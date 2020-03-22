@@ -171,3 +171,8 @@ local.properties
 hs_err_pid*
 !/rabbitmq-embedded/
 !/.idea/
+
+*/target/
+
+*.iml
+.idea/
