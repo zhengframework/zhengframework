@@ -222,6 +222,7 @@
     <module>zheng-jersey-jetty</module>
     <module>zheng-jersey-grizzly2</module>
     <module>zheng-cache-cache2k</module>
+    <module>zheng-cache-noop</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
