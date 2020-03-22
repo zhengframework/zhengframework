@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache.noop;
+package com.dadazhishi.zheng.cache.support;
 
 import java.net.URI;
 import java.util.Collections;
@@ -30,7 +30,7 @@ public class NoOpCacheManager implements CacheManager {
 
   @Override
   public URI getURI() {
-    return URI.create("noop://1");
+    return URI.create("noop://default");
   }
 
   @Override
@@ -40,7 +40,7 @@ public class NoOpCacheManager implements CacheManager {
 
   @Override
   public Properties getProperties() {
-    return new Properties();
+    return null;
   }
 
   @Override
@@ -58,7 +58,7 @@ public class NoOpCacheManager implements CacheManager {
   public <K, V> Cache<K, V> getCache(String name) {
     Cache cache = this.caches.get(name);
     if (cache == null) {
-      this.caches.computeIfAbsent(name, key -> new NoOpCache(NoOpCacheManager.this, name));
+      this.caches.computeIfAbsent(name, key -> new NoOpCache<>(NoOpCacheManager.this, name));
       synchronized (this.cacheNames) {
         this.cacheNames.add(name);
       }

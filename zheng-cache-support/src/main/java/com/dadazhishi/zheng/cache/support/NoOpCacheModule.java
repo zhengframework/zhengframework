@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache.noop;
+package com.dadazhishi.zheng.cache.support;
 
 import com.google.inject.AbstractModule;
 import javax.cache.CacheManager;

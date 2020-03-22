@@ -1,6 +1,6 @@
 package com.dadazhishi.zheng.cache;
 
-import com.dadazhishi.zheng.cache.noop.NoOpCacheModule;
+import com.dadazhishi.zheng.cache.support.NoOpCacheModule;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Guice;
 import com.google.inject.Module;
@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class CacheModuleTest {
+public class NoOpCacheModuleTest {
 
   @Inject
   CacheManager cacheManager;
