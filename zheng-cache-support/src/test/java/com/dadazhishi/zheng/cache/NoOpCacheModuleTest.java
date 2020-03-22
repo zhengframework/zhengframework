@@ -1,6 +1,5 @@
 package com.dadazhishi.zheng.cache;
 
-import com.dadazhishi.zheng.cache.support.NoOpCacheModule;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Guice;
 import com.google.inject.Module;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache.support;
+package com.dadazhishi.zheng.cache;
 
 import javax.cache.Cache;
 

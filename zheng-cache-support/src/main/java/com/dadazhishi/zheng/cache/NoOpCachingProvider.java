@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache.support;
+package com.dadazhishi.zheng.cache;
 
 import java.net.URI;
 import java.util.Properties;
@@ -6,12 +6,12 @@ import javax.cache.CacheManager;
 import javax.cache.configuration.OptionalFeature;
 import javax.cache.spi.CachingProvider;
 
-public class SimpleCachingProvider implements CachingProvider {
+public class NoOpCachingProvider implements CachingProvider {
 
-  private final SimpleCacheManager cacheManager;
+  private final NoOpCacheManager cacheManager;
 
-  public SimpleCachingProvider() {
-    cacheManager = new SimpleCacheManager(this);
+  public NoOpCachingProvider() {
+    cacheManager = new NoOpCacheManager(this);
   }
 
   @Override
@@ -21,12 +21,12 @@ public class SimpleCachingProvider implements CachingProvider {
 
   @Override
   public ClassLoader getDefaultClassLoader() {
-    return SimpleCachingProvider.class.getClassLoader();
+    return NoOpCachingProvider.class.getClassLoader();
   }
 
   @Override
   public URI getDefaultURI() {
-    return URI.create("map://default");
+    return URI.create("noop://default");
   }
 
   @Override
@@ -46,17 +46,17 @@ public class SimpleCachingProvider implements CachingProvider {
 
   @Override
   public void close() {
-    cacheManager.close();
+
   }
 
   @Override
   public void close(ClassLoader classLoader) {
-    cacheManager.close();
+
   }
 
   @Override
   public void close(URI uri, ClassLoader classLoader) {
-    cacheManager.close();
+
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache.support;
+package com.dadazhishi.zheng.cache;
 
 import java.net.URI;
 import java.util.Collections;
@@ -12,31 +12,30 @@ import javax.cache.CacheManager;
 import javax.cache.configuration.Configuration;
 import javax.cache.spi.CachingProvider;
 
-public class SimpleCacheManager implements CacheManager {
+public class NoOpCacheManager implements CacheManager {
 
-  private final SimpleCachingProvider simpleCachingProvider;
+  private final CachingProvider cachingProvider;
   private final ConcurrentMap<String, Cache> caches = new ConcurrentHashMap<>(16);
   private final Set<String> cacheNames = new LinkedHashSet<>(16);
   private boolean isClosed = false;
 
-  public SimpleCacheManager(
-      SimpleCachingProvider simpleCachingProvider) {
-    this.simpleCachingProvider = simpleCachingProvider;
+  public NoOpCacheManager(CachingProvider cachingProvider) {
+    this.cachingProvider = cachingProvider;
   }
 
   @Override
   public CachingProvider getCachingProvider() {
-    return simpleCachingProvider;
+    return cachingProvider;
   }
 
   @Override
   public URI getURI() {
-    return URI.create("map://default");
+    return URI.create("noop://default");
   }
 
   @Override
   public ClassLoader getClassLoader() {
-    return SimpleCacheManager.class.getClassLoader();
+    return NoOpCacheManager.class.getClassLoader();
   }
 
   @Override
@@ -57,9 +56,9 @@ public class SimpleCacheManager implements CacheManager {
 
   @Override
   public <K, V> Cache<K, V> getCache(String name) {
-    Cache<K, V> cache = this.caches.get(name);
+    Cache cache = this.caches.get(name);
     if (cache == null) {
-      this.caches.computeIfAbsent(name, key -> new SimpleCache<>(SimpleCacheManager.this, name));
+      this.caches.computeIfAbsent(name, key -> new NoOpCache<>(NoOpCacheManager.this, name));
       synchronized (this.cacheNames) {
         this.cacheNames.add(name);
       }

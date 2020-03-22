@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache.cache2k;
+package com.dadazhishi.zheng.cache;
 
 import com.google.inject.AbstractModule;
 import javax.cache.CacheManager;

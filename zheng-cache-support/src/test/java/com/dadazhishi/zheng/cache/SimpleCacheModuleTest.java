@@ -3,7 +3,6 @@ package com.dadazhishi.zheng.cache;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import com.dadazhishi.zheng.cache.support.SimpleCacheModule;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Guice;
 import com.google.inject.Module;
