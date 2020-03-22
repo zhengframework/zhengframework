@@ -223,6 +223,7 @@
     <module>zheng-jersey-grizzly2</module>
     <module>zheng-cache-cache2k</module>
     <module>zheng-cache-support</module>
+    <module>zheng-cache-infinispan</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
