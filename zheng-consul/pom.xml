@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-consul</artifactId>
+  <dependencies>
+    <dependency>
+      <artifactId>consul-api</artifactId>
+      <groupId>com.ecwid.consul</groupId>
+      <version>1.4.4</version>
+    </dependency>
+    <dependency>
+      <artifactId>embedded-consul</artifactId>
+      <groupId>com.pszymczyk.consul</groupId>
+      <scope>test</scope>
+      <version>2.1.4</version>
+    </dependency>
+    <dependency>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>junit</artifactId>
+      <groupId>junit</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-api</artifactId>
+      <groupId>org.slf4j</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-simple</artifactId>
+      <groupId>org.slf4j</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>okhttp</artifactId>
+      <groupId>com.squareup.okhttp3</groupId>
+      <scope>test</scope>
+      <version>4.4.1</version>
+    </dependency>
+    <dependency>
+      <artifactId>free-port-finder</artifactId>
+      <groupId>me.alexpanov</groupId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>zheng</artifactId>
+    <groupId>com.dadazhishi.zheng</groupId>
+    <version>1.0</version>
+  </parent>
+</project>
