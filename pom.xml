@@ -224,6 +224,7 @@
     <module>zheng-cache-cache2k</module>
     <module>zheng-cache-support</module>
     <module>zheng-cache-infinispan</module>
+    <module>zheng-cache-caffeine</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
