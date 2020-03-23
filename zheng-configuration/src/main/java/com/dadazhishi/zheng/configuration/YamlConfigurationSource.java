@@ -1,8 +1,6 @@
 package com.dadazhishi.zheng.configuration;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,6 +38,6 @@ public class YamlConfigurationSource implements ConfigurationSource {
 
   @Override
   public Configuration read() {
-    return new ConfigurationImpl("", Collections.unmodifiableMap(map));
+    return new ConfigurationImpl(Collections.unmodifiableMap(map));
   }
 }

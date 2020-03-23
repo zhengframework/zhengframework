@@ -12,29 +12,14 @@ import org.apache.commons.collections4.trie.PatriciaTrie;
 
 public class ConfigurationImpl extends AbstractMap<String, String> implements Configuration {
 
-  private final String namespace;
   private final PatriciaTrie<String> patriciaTrie;
 
   public ConfigurationImpl() {
-    this(",", new PatriciaTrie<>());
-  }
-
-  public ConfigurationImpl(String namespace) {
-    this.namespace = namespace;
     this.patriciaTrie = new PatriciaTrie<>();
   }
 
-  public ConfigurationImpl(String namespace, Map<String, String> map) {
-    this.namespace = namespace;
+  public ConfigurationImpl(Map<String, String> map) {
     this.patriciaTrie = new PatriciaTrie<>(map);
-  }
-
-  public static ConfigurationImpl from(String namespace, Map<String, String> map) {
-    return new ConfigurationImpl(namespace, map);
-  }
-
-  public static ConfigurationImpl from(Map<String, String> map) {
-    return new ConfigurationImpl("", map);
   }
 
   @SuppressWarnings("NullableProblems")
@@ -43,18 +28,13 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     return patriciaTrie.entrySet();
   }
 
-  @Override
-  public String namespace() {
-    return namespace;
-  }
-
   public Configuration getConfiguration(String namespace) {
     if (namespace == null || namespace.length() == 0) {
       throw new RuntimeException("invalid namespace");
     }
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace);
     int len = namespace.length();
-    return new ConfigurationImpl(namespace, prefixMap.entrySet().stream()
+    return new ConfigurationImpl(prefixMap.entrySet().stream()
         .collect(Collectors.toMap(entry -> entry.getKey().substring(len + 1), Entry::getValue)));
   }
 
@@ -88,7 +68,7 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
       map.get(index).put(newKey, entry.getValue());
     }
     return map.entrySet().stream().sorted(Entry.comparingByKey())
-        .map(entry -> new ConfigurationImpl(namespace, entry.getValue()))
+        .map(entry -> new ConfigurationImpl(entry.getValue()))
         .collect(Collectors.toList());
   }
 
@@ -117,7 +97,7 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     }
     return map.entrySet().stream()
         .collect(Collectors.toMap(Entry::getKey,
-            entry -> new ConfigurationImpl(namespace, entry.getValue())));
+            entry -> new ConfigurationImpl(entry.getValue())));
   }
 
   @Override
@@ -132,13 +112,12 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
       return false;
     }
     ConfigurationImpl that = (ConfigurationImpl) o;
-    return namespace.equals(that.namespace) &&
-        patriciaTrie.equals(that.patriciaTrie);
+    return patriciaTrie.equals(that.patriciaTrie);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), namespace, patriciaTrie);
+    return Objects.hash(super.hashCode(), patriciaTrie);
   }
 
 }

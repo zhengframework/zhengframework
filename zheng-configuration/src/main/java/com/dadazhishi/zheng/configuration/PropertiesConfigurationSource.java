@@ -44,6 +44,6 @@ public class PropertiesConfigurationSource implements ConfigurationSource {
     for (String name : properties.stringPropertyNames()) {
       map.put(name, properties.getProperty(name));
     }
-    return new ConfigurationImpl("", Collections.unmodifiableMap(map));
+    return new ConfigurationImpl(Collections.unmodifiableMap(map));
   }
 }

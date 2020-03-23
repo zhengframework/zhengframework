@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.util.Collections;
 import java.util.Map;
 
 public class JsonConfigurationSource implements ConfigurationSource {
@@ -37,6 +38,6 @@ public class JsonConfigurationSource implements ConfigurationSource {
 
   @Override
   public Configuration read() {
-    return new ConfigurationImpl("", map);
+    return new ConfigurationImpl(Collections.unmodifiableMap(map));
   }
 }

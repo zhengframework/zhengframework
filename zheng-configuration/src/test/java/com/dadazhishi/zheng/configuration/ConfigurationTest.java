@@ -41,7 +41,7 @@ public class ConfigurationTest {
 
   @Test
   public void testGet() {
-    ConfigurationImpl configuration = new ConfigurationImpl("", map);
+    ConfigurationImpl configuration = new ConfigurationImpl(map);
     Configuration apple = configuration.getConfiguration("apple");
     assertTrue(Boolean.parseBoolean(apple.get("big")));
     assertEquals("110", apple.get("name"));
@@ -50,7 +50,7 @@ public class ConfigurationTest {
 
   @Test
   public void getList() {
-    ConfigurationImpl configuration = new ConfigurationImpl("", map);
+    ConfigurationImpl configuration = new ConfigurationImpl(map);
     List<Configuration> bananas = configuration.getConfigurationList("bananas");
     assertEquals(3, bananas.size());
 
@@ -58,7 +58,7 @@ public class ConfigurationTest {
 
   @Test
   public void getMap() {
-    ConfigurationImpl configuration = new ConfigurationImpl("", map);
+    ConfigurationImpl configuration = new ConfigurationImpl(map);
     Map<String, Configuration> apples = configuration.getConfigurationMap("apples");
     assertEquals(1, apples.size());
   }

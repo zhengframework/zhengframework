@@ -5,7 +5,6 @@ import java.util.Map;
 
 public interface Configuration extends Map<String, String> {
 
-  String namespace();
 
   Configuration getConfiguration(String namespace);
 

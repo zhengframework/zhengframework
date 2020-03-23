@@ -13,6 +13,6 @@ public class MapConfigurationSource implements ConfigurationSource {
 
   @Override
   public Configuration read() {
-    return new ConfigurationImpl("", Collections.unmodifiableMap(map));
+    return new ConfigurationImpl(Collections.unmodifiableMap(map));
   }
 }
