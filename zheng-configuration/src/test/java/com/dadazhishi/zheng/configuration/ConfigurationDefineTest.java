@@ -12,11 +12,12 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ConfigurationTest {
+public class ConfigurationDefineTest {
 
   private final JavaPropsMapper mapper = new JavaPropsMapper();
   Map<String, String> map;
   Food food;
+
   @Before
   public void setUp() throws Exception {
 

@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.configuration;
 
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationDefine;
 import com.dadazhishi.zheng.configuration.annotation.ConfigurationType;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
@@ -31,11 +32,6 @@ public class ConfigurationModule extends AbstractModule {
     this.configuration.putAll(configuration);
   }
 
-  public ConfigurationModule(Configuration configuration,
-      AbstractModule abstractModule) {
-
-  }
-
   @Override
   protected void configure() {
     OptionalBinder.newOptionalBinder(binder(), Configuration.class)
@@ -43,14 +39,15 @@ public class ConfigurationModule extends AbstractModule {
     ConfigurationMapper mapper = new ConfigurationMapper();
     bind(ConfigurationMapper.class).toInstance(mapper);
     Names.bindProperties(binder(), System.getProperties());
+    Names.bindProperties(binder(), System.getenv());
     Names.bindProperties(binder(), configuration);
 
     if (isEnableConfigurationScan()) {
       List<Class<?>> classList = scan();
       for (Class<?> aClass : classList) {
-        com.dadazhishi.zheng.configuration.annotation.Configuration annotation = aClass
+        ConfigurationDefine annotation = aClass
             .getAnnotation(
-                com.dadazhishi.zheng.configuration.annotation.Configuration.class);
+                ConfigurationDefine.class);
         if (annotation.type() == ConfigurationType.BEAN) {
           if (annotation.namespace().isEmpty()) {
             bind(aClass).toProvider(new ConfigurationObjectProvider(
@@ -101,7 +98,7 @@ public class ConfigurationModule extends AbstractModule {
     if (configurationPackages == null) {
       configurationPackages = new String[0];
     }
-    String name = com.dadazhishi.zheng.configuration.annotation.Configuration.class.getName();
+    String name = ConfigurationDefine.class.getName();
     final List<Class<?>> entityClasses = new ArrayList<>();
     ScanResult scanResult = new ClassGraph()
         .whitelistPackages(configurationPackages)

@@ -1,10 +1,10 @@
 package com.dadazhishi.zheng.configuration;
 
-import com.dadazhishi.zheng.configuration.annotation.Configuration;
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationDefine;
 import com.dadazhishi.zheng.configuration.annotation.ConfigurationType;
 import java.util.Objects;
 
-@Configuration(namespace = "apples", type = ConfigurationType.MAP)
+@ConfigurationDefine(namespace = "apples", type = ConfigurationType.MAP)
 public class AppleAnnotation {
 
   private String name;

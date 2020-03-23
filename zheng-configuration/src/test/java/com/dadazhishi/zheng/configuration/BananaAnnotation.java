@@ -1,10 +1,10 @@
 package com.dadazhishi.zheng.configuration;
 
-import com.dadazhishi.zheng.configuration.annotation.Configuration;
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationDefine;
 import com.dadazhishi.zheng.configuration.annotation.ConfigurationType;
 import java.util.Objects;
 
-@Configuration(namespace = "bananas", type = ConfigurationType.SET)
+@ConfigurationDefine(namespace = "bananas", type = ConfigurationType.SET)
 public class BananaAnnotation {
 
   private String name;

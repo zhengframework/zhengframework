@@ -1,11 +1,11 @@
 package com.dadazhishi.zheng.configuration;
 
-import com.dadazhishi.zheng.configuration.annotation.Configuration;
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationDefine;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-@Configuration
+@ConfigurationDefine
 public class FoodAnnotation {
 
   private Apple apple;
