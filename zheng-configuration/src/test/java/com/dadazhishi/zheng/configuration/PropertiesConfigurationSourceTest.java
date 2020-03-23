@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.Test;
 
 public class PropertiesConfigurationSourceTest {
@@ -35,7 +36,7 @@ public class PropertiesConfigurationSourceTest {
     Configuration configuration = propertiesConfigurationSource.read();
     Map<String, Configuration> apples = configuration.getConfigurationMap("apples");
     assertEquals(1, apples.size());
-    List<Configuration> bananas = configuration.getConfigurationList("bananas");
+    Set<Configuration> bananas = configuration.getConfigurationSet("bananas");
     assertEquals(3, bananas.size());
     ConfigurationMapper mapper = new ConfigurationMapper();
     Food food2 = mapper.resolve(configuration, Food.class);

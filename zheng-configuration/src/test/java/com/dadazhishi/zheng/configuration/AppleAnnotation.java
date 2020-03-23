@@ -1,8 +1,11 @@
 package com.dadazhishi.zheng.configuration;
 
+import com.dadazhishi.zheng.configuration.annotation.Configuration;
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationType;
 import java.util.Objects;
 
-public class Apple {
+@Configuration(namespace = "apples", type = ConfigurationType.MAP)
+public class AppleAnnotation {
 
   private String name;
   private boolean big;
@@ -40,7 +43,7 @@ public class Apple {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Apple apple = (Apple) o;
+    AppleAnnotation apple = (AppleAnnotation) o;
     return isBig() == apple.isBig() &&
         Double.compare(apple.getWeight(), getWeight()) == 0 &&
         Objects.equals(getName(), apple.getName());

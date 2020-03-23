@@ -1,6 +1,6 @@
 package com.dadazhishi.zheng.configuration;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class YamlConfigurationSourceTest {
     food.setBananas(list);
 
     YamlConfigurationSource configurationSource = new YamlConfigurationSource(
-        YamlTest.class.getResourceAsStream("/food.yaml"));
+        YamlConfigurationSourceTest.class.getResourceAsStream("/food.yaml"));
     Configuration configuration = configurationSource.read();
     ConfigurationMapper mapper = new ConfigurationMapper();
     Food food2 = mapper.resolve(configuration, Food.class);

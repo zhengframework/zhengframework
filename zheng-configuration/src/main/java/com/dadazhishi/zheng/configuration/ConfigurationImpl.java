@@ -2,7 +2,6 @@ package com.dadazhishi.zheng.configuration;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -32,27 +31,27 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     if (namespace == null || namespace.length() == 0) {
       throw new RuntimeException("invalid namespace");
     }
-    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace);
-    int len = namespace.length();
+    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
+    int len = namespace.length() + 1;
     return new ConfigurationImpl(prefixMap.entrySet().stream()
-        .collect(Collectors.toMap(entry -> entry.getKey().substring(len + 1), Entry::getValue)));
+        .collect(Collectors.toMap(entry -> entry.getKey().substring(len), Entry::getValue)));
   }
 
   @Override
-  public List<Configuration> getConfigurationList(String namespace) {
+  public Set<Configuration> getConfigurationSet(String namespace) {
     if (namespace == null || namespace.length() == 0) {
       throw new RuntimeException("invalid namespace");
     }
-    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace);
-    int len = namespace.length();
+    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
+    int len = namespace.length() + 1;
     Map<Integer, Map<String, String>> map = new HashMap<>();
     for (Entry<String, String> entry : prefixMap.entrySet()) {
-      String key = entry.getKey().substring(len + 1);
+      String key = entry.getKey().substring(len);
       String indexKey = key.substring(0, key.indexOf("."));
       if (indexKey.length() == 0) {
         throw new RuntimeException("parse index error, key=" + key);
       }
-      int index = 0;
+      int index;
       try {
         index = Integer.parseInt(key.substring(0, key.indexOf(".")));
       } catch (NumberFormatException e) {
@@ -69,7 +68,7 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     }
     return map.entrySet().stream().sorted(Entry.comparingByKey())
         .map(entry -> new ConfigurationImpl(entry.getValue()))
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
   }
 
   @Override
@@ -77,11 +76,11 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     if (namespace == null || namespace.length() == 0) {
       throw new RuntimeException("invalid namespace");
     }
-    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace);
-    int len = namespace.length();
+    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
+    int len = namespace.length() + 1;
     Map<String, Map<String, String>> map = new HashMap<>();
     for (Entry<String, String> entry : prefixMap.entrySet()) {
-      String key = entry.getKey().substring(len + 1);
+      String key = entry.getKey().substring(len);
       String mapKey = key.substring(0, key.indexOf("."));
       if (mapKey.length() == 0) {
         throw new RuntimeException("parse map key error, key=" + key);
@@ -120,4 +119,7 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     return Objects.hash(super.hashCode(), patriciaTrie);
   }
 
+  public String put(String key, String value) {
+    return patriciaTrie.put(key, value);
+  }
 }

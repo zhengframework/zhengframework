@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,10 +16,11 @@ public class ConfigurationTest {
 
   private final JavaPropsMapper mapper = new JavaPropsMapper();
   Map<String, String> map;
-
+  Food food;
   @Before
   public void setUp() throws Exception {
-    Food food = new Food();
+
+    food = new Food();
     Apple apple = new Apple();
     apple.setBig(true);
     apple.setWeight(1.9);
@@ -51,7 +53,7 @@ public class ConfigurationTest {
   @Test
   public void getList() {
     ConfigurationImpl configuration = new ConfigurationImpl(map);
-    List<Configuration> bananas = configuration.getConfigurationList("bananas");
+    Set<Configuration> bananas = configuration.getConfigurationSet("bananas");
     assertEquals(3, bananas.size());
 
   }
