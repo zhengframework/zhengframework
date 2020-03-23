@@ -3,6 +3,9 @@ package com.dadazhishi.zheng.configuration;
 import com.dadazhishi.zheng.configuration.annotation.ConfigurationDefine;
 import com.dadazhishi.zheng.configuration.annotation.ConfigurationType;
 import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
+import com.google.inject.Key;
+import com.google.inject.Provides;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
@@ -10,26 +13,38 @@ import com.google.inject.name.Names;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ScanResult;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import javax.inject.Singleton;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ConfigurationModule extends AbstractModule {
 
-  private final Configuration configuration = new ConfigurationImpl();
+  private final Configuration configuration;
   private String[] configurationPackages;
   private boolean enableConfigurationScan = true;
 
   public ConfigurationModule(ConfigurationSource... configurationSources) {
+    HashMap<String, String> map = new HashMap<>();
     for (ConfigurationSource configurationSource : configurationSources) {
-      configuration.putAll(configurationSource.getConfiguration());
+      map.putAll(configurationSource.getConfiguration());
     }
+    configuration = new ConfigurationImpl(map);
   }
 
   public ConfigurationModule(Configuration configuration) {
-    this.configuration.putAll(configuration);
+    this.configuration = new ConfigurationImpl(configuration);
+  }
+
+  private void bindConfiguration(Binder binder, Configuration configuration) {
+    binder = binder.skipSources(Names.class);
+    for (String key : configuration.keySet()) {
+      binder.bind(Key.get(String.class, new NamedImpl(key)))
+          .toProvider(new ConfigurationNamedProvider(configuration, key));
+    }
   }
 
   @Override
@@ -38,8 +53,17 @@ public class ConfigurationModule extends AbstractModule {
         .setDefault().toInstance(configuration);
     ConfigurationMapper mapper = new ConfigurationMapper();
     bind(ConfigurationMapper.class).toInstance(mapper);
-    Names.bindProperties(binder(), configuration);
+    bindConfiguration(binder(), configuration);
+    autoBindConfiguration(mapper);
+  }
 
+  @Singleton
+  @Provides
+  public ConfigurationObjectMapper configurationObjectMapper(ConfigurationMapper mapper) {
+    return new ConfigurationObjectMapper(mapper);
+  }
+
+  private void autoBindConfiguration(ConfigurationMapper mapper) {
     if (isEnableConfigurationScan()) {
       List<Class<?>> classList = scan();
       for (Class<?> aClass : classList) {
@@ -49,14 +73,13 @@ public class ConfigurationModule extends AbstractModule {
         if (annotation.type() == ConfigurationType.BEAN) {
           if (annotation.namespace().isEmpty()) {
             bind(aClass).toProvider(new ConfigurationObjectProvider(
-                mapper, configuration, aClass)).asEagerSingleton();
+                mapper, configuration, aClass));
           } else {
             bind(aClass).toProvider(new ConfigurationObjectProvider(
                 mapper, configuration.getConfiguration(annotation.namespace()), aClass))
-                .asEagerSingleton();
+            ;
           }
         } else if (annotation.type() == ConfigurationType.SET) {
-
           if (annotation.namespace().isEmpty()) {
             throw new RuntimeException("Configuration type[LIST] need namespace not empty");
           } else {
@@ -65,11 +88,10 @@ public class ConfigurationModule extends AbstractModule {
             for (Configuration configuration1 : configurationList) {
               Multibinder.newSetBinder(binder(), aClass).addBinding()
                   .toProvider(new ConfigurationObjectProvider(
-                      mapper, configuration1, aClass)).asEagerSingleton();
+                      mapper, configuration1, aClass));
             }
           }
         } else if (annotation.type() == ConfigurationType.MAP) {
-
           if (annotation.namespace().isEmpty()) {
             throw new RuntimeException("Configuration type[LIST] need namespace not empty");
           } else {
@@ -79,7 +101,7 @@ public class ConfigurationModule extends AbstractModule {
                 .entrySet()) {
               MapBinder.newMapBinder(binder(), String.class, aClass).addBinding(entry.getKey())
                   .toProvider(new ConfigurationObjectProvider(
-                      mapper, entry.getValue(), aClass)).asEagerSingleton();
+                      mapper, entry.getValue(), aClass));
             }
           }
         }

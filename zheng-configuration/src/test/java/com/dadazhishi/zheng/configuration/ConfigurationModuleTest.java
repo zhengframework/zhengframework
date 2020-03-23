@@ -17,12 +17,14 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ConfigurationDefineModuleTest {
+public class ConfigurationModuleTest {
 
   Food food;
+  Injector injector;
+  Configuration configuration;
 
   @Before
-  public void setup() {
+  public void setup() throws IOException {
     food = new Food();
     Apple apple = new Apple();
     apple.setBig(true);
@@ -38,19 +40,28 @@ public class ConfigurationDefineModuleTest {
       list.add(banana);
     }
     food.setBananas(list);
-  }
 
-  @Test
-  public void testAnnotation() throws IOException {
     PropertiesConfigurationSource propertiesConfigurationSource = new PropertiesConfigurationSource
         (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
 
-    Configuration configuration = propertiesConfigurationSource.getConfiguration();
+    configuration = propertiesConfigurationSource.getConfiguration();
 
     ConfigurationModule configurationModule = new ConfigurationModule(configuration);
     configurationModule.setConfigurationPackages("com.dadazhishi.zheng.configuration");
-    Injector injector = Guice
+    injector = Guice
         .createInjector(configurationModule, new FoodModule());
+  }
+
+  @Test
+  public void testNamedAnnotation() {
+    System.out.println(injector.getInstance(NamedAnnotation.class).getName());
+    System.out.println(injector.getInstance(NamedAnnotation.class).getName());
+
+  }
+
+  @Test
+  public void testAnnotation() {
+
     FoodAnnotation food2 = injector.getInstance(FoodAnnotation.class);
     assertEquals(food.getApple(), food2.getApple());
     System.out.println(food2.getApple());
@@ -64,16 +75,25 @@ public class ConfigurationDefineModuleTest {
     assertEquals(food.getApples().size(), appleAnnotationMap.size());
   }
 
+  @Test
+  public void testConfigurationObjectMapper() {
+    ConfigurationObjectMapper configurationObjectMapper = injector
+        .getInstance(ConfigurationObjectMapper.class);
+    FoodAnnotation food1 = configurationObjectMapper.resolve(configuration, FoodAnnotation.class);
+    assertEquals(food.getApple(), food1.getApple());
+
+    Set<BananaAnnotation> bananaAnnotationSet = configurationObjectMapper
+        .resolveSet(configuration, BananaAnnotation.class);
+    assertEquals(food.getBananas().size(), bananaAnnotationSet.size());
+
+    Map<String, AppleAnnotation> appleAnnotationMap = configurationObjectMapper
+        .resolveMap(configuration, AppleAnnotation.class);
+    assertEquals(food.getApples().size(), appleAnnotationMap.size());
+
+  }
 
   @Test
-  public void configure() throws IOException {
-    PropertiesConfigurationSource propertiesConfigurationSource = new PropertiesConfigurationSource
-        (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
-
-    Configuration configuration = propertiesConfigurationSource.getConfiguration();
-
-    Injector injector = Guice
-        .createInjector(new ConfigurationModule(configuration), new FoodModule());
+  public void testStatic() throws IOException {
     Food food2 = injector.getInstance(Food.class);
     assertEquals(food, food2);
 

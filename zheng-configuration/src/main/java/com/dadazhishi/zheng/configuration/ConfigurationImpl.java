@@ -119,7 +119,4 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
     return Objects.hash(super.hashCode(), patriciaTrie);
   }
 
-  public String put(String key, String value) {
-    return patriciaTrie.put(key, value);
-  }
 }
