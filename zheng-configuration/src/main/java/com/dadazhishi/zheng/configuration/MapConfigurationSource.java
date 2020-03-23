@@ -12,7 +12,7 @@ public class MapConfigurationSource implements ConfigurationSource {
   }
 
   @Override
-  public Configuration read() {
+  public Configuration getConfiguration() {
     return new ConfigurationImpl(Collections.unmodifiableMap(map));
   }
 }

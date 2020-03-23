@@ -45,7 +45,7 @@ public class ConfigurationDefineModuleTest {
     PropertiesConfigurationSource propertiesConfigurationSource = new PropertiesConfigurationSource
         (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
 
-    Configuration configuration = propertiesConfigurationSource.read();
+    Configuration configuration = propertiesConfigurationSource.getConfiguration();
 
     ConfigurationModule configurationModule = new ConfigurationModule(configuration);
     configurationModule.setConfigurationPackages("com.dadazhishi.zheng.configuration");
@@ -70,7 +70,7 @@ public class ConfigurationDefineModuleTest {
     PropertiesConfigurationSource propertiesConfigurationSource = new PropertiesConfigurationSource
         (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
 
-    Configuration configuration = propertiesConfigurationSource.read();
+    Configuration configuration = propertiesConfigurationSource.getConfiguration();
 
     Injector injector = Guice
         .createInjector(new ConfigurationModule(configuration), new FoodModule());

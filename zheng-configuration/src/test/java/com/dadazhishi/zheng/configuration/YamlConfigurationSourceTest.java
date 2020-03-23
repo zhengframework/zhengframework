@@ -30,7 +30,7 @@ public class YamlConfigurationSourceTest {
 
     YamlConfigurationSource configurationSource = new YamlConfigurationSource(
         YamlConfigurationSourceTest.class.getResourceAsStream("/food.yaml"));
-    Configuration configuration = configurationSource.read();
+    Configuration configuration = configurationSource.getConfiguration();
     ConfigurationMapper mapper = new ConfigurationMapper();
     Food food2 = mapper.resolve(configuration, Food.class);
 

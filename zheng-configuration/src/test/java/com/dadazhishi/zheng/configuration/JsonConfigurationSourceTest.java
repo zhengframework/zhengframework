@@ -31,7 +31,7 @@ public class JsonConfigurationSourceTest {
     JsonConfigurationSource configurationSource = new JsonConfigurationSource(
         JsonConfigurationSourceTest.class.getResourceAsStream("/food.json"));
 
-    Configuration configuration = configurationSource.read();
+    Configuration configuration = configurationSource.getConfiguration();
     ConfigurationMapper mapper = new ConfigurationMapper();
     Food food2 = mapper.resolve(configuration, Food.class);
     assertEquals(food, food2);

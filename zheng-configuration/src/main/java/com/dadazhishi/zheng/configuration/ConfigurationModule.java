@@ -24,7 +24,7 @@ public class ConfigurationModule extends AbstractModule {
 
   public ConfigurationModule(ConfigurationSource... configurationSources) {
     for (ConfigurationSource configurationSource : configurationSources) {
-      configuration.putAll(configurationSource.read());
+      configuration.putAll(configurationSource.getConfiguration());
     }
   }
 
@@ -38,8 +38,6 @@ public class ConfigurationModule extends AbstractModule {
         .setDefault().toInstance(configuration);
     ConfigurationMapper mapper = new ConfigurationMapper();
     bind(ConfigurationMapper.class).toInstance(mapper);
-    Names.bindProperties(binder(), System.getProperties());
-    Names.bindProperties(binder(), System.getenv());
     Names.bindProperties(binder(), configuration);
 
     if (isEnableConfigurationScan()) {

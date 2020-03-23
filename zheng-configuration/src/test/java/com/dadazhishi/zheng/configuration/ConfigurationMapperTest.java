@@ -3,9 +3,6 @@ package com.dadazhishi.zheng.configuration;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.util.List;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ConfigurationMapperTest {
@@ -15,7 +12,7 @@ public class ConfigurationMapperTest {
     PropertiesConfigurationSource propertiesConfigurationSource =new PropertiesConfigurationSource
         (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
 
-    Configuration configuration = propertiesConfigurationSource.read();
+    Configuration configuration = propertiesConfigurationSource.getConfiguration();
     ConfigurationMapper mapper = new ConfigurationMapper();
 
     Food food = mapper.resolve(configuration, Food.class);

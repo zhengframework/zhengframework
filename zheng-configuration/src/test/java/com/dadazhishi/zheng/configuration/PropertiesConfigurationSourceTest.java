@@ -33,7 +33,7 @@ public class PropertiesConfigurationSourceTest {
     PropertiesConfigurationSource propertiesConfigurationSource =new PropertiesConfigurationSource
         (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
 
-    Configuration configuration = propertiesConfigurationSource.read();
+    Configuration configuration = propertiesConfigurationSource.getConfiguration();
     Map<String, Configuration> apples = configuration.getConfigurationMap("apples");
     assertEquals(1, apples.size());
     Set<Configuration> bananas = configuration.getConfigurationSet("bananas");

@@ -39,7 +39,7 @@ public class PropertiesConfigurationSource implements ConfigurationSource {
   }
 
   @Override
-  public Configuration read() {
+  public Configuration getConfiguration() {
     Map<String, String> map = new HashMap<>();
     for (String name : properties.stringPropertyNames()) {
       map.put(name, properties.getProperty(name));
