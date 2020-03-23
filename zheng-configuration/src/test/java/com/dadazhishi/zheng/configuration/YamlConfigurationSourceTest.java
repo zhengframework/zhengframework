@@ -1,15 +1,14 @@
 package com.dadazhishi.zheng.configuration;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import org.junit.Test;
 
-public class PropertiesConfigurationSourceTest {
+public class YamlConfigurationSourceTest {
 
   @Test
   public void read() throws IOException {
@@ -29,16 +28,12 @@ public class PropertiesConfigurationSourceTest {
     }
     food.setBananas(list);
 
-    PropertiesConfigurationSource propertiesConfigurationSource =new PropertiesConfigurationSource
-        (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
-
-    Configuration configuration = propertiesConfigurationSource.read();
-    Map<String, Configuration> apples = configuration.getConfigurationMap("apples");
-    assertEquals(1, apples.size());
-    List<Configuration> bananas = configuration.getConfigurationList("bananas");
-    assertEquals(3, bananas.size());
+    YamlConfigurationSource configurationSource = new YamlConfigurationSource(
+        YamlTest.class.getResourceAsStream("/food.yaml"));
+    Configuration configuration = configurationSource.read();
     ConfigurationMapper mapper = new ConfigurationMapper();
     Food food2 = mapper.resolve(configuration, Food.class);
+
     assertEquals(food, food2);
   }
 }

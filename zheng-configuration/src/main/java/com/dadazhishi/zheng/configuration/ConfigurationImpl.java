@@ -140,4 +140,5 @@ public class ConfigurationImpl extends AbstractMap<String, String> implements Co
   public int hashCode() {
     return Objects.hash(super.hashCode(), namespace, patriciaTrie);
   }
+
 }

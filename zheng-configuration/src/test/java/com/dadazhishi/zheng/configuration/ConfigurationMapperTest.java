@@ -12,8 +12,8 @@ public class ConfigurationMapperTest {
 
   @Test
   public void resolve() throws IOException {
-    PropertiesConfigurationSource propertiesConfigurationSource = PropertiesConfigurationSource
-        .load(PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
+    PropertiesConfigurationSource propertiesConfigurationSource =new PropertiesConfigurationSource
+        (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
 
     Configuration configuration = propertiesConfigurationSource.read();
     ConfigurationMapper mapper = new ConfigurationMapper();

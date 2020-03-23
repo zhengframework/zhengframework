@@ -2,6 +2,7 @@ package com.dadazhishi.zheng.configuration;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Food {
 
@@ -33,5 +34,24 @@ public class Food {
 
   public void setApples(Map<String, Apple> apples) {
     this.apples = apples;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Food food = (Food) o;
+    return Objects.equals(getApple(), food.getApple()) &&
+        Objects.equals(getBananas(), food.getBananas()) &&
+        Objects.equals(getApples(), food.getApples());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getApple(), getBananas(), getApples());
   }
 }

@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,32 +15,27 @@ public class PropertiesConfigurationSource implements ConfigurationSource {
   private final Properties properties;
 
   public PropertiesConfigurationSource(Properties properties) {
-
     this.properties = properties;
   }
 
-  public static PropertiesConfigurationSource loadFromFile(String propertiesFile) throws IOException {
-    Properties properties = new Properties();
+  public PropertiesConfigurationSource(String propertiesFile) throws IOException {
+    properties = new Properties();
     properties.load(new FileReader(propertiesFile));
-    return new PropertiesConfigurationSource(properties);
   }
 
-  public static PropertiesConfigurationSource load(File propertiesFile) throws IOException {
-    Properties properties = new Properties();
+  public PropertiesConfigurationSource(File propertiesFile) throws IOException {
+    properties = new Properties();
     properties.load(new FileReader(propertiesFile));
-    return new PropertiesConfigurationSource(properties);
   }
 
-  public static PropertiesConfigurationSource load(Reader reader) throws IOException {
-    Properties properties = new Properties();
+  public PropertiesConfigurationSource(Reader reader) throws IOException {
+    properties = new Properties();
     properties.load(reader);
-    return new PropertiesConfigurationSource(properties);
   }
 
-  public static PropertiesConfigurationSource load(InputStream inputStream) throws IOException {
-    Properties properties = new Properties();
+  public PropertiesConfigurationSource(InputStream inputStream) throws IOException {
+    properties = new Properties();
     properties.load(inputStream);
-    return new PropertiesConfigurationSource(properties);
   }
 
   @Override
