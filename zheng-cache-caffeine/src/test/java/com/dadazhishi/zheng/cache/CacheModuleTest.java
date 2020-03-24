@@ -41,7 +41,6 @@ public class CacheModuleTest {
       }
     });
     Guice.createInjector(module).injectMembers(this);
-//    Guice.createInjector(new CacheAnnotationsModule()).injectMembers(this);
   }
 
   @Test

@@ -34,6 +34,7 @@ public class CacheModuleTest {
 
       @Override
       protected void configureCacheManager(CacheManager cacheManager) {
+        cacheManager.destroyCache("guice");
         cacheManager.createCache("guice", ExtendedMutableConfiguration
             .of(new Cache2kBuilder<Integer, Integer>() {
             }
