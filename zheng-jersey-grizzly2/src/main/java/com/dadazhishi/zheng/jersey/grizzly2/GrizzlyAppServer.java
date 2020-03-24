@@ -52,8 +52,6 @@ public class GrizzlyAppServer implements AppServer {
 
     WebappContext context = new WebappContext("GrizzlyContext",
         jerseyConfiguration.getContextPath());
-    context.setRequestCharacterEncoding("UTF-8");
-    context.setResponseCharacterEncoding("UTF-8");
 
     context.addListener(new GuiceServletContextListener() {
       @Override
@@ -64,7 +62,7 @@ public class GrizzlyAppServer implements AppServer {
 
     FilterRegistration guiceFilter = context.addFilter("GuiceFilter", GuiceFilter.class);
     guiceFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), "/*");
-
+    guiceFilter.setAsyncSupported(true);
     ServletRegistration registration = context.addServlet(ServletContainer.class.getName(),
         ServletContainer.class);
     registration
@@ -74,6 +72,7 @@ public class GrizzlyAppServer implements AppServer {
     config.setPassTraceRequest(true);
     config.setDefaultQueryEncoding(Charsets.UTF8_CHARSET);
     config.setGracefulShutdownSupported(true);
+    config.setSendFileEnabled(true);
     context.deploy(server);
   }
 
