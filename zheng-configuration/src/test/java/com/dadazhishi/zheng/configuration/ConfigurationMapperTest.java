@@ -2,6 +2,7 @@ package com.dadazhishi.zheng.configuration;
 
 import static org.junit.Assert.assertEquals;
 
+import com.dadazhishi.zheng.configuration.objects.Food;
 import java.io.IOException;
 import org.junit.Test;
 
@@ -9,10 +10,10 @@ public class ConfigurationMapperTest {
 
   @Test
   public void resolve() throws IOException {
-    PropertiesConfigurationSource propertiesConfigurationSource =new PropertiesConfigurationSource
-        (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
+    Configuration configuration = ConfigurationBuilder.create()
+        .withClassPathProperties("food.properties")
+        .build();
 
-    Configuration configuration = propertiesConfigurationSource.getConfiguration();
     ConfigurationMapper mapper = new ConfigurationMapper();
 
     Food food = mapper.resolve(configuration, Food.class);

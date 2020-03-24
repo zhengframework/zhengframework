@@ -48,6 +48,12 @@
       <groupId>io.github.classgraph</groupId>
       <version>4.8.65</version>
     </dependency>
+    <dependency>
+      <artifactId>system-rules</artifactId>
+      <groupId>com.github.stefanbirkner</groupId>
+      <scope>test</scope>
+      <version>1.19.0</version>
+    </dependency>
   </dependencies>
 
   <modelVersion>4.0.0</modelVersion>

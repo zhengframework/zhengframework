@@ -1,8 +1,7 @@
 package com.dadazhishi.zheng.configuration;
 
-import com.dadazhishi.zheng.configuration.resolver.ConfigurationResolver;
-import com.google.common.collect.Maps;
-import java.util.Collections;
+import static com.dadazhishi.zheng.configuration.ConfigurationImpl.checkNamespace;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,47 +11,32 @@ import java.util.SortedMap;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.trie.PatriciaTrie;
 
-public class ConfigurationImpl implements Configuration {
+public class NamespaceConfiguration implements Configuration {
 
-  private final ConfigurationResolver resolver;
+  private final PatriciaTrie<String> patriciaTrie;
 
-  protected ConfigurationImpl(ConfigurationResolver resolver) {
-    this.resolver = resolver;
-  }
-
-  public static ConfigurationBuilder builder() {
-    return new ConfigurationBuilder();
-  }
-
-  static void checkNamespace(String namespace) {
-    if (namespace == null || namespace.length() == 0) {
-      throw new RuntimeException("invalid namespace");
-    }
+  public NamespaceConfiguration(Map<String, String> map) {
+    this.patriciaTrie = new PatriciaTrie<>(map);
   }
 
   @Override
   public Optional<String> get(String key) {
-    return resolver.get(key);
+    return Optional.ofNullable(patriciaTrie.get(key));
   }
 
   @Override
   public Set<String> keySet() {
-    return resolver.keySet();
+    return patriciaTrie.keySet();
   }
 
   @Override
   public Map<String, String> asMap() {
-    Map<String, String> map = Maps.newTreeMap();
-    for (String key : resolver.keySet()) {
-      map.put(key, resolver.get(key).orElse(null));
-    }
-    return Collections.unmodifiableMap(map);
+    return patriciaTrie;
   }
 
   @Override
   public Configuration getConfiguration(String namespace) {
     checkNamespace(namespace);
-    PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
     int len = namespace.length() + 1;
     return new NamespaceConfiguration(prefixMap.entrySet().stream()
@@ -62,7 +46,6 @@ public class ConfigurationImpl implements Configuration {
   @Override
   public Set<Configuration> getConfigurationSet(String namespace) {
     checkNamespace(namespace);
-    PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
     int len = namespace.length() + 1;
     Map<Integer, Map<String, String>> map = new HashMap<>();
@@ -95,7 +78,6 @@ public class ConfigurationImpl implements Configuration {
   @Override
   public Map<String, Configuration> getConfigurationMap(String namespace) {
     checkNamespace(namespace);
-    PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
     int len = namespace.length() + 1;
     Map<String, Map<String, String>> map = new HashMap<>();
@@ -118,5 +100,4 @@ public class ConfigurationImpl implements Configuration {
         .collect(Collectors.toMap(Entry::getKey,
             entry -> new NamespaceConfiguration(entry.getValue())));
   }
-
 }

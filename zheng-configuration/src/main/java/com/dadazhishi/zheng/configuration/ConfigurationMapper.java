@@ -9,7 +9,7 @@ public class ConfigurationMapper {
 
   public <T> T resolve(Configuration configuration, Class<T> tClass) {
     try {
-      return mapper.readMapAs(configuration, tClass);
+      return mapper.readMapAs(configuration.asMap(), tClass);
     } catch (IOException e) {
       throw new RuntimeException("resolve configuration error", e);
     }

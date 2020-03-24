@@ -1,7 +1,15 @@
 package com.dadazhishi.zheng.configuration;
 
+import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertEquals;
 
+import com.dadazhishi.zheng.configuration.objects.Apple;
+import com.dadazhishi.zheng.configuration.objects.AppleAnnotation;
+import com.dadazhishi.zheng.configuration.objects.Banana;
+import com.dadazhishi.zheng.configuration.objects.BananaAnnotation;
+import com.dadazhishi.zheng.configuration.objects.Food;
+import com.dadazhishi.zheng.configuration.objects.FoodAnnotation;
+import com.dadazhishi.zheng.configuration.objects.NamedAnnotation;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -41,12 +49,13 @@ public class ConfigurationModuleTest {
     }
     food.setBananas(list);
 
-    PropertiesConfigurationSource propertiesConfigurationSource = new PropertiesConfigurationSource
-        (PropertiesConfigurationSourceTest.class.getResourceAsStream("/food.properties"));
+    configuration = ConfigurationBuilder.create()
+        .withEnvironmentVariables()
+        .withSystemProperties()
+        .withClassPathProperties("food.properties")
+        .build();
 
-    configuration = propertiesConfigurationSource.getConfiguration();
-
-    ConfigurationModule configurationModule = new ConfigurationModule(configuration);
+    ConfigurationModule configurationModule = new ConfigurationModule(this.configuration);
     configurationModule.setConfigurationPackages("com.dadazhishi.zheng.configuration");
     injector = Guice
         .createInjector(configurationModule, new FoodModule());
@@ -57,6 +66,13 @@ public class ConfigurationModuleTest {
     System.out.println(injector.getInstance(NamedAnnotation.class).getName());
     System.out.println(injector.getInstance(NamedAnnotation.class).getName());
 
+  }
+
+  @Test
+  public void testGetMapKeyNamed() {
+    AppleAnnotation abc = injector.getInstance(Key.get(AppleAnnotation.class, named("abc")));
+    System.out.println(abc.getWeight());
+    System.out.println(abc.getName());
   }
 
   @Test
