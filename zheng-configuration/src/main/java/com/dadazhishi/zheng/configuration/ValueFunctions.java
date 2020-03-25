@@ -16,9 +16,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -85,10 +86,6 @@ public class ValueFunctions {
     return s -> Enum.valueOf(enumType, s);
   }
 
-  public static <V, T> Optional<V> transform(Optional<T> optional, Function<T, V> transform) {
-    return optional.map(transform);
-  }
-
   public static Function<String, LocalTime> toLocalTime() {
     return LocalTime::parse;
   }
@@ -137,4 +134,13 @@ public class ValueFunctions {
       }
     };
   }
+
+  public static Function<String, String[]> toArray(String separator) {
+    return value -> value.split(separator);
+  }
+
+  public static Function<String, List<String>> toList(String separator) {
+    return value -> Arrays.asList(value.split(separator));
+  }
+
 }
