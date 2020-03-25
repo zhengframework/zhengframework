@@ -10,7 +10,7 @@ import java.util.Set;
 public class ChainedConfigurationResolver implements ConfigurationResolver {
 
   private final List<ConfigurationResolver> resolvers = Collections
-      .synchronizedList(Lists.<ConfigurationResolver>newArrayList());
+      .synchronizedList(Lists.newArrayList());
 
   public ChainedConfigurationResolver(List<ConfigurationResolver> resolvers) {
     this.resolvers.addAll(resolvers);

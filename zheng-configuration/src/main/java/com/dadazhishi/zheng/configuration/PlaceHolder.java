@@ -1,6 +1,7 @@
 package com.dadazhishi.zheng.configuration;
 
-import java.util.Map;
+import com.dadazhishi.zheng.configuration.ex.UnresolvablePlaceholdersException;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,16 +11,16 @@ import java.util.regex.Pattern;
 public class PlaceHolder {
 
   private static final Pattern PATTERN = Pattern.compile("\\$\\{(.+?)\\}");
-  private final Map<String, String> values;
+  private final Configuration configuration;
 
   /**
    * Creates a new instance and initializes it. Uses defaults for variable prefix and suffix and the
    * escaping character.
    *
-   * @param values the variables' values, may be null
+   * @param configuration the variables' values, may be null
    */
-  PlaceHolder(Map<String, String> values) {
-    this.values = values;
+  PlaceHolder(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   /**
@@ -37,8 +38,11 @@ public class PlaceHolder {
     StringBuffer sb = new StringBuffer();
     while (m.find()) {
       String var = m.group(1);
-      String value = values.get(var);
-      String replacement = (value != null) ? replace(value) : "";
+      Optional<String> value = configuration.get(var);
+      if (!value.isPresent()) {
+        throw new UnresolvablePlaceholdersException(var);
+      }
+      String replacement = replace(value.get());
       m.appendReplacement(sb, Matcher.quoteReplacement(replacement));
     }
     m.appendTail(sb);
