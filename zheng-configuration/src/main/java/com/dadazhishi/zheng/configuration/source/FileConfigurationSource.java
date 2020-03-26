@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -16,7 +15,14 @@ import java.util.function.Supplier;
 public class FileConfigurationSource implements AutoConfigurationSource {
 
   public static final String FILE_BASH_PATH = "file.bash-path";
-  private Map<String, String> properties = new HashMap<>();
+  private String basePath;
+
+  public FileConfigurationSource(String basePath) {
+    this.basePath = basePath;
+  }
+
+  public FileConfigurationSource() {
+  }
 
   @Override
   public String[] schemes() {
@@ -25,7 +31,7 @@ public class FileConfigurationSource implements AutoConfigurationSource {
 
   @Override
   public void init(Map<String, String> properties) {
-    this.properties = properties;
+    basePath = properties.get(FILE_BASH_PATH);
   }
 
   @Override
@@ -39,8 +45,8 @@ public class FileConfigurationSource implements AutoConfigurationSource {
     }
     return () -> {
       File file;
-      if (properties.containsKey(FILE_BASH_PATH)) {
-        file = new File(properties.get(FILE_BASH_PATH), uri.getPath());
+      if (basePath != null) {
+        file = new File(basePath, uri.getPath());
       } else {
         file = new File(uri.getPath());
       }
