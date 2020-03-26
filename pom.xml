@@ -231,6 +231,7 @@
     <module>zheng-configuration-http</module>
     <module>zheng-configuration-ini</module>
     <module>zheng-configuration-jdbc</module>
+    <module>zheng-configuration-toml</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
