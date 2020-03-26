@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class RefreshableFileConfigurationResolver extends RefreshableConfigurationResolver {
 
@@ -14,6 +15,15 @@ public class RefreshableFileConfigurationResolver extends RefreshableConfigurati
 
   public RefreshableFileConfigurationResolver(
       ConfigurationParser<InputStream> parser, File file) {
+    super();
+    this.parser = parser;
+    this.file = file;
+  }
+
+  public RefreshableFileConfigurationResolver(long initialDelay, long delay,
+      TimeUnit unit,
+      ConfigurationParser<InputStream> parser, File file) {
+    super(initialDelay, delay, unit);
     this.parser = parser;
     this.file = file;
   }

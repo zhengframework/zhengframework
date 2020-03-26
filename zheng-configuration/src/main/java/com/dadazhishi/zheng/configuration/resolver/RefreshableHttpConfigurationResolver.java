@@ -5,14 +5,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-public class RefreshableURLConfigurationResolver extends RefreshableConfigurationResolver {
+public class RefreshableHttpConfigurationResolver extends RefreshableConfigurationResolver {
 
   private final ConfigurationParser<InputStream> parser;
   private final URL url;
 
-  public RefreshableURLConfigurationResolver(
+  public RefreshableHttpConfigurationResolver(
       ConfigurationParser<InputStream> parser, URL url) {
+    super();
+    this.parser = parser;
+    this.url = url;
+  }
+
+  public RefreshableHttpConfigurationResolver(long initialDelay, long delay,
+      TimeUnit unit,
+      ConfigurationParser<InputStream> parser, URL url) {
+    super(initialDelay, delay, unit);
     this.parser = parser;
     this.url = url;
   }

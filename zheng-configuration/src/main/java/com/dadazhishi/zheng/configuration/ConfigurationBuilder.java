@@ -7,13 +7,10 @@ import com.dadazhishi.zheng.configuration.resolver.ConfigurationResolver;
 import com.dadazhishi.zheng.configuration.resolver.EnvironmentConfigurationResolver;
 import com.dadazhishi.zheng.configuration.resolver.FallbackConfigurationResolver;
 import com.dadazhishi.zheng.configuration.resolver.FileConfigurationResolver;
+import com.dadazhishi.zheng.configuration.resolver.HttpConfigurationResolver;
 import com.dadazhishi.zheng.configuration.resolver.InputStreamConfigurationResolver;
 import com.dadazhishi.zheng.configuration.resolver.MapConfigurationResolver;
-import com.dadazhishi.zheng.configuration.resolver.RefreshableFileConfigurationResolver;
-import com.dadazhishi.zheng.configuration.resolver.RefreshableInputStreamConfigurationResolver;
-import com.dadazhishi.zheng.configuration.resolver.RefreshableURLConfigurationResolver;
 import com.dadazhishi.zheng.configuration.resolver.SystemPropertiesConfigurationResolver;
-import com.dadazhishi.zheng.configuration.resolver.URLConfigurationResolver;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import java.io.File;
@@ -79,27 +76,7 @@ public class ConfigurationBuilder {
 
   public ConfigurationBuilder withProperties(URL url) {
     resolvers
-        .add(new URLConfigurationResolver(new PropertiesConfigurationParser(),
-            url));
-    return this;
-  }
-
-  public ConfigurationBuilder withRefreshableProperties(File path) {
-    resolvers
-        .add(new RefreshableFileConfigurationResolver(new PropertiesConfigurationParser(), path));
-    return this;
-  }
-
-  public ConfigurationBuilder withRefreshableProperties(Supplier<InputStream> inputStream) {
-    resolvers
-        .add(new RefreshableInputStreamConfigurationResolver(new PropertiesConfigurationParser(),
-            inputStream));
-    return this;
-  }
-
-  public ConfigurationBuilder withRefreshableProperties(URL url) {
-    resolvers
-        .add(new RefreshableURLConfigurationResolver(new PropertiesConfigurationParser(),
+        .add(new HttpConfigurationResolver(new PropertiesConfigurationParser(),
             url));
     return this;
   }
