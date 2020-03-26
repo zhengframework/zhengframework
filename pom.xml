@@ -229,6 +229,7 @@
     <module>zheng-configuration-json</module>
     <module>zheng-configuration-yaml</module>
     <module>zheng-configuration-http</module>
+    <module>zheng-configuration-ini</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
