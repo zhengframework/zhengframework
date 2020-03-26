@@ -228,6 +228,7 @@
     <module>zheng-cache-jcs</module>
     <module>zheng-configuration-json</module>
     <module>zheng-configuration-yaml</module>
+    <module>zheng-configuration-http</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

@@ -1,3 +1,2 @@
-com.dadazhishi.zheng.configuration.source.HttpConfigurationSource
 com.dadazhishi.zheng.configuration.source.ClassPathConfigurationSource
 com.dadazhishi.zheng.configuration.source.FileConfigurationSource
