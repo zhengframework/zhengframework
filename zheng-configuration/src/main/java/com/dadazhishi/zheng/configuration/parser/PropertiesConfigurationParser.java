@@ -1,11 +1,12 @@
 package com.dadazhishi.zheng.configuration.parser;
 
+import com.dadazhishi.zheng.configuration.spi.AutoConfigurationParser;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class PropertiesConfigurationParser implements ConfigurationParser<InputStream> {
+public class PropertiesConfigurationParser implements AutoConfigurationParser {
 
   @Override
   public Map<String, String> parse(InputStream content) {
@@ -20,6 +21,11 @@ public class PropertiesConfigurationParser implements ConfigurationParser<InputS
       map.put(name, properties.getProperty(name));
     }
     return map;
+  }
+
+  @Override
+  public String[] fileTypes() {
+    return new String[]{".properties"};
   }
 
 }

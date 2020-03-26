@@ -7,11 +7,11 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class URLConfigurationResolver extends AbstractConfigurationResolver {
+public class HttpConfigurationResolver extends AbstractConfigurationResolver {
 
   private Map<String, String> map = new HashMap<>();
 
-  public URLConfigurationResolver(
+  public HttpConfigurationResolver(
       ConfigurationParser<InputStream> parser,
       URL url) {
     try (InputStream inputStream = url.openStream()) {
@@ -25,4 +25,5 @@ public class URLConfigurationResolver extends AbstractConfigurationResolver {
   protected Map<String, String> delegate() {
     return map;
   }
+
 }
