@@ -1,5 +1,9 @@
 code base on [guice-persist-hibernate](https://github.com/jcampos8782/guice-persist-hibernate)
 
+# hibernate configurations
+
+https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#configurations
+
 
 ```java
 

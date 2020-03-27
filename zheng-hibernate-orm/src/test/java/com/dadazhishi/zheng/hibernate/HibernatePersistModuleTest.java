@@ -9,9 +9,7 @@ import com.google.inject.Injector;
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.UnitOfWork;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import org.junit.Before;
@@ -19,24 +17,16 @@ import org.junit.Test;
 
 public class HibernatePersistModuleTest {
 
-  final PackageScanEntityClassProvider packageScanEntityClassProvider = new PackageScanEntityClassProvider(
-      "com.dadazhishi.zheng.hibernate");
   private Injector injector;
   private Injector injector2;
 
   @Before
   public void beforeEach() {
+    HibernateConfig hibernateConfig = new HibernateConfig();
+    hibernateConfig.setEntityPackages("com.dadazhishi.zheng.hibernate");
     injector = Guice.createInjector(
-        new HibernatePersistModule(TestEntityProvider.class, TestPropertyProvider.class));
-    injector2 = Guice.createInjector(new HibernatePersistModule(null, TestPropertyProvider.class)
-
-        , new AbstractModule() {
-          @Override
-          protected void configure() {
-            bind(HibernateEntityClassProvider.class)
-                .toInstance(new PackageScanEntityClassProvider("com.dadazhishi.zheng.hibernate"));
-          }
-        }
+        new HibernatePersistModule(new TestEntityProvider(), hibernateConfig));
+    injector2 = Guice.createInjector(new HibernatePersistModule(null, hibernateConfig)
     );
   }
 
@@ -47,8 +37,9 @@ public class HibernatePersistModuleTest {
 
   @Test
   public void initializationSucceedsUsingProviderConstructor() {
+
     Guice.createInjector(
-        new HibernatePersistModule(TestEntityProvider.class, TestPropertyProvider.class));
+        new HibernatePersistModule(new TestEntityProvider(), new HibernateConfig()));
   }
 
   @Test
@@ -57,7 +48,7 @@ public class HibernatePersistModuleTest {
       @Override
       protected void configure() {
         bind(HibernateEntityClassProvider.class).to(TestEntityProvider.class);
-        bind(HibernatePropertyProvider.class).to(TestPropertyProvider.class);
+        bind(HibernateConfig.class).toInstance(new HibernateConfig());
       }
     });
   }
@@ -112,11 +103,4 @@ public class HibernatePersistModuleTest {
     }
   }
 
-  private static class TestPropertyProvider implements HibernatePropertyProvider {
-
-    @Override
-    public Map<String, String> get() {
-      return Collections.emptyMap();
-    }
-  }
 }

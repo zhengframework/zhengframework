@@ -39,7 +39,7 @@ public class AutoRegisteringListenerIntegrator implements Integrator {
     final EventListenerRegistry eventListenerRegistry = serviceRegistry
         .getService(EventListenerRegistry.class);
     for (final AutoRegisteringListener listener : listeners) {
-      listener.getEventType().stream()
+      listener.getEventType()
           .forEach(type -> doRegister(eventListenerRegistry, type, listener));
     }
   }

@@ -8,7 +8,10 @@ import com.google.inject.persist.PersistModule;
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.UnitOfWork;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
@@ -23,52 +26,78 @@ import org.hibernate.integrator.spi.Integrator;
 /**
  * Adaptation of the {@link PersistModule} specific to using Hibernate via a {@code SessionFactory}
  * as opposed to the JPA {@code EntityManagerFactory}. This allows for runtime binding of
- * configuration properties (using a {@link HibernatePropertyProvider} and programmatic
- * configuration of {@code @Entity} classes (Yay! No XML!). <br /> <br /> Users of this module
- * *must* either<br /> a) Provide {@link HibernateEntityClassProvider} and {@link
- * HibernatePropertyProvider} classes to the constructor<br /> OR<br/> b) Provider bindings for
- * those classes via an installed Guice module
+ * configuration properties (using a {@link HibernateConfig} and programmatic configuration of
+ * {@code @Entity} classes (Yay! No XML!). <br /> <br /> Users of this module *must* either<br /> a)
+ * Provide {@link HibernateEntityClassProvider} and {@link HibernateConfig} classes to the
+ * constructor<br /> OR<br/> b) Provider bindings for those classes via an installed Guice module
  *
  * @author Jason Campos <jcampos8782@gmail.com>
  */
 public class HibernatePersistModule extends PersistModule {
 
-  private final Class<? extends HibernateEntityClassProvider> entityClassProvider;
-  private final Class<? extends HibernatePropertyProvider> hibernatePropertyProvider;
-
-  /**
-   * Instantiates module without specifying the {@link #hibernatePropertyProvider} or {@link
-   * #entityClassProvider}. These bindings *must* be set in order for this module to function
-   * properly.
-   */
-  public HibernatePersistModule() {
-    this.entityClassProvider = null;
-    this.hibernatePropertyProvider = null;
-  }
+  private final HibernateEntityClassProvider entityClassProvider;
+  private final HibernateConfig hibernateConfig;
 
   /**
    * Instantiates module with the specified entity class and property providers. No additional
    * bindings required for this module to function properly.
    */
-  public HibernatePersistModule(
-      final Class<? extends HibernateEntityClassProvider> entityClassProvider,
-      final Class<? extends HibernatePropertyProvider> hibernatePropertyProvider) {
+  public HibernatePersistModule() {
+    this.entityClassProvider = null;
+    this.hibernateConfig = null;
+  }
 
+  public HibernatePersistModule(
+      HibernateConfig hibernateConfig) {
+    this(null, hibernateConfig);
+  }
+
+  public HibernatePersistModule(
+      final HibernateEntityClassProvider entityClassProvider,
+      HibernateConfig hibernateConfig) {
     this.entityClassProvider = entityClassProvider;
-    this.hibernatePropertyProvider = hibernatePropertyProvider;
+    this.hibernateConfig = Objects.requireNonNull(hibernateConfig);
+  }
+
+  private Map<String, String> hibernateConfigToMap(HibernateConfig hibernateConfig) {
+    Map<String, String> map = new HashMap<>();
+    if (hibernateConfig.getDriverClassName() != null) {
+      map.put("hibernate.connection.driver_class", hibernateConfig.getDriverClassName());
+    }
+    if (hibernateConfig.getUrl() != null) {
+      map.put("hibernate.connection.url", hibernateConfig.getUrl());
+    }
+    if (hibernateConfig.getUsername() != null) {
+      map.put("hibernate.connection.username", hibernateConfig.getUsername());
+    }
+    if (hibernateConfig.getPassword() != null) {
+      map.put("hibernate.connection.password", hibernateConfig.getPassword());
+    } else {
+      map.put("hibernate.connection.password", "");
+    }
+    if (hibernateConfig.getProperties() != null && !hibernateConfig.getProperties().isEmpty()) {
+      hibernateConfig.getProperties().forEach(map::put);
+    }
+    return map;
   }
 
   @Override
   protected void configurePersistence() {
     requireBinding(HibernateEntityClassProvider.class);
-    requireBinding(HibernatePropertyProvider.class);
+    requireBinding(HibernateConfig.class);
 
-    if (entityClassProvider != null) {
-      bind(HibernateEntityClassProvider.class).to(entityClassProvider);
+    if (hibernateConfig != null) {
+      bind(HibernateConfig.class).toInstance(hibernateConfig);
+      if (hibernateConfig.getEntityPackages() != null
+          && hibernateConfig.getEntityPackages().length > 0) {
+        PackageScanEntityClassProvider entityClassProvider = new PackageScanEntityClassProvider(
+            hibernateConfig.getEntityPackages());
+        bind(HibernateEntityClassProvider.class).toInstance(entityClassProvider);
+      }
     }
 
-    if (hibernatePropertyProvider != null) {
-      bind(HibernatePropertyProvider.class).to(hibernatePropertyProvider);
+    if (entityClassProvider != null) {
+      bind(HibernateEntityClassProvider.class).toInstance(entityClassProvider);
     }
 
     // Resolve PersistService, Provider<SessionFactory>, and HibernatePersistService
@@ -105,13 +134,14 @@ public class HibernatePersistModule extends PersistModule {
     return txInterceptor;
   }
 
+  @Singleton
   @Inject
   @Provides
   private Configuration getHibernateConfiguration(
       final HibernateEntityClassProvider entityClassProvider,
-      final HibernatePropertyProvider hibernatePropertyProvider) {
+      final HibernateConfig hibernateConfig) {
     final Configuration configuration = new Configuration();
-    hibernatePropertyProvider.get().forEach(configuration::setProperty);
+    hibernateConfigToMap(hibernateConfig).forEach(configuration::setProperty);
     entityClassProvider.get().forEach(configuration::addAnnotatedClass);
     return configuration;
   }
