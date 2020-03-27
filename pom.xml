@@ -232,6 +232,9 @@
     <module>zheng-configuration-ini</module>
     <module>zheng-configuration-jdbc</module>
     <module>zheng-configuration-toml</module>
+    <module>zheng-configuration-consul</module>
+    <module>zheng-configuration-etcd</module>
+    <module>zheng-configuration-zookeeper</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
