@@ -1,105 +1,121 @@
 package com.dadazhishi.zheng.hibernate;
 
+import static org.hibernate.cfg.AvailableSettings.DIALECT;
+import static org.hibernate.cfg.AvailableSettings.HBM2DDL_AUTO;
 import static org.junit.Assert.assertEquals;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.CreationException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.persist.PersistService;
-import com.google.inject.persist.UnitOfWork;
-import java.util.Arrays;
-import java.util.List;
+import com.google.inject.Provides;
+import com.google.inject.persist.Transactional;
+import java.util.UUID;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
-import org.junit.Before;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import org.junit.Test;
 
 public class HibernatePersistModuleTest {
 
-  private Injector injector;
-  private Injector injector2;
-
-  @Before
-  public void beforeEach() {
-    HibernateConfig hibernateConfig = new HibernateConfig();
-    hibernateConfig.setEntityPackages("com.dadazhishi.zheng.hibernate");
-    injector = Guice.createInjector(
-        new HibernatePersistModule(new TestEntityProvider(), hibernateConfig));
-    injector2 = Guice.createInjector(new HibernatePersistModule(null, hibernateConfig)
-    );
-  }
 
   @Test(expected = CreationException.class)
-  public void failsToIntializeWithoutRequiredProviders() {
+  public void failsToInitializedWithoutRequiredProviders() {
     Guice.createInjector(new HibernatePersistModule());
   }
 
   @Test
-  public void initializationSucceedsUsingProviderConstructor() {
+  public void example() {
+    Injector injector = Guice.createInjector(new MyModule(), new HibernatePersistModule());
 
-    Guice.createInjector(
-        new HibernatePersistModule(new TestEntityProvider(), new HibernateConfig()));
+    Work work = injector.getInstance(Work.class);
+
+    work.makeAThing();
+    work.makeAThing();
+    work.makeAThing();
+
+    System.out.println("There are now " + work.countThings() + " things");
+
+    assertEquals(3, work.countThings());
+    // Without this, the program will not exit
+    injector.getInstance(EntityManagerFactory.class).close();
+
   }
 
-  @Test
-  public void intializationSucceedsUsingAdditionalModule() {
-    Guice.createInjector(new HibernatePersistModule(), new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(HibernateEntityClassProvider.class).to(TestEntityProvider.class);
-        bind(HibernateConfig.class).toInstance(new HibernateConfig());
-      }
-    });
-  }
-
-  @Test
-  public void testPersistServiceAndSessionFactoryProviderAreSingleton() {
-    final HibernatePersistService persistService = (HibernatePersistService) injector
-        .getInstance(PersistService.class);
-    final HibernatePersistService hibernatePersistService = injector
-        .getInstance(HibernatePersistService.class);
-    assertEquals(persistService, hibernatePersistService);
-  }
-
-  @Test
-  public void testPersistServiceAndSessionFactoryProviderAreSingleton2() {
-    final HibernatePersistService persistService = (HibernatePersistService) injector2
-        .getInstance(PersistService.class);
-    final HibernatePersistService hibernatePersistService = injector2
-        .getInstance(HibernatePersistService.class);
-    assertEquals(persistService, hibernatePersistService);
-  }
-
-  @Test
-  public void testUnitOfWorkAndSessionProviderAreSingleton() {
-    final HibernateUnitOfWork unitOfWork = (HibernateUnitOfWork) injector
-        .getInstance(UnitOfWork.class);
-    final HibernateUnitOfWork hibernateUnitOfWork = injector.getInstance(HibernateUnitOfWork.class);
-    assertEquals(unitOfWork, hibernateUnitOfWork);
-  }
-
-  @Test
-  public void testUnitOfWorkAndSessionProviderAreSingleton2() {
-    final HibernateUnitOfWork unitOfWork = (HibernateUnitOfWork) injector2
-        .getInstance(UnitOfWork.class);
-    final HibernateUnitOfWork hibernateUnitOfWork = injector2
-        .getInstance(HibernateUnitOfWork.class);
-    assertEquals(unitOfWork, hibernateUnitOfWork);
-  }
-
-  @Entity
-  private static class TestEntity {
+  @Entity(name = "Thing")
+  public static class Thing {
 
     @Id
-    long id;
+    private UUID id = UUID.randomUUID();
+    private String name;
+
+    public Thing(String name) {
+      setName(name);
+    }
+
+    public UUID getId() {
+      return id;
+    }
+
+    public void setId(UUID id) {
+      this.id = id;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
   }
 
-  private static class TestEntityProvider implements HibernateEntityClassProvider {
+  public static class Work {
+
+    private final EntityManager entityManager;
+
+    @Inject
+    public Work(EntityManager entityManager) {
+
+      this.entityManager = entityManager;
+    }
+
+    @Transactional
+    public void makeAThing() {
+      entityManager.persist(new Thing("Thing " + Math.random()));
+    }
+
+    @Transactional
+    public long countThings() {
+      CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+      CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+      cq.select(cb.count(cq.from(Thing.class)));
+      return entityManager.createQuery(cq).getSingleResult();
+    }
+  }
+
+  public static class MyModule extends AbstractModule {
 
     @Override
-    public List<Class<?>> get() {
-      return Arrays.asList(TestEntity.class);
+    protected void configure() {
+    }
+
+    @Provides
+    @Singleton
+    public HibernateConfig hibernateConfig() {
+      HibernateConfig cfg = new HibernateConfig();
+      cfg.setEntityPackages(HibernatePersistModuleTest.class.getPackage().getName());
+      cfg.setDriverClassName("org.h2.Driver");
+      cfg.setUsername("sa");
+      cfg.setUrl("jdbc:h2:mem:test");
+      cfg.getProperties().put(DIALECT, "org.hibernate.dialect.H2Dialect");
+      cfg.getProperties().put(HBM2DDL_AUTO, "create");
+      return cfg;
     }
   }
 

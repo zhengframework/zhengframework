@@ -10,7 +10,7 @@ public class HibernateConfig {
   private String password;
   private String driverClassName;
   private String url;
-  private Map<String, String> properties;
+  private Map<String, String> properties = new HashMap<>();
 
   public String[] getEntityPackages() {
     return entityPackages;

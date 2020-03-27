@@ -1,6 +1,7 @@
 package com.dadazhishi.zheng.hibernate;
 
 import com.google.inject.persist.Transactional;
+import com.google.inject.persist.UnitOfWork;
 import java.lang.reflect.Method;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -21,20 +22,26 @@ public class HibernateTransactionInterceptor implements MethodInterceptor {
 
   // Tracks if the unit of work was begun implicitly by this transaction.
   private final ThreadLocal<Boolean> didWeStartWork = new ThreadLocal<>();
+//  @Inject
+//  HibernateUnitOfWork unitOfWork = null;
+
   @Inject
-  HibernateUnitOfWork unitOfWork = null;
+  private HibernatePersistService emProvider = null;
+
+  @Inject
+  private UnitOfWork unitOfWork = null;
 
   @Override
   public Object invoke(final MethodInvocation methodInvocation) throws Throwable {
 
     // Should we start a unit of work?
-    if (!unitOfWork.isWorking()) {
-      unitOfWork.begin();
+    if (!emProvider.isWorking()) {
+      emProvider.begin();
       didWeStartWork.set(true);
     }
 
     final Transactional transactional = readTransactionMetadata(methodInvocation);
-    final EntityManager em = unitOfWork.get();
+    final EntityManager em = emProvider.get();
 
     // Allow 'joining' of transactions if there is an enclosing
     // @Transactional method.

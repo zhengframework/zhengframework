@@ -1,9 +1,13 @@
 package com.dadazhishi.zheng.hibernate;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.persist.PersistService;
+import com.google.inject.persist.UnitOfWork;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -19,11 +23,18 @@ import org.slf4j.LoggerFactory;
  * @author Jason Campos <jcampos8782@gmail.com>
  */
 @Singleton
-public class HibernatePersistService implements Provider<SessionFactory>, PersistService {
+public class HibernatePersistService implements Provider<EntityManager>, UnitOfWork,
+    PersistService {
 
   private static final Logger logger = LoggerFactory.getLogger(HibernatePersistService.class);
   private final Configuration configuration;
   private final BootstrapServiceRegistry bootstrapServiceRegistry;
+  private final ThreadLocal<EntityManager> entityManager = new ThreadLocal<>();
+
+  public SessionFactory getSessionFactory() {
+    return sessionFactory;
+  }
+
   private volatile SessionFactory sessionFactory;
   private volatile boolean started;
 
@@ -35,16 +46,56 @@ public class HibernatePersistService implements Provider<SessionFactory>, Persis
   }
 
   @Override
-  public SessionFactory get() {
+  public EntityManager get() {
     if (!started) {
       throw new IllegalStateException(
           "HibernatePersistService has not been started or has been stopped.");
     }
-    return sessionFactory;
+    if (!isWorking()) {
+      begin();
+    }
+    EntityManager em = entityManager.get();
+    Preconditions.checkState(
+        null != em,
+        "Requested EntityManager outside work unit. "
+            + "Try calling UnitOfWork.begin() first, or use a PersistFilter if you "
+            + "are inside a servlet environment.");
+
+    return em;
+  }
+
+  public boolean isWorking() {
+    return entityManager.get() != null;
   }
 
   @Override
-  public void start() {
+  public void begin() {
+    Preconditions.checkState(
+        null == entityManager.get(),
+        "Work already begun on this thread. Looks like you have called UnitOfWork.begin() twice"
+            + " without a balancing call to end() in between.");
+
+    entityManager.set(sessionFactory.createEntityManager());
+  }
+
+  @Override
+  public void end() {
+    EntityManager em = entityManager.get();
+
+    // Let's not penalize users for calling end() multiple times.
+    if (null == em) {
+      return;
+    }
+
+    try {
+      em.close();
+    } finally {
+      entityManager.remove();
+    }
+  }
+
+  @Override
+  public synchronized void start() {
     logger.info("Starting HibernatePersistService");
     final ServiceRegistry registry = new StandardServiceRegistryBuilder(bootstrapServiceRegistry)
         .applySettings(configuration.getProperties())
@@ -55,10 +106,29 @@ public class HibernatePersistService implements Provider<SessionFactory>, Persis
     started = true;
   }
 
+
+  @Singleton
+  public static class EntityManagerFactoryProvider implements Provider<EntityManagerFactory> {
+
+    private final HibernatePersistService emProvider;
+
+    @Inject
+    public EntityManagerFactoryProvider(HibernatePersistService emProvider) {
+      this.emProvider = emProvider;
+    }
+
+    @Override
+    public EntityManagerFactory get() {
+      assert null != emProvider.sessionFactory;
+      return emProvider.sessionFactory;
+    }
+  }
+
   @Override
   public void stop() {
     logger.info("Stopping HibernatePersistService");
     sessionFactory.close();
     logger.info("HibernatePersistService stopped");
   }
+
 }

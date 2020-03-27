@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.hibernate;
 
+import com.dadazhishi.zheng.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
@@ -15,8 +16,8 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import org.aopalliance.intercept.MethodInterceptor;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
 import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
@@ -35,7 +36,6 @@ import org.hibernate.integrator.spi.Integrator;
  */
 public class HibernatePersistModule extends PersistModule {
 
-  private final HibernateEntityClassProvider entityClassProvider;
   private final HibernateConfig hibernateConfig;
 
   /**
@@ -43,19 +43,12 @@ public class HibernatePersistModule extends PersistModule {
    * bindings required for this module to function properly.
    */
   public HibernatePersistModule() {
-    this.entityClassProvider = null;
     this.hibernateConfig = null;
   }
 
-  public HibernatePersistModule(
-      HibernateConfig hibernateConfig) {
-    this(null, hibernateConfig);
-  }
 
   public HibernatePersistModule(
-      final HibernateEntityClassProvider entityClassProvider,
       HibernateConfig hibernateConfig) {
-    this.entityClassProvider = entityClassProvider;
     this.hibernateConfig = Objects.requireNonNull(hibernateConfig);
   }
 
@@ -88,29 +81,19 @@ public class HibernatePersistModule extends PersistModule {
 
     if (hibernateConfig != null) {
       bind(HibernateConfig.class).toInstance(hibernateConfig);
-      if (hibernateConfig.getEntityPackages() != null
-          && hibernateConfig.getEntityPackages().length > 0) {
-        PackageScanEntityClassProvider entityClassProvider = new PackageScanEntityClassProvider(
-            hibernateConfig.getEntityPackages());
-        bind(HibernateEntityClassProvider.class).toInstance(entityClassProvider);
-      }
-    }
-
-    if (entityClassProvider != null) {
-      bind(HibernateEntityClassProvider.class).toInstance(entityClassProvider);
     }
 
     // Resolve PersistService, Provider<SessionFactory>, and HibernatePersistService
     // to the same object.
     bind(HibernatePersistService.class).in(Singleton.class);
     bind(PersistService.class).to(HibernatePersistService.class);
-    bind(SessionFactory.class).toProvider(HibernatePersistService.class);
+//    bind(SessionFactory.class).toProvider(HibernatePersistService2.class);
 
     // Resolve UnitOfWork, Provider<Session>,and HibernateUnitOfWork
     // to the same object.
-    bind(HibernateUnitOfWork.class).in(Singleton.class);
-    bind(UnitOfWork.class).to(HibernateUnitOfWork.class);
-    bind(Session.class).toProvider(HibernateUnitOfWork.class);
+//    bind(HibernateUnitOfWork.class).in(Singleton.class);
+    bind(UnitOfWork.class).to(HibernatePersistService.class);
+//    bind(Session.class).toProvider(HibernateUnitOfWork.class);
 
     // Default to an empty set of integrators
     // @formatter:off
@@ -119,12 +102,16 @@ public class HibernatePersistModule extends PersistModule {
 			.setDefault()
 			.toInstance(ImmutableSet.copyOf(integrators));
 
-
-
 		// @formatter:on
     // Since Session implements EntityManager, bind EntityManager as well in case the user would rather use JPA
     // classes
-    bind(EntityManager.class).toProvider(HibernateSessionEntityManagerAdapter.class);
+//    bind(EntityManager.class).toProvider(HibernateSessionEntityManagerAdapter.class);
+    bind(EntityManager.class).toProvider(HibernatePersistService.class);
+    bind(EntityManagerFactory.class).toProvider(EntityManagerFactoryProvider.class);
+
+    bind(Initializer.class).asEagerSingleton();
+
+    requestStaticInjection(DefaultEntityManager.class);
   }
 
   @Override
@@ -132,6 +119,22 @@ public class HibernatePersistModule extends PersistModule {
     final MethodInterceptor txInterceptor = new HibernateTransactionInterceptor();
     requestInjection(txInterceptor);
     return txInterceptor;
+  }
+
+  @Singleton
+  @Inject
+  @Provides
+  private SessionFactory sessionFactory(HibernatePersistService hibernatePersistService) {
+    return hibernatePersistService.getSessionFactory();
+  }
+
+  @Singleton
+  @Inject
+  @Provides
+  private HibernateEntityClassProvider hibernateEntityClassProvider(
+      final HibernateConfig hibernateConfig) {
+    return new PackageScanEntityClassProvider(
+        hibernateConfig.getEntityPackages());
   }
 
   @Singleton
@@ -156,5 +159,13 @@ public class HibernatePersistModule extends PersistModule {
       builder.applyIntegrator(integrator);
     }
     return builder.build();
+  }
+
+  static class Initializer {
+
+    @Inject
+    public Initializer(PersistService service) {
+      service.start();
+    }
   }
 }

@@ -56,6 +56,12 @@
       <scope>test</scope>
       <version>2.0.2-beta</version>
     </dependency>
+    <dependency>
+      <artifactId>h2</artifactId>
+      <groupId>com.h2database</groupId>
+      <scope>test</scope>
+      <version>1.4.200</version>
+    </dependency>
   </dependencies>
 
   <modelVersion>4.0.0</modelVersion>
