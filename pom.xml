@@ -190,7 +190,7 @@
     <module>zheng-shiro</module>
     <module>zheng-configuration</module>
     <module>zheng-mybatis</module>
-    <module>zheng-datasource</module>
+    <module>zheng-database</module>
     <module>zheng-datasource-HikariCP</module>
     <module>zheng-driver-mysql</module>
     <module>zheng-datasource-commons-dbcp2</module>
