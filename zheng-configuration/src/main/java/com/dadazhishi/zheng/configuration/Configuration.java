@@ -2,12 +2,16 @@ package com.dadazhishi.zheng.configuration;
 
 import static java.util.Arrays.stream;
 
+import com.dadazhishi.zheng.configuration.util.Duration;
+import com.dadazhishi.zheng.configuration.util.Size;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -52,15 +56,23 @@ public interface Configuration {
   }
 
   default Optional<Integer> getInt(String key) {
-    return getValue(key, ValueFunctions.toInt());
+    return getValue(key, Integer::parseInt);
   }
 
   default Integer getInt(String key, Integer defaultValue) {
     return getInt(key).orElse(defaultValue);
   }
 
+  default Optional<Charset> getCharset(String key) {
+    return getValue(key, Charset::forName);
+  }
+
+  default Charset getCharset(String key, Charset defaultValue) {
+    return getCharset(key).orElse(defaultValue);
+  }
+
   default Optional<Long> getLong(String key) {
-    return getValue(key, ValueFunctions.toLong());
+    return getValue(key, Long::parseLong);
   }
 
   default Long getLong(String key, Long defaultValue) {
@@ -68,7 +80,7 @@ public interface Configuration {
   }
 
   default Optional<Float> getFloat(String key) {
-    return getValue(key, ValueFunctions.toFloat());
+    return getValue(key, Float::parseFloat);
   }
 
   default Float getFloat(String key, Float defaultValue) {
@@ -76,7 +88,7 @@ public interface Configuration {
   }
 
   default Optional<Double> getDouble(String key) {
-    return getValue(key, ValueFunctions.toDouble());
+    return getValue(key, Double::parseDouble);
   }
 
   default Double getDouble(String key, Double defaultValue) {
@@ -92,7 +104,7 @@ public interface Configuration {
   }
 
   default Optional<BigDecimal> getBigDecimal(String key) {
-    return getValue(key, ValueFunctions.toBigDecimal());
+    return getValue(key, BigDecimal::new);
   }
 
   default BigDecimal getBigDecimal(String key, BigDecimal defaultValue) {
@@ -100,7 +112,7 @@ public interface Configuration {
   }
 
   default Optional<BigInteger> getBigInteger(String key) {
-    return getValue(key, ValueFunctions.toBigInteger());
+    return getValue(key, BigInteger::new);
   }
 
   default BigInteger getBigInteger(String key, BigInteger defaultValue) {
@@ -108,7 +120,7 @@ public interface Configuration {
   }
 
   default Optional<File> getFile(String key) {
-    return getValue(key, ValueFunctions.toFile());
+    return getValue(key, File::new);
   }
 
   default File getFile(String key, File defaultValue) {
@@ -116,7 +128,7 @@ public interface Configuration {
   }
 
   default Optional<Path> getPath(String key) {
-    return getValue(key, ValueFunctions.toPath());
+    return getValue(key, Paths::get);
   }
 
   default Path getPath(String key, Path defaultValue) {
@@ -132,7 +144,7 @@ public interface Configuration {
   }
 
   default Optional<LocalTime> getLocalTime(String key) {
-    return getValue(key, ValueFunctions.toLocalTime());
+    return getValue(key, LocalTime::parse);
   }
 
   default LocalTime getLocalTime(String key, LocalTime defaultValue) {
@@ -140,7 +152,7 @@ public interface Configuration {
   }
 
   default Optional<LocalDateTime> getLocalDateTime(String key) {
-    return getValue(key, ValueFunctions.toLocalDateTime());
+    return getValue(key, LocalDateTime::parse);
   }
 
   default LocalDateTime getLocalDateTime(String key, LocalDateTime defaultValue) {
@@ -148,11 +160,27 @@ public interface Configuration {
   }
 
   default Optional<LocalDate> getLocalDate(String key) {
-    return getValue(key, ValueFunctions.toLocalDate());
+    return getValue(key, LocalDate::parse);
   }
 
   default LocalDate getLocalDate(String key, LocalDate defaultValue) {
     return getLocalDate(key).orElse(defaultValue);
+  }
+
+  default Optional<Size> getSize(String key) {
+    return getValue(key, Size::parse);
+  }
+
+  default Size getSize(String key, Size defaultValue) {
+    return getSize(key).orElse(defaultValue);
+  }
+
+  default Optional<Duration> getDuration(String key) {
+    return getValue(key, Duration::parse);
+  }
+
+  default Duration getDuration(String key, Duration defaultValue) {
+    return getDuration(key).orElse(defaultValue);
   }
 
   default Optional<URI> getURI(String key) {
@@ -163,6 +191,7 @@ public interface Configuration {
     return getURI(key).orElse(defaultValue);
   }
 
+
   default Optional<URL> getURL(String key) {
     return getValue(key, ValueFunctions.toURL());
   }
@@ -172,7 +201,7 @@ public interface Configuration {
   }
 
   default <T extends Enum<T>> Optional<T> getEnum(String key, Class<T> enumType) {
-    return getValue(key, ValueFunctions.toEnum(enumType));
+    return getValue(key, s -> Enum.valueOf(enumType, s));
   }
 
   default <T extends Enum<T>> T getEnum(String key, Class<T> enumType, T defaultValue) {
