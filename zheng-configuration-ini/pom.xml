@@ -3,16 +3,15 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>zheng-configuration-ini</artifactId>
+
   <dependencies>
     <dependency>
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
-      <version>1.0</version>
     </dependency>
     <dependency>
       <artifactId>ini4j</artifactId>
       <groupId>org.ini4j</groupId>
-      <version>0.5.4</version>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -21,6 +20,17 @@
     </dependency>
 
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <modelVersion>4.0.0</modelVersion>
 

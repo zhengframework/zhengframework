@@ -11,12 +11,10 @@
     <dependency>
       <artifactId>infinispan-core</artifactId>
       <groupId>org.infinispan</groupId>
-      <version>10.1.5.Final</version>
     </dependency>
     <dependency>
       <artifactId>infinispan-jcache</artifactId>
       <groupId>org.infinispan</groupId>
-      <version>10.1.5.Final</version>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -24,6 +22,17 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <modelVersion>4.0.0</modelVersion>
   <parent>

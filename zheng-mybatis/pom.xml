@@ -2,27 +2,24 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-mybatis</artifactId>
   <dependencies>
     <dependency>
       <artifactId>mybatis</artifactId>
       <groupId>org.mybatis</groupId>
-      <version>3.5.4</version>
     </dependency>
     <dependency>
       <artifactId>mybatis-guice</artifactId>
       <groupId>org.mybatis</groupId>
-      <version>3.12</version>
     </dependency>
     <dependency>
       <artifactId>hsqldb</artifactId>
       <groupId>org.hsqldb</groupId>
       <scope>test</scope>
-      <version>2.5.0</version>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -38,9 +35,24 @@
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
+  <artifactId>zheng-mybatis</artifactId>
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>zheng</artifactId>

@@ -2,22 +2,11 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-mongodb</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>mongodb-driver-sync</artifactId>
-      <groupId>org.mongodb</groupId>
-      <version>4.0.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>de.flapdoodle.embed.mongo</artifactId>
-      <groupId>de.flapdoodle.embed</groupId>
-      <scope>test</scope>
-      <version>2.2.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -25,8 +14,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
     </dependency>
     <dependency>
       <artifactId>slf4j-simple</artifactId>
@@ -38,13 +27,35 @@
       <groupId>me.alexpanov</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>mongodb-driver-sync</artifactId>
+      <groupId>org.mongodb</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>de.flapdoodle.embed.mongo</artifactId>
+      <groupId>de.flapdoodle.embed</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <artifactId>zheng-mongodb</artifactId>
 
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <artifactId>zheng</artifactId>
     <groupId>com.dadazhishi.zheng</groupId>
     <version>1.0</version>
   </parent>
+
 </project>

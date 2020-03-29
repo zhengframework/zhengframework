@@ -14,7 +14,8 @@ public abstract class Cache2kModule extends AbstractModule {
   protected void configure() {
     CachingProvider cachingProvider =
         Caching.getCachingProvider(JCacheProvider.class.getName());
-    CacheManager cacheManager = cachingProvider.getCacheManager();
+    CacheManager cacheManager = cachingProvider
+        .getCacheManager(cachingProvider.getDefaultURI(), cachingProvider.getDefaultClassLoader());
     configureCacheManager(cacheManager);
     bind(CacheResolverFactory.class).toInstance(new DefaultCacheResolverFactory(cacheManager));
     bind(CacheManager.class).toInstance(cacheManager);

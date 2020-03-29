@@ -10,7 +10,7 @@ public class Food {
 
   private List<Banana> bananas;
 
-  private Map<String,Apple> apples;
+  private Map<String, Apple> apples;
 
   public Apple getApple() {
     return apple;

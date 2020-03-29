@@ -20,8 +20,7 @@ public class MongoDBModule extends AbstractModule {
 
   @Provides
   public MongoClient mongoClient() {
-    MongoClient mongoClient = MongoClients.create(uri);
-    return mongoClient;
+    return MongoClients.create(uri);
   }
 
 }

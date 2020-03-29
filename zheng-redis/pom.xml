@@ -2,22 +2,11 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-redis</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>jedis</artifactId>
-      <groupId>redis.clients</groupId>
-      <version>3.2.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>jedis-mock</artifactId>
-      <groupId>com.github.fppt</groupId>
-      <scope>test</scope>
-      <version>0.1.16</version>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -25,18 +14,43 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
     </dependency>
     <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>lettuce-core</artifactId>
+      <groupId>io.lettuce</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jedis</artifactId>
+      <groupId>redis.clients</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jedis-mock</artifactId>
+      <groupId>com.github.fppt</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <artifactId>zheng-redis</artifactId>
 
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <artifactId>zheng</artifactId>
     <groupId>com.dadazhishi.zheng</groupId>

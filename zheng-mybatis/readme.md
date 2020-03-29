@@ -1,1 +1,0 @@
-[mybatis-guice](http://mybatis.org/guice/getting-started.html)

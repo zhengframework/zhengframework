@@ -11,12 +11,10 @@
     <dependency>
       <artifactId>caffeine</artifactId>
       <groupId>com.github.ben-manes.caffeine</groupId>
-      <version>2.8.1</version>
     </dependency>
     <dependency>
       <artifactId>jcache</artifactId>
       <groupId>com.github.ben-manes.caffeine</groupId>
-      <version>2.8.1</version>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -24,6 +22,17 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <modelVersion>4.0.0</modelVersion>
 

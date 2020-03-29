@@ -2,31 +2,20 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-memcached</artifactId>
   <dependencies>
     <dependency>
       <artifactId>xmemcached</artifactId>
       <groupId>com.googlecode.xmemcached</groupId>
-      <version>2.4.6</version>
     </dependency>
     <dependency>
       <artifactId>jmemcached-core</artifactId>
       <groupId>com.thimbleware.jmemcached</groupId>
       <scope>test</scope>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
       <groupId>junit</groupId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
     </dependency>
     <dependency>
       <artifactId>slf4j-simple</artifactId>
@@ -38,7 +27,24 @@
       <groupId>me.alexpanov</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <artifactId>zheng-memcached</artifactId>
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -46,5 +52,4 @@
     <groupId>com.dadazhishi.zheng</groupId>
     <version>1.0</version>
   </parent>
-
 </project>

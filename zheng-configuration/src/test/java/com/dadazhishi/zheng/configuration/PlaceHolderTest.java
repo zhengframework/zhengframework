@@ -80,7 +80,8 @@ public class PlaceHolderTest {
     props.put("baz", "bazValue");
 
     String template = "Test: ${foo} ${bar} ${baz} :Test";
-    new PlaceHolder(new NamespaceConfiguration(props)).replace(template); }
+    new PlaceHolder(new NamespaceConfiguration(props)).replace(template);
+  }
 
   @Test
   public void testParametrization() {

@@ -2,22 +2,11 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-rabbitmq</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>amqp-client</artifactId>
-      <groupId>com.rabbitmq</groupId>
-      <version>5.8.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>embedded-rabbitmq</artifactId>
-      <groupId>io.arivera.oss</groupId>
-      <scope>test</scope>
-      <version>1.4.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -25,18 +14,42 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
     </dependency>
     <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>amqp-client</artifactId>
+      <groupId>com.rabbitmq</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>embedded-rabbitmq</artifactId>
+      <groupId>io.arivera.oss</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-service</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
+  <artifactId>zheng-rabbitmq</artifactId>
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <artifactId>zheng</artifactId>
     <groupId>com.dadazhishi.zheng</groupId>

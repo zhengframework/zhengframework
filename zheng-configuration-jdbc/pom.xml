@@ -7,7 +7,6 @@
     <dependency>
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
-      <version>1.0</version>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -18,9 +17,19 @@
       <artifactId>h2</artifactId>
       <groupId>com.h2database</groupId>
       <scope>test</scope>
-      <version>1.4.200</version>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <modelVersion>4.0.0</modelVersion>
 
