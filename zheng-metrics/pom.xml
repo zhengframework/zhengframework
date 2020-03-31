@@ -39,6 +39,37 @@
       <artifactId>zheng-service</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
+    <!--<dependency>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <artifactId>zheng-rest-jersey</artifactId>
+      <scope>test</scope>
+    </dependency>-->
+    <dependency>
+      <artifactId>zheng-rest-resteasy</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-web-jetty</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>micrometer-core</artifactId>
+      <groupId>io.micrometer</groupId>
+      <version>1.4.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>aspectjrt</artifactId>
+      <groupId>org.aspectj</groupId>
+      <version>1.9.5</version>
+    </dependency>
+    <dependency>
+      <artifactId>micrometer-registry-jmx</artifactId>
+      <groupId>io.micrometer</groupId>
+      <version>1.4.0</version>
+    </dependency>
+
   </dependencies>
 
   <dependencyManagement>
