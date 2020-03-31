@@ -30,6 +30,11 @@ public class RestModule extends ServletModule {
   }
 
   public RestModule(
+      Class<? extends JerseyResourceConfig> resourceConfigClass) {
+    this(resourceConfigClass, null);
+  }
+
+  public RestModule(
       Class<? extends JerseyResourceConfig> resourceConfigClass, String path) {
     this.resourceConfigClass = resourceConfigClass;
     this.path = path;

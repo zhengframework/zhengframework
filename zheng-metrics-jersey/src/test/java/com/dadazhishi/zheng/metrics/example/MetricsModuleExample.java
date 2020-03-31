@@ -1,40 +1,33 @@
 package com.dadazhishi.zheng.metrics.example;
 
-import com.codahale.metrics.Counter;
-import com.codahale.metrics.MetricRegistry;
 import com.dadazhishi.zheng.metrics.MetricsModule;
+import com.dadazhishi.zheng.metrics.jersey.MetricsResourceConfig;
+import com.dadazhishi.zheng.rest.jersey.RestModule;
+import com.dadazhishi.zheng.service.Run;
+import com.dadazhishi.zheng.web.WebConfig;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.util.function.BiConsumer;
 
 public class MetricsModuleExample {
 
   public static void main(String[] args) throws Exception {
     final Injector injector = Guice.createInjector(
         new MetricsModule()
+        , new RestModule(MetricsResourceConfig.class)
         , new AbstractModule() {
           @Override
           protected void configure() {
+
+            bind(TestResource.class);
             bind(TestService.class);
+            bind(WebConfig.class).toInstance(new WebConfig());
           }
         }
     );
 
     // start services
-    TestService testService = injector.getInstance(TestService.class);
-    for (int i = 0; i < 10; i++) {
-      testService.count();
-    }
-    MetricRegistry metricRegistry = injector.getInstance(MetricRegistry.class);
-    metricRegistry.getCounters().forEach(new BiConsumer<String, Counter>() {
-      @Override
-      public void accept(String s, Counter counter) {
-        System.out.println(counter.getCount());
-      }
-    });
-
-
+    injector.getInstance(Run.class).start();
   }
 
 }

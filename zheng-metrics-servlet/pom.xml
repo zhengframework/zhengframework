@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-metrics-servlet</artifactId>
+  <dependencies>
+    <dependency>
+      <artifactId>metrics-servlets</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>guice-servlet</artifactId>
+      <groupId>com.google.inject.extensions</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>javax.servlet-api</artifactId>
+      <groupId>javax.servlet</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>junit</artifactId>
+      <groupId>junit</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-web-jetty</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>zheng</artifactId>
+    <groupId>com.dadazhishi.zheng</groupId>
+    <version>1.0</version>
+  </parent>
+
+</project>

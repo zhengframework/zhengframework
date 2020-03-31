@@ -2,8 +2,23 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-metrics</artifactId>
+  <artifactId>zheng-metrics-micrometer</artifactId>
   <dependencies>
+    <dependency>
+      <artifactId>micrometer-core</artifactId>
+      <groupId>io.micrometer</groupId>
+      <version>1.4.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>micrometer-registry-jmx</artifactId>
+      <groupId>io.micrometer</groupId>
+      <version>1.4.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>aspectjrt</artifactId>
+      <groupId>org.aspectj</groupId>
+      <version>1.9.5</version>
+    </dependency>
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
@@ -24,33 +39,25 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>metrics-jmx</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-jvm</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-core</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-annotation</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-service</artifactId>
-      <groupId>com.dadazhishi.zheng</groupId>
-    </dependency>
-
-    <dependency>
       <artifactId>jakarta.ws.rs-api</artifactId>
       <groupId>jakarta.ws.rs</groupId>
       <scope>test</scope>
     </dependency>
-
-
+    <dependency>
+      <artifactId>zheng-rest-jersey</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+    <!--<dependency>
+      <artifactId>zheng-rest-resteasy</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>-->
+    <dependency>
+      <artifactId>zheng-web-jetty</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
@@ -64,20 +71,12 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>zheng</artifactId>
     <groupId>com.dadazhishi.zheng</groupId>
     <version>1.0</version>
   </parent>
-  <repositories>
-    <repository>
-      <id>bintray-marshallpierce-maven</id>
-      <name>bintray</name>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <url>https://dl.bintray.com/marshallpierce/maven</url>
-    </repository>
-  </repositories>
+
 </project>

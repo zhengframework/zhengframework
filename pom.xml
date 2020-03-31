@@ -63,6 +63,9 @@
     <module>zheng-memcached</module>
     <module>zheng-redis</module>
     <module>zheng-mybatis</module>
+    <module>zheng-metrics-micrometer</module>
+    <module>zheng-metrics-jersey</module>
+    <module>zheng-metrics-servlet</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

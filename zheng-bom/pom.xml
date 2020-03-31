@@ -13,6 +13,13 @@
         <version>${jersey.version}</version>
       </dependency>
       <dependency>
+        <artifactId>metrics-bom</artifactId>
+        <groupId>io.dropwizard.metrics</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${metrics.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>guice</artifactId>
         <groupId>com.google.inject</groupId>
         <version>${guice.version}</version>
@@ -282,26 +289,6 @@
         <version>1.0.0</version>
       </dependency>
       <dependency>
-        <artifactId>metrics-guice</artifactId>
-        <groupId>com.palominolabs.metrics</groupId>
-        <version>4.0.0</version>
-      </dependency>
-      <dependency>
-        <artifactId>metrics-healthchecks</artifactId>
-        <groupId>io.dropwizard.metrics</groupId>
-        <version>${metrics.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>metrics-core</artifactId>
-        <groupId>io.dropwizard.metrics</groupId>
-        <version>${metrics.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>metrics-jvm</artifactId>
-        <groupId>io.dropwizard.metrics</groupId>
-        <version>${metrics.version}</version>
-      </dependency>
-      <dependency>
         <artifactId>dropwizard-util</artifactId>
         <groupId>io.dropwizard</groupId>
         <version>2.0.3</version>
@@ -338,12 +325,18 @@
       </dependency>
 
       <dependency>
-        <artifactId>zheng-cache</artifactId>
-        <groupId>com.dadazhishi.zheng</groupId>
-        <version>${project.version}</version>
+        <artifactId>hk2-api</artifactId>
+        <groupId>org.glassfish.hk2</groupId>
+        <version>2.6.1</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-configuration</artifactId>
+        <artifactId>jakarta.ws.rs-api</artifactId>
+        <groupId>jakarta.ws.rs</groupId>
+        <version>2.1.6</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>zheng-cache</artifactId>
         <groupId>com.dadazhishi.zheng</groupId>
         <version>${project.version}</version>
       </dependency>
@@ -536,7 +529,7 @@
     <junit.version>4.12</junit.version>
     <lettuce-core.version>5.2.2.RELEASE</lettuce-core.version>
     <lombok.version>1.18.12</lombok.version>
-    <metrics.version>3.1.2</metrics.version>
+    <metrics.version>4.1.5</metrics.version>
     <mockito-all.version>2.0.2-beta</mockito-all.version>
     <mongodb-driver-sync.version>4.0.0</mongodb-driver-sync.version>
     <mybatis-guice.version>3.12</mybatis-guice.version>

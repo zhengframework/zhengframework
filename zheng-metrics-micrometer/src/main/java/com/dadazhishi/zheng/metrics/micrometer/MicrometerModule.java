@@ -1,6 +1,5 @@
 package com.dadazhishi.zheng.metrics.micrometer;
 
-import com.codahale.metrics.annotation.Gauge;
 import com.google.inject.AbstractModule;
 import io.micrometer.core.aop.CountedAspect;
 import io.micrometer.core.aop.TimedAspect;
@@ -36,7 +35,6 @@ public class MicrometerModule extends AbstractModule {
     new JvmThreadMetrics().bindTo(meterRegistry);
   }
 
-  @Gauge
   @Override
   protected void configure() {
     bind(MeterRegistry.class).toInstance(meterRegistry);
