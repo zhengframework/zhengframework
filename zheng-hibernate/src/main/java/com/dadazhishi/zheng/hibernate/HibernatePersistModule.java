@@ -1,6 +1,7 @@
 package com.dadazhishi.zheng.hibernate;
 
 import com.dadazhishi.zheng.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
+import com.dadazhishi.zheng.service.ServicesModule;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
@@ -78,6 +79,7 @@ public class HibernatePersistModule extends PersistModule {
 
   @Override
   protected void configurePersistence() {
+    install(new ServicesModule());
     requireBinding(HibernateEntityClassProvider.class);
     requireBinding(HibernateConfig.class);
 

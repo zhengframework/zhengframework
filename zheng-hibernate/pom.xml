@@ -48,6 +48,11 @@
       <artifactId>zheng-service</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
+    <dependency>
+      <artifactId>h2</artifactId>
+      <groupId>com.h2database</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
