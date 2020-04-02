@@ -43,6 +43,10 @@
       <groupId>com.github.stefanbirkner</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

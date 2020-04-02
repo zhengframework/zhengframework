@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class HttpConfigurationResolver extends AbstractConfigurationResolver {
 
   private Map<String, String> map = new HashMap<>();
@@ -14,10 +16,21 @@ public class HttpConfigurationResolver extends AbstractConfigurationResolver {
   public HttpConfigurationResolver(
       ConfigurationParser<InputStream> parser,
       URL url) {
+    this(parser, url, true);
+  }
+
+  public HttpConfigurationResolver(
+      ConfigurationParser<InputStream> parser,
+      URL url, boolean failOnError) {
     try (InputStream inputStream = url.openStream()) {
       map.putAll(parser.parse(inputStream));
     } catch (IOException e) {
-      throw new RuntimeException("get configuration from url fail, url=" + url, e);
+      if (failOnError) {
+        throw new RuntimeException("get configuration from URL fail, url=" + url, e);
+      } else {
+        log.warn("get configuration from URL fail, url={}", url);
+      }
+
     }
   }
 

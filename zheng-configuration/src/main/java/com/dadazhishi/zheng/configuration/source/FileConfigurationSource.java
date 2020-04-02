@@ -2,6 +2,7 @@ package com.dadazhishi.zheng.configuration.source;
 
 import com.dadazhishi.zheng.configuration.spi.AutoConfigurationSource;
 import com.google.common.base.Joiner;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,26 +12,26 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class FileConfigurationSource implements AutoConfigurationSource {
 
-  public static final String FILE_BASH_PATH = "file.bash-path";
+  public static final String FILE_BASH_PATH = "file.basePath";
   private String basePath;
-
-  public FileConfigurationSource(String basePath) {
-    this.basePath = basePath;
-  }
+  private boolean failOnError = false;
 
   public FileConfigurationSource() {
   }
 
   @Override
   public String[] schemes() {
-    return new String[]{"file"};
+    return new String[]{"file" };
   }
 
   @Override
   public void init(Map<String, String> properties) {
+    failOnError = Boolean.parseBoolean(properties.getOrDefault("failOnError", "false"));
     basePath = properties.get(FILE_BASH_PATH);
   }
 
@@ -46,19 +47,24 @@ public class FileConfigurationSource implements AutoConfigurationSource {
     return () -> {
       File file;
       if (basePath != null) {
-        file = new File(basePath, uri.getPath());
+        file = new File(basePath, uri.getSchemeSpecificPart());
       } else {
-        file = new File(uri.getPath());
+        file = new File(uri.getSchemeSpecificPart());
       }
       if (file.exists() && file.canRead()) {
         try {
           return new FileInputStream(file);
         } catch (FileNotFoundException e) {
-          throw new RuntimeException("file not found or cannot read, file=" + file.getPath());
+          if (failOnError) {
+            throw new RuntimeException("file not found or cannot read, file=" + file, e);
+          } else {
+            log.warn("file not found or cannot read, file={}", file, e);
+          }
         }
       } else {
-        throw new RuntimeException("file not found or cannot read, file=" + file.getPath());
+        log.warn("file not found or cannot read, file={}", file);
       }
+      return new ByteArrayInputStream(new byte[0]);
     };
   }
 }

@@ -3,12 +3,21 @@ package com.dadazhishi.zheng.configuration.parser;
 import com.dadazhishi.zheng.configuration.spi.AutoConfigurationParser;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
 
+@Slf4j
 public class INIConfigurationParser implements AutoConfigurationParser {
+
+  private boolean failOnError = false;
+
+  public void init(Map<String, String> properties) {
+    failOnError = Boolean.parseBoolean(properties.getOrDefault("failOnError", "false"));
+  }
 
   @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
   @Override
@@ -23,12 +32,17 @@ public class INIConfigurationParser implements AutoConfigurationParser {
       }
       return map;
     } catch (IOException e) {
-      throw new RuntimeException("parse ini fail", e);
+      if (failOnError) {
+        throw new RuntimeException("parse ini fail", e);
+      } else {
+        log.warn("parse ini fail");
+      }
     }
+    return Collections.emptyMap();
   }
 
   @Override
   public String[] fileTypes() {
-    return new String[]{".ini"};
+    return new String[]{".ini" };
   }
 }

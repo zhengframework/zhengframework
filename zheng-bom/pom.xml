@@ -254,11 +254,6 @@
         <version>1.19.0</version>
       </dependency>
       <dependency>
-        <artifactId>commons-collections4</artifactId>
-        <groupId>org.apache.commons</groupId>
-        <version>4.4</version>
-      </dependency>
-      <dependency>
         <artifactId>jackson-dataformat-yaml</artifactId>
         <groupId>com.fasterxml.jackson.dataformat</groupId>
         <version>${jackson.version}</version>
@@ -340,6 +335,53 @@
         <groupId>jakarta.ws.rs</groupId>
         <version>2.1.6</version>
       </dependency>
+
+      <dependency>
+        <artifactId>commons-cli</artifactId>
+        <groupId>commons-cli</groupId>
+        <version>1.4</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-io</artifactId>
+        <groupId>commons-io</groupId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-lang3</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>3.10</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-codec</artifactId>
+        <groupId>commons-codec</groupId>
+        <version>1.14</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-beanutils</artifactId>
+        <groupId>commons-beanutils</groupId>
+        <version>1.9.4</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-collections4</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>4.4</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-compress</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>1.20</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-fileupload</artifactId>
+        <groupId>commons-fileupload</groupId>
+        <version>1.4</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-configuration2</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>2.7</version>
+      </dependency>
+
 
       <dependency>
         <artifactId>zheng-cache</artifactId>

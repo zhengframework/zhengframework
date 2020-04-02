@@ -28,7 +28,7 @@ public class AutoConfigurationParserSelector {
   }
 
   public Map<String, String> parse(URI uri, InputStream content) {
-    String path = uri.getPath();
+    String path = uri.getSchemeSpecificPart();
     Objects.requireNonNull(path);
     String fileType = path.substring(path.lastIndexOf("."));
     fileType = fileType.toLowerCase();

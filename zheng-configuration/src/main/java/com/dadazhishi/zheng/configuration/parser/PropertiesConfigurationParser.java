@@ -5,8 +5,16 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class PropertiesConfigurationParser implements AutoConfigurationParser {
+
+  private boolean failOnError = false;
+
+  public void init(Map<String, String> properties) {
+    failOnError = Boolean.parseBoolean(properties.getOrDefault("failOnError", "false"));
+  }
 
   @Override
   public Map<String, String> parse(InputStream content) {
@@ -14,7 +22,11 @@ public class PropertiesConfigurationParser implements AutoConfigurationParser {
     try {
       properties.load(content);
     } catch (Exception e) {
-      throw new RuntimeException("parse properties fail", e);
+      if (failOnError) {
+        throw new RuntimeException("parse properties fail", e);
+      } else {
+        log.warn("parse properties fail");
+      }
     }
     Map<String, String> map = new HashMap<>();
     for (String name : properties.stringPropertyNames()) {
@@ -25,7 +37,7 @@ public class PropertiesConfigurationParser implements AutoConfigurationParser {
 
   @Override
   public String[] fileTypes() {
-    return new String[]{".properties"};
+    return new String[]{".properties" };
   }
 
 }

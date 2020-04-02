@@ -41,13 +41,13 @@ public class AutoConfigurationResolverSelector extends AbstractConfigurationReso
 
   private void load(URI uri) {
     String scheme = uri.getScheme();
-    AutoConfigurationSource source1 = sourceMap.get(scheme);
-    if (source1 == null) {
+    AutoConfigurationSource configurationSource = sourceMap.get(scheme);
+    if (configurationSource == null) {
       throw new RuntimeException(
           "invalid schema, support schema: " + Joiner.on(",").join(sourceMap.keySet()));
     }
-    Supplier<InputStream> source = source1.getSource(uri);
-    InputStream inputStream = source.get();
+    Supplier<InputStream> streamSupplier = configurationSource.getSource(uri);
+    InputStream inputStream = streamSupplier.get();
     map = parserSelector.parse(uri, inputStream);
   }
 

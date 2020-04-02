@@ -35,6 +35,10 @@
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
+    <dependency>
+      <artifactId>commons-cli</artifactId>
+      <groupId>commons-cli</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
