@@ -18,11 +18,11 @@ public class WebModuleExample {
     application.start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     try {
-
       OkHttpClient okHttpClient = new Builder()
           .build();
       Request request = new Request.Builder()
-          .url("http://localhost:" + webConfig.getPort() + "/hello").get().build();
+          .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "/hello")
+          .get().build();
       Response response1 = okHttpClient.newCall(request).execute();
       String resp = Objects.requireNonNull(response1.body()).string();
       System.out.println(resp);

@@ -25,7 +25,6 @@ public class ZhengApplication {
   private Options options = new Options();
 
   public ZhengApplication(Configuration configuration, String[] args, Module... modules) {
-    //Preconditions.checkState(configuration != null, "configuration is null");
     if (configuration == null) {
       configuration = buildConfiguration(args);
     }
@@ -92,7 +91,7 @@ public class ZhengApplication {
     if (path != null) {
       builder.withProperties(path);
     } else {
-      builder.with(URI.create("classpath:application.properties"));
+      builder.with(URI.create("classpath:/application.properties"));
     }
     return builder.build();
   }
