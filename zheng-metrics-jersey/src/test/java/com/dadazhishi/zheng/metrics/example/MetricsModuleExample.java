@@ -12,9 +12,10 @@ import com.google.inject.Injector;
 public class MetricsModuleExample {
 
   public static void main(String[] args) throws Exception {
+    MetricsResourceConfig.class.getName();
     final Injector injector = Guice.createInjector(
         new MetricsModule()
-        , new RestModule(MetricsResourceConfig.class)
+        , new RestModule()
         , new AbstractModule() {
           @Override
           protected void configure() {

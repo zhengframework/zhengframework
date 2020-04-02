@@ -19,17 +19,19 @@ public class MetricsServletModule extends ServletModule implements Configuration
 
   @Override
   protected void configureServlets() {
-    MetricsServletConfig metricsServletConfig = ConfigurationObjectMapper
-        .resolve(configuration, MetricsServletConfig.NAMESPACE, MetricsServletConfig.class);
-    String path = metricsServletConfig.getPath();
-    if (Strings.isNullOrEmpty(path)) {
-      serve("/metrics/*").with(new AdminServlet());
-    } else {
-      serve(path + "/*").with(new AdminServlet());
+    Boolean enable = configuration.getBoolean("zheng.metrics.enable", true);
+    if (enable) {
+      MetricsServletConfig metricsServletConfig = ConfigurationObjectMapper
+          .resolve(configuration, MetricsServletConfig.NAMESPACE, MetricsServletConfig.class);
+      String path = metricsServletConfig.getPath();
+      if (Strings.isNullOrEmpty(path)) {
+        serve("/metrics/*").with(new AdminServlet());
+      } else {
+        serve(path + "/*").with(new AdminServlet());
+      }
+
+      bind(MetricsServletContextListener.class).in(Singleton.class);
+      bind(HealthCheckServletContextListener.class).in(Singleton.class);
     }
-
-    bind(MetricsServletContextListener.class).in(Singleton.class);
-    bind(HealthCheckServletContextListener.class).in(Singleton.class);
-
   }
 }
