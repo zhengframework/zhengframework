@@ -45,6 +45,7 @@ public class FileConfigurationSource implements AutoConfigurationSource {
           "invalid schema, support schema: " + Joiner.on(",").join(schemes()));
     }
     return () -> {
+      log.info("uri={}", uri);
       File file;
       if (basePath != null) {
         file = new File(basePath, uri.getSchemeSpecificPart());

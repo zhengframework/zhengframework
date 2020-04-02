@@ -37,6 +37,7 @@ public class HttpConfigurationSource implements AutoConfigurationSource {
           "invalid schema, support schema: " + Joiner.on(",").join(schemes()));
     }
     return () -> {
+      log.info("uri={}", uri);
       try {
         return uri.toURL().openStream();
       } catch (IOException e) {

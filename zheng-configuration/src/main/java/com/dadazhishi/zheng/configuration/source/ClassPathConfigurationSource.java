@@ -38,7 +38,11 @@ public class ClassPathConfigurationSource implements AutoConfigurationSource {
           "invalid schema, support schema: " + Joiner.on(",").join(schemes()));
     }
     return () -> {
+      log.info("uri={}", uri);
       String path = uri.getSchemeSpecificPart();
+      if (!path.startsWith("/")) {
+        path = "/" + path;
+      }
       URL resource = ClassPathConfigurationSource.class.getResource(path);
       if (resource != null) {
         try {
