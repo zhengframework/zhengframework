@@ -19,7 +19,7 @@ public class RabbitMQConfig {
   private int requestedFrameMax = ConnectionFactory.DEFAULT_FRAME_MAX;
   private int requestedHeartbeat = ConnectionFactory.DEFAULT_HEARTBEAT;
   private long networkRecoveryInterval = ConnectionFactory.DEFAULT_NETWORK_RECOVERY_INTERVAL;
-  private String uri;
+  private String url;
   private boolean ssl = false;
   private boolean automaticRecovery = true;
   private boolean topologyRecovery = true;

@@ -31,7 +31,7 @@ public class ConnectionFactoryProvider implements Provider<ConnectionFactory> {
     factory.setAutomaticRecoveryEnabled(rabbitMQConfig.isAutomaticRecovery());
     factory.setTopologyRecoveryEnabled(rabbitMQConfig.isTopologyRecovery());
 
-    if (Strings.isNullOrEmpty(rabbitMQConfig.getUri())) {
+    if (Strings.isNullOrEmpty(rabbitMQConfig.getUrl())) {
       factory.setHost(rabbitMQConfig.getHost());
       factory.setVirtualHost(rabbitMQConfig.getVirtualHost());
       factory.setPort(
@@ -40,9 +40,9 @@ public class ConnectionFactoryProvider implements Provider<ConnectionFactory> {
       factory.setPassword(rabbitMQConfig.getPassword());
     } else {
       try {
-        factory.setUri(rabbitMQConfig.getUri());
+        factory.setUri(rabbitMQConfig.getUrl());
       } catch (Exception e) {
-        throw new IllegalArgumentException("uri: " + rabbitMQConfig.getUri());
+        throw new IllegalArgumentException("url: " + rabbitMQConfig.getUrl());
       }
     }
     return factory;
