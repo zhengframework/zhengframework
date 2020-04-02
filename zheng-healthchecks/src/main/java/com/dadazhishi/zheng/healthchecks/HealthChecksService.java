@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * This service periodically runs health checks at a configured interval and reports any health
  * issues via slf4j
  */
+@SuppressWarnings("UnstableApiUsage")
 @Singleton
 @Slf4j
 public class HealthChecksService extends AbstractScheduledService {

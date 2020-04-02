@@ -5,10 +5,10 @@ import com.codahale.metrics.Gauge;
 import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheck;
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import io.dropwizard.util.Duration;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class AbstractMetricReportingHealthCheck extends HealthCheck {
 
   private final String healthCheckName;
-  private Optional<Duration> cacheInterval = Optional.absent();
+  private Optional<Duration> cacheInterval = Optional.empty();
 
   /**
    * ctor for creating a simple gauge metric that calls a health check

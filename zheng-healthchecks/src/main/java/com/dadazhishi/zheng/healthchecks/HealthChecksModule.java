@@ -7,12 +7,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import lombok.EqualsAndHashCode;
 
-/**
- * binding for a periodic service that runs health checks and logs results
- *
- * depends on gwizard-services
- */
-@EqualsAndHashCode(callSuper = false, of = {})  // makes installation of this module idempotent
+@EqualsAndHashCode(callSuper = false, of = {})
 public class HealthChecksModule extends AbstractModule {
 
   @Override
