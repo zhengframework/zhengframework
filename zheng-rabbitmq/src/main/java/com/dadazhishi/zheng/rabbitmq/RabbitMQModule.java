@@ -7,10 +7,10 @@ import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
+import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.inject.Singleton;
 
 public class RabbitMQModule extends AbstractModule implements ConfigurationSupport {
 
@@ -29,7 +29,8 @@ public class RabbitMQModule extends AbstractModule implements ConfigurationSuppo
       RabbitMQConfig rabbitMQConfig = ConfigurationObjectMapper
           .resolve(configuration, RabbitMQConfig.NAMESPACE, RabbitMQConfig.class);
       bind(RabbitMQConfig.class).toInstance(rabbitMQConfig);
-      bind(ConnectionFactory.class).toProvider(ConnectionFactoryProvider.class).in(Singleton.class);
+      bind(ConnectionFactory.class).toProvider(ConnectionFactoryProvider.class);
+      bind(Connection.class).toProvider(ConnectionProvider.class);
     } else {
       Map<String, RabbitMQConfig> map = ConfigurationObjectMapper
           .resolveMap(configuration, RabbitMQConfig.NAMESPACE, RabbitMQConfig.class);
@@ -37,9 +38,23 @@ public class RabbitMQModule extends AbstractModule implements ConfigurationSuppo
         String name = entry.getKey();
         RabbitMQConfig rabbitMQConfig = entry.getValue();
         bind(Key.get(RabbitMQConfig.class, named(name))).toInstance(rabbitMQConfig);
+        ConnectionFactoryProvider connectionFactoryProvider = new ConnectionFactoryProvider(
+            rabbitMQConfig);
         bind(Key.get(ConnectionFactory.class, named(name)))
-            .toProvider(new ConnectionFactoryProvider(rabbitMQConfig)).in(Singleton.class);
-
+            .toProvider(connectionFactoryProvider);
+        ConnectionProvider connectionProvider = new ConnectionProvider(connectionFactoryProvider);
+        bind(Key.get(Connection.class, named(name)))
+            .toProvider(connectionProvider);
+//        Connection connection = connectionProvider.get();
+//        try {
+//          Channel channel = connection.createChannel();
+//          channel.exchangeDeclare("exchangeName", BuiltinExchangeType.DIRECT.getType());
+//          channel.queueDeclare("queueName", true, false, false, null);
+//          channel.queueBind("queueName","exchangeName","routeKey",null);
+//          channel.basicPublish("exchangeName","routeKey",null,"".getBytes());
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
       }
     }
   }

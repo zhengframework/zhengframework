@@ -4,7 +4,9 @@ import com.google.common.base.Strings;
 import com.rabbitmq.client.ConnectionFactory;
 import javax.inject.Inject;
 import javax.inject.Provider;
+import javax.inject.Singleton;
 
+@Singleton
 public class ConnectionFactoryProvider implements Provider<ConnectionFactory> {
 
   private final RabbitMQConfig rabbitMQConfig;
