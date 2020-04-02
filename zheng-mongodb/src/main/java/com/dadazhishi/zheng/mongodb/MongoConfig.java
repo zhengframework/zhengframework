@@ -9,5 +9,5 @@ public class MongoConfig {
 
   public static final String NAMESPACE = "zheng.mongo";
 
-  private String uri;
+  private String url;
 }

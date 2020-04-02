@@ -19,7 +19,7 @@ public class MongoClientProvider implements Provider<MongoClient> {
 
   @Override
   public MongoClient get() {
-    ConnectionString connectionString = new ConnectionString(mongoConfig.getUri());
+    ConnectionString connectionString = new ConnectionString(mongoConfig.getUrl());
     return MongoClients.create(connectionString);
   }
 }
