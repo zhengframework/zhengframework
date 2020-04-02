@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.PrivateModule;
 import com.google.inject.name.Names;
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -37,6 +38,12 @@ public class MybatisTest {
   public void setUp() throws Exception {
 
     injector = Guice.createInjector(
+        new PrivateModule() {
+          @Override
+          protected void configure() {
+
+          }
+        },
         new MyBatisModule() {
 
           @Override

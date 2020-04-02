@@ -1,3 +1,5 @@
+http://mybatis.org/guice/core.html
+
 config class: com.dadazhishi.zheng.web.WebConfig
 
 config example:
