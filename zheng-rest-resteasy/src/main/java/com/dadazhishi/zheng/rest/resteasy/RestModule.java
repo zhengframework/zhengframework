@@ -1,5 +1,12 @@
 package com.dadazhishi.zheng.rest.resteasy;
 
+import static com.dadazhishi.zheng.rest.RestConfig.NAMESPACE;
+
+import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationSupport;
+import com.dadazhishi.zheng.rest.ObjectMapperContextResolver;
+import com.dadazhishi.zheng.rest.RestConfig;
 import com.dadazhishi.zheng.web.WebModule;
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Scopes;
@@ -8,29 +15,35 @@ import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
+import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
-public class RestModule extends ServletModule {
+public class RestModule extends ServletModule implements ConfigurationSupport {
 
-  private final String path;
+  private Configuration configuration;
 
-  public RestModule() {
-    this(null);
-  }
-
-  public RestModule(String path) {
-    this.path = path;
-  }
 
   @Override
   protected void configureServlets() {
     install(new WebModule());
 
+    bind(ResteasyJackson2Provider.class);
     bind(GuiceResteasyBootstrapServletContextListener.class);
     bind(HttpServletDispatcher.class).in(Scopes.SINGLETON);
+    bind(ObjectMapperContextResolver.class);
 
+    RestConfig restConfig = ConfigurationObjectMapper
+        .resolve(configuration, NAMESPACE, RestConfig.class);
+    bind(RestConfig.class).toInstance(restConfig);
+    String path = restConfig.getPath();
+    if ("/".equals(path)) {
+      path = null;
+    }
+    if (path != null && path.length() > 1 && path.endsWith("/")) {
+      path = path.substring(0, path.length() - 1);
+    }
     if (path == null) {
       serve("/*").with(HttpServletDispatcher.class);
     } else {
@@ -38,8 +51,10 @@ public class RestModule extends ServletModule {
           .of("resteasy.servlet.mapping.prefix", path);
       serve(path + "/*").with(HttpServletDispatcher.class, initParams);
     }
-
-    bind(ObjectMapperContextResolver.class);
   }
 
+  @Override
+  public void setConfiguration(Configuration configuration) {
+    this.configuration = configuration;
+  }
 }

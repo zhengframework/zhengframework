@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.web;
 
+import com.dadazhishi.zheng.service.Scanner;
 import com.google.inject.Injector;
 import javax.inject.Inject;
 import org.eclipse.jetty.server.Handler;

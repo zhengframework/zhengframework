@@ -51,6 +51,9 @@ public class NamespaceConfiguration implements Configuration {
     Map<Integer, Map<String, String>> map = new HashMap<>();
     for (Entry<String, String> entry : prefixMap.entrySet()) {
       String key = entry.getKey().substring(len);
+      if (!key.contains(".")) {
+        continue;
+      }
       String indexKey = key.substring(0, key.indexOf("."));
       if (indexKey.length() == 0) {
         throw new RuntimeException("parse index error, key=" + key);
@@ -83,6 +86,9 @@ public class NamespaceConfiguration implements Configuration {
     Map<String, Map<String, String>> map = new HashMap<>();
     for (Entry<String, String> entry : prefixMap.entrySet()) {
       String key = entry.getKey().substring(len);
+      if (!key.contains(".")) {
+        continue;
+      }
       String mapKey = key.substring(0, key.indexOf("."));
       if (mapKey.length() == 0) {
         throw new RuntimeException("parse map key error, key=" + key);

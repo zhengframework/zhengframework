@@ -1,33 +1,46 @@
 package com.dadazhishi.zheng.rabbitmq;
 
+import static com.google.inject.name.Names.named;
+
+import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
+import com.google.inject.Key;
 import com.rabbitmq.client.ConnectionFactory;
-import java.net.URISyntaxException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import java.util.Map.Entry;
+import javax.inject.Singleton;
 
-public class RabbitMQModule extends AbstractModule {
+public class RabbitMQModule extends AbstractModule implements ConfigurationSupport {
 
-  private String uri;
+  private Configuration configuration;
 
-  public RabbitMQModule(String uri) {
-    this.uri = uri;
+  @Override
+  public void setConfiguration(Configuration configuration) {
+    this.configuration = configuration;
   }
+
 
   @Override
   protected void configure() {
-  }
+    Boolean group = configuration.getBoolean("zheng.rabbitmq.group", false);
+    if (!group) {
+      RabbitMQConfig rabbitMQConfig = ConfigurationObjectMapper
+          .resolve(configuration, RabbitMQConfig.NAMESPACE, RabbitMQConfig.class);
+      bind(RabbitMQConfig.class).toInstance(rabbitMQConfig);
+      bind(ConnectionFactory.class).toProvider(ConnectionFactoryProvider.class).in(Singleton.class);
+    } else {
+      Map<String, RabbitMQConfig> map = ConfigurationObjectMapper
+          .resolveMap(configuration, RabbitMQConfig.NAMESPACE, RabbitMQConfig.class);
+      for (Entry<String, RabbitMQConfig> entry : map.entrySet()) {
+        String name = entry.getKey();
+        RabbitMQConfig rabbitMQConfig = entry.getValue();
+        bind(Key.get(RabbitMQConfig.class, named(name))).toInstance(rabbitMQConfig);
+        bind(Key.get(ConnectionFactory.class, named(name)))
+            .toProvider(new ConnectionFactoryProvider(rabbitMQConfig)).in(Singleton.class);
 
-  @Provides
-  public ConnectionFactory connectionFactory() {
-    ConnectionFactory factory = new ConnectionFactory();
-    try {
-      factory.setUri(uri);
-//      factory.setUri("amqp://userName:password@hostName:portNumber/virtualHost");
-      return factory;
-    } catch (URISyntaxException | NoSuchAlgorithmException | KeyManagementException e) {
-      throw new RuntimeException(e);
+      }
     }
   }
 }

@@ -1,7 +1,9 @@
 package com.dadazhishi.zheng.configuration;
 
-import com.dadazhishi.zheng.configuration.annotation.ConfigurationDefine;
-import com.dadazhishi.zheng.configuration.annotation.ConfigurationType;
+import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -10,67 +12,50 @@ import java.util.Set;
 
 public class ConfigurationObjectMapper {
 
-  private final ConfigurationMapper mapper;
+  private static final JavaPropsMapper mapper = new JavaPropsMapper();
 
-  public ConfigurationObjectMapper(ConfigurationMapper mapper) {
-    this.mapper = mapper;
+  private static <T> T resolveClass(Configuration configuration, Class<T> tClass) {
+    try {
+      return mapper.readMapAs(configuration.asMap(), tClass);
+    } catch (IOException e) {
+      throw new RuntimeException("resolve configuration error", e);
+    }
   }
 
-  public <T> T resolve(Configuration configuration, Class<T> aClass) {
-    if (!aClass.isAnnotationPresent(ConfigurationDefine.class)) {
-      throw new RuntimeException("class need with annotation @ConfigurationDefine");
-    }
-    ConfigurationDefine annotation = aClass.getAnnotation(ConfigurationDefine.class);
-    if (annotation.type() == ConfigurationType.BEAN) {
-      if (annotation.namespace().isEmpty()) {
-        return mapper.resolve(configuration, aClass);
-      } else {
-        return mapper.resolve(configuration.getConfiguration(annotation.namespace()), aClass);
-      }
-    }
-    throw new RuntimeException("invalid ConfigurationType " + annotation.type());
+  public static <T> T resolve(Configuration configuration, Class<T> aClass) {
+    return resolve(configuration, null, aClass);
   }
 
-  public <T> Set<T> resolveSet(Configuration configuration, Class<T> aClass) {
-    if (!aClass.isAnnotationPresent(ConfigurationDefine.class)) {
-      throw new RuntimeException("class need with annotation @ConfigurationDefine");
+  public static <T> T resolve(Configuration configuration, String namespace, Class<T> aClass) {
+    if (Strings.isNullOrEmpty(namespace)) {
+      return resolveClass(configuration, aClass);
+    } else {
+      return resolveClass(configuration.getConfiguration(namespace), aClass);
     }
-    ConfigurationDefine annotation = aClass.getAnnotation(ConfigurationDefine.class);
-    if (annotation.type() == ConfigurationType.SET) {
-      if (annotation.namespace().isEmpty()) {
-        throw new RuntimeException("ConfigurationType[SET] need namespace not empty");
-      } else {
-        Set<Configuration> configurationList = configuration
-            .getConfigurationSet(annotation.namespace());
-        Set<T> objects = new LinkedHashSet<>(configurationList.size());
-        for (Configuration configuration1 : configurationList) {
-          objects.add(mapper.resolve(configuration1, aClass));
-        }
-        return objects;
-      }
-    }
-    throw new RuntimeException("invalid ConfigurationType " + annotation.type());
   }
 
-  public <T> Map<String, T> resolveMap(Configuration configuration, Class<T> aClass) {
-    if (!aClass.isAnnotationPresent(ConfigurationDefine.class)) {
-      throw new RuntimeException("class need with annotation @ConfigurationDefine");
+  public static <T> Set<T> resolveSet(Configuration configuration, String namespace,
+      Class<T> aClass) {
+    Preconditions.checkState(!Strings.isNullOrEmpty(namespace), "namespace cannot null or empty");
+    Set<Configuration> configurationList = configuration
+        .getConfigurationSet(namespace);
+    Set<T> objects = new LinkedHashSet<>(configurationList.size());
+    for (Configuration configuration1 : configurationList) {
+      objects.add(resolveClass(configuration1, aClass));
     }
-    ConfigurationDefine annotation = aClass.getAnnotation(ConfigurationDefine.class);
-    if (annotation.type() == ConfigurationType.MAP) {
-      if (annotation.namespace().isEmpty()) {
-        throw new RuntimeException("ConfigurationType[MAP] need namespace not empty");
-      } else {
-        Map<String, Configuration> configurationMap = configuration
-            .getConfigurationMap(annotation.namespace());
-        LinkedHashMap<String, T> map = new LinkedHashMap<>(configurationMap.size());
-        for (Entry<String, Configuration> entry : configurationMap
-            .entrySet()) {
-          map.put(entry.getKey(), mapper.resolve(entry.getValue(), aClass));
-        }
-        return map;
-      }
+    return objects;
+  }
+
+  public static <T> Map<String, T> resolveMap(Configuration configuration, String namespace,
+      Class<T> aClass) {
+    Preconditions.checkState(!Strings.isNullOrEmpty(namespace), "namespace cannot null or empty");
+    Map<String, Configuration> configurationMap = configuration
+        .getConfigurationMap(namespace);
+    LinkedHashMap<String, T> map = new LinkedHashMap<>(configurationMap.size());
+    for (Entry<String, Configuration> entry : configurationMap
+        .entrySet()) {
+      map.put(entry.getKey(), resolveClass(entry.getValue(), aClass));
     }
-    throw new RuntimeException("invalid ConfigurationType " + annotation.type());
+    return map;
   }
 }

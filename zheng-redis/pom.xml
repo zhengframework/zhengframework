@@ -27,12 +27,17 @@
       <groupId>io.lettuce</groupId>
     </dependency>
     <dependency>
-      <artifactId>jedis</artifactId>
-      <groupId>redis.clients</groupId>
-    </dependency>
-    <dependency>
       <artifactId>jedis-mock</artifactId>
       <groupId>com.github.fppt</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-configuration</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-service</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
       <scope>test</scope>
     </dependency>
   </dependencies>

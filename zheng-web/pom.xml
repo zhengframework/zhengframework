@@ -21,6 +21,10 @@
       <artifactId>zheng-service</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
+    <dependency>
+      <artifactId>zheng-configuration</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

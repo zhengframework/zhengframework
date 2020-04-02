@@ -14,9 +14,7 @@ public class ConfigurationMapperTest {
         .withClassPathProperties("food.properties")
         .build();
 
-    ConfigurationMapper mapper = new ConfigurationMapper();
-
-    Food food = mapper.resolve(configuration, Food.class);
+    Food food = ConfigurationObjectMapper.resolve(configuration, Food.class);
 
     assertEquals(1, food.getApples().size());
     assertEquals(3, food.getBananas().size());

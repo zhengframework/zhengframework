@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WebConfig {
 
+  public static final String NAMESPACE = "zheng.web";
   private String contextPath = "/";
 
   private int port = 8080;

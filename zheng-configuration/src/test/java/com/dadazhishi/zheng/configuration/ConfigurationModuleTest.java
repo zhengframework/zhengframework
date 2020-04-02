@@ -1,21 +1,15 @@
 package com.dadazhishi.zheng.configuration;
 
-import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertEquals;
 
 import com.dadazhishi.zheng.configuration.objects.Apple;
-import com.dadazhishi.zheng.configuration.objects.AppleAnnotation;
 import com.dadazhishi.zheng.configuration.objects.Banana;
-import com.dadazhishi.zheng.configuration.objects.BananaAnnotation;
 import com.dadazhishi.zheng.configuration.objects.Food;
-import com.dadazhishi.zheng.configuration.objects.FoodAnnotation;
 import com.dadazhishi.zheng.configuration.objects.NamedAnnotation;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
 import com.google.inject.Provides;
-import com.google.inject.TypeLiteral;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,8 +49,8 @@ public class ConfigurationModuleTest {
         .withClassPathProperties("food.properties")
         .build();
 
-    ConfigurationModule configurationModule = new ConfigurationModule(this.configuration);
-    configurationModule.setConfigurationPackages("com.dadazhishi.zheng.configuration");
+    ConfigurationModule configurationModule = new ConfigurationModule();
+    configurationModule.setConfiguration(configuration);
     injector = Guice
         .createInjector(configurationModule, new FoodModule());
   }
@@ -65,12 +59,14 @@ public class ConfigurationModuleTest {
   public void testNamedAnnotation() {
     System.out.println(injector.getInstance(NamedAnnotation.class).getName());
     System.out.println(injector.getInstance(NamedAnnotation.class).getName());
-
   }
 
   @Test
   public void testGetMapKeyNamed() {
-    AppleAnnotation abc = injector.getInstance(Key.get(AppleAnnotation.class, named("abc")));
+    Configuration configuration = injector.getInstance(Configuration.class);
+    Map<String, Apple> apples = ConfigurationObjectMapper
+        .resolveMap(configuration, "apples", Apple.class);
+    Apple abc = apples.get("abc");
     System.out.println(abc.getWeight());
     System.out.println(abc.getName());
   }
@@ -78,35 +74,22 @@ public class ConfigurationModuleTest {
   @Test
   public void testAnnotation() {
 
-    FoodAnnotation food2 = injector.getInstance(FoodAnnotation.class);
+    Configuration configuration = injector.getInstance(Configuration.class);
+    Food food2 = ConfigurationObjectMapper.resolve(configuration, Food.class);
     assertEquals(food.getApple(), food2.getApple());
     System.out.println(food2.getApple());
-    Set<BananaAnnotation> bananaAnnotationList = injector
-        .getInstance(Key.get(new TypeLiteral<Set<BananaAnnotation>>() {
-        }));
-    assertEquals(food.getBananas().size(), bananaAnnotationList.size());
-    Map<String, AppleAnnotation> appleAnnotationMap = injector
-        .getInstance(Key.get(new TypeLiteral<Map<String, AppleAnnotation>>() {
-        }));
-    assertEquals(food.getApples().size(), appleAnnotationMap.size());
+
+    Set<Banana> bananas = ConfigurationObjectMapper
+        .resolveSet(configuration, "bananas", Banana.class);
+
+    assertEquals(food.getBananas().size(), bananas.size());
+
+    Map<String, Apple> apples = ConfigurationObjectMapper
+        .resolveMap(configuration, "apples", Apple.class);
+
+    assertEquals(food.getApples().size(), apples.size());
   }
 
-  @Test
-  public void testConfigurationObjectMapper() {
-    ConfigurationObjectMapper configurationObjectMapper = injector
-        .getInstance(ConfigurationObjectMapper.class);
-    FoodAnnotation food1 = configurationObjectMapper.resolve(configuration, FoodAnnotation.class);
-    assertEquals(food.getApple(), food1.getApple());
-
-    Set<BananaAnnotation> bananaAnnotationSet = configurationObjectMapper
-        .resolveSet(configuration, BananaAnnotation.class);
-    assertEquals(food.getBananas().size(), bananaAnnotationSet.size());
-
-    Map<String, AppleAnnotation> appleAnnotationMap = configurationObjectMapper
-        .resolveMap(configuration, AppleAnnotation.class);
-    assertEquals(food.getApples().size(), appleAnnotationMap.size());
-
-  }
 
   @Test
   public void testStatic() throws IOException {
@@ -125,14 +108,14 @@ public class ConfigurationModuleTest {
     }
 
     @Provides
-    Food food(Configuration configuration, ConfigurationMapper configurationMapper) {
-      return configurationMapper.resolve(configuration, Food.class);
+    Food food(Configuration configuration) {
+      return ConfigurationObjectMapper.resolve(configuration, Food.class);
     }
 
     @Provides
-    Apple apple(Configuration configuration, ConfigurationMapper configurationMapper) {
+    Apple apple(Configuration configuration) {
       Configuration configuration1 = configuration.getConfiguration("apple");
-      return configurationMapper.resolve(configuration1, Apple.class);
+      return ConfigurationObjectMapper.resolve(configuration1, Apple.class);
     }
 
   }

@@ -19,12 +19,12 @@
       <groupId>org.jboss.resteasy</groupId>
     </dependency>
     <dependency>
-      <artifactId>resteasy-jackson2-provider</artifactId>
+      <artifactId>resteasy-core</artifactId>
       <groupId>org.jboss.resteasy</groupId>
     </dependency>
     <dependency>
-      <artifactId>resteasy-core</artifactId>
       <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson2-provider</artifactId>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
@@ -44,6 +44,14 @@
       <artifactId>zheng-web-jetty</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-configuration</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-rest</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
   </dependencies>
 

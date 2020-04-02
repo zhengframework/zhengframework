@@ -66,6 +66,7 @@
     <module>zheng-metrics-micrometer</module>
     <module>zheng-metrics-jersey</module>
     <module>zheng-metrics-servlet</module>
+    <module>zheng-rest</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

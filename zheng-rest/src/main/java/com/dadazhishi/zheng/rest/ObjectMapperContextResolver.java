@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rest.jersey;
+package com.dadazhishi.zheng.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.inject.Inject;

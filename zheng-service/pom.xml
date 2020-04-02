@@ -31,6 +31,10 @@
       <groupId>junit</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>zheng-configuration</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
