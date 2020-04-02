@@ -9,21 +9,10 @@ import javax.persistence.EntityTransaction;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-/**
- * THIS IS A COPY/PASTE ADAPTATION OF THE JPA TX INTERCEPTOR PACKAGED WITH GUICE-PERSIST. Minor
- * changes were made to use Hibernate's UnitOfWork implementation (literally a one line change).
- * Note: Would be nice to interface this to work with any UnitOfWork implementation or some adapter
- * interface which provides the isWorking() method.
- *
- * @author Dhanji R. Prasanna (dhanji@gmail.com)
- * @author Jason Campos (jcampos8782@gmail.com)
- */
 public class HibernateTransactionInterceptor implements MethodInterceptor {
 
   // Tracks if the unit of work was begun implicitly by this transaction.
   private final ThreadLocal<Boolean> didWeStartWork = new ThreadLocal<>();
-//  @Inject
-//  HibernateUnitOfWork unitOfWork = null;
 
   @Inject
   private HibernatePersistService emProvider = null;

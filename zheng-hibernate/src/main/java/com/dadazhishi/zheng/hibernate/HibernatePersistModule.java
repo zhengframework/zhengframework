@@ -1,7 +1,11 @@
 package com.dadazhishi.zheng.hibernate;
 
+import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
 import com.dadazhishi.zheng.service.ServicesModule;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
@@ -13,7 +17,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
@@ -27,33 +30,10 @@ import org.hibernate.integrator.spi.Integrator;
 
 // code base on [guice-persist-hibernate](https://github.com/jcampos8782/guice-persist-hibernate)
 
-/**
- * Adaptation of the {@link PersistModule} specific to using Hibernate via a {@code SessionFactory}
- * as opposed to the JPA {@code EntityManagerFactory}. This allows for runtime binding of
- * configuration properties (using a {@link HibernateConfig} and programmatic configuration of
- * {@code @Entity} classes (Yay! No XML!). <br /> <br /> Users of this module *must* either<br /> a)
- * Provide {@link HibernateEntityClassProvider} and {@link HibernateConfig} classes to the
- * constructor<br /> OR<br/> b) Provider bindings for those classes via an installed Guice module
- *
- * @author Jason Campos <jcampos8782@gmail.com>
- */
-public class HibernatePersistModule extends PersistModule {
+public class HibernatePersistModule extends PersistModule implements ConfigurationSupport {
 
-  private final HibernateConfig hibernateConfig;
+  private com.dadazhishi.zheng.configuration.Configuration configuration;
 
-  /**
-   * Instantiates module with the specified entity class and property providers. No additional
-   * bindings required for this module to function properly.
-   */
-  public HibernatePersistModule() {
-    this.hibernateConfig = null;
-  }
-
-
-  public HibernatePersistModule(
-      HibernateConfig hibernateConfig) {
-    this.hibernateConfig = Objects.requireNonNull(hibernateConfig);
-  }
 
   private Map<String, String> hibernateConfigToMap(HibernateConfig hibernateConfig) {
     Map<String, String> map = new HashMap<>();
@@ -80,37 +60,33 @@ public class HibernatePersistModule extends PersistModule {
   @Override
   protected void configurePersistence() {
     install(new ServicesModule());
-    requireBinding(HibernateEntityClassProvider.class);
-    requireBinding(HibernateConfig.class);
 
-    if (hibernateConfig != null) {
-      bind(HibernateConfig.class).toInstance(hibernateConfig);
-    }
+    HibernateConfig hibernateConfig = ConfigurationObjectMapper
+        .resolve(configuration, "zheng.hibernate", HibernateConfig.class);
+    bind(HibernateConfig.class).toInstance(hibernateConfig);
 
-    // Resolve PersistService, Provider<SessionFactory>, and HibernatePersistService
-    // to the same object.
+    String entityPackages = hibernateConfig.getEntityPackages();
+    Preconditions
+        .checkState(!Strings.isNullOrEmpty(entityPackages), "entityPackages is null or empty");
+    String[] strings = entityPackages.split(",");
+    HibernateEntityClassProvider entityClassProvider = new PackageScanEntityClassProvider(
+        strings);
+    bind(HibernateEntityClassProvider.class).toInstance(entityClassProvider);
+
     bind(HibernatePersistService.class).in(Singleton.class);
     bind(PersistService.class).to(HibernatePersistService.class);
-//    bind(SessionFactory.class).toProvider(HibernatePersistService2.class);
-
-    // Resolve UnitOfWork, Provider<Session>,and HibernateUnitOfWork
-    // to the same object.
-//    bind(HibernateUnitOfWork.class).in(Singleton.class);
     bind(UnitOfWork.class).to(HibernatePersistService.class);
-//    bind(Session.class).toProvider(HibernateUnitOfWork.class);
-
-    // Default to an empty set of integrators
-		final List<Integrator> integrators = Collections.emptyList();
-		OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<ImmutableSet<? extends Integrator>>(){})
-			.setDefault()
-			.toInstance(ImmutableSet.copyOf(integrators));
+    final List<Integrator> integrators = Collections.emptyList();
+    OptionalBinder
+        .newOptionalBinder(binder(), new TypeLiteral<ImmutableSet<? extends Integrator>>() {
+        })
+        .setDefault()
+        .toInstance(ImmutableSet.copyOf(integrators));
 
     bind(EntityManager.class).toProvider(HibernatePersistService.class);
     bind(EntityManagerFactory.class).toProvider(EntityManagerFactoryProvider.class);
 
     bind(HibernateService.class).asEagerSingleton();
-
-    requestStaticInjection(DefaultEntityManager.class);
   }
 
   @Override
@@ -127,14 +103,6 @@ public class HibernatePersistModule extends PersistModule {
     return hibernatePersistService.getSessionFactory();
   }
 
-  @Singleton
-  @Inject
-  @Provides
-  private HibernateEntityClassProvider hibernateEntityClassProvider(
-      final HibernateConfig hibernateConfig) {
-    return new PackageScanEntityClassProvider(
-        hibernateConfig.getEntityPackages());
-  }
 
   @Singleton
   @Inject
@@ -152,12 +120,15 @@ public class HibernatePersistModule extends PersistModule {
   @Singleton
   @Inject
   private BootstrapServiceRegistry getBootstrapServiceRegistry(
-      final ImmutableSet<? extends Integrator> integrators) {
+      IntegratorScanner integratorScanner) {
     final BootstrapServiceRegistryBuilder builder = new BootstrapServiceRegistryBuilder();
-    for (final Integrator integrator : integrators) {
-      builder.applyIntegrator(integrator);
-    }
+    integratorScanner.accept(builder::applyIntegrator);
     return builder.build();
+  }
+
+  @Override
+  public void setConfiguration(com.dadazhishi.zheng.configuration.Configuration configuration) {
+    this.configuration = configuration;
   }
 
 }
