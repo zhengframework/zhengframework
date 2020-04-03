@@ -13,7 +13,6 @@ public class SwaggerModule extends ServletModule {
 
   @Override
   protected void configureServlets() {
-    log.debug("Configuring swagger guice module...");
 //		Multibinder.newSetBinder(binder(), ServletContextListener.class).addBinding().to(SwaggerServletContextListener.class);
     bind(OpenApiResource.class);
     bind(AcceptHeaderOpenApiResource.class);

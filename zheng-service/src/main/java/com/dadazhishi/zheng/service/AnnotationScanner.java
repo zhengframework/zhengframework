@@ -2,17 +2,17 @@ package com.dadazhishi.zheng.service;
 
 import com.google.inject.Binding;
 import com.google.inject.Injector;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import lombok.extern.slf4j.Slf4j;
 
-/**
- * Walks through the guice injector bindings, visiting each one that is of the specified type.
- */
-public class Scanner<T> {
+@Slf4j
+public class AnnotationScanner<T> {
 
   private final Injector injector;
-  private final Class<T> scanFor;
+  private final Class<? extends Annotation> scanFor;
 
-  public Scanner(Injector injector, Class<T> scanFor) {
+  public AnnotationScanner(Injector injector, Class<? extends Annotation> scanFor) {
     this.injector = injector;
     this.scanFor = scanFor;
   }
@@ -36,9 +36,9 @@ public class Scanner<T> {
 
     for (final Binding<?> binding : inj.getBindings().values()) {
       final Type type = binding.getKey().getTypeLiteral().getType();
-
-      if (type instanceof Class && scanFor.isAssignableFrom((Class) type)) {
-        //noinspection unchecked
+      Class<?> rawType = binding.getKey().getTypeLiteral().getRawType();
+      if (rawType.isAnnotationPresent(scanFor)) {
+        log.info("{} rawType={}", scanFor, rawType);
         visitor.visit(binding.getProvider().get());
       }
     }

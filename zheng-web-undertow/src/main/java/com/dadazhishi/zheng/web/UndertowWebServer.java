@@ -20,7 +20,7 @@ import javax.servlet.DispatcherType;
 public class UndertowWebServer implements WebServer {
 
   private WebConfig webConfig;
-  private EventListenerScanner eventListenerScanner;
+  private EventListenerClassScanner eventListenerScanner;
 
   private Undertow server;
 
@@ -28,7 +28,7 @@ public class UndertowWebServer implements WebServer {
   public void init(Provider<WebConfig> webConfigProvider, Provider<Injector> injectorProvider) {
     this.webConfig = webConfigProvider.get();
     Injector injector = injectorProvider.get();
-    this.eventListenerScanner = new EventListenerScanner(injector);
+    this.eventListenerScanner = new EventListenerClassScanner(injector);
   }
 
   /**

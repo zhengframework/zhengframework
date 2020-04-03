@@ -40,9 +40,9 @@ public class RestModule extends ServletModule implements ConfigurationSupport {
     injectorProvider = getProvider(Injector.class);
     install(new WebModule());
     bind(ServletContainer.class).in(Scopes.SINGLETON);
-    bind(FeatureScanner.class);
-    bind(PathScanner.class);
-    bind(ProviderScanner.class);
+    bind(FeatureClassScanner.class);
+    bind(PathAnnotationScanner.class);
+    bind(ProviderAnnotationScanner.class);
 
     RestConfig restConfig = ConfigurationObjectMapper
         .resolve(configuration, NAMESPACE, RestConfig.class);

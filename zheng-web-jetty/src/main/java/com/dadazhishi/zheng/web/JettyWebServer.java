@@ -21,8 +21,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 public class JettyWebServer implements WebServer {
 
   private WebConfig webConfig;
-  private EventListenerScanner eventListenerScanner;
-  private HandlerScanner handlerScanner;
+  private EventListenerClassScanner eventListenerScanner;
+  private HandlerClassScanner handlerScanner;
 
   private Server server;
 
@@ -30,8 +30,8 @@ public class JettyWebServer implements WebServer {
   public void init(Provider<WebConfig> webConfigProvider, Provider<Injector> injectorProvider) {
     this.webConfig = webConfigProvider.get();
     Injector injector = injectorProvider.get();
-    this.eventListenerScanner = new EventListenerScanner(injector);
-    this.handlerScanner = new HandlerScanner(injector);
+    this.eventListenerScanner = new EventListenerClassScanner(injector);
+    this.handlerScanner = new HandlerClassScanner(injector);
   }
 
   /**

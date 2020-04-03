@@ -29,10 +29,19 @@ public class JerseyResourceConfig extends ResourceConfig {
     GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
     GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
     guiceBridge.bridgeGuiceInjector(injector);
-
-    injector.getInstance(FeatureScanner.class).accept(this::register);
-    injector.getInstance(PathScanner.class).accept(this::register);
-    injector.getInstance(ProviderScanner.class).accept(this::register);
+    log.info("test");
+    injector.getInstance(FeatureClassScanner.class).accept(component -> {
+      log.info("register Feature {}", component.getClass());
+      register(component);
+    });
+    injector.getInstance(PathAnnotationScanner.class).accept(component -> {
+      log.info("register Path {}", component.getClass());
+      register(component);
+    });
+    injector.getInstance(ProviderAnnotationScanner.class).accept(component -> {
+      log.info("register Provider {}", component.getClass());
+      register(component);
+    });
 
   }
 

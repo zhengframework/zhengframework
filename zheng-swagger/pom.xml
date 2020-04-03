@@ -40,6 +40,21 @@
       <artifactId>guice-servlet</artifactId>
       <groupId>com.google.inject.extensions</groupId>
     </dependency>
+    <dependency>
+      <artifactId>zheng-rest-jersey</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-web-jetty</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>okhttp</artifactId>
+      <groupId>com.squareup.okhttp3</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

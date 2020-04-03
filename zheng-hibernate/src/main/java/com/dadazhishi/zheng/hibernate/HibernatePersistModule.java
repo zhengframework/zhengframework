@@ -120,7 +120,7 @@ public class HibernatePersistModule extends PersistModule implements Configurati
   @Singleton
   @Inject
   private BootstrapServiceRegistry getBootstrapServiceRegistry(
-      IntegratorScanner integratorScanner) {
+      IntegratorClassScanner integratorScanner) {
     final BootstrapServiceRegistryBuilder builder = new BootstrapServiceRegistryBuilder();
     integratorScanner.accept(builder::applyIntegrator);
     return builder.build();
