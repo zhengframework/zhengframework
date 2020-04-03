@@ -67,6 +67,7 @@
     <module>zheng-metrics-jersey</module>
     <module>zheng-metrics-servlet</module>
     <module>zheng-rest</module>
+    <module>zheng-webjars</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

@@ -28,6 +28,16 @@
       <groupId>io.swagger.core.v3</groupId>
     </dependency>
     <dependency>
+      <artifactId>swagger-ui</artifactId>
+      <groupId>org.webjars</groupId>
+      <version>3.25.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>ST4</artifactId>
+      <groupId>org.antlr</groupId>
+      <version>4.3</version>
+    </dependency>
+    <dependency>
       <artifactId>zheng-service</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
@@ -39,6 +49,10 @@
     <dependency>
       <artifactId>guice-servlet</artifactId>
       <groupId>com.google.inject.extensions</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
     </dependency>
     <dependency>
       <artifactId>zheng-rest-jersey</artifactId>
@@ -54,6 +68,11 @@
       <artifactId>okhttp</artifactId>
       <groupId>com.squareup.okhttp3</groupId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-webjars</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 

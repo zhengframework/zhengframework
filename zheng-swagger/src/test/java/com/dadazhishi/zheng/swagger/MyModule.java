@@ -6,6 +6,7 @@ public class MyModule extends ServletModule {
 
   @Override
   protected void configureServlets() {
+
     serve("/hello").with(HelloServlet.class);
     bind(TestResource.class);
   }

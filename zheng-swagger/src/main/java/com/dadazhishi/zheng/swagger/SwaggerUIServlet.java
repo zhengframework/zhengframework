@@ -1,11 +1,9 @@
-package com.dadazhishi.zheng.webjars;
+package com.dadazhishi.zheng.swagger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.StringJoiner;
-import javax.inject.Inject;
+import java.net.URL;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +14,27 @@ import org.webjars.NotFoundException;
 import org.webjars.WebJarAssetLocator;
 
 @Slf4j
-public class WebjarsServlet extends HttpServlet {
+public class SwaggerUIServlet extends HttpServlet {
 
+  //  private final SwaggerUIConfig swaggerUIConfig;
+//
+//  @Inject
+//  public SwaggerUIServlet(SwaggerUIConfig swaggerUIConfig) {
+//    this.swaggerUIConfig = swaggerUIConfig;
+//  }
+//
+//  @Override
+//  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+//      throws ServletException, IOException {
+//    YAMLMapper mapper = new YAMLMapper();
+//    ArrayList<SwaggerUIConfig> list = new ArrayList<>();
+//    swaggerUIConfig.setUrl("http://localhost:8080/abc/openapi.json");
+//    list.add(swaggerUIConfig);
+//    mapper.writeValue(resp.getOutputStream(), list);
+//  }
+
+  public static final String DEFAULT_PREFIX = "/api-docs";
   private static final long serialVersionUID = 1L;
-
   private static final long DEFAULT_EXPIRE_TIME_MS = 86400000L; // 1 day
   private static final long DEFAULT_EXPIRE_TIME_S = 86400L; // 1 day
   /**
@@ -27,14 +42,9 @@ public class WebjarsServlet extends HttpServlet {
    */
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
   private static final int EOF = -1;
-  private final WebjarsConfig webjarsConfig;
+  private String prefix;
   private boolean disableCache = false;
   private WebJarAssetLocator locator = new WebJarAssetLocator();
-
-  @Inject
-  public WebjarsServlet(WebjarsConfig webjarsConfig) {
-    this.webjarsConfig = webjarsConfig;
-  }
 
   private static boolean isDirectoryRequest(String uri) {
     return uri.endsWith("/");
@@ -82,6 +92,9 @@ public class WebjarsServlet extends HttpServlet {
           "Expected servlet container to provide a non-null ServletConfig.");
     }
     try {
+
+      prefix = config.getInitParameter("prefix");
+
       String disableCache = config.getInitParameter("disableCache");
       if (disableCache != null) {
         this.disableCache = Boolean.parseBoolean(disableCache);
@@ -93,19 +106,13 @@ public class WebjarsServlet extends HttpServlet {
     log.info("WebjarsServlet initialization completed");
   }
 
-  private String getFullPath(String uri) throws NotFoundException {
+  private String getFullPath(String webjar, String uri) throws NotFoundException {
     log.info("uri={}", uri);
     if (uri.startsWith("/")) {
       uri = uri.substring(1);
     }
-    String[] strings = uri.split("/");
-    log.info("str={}", Arrays.toString(strings));
-    StringJoiner stringJoiner = new StringJoiner("/");
-    for (int i = 1; i < strings.length; i++) {
-      stringJoiner.add(strings[i]);
-    }
     try {
-      return locator.getFullPath(strings[0], stringJoiner.toString());
+      return locator.getFullPath(webjar, uri);
     } catch (NullPointerException e) {
       log.error("get full path error, uri={}", uri, e);
       throw new NotFoundException(uri);
@@ -115,18 +122,38 @@ public class WebjarsServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
+    String eTagName;
     log.info("requestURI: {}", request.getRequestURI());
     log.info("getContextPath: {}", request.getContextPath());
     String uri = request.getRequestURI()
         .replaceFirst(request.getContextPath(), "")
-        .replaceFirst(webjarsConfig.getPath(), "");
-    if (isDirectoryRequest(uri)) {
-      response.sendError(HttpServletResponse.SC_FORBIDDEN);
-      return;
+        .replaceFirst(prefix, "");
+    if (uri.endsWith("/")) {
+      uri = uri + "index.html";
     }
+    if (uri.endsWith("/index.html")) {
+      eTagName = prefix + "/index.html";
+      URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
+      try (InputStream inputStream = resource.openStream()) {
+        if (!disableCache) {
+          prepareCacheHeaders(response, eTagName);
+        }
+        String filename = getFileName(uri);
+        String mimeType = this.getServletContext().getMimeType(filename);
+
+        response.setContentType(mimeType != null ? mimeType : "application/octet-stream");
+        copy(inputStream, response.getOutputStream());
+        return;
+      }
+    }
+
+//    if (isDirectoryRequest(uri)) {
+//      response.sendError(HttpServletResponse.SC_FORBIDDEN);
+//      return;
+//    }
     String webjarsResourceURI;
     try {
-      webjarsResourceURI = getFullPath(uri);
+      webjarsResourceURI = getFullPath("swagger-ui", uri);
     } catch (NotFoundException e) {
       response.sendError(HttpServletResponse.SC_NOT_FOUND);
       return;
@@ -135,7 +162,6 @@ public class WebjarsServlet extends HttpServlet {
 //    String webjarsResourceURI = "/META-INF/resources" + uri;
     log.info("Webjars resource requested: {}", webjarsResourceURI);
 
-    String eTagName;
     try {
       eTagName = this.getETagName(webjarsResourceURI);
     } catch (IllegalArgumentException e) {

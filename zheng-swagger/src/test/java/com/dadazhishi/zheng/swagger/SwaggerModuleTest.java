@@ -7,6 +7,8 @@ import com.dadazhishi.zheng.rest.jersey.RestModule;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;
+import com.dadazhishi.zheng.webjars.WebjarsModule;
+import java.io.IOException;
 import java.util.Objects;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
@@ -14,11 +16,35 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.junit.Test;
 
-public class WebModuleExample {
+public class SwaggerModuleTest {
+
+  public static void main(String[] args) throws IOException {
+    ZhengApplication application = ZhengApplication
+        .create(
+            new MyModule(),
+            new WebModule(),
+            new SwaggerModule(),
+            new WebjarsModule(),
+            new RestModule()
+        );
+    application.start();
+    WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
+    System.out.println(webConfig);
+    String contextPath = webConfig.getContextPath();
+    if (contextPath.equals("/")) {
+      contextPath = "";
+    }
+    if (contextPath.endsWith("/")) {
+      contextPath = contextPath.substring(0, contextPath.length() - 1);
+    }
+    String json = "http://localhost:" + webConfig.getPort() + contextPath + "/openapi.json";
+    String yaml = "http://localhost:" + webConfig.getPort() + contextPath + "/openapi.yaml";
+    System.out.println(json);
+    System.out.println(yaml);
+  }
 
   @Test
-  public void main() throws Exception {
-//  public static void main(String[] args) throws Exception {
+  public void test() throws IOException {
     ZhengApplication application = ZhengApplication
         .create(
             new MyModule(),
@@ -53,5 +79,4 @@ public class WebModuleExample {
       application.stop();
     }
   }
-
 }

@@ -94,6 +94,17 @@ public class ConfigurationBuilder {
     return this;
   }
 
+  public ConfigurationBuilder with(String uri) {
+    resolvers.add(new AutoConfigurationResolverSelector(URI.create(uri),
+        Collections.singletonMap("failOnError", "false")));
+    return this;
+  }
+
+  public ConfigurationBuilder with(String uri, Map<String, String> properties) {
+    resolvers.add(new AutoConfigurationResolverSelector(URI.create(uri), properties));
+    return this;
+  }
+
   public ConfigurationBuilder withProperties(URL url) {
     resolvers
         .add(new HttpConfigurationResolver(new PropertiesConfigurationParser(),

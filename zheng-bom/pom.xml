@@ -543,6 +543,11 @@
         <groupId>com.dadazhishi.zheng</groupId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>zheng-webjars</artifactId>
+        <groupId>com.dadazhishi.zheng</groupId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>

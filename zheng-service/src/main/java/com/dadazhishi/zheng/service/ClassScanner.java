@@ -40,8 +40,6 @@ public class ClassScanner<T> {
       final Type type = binding.getKey().getTypeLiteral().getType();
 
       if (type instanceof Class) {
-        log.info("type={}", type);
-        log.info("{} isAssignableFrom={}", scanFor, scanFor.isAssignableFrom((Class) type));
         if (scanFor.isAssignableFrom((Class) type)) {
           //noinspection unchecked
           visitor.visit(binding.getProvider().get());
