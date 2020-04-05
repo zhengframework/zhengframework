@@ -7,6 +7,11 @@ import java.util.Map;
 
 public class EnvironmentConfigurationResolver extends ReloadableConfigurationResolver {
 
+  public EnvironmentConfigurationResolver() {
+    super();
+    reload();
+  }
+
   private static Map<String, String> transformEnvMap(Map<String, String> envMap) {
     Map<String, String> map = Maps.newHashMapWithExpectedSize(envMap.size());
     for (Map.Entry<String, String> entry : envMap.entrySet()) {

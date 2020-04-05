@@ -22,6 +22,7 @@ public class InputStreamConfigurationResolver extends ReloadableConfigurationRes
   public InputStreamConfigurationResolver(
       ConfigurationParser<InputStream> parser,
       Supplier<InputStream> inputStreamSupplier, boolean failOnError) {
+    super();
     this.parser = parser;
     this.inputStreamSupplier = inputStreamSupplier;
     this.failOnError = failOnError;

@@ -44,6 +44,7 @@ public class FileConfigurationResolver extends ReloadableConfigurationResolver {
       FileLocator fileLocator,
       ConfigurationParser<InputStream> configurationParser,
       boolean failOnError) {
+    super();
     this.fileSystem = fileSystem;
     this.fileLocationStrategy = fileLocationStrategy;
     this.fileLocator = fileLocator;

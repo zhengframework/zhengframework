@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 public class SystemConfigurationResolver extends ReloadableConfigurationResolver {
 
+  public SystemConfigurationResolver() {
+    super();
+    reload();
+  }
+
   @Override
   public void reload() {
     update(Collections.unmodifiableMap(System.getProperties()

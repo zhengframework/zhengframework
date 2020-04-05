@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CombinedConfigurationResolver implements ConfigurationResolver {
 
   private final List<ConfigurationResolver> resolvers = Collections
@@ -31,6 +33,7 @@ public class CombinedConfigurationResolver implements ConfigurationResolver {
   public Set<String> keySet() {
     Set<String> keySet = Sets.newHashSet();
     for (ConfigurationResolver resolver : resolvers) {
+      log.info("ConfigurationResolver Class={}", resolver.getClass());
       keySet.addAll(resolver.keySet());
     }
     return keySet;

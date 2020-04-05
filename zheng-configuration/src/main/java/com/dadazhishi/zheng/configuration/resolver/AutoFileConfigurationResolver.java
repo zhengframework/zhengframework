@@ -31,6 +31,7 @@ public class AutoFileConfigurationResolver extends ReloadableConfigurationResolv
       FileLocator fileLocator,
       boolean failOnError,
       Map<String, String> properties) {
+    super();
     this.fileSystem = fileSystem;
     this.fileLocationStrategy = fileLocationStrategy;
     this.fileLocator = fileLocator;
