@@ -2,12 +2,13 @@ package com.dadazhishi.zheng.configuration;
 
 import static com.google.inject.name.Names.named;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 
-public class ConfigurationModule extends AbstractModule implements ConfigurationSupport {
+public class ConfigurationModule extends AbstractModule implements ConfigurationAware {
 
   private Configuration configuration;
 
@@ -21,12 +22,13 @@ public class ConfigurationModule extends AbstractModule implements Configuration
 
   @Override
   protected void configure() {
+    Preconditions.checkArgument(configuration != null, "configuration is null");
     bind(Configuration.class).toInstance(configuration);
     bindConfiguration(binder(), configuration);
   }
 
   @Override
-  public void setConfiguration(Configuration configuration) {
+  public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
 }

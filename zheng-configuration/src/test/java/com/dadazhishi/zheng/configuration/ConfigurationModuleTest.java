@@ -46,11 +46,11 @@ public class ConfigurationModuleTest {
     configuration = ConfigurationBuilder.create()
         .withEnvironmentVariables()
         .withSystemProperties()
-        .withClassPathProperties("food.properties")
+        .withProperties("food.properties")
         .build();
 
     ConfigurationModule configurationModule = new ConfigurationModule();
-    configurationModule.setConfiguration(configuration);
+    configurationModule.initConfiguration(configuration);
     injector = Guice
         .createInjector(configurationModule, new FoodModule());
   }

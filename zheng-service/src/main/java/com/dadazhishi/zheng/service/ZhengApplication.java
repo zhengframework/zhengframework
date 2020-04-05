@@ -1,13 +1,16 @@
 package com.dadazhishi.zheng.service;
 
 import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
+import com.dadazhishi.zheng.configuration.ex.ConfigurationException;
+import com.dadazhishi.zheng.configuration.io.FileLocator;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,9 +32,9 @@ public class ZhengApplication {
       configuration = buildConfiguration(args);
     }
     for (Module module : modules) {
-      if (module instanceof ConfigurationSupport) {
-        ConfigurationSupport configurationSupport = (ConfigurationSupport) module;
-        configurationSupport.setConfiguration(configuration);
+      if (module instanceof ConfigurationAware) {
+        ConfigurationAware configurationAware = (ConfigurationAware) module;
+        configurationAware.initConfiguration(configuration);
       }
     }
     injector = Guice.createInjector(modules);
@@ -89,9 +92,13 @@ public class ZhengApplication {
         .withSystemProperties()
         .withEnvironmentVariables();
     if (path != null) {
-      builder.withProperties(path);
+      try {
+        builder.withProperties(FileLocator.builder().sourceURL(path.toUri().toURL()).build());
+      } catch (MalformedURLException e) {
+        throw new ConfigurationException(e);
+      }
     } else {
-      builder.with(URI.create("classpath:/application.properties"));
+      builder.withURI(URI.create("classpath:/application.properties"));
     }
     return builder.build();
   }

@@ -36,7 +36,7 @@ public class JavaObjectConfigurationParserTest {
     Map<String, String> parse = parser.parse(food);
 
     Configuration configuration = ConfigurationBuilder.create()
-        .withClassPathProperties("food.properties")
+        .withProperties("food.properties")
         .build();
     Assert.assertEquals(parse, configuration.asMap());
 

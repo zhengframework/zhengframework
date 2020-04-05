@@ -1,7 +1,7 @@
 package com.dadazhishi.zheng.hibernate;
 
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
 import com.dadazhishi.zheng.service.ServicesModule;
 import com.google.common.base.Preconditions;
@@ -30,7 +30,7 @@ import org.hibernate.integrator.spi.Integrator;
 
 // code base on [guice-persist-hibernate](https://github.com/jcampos8782/guice-persist-hibernate)
 
-public class HibernatePersistModule extends PersistModule implements ConfigurationSupport {
+public class HibernatePersistModule extends PersistModule implements ConfigurationAware {
 
   private com.dadazhishi.zheng.configuration.Configuration configuration;
 
@@ -60,7 +60,7 @@ public class HibernatePersistModule extends PersistModule implements Configurati
   @Override
   protected void configurePersistence() {
     install(new ServicesModule());
-
+    Preconditions.checkArgument(configuration != null, "configuration is null");
     HibernateConfig hibernateConfig = ConfigurationBeanMapper
         .resolve(configuration, "zheng.hibernate", HibernateConfig.class);
     bind(HibernateConfig.class).toInstance(hibernateConfig);
@@ -127,7 +127,7 @@ public class HibernatePersistModule extends PersistModule implements Configurati
   }
 
   @Override
-  public void setConfiguration(com.dadazhishi.zheng.configuration.Configuration configuration) {
+  public void initConfiguration(com.dadazhishi.zheng.configuration.Configuration configuration) {
     this.configuration = configuration;
   }
 

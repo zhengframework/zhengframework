@@ -18,7 +18,7 @@ public class WebjarsModuleTest {
   @Test
   public void testDefaultPath() throws IOException {
 
-    Configuration configuration = ConfigurationBuilder.create().with("classpath:app.properties")
+    Configuration configuration = ConfigurationBuilder.create().withURI("classpath:app.properties")
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
@@ -57,7 +57,7 @@ public class WebjarsModuleTest {
   public void testDisableCache() throws IOException {
 
     Configuration configuration = ConfigurationBuilder.create()
-        .with("classpath:app_cache.properties")
+        .withURI("classpath:app_cache.properties")
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
@@ -95,7 +95,7 @@ public class WebjarsModuleTest {
   @Test
   public void testPath() throws IOException {
     Configuration configuration = ConfigurationBuilder.create()
-        .with("classpath:app_path.properties")
+        .withURI("classpath:app_path.properties")
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,

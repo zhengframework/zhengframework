@@ -1,6 +1,5 @@
-package com.dadazhishi.zheng.configuration.parser;
+package com.dadazhishi.zheng.configuration.resolver;
 
-import com.dadazhishi.zheng.configuration.resolver.ConfigurationResolver;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

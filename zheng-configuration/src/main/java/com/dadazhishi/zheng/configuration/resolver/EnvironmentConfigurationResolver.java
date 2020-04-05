@@ -4,23 +4,15 @@ import com.google.common.base.CaseFormat;
 import com.google.common.collect.Maps;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 
-public class EnvironmentConfigurationResolver extends AbstractConfigurationResolver {
-
-  private final Map<String, String> envMap;
-
-  public EnvironmentConfigurationResolver() {
-    this.envMap = transformEnvMap(System.getenv());
-  }
+public class EnvironmentConfigurationResolver extends ReloadableConfigurationResolver {
 
   private static Map<String, String> transformEnvMap(Map<String, String> envMap) {
     Map<String, String> map = Maps.newHashMapWithExpectedSize(envMap.size());
     for (Map.Entry<String, String> entry : envMap.entrySet()) {
       map.put(envToKey(entry.getKey()), entry.getValue());
-//      map.put(entry.getKey(), entry.getValue());
     }
-    return map;
+    return Collections.unmodifiableMap(map);
   }
 
   private static String envToKey(String env) {
@@ -28,12 +20,7 @@ public class EnvironmentConfigurationResolver extends AbstractConfigurationResol
   }
 
   @Override
-  protected Map<String, String> delegate() {
-    return envMap;
-  }
-
-  @Override
-  public Set<String> keySet() {
-    return Collections.emptySet();
+  public void reload() {
+    update(transformEnvMap(System.getenv()));
   }
 }

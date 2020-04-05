@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class ChainedConfigurationResolver implements ConfigurationResolver {
+public class CombinedConfigurationResolver implements ConfigurationResolver {
 
   private final List<ConfigurationResolver> resolvers = Collections
       .synchronizedList(Lists.newArrayList());
 
-  public ChainedConfigurationResolver(List<ConfigurationResolver> resolvers) {
+  public CombinedConfigurationResolver(List<ConfigurationResolver> resolvers) {
     this.resolvers.addAll(resolvers);
   }
 

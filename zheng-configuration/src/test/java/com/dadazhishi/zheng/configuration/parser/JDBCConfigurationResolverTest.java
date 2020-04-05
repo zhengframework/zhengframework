@@ -3,6 +3,7 @@ package com.dadazhishi.zheng.configuration.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.dadazhishi.zheng.configuration.resolver.JDBCConfigurationResolver;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

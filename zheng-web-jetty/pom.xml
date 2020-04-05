@@ -5,6 +5,11 @@
   <artifactId>zheng-web-jetty</artifactId>
   <dependencies>
     <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <artifactId>jetty-webapp</artifactId>
       <groupId>org.eclipse.jetty</groupId>
     </dependency>

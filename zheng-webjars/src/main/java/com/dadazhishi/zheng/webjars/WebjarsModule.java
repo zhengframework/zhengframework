@@ -1,19 +1,21 @@
 package com.dadazhishi.zheng.webjars;
 
 import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
+import com.google.common.base.Preconditions;
 import com.google.inject.servlet.ServletModule;
 import java.util.Collections;
 import java.util.Map;
 import javax.inject.Singleton;
 
-public class WebjarsModule extends ServletModule implements ConfigurationSupport {
+public class WebjarsModule extends ServletModule implements ConfigurationAware {
 
   private Configuration configuration;
 
   @Override
   protected void configureServlets() {
+    Preconditions.checkArgument(configuration != null, "configuration is null");
     WebjarsConfig webjarsConfig = ConfigurationBeanMapper
         .resolve(configuration, WebjarsConfig.PREFIX, WebjarsConfig.class);
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
@@ -39,7 +41,7 @@ public class WebjarsModule extends ServletModule implements ConfigurationSupport
   }
 
   @Override
-  public void setConfiguration(Configuration configuration) {
+  public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
 }

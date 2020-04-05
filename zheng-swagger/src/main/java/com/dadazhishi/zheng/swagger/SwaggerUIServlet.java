@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import javax.servlet.ServletConfig;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,24 +16,6 @@ import org.webjars.WebJarAssetLocator;
 @Slf4j
 public class SwaggerUIServlet extends HttpServlet {
 
-  //  private final SwaggerUIConfig swaggerUIConfig;
-//
-//  @Inject
-//  public SwaggerUIServlet(SwaggerUIConfig swaggerUIConfig) {
-//    this.swaggerUIConfig = swaggerUIConfig;
-//  }
-//
-//  @Override
-//  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-//      throws ServletException, IOException {
-//    YAMLMapper mapper = new YAMLMapper();
-//    ArrayList<SwaggerUIConfig> list = new ArrayList<>();
-//    swaggerUIConfig.setUrl("http://localhost:8080/abc/openapi.json");
-//    list.add(swaggerUIConfig);
-//    mapper.writeValue(resp.getOutputStream(), list);
-//  }
-
-  public static final String DEFAULT_PREFIX = "/api-docs";
   private static final long serialVersionUID = 1L;
   private static final long DEFAULT_EXPIRE_TIME_MS = 86400000L; // 1 day
   private static final long DEFAULT_EXPIRE_TIME_S = 86400L; // 1 day
@@ -42,12 +24,14 @@ public class SwaggerUIServlet extends HttpServlet {
    */
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
   private static final int EOF = -1;
-  private String prefix;
   private boolean disableCache = false;
   private WebJarAssetLocator locator = new WebJarAssetLocator();
 
-  private static boolean isDirectoryRequest(String uri) {
-    return uri.endsWith("/");
+  private final SwaggerConfig swaggerConfig;
+
+  @Inject
+  public SwaggerUIServlet(SwaggerConfig swaggerConfig) {
+    this.swaggerConfig = swaggerConfig;
   }
 
   /**
@@ -85,24 +69,6 @@ public class SwaggerUIServlet extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-
-    ServletConfig config = getServletConfig();
-    if (config == null) {
-      throw new NullPointerException(
-          "Expected servlet container to provide a non-null ServletConfig.");
-    }
-    try {
-
-      prefix = config.getInitParameter("prefix");
-
-      String disableCache = config.getInitParameter("disableCache");
-      if (disableCache != null) {
-        this.disableCache = Boolean.parseBoolean(disableCache);
-        log.info("WebjarsServlet cache enabled: {}", !this.disableCache);
-      }
-    } catch (Exception e) {
-      log.warn("The WebjarsServlet configuration parameter \"disableCache\" is invalid");
-    }
     log.info("WebjarsServlet initialization completed");
   }
 
@@ -123,16 +89,14 @@ public class SwaggerUIServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     String eTagName;
-    log.info("requestURI: {}", request.getRequestURI());
-    log.info("getContextPath: {}", request.getContextPath());
     String uri = request.getRequestURI()
         .replaceFirst(request.getContextPath(), "")
-        .replaceFirst(prefix, "");
+        .replaceFirst(swaggerConfig.getBasePath(), "");
     if (uri.endsWith("/")) {
       uri = uri + "index.html";
     }
     if (uri.endsWith("/index.html")) {
-      eTagName = prefix + "/index.html";
+      eTagName = swaggerConfig.getBasePath() + "/index.html";
       URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
       try (InputStream inputStream = resource.openStream()) {
         if (!disableCache) {
@@ -146,11 +110,6 @@ public class SwaggerUIServlet extends HttpServlet {
         return;
       }
     }
-
-//    if (isDirectoryRequest(uri)) {
-//      response.sendError(HttpServletResponse.SC_FORBIDDEN);
-//      return;
-//    }
     String webjarsResourceURI;
     try {
       webjarsResourceURI = getFullPath("swagger-ui", uri);
@@ -159,8 +118,7 @@ public class SwaggerUIServlet extends HttpServlet {
       return;
     }
 
-//    String webjarsResourceURI = "/META-INF/resources" + uri;
-    log.info("Webjars resource requested: {}", webjarsResourceURI);
+    log.debug("Webjars resource requested: {}", webjarsResourceURI);
 
     try {
       eTagName = this.getETagName(webjarsResourceURI);
@@ -211,15 +169,6 @@ public class SwaggerUIServlet extends HttpServlet {
    * @throws IllegalArgumentException when insufficient URI has given
    */
   private String getETagName(String webjarsResourceURI) {
-
-//    String[] tokens = webjarsResourceURI.split("/");
-//    if (tokens.length < 7) {
-//      throw new IllegalArgumentException("insufficient URL has given: " + webjarsResourceURI);
-//    }
-//    String version = tokens[5];
-//    String fileName = tokens[tokens.length - 1];
-//
-//    return fileName + "_" + version;
     return webjarsResourceURI;
   }
 

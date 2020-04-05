@@ -1,9 +1,10 @@
 package com.dadazhishi.zheng.web;
 
 import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.service.ServicesModule;
+import com.google.common.base.Preconditions;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
 import com.google.inject.servlet.ServletModule;
@@ -17,17 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
-public class WebModule extends ServletModule implements ConfigurationSupport {
+public class WebModule extends ServletModule implements ConfigurationAware {
 
   private Configuration configuration;
 
   @Override
-  public void setConfiguration(Configuration configuration) {
+  public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
 
   @Override
   protected void configureServlets() {
+    Preconditions.checkArgument(configuration != null, "configuration is null");
     install(new ServicesModule());
     bind(WebServerService.class).asEagerSingleton();
     WebConfig webConfig = ConfigurationBeanMapper

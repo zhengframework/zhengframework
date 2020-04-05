@@ -29,7 +29,7 @@ public class RestExample {
   @Before
   public void setup() {
     Configuration configuration = ConfigurationBuilder.create()
-        .with("classpath:app.properties")
+        .withURI("classpath:app.properties")
         .build();
     System.out.println(configuration.asMap());
     application = ZhengApplication

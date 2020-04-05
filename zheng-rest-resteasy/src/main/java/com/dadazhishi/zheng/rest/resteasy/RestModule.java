@@ -3,11 +3,12 @@ package com.dadazhishi.zheng.rest.resteasy;
 import static com.dadazhishi.zheng.rest.RestConfig.PREFIX;
 
 import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.rest.ObjectMapperContextResolver;
 import com.dadazhishi.zheng.rest.RestConfig;
 import com.dadazhishi.zheng.web.WebModule;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;
@@ -20,14 +21,17 @@ import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
-public class RestModule extends ServletModule implements ConfigurationSupport {
+public class RestModule extends ServletModule implements ConfigurationAware {
 
   private Configuration configuration;
 
 
   @Override
   protected void configureServlets() {
-    install(new WebModule());
+    Preconditions.checkArgument(configuration != null, "configuration is null");
+    WebModule webModule = new WebModule();
+    webModule.initConfiguration(configuration);
+    install(webModule);
 
     bind(ResteasyJackson2Provider.class);
     bind(GuiceResteasyBootstrapServletContextListener.class);
@@ -54,7 +58,7 @@ public class RestModule extends ServletModule implements ConfigurationSupport {
   }
 
   @Override
-  public void setConfiguration(Configuration configuration) {
+  public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
 }

@@ -62,6 +62,14 @@
       <groupId>org.ini4j</groupId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <artifactId>commons-lang3</artifactId>
+      <groupId>org.apache.commons</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>commons-io</artifactId>
+      <groupId>commons-io</groupId>
+    </dependency>
 
   </dependencies>
 

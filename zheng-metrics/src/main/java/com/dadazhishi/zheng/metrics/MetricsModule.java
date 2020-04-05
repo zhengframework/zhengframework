@@ -2,9 +2,10 @@ package com.dadazhishi.zheng.metrics;
 
 import com.codahale.metrics.MetricRegistry;
 import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.service.ServicesModule;
+import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.palominolabs.metrics.guice.GaugeInstanceClassMetricNamer;
 import com.palominolabs.metrics.guice.MetricNamer;
@@ -19,12 +20,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
-public class MetricsModule extends AbstractModule implements ConfigurationSupport {
+public class MetricsModule extends AbstractModule implements ConfigurationAware {
 
   private Configuration configuration;
 
   @Override
-  public void setConfiguration(Configuration configuration) {
+  public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
 
@@ -36,6 +37,7 @@ public class MetricsModule extends AbstractModule implements ConfigurationSuppor
 
   @Override
   protected void configure() {
+    Preconditions.checkArgument(configuration != null, "configuration is null");
     MetricsConfig metricsServletConfig = ConfigurationBeanMapper
         .resolve(configuration, MetricsConfig.PREFIX, MetricsConfig.class);
     if (metricsServletConfig.isEnable()) {

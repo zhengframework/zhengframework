@@ -8,18 +8,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ProvideSystemProperty;
 
-public class SystemPropertiesConfigurationResolverTest {
+public class SystemConfigurationResolverTest {
 
   @Rule
   public final ProvideSystemProperty myPropertyHasMyValue
       = new ProvideSystemProperty("test-abc",
       "SystemPropertiesConfigurationResolver");
 
-  SystemPropertiesConfigurationResolver resolver;
+  SystemConfigurationResolver resolver;
 
   @Before
   public void setup() {
-    resolver = new SystemPropertiesConfigurationResolver();
+    resolver = new SystemConfigurationResolver();
   }
 
   @Test

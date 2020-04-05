@@ -3,8 +3,9 @@ package com.dadazhishi.zheng.rabbitmq;
 import static com.google.inject.name.Names.named;
 
 import com.dadazhishi.zheng.configuration.Configuration;
+import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.configuration.ConfigurationSupport;
+import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.rabbitmq.client.Connection;
@@ -12,18 +13,19 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class RabbitMQModule extends AbstractModule implements ConfigurationSupport {
+public class RabbitMQModule extends AbstractModule implements ConfigurationAware {
 
   private Configuration configuration;
 
   @Override
-  public void setConfiguration(Configuration configuration) {
+  public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
 
 
   @Override
   protected void configure() {
+    Preconditions.checkArgument(configuration != null, "configuration is null");
     Boolean group = configuration.getBoolean("zheng.rabbitmq.group", false);
     if (!group) {
       RabbitMQConfig rabbitMQConfig = ConfigurationBeanMapper

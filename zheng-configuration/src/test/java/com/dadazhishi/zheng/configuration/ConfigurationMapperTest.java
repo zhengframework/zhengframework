@@ -11,7 +11,7 @@ public class ConfigurationMapperTest {
   @Test
   public void resolve() throws IOException {
     Configuration configuration = ConfigurationBuilder.create()
-        .withClassPathProperties("food.properties")
+        .withProperties("food.properties")
         .build();
 
     Food food = ConfigurationBeanMapper.resolve(configuration, Food.class);

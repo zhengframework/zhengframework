@@ -32,7 +32,13 @@ public class ConfigurationImpl implements Configuration {
 
   @Override
   public Optional<String> get(String key) {
-    return resolver.get(key);
+    Optional<String> optional = resolver.get(key);
+    if (optional.isPresent()) {
+      PlaceHolder placeHolder = new PlaceHolder(this);
+      return Optional.ofNullable(placeHolder.replace(optional.get()));
+    } else {
+      return optional;
+    }
   }
 
   @Override
@@ -44,7 +50,7 @@ public class ConfigurationImpl implements Configuration {
   public Map<String, String> asMap() {
     Map<String, String> map = Maps.newTreeMap();
     for (String key : resolver.keySet()) {
-      map.put(key, resolver.get(key).orElse(null));
+      map.put(key, get(key).orElse(null));
     }
     return Collections.unmodifiableMap(map);
   }
