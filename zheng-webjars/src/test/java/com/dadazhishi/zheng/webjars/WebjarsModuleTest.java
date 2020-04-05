@@ -18,11 +18,10 @@ public class WebjarsModuleTest {
   @Test
   public void testDefaultPath() throws IOException {
 
-    Configuration configuration = ConfigurationBuilder.create().withURI("classpath:app.properties")
+    Configuration configuration = ConfigurationBuilder.create().withProperties("app.properties")
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
-            new WebModule(),
             new WebjarsModule()
         );
     application.start();
@@ -36,16 +35,16 @@ public class WebjarsModuleTest {
 
       String bootstrap1 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/3.1.0/js/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/3.1.0/js/bootstrap.js")
           .get().build()).execute().body().string();
       String bootstrap2 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/js/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/js/bootstrap.js")
           .get().build()).execute().body().string();
       assertEquals(bootstrap1, bootstrap2);
       String bootstrap3 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/bootstrap.js")
           .get().build()).execute().body().string();
       assertEquals(bootstrap1, bootstrap3);
     } finally {
@@ -57,11 +56,10 @@ public class WebjarsModuleTest {
   public void testDisableCache() throws IOException {
 
     Configuration configuration = ConfigurationBuilder.create()
-        .withURI("classpath:app_cache.properties")
+        .withProperties("app_cache.properties")
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
-            new WebModule(),
             new WebjarsModule()
         );
     application.start();
@@ -75,16 +73,16 @@ public class WebjarsModuleTest {
 
       String bootstrap1 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/3.1.0/js/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/3.1.0/js/bootstrap.js")
           .get().build()).execute().body().string();
       String bootstrap2 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/js/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/js/bootstrap.js")
           .get().build()).execute().body().string();
       assertEquals(bootstrap1, bootstrap2);
       String bootstrap3 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/bootstrap.js")
           .get().build()).execute().body().string();
       assertEquals(bootstrap1, bootstrap3);
     } finally {
@@ -95,7 +93,7 @@ public class WebjarsModuleTest {
   @Test
   public void testPath() throws IOException {
     Configuration configuration = ConfigurationBuilder.create()
-        .withURI("classpath:app_path.properties")
+        .withProperties("app_path.properties")
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
@@ -113,16 +111,16 @@ public class WebjarsModuleTest {
 
       String bootstrap1 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/3.1.0/js/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/3.1.0/js/bootstrap.js")
           .get().build()).execute().body().string();
       String bootstrap2 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/js/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/js/bootstrap.js")
           .get().build()).execute().body().string();
       assertEquals(bootstrap1, bootstrap2);
       String bootstrap3 = okHttpClient.newCall(new Request.Builder()
           .url("http://localhost:" + webConfig.getPort()
-              + webjarsConfig.getPath() + "/bootstrap/bootstrap.js")
+              + webjarsConfig.getBasePath() + "/bootstrap/bootstrap.js")
           .get().build()).execute().body().string();
       assertEquals(bootstrap1, bootstrap3);
     } finally {

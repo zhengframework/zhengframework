@@ -3,6 +3,8 @@ package com.dadazhishi.zheng.webjars;
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
+import com.dadazhishi.zheng.web.PathUtils;
+import com.dadazhishi.zheng.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.servlet.ServletModule;
 import java.util.Collections;
@@ -16,21 +18,15 @@ public class WebjarsModule extends ServletModule implements ConfigurationAware {
   @Override
   protected void configureServlets() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
+    WebModule webModule = new WebModule();
+    webModule.initConfiguration(configuration);
+    install(webModule);
     WebjarsConfig webjarsConfig = ConfigurationBeanMapper
         .resolve(configuration, WebjarsConfig.PREFIX, WebjarsConfig.class);
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
     bind(WebjarsServlet.class).in(Singleton.class);
-    String path = webjarsConfig.getPath();
-    if ("/".equals(path)) {
-      path = null;
-    } else {
-      if (path.endsWith("/")) {
-        path = path.substring(0, path.length() - 1);
-      }
-      if (!path.startsWith("/")) {
-        path = "/" + path;
-      }
-    }
+    String path = webjarsConfig.getBasePath();
+    path = PathUtils.fixPath(path);
     Map<String, String> initParams = Collections
         .singletonMap("disableCache", "" + webjarsConfig.isDisableCache());
     if (path == null) {

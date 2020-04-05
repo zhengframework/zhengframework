@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 public class WebjarsConfig {
 
   public static final String PREFIX = "zheng.webjars";
-  public static String WEBJAR_URL_PREFIX = "/webjars/";
-  private String path = "/webjars";
+  private String basePath = "/webjars";
   private boolean disableCache = false;
 
 }

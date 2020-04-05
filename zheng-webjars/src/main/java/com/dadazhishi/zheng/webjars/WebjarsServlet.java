@@ -119,7 +119,7 @@ public class WebjarsServlet extends HttpServlet {
     log.info("getContextPath: {}", request.getContextPath());
     String uri = request.getRequestURI()
         .replaceFirst(request.getContextPath(), "")
-        .replaceFirst(webjarsConfig.getPath(), "");
+        .replaceFirst(webjarsConfig.getBasePath(), "");
     if (isDirectoryRequest(uri)) {
       response.sendError(HttpServletResponse.SC_FORBIDDEN);
       return;
