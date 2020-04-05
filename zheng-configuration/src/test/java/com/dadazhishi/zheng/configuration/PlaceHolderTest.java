@@ -13,7 +13,7 @@ public class PlaceHolderTest {
   @Test
   public void shouldReturnNullWhenNullIsProvided() {
     Map<String, String> props = new HashMap<>();
-    PlaceHolder placeHolder = new PlaceHolder(new NamespaceConfiguration(props));
+    PlaceHolder placeHolder = new PlaceHolder(new MapConfiguration(props));
     assertNull(placeHolder.replace(null));
   }
 
@@ -23,7 +23,7 @@ public class PlaceHolderTest {
     props.put("animal", "quick brown fox");
     props.put("target", "lazy dog");
     String templateString = "The ${animal} jumped over the ${target}.";
-    PlaceHolder sub = new PlaceHolder(new NamespaceConfiguration(props));
+    PlaceHolder sub = new PlaceHolder(new MapConfiguration(props));
     String resolvedString = sub.replace(templateString);
     assertEquals("The quick brown fox jumped over the lazy dog.", resolvedString);
   }
@@ -34,7 +34,7 @@ public class PlaceHolderTest {
     props.put("animal", "quick\\brown\\fox");
     props.put("target", "lazy\\dog");
     String templateString = "The\\${animal}\\jumped\\over\\the\\${target}.";
-    PlaceHolder sub = new PlaceHolder(new NamespaceConfiguration(props));
+    PlaceHolder sub = new PlaceHolder(new MapConfiguration(props));
     String resolvedString = sub.replace(templateString);
     assertEquals("The\\quick\\brown\\fox\\jumped\\over\\the\\lazy\\dog.", resolvedString);
   }
@@ -50,7 +50,7 @@ public class PlaceHolderTest {
     props.put("template", "The ${animal} jum\\ped over the ${target}.");
     props.put("wrapper", "\\foo\\${template}\\bar\\");
     props.put("wrapper2", "\\baz\\${wrapper}\\qux\\");
-    PlaceHolder sub = new PlaceHolder(new NamespaceConfiguration(props));
+    PlaceHolder sub = new PlaceHolder(new MapConfiguration(props));
     String resolvedString = sub.replace("${wrapper2}");
     assertEquals(
         "\\baz\\\\foo\\The qui\\ck\\bro\\wn\\fo\\x jum\\ped over the la\\zy\\do\\g.\\bar\\\\qux\\",
@@ -67,7 +67,7 @@ public class PlaceHolderTest {
     props.put("target", "${target.attribute} ${target.animal}");
     props.put("template", "The ${animal} jumped over the ${target}.");
     String templateString = "${template}";
-    PlaceHolder sub = new PlaceHolder(new NamespaceConfiguration(props));
+    PlaceHolder sub = new PlaceHolder(new MapConfiguration(props));
     String resolvedString = sub.replace(templateString);
     assertEquals("The quick brown fox jumped over the lazy dog.", resolvedString);
   }
@@ -80,7 +80,7 @@ public class PlaceHolderTest {
     props.put("baz", "bazValue");
 
     String template = "Test: ${foo} ${bar} ${baz} :Test";
-    new PlaceHolder(new NamespaceConfiguration(props)).replace(template);
+    new PlaceHolder(new MapConfiguration(props)).replace(template);
   }
 
   @Test
@@ -90,7 +90,7 @@ public class PlaceHolderTest {
     props.put("foo", "fooValue");
     props.put("baz", "bazValue");
 
-    PlaceHolder sub = new PlaceHolder(new NamespaceConfiguration(props));
+    PlaceHolder sub = new PlaceHolder(new MapConfiguration(props));
     assertEquals("foo1", sub.replace("foo%d", 1));
     assertEquals("baz", sub.replace("baz"));
     assertEquals("foo.1.sfx", sub.replace("foo.%d.%s", 1, "sfx"));

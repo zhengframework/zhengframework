@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MetricsConfig {
 
-  public static final String NAMESPACE = "zheng.metrics";
+  public static final String PREFIX = "zheng.metrics";
 
   private boolean enable = true;
 }

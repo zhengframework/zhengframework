@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemcachedConfig {
 
-  public static final String NAMESPACE = "zheng.memcached";
+  public static final String PREFIX = "zheng.memcached";
 
   private String addresses;
   @Nullable

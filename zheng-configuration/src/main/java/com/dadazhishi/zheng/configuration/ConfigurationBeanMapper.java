@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class ConfigurationObjectMapper {
+public class ConfigurationBeanMapper {
 
   private static final JavaPropsMapper mapper = new JavaPropsMapper();
 
@@ -26,19 +26,19 @@ public class ConfigurationObjectMapper {
     return resolve(configuration, null, aClass);
   }
 
-  public static <T> T resolve(Configuration configuration, String namespace, Class<T> aClass) {
-    if (Strings.isNullOrEmpty(namespace)) {
+  public static <T> T resolve(Configuration configuration, String prefix, Class<T> aClass) {
+    if (Strings.isNullOrEmpty(prefix)) {
       return resolveClass(configuration, aClass);
     } else {
-      return resolveClass(configuration.getConfiguration(namespace), aClass);
+      return resolveClass(configuration.prefix(prefix), aClass);
     }
   }
 
-  public static <T> Set<T> resolveSet(Configuration configuration, String namespace,
+  public static <T> Set<T> resolveSet(Configuration configuration, String prefix,
       Class<T> aClass) {
-    Preconditions.checkState(!Strings.isNullOrEmpty(namespace), "namespace cannot null or empty");
+    Preconditions.checkState(!Strings.isNullOrEmpty(prefix), "prefix cannot null or empty");
     Set<Configuration> configurationList = configuration
-        .getConfigurationSet(namespace);
+        .prefixSet(prefix);
     Set<T> objects = new LinkedHashSet<>(configurationList.size());
     for (Configuration configuration1 : configurationList) {
       objects.add(resolveClass(configuration1, aClass));
@@ -46,11 +46,11 @@ public class ConfigurationObjectMapper {
     return objects;
   }
 
-  public static <T> Map<String, T> resolveMap(Configuration configuration, String namespace,
+  public static <T> Map<String, T> resolveMap(Configuration configuration, String prefix,
       Class<T> aClass) {
-    Preconditions.checkState(!Strings.isNullOrEmpty(namespace), "namespace cannot null or empty");
+    Preconditions.checkState(!Strings.isNullOrEmpty(prefix), "prefix cannot null or empty");
     Map<String, Configuration> configurationMap = configuration
-        .getConfigurationMap(namespace);
+        .prefixMap(prefix);
     LinkedHashMap<String, T> map = new LinkedHashMap<>(configurationMap.size());
     for (Entry<String, Configuration> entry : configurationMap
         .entrySet()) {

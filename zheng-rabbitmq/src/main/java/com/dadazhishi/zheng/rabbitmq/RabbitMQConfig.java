@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RabbitMQConfig {
 
-  public static final String NAMESPACE = "zheng.rabbitmq";
+  public static final String PREFIX = "zheng.rabbitmq";
 
   private String virtualHost = ConnectionFactory.DEFAULT_VHOST;
   private String host = ConnectionFactory.DEFAULT_HOST;

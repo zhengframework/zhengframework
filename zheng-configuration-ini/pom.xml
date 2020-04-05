@@ -6,6 +6,11 @@
 
   <dependencies>
     <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>

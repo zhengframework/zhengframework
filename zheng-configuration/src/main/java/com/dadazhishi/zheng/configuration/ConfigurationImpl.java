@@ -24,9 +24,9 @@ public class ConfigurationImpl implements Configuration {
     return new ConfigurationBuilder();
   }
 
-  static void checkNamespace(String namespace) {
-    if (namespace == null || namespace.length() == 0) {
-      throw new RuntimeException("invalid namespace");
+  static void checkPrefix(String prefix) {
+    if (prefix == null || prefix.length() == 0) {
+      throw new RuntimeException("invalid prefix");
     }
   }
 
@@ -50,21 +50,21 @@ public class ConfigurationImpl implements Configuration {
   }
 
   @Override
-  public Configuration getConfiguration(String namespace) {
-    checkNamespace(namespace);
+  public Configuration prefix(String prefix) {
+    checkPrefix(prefix);
     PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
-    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
-    int len = namespace.length() + 1;
-    return new NamespaceConfiguration(prefixMap.entrySet().stream()
+    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
+    int len = prefix.length() + 1;
+    return new MapConfiguration(prefixMap.entrySet().stream()
         .collect(Collectors.toMap(entry -> entry.getKey().substring(len), Entry::getValue)));
   }
 
   @Override
-  public Set<Configuration> getConfigurationSet(String namespace) {
-    checkNamespace(namespace);
+  public Set<Configuration> prefixSet(String prefix) {
+    checkPrefix(prefix);
     PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
-    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
-    int len = namespace.length() + 1;
+    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
+    int len = prefix.length() + 1;
     Map<Integer, Map<String, String>> map = new HashMap<>();
     for (Entry<String, String> entry : prefixMap.entrySet()) {
       String key = entry.getKey().substring(len);
@@ -91,16 +91,16 @@ public class ConfigurationImpl implements Configuration {
       map.get(index).put(newKey, entry.getValue());
     }
     return map.entrySet().stream().sorted(Entry.comparingByKey())
-        .map(entry -> new NamespaceConfiguration(entry.getValue()))
+        .map(entry -> new MapConfiguration(entry.getValue()))
         .collect(Collectors.toSet());
   }
 
   @Override
-  public Map<String, Configuration> getConfigurationMap(String namespace) {
-    checkNamespace(namespace);
+  public Map<String, Configuration> prefixMap(String prefix) {
+    checkPrefix(prefix);
     PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
-    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(namespace + ".");
-    int len = namespace.length() + 1;
+    SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
+    int len = prefix.length() + 1;
     Map<String, Map<String, String>> map = new HashMap<>();
     for (Entry<String, String> entry : prefixMap.entrySet()) {
       String key = entry.getKey().substring(len);
@@ -122,7 +122,7 @@ public class ConfigurationImpl implements Configuration {
     }
     return map.entrySet().stream()
         .collect(Collectors.toMap(Entry::getKey,
-            entry -> new NamespaceConfiguration(entry.getValue())));
+            entry -> new MapConfiguration(entry.getValue())));
   }
 
 }

@@ -2,7 +2,7 @@ package com.dadazhishi.zheng.metrics;
 
 import com.codahale.metrics.MetricRegistry;
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.service.ServicesModule;
 import com.google.inject.AbstractModule;
@@ -36,8 +36,8 @@ public class MetricsModule extends AbstractModule implements ConfigurationSuppor
 
   @Override
   protected void configure() {
-    MetricsConfig metricsServletConfig = ConfigurationObjectMapper
-        .resolve(configuration, MetricsConfig.NAMESPACE, MetricsConfig.class);
+    MetricsConfig metricsServletConfig = ConfigurationBeanMapper
+        .resolve(configuration, MetricsConfig.PREFIX, MetricsConfig.class);
     if (metricsServletConfig.isEnable()) {
       install(new ServicesModule());
 

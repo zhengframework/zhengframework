@@ -64,7 +64,7 @@ public class ConfigurationModuleTest {
   @Test
   public void testGetMapKeyNamed() {
     Configuration configuration = injector.getInstance(Configuration.class);
-    Map<String, Apple> apples = ConfigurationObjectMapper
+    Map<String, Apple> apples = ConfigurationBeanMapper
         .resolveMap(configuration, "apples", Apple.class);
     Apple abc = apples.get("abc");
     System.out.println(abc.getWeight());
@@ -75,16 +75,16 @@ public class ConfigurationModuleTest {
   public void testAnnotation() {
 
     Configuration configuration = injector.getInstance(Configuration.class);
-    Food food2 = ConfigurationObjectMapper.resolve(configuration, Food.class);
+    Food food2 = ConfigurationBeanMapper.resolve(configuration, Food.class);
     assertEquals(food.getApple(), food2.getApple());
     System.out.println(food2.getApple());
 
-    Set<Banana> bananas = ConfigurationObjectMapper
+    Set<Banana> bananas = ConfigurationBeanMapper
         .resolveSet(configuration, "bananas", Banana.class);
 
     assertEquals(food.getBananas().size(), bananas.size());
 
-    Map<String, Apple> apples = ConfigurationObjectMapper
+    Map<String, Apple> apples = ConfigurationBeanMapper
         .resolveMap(configuration, "apples", Apple.class);
 
     assertEquals(food.getApples().size(), apples.size());
@@ -109,13 +109,13 @@ public class ConfigurationModuleTest {
 
     @Provides
     Food food(Configuration configuration) {
-      return ConfigurationObjectMapper.resolve(configuration, Food.class);
+      return ConfigurationBeanMapper.resolve(configuration, Food.class);
     }
 
     @Provides
     Apple apple(Configuration configuration) {
-      Configuration configuration1 = configuration.getConfiguration("apple");
-      return ConfigurationObjectMapper.resolve(configuration1, Apple.class);
+      Configuration configuration1 = configuration.prefix("apple");
+      return ConfigurationBeanMapper.resolve(configuration1, Apple.class);
     }
 
   }

@@ -1,1 +1,4 @@
 com.dadazhishi.zheng.configuration.parser.PropertiesConfigurationParser
+com.dadazhishi.zheng.configuration.parser.YamlConfigurationParser
+com.dadazhishi.zheng.configuration.parser.JsonConfigurationParser
+com.dadazhishi.zheng.configuration.parser.INIConfigurationParser

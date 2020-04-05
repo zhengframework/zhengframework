@@ -15,7 +15,7 @@ public class JsonConfigurationParserTest {
             new ClassPathConfigurationResolver(new JsonConfigurationParser(), "food.json"))
         .build();
 
-    Assert.assertEquals(3, configuration.getConfigurationSet("bananas").size());
+    Assert.assertEquals(3, configuration.prefixSet("bananas").size());
 
   }
 }

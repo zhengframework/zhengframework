@@ -3,7 +3,7 @@ package com.dadazhishi.zheng.memcached;
 import static com.google.inject.name.Names.named;
 
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
@@ -17,15 +17,15 @@ public class MemcachedModule extends AbstractModule implements ConfigurationSupp
 
   @Override
   protected void configure() {
-    Boolean group = configuration.getBoolean(MemcachedConfig.NAMESPACE + ".group", false);
+    Boolean group = configuration.getBoolean(MemcachedConfig.PREFIX + ".group", false);
     if (!group) {
-      MemcachedConfig memcachedConfig = ConfigurationObjectMapper
-          .resolve(configuration, MemcachedConfig.NAMESPACE, MemcachedConfig.class);
+      MemcachedConfig memcachedConfig = ConfigurationBeanMapper
+          .resolve(configuration, MemcachedConfig.PREFIX, MemcachedConfig.class);
       bind(MemcachedConfig.class).toInstance(memcachedConfig);
       bind(MemcachedClient.class).toProvider(MemcachedClientProvider.class);
     } else {
-      Map<String, MemcachedConfig> map = ConfigurationObjectMapper
-          .resolveMap(configuration, MemcachedConfig.NAMESPACE, MemcachedConfig.class);
+      Map<String, MemcachedConfig> map = ConfigurationBeanMapper
+          .resolveMap(configuration, MemcachedConfig.PREFIX, MemcachedConfig.class);
       for (Entry<String, MemcachedConfig> entry : map.entrySet()) {
         String name = entry.getKey();
         MemcachedConfig memcachedConfig = entry.getValue();

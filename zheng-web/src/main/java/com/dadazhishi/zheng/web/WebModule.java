@@ -1,7 +1,7 @@
 package com.dadazhishi.zheng.web;
 
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.service.ServicesModule;
 import com.google.inject.Injector;
@@ -30,8 +30,8 @@ public class WebModule extends ServletModule implements ConfigurationSupport {
   protected void configureServlets() {
     install(new ServicesModule());
     bind(WebServerService.class).asEagerSingleton();
-    WebConfig webConfig = ConfigurationObjectMapper
-        .resolve(configuration, WebConfig.NAMESPACE, WebConfig.class);
+    WebConfig webConfig = ConfigurationBeanMapper
+        .resolve(configuration, WebConfig.PREFIX, WebConfig.class);
     bind(WebConfig.class).toInstance(webConfig);
   }
 

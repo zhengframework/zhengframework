@@ -16,7 +16,7 @@ public class YamlConfigurationParserTest {
             new ClassPathConfigurationResolver(new YamlConfigurationParser(), "food.yaml"))
         .build();
 
-    assertEquals(3, configuration.getConfigurationSet("bananas").size());
+    assertEquals(3, configuration.prefixSet("bananas").size());
 
 
   }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestConfig {
 
-  public static final String NAMESPACE = "zheng.rest";
+  public static final String PREFIX = "zheng.rest";
   private String path = null;
 
   private Map<String, String> properties = new HashMap<>();

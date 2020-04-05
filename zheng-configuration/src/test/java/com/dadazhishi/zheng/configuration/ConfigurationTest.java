@@ -22,8 +22,8 @@ public class ConfigurationTest {
 
   @Test
   public void testGet() {
-    NamespaceConfiguration configuration = new NamespaceConfiguration(map);
-    Configuration apple = configuration.getConfiguration("apple");
+    MapConfiguration configuration = new MapConfiguration(map);
+    Configuration apple = configuration.prefix("apple");
     assertTrue(Boolean.parseBoolean(apple.get("big").get()));
     assertEquals("110", apple.get("name").get());
     assertTrue(Double.parseDouble(apple.get("weight").get()) == 1.9);
@@ -31,16 +31,16 @@ public class ConfigurationTest {
 
   @Test
   public void getList() {
-    NamespaceConfiguration configuration = new NamespaceConfiguration(map);
-    Set<Configuration> bananas = configuration.getConfigurationSet("bananas");
+    MapConfiguration configuration = new MapConfiguration(map);
+    Set<Configuration> bananas = configuration.prefixSet("bananas");
     assertEquals(3, bananas.size());
 
   }
 
   @Test
   public void getMap() {
-    NamespaceConfiguration configuration = new NamespaceConfiguration(map);
-    Map<String, Configuration> apples = configuration.getConfigurationMap("apples");
+    MapConfiguration configuration = new MapConfiguration(map);
+    Map<String, Configuration> apples = configuration.prefixMap("apples");
     assertEquals(1, apples.size());
   }
 }

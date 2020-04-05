@@ -1,6 +1,6 @@
 package com.dadazhishi.zheng.hibernate;
 
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
 import com.dadazhishi.zheng.service.ServicesModule;
@@ -61,7 +61,7 @@ public class HibernatePersistModule extends PersistModule implements Configurati
   protected void configurePersistence() {
     install(new ServicesModule());
 
-    HibernateConfig hibernateConfig = ConfigurationObjectMapper
+    HibernateConfig hibernateConfig = ConfigurationBeanMapper
         .resolve(configuration, "zheng.hibernate", HibernateConfig.class);
     bind(HibernateConfig.class).toInstance(hibernateConfig);
 

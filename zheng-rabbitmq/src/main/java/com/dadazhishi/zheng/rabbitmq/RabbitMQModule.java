@@ -3,7 +3,7 @@ package com.dadazhishi.zheng.rabbitmq;
 import static com.google.inject.name.Names.named;
 
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
@@ -26,14 +26,14 @@ public class RabbitMQModule extends AbstractModule implements ConfigurationSuppo
   protected void configure() {
     Boolean group = configuration.getBoolean("zheng.rabbitmq.group", false);
     if (!group) {
-      RabbitMQConfig rabbitMQConfig = ConfigurationObjectMapper
-          .resolve(configuration, RabbitMQConfig.NAMESPACE, RabbitMQConfig.class);
+      RabbitMQConfig rabbitMQConfig = ConfigurationBeanMapper
+          .resolve(configuration, RabbitMQConfig.PREFIX, RabbitMQConfig.class);
       bind(RabbitMQConfig.class).toInstance(rabbitMQConfig);
       bind(ConnectionFactory.class).toProvider(ConnectionFactoryProvider.class);
       bind(Connection.class).toProvider(ConnectionProvider.class);
     } else {
-      Map<String, RabbitMQConfig> map = ConfigurationObjectMapper
-          .resolveMap(configuration, RabbitMQConfig.NAMESPACE, RabbitMQConfig.class);
+      Map<String, RabbitMQConfig> map = ConfigurationBeanMapper
+          .resolveMap(configuration, RabbitMQConfig.PREFIX, RabbitMQConfig.class);
       for (Entry<String, RabbitMQConfig> entry : map.entrySet()) {
         String name = entry.getKey();
         RabbitMQConfig rabbitMQConfig = entry.getValue();

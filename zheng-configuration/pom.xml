@@ -31,6 +31,10 @@
       <groupId>com.fasterxml.jackson.dataformat</groupId>
     </dependency>
     <dependency>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+    </dependency>
+    <dependency>
       <artifactId>jackson-databind</artifactId>
       <groupId>com.fasterxml.jackson.core</groupId>
     </dependency>
@@ -46,7 +50,19 @@
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
+    <dependency>
+      <artifactId>h2</artifactId>
+      <groupId>com.h2database</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>ini4j</artifactId>
+      <groupId>org.ini4j</groupId>
+      <optional>true</optional>
+    </dependency>
+
   </dependencies>
 
   <dependencyManagement>

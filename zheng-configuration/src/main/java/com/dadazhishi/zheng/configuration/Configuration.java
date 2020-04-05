@@ -33,19 +33,19 @@ public interface Configuration {
   Map<String, String> asMap();
 
   /**
-   * 根据namespace获得静态Configuration实例
+   * 根据prefix获得静态Configuration实例
    */
-  Configuration getConfiguration(String namespace);
+  Configuration prefix(String prefix);
 
   /**
-   * 根据namespace获得静态Configuration实例
+   * 根据prefix获得静态Configuration实例
    */
-  Set<Configuration> getConfigurationSet(String namespace);
+  Set<Configuration> prefixSet(String prefix);
 
   /**
-   * 根据namespace获得静态Configuration实例
+   * 根据prefix获得静态Configuration实例
    */
-  Map<String, Configuration> getConfigurationMap(String namespace);
+  Map<String, Configuration> prefixMap(String prefix);
 
   default Optional<String> getString(String key) {
     return get(key);

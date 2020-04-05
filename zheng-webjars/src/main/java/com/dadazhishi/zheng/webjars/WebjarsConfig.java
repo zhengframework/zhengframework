@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WebjarsConfig {
 
-  public static final String NAMESPACE = "zheng.webjars";
+  public static final String PREFIX = "zheng.webjars";
   public static String WEBJAR_URL_PREFIX = "/webjars/";
   private String path = "/webjars";
   private boolean disableCache = false;

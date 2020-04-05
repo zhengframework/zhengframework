@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MongoConfig {
 
-  public static final String NAMESPACE = "zheng.mongo";
+  public static final String PREFIX = "zheng.mongo";
 
   private String url;
 }

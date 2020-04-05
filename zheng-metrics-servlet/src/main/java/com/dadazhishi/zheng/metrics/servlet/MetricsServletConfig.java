@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MetricsServletConfig {
 
-  public static final String NAMESPACE = "zheng.metrics.servlet";
+  public static final String PREFIX = "zheng.metrics.servlet";
   private String path = "/metrics";
 }

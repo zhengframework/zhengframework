@@ -3,7 +3,7 @@ package com.dadazhishi.zheng.redis;
 import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.configuration.NamespaceConfiguration;
+import com.dadazhishi.zheng.configuration.MapConfiguration;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.github.fppt.jedismock.RedisServer;
 import com.google.inject.Key;
@@ -33,7 +33,7 @@ public class RedisModuleTest {
     map.put("zheng.redis.host", server.getHost());
     map.put("zheng.redis.port", "" + server.getBindPort());
     System.out.println(map);
-    NamespaceConfiguration configuration = new NamespaceConfiguration(map);
+    MapConfiguration configuration = new MapConfiguration(map);
 
     ZhengApplication application = ZhengApplication.create(configuration, new RedisModule());
     RedisClient redisClient = application.getInjector()
@@ -54,7 +54,7 @@ public class RedisModuleTest {
     map.put("zheng.redis.a2.host", server.getHost());
     map.put("zheng.redis.a2.port", "" + server.getBindPort());
     System.out.println(map);
-    NamespaceConfiguration configuration = new NamespaceConfiguration(map);
+    MapConfiguration configuration = new MapConfiguration(map);
 
     ZhengApplication application = ZhengApplication.create(configuration, new RedisModule());
     RedisClient redisClient = application.getInjector()

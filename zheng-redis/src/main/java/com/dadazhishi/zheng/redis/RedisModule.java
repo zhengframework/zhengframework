@@ -3,7 +3,7 @@ package com.dadazhishi.zheng.redis;
 import static com.google.inject.name.Names.named;
 
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
@@ -24,13 +24,13 @@ public class RedisModule extends AbstractModule implements ConfigurationSupport 
   protected void configure() {
     Boolean group = configuration.getBoolean("zheng.redis.group", false);
     if (!group) {
-      RedisConfig redisConfig = ConfigurationObjectMapper
-          .resolve(configuration, RedisConfig.NAMESPACE, RedisConfig.class);
+      RedisConfig redisConfig = ConfigurationBeanMapper
+          .resolve(configuration, RedisConfig.PREFIX, RedisConfig.class);
       bind(RedisConfig.class).toInstance(redisConfig);
       bind(RedisClient.class).toProvider(RedisClientProvider.class);
     } else {
-      Map<String, RedisConfig> map = ConfigurationObjectMapper
-          .resolveMap(configuration, RedisConfig.NAMESPACE, RedisConfig.class);
+      Map<String, RedisConfig> map = ConfigurationBeanMapper
+          .resolveMap(configuration, RedisConfig.PREFIX, RedisConfig.class);
       for (Entry<String, RedisConfig> entry : map.entrySet()) {
         String name = entry.getKey();
         RedisConfig redisConfig = entry.getValue();

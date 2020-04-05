@@ -2,7 +2,7 @@ package com.dadazhishi.zheng.metrics.servlet;
 
 import com.codahale.metrics.servlets.AdminServlet;
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.common.base.Strings;
 import com.google.inject.servlet.ServletModule;
@@ -21,8 +21,8 @@ public class MetricsServletModule extends ServletModule implements Configuration
   protected void configureServlets() {
     Boolean enable = configuration.getBoolean("zheng.metrics.enable", true);
     if (enable) {
-      MetricsServletConfig metricsServletConfig = ConfigurationObjectMapper
-          .resolve(configuration, MetricsServletConfig.NAMESPACE, MetricsServletConfig.class);
+      MetricsServletConfig metricsServletConfig = ConfigurationBeanMapper
+          .resolve(configuration, MetricsServletConfig.PREFIX, MetricsServletConfig.class);
       String path = metricsServletConfig.getPath();
       if (Strings.isNullOrEmpty(path)) {
         serve("/metrics/*").with(new AdminServlet());

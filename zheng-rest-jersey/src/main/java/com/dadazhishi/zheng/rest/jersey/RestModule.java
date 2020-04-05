@@ -1,9 +1,9 @@
 package com.dadazhishi.zheng.rest.jersey;
 
-import static com.dadazhishi.zheng.rest.RestConfig.NAMESPACE;
+import static com.dadazhishi.zheng.rest.RestConfig.PREFIX;
 
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.rest.ObjectMapperContextResolver;
 import com.dadazhishi.zheng.rest.RestConfig;
@@ -48,8 +48,8 @@ public class RestModule extends ServletModule implements ConfigurationSupport {
     bind(PathAnnotationScanner.class);
     bind(ProviderAnnotationScanner.class);
 
-    RestConfig restConfig = ConfigurationObjectMapper
-        .resolve(configuration, NAMESPACE, RestConfig.class);
+    RestConfig restConfig = ConfigurationBeanMapper
+        .resolve(configuration, PREFIX, RestConfig.class);
     bind(RestConfig.class).toInstance(restConfig);
 
     String resourceConfigClass = restConfig.getProperties()

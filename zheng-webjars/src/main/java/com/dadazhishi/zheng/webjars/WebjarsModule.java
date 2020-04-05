@@ -1,7 +1,7 @@
 package com.dadazhishi.zheng.webjars;
 
 import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
+import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.google.inject.servlet.ServletModule;
 import java.util.Collections;
@@ -14,8 +14,8 @@ public class WebjarsModule extends ServletModule implements ConfigurationSupport
 
   @Override
   protected void configureServlets() {
-    WebjarsConfig webjarsConfig = ConfigurationObjectMapper
-        .resolve(configuration, WebjarsConfig.NAMESPACE, WebjarsConfig.class);
+    WebjarsConfig webjarsConfig = ConfigurationBeanMapper
+        .resolve(configuration, WebjarsConfig.PREFIX, WebjarsConfig.class);
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
     bind(WebjarsServlet.class).in(Singleton.class);
     String path = webjarsConfig.getPath();

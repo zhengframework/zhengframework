@@ -39,11 +39,7 @@
     <module>zheng-cache-infinispan</module>
     <module>zheng-cache-caffeine</module>
     <module>zheng-cache-jcs</module>
-    <module>zheng-configuration-json</module>
-    <module>zheng-configuration-yaml</module>
-    <module>zheng-configuration-http</module>
     <module>zheng-configuration-ini</module>
-    <module>zheng-configuration-jdbc</module>
     <module>zheng-configuration-toml</module>
     <module>zheng-bom</module>
     <module>zheng-web</module>
