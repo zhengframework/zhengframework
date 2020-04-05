@@ -7,10 +7,8 @@ import com.dadazhishi.zheng.configuration.ConfigurationObjectMapper;
 import com.dadazhishi.zheng.configuration.ConfigurationSupport;
 import com.dadazhishi.zheng.rest.ObjectMapperContextResolver;
 import com.dadazhishi.zheng.rest.RestConfig;
-import com.dadazhishi.zheng.web.WebModule;
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
-import com.google.inject.multibindings.Multibinder;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import java.util.Collections;
@@ -21,6 +19,10 @@ import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+/**
+ * because jersey use hk2, when use guice, sometime has mistake.
+ */
+@Deprecated
 @Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
 public class RestModule extends ServletModule implements ConfigurationSupport {
@@ -38,7 +40,9 @@ public class RestModule extends ServletModule implements ConfigurationSupport {
   @Override
   protected void configureServlets() {
     injectorProvider = getProvider(Injector.class);
-    install(new WebModule());
+//    WebModule webModule = new WebModule();
+//    webModule.setConfiguration(configuration);
+//    install(webModule);
     bind(ServletContainer.class).in(Scopes.SINGLETON);
     bind(FeatureClassScanner.class);
     bind(PathAnnotationScanner.class);
@@ -68,13 +72,19 @@ public class RestModule extends ServletModule implements ConfigurationSupport {
     } else {
       serve(path + "/*").with(ServletContainer.class, map);
     }
-    Multibinder.newSetBinder(binder(), ServletContextListener.class).addBinding()
-        .toInstance(new GuiceServletContextListener() {
-          @Override
-          protected Injector getInjector() {
-            return injectorProvider.get();
-          }
-        });
+//    Multibinder.newSetBinder(binder(), ServletContextListener.class).addBinding()
+//        .toInstance(new GuiceServletContextListener() {
+//          @Override
+//          protected Injector getInjector() {
+//            return injectorProvider.get();
+//          }
+//        });
+    bind(ServletContextListener.class).toInstance(new GuiceServletContextListener() {
+      @Override
+      protected Injector getInjector() {
+        return injectorProvider.get();
+      }
+    });
 
     bind(ObjectMapperContextResolver.class);
   }

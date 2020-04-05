@@ -30,7 +30,6 @@
     <dependency>
       <artifactId>webjars-locator-core</artifactId>
       <groupId>org.webjars</groupId>
-      <version>0.44</version>
     </dependency>
     <dependency>
       <artifactId>zheng-configuration</artifactId>

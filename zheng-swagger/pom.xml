@@ -30,12 +30,6 @@
     <dependency>
       <artifactId>swagger-ui</artifactId>
       <groupId>org.webjars</groupId>
-      <version>3.25.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>ST4</artifactId>
-      <groupId>org.antlr</groupId>
-      <version>4.3</version>
     </dependency>
     <dependency>
       <artifactId>zheng-service</artifactId>
@@ -72,7 +66,6 @@
     <dependency>
       <artifactId>zheng-webjars</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
 

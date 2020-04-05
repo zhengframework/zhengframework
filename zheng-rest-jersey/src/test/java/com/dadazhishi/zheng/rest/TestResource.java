@@ -1,8 +1,9 @@
 package com.dadazhishi.zheng.rest;
 
-import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 
 @Path(TestResource.PATH)
 public class TestResource {
@@ -10,21 +11,11 @@ public class TestResource {
   public static final String PATH = "test";
   public static final String MESSAGE = "Hello World!";
 
-  private final MySingleton service;
-  private final PerRequestService requestService;
-
-  @Inject
-  TestResource(MySingleton service, PerRequestService perRequestService) {
-    this.service = service;
-    this.requestService = perRequestService;
-  }
-
   @Path("inject")
   @GET
-  public String getit() {
-    return "Success: " + service.call() + ", " + requestService.call();
+  public String getit(@Context HttpServletRequest request) {
+    return "Success: " + request.getSession().getId() + ", " + request.getRequestURI();
   }
-
 
   @GET
   public String sayHello() {

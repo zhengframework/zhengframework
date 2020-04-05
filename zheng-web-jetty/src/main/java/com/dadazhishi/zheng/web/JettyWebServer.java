@@ -7,9 +7,11 @@ import java.util.EnumSet;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.servlet.DispatcherType;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
 /**
@@ -17,6 +19,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
  * the GuiceFilter so you can manage web content with Guice ServletModules. Also clever enough to
  * add any EventListener objects found in the injector bindings.
  */
+@Slf4j
 @Singleton
 public class JettyWebServer implements WebServer {
 
@@ -48,7 +51,13 @@ public class JettyWebServer implements WebServer {
     // Create a servlet context and add the jersey servlet.
     final ServletContextHandler sch = createRootServletContextHandler(webConfig);
 
-    sch.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+    FilterHolder filterHolder = new FilterHolder();
+    filterHolder.setDisplayName("GuiceFilter");
+    filterHolder.setName("GuiceFilter");
+    filterHolder.setAsyncSupported(true);
+    filterHolder.setHeldClass(GuiceFilter.class);
+    sch.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
+    log.info("register GuiceFilter");
 
     // Must add DefaultServlet for embedded Jetty. Failing to do this will cause 404 errors.
     sch.addServlet(DefaultServlet.class, "/");

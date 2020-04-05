@@ -12,8 +12,10 @@ import java.util.ServiceLoader;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
 public class WebModule extends ServletModule implements ConfigurationSupport {
 
@@ -41,6 +43,7 @@ public class WebModule extends ServletModule implements ConfigurationSupport {
     Iterator<WebServer> iterator = webServers.iterator();
     if (iterator.hasNext()) {
       WebServer webServer = iterator.next();
+      log.info("find WebServer class [{}]", webServer.getClass());
       webServer.init(webConfigProvider, injectorProvider);
       return webServer;
     } else {
