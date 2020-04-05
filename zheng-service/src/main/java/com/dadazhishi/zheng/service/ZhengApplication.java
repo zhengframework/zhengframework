@@ -11,7 +11,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -98,7 +97,7 @@ public class ZhengApplication {
         throw new ConfigurationException(e);
       }
     } else {
-      builder.withURI(URI.create("classpath:/application.properties"));
+      builder.withProperties("application.properties");
     }
     return builder.build();
   }
