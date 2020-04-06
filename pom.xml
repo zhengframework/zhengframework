@@ -46,8 +46,6 @@
     <module>zheng-web-jetty</module>
     <module>zheng-web-undertow</module>
     <module>zheng-service</module>
-    <module>zheng-rest-jersey</module>
-    <module>zheng-rest-resteasy</module>
     <module>zheng-activemq</module>
     <module>zheng-activemq-artemis</module>
     <module>zheng-metrics</module>
@@ -59,8 +57,6 @@
     <module>zheng-memcached</module>
     <module>zheng-redis</module>
     <module>zheng-mybatis</module>
-    <module>zheng-metrics-micrometer</module>
-    <module>zheng-metrics-jersey</module>
     <module>zheng-metrics-servlet</module>
     <module>zheng-rest</module>
     <module>zheng-webjars</module>

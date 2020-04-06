@@ -1,12 +1,10 @@
-package com.dadazhishi.zheng.rest.resteasy;
+package com.dadazhishi.zheng.rest;
 
 import static com.dadazhishi.zheng.rest.RestConfig.PREFIX;
 
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.rest.ObjectMapperContextResolver;
-import com.dadazhishi.zheng.rest.RestConfig;
 import com.dadazhishi.zheng.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;

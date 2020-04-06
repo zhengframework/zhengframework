@@ -403,16 +403,6 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-rest-jersey</artifactId>
-        <groupId>com.dadazhishi.zheng</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-rest-resteasy</artifactId>
-        <groupId>com.dadazhishi.zheng</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
         <artifactId>zheng-swagger</artifactId>
         <groupId>com.dadazhishi.zheng</groupId>
         <version>${project.version}</version>

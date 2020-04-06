@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.configuration.resolver;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -11,6 +12,7 @@ public abstract class ReloadableConfigurationResolver implements ConfigurationRe
 
   public ReloadableConfigurationResolver() {
     mapReference = new AtomicReference<>();
+    mapReference.set(Collections.emptyMap());
   }
 
   @Override

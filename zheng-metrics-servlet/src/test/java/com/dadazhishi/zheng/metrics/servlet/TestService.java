@@ -1,18 +1,17 @@
-package com.dadazhishi.zheng.metrics.example;
+package com.dadazhishi.zheng.metrics.servlet;
 
 import com.codahale.metrics.annotation.Counted;
+import com.codahale.metrics.annotation.Gauge;
+import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
 
 public class TestService {
 
+  @Metered
+  @Gauge
   @Timed
   @Counted(monotonic = true)
   public String count() {
-    try {
-      Thread.sleep(100);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     return "1111";
   }
 }

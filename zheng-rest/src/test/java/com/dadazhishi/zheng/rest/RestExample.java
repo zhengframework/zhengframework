@@ -1,11 +1,7 @@
 package com.dadazhishi.zheng.rest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.rest.resteasy.RestModule;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;
@@ -50,7 +46,7 @@ public class RestExample {
         .path("/");
     String response = target.path(TestResource.PATH).request().get().readEntity(String.class);
     System.out.println(response);
-    assertEquals(TestResource.MESSAGE, response);
+    Assert.assertEquals(TestResource.MESSAGE, response);
   }
 
   @Test
@@ -64,7 +60,7 @@ public class RestExample {
     String response2 = target.path(TestResource.PATH + "/inject").request().get()
         .readEntity(String.class);
     System.out.println(response2);
-    assertNotEquals(response1, response2);
+    Assert.assertNotEquals(response1, response2);
   }
 
 }

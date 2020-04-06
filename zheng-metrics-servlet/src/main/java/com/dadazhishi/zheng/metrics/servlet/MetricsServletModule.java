@@ -21,19 +21,20 @@ public class MetricsServletModule extends ServletModule implements Configuration
   @Override
   protected void configureServlets() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    Boolean enable = configuration.getBoolean("zheng.metrics.enable", true);
-    if (enable) {
-      MetricsServletConfig metricsServletConfig = ConfigurationBeanMapper
-          .resolve(configuration, MetricsServletConfig.PREFIX, MetricsServletConfig.class);
+    MetricsServletConfig metricsServletConfig = ConfigurationBeanMapper
+        .resolve(configuration, MetricsServletConfig.PREFIX, MetricsServletConfig.class);
+    if (metricsServletConfig.isEnable()) {
       String path = metricsServletConfig.getPath();
       if (Strings.isNullOrEmpty(path)) {
         serve("/metrics/*").with(new AdminServlet());
       } else {
         serve(path + "/*").with(new AdminServlet());
       }
-
+      bind(HealthCheckScanner.class);
       bind(MetricsServletContextListener.class).in(Singleton.class);
       bind(HealthCheckServletContextListener.class).in(Singleton.class);
+
     }
+
   }
 }

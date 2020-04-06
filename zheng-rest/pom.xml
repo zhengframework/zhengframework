@@ -12,6 +12,24 @@
     <dependency>
       <artifactId>jakarta.ws.rs-api</artifactId>
       <groupId>jakarta.ws.rs</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>javax.servlet-api</artifactId>
+      <groupId>javax.servlet</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>resteasy-guice</artifactId>
+      <groupId>org.jboss.resteasy</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>resteasy-core</artifactId>
+      <groupId>org.jboss.resteasy</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>resteasy-jackson2-provider</artifactId>
+      <groupId>org.jboss.resteasy</groupId>
     </dependency>
     <dependency>
       <artifactId>jackson-databind</artifactId>
@@ -28,6 +46,25 @@
     <dependency>
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-web</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-web-jetty</artifactId>
+      <groupId>com.dadazhishi.zheng</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>junit</artifactId>
+      <groupId>junit</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-simple</artifactId>
+      <groupId>org.slf4j</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

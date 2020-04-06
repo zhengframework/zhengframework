@@ -49,7 +49,7 @@
       <groupId>com.fasterxml.jackson.dataformat</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-rest-jersey</artifactId>
+      <artifactId>zheng-rest</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
       <scope>test</scope>
     </dependency>
