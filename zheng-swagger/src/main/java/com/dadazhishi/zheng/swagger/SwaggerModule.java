@@ -27,9 +27,12 @@ public class SwaggerModule extends ServletModule implements ConfigurationAware {
     SwaggerConfig swaggerConfig = ConfigurationBeanMapper
         .resolve(configuration, SwaggerConfig.PREFIX, SwaggerConfig.class);
     bind(SwaggerConfig.class).toInstance(swaggerConfig);
-    bind(SwaggerUIServlet.class).in(Singleton.class);
-
-    serve(swaggerConfig.getBasePath() + "/*").with(SwaggerUIServlet.class);
+    if (swaggerConfig.isEnableUI()) {
+      bind(SwaggerUIServlet.class).in(Singleton.class);
+      serve(swaggerConfig.getBasePath() + "/*").with(SwaggerUIServlet.class);
+    } else {
+      log.info("disable Swagger UI");
+    }
   }
 
 

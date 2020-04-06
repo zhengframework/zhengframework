@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.hibernate;
 
+import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
@@ -7,8 +8,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class HibernateConfig {
+public class HibernateConfig implements ConfigurationDefine {
 
+  public static final String PREFIX = "zheng.hibernate";
   private String driverClassName;
   private String url;
   private String username;

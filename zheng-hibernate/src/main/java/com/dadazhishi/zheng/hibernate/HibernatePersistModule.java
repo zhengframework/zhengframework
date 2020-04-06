@@ -62,7 +62,7 @@ public class HibernatePersistModule extends PersistModule implements Configurati
     install(new ServicesModule());
     Preconditions.checkArgument(configuration != null, "configuration is null");
     HibernateConfig hibernateConfig = ConfigurationBeanMapper
-        .resolve(configuration, "zheng.hibernate", HibernateConfig.class);
+        .resolve(configuration, HibernateConfig.PREFIX, HibernateConfig.class);
     bind(HibernateConfig.class).toInstance(hibernateConfig);
 
     String entityPackages = hibernateConfig.getEntityPackages();

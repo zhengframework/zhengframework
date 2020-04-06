@@ -16,12 +16,6 @@ import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Hibernate {@link PersistService} implementation which manages a singleton {@code
- * SessionFactory}.
- *
- * @author Jason Campos <jcampos8782@gmail.com>
- */
 @Singleton
 public class HibernatePersistService implements Provider<EntityManager>, UnitOfWork,
     PersistService {

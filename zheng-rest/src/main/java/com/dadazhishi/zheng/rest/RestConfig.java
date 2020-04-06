@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.rest;
 
+import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class RestConfig {
+public class RestConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.rest";
   private String path = null;

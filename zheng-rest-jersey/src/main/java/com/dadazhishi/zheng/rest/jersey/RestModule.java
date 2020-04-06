@@ -7,6 +7,7 @@ import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.rest.ObjectMapperContextResolver;
 import com.dadazhishi.zheng.rest.RestConfig;
+import com.dadazhishi.zheng.web.PathUtils;
 import com.dadazhishi.zheng.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.Injector;
@@ -58,19 +59,15 @@ public class RestModule extends ServletModule implements ConfigurationAware {
 
     String resourceConfigClass = restConfig.getProperties()
         .getOrDefault("jersey.resourceConfigClass", DEFAULT_RESOURCE_CONFIG_CLASS);
-    log.warn("cannot get key 'jersey.resourceConfigClass' from RestConfig, use default class [{}]",
+    log.info("cannot get key 'jersey.resourceConfigClass' from RestConfig, use default class [{}]",
         DEFAULT_RESOURCE_CONFIG_CLASS);
 
     Map<String, String> map = Collections
         .singletonMap("javax.ws.rs.Application", resourceConfigClass);
 
+
     String path = restConfig.getPath();
-    if ("/".equals(path)) {
-      path = null;
-    }
-    if (path != null && path.length() > 1 && path.endsWith("/")) {
-      path = path.substring(0, path.length() - 1);
-    }
+    path = PathUtils.fixPath(path);
     if (path == null) {
       serve("/*").with(ServletContainer.class, map);
     } else {
