@@ -60,6 +60,7 @@
     <module>zheng-metrics-servlet</module>
     <module>zheng-rest</module>
     <module>zheng-webjars</module>
+    <module>zheng-jdbc</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
