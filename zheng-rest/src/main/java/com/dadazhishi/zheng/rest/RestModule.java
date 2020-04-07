@@ -7,13 +7,16 @@ import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
 import com.dadazhishi.zheng.web.WebModule;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;
-import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
+import org.jboss.resteasy.plugins.interceptors.AcceptEncodingGZIPFilter;
+import org.jboss.resteasy.plugins.interceptors.GZIPDecodingInterceptor;
+import org.jboss.resteasy.plugins.interceptors.GZIPEncodingInterceptor;
 import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
@@ -31,6 +34,9 @@ public class RestModule extends ServletModule implements ConfigurationAware {
     webModule.initConfiguration(configuration);
     install(webModule);
 
+    bind(AcceptEncodingGZIPFilter.class);
+    bind(GZIPDecodingInterceptor.class);
+    bind(GZIPEncodingInterceptor.class);
     bind(ResteasyJackson2Provider.class);
     bind(GuiceResteasyBootstrapServletContextListener.class);
     bind(HttpServletDispatcher.class).in(Scopes.SINGLETON);
@@ -49,9 +55,16 @@ public class RestModule extends ServletModule implements ConfigurationAware {
     if (path == null) {
       serve("/*").with(HttpServletDispatcher.class);
     } else {
-      final Map<String, String> initParams = ImmutableMap
-          .of("resteasy.servlet.mapping.prefix", path);
-      serve(path + "/*").with(HttpServletDispatcher.class, initParams);
+      HashMap<String, String> hashMap = new HashMap<>();
+      for (Entry<String, String> entry : restConfig.getProperties().entrySet()) {
+        if (entry.getKey().startsWith("resteasy.")) {
+          hashMap.put(entry.getKey(), entry.getValue());
+        }
+      }
+      if (!hashMap.containsKey("resteasy.servlet.mapping.prefix")) {
+        hashMap.put("resteasy.servlet.mapping.prefix", path);
+      }
+      serve(path + "/*").with(HttpServletDispatcher.class, hashMap);
     }
   }
 
