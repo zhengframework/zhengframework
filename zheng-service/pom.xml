@@ -36,8 +36,8 @@
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
     <dependency>
-      <artifactId>commons-cli</artifactId>
-      <groupId>commons-cli</groupId>
+      <artifactId>jopt-simple</artifactId>
+      <groupId>net.sf.jopt-simple</groupId>
     </dependency>
   </dependencies>
 

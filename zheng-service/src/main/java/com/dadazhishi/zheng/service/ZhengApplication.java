@@ -14,17 +14,13 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import java.util.Optional;
+import joptsimple.ArgumentAcceptingOptionSpec;
+import joptsimple.OptionSet;
 
 public class ZhengApplication {
 
   private Injector injector;
-  private Options options = new Options();
 
   public ZhengApplication(Configuration configuration, String[] args, Module... modules) {
     if (configuration == null) {
@@ -53,20 +49,17 @@ public class ZhengApplication {
   }
 
   private Configuration buildConfiguration(String[] args) {
-    Option option = Option.builder().longOpt("config").hasArg(true)
-        .desc("app configuration file path").build();
-    options.addOption(option);
+    Arguments arguments = new Arguments(args);
+    ArgumentAcceptingOptionSpec<String> configOpt = arguments.getOptionParser().accepts("config")
+        .withRequiredArg().ofType(String.class);
+    OptionSet optionSet = arguments.parse();
 
-    CommandLineParser parser = new DefaultParser();
+    Optional<String> config = optionSet.valueOfOptional(configOpt);
     String argsConfigFile = null;
-    try {
-      CommandLine commandLine = parser.parse(options, args);
-      if (commandLine.hasOption("config")) {
-        argsConfigFile = commandLine.getOptionValue("config");
-      }
-    } catch (ParseException e) {
-      throw new RuntimeException("parse arguments fail", e);
+    if (config.isPresent()) {
+      argsConfigFile = config.get();
     }
+
     Path path = null;
     if (argsConfigFile != null) {
       path = Paths.get(argsConfigFile);

@@ -3,7 +3,6 @@ package com.dadazhishi.zheng.service;
 import com.google.inject.Binding;
 import com.google.inject.Injector;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,7 +26,8 @@ public class AnnotationScanner<T> {
   /**
    * Recursive impl that walks up the parent injectors first
    */
-  private void accept(Injector inj, Visitor visitor) {
+  @SuppressWarnings("unchecked")
+  private void accept(Injector inj, Visitor<T> visitor) {
     if (inj == null) {
       return;
     }
@@ -35,11 +35,12 @@ public class AnnotationScanner<T> {
     accept(inj.getParent(), visitor);
 
     for (final Binding<?> binding : inj.getBindings().values()) {
-      final Type type = binding.getKey().getTypeLiteral().getType();
       Class<?> rawType = binding.getKey().getTypeLiteral().getRawType();
-      if (rawType.isAnnotationPresent(scanFor)) {
-        log.info("{} rawType={}", scanFor, rawType);
-        visitor.visit(binding.getProvider().get());
+      if (rawType != null) {
+        if (rawType.isAnnotationPresent(scanFor)) {
+          log.debug("{} rawType={}", scanFor, rawType);
+          visitor.visit((T) binding.getProvider().get());
+        }
       }
     }
   }

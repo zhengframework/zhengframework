@@ -2,12 +2,15 @@ package com.dadazhishi.zheng.service;
 
 import com.google.inject.Binding;
 import com.google.inject.Injector;
-import java.lang.reflect.Type;
+import com.google.inject.multibindings.MapBinderBinding;
+import com.google.inject.multibindings.MultibinderBinding;
+import com.google.inject.multibindings.MultibindingsTargetVisitor;
+import com.google.inject.multibindings.OptionalBinderBinding;
+import com.google.inject.spi.DefaultBindingTargetVisitor;
+import com.google.inject.spi.LinkedKeyBinding;
+import java.lang.reflect.Modifier;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Walks through the guice injector bindings, visiting each one that is of the specified type.
- */
 @Slf4j
 public class ClassScanner<T> {
 
@@ -19,6 +22,17 @@ public class ClassScanner<T> {
     this.scanFor = scanFor;
   }
 
+  private static boolean isConcrete(Class<?> type) {
+    return !type.isInterface() && !Modifier.isAbstract(type.getModifiers());
+  }
+
+  public static <T> Class<? extends T> getTargetClass(Binding<T> binding) {
+    if (binding != null) {
+      return binding.acceptTargetVisitor(new BindingInspectorVisitor<>());
+    }
+    return null;
+  }
+
   /**
    * Start the process, visiting each ServletContextListener bound in the injector or any parents
    */
@@ -26,10 +40,8 @@ public class ClassScanner<T> {
     accept(injector, visitor);
   }
 
-  /**
-   * Recursive impl that walks up the parent injectors first
-   */
-  private void accept(Injector inj, Visitor visitor) {
+  @SuppressWarnings("unchecked")
+  private void accept(Injector inj, Visitor<T> visitor) {
     if (inj == null) {
       return;
     }
@@ -37,20 +49,56 @@ public class ClassScanner<T> {
     accept(inj.getParent(), visitor);
 
     for (final Binding<?> binding : inj.getBindings().values()) {
-      final Type type = binding.getKey().getTypeLiteral().getType();
-
-      if (type instanceof Class) {
-        if (scanFor.isAssignableFrom((Class) type)) {
-          //noinspection unchecked
-          visitor.visit(binding.getProvider().get());
+      final Class<?> type = binding.getKey().getTypeLiteral().getRawType();
+      if (type != null) {
+        Class<?> targetType = getTargetClass(binding);
+        if (targetType != null) {
+          if (isConcrete(targetType)) {
+            if (scanFor.isAssignableFrom(targetType)) {
+              log.debug("{} targetType={}", scanFor, targetType);
+              visitor.visit((T) binding.getProvider().get());
+            }
+          }
+        } else {
+          if (isConcrete(type)) {
+            if (scanFor.isAssignableFrom(type)) {
+              log.debug("{} type={}", scanFor, type);
+              visitor.visit((T) binding.getProvider().get());
+            }
+          }
         }
-      }
 
+      }
     }
   }
 
   public interface Visitor<V> {
 
     void visit(V thing);
+  }
+
+  private static final class BindingInspectorVisitor<T, C extends Class<? extends T>> extends
+      DefaultBindingTargetVisitor<T, C> implements MultibindingsTargetVisitor<T, C> {
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public C visit(LinkedKeyBinding<? extends T> binding) {
+      return (C) binding.getLinkedKey().getTypeLiteral().getRawType();
+    }
+
+    @Override
+    public C visit(MultibinderBinding<? extends T> multibinderBinding) {
+      return null;
+    }
+
+    @Override
+    public C visit(MapBinderBinding<? extends T> mapBinderBinding) {
+      return null;
+    }
+
+    @Override
+    public C visit(OptionalBinderBinding<? extends T> optionalBinderBinding) {
+      return null;
+    }
   }
 }
