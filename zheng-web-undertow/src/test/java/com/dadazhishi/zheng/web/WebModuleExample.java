@@ -14,7 +14,7 @@ public class WebModuleExample {
 
   @Test
   public void main() throws Exception {
-    ZhengApplication application = ZhengApplication.create(new WebModule(), new MyModule());
+    ZhengApplication application = ZhengApplication.create(new UndertowWebModule(), new MyModule());
     application.start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     try {

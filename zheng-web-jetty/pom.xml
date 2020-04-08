@@ -14,6 +14,11 @@
       <groupId>org.eclipse.jetty</groupId>
     </dependency>
     <dependency>
+      <artifactId>javax-websocket-server-impl</artifactId>
+      <groupId>org.eclipse.jetty.websocket</groupId>
+    </dependency>
+
+    <dependency>
       <artifactId>zheng-web</artifactId>
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>

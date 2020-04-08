@@ -14,6 +14,11 @@
       <groupId>javax.servlet</groupId>
     </dependency>
     <dependency>
+      <artifactId>javax.websocket-api</artifactId>
+      <groupId>javax.websocket</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <artifactId>guice-servlet</artifactId>
       <groupId>com.google.inject.extensions</groupId>
     </dependency>

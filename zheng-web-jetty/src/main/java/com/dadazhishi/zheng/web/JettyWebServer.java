@@ -49,25 +49,25 @@ public class JettyWebServer implements WebServer {
     server = createServer(webConfig);
 
     // Create a servlet context and add the jersey servlet.
-    final ServletContextHandler sch = createRootServletContextHandler(webConfig);
+    final ServletContextHandler context = createRootServletContextHandler(webConfig);
 
     FilterHolder filterHolder = new FilterHolder();
     filterHolder.setDisplayName("GuiceFilter");
     filterHolder.setName("GuiceFilter");
     filterHolder.setAsyncSupported(true);
     filterHolder.setHeldClass(GuiceFilter.class);
-    sch.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
+    context.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
     log.info("register GuiceFilter");
 
     // Must add DefaultServlet for embedded Jetty. Failing to do this will cause 404 errors.
-    sch.addServlet(DefaultServlet.class, "/");
+    context.addServlet(DefaultServlet.class, "/");
 
-    eventListenerScanner.accept(sch::addEventListener);
+    eventListenerScanner.accept(context::addEventListener);
 
     final HandlerCollection handlers = new HandlerCollection();
 
     // the sch is currently the server handler, add it to the list
-    handlers.addHandler(sch);
+    handlers.addHandler(context);
 
     // This will add any registered jetty Handlers that have been bound.
     handlerScanner.accept(handlers::addHandler);

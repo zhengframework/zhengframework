@@ -9,6 +9,14 @@
       <groupId>com.dadazhishi.zheng</groupId>
     </dependency>
     <dependency>
+      <artifactId>javax.websocket-api</artifactId>
+      <groupId>javax.websocket</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>undertow-websockets-jsr</artifactId>
+      <groupId>io.undertow</groupId>
+    </dependency>
+    <dependency>
       <artifactId>undertow-servlet</artifactId>
       <groupId>io.undertow</groupId>
     </dependency>
@@ -27,6 +35,7 @@
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <dependencyManagement>

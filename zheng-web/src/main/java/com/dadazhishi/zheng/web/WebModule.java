@@ -7,11 +7,14 @@ import com.dadazhishi.zheng.service.ServicesModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
+import com.google.inject.TypeLiteral;
+import com.google.inject.multibindings.OptionalBinder;
 import com.google.inject.servlet.ServletModule;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 import javax.inject.Provider;
 import javax.inject.Singleton;
+import javax.websocket.server.ServerEndpointConfig;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +38,14 @@ public class WebModule extends ServletModule implements ConfigurationAware {
     WebConfig webConfig = ConfigurationBeanMapper
         .resolve(configuration, WebConfig.PREFIX, WebConfig.class);
     bind(WebConfig.class).toInstance(webConfig);
+
+    // websocket support
+    OptionalBinder
+        .newOptionalBinder(binder(), new TypeLiteral<WebSocketEndpoint>() {
+        });
+    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<ServerEndpointConfig>() {
+    });
+
   }
 
   @Singleton
@@ -52,4 +63,5 @@ public class WebModule extends ServletModule implements ConfigurationAware {
       throw new IllegalStateException("need WebServer");
     }
   }
+
 }
