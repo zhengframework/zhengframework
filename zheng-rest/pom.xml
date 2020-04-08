@@ -40,6 +40,11 @@
       <groupId>com.fasterxml.jackson.core</groupId>
     </dependency>
     <dependency>
+      <artifactId>jackson-datatype-jdk8</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+    </dependency>
+
+    <dependency>
       <artifactId>guice</artifactId>
       <groupId>com.google.inject</groupId>
     </dependency>
@@ -65,6 +70,21 @@
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <scope>compile</scope>
+      <version>2.10.3</version>
+    </dependency>
+    <dependency>
+      <artifactId>metrics-core</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>metrics-annotation</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
     </dependency>
   </dependencies>
 
