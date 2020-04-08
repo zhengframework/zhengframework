@@ -1,43 +1,42 @@
 package com.dadazhishi.zheng.configuration.parser;
 
-import com.dadazhishi.zheng.configuration.spi.AutoConfigurationParser;
+import com.dadazhishi.zheng.configuration.ex.ConfigurationSourceException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-public class YamlConfigurationParser implements AutoConfigurationParser {
+public class YamlConfigurationParser implements ConfigurationParser, FileConfigurationParser {
 
   private JavaPropsMapper propsMapper = new JavaPropsMapper();
   private YAMLMapper yamlMapper = new YAMLMapper();
-  private boolean failOnError = false;
-
-  public void init(Map<String, String> properties) {
-    failOnError = Boolean.parseBoolean(properties.getOrDefault("failOnError", "false"));
-  }
 
   @Override
-  public Map<String, String> parse(InputStream content) {
+  public Map<String, String> parse(InputStream inputStream) {
     try {
-      JsonNode jsonNode = yamlMapper.readTree(content);
+      JsonNode jsonNode = yamlMapper.readTree(inputStream);
       return propsMapper.writeValueAsMap(jsonNode);
     } catch (IOException e) {
-      if (failOnError) {
-        throw new RuntimeException("parse yaml fail", e);
-      } else {
-        log.warn("parse yaml fail");
-      }
+      throw new ConfigurationSourceException("fail load configuration from inputStream", e);
     }
-    return Collections.emptyMap();
   }
 
   @Override
-  public String[] fileTypes() {
+  public String[] supportFileTypes() {
     return new String[]{".yml", ".yaml"};
   }
+
+  @Override
+  public Map<String, String> parse(String fileName, InputStream inputStream) {
+    checkSupportFileTypes(fileName);
+    try {
+      JsonNode jsonNode = yamlMapper.readTree(inputStream);
+      return propsMapper.writeValueAsMap(jsonNode);
+    } catch (IOException e) {
+      throw new ConfigurationSourceException("fail load configuration from file: " + fileName, e);
+    }
+  }
+
 }

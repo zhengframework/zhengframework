@@ -6,6 +6,7 @@ import com.dadazhishi.zheng.configuration.objects.Apple;
 import com.dadazhishi.zheng.configuration.objects.Banana;
 import com.dadazhishi.zheng.configuration.objects.Food;
 import com.dadazhishi.zheng.configuration.objects.NamedAnnotation;
+import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -23,7 +24,7 @@ public class ConfigurationModuleTest {
 
   Food food;
   Injector injector;
-  Configuration configuration;
+
 
   @Before
   public void setup() throws IOException {
@@ -43,10 +44,8 @@ public class ConfigurationModuleTest {
     }
     food.setBananas(list);
 
-    configuration = ConfigurationBuilder.create()
-        .withEnvironmentVariables()
-        .withSystemProperties()
-        .withProperties("food.properties")
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("food.properties"))
         .build();
 
     ConfigurationModule configurationModule = new ConfigurationModule();

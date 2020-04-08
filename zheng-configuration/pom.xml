@@ -61,6 +61,13 @@
       <artifactId>ini4j</artifactId>
       <groupId>org.ini4j</groupId>
       <optional>true</optional>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>tomlj</artifactId>
+      <groupId>org.tomlj</groupId>
+      <optional>true</optional>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>commons-lang3</artifactId>
@@ -70,7 +77,10 @@
       <artifactId>commons-io</artifactId>
       <groupId>commons-io</groupId>
     </dependency>
-
+    <dependency>
+      <artifactId>metrics-core</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

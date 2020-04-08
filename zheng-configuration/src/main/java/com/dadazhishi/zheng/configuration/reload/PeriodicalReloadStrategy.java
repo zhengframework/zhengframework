@@ -1,0 +1,52 @@
+package com.dadazhishi.zheng.configuration.reload;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+
+@Slf4j
+public class PeriodicalReloadStrategy implements ReloadStrategy {
+
+  final ThreadFactory factory =
+      new BasicThreadFactory.Builder()
+          .namingPattern("PeriodicalReloadStrategy-%s").daemon(true)
+          .build();
+
+  private final long duration;
+  private final TimeUnit unit;
+  private final ScheduledExecutorService executorService;
+  private final Map<Reloadable, ScheduledFuture<?>> tasks = new ConcurrentHashMap<Reloadable, ScheduledFuture<?>>();
+
+
+  public PeriodicalReloadStrategy(long duration, TimeUnit unit) {
+    this.duration = duration;
+    this.unit = unit;
+    executorService = Executors
+        .newScheduledThreadPool(Runtime.getRuntime().availableProcessors(), factory);
+  }
+
+
+  @Override
+  public void register(Reloadable resource) {
+    log.debug("Registering resource " + resource
+        + " with reload time of {} {}", duration, unit.toString().toLowerCase());
+    ScheduledFuture<?> scheduledFuture = executorService
+        .scheduleWithFixedDelay(resource::reload, duration, duration, unit);
+    tasks.put(resource, scheduledFuture);
+  }
+
+  @Override
+  public void deregister(Reloadable resource) {
+    log.debug("De-registering resource {}", resource);
+    ScheduledFuture<?> scheduledFuture = tasks.remove(resource);
+    if (scheduledFuture != null) {
+      scheduledFuture.cancel(true);
+    }
+  }
+}

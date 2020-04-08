@@ -1,43 +1,41 @@
 package com.dadazhishi.zheng.configuration.parser;
 
-import com.dadazhishi.zheng.configuration.spi.AutoConfigurationParser;
+import com.dadazhishi.zheng.configuration.ex.ConfigurationSourceException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-public class JsonConfigurationParser implements AutoConfigurationParser {
+public class JsonConfigurationParser implements ConfigurationParser, FileConfigurationParser {
 
   private JavaPropsMapper propsMapper = new JavaPropsMapper();
   private JsonMapper jsonMapper = new JsonMapper();
-  private boolean failOnError = false;
-
-  public void init(Map<String, String> properties) {
-    failOnError = Boolean.parseBoolean(properties.getOrDefault("failOnError", "false"));
-  }
 
   @Override
-  public Map<String, String> parse(InputStream content) {
+  public Map<String, String> parse(InputStream inputStream) {
     try {
-      JsonNode jsonNode = jsonMapper.readTree(content);
+      JsonNode jsonNode = jsonMapper.readTree(inputStream);
       return propsMapper.writeValueAsMap(jsonNode);
     } catch (IOException e) {
-      if (failOnError) {
-        throw new RuntimeException("parse json fail", e);
-      } else {
-        log.warn("parse json fail");
-      }
+      throw new ConfigurationSourceException("fail load configuration from inputStream", e);
     }
-    return Collections.emptyMap();
   }
 
   @Override
-  public String[] fileTypes() {
-    return new String[]{".json" };
+  public String[] supportFileTypes() {
+    return new String[]{".json"};
+  }
+
+  @Override
+  public Map<String, String> parse(String fileName, InputStream inputStream) {
+    checkSupportFileTypes(fileName);
+    try {
+      JsonNode jsonNode = jsonMapper.readTree(inputStream);
+      return propsMapper.writeValueAsMap(jsonNode);
+    } catch (IOException e) {
+      throw new ConfigurationSourceException("fail load configuration from file: " + fileName, e);
+    }
   }
 }

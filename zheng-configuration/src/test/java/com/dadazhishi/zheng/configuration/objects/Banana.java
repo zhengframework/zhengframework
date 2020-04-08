@@ -1,7 +1,9 @@
 package com.dadazhishi.zheng.configuration.objects;
 
 import java.util.Objects;
+import lombok.ToString;
 
+@ToString
 public class Banana {
 
   private String name;

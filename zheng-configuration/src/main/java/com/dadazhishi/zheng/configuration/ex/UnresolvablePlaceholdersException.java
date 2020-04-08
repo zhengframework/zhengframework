@@ -7,5 +7,4 @@ public class UnresolvablePlaceholdersException extends RuntimeException {
   public UnresolvablePlaceholdersException(String message) {
     super(message);
   }
-
 }

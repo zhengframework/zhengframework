@@ -3,7 +3,9 @@ package com.dadazhishi.zheng.configuration.objects;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import lombok.ToString;
 
+@ToString
 public class Food {
 
   private Apple apple;

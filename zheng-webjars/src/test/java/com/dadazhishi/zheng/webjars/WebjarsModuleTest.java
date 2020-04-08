@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
+import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;
@@ -17,8 +18,8 @@ public class WebjarsModuleTest {
 
   @Test
   public void testDefaultPath() throws IOException {
-
-    Configuration configuration = ConfigurationBuilder.create().withProperties("app.properties")
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
@@ -54,9 +55,8 @@ public class WebjarsModuleTest {
 
   @Test
   public void testDisableCache() throws IOException {
-
-    Configuration configuration = ConfigurationBuilder.create()
-        .withProperties("app_cache.properties")
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("app_cache.properties"))
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,
@@ -92,8 +92,8 @@ public class WebjarsModuleTest {
 
   @Test
   public void testPath() throws IOException {
-    Configuration configuration = ConfigurationBuilder.create()
-        .withProperties("app_path.properties")
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("app_path.properties"))
         .build();
     ZhengApplication application = ZhengApplication
         .create(configuration,

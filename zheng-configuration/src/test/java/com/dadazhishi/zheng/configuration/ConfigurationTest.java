@@ -22,7 +22,7 @@ public class ConfigurationTest {
 
   @Test
   public void testGet() {
-    MapConfiguration configuration = new MapConfiguration(map);
+    SubsetConfiguration configuration = new SubsetConfiguration(map);
     Configuration apple = configuration.prefix("apple");
     assertTrue(Boolean.parseBoolean(apple.get("big").get()));
     assertEquals("110", apple.get("name").get());
@@ -31,7 +31,7 @@ public class ConfigurationTest {
 
   @Test
   public void getList() {
-    MapConfiguration configuration = new MapConfiguration(map);
+    SubsetConfiguration configuration = new SubsetConfiguration(map);
     Set<Configuration> bananas = configuration.prefixSet("bananas");
     assertEquals(3, bananas.size());
 
@@ -39,7 +39,7 @@ public class ConfigurationTest {
 
   @Test
   public void getMap() {
-    MapConfiguration configuration = new MapConfiguration(map);
+    SubsetConfiguration configuration = new SubsetConfiguration(map);
     Map<String, Configuration> apples = configuration.prefixMap("apples");
     assertEquals(1, apples.size());
   }

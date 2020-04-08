@@ -39,8 +39,6 @@
     <module>zheng-cache-infinispan</module>
     <module>zheng-cache-caffeine</module>
     <module>zheng-cache-jcs</module>
-    <module>zheng-configuration-ini</module>
-    <module>zheng-configuration-toml</module>
     <module>zheng-bom</module>
     <module>zheng-web</module>
     <module>zheng-web-jetty</module>

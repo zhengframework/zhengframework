@@ -5,23 +5,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+import org.ini4j.Ini;
+import org.ini4j.Profile.Section;
 
-public class PropertiesConfigurationParser implements ConfigurationParser, FileConfigurationParser {
+public class INIConfigurationParser implements ConfigurationParser, FileConfigurationParser {
 
   @Override
   public Map<String, String> parse(InputStream inputStream) {
-    Properties properties = new Properties();
     try {
-      properties.load(inputStream);
+      Map<String, String> map = new HashMap<>();
+      Ini ini = new Ini(inputStream);
+      for (Section section : ini.values()) {
+        for (String s : section.keySet()) {
+          map.put(section.getName() + "." + s, section.fetch(s));
+        }
+      }
+      return map;
     } catch (IOException e) {
       throw new ConfigurationSourceException("fail load configuration from inputStream", e);
     }
-    Map<String, String> map = new HashMap<>();
-    for (String name : properties.stringPropertyNames()) {
-      map.put(name, properties.getProperty(name));
-    }
-    return map;
   }
 
   @Override
@@ -32,16 +34,17 @@ public class PropertiesConfigurationParser implements ConfigurationParser, FileC
   @Override
   public Map<String, String> parse(String fileName, InputStream inputStream) {
     checkSupportFileTypes(fileName);
-    Properties properties = new Properties();
     try {
-      properties.load(inputStream);
+      Map<String, String> map = new HashMap<>();
+      Ini ini = new Ini(inputStream);
+      for (Section section : ini.values()) {
+        for (String s : section.keySet()) {
+          map.put(section.getName() + "." + s, section.fetch(s));
+        }
+      }
+      return map;
     } catch (IOException e) {
       throw new ConfigurationSourceException("fail load configuration from file: " + fileName, e);
     }
-    Map<String, String> map = new HashMap<>();
-    for (String name : properties.stringPropertyNames()) {
-      map.put(name, properties.getProperty(name));
-    }
-    return map;
   }
 }

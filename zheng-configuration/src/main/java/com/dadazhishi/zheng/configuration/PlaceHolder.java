@@ -19,7 +19,7 @@ public class PlaceHolder {
    *
    * @param configuration the variables' values, may be null
    */
-  PlaceHolder(Configuration configuration) {
+  public PlaceHolder(Configuration configuration) {
     this.configuration = configuration;
   }
 
@@ -30,7 +30,7 @@ public class PlaceHolder {
    * @param source the string to replace in, null returns null
    * @return the result of the replace operation
    */
-  String replace(String source) {
+  public String replace(String source) {
     if (source == null) {
       return null;
     }
@@ -59,7 +59,7 @@ public class PlaceHolder {
    * @param args Arguments referenced by the format specifiers in the source string.
    * @return formatted string
    */
-  String replace(String source, Object... args) {
+  public String replace(String source, Object... args) {
     if (source == null) {
       return null;
     }

@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.MigrationInfo;
 
 @Slf4j

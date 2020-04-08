@@ -1,6 +1,5 @@
 package com.dadazhishi.zheng.configuration.io;
 
-import java.net.URL;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,13 +13,23 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+
 public class FileLocator {
 
   private String fileName;
 
   private String basePath;
 
-  private URL sourceURL;
+  private String sourceURL;
 
   private String encoding;
+
+  public FileLocator copy() {
+    return FileLocator.builder()
+        .fileName(fileName)
+        .basePath(basePath)
+        .encoding(encoding)
+        .sourceURL(sourceURL)
+        .build();
+  }
 }

@@ -39,10 +39,6 @@
       <artifactId>jackson-core</artifactId>
       <groupId>com.fasterxml.jackson.core</groupId>
     </dependency>
-    <dependency>
-      <artifactId>jackson-datatype-jdk8</artifactId>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-    </dependency>
 
     <dependency>
       <artifactId>guice</artifactId>

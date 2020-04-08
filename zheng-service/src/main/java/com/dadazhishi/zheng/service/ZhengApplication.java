@@ -3,17 +3,22 @@ package com.dadazhishi.zheng.service;
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationAware;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.ex.ConfigurationException;
 import com.dadazhishi.zheng.configuration.io.FileLocator;
+import com.dadazhishi.zheng.configuration.source.ConfigurationSource;
+import com.dadazhishi.zheng.configuration.source.EnvironmentVariablesConfigurationSource;
+import com.dadazhishi.zheng.configuration.source.FallbackConfigurationSource;
+import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
+import com.dadazhishi.zheng.configuration.source.SystemPropertiesConfigurationSource;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionSet;
@@ -79,20 +84,21 @@ public class ZhengApplication {
           property + " not exists or not readable");
     }
 
-    ConfigurationBuilder configurationBuilder = ConfigurationBuilder.create();
-    ConfigurationBuilder builder = configurationBuilder
-        .withSystemProperties()
-        .withEnvironmentVariables();
+    List<ConfigurationSource> sources = new ArrayList<>();
+    sources.add(new SystemPropertiesConfigurationSource());
+    sources.add(new EnvironmentVariablesConfigurationSource());
+
     if (path != null) {
-      try {
-        builder.withProperties(FileLocator.builder().sourceURL(path.toUri().toURL()).build());
-      } catch (MalformedURLException e) {
-        throw new ConfigurationException(e);
-      }
+      sources.add(0, new FileConfigurationSource(
+          FileLocator.builder().sourceURL(path.toAbsolutePath().toString()).build()));
     } else {
-      builder.withProperties("application.properties");
+      sources.add(new FileConfigurationSource("application.properties"));
     }
-    return builder.build();
+    FallbackConfigurationSource configurationSource = new FallbackConfigurationSource(
+        sources);
+    return new ConfigurationBuilder()
+        .withConfigurationSource(configurationSource)
+        .build();
   }
 
   public Injector getInjector() {

@@ -3,7 +3,7 @@ package com.dadazhishi.zheng.swagger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.dadazhishi.zheng.rest.jersey.RestModule;
+import com.dadazhishi.zheng.rest.RestModule;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;

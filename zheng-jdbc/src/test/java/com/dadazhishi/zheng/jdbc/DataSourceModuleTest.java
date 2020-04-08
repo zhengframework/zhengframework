@@ -4,7 +4,7 @@ import static com.google.inject.name.Names.named;
 
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.io.FileLocator;
+import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.google.inject.Key;
 import java.sql.Connection;
@@ -18,8 +18,9 @@ public class DataSourceModuleTest {
 
   @Test
   public void configure() throws SQLException {
-    FileLocator fileLocator = FileLocator.builder().fileName("application.properties").build();
-    Configuration configuration = ConfigurationBuilder.create().withProperties(fileLocator).build();
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("application.properties"))
+        .build();
 
     ZhengApplication application = ZhengApplication.create(configuration, new DataSourceModule());
     DataSource dataSource = application.getInjector().getInstance(DataSource.class);
@@ -31,9 +32,10 @@ public class DataSourceModuleTest {
 
   @Test
   public void configureGroup() throws SQLException {
-    FileLocator fileLocator = FileLocator.builder().fileName("application_group.properties")
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
         .build();
-    Configuration configuration = ConfigurationBuilder.create().withProperties(fileLocator).build();
+
     ZhengApplication application = ZhengApplication.create(configuration, new DataSourceModule());
     DataSource dataSourceA = application.getInjector()
         .getInstance(Key.get(DataSource.class, named("a")));

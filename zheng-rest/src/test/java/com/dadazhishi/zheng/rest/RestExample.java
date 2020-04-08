@@ -2,6 +2,7 @@ package com.dadazhishi.zheng.rest;
 
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
+import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
 import com.dadazhishi.zheng.service.ZhengApplication;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;
@@ -9,6 +10,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +26,8 @@ public class RestExample {
 
   @Before
   public void setup() {
-    Configuration configuration = ConfigurationBuilder.create()
-        .withURI("classpath:app.properties")
+    Configuration configuration = new ConfigurationBuilder()
+        .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
     System.out.println(configuration.asMap());
     application = ZhengApplication
