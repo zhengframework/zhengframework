@@ -1,14 +1,14 @@
 package com.dadazhishi.zheng.metrics.servlet;
 
 import com.dadazhishi.zheng.metrics.MetricsModule;
-import com.dadazhishi.zheng.service.ZhengApplication;
+import com.dadazhishi.zheng.service.Application;
 import com.dadazhishi.zheng.web.WebModule;
 import com.google.inject.AbstractModule;
 
 public class MetricsServletModuleTest {
 
   public static void main(String[] args) throws Exception {
-    ZhengApplication application = ZhengApplication.create(
+    Application application = Application.create(
         new MetricsModule(),
         new MetricsServletModule()
         , new WebModule()

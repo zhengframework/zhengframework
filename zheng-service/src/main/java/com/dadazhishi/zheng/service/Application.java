@@ -14,6 +14,7 @@ import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Stage;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,11 +24,11 @@ import java.util.Optional;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionSet;
 
-public class ZhengApplication {
+public class Application {
 
   private Injector injector;
 
-  public ZhengApplication(Configuration configuration, String[] args, Module... modules) {
+  public Application(Configuration configuration, String[] args, Module... modules) {
     if (configuration == null) {
       configuration = buildConfiguration(args);
     }
@@ -37,20 +38,20 @@ public class ZhengApplication {
         configurationAware.initConfiguration(configuration);
       }
     }
-    injector = Guice.createInjector(modules);
+    injector = Guice.createInjector(Stage.PRODUCTION, modules);
   }
 
-  public static ZhengApplication create(Configuration configuration, String[] args,
+  public static Application create(Configuration configuration, String[] args,
       Module... modules) {
-    return new ZhengApplication(configuration, args, modules);
+    return new Application(configuration, args, modules);
   }
 
-  public static ZhengApplication create(Configuration configuration, Module... modules) {
-    return new ZhengApplication(configuration, new String[0], modules);
+  public static Application create(Configuration configuration, Module... modules) {
+    return new Application(configuration, new String[0], modules);
   }
 
-  public static ZhengApplication create(Module... modules) {
-    return new ZhengApplication(null, new String[0], modules);
+  public static Application create(Module... modules) {
+    return new Application(null, new String[0], modules);
   }
 
   private Configuration buildConfiguration(String[] args) {

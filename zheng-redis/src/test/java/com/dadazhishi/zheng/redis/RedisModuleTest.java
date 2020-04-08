@@ -4,7 +4,7 @@ import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertEquals;
 
 import com.dadazhishi.zheng.configuration.SubsetConfiguration;
-import com.dadazhishi.zheng.service.ZhengApplication;
+import com.dadazhishi.zheng.service.Application;
 import com.github.fppt.jedismock.RedisServer;
 import com.google.inject.Key;
 import io.lettuce.core.RedisClient;
@@ -35,7 +35,7 @@ public class RedisModuleTest {
     System.out.println(map);
     SubsetConfiguration configuration = new SubsetConfiguration(map);
 
-    ZhengApplication application = ZhengApplication.create(configuration, new RedisModule());
+    Application application = Application.create(configuration, new RedisModule());
     RedisClient redisClient = application.getInjector()
         .getInstance(RedisClient.class);
     StatefulRedisConnection<String, String> connection = redisClient.connect();
@@ -56,7 +56,7 @@ public class RedisModuleTest {
     System.out.println(map);
     SubsetConfiguration configuration = new SubsetConfiguration(map);
 
-    ZhengApplication application = ZhengApplication.create(configuration, new RedisModule());
+    Application application = Application.create(configuration, new RedisModule());
     RedisClient redisClient = application.getInjector()
         .getInstance(Key.get(RedisClient.class, named("a1")));
     StatefulRedisConnection<String, String> connection = redisClient.connect();

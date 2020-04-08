@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.dadazhishi.zheng.rest.RestModule;
-import com.dadazhishi.zheng.service.ZhengApplication;
+import com.dadazhishi.zheng.service.Application;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;
 import com.dadazhishi.zheng.webjars.WebjarsModule;
@@ -19,7 +19,7 @@ import org.junit.Test;
 public class SwaggerModuleTest {
 
   public static void main(String[] args) throws IOException {
-    ZhengApplication application = ZhengApplication
+    Application application = Application
         .create(
             new MyModule(),
             new WebModule(),
@@ -45,7 +45,7 @@ public class SwaggerModuleTest {
 
   @Test
   public void test() throws IOException {
-    ZhengApplication application = ZhengApplication
+    Application application = Application
         .create(
             new MyModule(),
             new WebModule(),

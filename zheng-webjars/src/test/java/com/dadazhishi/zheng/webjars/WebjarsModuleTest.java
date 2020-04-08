@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
 import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
-import com.dadazhishi.zheng.service.ZhengApplication;
+import com.dadazhishi.zheng.service.Application;
 import com.dadazhishi.zheng.web.WebConfig;
 import com.dadazhishi.zheng.web.WebModule;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
-    ZhengApplication application = ZhengApplication
+    Application application = Application
         .create(configuration,
             new WebjarsModule()
         );
@@ -58,7 +58,7 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_cache.properties"))
         .build();
-    ZhengApplication application = ZhengApplication
+    Application application = Application
         .create(configuration,
             new WebjarsModule()
         );
@@ -95,7 +95,7 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_path.properties"))
         .build();
-    ZhengApplication application = ZhengApplication
+    Application application = Application
         .create(configuration,
             new WebModule(),
             new WebjarsModule()

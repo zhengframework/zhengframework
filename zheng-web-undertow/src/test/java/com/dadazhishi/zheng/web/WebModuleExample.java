@@ -2,7 +2,7 @@ package com.dadazhishi.zheng.web;
 
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.service.ZhengApplication;
+import com.dadazhishi.zheng.service.Application;
 import java.util.Objects;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
@@ -14,7 +14,7 @@ public class WebModuleExample {
 
   @Test
   public void main() throws Exception {
-    ZhengApplication application = ZhengApplication.create(new UndertowWebModule(), new MyModule());
+    Application application = Application.create(new UndertowWebModule(), new MyModule());
     application.start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     try {

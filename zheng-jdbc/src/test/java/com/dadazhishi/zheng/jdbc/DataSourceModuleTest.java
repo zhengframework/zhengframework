@@ -5,7 +5,7 @@ import static com.google.inject.name.Names.named;
 import com.dadazhishi.zheng.configuration.Configuration;
 import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
 import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
-import com.dadazhishi.zheng.service.ZhengApplication;
+import com.dadazhishi.zheng.service.Application;
 import com.google.inject.Key;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -22,7 +22,7 @@ public class DataSourceModuleTest {
         .withConfigurationSource(new FileConfigurationSource("application.properties"))
         .build();
 
-    ZhengApplication application = ZhengApplication.create(configuration, new DataSourceModule());
+    Application application = Application.create(configuration, new DataSourceModule());
     DataSource dataSource = application.getInjector().getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
@@ -36,7 +36,7 @@ public class DataSourceModuleTest {
         .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
         .build();
 
-    ZhengApplication application = ZhengApplication.create(configuration, new DataSourceModule());
+    Application application = Application.create(configuration, new DataSourceModule());
     DataSource dataSourceA = application.getInjector()
         .getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
