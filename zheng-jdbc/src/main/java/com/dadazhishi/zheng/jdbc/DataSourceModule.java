@@ -13,7 +13,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class DataSourceModule extends AbstractModule implements ConfigurationAware {
 
   private Configuration configuration;
