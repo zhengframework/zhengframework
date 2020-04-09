@@ -1,5 +1,8 @@
 package com.dadazhishi.zheng.configuration;
 
+import static com.dadazhishi.zheng.configuration.ConfigurationDefineUtils.checkConfigurationDefine;
+
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationInfo;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -9,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class ConfigurationBeanMapper {
 
@@ -57,5 +61,22 @@ public class ConfigurationBeanMapper {
       map.put(entry.getKey(), resolveClass(entry.getValue(), aClass));
     }
     return map;
+  }
+
+  public static <C> void resolve(Configuration configuration, Class<? extends C> aClass,
+      BiConsumer<String, C> consumer) {
+    checkConfigurationDefine(aClass);
+    ConfigurationInfo configurationInfo = aClass.getAnnotation(ConfigurationInfo.class);
+    String prefix = configurationInfo.prefix();
+    if (configurationInfo.supportGroup()) {
+      Boolean group = configuration.getBoolean(prefix + ".group", false);
+      if (!group) {
+        C resolve = resolve(configuration, prefix, aClass);
+        consumer.accept(null, resolve);
+      } else {
+        Map<String, ? extends C> resolveMap = resolveMap(configuration, prefix, aClass);
+        resolveMap.forEach(consumer);
+      }
+    }
   }
 }

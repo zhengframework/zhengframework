@@ -1,5 +1,6 @@
 package com.dadazhishi.zheng.configuration;
 
+import com.dadazhishi.zheng.configuration.annotation.ConfigurationInfo;
 import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,11 @@ import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@ConfigurationInfo(prefix = "zheng.example", supportGroup = true, examples = {
+//    @ConfigurationExample(example = ConfigurationDefineExample.class),
+//    @ConfigurationExample(groupName = "first", example = ConfigurationDefineExample.class),
+//    @ConfigurationExample(groupName = "second", example = ConfigurationDefineExample.class)
+})
 @Data
 @NoArgsConstructor
 public class ConfigurationDefineExample implements ConfigurationDefine {
@@ -29,6 +35,6 @@ public class ConfigurationDefineExample implements ConfigurationDefine {
   public static class JettyConfig {
 
     private int port = 8080;
-    private String serverName = null;
+    private String serverName = "abc";
   }
 }
