@@ -77,6 +77,22 @@
       <scope>provided</scope>
     </dependency>-->
 
+    <dependency>
+      <artifactId>jooq</artifactId>
+      <groupId>org.jooq</groupId>
+      <version>3.13.1</version>
+    </dependency>
+    <dependency>
+      <artifactId>jooq-meta</artifactId>
+      <groupId>org.jooq</groupId>
+      <version>3.13.1</version>
+    </dependency>
+    <dependency>
+      <artifactId>jooq-codegen</artifactId>
+      <groupId>org.jooq</groupId>
+      <version>3.13.1</version>
+    </dependency>
+
   </dependencies>
 
   <dependencyManagement>
