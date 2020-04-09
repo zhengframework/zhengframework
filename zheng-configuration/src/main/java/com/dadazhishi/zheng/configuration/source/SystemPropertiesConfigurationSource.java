@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class SystemPropertiesConfigurationSource implements ConfigurationSource {
+public class SystemPropertiesConfigurationSource extends AbstractConfigurationSource {
 
   @Override
   public void init() {
@@ -14,7 +14,7 @@ public class SystemPropertiesConfigurationSource implements ConfigurationSource 
   }
 
   @Override
-  public Map<String, String> getConfiguration(Environment environment) {
+  public Map<String, String> getConfigurationInternal(Environment environment) {
     return Collections.unmodifiableMap(System.getProperties()
         .entrySet()
         .stream()

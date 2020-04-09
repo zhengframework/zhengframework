@@ -41,4 +41,14 @@ public class MeteredConfigurationSource implements ConfigurationSource {
       context.stop();
     }
   }
+
+  @Override
+  public void addListener(ConfigurationSourceListener listener) {
+    delegate.addListener(listener);
+  }
+
+  @Override
+  public void removeListener(ConfigurationSourceListener listener) {
+    delegate.removeListener(listener);
+  }
 }

@@ -50,6 +50,20 @@ public class FallbackConfigurationSource implements ConfigurationSource {
   }
 
   @Override
+  public void addListener(ConfigurationSourceListener listener) {
+    for (ConfigurationSource source : sources) {
+      source.addListener(listener);
+    }
+  }
+
+  @Override
+  public void removeListener(ConfigurationSourceListener listener) {
+    for (ConfigurationSource source : sources) {
+      source.removeListener(listener);
+    }
+  }
+
+  @Override
   public Map<String, String> getConfiguration(Environment environment) {
     boolean allMissEnvironment = true;
     for (ConfigurationSource source : sources) {

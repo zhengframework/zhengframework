@@ -13,6 +13,10 @@ public interface ConfigurationSource {
    */
   void init();
 
+  void addListener(ConfigurationSourceListener listener);
+
+  void removeListener(ConfigurationSourceListener listener);
+
   /**
    * Get configuration
    *

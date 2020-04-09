@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
-public class EnvironmentVariablesConfigurationSource implements ConfigurationSource {
+public class EnvironmentVariablesConfigurationSource extends AbstractConfigurationSource {
 
   private final static char ENV_DELIMITER = '_';
   private final static char PROPERTIES_DELIMITER = '.';
@@ -30,7 +30,7 @@ public class EnvironmentVariablesConfigurationSource implements ConfigurationSou
   }
 
   @Override
-  public Map<String, String> getConfiguration(Environment environment) {
+  protected Map<String, String> getConfigurationInternal(Environment environment) {
     Map<String, String> copyMap = new HashMap<>();
     String environmentContext = formatEnvironmentContext(environment);
     for (Entry<String, String> entry : System.getenv().entrySet()) {

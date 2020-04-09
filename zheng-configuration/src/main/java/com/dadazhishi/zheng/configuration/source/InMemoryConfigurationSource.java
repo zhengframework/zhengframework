@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-public class InMemoryConfigurationSource implements ConfigurationSource {
+public class InMemoryConfigurationSource extends AbstractConfigurationSource {
 
   private final Map<String, String> map;
 
@@ -24,7 +24,7 @@ public class InMemoryConfigurationSource implements ConfigurationSource {
   }
 
   @Override
-  public Map<String, String> getConfiguration(Environment environment) {
+  protected Map<String, String> getConfigurationInternal(Environment environment) {
     String environmentContext = formatEnvironmentContext(environment);
     Map<String, String> copyMap = new HashMap<>();
     for (Entry<String, String> entry : map.entrySet()) {
@@ -35,4 +35,5 @@ public class InMemoryConfigurationSource implements ConfigurationSource {
     }
     return Collections.unmodifiableMap(copyMap);
   }
+
 }

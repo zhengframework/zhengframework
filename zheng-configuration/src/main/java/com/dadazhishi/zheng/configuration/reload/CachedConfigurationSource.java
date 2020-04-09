@@ -4,11 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import com.dadazhishi.zheng.configuration.environment.Environment;
 import com.dadazhishi.zheng.configuration.ex.MissingEnvironmentException;
+import com.dadazhishi.zheng.configuration.source.AbstractConfigurationSource;
 import com.dadazhishi.zheng.configuration.source.ConfigurationSource;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CachedConfigurationSource implements ConfigurationSource {
+public class CachedConfigurationSource extends AbstractConfigurationSource {
 
   private final Map<String, Map<String, String>> cachedConfigurationPerEnvironment;
   private final ConfigurationSource underlyingSource;
@@ -20,7 +21,7 @@ public class CachedConfigurationSource implements ConfigurationSource {
   }
 
   @Override
-  public Map<String, String> getConfiguration(Environment environment) {
+  protected Map<String, String> getConfigurationInternal(Environment environment) {
     if (cachedConfigurationPerEnvironment.containsKey(environment.getName())) {
       return cachedConfigurationPerEnvironment.get(environment.getName());
     } else {

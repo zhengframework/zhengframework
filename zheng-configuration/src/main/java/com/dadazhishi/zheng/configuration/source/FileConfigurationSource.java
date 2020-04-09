@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
-public class FileConfigurationSource implements ConfigurationSource {
+public class FileConfigurationSource extends AbstractConfigurationSource {
 
   public static final CombinedLocationStrategy FILE_LOCATION_STRATEGY = new CombinedLocationStrategy(
       Arrays.asList(
@@ -95,7 +95,7 @@ public class FileConfigurationSource implements ConfigurationSource {
   }
 
   @Override
-  public Map<String, String> getConfiguration(Environment environment) {
+  protected Map<String, String> getConfigurationInternal(Environment environment) {
     String env = StringUtils.trimToEmpty(environment.getName());
     FileLocator copy = fileLocator.copy();
     if (StringUtils.isNotEmpty(copy.getSourceURL())) {

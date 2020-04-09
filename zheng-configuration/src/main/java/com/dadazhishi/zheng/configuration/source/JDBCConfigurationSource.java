@@ -11,7 +11,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 import org.apache.commons.lang3.StringUtils;
 
-public class JDBCConfigurationSource implements ConfigurationSource {
+public class JDBCConfigurationSource extends AbstractConfigurationSource {
 
   private final DataSource dataSource;
   private final String fetchSQL;
@@ -27,7 +27,7 @@ public class JDBCConfigurationSource implements ConfigurationSource {
   }
 
   @Override
-  public Map<String, String> getConfiguration(Environment environment) {
+  protected Map<String, String> getConfigurationInternal(Environment environment) {
     try (Connection connection = dataSource.getConnection()) {
       try (PreparedStatement preparedStatement = connection.prepareStatement(fetchSQL)) {
         String environmentName = StringUtils.trim(environment.getName());
