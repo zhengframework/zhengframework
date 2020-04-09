@@ -64,6 +64,19 @@
       <artifactId>jdbi3-sqlobject</artifactId>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <artifactId>querydsl-sql</artifactId>
+      <groupId>com.querydsl</groupId>
+      <version>4.3.1</version>
+    </dependency>
+    <!--<dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-sql-codegen</artifactId>
+      <version>4.3.1</version>
+      <scope>provided</scope>
+    </dependency>-->
+
   </dependencies>
 
   <dependencyManagement>
