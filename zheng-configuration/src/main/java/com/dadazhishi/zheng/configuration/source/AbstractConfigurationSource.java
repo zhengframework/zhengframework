@@ -5,15 +5,17 @@ import com.google.common.collect.MapDifference;
 import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.common.collect.Maps;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractConfigurationSource implements ConfigurationSource {
 
-  private Map<String, String> oldConfig = new HashMap<>();
+  private Map<String, Map<String, String>> oldConfig = new HashMap<>();
   private List<ConfigurationSourceListener> listenerList = new ArrayList<>();
 
   @Override
@@ -26,9 +28,10 @@ public abstract class AbstractConfigurationSource implements ConfigurationSource
     listenerList.remove(Objects.requireNonNull(listener));
   }
 
-  private void fireEvent(Map<String, String> newConfig) {
-    MapDifference<String, String> difference = Maps.difference(oldConfig, newConfig);
-    oldConfig = newConfig;
+  private void fireEvent(String environmentName, Map<String, String> newConfig) {
+    Map<String, String> map = oldConfig.getOrDefault(environmentName, Collections.emptyMap());
+    MapDifference<String, String> difference = Maps.difference(map, newConfig);
+    oldConfig.put(environmentName, newConfig);
     if (!difference.areEqual()) {
       for (Entry<String, ValueDifference<String>> entry : difference
           .entriesDiffering().entrySet()) {
@@ -48,7 +51,7 @@ public abstract class AbstractConfigurationSource implements ConfigurationSource
   @Override
   public Map<String, String> getConfiguration(Environment environment) {
     final Map<String, String> newConfig = getConfigurationInternal(environment);
-    fireEvent(newConfig);
+    fireEvent(StringUtils.trimToEmpty(environment.getName()), newConfig);
     return newConfig;
   }
 }
