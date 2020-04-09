@@ -59,6 +59,7 @@
     <module>zheng-rest</module>
     <module>zheng-webjars</module>
     <module>zheng-jdbc</module>
+    <module>zheng-shiro</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
