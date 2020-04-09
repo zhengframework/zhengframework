@@ -3,57 +3,34 @@ package com.dadazhishi.zheng.jdbc;
 import static com.google.inject.name.Names.named;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Injector;
 import com.google.inject.Key;
-import com.google.inject.Provides;
+import java.lang.annotation.Annotation;
 import java.util.Objects;
-import javax.inject.Provider;
-import javax.sql.DataSource;
-import lombok.extern.slf4j.Slf4j;
+import lombok.EqualsAndHashCode;
 import org.jdbi.v3.core.Jdbi;
-import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
-@Slf4j
+@EqualsAndHashCode(callSuper = false, of = {"qualifier"})
 public class JdbiModule extends AbstractModule {
 
-  private final String name;
+  private Annotation qualifier;
+
+  public JdbiModule(Annotation qualifier) {
+    this.qualifier = qualifier;
+  }
 
   public JdbiModule(String name) {
-    this.name = name;
+    this.qualifier = named(Objects.requireNonNull(name));
   }
 
-  public JdbiModule() {
-    name = null;
-  }
 
-  @Provides
-  public Jdbi jdbi(Provider<Injector> injectorProvider) {
-    DataSource dataSource;
-    if (name == null) {
-      dataSource = injectorProvider.get().getInstance(Key.get(DataSource.class));
+  @Override
+  protected void configure() {
+    JdbiProvider jdbiProvider = new JdbiProvider(qualifier);
+    requestInjection(jdbiProvider);
+    if (qualifier == null) {
+      bind(Key.get(Jdbi.class)).toProvider(jdbiProvider);
     } else {
-      dataSource = injectorProvider.get()
-          .getInstance(Key.get(DataSource.class, named(name)));
+      bind(Key.get(Jdbi.class, qualifier)).toProvider(jdbiProvider);
     }
-    Jdbi jdbi = Jdbi.create(dataSource);
-    jdbi.installPlugin(new SqlObjectPlugin());
-    return jdbi;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    JdbiModule that = (JdbiModule) o;
-    return Objects.equals(name, that.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name);
   }
 }
