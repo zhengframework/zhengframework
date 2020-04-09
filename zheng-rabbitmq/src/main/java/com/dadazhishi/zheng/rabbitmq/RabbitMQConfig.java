@@ -1,10 +1,12 @@
 package com.dadazhishi.zheng.rabbitmq;
 
 import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
 public class RabbitMQConfig implements ConfigurationDefine {

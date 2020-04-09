@@ -1,10 +1,12 @@
 package com.dadazhishi.zheng.memcached;
 
 import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
 public class MemcachedConfig implements ConfigurationDefine {
