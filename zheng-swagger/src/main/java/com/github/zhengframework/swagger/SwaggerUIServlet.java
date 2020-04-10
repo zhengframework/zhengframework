@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +23,9 @@ public class SwaggerUIServlet extends HttpServlet {
    */
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
   private static final int EOF = -1;
+  private final SwaggerConfig swaggerConfig;
   private boolean disableCache = false;
   private WebJarAssetLocator locator = new WebJarAssetLocator();
-
-  private final SwaggerConfig swaggerConfig;
 
   @Inject
   public SwaggerUIServlet(SwaggerConfig swaggerConfig) {
@@ -55,7 +53,7 @@ public class SwaggerUIServlet extends HttpServlet {
    */
   private static int copy(InputStream input, OutputStream output) throws IOException {
     long count = 0;
-    int n = 0;
+    int n;
     byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
     while (EOF != (n = input.read(buffer))) {
       output.write(buffer, 0, n);
@@ -68,7 +66,7 @@ public class SwaggerUIServlet extends HttpServlet {
   }
 
   @Override
-  public void init() throws ServletException {
+  public void init() {
     log.info("WebjarsServlet initialization completed");
   }
 

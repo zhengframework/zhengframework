@@ -51,6 +51,7 @@ public interface Configuration {
 
   /**
    * 根据prefix获得静态Configuration实例
+   *
    * @param prefix String
    * @return Configuration Map
    */

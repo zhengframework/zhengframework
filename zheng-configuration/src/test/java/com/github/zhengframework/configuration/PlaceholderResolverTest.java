@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class PlaceholderResolverTest {
 
-  private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("(\\$\\{(.*?)\\})");
+  private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("(\\$\\{(.*?)})");
 
   @Test
   public void resolvePlaceholders() {

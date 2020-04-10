@@ -24,12 +24,9 @@ public class FlywayManagedSchema implements ManagedSchema {
         .load();
 
     MigrationInfo current = flyway.info().current();
-    if (current == null)
-    {
+    if (current == null) {
       log.info("No existing schema found");
-    }
-    else
-    {
+    } else {
       log.info("Current schema version is {}", current.getVersion());
     }
 

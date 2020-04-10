@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class PlaceHolder {
 
-  private static final Pattern PATTERN = Pattern.compile("\\$\\{(.+?)\\}");
+  private static final Pattern PATTERN = Pattern.compile("\\$\\{(.+?)}");
   private final Configuration configuration;
 
   /**

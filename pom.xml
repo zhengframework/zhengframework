@@ -103,8 +103,8 @@
   <description>zheng framework is a modular framework with many ready-to-use modules</description>
   <developers>
     <developer>
-      <name>Zheng MingHai</name>
       <email>ysykart@gmail.com</email>
+      <name>Zheng MingHai</name>
       <url>https://github.com/ysykzheng</url>
     </developer>
   </developers>
@@ -126,45 +126,8 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
-  <profiles>
-    <profile>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <configuration>
-                  <gpgArguments>
-                    <arg>--pinentry-mode</arg>
-                    <arg>loopback</arg>
-                  </gpgArguments>
-                </configuration>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-              </execution>
-            </executions>
-            <groupId>org.apache.maven.plugins</groupId>
-            <version>1.5</version>
-          </plugin>
-        </plugins>
-      </build>
-      <id>ossrh</id>
-    </profile>
-  </profiles>
-
-  <scm>
-    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
-    </developerConnection>
-    <url>https://github.com/zhengframework/zhengframework</url>
-  </scm>
-
-  <url>https://github.com/zhengframework/zhengframework</url>
   <modelVersion>4.0.0</modelVersion>
+
   <modules>
     <module>zheng-configuration</module>
     <module>zheng-cache</module>
@@ -195,11 +158,48 @@
     <module>zheng-jdbc</module>
     <module>zheng-shiro</module>
   </modules>
+
   <packaging>pom</packaging>
+  <profiles>
+    <profile>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>1.5</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>ossrh</id>
+    </profile>
+  </profiles>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <scm>
+    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
+    <url>https://github.com/zhengframework/zhengframework</url>
+  </scm>
+  <url>https://github.com/zhengframework/zhengframework</url>
   <version>1.0</version>
 </project>

@@ -49,6 +49,7 @@ public class ServiceRegistry {
 
   /**
    * Add a listener to the servicemanager. Must be called before start.
+   *
    * @param listener ServiceManager.Listener
    */
   public void add(ServiceManager.Listener listener) {
@@ -62,6 +63,7 @@ public class ServiceRegistry {
 
   /**
    * Create a service manager from the present data. This should be done only once.
+   *
    * @return ServiceManager ServiceManager
    */
   ServiceManager makeServiceManager() {

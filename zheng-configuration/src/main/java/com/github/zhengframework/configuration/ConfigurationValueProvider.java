@@ -10,10 +10,10 @@ class ConfigurationValueProvider implements Provider<String> {
   private final String key;
   private Configuration configuration;
 
-   ConfigurationValueProvider(Configuration configuration, String key) {
-     this.key = key;
-     this.configuration = configuration;
-   }
+  ConfigurationValueProvider(Configuration configuration, String key) {
+    this.key = key;
+    this.configuration = configuration;
+  }
 
   @Override
   public String get() {

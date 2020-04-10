@@ -19,21 +19,18 @@ import lombok.extern.slf4j.Slf4j;
  * Add the metrics-guice MetricsInstrumentationModule to scan for metrics annotations.
  */
 @Slf4j
-@EqualsAndHashCode(callSuper = false, of = {})
+@EqualsAndHashCode(callSuper = false)
 public class MetricsModule extends AbstractModule implements ConfigurationAware {
 
+  private final MetricRegistry metricRegistry = new MetricRegistry();
+  private final MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
+  private final AnnotationResolver annotationResolver = new MethodAnnotationResolver();
   private Configuration configuration;
 
   @Override
   public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
-
-
-  private final MetricRegistry metricRegistry = new MetricRegistry();
-  private final MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
-  private final AnnotationResolver annotationResolver = new MethodAnnotationResolver();
-
 
   @Override
   protected void configure() {

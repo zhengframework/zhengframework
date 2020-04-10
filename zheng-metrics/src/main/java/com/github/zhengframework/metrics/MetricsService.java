@@ -1,4 +1,5 @@
 package com.github.zhengframework.metrics;
+
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.jmx.JmxReporter;
 import com.codahale.metrics.jvm.BufferPoolMetricSet;
@@ -36,13 +37,13 @@ public class MetricsService extends AbstractIdleService {
   }
 
   @Override
-  protected void startUp() throws Exception {
+  protected void startUp() {
     jmxReporter = JmxReporter.forRegistry(metricRegistry).build();
     jmxReporter.start();
   }
 
   @Override
-  protected void shutDown() throws Exception {
+  protected void shutDown() {
     jmxReporter.stop();
   }
 }

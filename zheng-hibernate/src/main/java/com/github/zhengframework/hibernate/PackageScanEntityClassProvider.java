@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 
 /**
  * Recursively locates {@code @Entity} annotated classes in the argument {@link #entityPackages}.
- *
- *
  */
 public class PackageScanEntityClassProvider implements HibernateEntityClassProvider {
 

@@ -11,13 +11,13 @@ import javax.annotation.Nullable;
  */
 public interface AnnotationResolver {
 
-    /**
-     * @param annotationClass Metrics annotation to look for
-     * @param method method that the corresponding metric may be applied to
-     * @param <T> annotation type
-     * @return a T instance, if found, else null
-     */
-    @Nullable
-    <T extends Annotation> T findAnnotation(@Nonnull Class<T> annotationClass,
-        @Nonnull Method method);
+  /**
+   * @param annotationClass Metrics annotation to look for
+   * @param method method that the corresponding metric may be applied to
+   * @param <T> annotation type
+   * @return a T instance, if found, else null
+   */
+  @Nullable
+  <T extends Annotation> T findAnnotation(@Nonnull Class<T> annotationClass,
+      @Nonnull Method method);
 }
