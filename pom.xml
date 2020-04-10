@@ -194,7 +194,6 @@
     <module>zheng-webjars</module>
     <module>zheng-jdbc</module>
     <module>zheng-shiro</module>
-    <module>zheng-jndi</module>
   </modules>
   <packaging>pom</packaging>
   <properties>
