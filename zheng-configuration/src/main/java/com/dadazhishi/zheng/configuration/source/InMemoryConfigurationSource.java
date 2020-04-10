@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration.source;
+package com.github.zhengframework.configuration.source;
 
-import static com.dadazhishi.zheng.configuration.source.EnvironmentVariablesConfigurationSource.convertToPropertiesKey;
-import static com.dadazhishi.zheng.configuration.source.EnvironmentVariablesConfigurationSource.formatEnvironmentContext;
+import static com.github.zhengframework.configuration.source.EnvironmentVariablesConfigurationSource.convertToPropertiesKey;
+import static com.github.zhengframework.configuration.source.EnvironmentVariablesConfigurationSource.formatEnvironmentContext;
 
-import com.dadazhishi.zheng.configuration.environment.Environment;
+import com.github.zhengframework.configuration.environment.Environment;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

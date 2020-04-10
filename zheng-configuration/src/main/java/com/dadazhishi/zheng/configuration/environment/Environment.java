@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.environment;
+package com.github.zhengframework.configuration.environment;
 
 
 public interface Environment {

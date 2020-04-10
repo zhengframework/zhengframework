@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.inject.Inject;

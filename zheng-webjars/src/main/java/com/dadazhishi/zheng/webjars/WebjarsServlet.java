@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.webjars;
+package com.github.zhengframework.webjars;
 
 import java.io.IOException;
 import java.io.InputStream;

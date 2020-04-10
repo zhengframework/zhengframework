@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 
 import static org.mockito.Mockito.times;
@@ -6,9 +6,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import com.dadazhishi.zheng.hibernate.integrator.AutoRegisteringListener;
-import com.dadazhishi.zheng.hibernate.integrator.AutoRegisteringListener.RegistrationType;
-import com.dadazhishi.zheng.hibernate.integrator.AutoRegisteringListenerIntegrator;
+import com.github.zhengframework.hibernate.integrator.AutoRegisteringListener;
+import com.github.zhengframework.hibernate.integrator.AutoRegisteringListener.RegistrationType;
+import com.github.zhengframework.hibernate.integrator.AutoRegisteringListenerIntegrator;
 import com.google.common.collect.ImmutableSet;
 import java.util.ArrayList;
 import java.util.List;

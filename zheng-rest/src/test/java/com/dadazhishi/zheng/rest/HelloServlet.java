@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
 import java.io.IOException;
 import javax.inject.Singleton;

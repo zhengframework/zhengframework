@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.ex;
+package com.github.zhengframework.configuration.ex;
 
 public class ConfigurationSourceException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.reload;
+package com.github.zhengframework.configuration.reload;
 
 public interface ReloadStrategy {
 

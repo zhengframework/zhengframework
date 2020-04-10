@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.jdbc;
+package com.github.zhengframework.jdbc;
 
 import com.google.inject.Injector;
 import com.google.inject.Key;

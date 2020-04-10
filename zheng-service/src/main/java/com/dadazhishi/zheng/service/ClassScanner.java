@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.service;
+package com.github.zhengframework.service;
 
 import com.google.inject.Binding;
 import com.google.inject.Injector;

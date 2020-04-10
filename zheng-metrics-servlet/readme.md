@@ -1,4 +1,4 @@
-config class: com.dadazhishi.zheng.metrics.servlet.MetricsServletConfig
+config class: com.github.zhengframework.metrics.servlet.MetricsServletConfig
 
 config example:
 ```

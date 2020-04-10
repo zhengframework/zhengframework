@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.healthchecks;
+package com.github.zhengframework.healthchecks;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.dadazhishi.zheng.service.ServiceRegistry;
+import com.github.zhengframework.service.ServiceRegistry;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.AbstractScheduledService;
 import com.google.inject.Inject;

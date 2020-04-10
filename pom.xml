@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng</artifactId>
+  <artifactId>zhengframework</artifactId>
   <build>
     <plugins>
       <plugin>
@@ -14,22 +14,156 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>3.8.1</version>
       </plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <goals>deploy</goals>
+          <releaseProfiles>ossrh</releaseProfiles>
+          <useReleaseProfile>false</useReleaseProfile>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.5</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>2.2.0</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <id>enforce-maven</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.0.0-M1</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <aggregate>true</aggregate>
+          <charset>UTF-8</charset>
+          <docencoding>UTF-8</docencoding>
+          <encoding>UTF-8</encoding>
+          <nohelp>true</nohelp>
+          <show>private</show>
+          <tags>
+            <tag>
+              <head>Http Response Details:</head>
+              <name>http.response.details</name>
+              <placement>a</placement>
+            </tag>
+          </tags>
+          <!--<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>-->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-javadocs</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.10.4</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+            <id>attach-sources</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.2.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <configuration>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <serverId>ossrh</serverId>
+        </configuration>
+        <extensions>true</extensions>
+        <groupId>org.sonatype.plugins</groupId>
+        <version>1.6.8</version>
+      </plugin>
     </plugins>
   </build>
+  <description>zheng framework is a modular framework with many ready-to-use modules</description>
   <developers>
     <developer>
       <name>Zheng MingHai</name>
+      <email>ysykart@gmail.com</email>
       <url>https://github.com/ysykzheng</url>
     </developer>
   </developers>
-
-  <groupId>com.dadazhishi.zheng</groupId>
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <groupId>com.github.zhengframework</groupId>
   <licenses>
     <license>
-      <name>The Apache License, Version 2.0</name>
+      <distribution>repo</distribution>
+      <name>Apache 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+  <profiles>
+    <profile>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>1.5</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>ossrh</id>
+    </profile>
+  </profiles>
+
+  <scm>
+    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
+    <url>https://github.com/zhengframework/zhengframework</url>
+  </scm>
+
+  <url>https://github.com/zhengframework/zhengframework</url>
   <modelVersion>4.0.0</modelVersion>
   <modules>
     <module>zheng-configuration</module>

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.activemq;
+package com.github.zhengframework.activemq;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 

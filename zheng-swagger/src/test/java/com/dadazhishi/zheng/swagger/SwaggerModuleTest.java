@@ -1,13 +1,13 @@
-package com.dadazhishi.zheng.swagger;
+package com.github.zhengframework.swagger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.dadazhishi.zheng.rest.RestModule;
-import com.dadazhishi.zheng.service.Application;
-import com.dadazhishi.zheng.web.WebConfig;
-import com.dadazhishi.zheng.web.WebModule;
-import com.dadazhishi.zheng.webjars.WebjarsModule;
+import com.github.zhengframework.rest.RestModule;
+import com.github.zhengframework.service.Application;
+import com.github.zhengframework.web.WebConfig;
+import com.github.zhengframework.web.WebModule;
+import com.github.zhengframework.webjars.WebjarsModule;
 import java.io.IOException;
 import java.util.Objects;
 import okhttp3.OkHttpClient;

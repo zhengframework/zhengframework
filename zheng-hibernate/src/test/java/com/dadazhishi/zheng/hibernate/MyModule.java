@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 import static org.hibernate.cfg.AvailableSettings.DIALECT;
 import static org.hibernate.cfg.AvailableSettings.HBM2DDL_AUTO;

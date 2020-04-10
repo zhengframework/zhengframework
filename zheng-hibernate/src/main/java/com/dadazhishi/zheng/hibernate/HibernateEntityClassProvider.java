@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 import java.util.List;
 import javax.inject.Provider;

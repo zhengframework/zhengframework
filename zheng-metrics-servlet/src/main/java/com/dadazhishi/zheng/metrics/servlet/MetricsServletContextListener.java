@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.metrics.servlet;
+package com.github.zhengframework.metrics.servlet;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlets.MetricsServlet;

@@ -1,11 +1,11 @@
-package com.dadazhishi.zheng.jdbc;
+package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
-import com.dadazhishi.zheng.service.Application;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationBuilder;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.service.Application;
 import com.google.inject.Key;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;

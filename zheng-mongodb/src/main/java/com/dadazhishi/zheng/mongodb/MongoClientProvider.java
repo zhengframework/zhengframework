@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.mongodb;
+package com.github.zhengframework.mongodb;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClient;

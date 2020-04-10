@@ -1,6 +1,6 @@
 http://mybatis.org/guice/core.html
 
-config class: com.dadazhishi.zheng.web.WebConfig
+config class: com.github.zhengframework.web.WebConfig
 
 config example:
 ```

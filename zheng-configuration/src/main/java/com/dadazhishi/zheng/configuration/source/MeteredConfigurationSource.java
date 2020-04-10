@@ -1,8 +1,8 @@
-package com.dadazhishi.zheng.configuration.source;
+package com.github.zhengframework.configuration.source;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
-import com.dadazhishi.zheng.configuration.environment.Environment;
+import com.github.zhengframework.configuration.environment.Environment;
 import java.util.Map;
 import java.util.Objects;
 

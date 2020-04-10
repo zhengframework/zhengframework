@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.configuration.io;
+package com.github.zhengframework.configuration.io;
 
-import com.dadazhishi.zheng.configuration.ex.ConfigurationException;
+import com.github.zhengframework.configuration.ex.ConfigurationException;
 import java.io.InputStream;
 import java.net.URL;
 

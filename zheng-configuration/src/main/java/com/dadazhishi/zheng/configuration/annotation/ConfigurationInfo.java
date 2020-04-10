@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.annotation;
+package com.github.zhengframework.configuration.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

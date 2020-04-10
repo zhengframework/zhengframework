@@ -1,11 +1,11 @@
-package com.dadazhishi.zheng.redis;
+package com.github.zhengframework.redis;
 
 import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.configuration.SubsetConfiguration;
-import com.dadazhishi.zheng.service.Application;
 import com.github.fppt.jedismock.RedisServer;
+import com.github.zhengframework.configuration.SubsetConfiguration;
+import com.github.zhengframework.service.Application;
 import com.google.inject.Key;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.io;
+package com.github.zhengframework.configuration.io;
 
 import com.google.common.base.Preconditions;
 import java.net.URL;

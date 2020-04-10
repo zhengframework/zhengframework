@@ -1,8 +1,6 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
-import static org.junit.Assert.assertEquals;
-
-import com.dadazhishi.zheng.service.Run;
+import com.github.zhengframework.service.Run;
 import com.google.inject.CreationException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

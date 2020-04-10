@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
-import com.dadazhishi.zheng.configuration.annotation.ConfigurationExample;
-import com.dadazhishi.zheng.configuration.annotation.ConfigurationInfo;
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+import com.github.zhengframework.configuration.annotation.ConfigurationExample;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;

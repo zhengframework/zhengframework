@@ -1,9 +1,9 @@
-//package com.dadazhishi.zheng.healthchecks;
+//package com.github.zhengframework.healthchecks;
 //
 //import com.codahale.metrics.health.HealthCheck;
 //import com.codahale.metrics.health.jvm.ThreadDeadlockHealthCheck;
-//import com.dadazhishi.zheng.metrics.MetricsModule;
-//import com.dadazhishi.zheng.service.Run;
+//import com.github.zhengframework.metrics.MetricsModule;
+//import com.github.zhengframework.service.Run;
 //import com.google.inject.AbstractModule;
 //import com.google.inject.Guice;
 //import com.google.inject.Inject;

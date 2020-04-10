@@ -33,7 +33,7 @@
     </dependency>
     <dependency>
       <artifactId>zheng-configuration</artifactId>
-      <groupId>com.dadazhishi.zheng</groupId>
+      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
       <artifactId>jopt-simple</artifactId>
@@ -45,7 +45,7 @@
     <dependencies>
       <dependency>
         <artifactId>zheng-bom</artifactId>
-        <groupId>com.dadazhishi.zheng</groupId>
+        <groupId>com.github.zhengframework</groupId>
         <scope>import</scope>
         <type>pom</type>
         <version>${project.version}</version>
@@ -54,8 +54,8 @@
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>zheng</artifactId>
-    <groupId>com.dadazhishi.zheng</groupId>
+    <artifactId>zhengframework</artifactId>
+    <groupId>com.github.zhengframework</groupId>
     <version>1.0</version>
   </parent>
 

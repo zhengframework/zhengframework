@@ -1,10 +1,10 @@
-package com.dadazhishi.zheng.metrics;
+package com.github.zhengframework.metrics;
 
 import com.codahale.metrics.MetricRegistry;
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationAware;
-import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.service.ServicesModule;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.service.ServicesModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.palominolabs.metrics.guice.GaugeInstanceClassMetricNamer;

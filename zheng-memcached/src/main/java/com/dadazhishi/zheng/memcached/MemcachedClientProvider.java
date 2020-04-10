@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.memcached;
+package com.github.zhengframework.memcached;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

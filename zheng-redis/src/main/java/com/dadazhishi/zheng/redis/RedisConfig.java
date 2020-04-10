@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.redis;
+package com.github.zhengframework.redis;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

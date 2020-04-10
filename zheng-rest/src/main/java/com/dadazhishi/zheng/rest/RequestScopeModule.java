@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;

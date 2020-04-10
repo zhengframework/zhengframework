@@ -1,4 +1,4 @@
-config class: com.dadazhishi.zheng.webjars.WebjarsConfig
+config class: com.github.zhengframework.webjars.WebjarsConfig
 
 config example:
 ```

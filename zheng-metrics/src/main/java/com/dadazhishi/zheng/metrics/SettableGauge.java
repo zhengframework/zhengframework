@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.metrics;
+package com.github.zhengframework.metrics;
 
 import com.codahale.metrics.Gauge;
 import com.codahale.metrics.Metric;

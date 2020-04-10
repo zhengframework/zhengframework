@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.spi;
+package com.github.zhengframework.configuration.spi;
 
 public interface ConfigurationDefine {
 

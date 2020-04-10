@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.web;
+package com.github.zhengframework.web;
 
-import com.dadazhishi.zheng.service.ServiceRegistry;
+import com.github.zhengframework.service.ServiceRegistry;
 import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;

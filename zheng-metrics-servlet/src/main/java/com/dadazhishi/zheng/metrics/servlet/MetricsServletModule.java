@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.metrics.servlet;
+package com.github.zhengframework.metrics.servlet;
 
 import com.codahale.metrics.servlets.AdminServlet;
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationAware;
-import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.servlet.ServletModule;

@@ -15,10 +15,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dadazhishi.zheng.mybatis.UserMapper2">
+<mapper namespace="com.github.zhengframework.mybatis.UserMapper2">
 
   <select id="getUser" parameterType="java.lang.String"
-    resultType="com.dadazhishi.zheng.mybatis.User">
+    resultType="com.github.zhengframework.mybatis.User">
     select * from users where id=#{value}
   </select>
 </mapper>

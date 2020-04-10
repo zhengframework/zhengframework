@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.dadazhishi.zheng.configuration.parser.PropertiesConfigurationParser;
+import com.github.zhengframework.configuration.parser.PropertiesConfigurationParser;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Before;

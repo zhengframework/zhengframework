@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.rabbitmq;
+package com.github.zhengframework.rabbitmq;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.Data;
 import lombok.NoArgsConstructor;

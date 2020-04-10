@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.io;
+package com.github.zhengframework.configuration.io;
 
 import java.net.URL;
 

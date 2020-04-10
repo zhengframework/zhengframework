@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.shiro;
+package com.github.zhengframework.shiro;
 
 import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;

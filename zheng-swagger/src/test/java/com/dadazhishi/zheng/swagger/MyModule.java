@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.swagger;
+package com.github.zhengframework.swagger;
 
 import com.google.inject.servlet.ServletModule;
 

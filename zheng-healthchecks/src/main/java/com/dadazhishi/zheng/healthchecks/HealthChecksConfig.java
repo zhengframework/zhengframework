@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.healthchecks;
+package com.github.zhengframework.healthchecks;
 
 import io.dropwizard.util.Duration;
 import lombok.Data;

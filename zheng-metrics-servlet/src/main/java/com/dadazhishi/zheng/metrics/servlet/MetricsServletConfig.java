@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.metrics.servlet;
+package com.github.zhengframework.metrics.servlet;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

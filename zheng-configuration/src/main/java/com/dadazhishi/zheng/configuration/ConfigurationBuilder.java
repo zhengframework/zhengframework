@@ -1,18 +1,18 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static java.util.Objects.requireNonNull;
 
 import com.codahale.metrics.MetricRegistry;
-import com.dadazhishi.zheng.configuration.environment.DefaultEnvironment;
-import com.dadazhishi.zheng.configuration.environment.Environment;
-import com.dadazhishi.zheng.configuration.reload.CachedConfigurationSource;
-import com.dadazhishi.zheng.configuration.reload.ImmediateReloadStrategy;
-import com.dadazhishi.zheng.configuration.reload.MeteredReloadable;
-import com.dadazhishi.zheng.configuration.reload.ReloadStrategy;
-import com.dadazhishi.zheng.configuration.reload.Reloadable;
-import com.dadazhishi.zheng.configuration.source.ConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.EmptyConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.MeteredConfigurationSource;
+import com.github.zhengframework.configuration.environment.DefaultEnvironment;
+import com.github.zhengframework.configuration.environment.Environment;
+import com.github.zhengframework.configuration.reload.CachedConfigurationSource;
+import com.github.zhengframework.configuration.reload.ImmediateReloadStrategy;
+import com.github.zhengframework.configuration.reload.MeteredReloadable;
+import com.github.zhengframework.configuration.reload.ReloadStrategy;
+import com.github.zhengframework.configuration.reload.Reloadable;
+import com.github.zhengframework.configuration.source.ConfigurationSource;
+import com.github.zhengframework.configuration.source.EmptyConfigurationSource;
+import com.github.zhengframework.configuration.source.MeteredConfigurationSource;
 
 public class ConfigurationBuilder {
 

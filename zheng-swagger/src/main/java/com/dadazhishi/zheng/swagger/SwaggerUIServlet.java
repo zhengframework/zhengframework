@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.swagger;
+package com.github.zhengframework.swagger;
 
 import java.io.IOException;
 import java.io.InputStream;

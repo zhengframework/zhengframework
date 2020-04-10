@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.configuration.objects.Food;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.configuration.objects.Food;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import java.io.IOException;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache;
+package com.github.zhengframework.cache;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;

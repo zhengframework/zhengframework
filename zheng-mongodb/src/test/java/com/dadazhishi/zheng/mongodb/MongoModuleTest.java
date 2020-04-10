@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.mongodb;
+package com.github.zhengframework.mongodb;
 
 import de.flapdoodle.embed.mongo.MongodExecutable;
 import de.flapdoodle.embed.mongo.MongodProcess;

@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;

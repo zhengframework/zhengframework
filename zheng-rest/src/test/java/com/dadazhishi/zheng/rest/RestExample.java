@@ -1,11 +1,11 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
-import com.dadazhishi.zheng.service.Application;
-import com.dadazhishi.zheng.web.WebConfig;
-import com.dadazhishi.zheng.web.WebModule;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationBuilder;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.service.Application;
+import com.github.zhengframework.web.WebConfig;
+import com.github.zhengframework.web.WebModule;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;

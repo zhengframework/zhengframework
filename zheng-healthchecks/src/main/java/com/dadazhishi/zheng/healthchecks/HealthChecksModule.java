@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.healthchecks;
+package com.github.zhengframework.healthchecks;
 
 import com.codahale.metrics.health.HealthCheckRegistry;
-import com.dadazhishi.zheng.service.ServicesModule;
+import com.github.zhengframework.service.ServicesModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;

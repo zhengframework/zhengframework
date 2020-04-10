@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate.integrator;
+package com.github.zhengframework.hibernate.integrator;
 
 import com.google.common.collect.ImmutableSet;
 import org.hibernate.event.spi.EventType;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.objects;
+package com.github.zhengframework.configuration.objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.metrics.example;
+package com.github.zhengframework.metrics.example;
 
 import com.codahale.metrics.annotation.Counted;
 import com.codahale.metrics.annotation.Timed;

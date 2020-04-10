@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 import static org.junit.Assert.assertTrue;
 
@@ -10,7 +10,7 @@ public class PackageScanEntityClassProviderTest {
   @Test
   public void get() {
     final PackageScanEntityClassProvider provider = new PackageScanEntityClassProvider(
-        "com.dadazhishi.zheng.hibernate");
+        "com.github.zhengframework.hibernate");
     final List<Class<?>> entities = provider.get();
     assertTrue(entities.size() > 0);
 //    assertEquals(TestEntity.class, entities.get(0));

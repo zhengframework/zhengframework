@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

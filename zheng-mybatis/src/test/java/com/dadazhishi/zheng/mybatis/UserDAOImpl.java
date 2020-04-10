@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.mybatis;
+package com.github.zhengframework.mybatis;
 
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +14,6 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public User getUser(String userId) {
-    return session.selectOne("com.dadazhishi.zheng.mybatis.UserMapper.getUser", userId);
+    return session.selectOne("com.github.zhengframework.mybatis.UserMapper.getUser", userId);
   }
 }

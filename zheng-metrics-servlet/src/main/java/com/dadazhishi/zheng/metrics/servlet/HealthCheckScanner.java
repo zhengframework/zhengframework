@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.metrics.servlet;
+package com.github.zhengframework.metrics.servlet;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.dadazhishi.zheng.service.ClassScanner;
+import com.github.zhengframework.service.ClassScanner;
 import com.google.inject.Injector;
 import javax.inject.Inject;
 

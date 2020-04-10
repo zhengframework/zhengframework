@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.configuration.source;
+package com.github.zhengframework.configuration.source;
 
-import com.dadazhishi.zheng.configuration.environment.Environment;
-import com.dadazhishi.zheng.configuration.ex.ConfigurationSourceException;
+import com.github.zhengframework.configuration.environment.Environment;
+import com.github.zhengframework.configuration.ex.ConfigurationSourceException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

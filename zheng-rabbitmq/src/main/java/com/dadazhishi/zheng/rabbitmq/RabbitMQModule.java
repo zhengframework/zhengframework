@@ -1,10 +1,10 @@
-package com.dadazhishi.zheng.rabbitmq;
+package com.github.zhengframework.rabbitmq;
 
 import static com.google.inject.name.Names.named;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationAware;
-import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;

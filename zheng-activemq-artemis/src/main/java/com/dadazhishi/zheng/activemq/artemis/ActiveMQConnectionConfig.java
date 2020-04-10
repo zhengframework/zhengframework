@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.activemq.artemis;
+package com.github.zhengframework.activemq.artemis;
 
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 

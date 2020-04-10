@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import javax.inject.Provider;
 import org.slf4j.Logger;

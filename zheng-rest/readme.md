@@ -1,4 +1,4 @@
-config class: com.dadazhishi.zheng.rest.RestConfig
+config class: com.github.zhengframework.rest.RestConfig
 
 config example:
 ```

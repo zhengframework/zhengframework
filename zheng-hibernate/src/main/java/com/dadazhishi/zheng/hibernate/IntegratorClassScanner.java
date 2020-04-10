@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
-import com.dadazhishi.zheng.service.ClassScanner;
+import com.github.zhengframework.service.ClassScanner;
 import com.google.inject.Injector;
 import org.hibernate.integrator.spi.Integrator;
 

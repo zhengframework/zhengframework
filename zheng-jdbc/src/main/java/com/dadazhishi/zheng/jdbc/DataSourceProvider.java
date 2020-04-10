@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.jdbc;
+package com.github.zhengframework.jdbc;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

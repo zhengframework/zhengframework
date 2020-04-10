@@ -1,4 +1,4 @@
-config class: com.dadazhishi.zheng.redis.RedisConfig
+config class: com.github.zhengframework.redis.RedisConfig
 
 config example:
 ```

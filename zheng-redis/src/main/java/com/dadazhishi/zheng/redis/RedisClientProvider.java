@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.redis;
+package com.github.zhengframework.redis;
 
 import com.google.common.base.Strings;
 import io.lettuce.core.RedisClient;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.activemq.artemis;
+package com.github.zhengframework.activemq.artemis;
 
 import static org.junit.Assert.assertEquals;
 

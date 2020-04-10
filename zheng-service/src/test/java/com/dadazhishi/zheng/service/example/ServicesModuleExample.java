@@ -1,8 +1,8 @@
-package com.dadazhishi.zheng.service.example;
+package com.github.zhengframework.service.example;
 
-import com.dadazhishi.zheng.service.Run;
-import com.dadazhishi.zheng.service.ServiceRegistry;
-import com.dadazhishi.zheng.service.ServicesModule;
+import com.github.zhengframework.service.Run;
+import com.github.zhengframework.service.ServiceRegistry;
+import com.github.zhengframework.service.ServicesModule;
 import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.common.util.concurrent.Service;
 import com.google.inject.AbstractModule;

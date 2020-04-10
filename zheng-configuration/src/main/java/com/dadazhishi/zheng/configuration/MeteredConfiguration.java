@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;

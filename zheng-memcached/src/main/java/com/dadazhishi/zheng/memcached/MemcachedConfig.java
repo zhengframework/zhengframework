@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.memcached;
+package com.github.zhengframework.memcached;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.NoArgsConstructor;

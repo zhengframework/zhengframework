@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.web;
+package com.github.zhengframework.web;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Injector;

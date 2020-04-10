@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static com.google.inject.name.Names.named;
 

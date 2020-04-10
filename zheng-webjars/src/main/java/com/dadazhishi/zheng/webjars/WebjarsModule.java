@@ -1,10 +1,10 @@
-package com.dadazhishi.zheng.webjars;
+package com.github.zhengframework.webjars;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationAware;
-import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.web.PathUtils;
-import com.dadazhishi.zheng.web.WebModule;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.web.PathUtils;
+import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.servlet.ServletModule;
 import java.util.Collections;

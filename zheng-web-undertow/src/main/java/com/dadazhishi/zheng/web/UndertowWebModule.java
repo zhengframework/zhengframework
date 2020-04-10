@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.web;
+package com.github.zhengframework.web;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

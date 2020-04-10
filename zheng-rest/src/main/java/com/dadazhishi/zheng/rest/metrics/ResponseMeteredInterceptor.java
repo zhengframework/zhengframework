@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rest.metrics;
+package com.github.zhengframework.rest.metrics;
 
 import com.codahale.metrics.Meter;
 import java.io.IOException;

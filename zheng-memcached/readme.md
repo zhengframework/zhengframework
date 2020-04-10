@@ -1,4 +1,4 @@
-config class: com.dadazhishi.zheng.memcached.MemcachedConfig
+config class: com.github.zhengframework.memcached.MemcachedConfig
 
 config example:
 ```

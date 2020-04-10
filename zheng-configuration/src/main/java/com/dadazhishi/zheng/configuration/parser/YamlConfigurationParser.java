@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration.parser;
+package com.github.zhengframework.configuration.parser;
 
-import com.dadazhishi.zheng.configuration.ex.ConfigurationSourceException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.github.zhengframework.configuration.ex.ConfigurationSourceException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;

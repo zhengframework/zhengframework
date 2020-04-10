@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
 
 import com.fasterxml.jackson.databind.JsonMappingException;

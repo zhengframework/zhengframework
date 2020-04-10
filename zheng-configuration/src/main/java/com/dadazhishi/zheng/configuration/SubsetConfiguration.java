@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 
-import static com.dadazhishi.zheng.configuration.SimpleConfiguration.checkPrefix;
+import static com.github.zhengframework.configuration.SimpleConfiguration.checkPrefix;
 
 import java.util.HashMap;
 import java.util.Map;

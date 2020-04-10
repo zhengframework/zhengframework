@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.mybatis;
+package com.github.zhengframework.mybatis;
 
 import javax.inject.Inject;
 import org.mybatis.guice.transactional.Transactional;

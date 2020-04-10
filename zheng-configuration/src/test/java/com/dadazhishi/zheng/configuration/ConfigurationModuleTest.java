@@ -1,12 +1,12 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.configuration.objects.Apple;
-import com.dadazhishi.zheng.configuration.objects.Banana;
-import com.dadazhishi.zheng.configuration.objects.Food;
-import com.dadazhishi.zheng.configuration.objects.NamedAnnotation;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.configuration.objects.Apple;
+import com.github.zhengframework.configuration.objects.Banana;
+import com.github.zhengframework.configuration.objects.Food;
+import com.github.zhengframework.configuration.objects.NamedAnnotation;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

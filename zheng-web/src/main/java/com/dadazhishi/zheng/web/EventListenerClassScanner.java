@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.web;
+package com.github.zhengframework.web;
 
-import com.dadazhishi.zheng.service.ClassScanner;
+import com.github.zhengframework.service.ClassScanner;
 import com.google.inject.Injector;
 import java.util.EventListener;
 

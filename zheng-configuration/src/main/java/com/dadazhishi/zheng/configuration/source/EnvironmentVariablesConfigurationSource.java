@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.configuration.source;
+package com.github.zhengframework.configuration.source;
 
-import com.dadazhishi.zheng.configuration.environment.Environment;
+import com.github.zhengframework.configuration.environment.Environment;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;

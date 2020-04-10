@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.objects;
+package com.github.zhengframework.configuration.objects;
 
 import java.util.List;
 import java.util.Map;

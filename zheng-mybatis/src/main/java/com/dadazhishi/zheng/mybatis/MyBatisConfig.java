@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.mybatis;
+package com.github.zhengframework.mybatis;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

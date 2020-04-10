@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.activemq.artemis;
+package com.github.zhengframework.activemq.artemis;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;

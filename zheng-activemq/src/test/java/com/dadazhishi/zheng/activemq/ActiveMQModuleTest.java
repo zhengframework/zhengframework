@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.activemq;
+package com.github.zhengframework.activemq;
 
 import static org.junit.Assert.assertEquals;
 

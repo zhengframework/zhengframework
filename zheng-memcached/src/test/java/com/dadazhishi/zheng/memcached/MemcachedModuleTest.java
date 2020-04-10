@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.memcached;
+package com.github.zhengframework.memcached;
 
 import com.thimbleware.jmemcached.CacheImpl;
 import com.thimbleware.jmemcached.Key;

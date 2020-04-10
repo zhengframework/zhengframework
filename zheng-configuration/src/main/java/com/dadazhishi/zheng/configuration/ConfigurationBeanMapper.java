@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
-import static com.dadazhishi.zheng.configuration.ConfigurationDefineUtils.checkConfigurationDefine;
+import static com.github.zhengframework.configuration.ConfigurationDefineUtils.checkConfigurationDefine;
 
-import com.dadazhishi.zheng.configuration.annotation.ConfigurationInfo;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import java.io.IOException;

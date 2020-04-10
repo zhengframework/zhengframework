@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import com.dadazhishi.zheng.configuration.ex.UnresolvablePlaceholdersException;
+import com.github.zhengframework.configuration.ex.UnresolvablePlaceholdersException;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 import com.google.inject.persist.Transactional;
 import javax.inject.Inject;

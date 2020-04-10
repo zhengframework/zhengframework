@@ -1,7 +1,6 @@
-package com.dadazhishi.zheng.mybatis;
+package com.github.zhengframework.mybatis;
 
 import static org.apache.ibatis.io.Resources.getResourceAsReader;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.google.inject.Guice;

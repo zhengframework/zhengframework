@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.parser;
+package com.github.zhengframework.configuration.parser;
 
 import java.io.InputStream;
 import java.util.Arrays;

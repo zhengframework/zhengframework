@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.hibernate.integrator;
+package com.github.zhengframework.hibernate.integrator;
 
-import com.dadazhishi.zheng.hibernate.integrator.AutoRegisteringListener.RegistrationType;
+import com.github.zhengframework.hibernate.integrator.AutoRegisteringListener.RegistrationType;
 import com.google.common.collect.ImmutableSet;
 import javax.inject.Inject;
 import org.hibernate.boot.Metadata;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rabbitmq;
+package com.github.zhengframework.rabbitmq;
 
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.AbstractIdleService;

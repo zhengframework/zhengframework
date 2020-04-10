@@ -1,14 +1,14 @@
-package com.dadazhishi.zheng.service;
+package com.github.zhengframework.service;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationAware;
-import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.io.FileLocator;
-import com.dadazhishi.zheng.configuration.source.ConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.EnvironmentVariablesConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.FallbackConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.SystemPropertiesConfigurationSource;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBuilder;
+import com.github.zhengframework.configuration.io.FileLocator;
+import com.github.zhengframework.configuration.source.ConfigurationSource;
+import com.github.zhengframework.configuration.source.EnvironmentVariablesConfigurationSource;
+import com.github.zhengframework.configuration.source.FallbackConfigurationSource;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.configuration.source.SystemPropertiesConfigurationSource;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;

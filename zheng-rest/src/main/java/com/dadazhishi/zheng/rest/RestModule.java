@@ -1,11 +1,11 @@
-package com.dadazhishi.zheng.rest;
+package com.github.zhengframework.rest;
 
-import static com.dadazhishi.zheng.rest.RestConfig.PREFIX;
+import static com.github.zhengframework.rest.RestConfig.PREFIX;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationAware;
-import com.dadazhishi.zheng.configuration.ConfigurationBeanMapper;
-import com.dadazhishi.zheng.web.WebModule;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;

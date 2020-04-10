@@ -1,10 +1,10 @@
-package com.dadazhishi.zheng.configuration;
+package com.github.zhengframework.configuration;
 
 import static java.util.Arrays.stream;
 
-import com.dadazhishi.zheng.configuration.util.Duration;
-import com.dadazhishi.zheng.configuration.util.Size;
-import com.dadazhishi.zheng.configuration.util.ValueFunctions;
+import com.github.zhengframework.configuration.util.Duration;
+import com.github.zhengframework.configuration.util.Size;
+import com.github.zhengframework.configuration.util.ValueFunctions;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;

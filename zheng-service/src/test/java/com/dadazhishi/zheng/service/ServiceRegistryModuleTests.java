@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.service;
+package com.github.zhengframework.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

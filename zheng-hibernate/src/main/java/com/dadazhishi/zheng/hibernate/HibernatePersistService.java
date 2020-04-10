@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.persist.PersistService;

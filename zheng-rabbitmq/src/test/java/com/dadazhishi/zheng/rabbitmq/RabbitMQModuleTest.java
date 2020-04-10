@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.rabbitmq;
+package com.github.zhengframework.rabbitmq;
 
 import io.arivera.oss.embedded.rabbitmq.EmbeddedRabbitMq;
 import io.arivera.oss.embedded.rabbitmq.EmbeddedRabbitMqConfig;

@@ -1,11 +1,11 @@
-package com.dadazhishi.zheng.metrics;
+package com.github.zhengframework.metrics;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.jmx.JmxReporter;
 import com.codahale.metrics.jvm.BufferPoolMetricSet;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
-import com.dadazhishi.zheng.service.ServiceRegistry;
+import com.github.zhengframework.service.ServiceRegistry;
 import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.inject.Inject;
 import java.lang.management.ManagementFactory;

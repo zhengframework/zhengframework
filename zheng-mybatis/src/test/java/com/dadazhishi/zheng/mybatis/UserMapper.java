@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.mybatis;
+package com.github.zhengframework.mybatis;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.swagger;
+package com.github.zhengframework.swagger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -1,8 +1,8 @@
-package com.dadazhishi.zheng.web;
+package com.github.zhengframework.web;
 
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.service.Application;
+import com.github.zhengframework.service.Application;
 import java.util.Objects;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;

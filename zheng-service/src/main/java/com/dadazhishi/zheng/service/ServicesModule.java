@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.service;
+package com.github.zhengframework.service;
 
 import com.google.common.util.concurrent.ServiceManager;
 import com.google.inject.AbstractModule;

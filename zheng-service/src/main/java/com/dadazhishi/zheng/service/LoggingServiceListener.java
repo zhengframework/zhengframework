@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.service;
+package com.github.zhengframework.service;
 
 import com.google.common.util.concurrent.Service;
 import org.slf4j.Logger;

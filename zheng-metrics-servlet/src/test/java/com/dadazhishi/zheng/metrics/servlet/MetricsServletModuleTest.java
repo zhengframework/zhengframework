@@ -1,8 +1,8 @@
-package com.dadazhishi.zheng.metrics.servlet;
+package com.github.zhengframework.metrics.servlet;
 
-import com.dadazhishi.zheng.metrics.MetricsModule;
-import com.dadazhishi.zheng.service.Application;
-import com.dadazhishi.zheng.web.WebModule;
+import com.github.zhengframework.metrics.MetricsModule;
+import com.github.zhengframework.service.Application;
+import com.github.zhengframework.web.WebModule;
 import com.google.inject.AbstractModule;
 
 public class MetricsServletModuleTest {

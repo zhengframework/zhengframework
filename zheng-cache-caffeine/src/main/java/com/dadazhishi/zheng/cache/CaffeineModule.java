@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache;
+package com.github.zhengframework.cache;
 
 import com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider;
 import com.google.inject.AbstractModule;

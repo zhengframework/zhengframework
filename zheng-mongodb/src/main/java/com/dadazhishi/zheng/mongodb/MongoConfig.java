@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.mongodb;
+package com.github.zhengframework.mongodb;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

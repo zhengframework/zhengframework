@@ -1,13 +1,13 @@
-package com.dadazhishi.zheng.webjars;
+package com.github.zhengframework.webjars;
 
 import static org.junit.Assert.assertEquals;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
-import com.dadazhishi.zheng.service.Application;
-import com.dadazhishi.zheng.web.WebConfig;
-import com.dadazhishi.zheng.web.WebModule;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationBuilder;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.service.Application;
+import com.github.zhengframework.web.WebConfig;
+import com.github.zhengframework.web.WebModule;
 import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;

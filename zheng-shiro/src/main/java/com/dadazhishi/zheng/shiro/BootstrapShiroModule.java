@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.shiro;
+package com.github.zhengframework.shiro;
 
 import com.google.inject.Provides;
 import com.google.inject.name.Names;

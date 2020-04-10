@@ -1,8 +1,8 @@
-package com.dadazhishi.zheng.configuration.parser;
+package com.github.zhengframework.configuration.parser;
 
-import com.dadazhishi.zheng.configuration.Configuration;
-import com.dadazhishi.zheng.configuration.ConfigurationBuilder;
-import com.dadazhishi.zheng.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationBuilder;
+import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import org.junit.Assert;
 import org.junit.Test;
 

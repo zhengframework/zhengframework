@@ -1,7 +1,7 @@
-package com.dadazhishi.zheng.jdbc;
+package com.github.zhengframework.jdbc;
 
-import com.dadazhishi.zheng.configuration.spi.ConfigurationDefine;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

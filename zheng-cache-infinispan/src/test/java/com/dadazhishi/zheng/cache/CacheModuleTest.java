@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.cache;
+package com.github.zhengframework.cache;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

@@ -1,9 +1,9 @@
-package com.dadazhishi.zheng.metrics.servlet;
+package com.github.zhengframework.metrics.servlet;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.servlets.HealthCheckServlet;
-import com.dadazhishi.zheng.service.ClassScanner.Visitor;
+import com.github.zhengframework.service.ClassScanner.Visitor;
 import javax.inject.Inject;
 
 public class HealthCheckServletContextListener extends HealthCheckServlet.ContextListener {

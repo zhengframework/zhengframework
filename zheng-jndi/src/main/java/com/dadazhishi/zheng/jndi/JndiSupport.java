@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.jndi;
+package com.github.zhengframework.jndi;
 
 import javax.inject.Inject;
 import javax.inject.Provider;

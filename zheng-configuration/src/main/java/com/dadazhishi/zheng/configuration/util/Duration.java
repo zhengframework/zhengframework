@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.configuration.util;
+package com.github.zhengframework.configuration.util;
 
 import java.util.HashMap;
 import java.util.Locale;

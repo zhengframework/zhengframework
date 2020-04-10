@@ -1,11 +1,11 @@
-package com.dadazhishi.zheng.configuration.reload;
+package com.github.zhengframework.configuration.reload;
 
 import static java.util.Objects.requireNonNull;
 
-import com.dadazhishi.zheng.configuration.environment.Environment;
-import com.dadazhishi.zheng.configuration.ex.MissingEnvironmentException;
-import com.dadazhishi.zheng.configuration.source.AbstractConfigurationSource;
-import com.dadazhishi.zheng.configuration.source.ConfigurationSource;
+import com.github.zhengframework.configuration.environment.Environment;
+import com.github.zhengframework.configuration.ex.MissingEnvironmentException;
+import com.github.zhengframework.configuration.source.AbstractConfigurationSource;
+import com.github.zhengframework.configuration.source.ConfigurationSource;
 import java.util.HashMap;
 import java.util.Map;
 

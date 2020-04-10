@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ScanResult;

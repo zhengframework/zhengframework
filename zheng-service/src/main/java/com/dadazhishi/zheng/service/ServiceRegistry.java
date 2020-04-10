@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.service;
+package com.github.zhengframework.service;
 
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.MoreExecutors;

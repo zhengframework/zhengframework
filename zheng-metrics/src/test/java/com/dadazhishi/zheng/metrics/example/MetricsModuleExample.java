@@ -1,8 +1,8 @@
-package com.dadazhishi.zheng.metrics.example;
+package com.github.zhengframework.metrics.example;
 
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.MetricRegistry;
-import com.dadazhishi.zheng.metrics.MetricsModule;
+import com.github.zhengframework.metrics.MetricsModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

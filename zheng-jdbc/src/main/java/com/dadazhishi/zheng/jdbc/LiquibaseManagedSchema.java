@@ -1,4 +1,4 @@
-package com.dadazhishi.zheng.jdbc;
+package com.github.zhengframework.jdbc;
 
 import java.sql.SQLException;
 import javax.sql.DataSource;

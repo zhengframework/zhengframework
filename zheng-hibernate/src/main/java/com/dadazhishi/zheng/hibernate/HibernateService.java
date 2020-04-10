@@ -1,6 +1,6 @@
-package com.dadazhishi.zheng.hibernate;
+package com.github.zhengframework.hibernate;
 
-import com.dadazhishi.zheng.service.ServiceRegistry;
+import com.github.zhengframework.service.ServiceRegistry;
 import com.google.common.util.concurrent.AbstractIdleService;
 import javax.inject.Inject;
 
