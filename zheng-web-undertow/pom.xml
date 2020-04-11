@@ -35,6 +35,11 @@
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
 

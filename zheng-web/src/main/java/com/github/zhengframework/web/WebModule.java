@@ -28,7 +28,7 @@ public class WebModule extends ServletModule implements ConfigurationAware {
     Preconditions.checkArgument(configuration != null, "configuration is null");
     ConfigurationBeanMapper.resolve(configuration, WebConfig.class,
         (s, webConfig) -> {
-          System.out.println("webConfig===" + webConfig);
+         log.debug("webConfig={}", webConfig);
           bind(WebConfig.class).toInstance(webConfig);
         });
     OptionalBinder

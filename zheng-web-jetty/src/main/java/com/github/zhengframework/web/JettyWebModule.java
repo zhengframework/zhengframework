@@ -3,6 +3,7 @@ package com.github.zhengframework.web;
 import com.github.zhengframework.core.Configuration;
 import com.github.zhengframework.core.ConfigurationAware;
 import com.google.inject.AbstractModule;
+import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import javax.websocket.server.ServerEndpointConfig;
@@ -22,12 +23,17 @@ public class JettyWebModule extends AbstractModule implements ConfigurationAware
     WebModule webModule = new WebModule();
     webModule.initConfiguration(configuration);
     install(webModule);
+    // web socket
+    bind(GuiceServerEndpointConfigurator.class);
+    Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
+    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
+    });
+
     OptionalBinder.newOptionalBinder(binder(), Server.class).setDefault().toProvider(Server::new);
     OptionalBinder.newOptionalBinder(binder(), JettyServerConfigurer.class)
         .setDefault().to(DefaultJettyServerConfigurer.class);
-    Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
-    Multibinder.newSetBinder(binder(), WebSocketEndpoint.class);
-    bind(WebServer.class).to(JettyServer.class);
+
+    bind(WebServer.class).to(JettyWebServer.class);
   }
 
 }

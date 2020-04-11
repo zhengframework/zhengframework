@@ -16,6 +16,8 @@ public class WebConfig implements ConfigurationDefine {
 
   private String contextPath = "/";
 
+  private String webSocketPath = "/ws";
+
   private int port = 8080;
 
   private Map<String, String> properties = new HashMap<>();

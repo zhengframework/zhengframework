@@ -1,5 +1,6 @@
 package com.github.zhengframework.web;
 
+import com.google.common.collect.Lists;
 import com.google.inject.servlet.GuiceFilter;
 import java.util.EnumSet;
 import java.util.Set;
@@ -7,6 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletException;
 import javax.websocket.DeploymentException;
+import javax.websocket.server.ServerEndpoint;
 import javax.websocket.server.ServerEndpointConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
@@ -23,21 +25,24 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
 
   private final WebConfig webConfig;
   private final Set<ServerEndpointConfig> serverEndpointConfigSet;
-  private final Set<WebSocketEndpoint> webSocketEndpointSet;
+  private final Set<Class<? extends WebSocketEndpoint>> annotatedEndpoints;
   private final EventListenerClassScanner eventListenerScanner;
   private final HandlerClassScanner handlerScanner;
+  private final GuiceServerEndpointConfigurator guiceServerEndpointConfigurator;
 
   @Inject
   public DefaultJettyServerConfigurer(WebConfig webConfig,
       Set<ServerEndpointConfig> serverEndpointConfigSet,
-      Set<WebSocketEndpoint> webSocketEndpointSet,
+      Set<Class<? extends WebSocketEndpoint>> annotatedEndpoints,
       EventListenerClassScanner eventListenerScanner,
-      HandlerClassScanner handlerScanner) {
+      HandlerClassScanner handlerScanner,
+      GuiceServerEndpointConfigurator guiceServerEndpointConfigurator) {
     this.webConfig = webConfig;
     this.serverEndpointConfigSet = serverEndpointConfigSet;
-    this.webSocketEndpointSet = webSocketEndpointSet;
+    this.annotatedEndpoints = annotatedEndpoints;
     this.eventListenerScanner = eventListenerScanner;
     this.handlerScanner = handlerScanner;
+    this.guiceServerEndpointConfigurator = guiceServerEndpointConfigurator;
   }
 
   @Override
@@ -81,14 +86,22 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
       for (ServerEndpointConfig serverEndpointConfig : serverEndpointConfigSet) {
         serverContainer.addEndpoint(serverEndpointConfig);
       }
-      WebSocketServerContainerInitializer.configure(context, (servletContext, serverContainer1) -> {
-        for (WebSocketEndpoint webSocketEndpoint : webSocketEndpointSet) {
-          serverContainer1.addEndpoint(webSocketEndpoint.getClass());
-          serverContainer1.addBean(webSocketEndpoint);
+
+      for (Class<? extends WebSocketEndpoint> clazz : annotatedEndpoints) {
+        ServerEndpoint annotation = clazz.getAnnotation(ServerEndpoint.class);
+        if (annotation != null) {
+          serverContainer
+              .addEndpoint(ServerEndpointConfig.Builder.create(clazz, annotation.value())
+                  .configurator(guiceServerEndpointConfigurator)
+                  .decoders(Lists.newArrayList(annotation.decoders()))
+                  .encoders(Lists.newArrayList(annotation.encoders()))
+                  .subprotocols(Lists.newArrayList(annotation.subprotocols()))
+                  .build());
         }
-      });
+      }
     } catch (DeploymentException | ServletException e) {
       throw new RuntimeException("add WebSocketServerContainer fail", e);
     }
   }
+
 }
