@@ -1,4 +1,4 @@
-package com.github.zhengframework.configuration.util;
+package com.github.zhengframework.configuration.value;
 
 import java.util.HashMap;
 import java.util.Locale;

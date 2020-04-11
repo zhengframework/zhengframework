@@ -2,9 +2,10 @@ package com.github.zhengframework.configuration;
 
 import static java.util.Arrays.stream;
 
-import com.github.zhengframework.configuration.util.Duration;
-import com.github.zhengframework.configuration.util.Size;
-import com.github.zhengframework.configuration.util.ValueFunctions;
+import com.github.zhengframework.configuration.value.Duration;
+import com.github.zhengframework.configuration.value.Size;
+import com.github.zhengframework.configuration.value.ValueFunction;
+import com.github.zhengframework.configuration.value.ValueFunctions;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -258,24 +259,24 @@ public interface Configuration {
     return get(key).map(ValueFunctions.toList(",")).orElse(defaultValue);
   }
 
-  default <T> List<T> getList(String key, String separator, Function<String, T> map) {
+  default <T> List<T> getList(String key, String separator, ValueFunction<T> map) {
     return getList(key, separator).orElse(Collections.emptyList()).stream().map(map)
         .collect(Collectors.toList());
   }
 
   @SuppressWarnings("unchecked")
-  default <T> T[] getArray(String key, String separator, Function<String, T> map) {
+  default <T> T[] getArray(String key, String separator, ValueFunction<T> map) {
     return (T[]) stream(getArray(key, separator).orElse(new String[0]))
         .map(map).toArray();
   }
 
-  default <T> List<T> getList(String key, Function<String, T> map) {
+  default <T> List<T> getList(String key, ValueFunction<T> map) {
     return getList(key, ",").orElse(Collections.emptyList()).stream().map(map)
         .collect(Collectors.toList());
   }
 
   @SuppressWarnings("unchecked")
-  default <T> T[] getArray(String key, Function<String, T> map) {
+  default <T> T[] getArray(String key, ValueFunction<T> map) {
     return (T[]) stream(getArray(key, ",").orElse(new String[0]))
         .map(map).toArray();
   }
