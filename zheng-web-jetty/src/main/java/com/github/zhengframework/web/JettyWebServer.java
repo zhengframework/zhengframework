@@ -55,7 +55,6 @@ public class JettyWebServer implements WebServer {
     filterHolder.setAsyncSupported(true);
     filterHolder.setHeldClass(GuiceFilter.class);
     context.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
-    log.info("register GuiceFilter");
 
     context.addServlet(DefaultServlet.class, "/");
 

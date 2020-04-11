@@ -1,9 +1,9 @@
 package com.github.zhengframework.metrics;
 
 import com.codahale.metrics.MetricRegistry;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.core.Configuration;
+import com.github.zhengframework.core.ConfigurationAware;
 import com.github.zhengframework.service.ServicesModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
@@ -15,9 +15,6 @@ import com.palominolabs.metrics.guice.annotation.MethodAnnotationResolver;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Add the metrics-guice MetricsInstrumentationModule to scan for metrics annotations.
- */
 @Slf4j
 @EqualsAndHashCode(callSuper = false)
 public class MetricsModule extends AbstractModule implements ConfigurationAware {

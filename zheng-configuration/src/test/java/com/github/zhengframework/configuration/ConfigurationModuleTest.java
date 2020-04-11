@@ -7,6 +7,7 @@ import com.github.zhengframework.configuration.objects.Banana;
 import com.github.zhengframework.configuration.objects.Food;
 import com.github.zhengframework.configuration.objects.NamedAnnotation;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.core.Configuration;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -19,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
-
 public class ConfigurationModuleTest {
 
   Food food;

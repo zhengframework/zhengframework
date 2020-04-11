@@ -1,14 +1,14 @@
 package com.github.zhengframework.service;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.io.FileLocator;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
 import com.github.zhengframework.configuration.source.EnvironmentVariablesConfigurationSource;
-import com.github.zhengframework.configuration.source.FallbackConfigurationSource;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.configuration.source.MergeConfigurationSource;
 import com.github.zhengframework.configuration.source.SystemPropertiesConfigurationSource;
+import com.github.zhengframework.core.Configuration;
+import com.github.zhengframework.core.ConfigurationAware;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;
@@ -23,7 +23,9 @@ import java.util.List;
 import java.util.Optional;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionSet;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Application {
 
   private Injector injector;
@@ -90,12 +92,14 @@ public class Application {
     sources.add(new EnvironmentVariablesConfigurationSource());
 
     if (path != null) {
+      log.info("read configuration from file={}", path);
       sources.add(0, new FileConfigurationSource(
           FileLocator.builder().sourceURL(path.toAbsolutePath().toString()).build()));
     } else {
+      log.info("read configuration from default file=application.properties");
       sources.add(new FileConfigurationSource("application.properties"));
     }
-    FallbackConfigurationSource configurationSource = new FallbackConfigurationSource(
+    MergeConfigurationSource configurationSource = new MergeConfigurationSource(
         sources);
     return new ConfigurationBuilder()
         .withConfigurationSource(configurationSource)

@@ -1,11 +1,9 @@
-package com.github.zhengframework.configuration;
+package com.github.zhengframework.core;
 
 import static java.util.Arrays.stream;
 
-import com.github.zhengframework.configuration.value.Duration;
-import com.github.zhengframework.configuration.value.Size;
-import com.github.zhengframework.configuration.value.ValueFunction;
-import com.github.zhengframework.configuration.value.ValueFunctions;
+import com.github.zhengframework.core.value.ValueFunction;
+import com.github.zhengframework.core.value.ValueFunctions;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -176,22 +174,6 @@ public interface Configuration {
 
   default LocalDate getLocalDate(String key, LocalDate defaultValue) {
     return getLocalDate(key).orElse(defaultValue);
-  }
-
-  default Optional<Size> getSize(String key) {
-    return getValue(key, Size::parse);
-  }
-
-  default Size getSize(String key, Size defaultValue) {
-    return getSize(key).orElse(defaultValue);
-  }
-
-  default Optional<Duration> getDuration(String key) {
-    return getValue(key, Duration::parse);
-  }
-
-  default Duration getDuration(String key, Duration defaultValue) {
-    return getDuration(key).orElse(defaultValue);
   }
 
   default Optional<URI> getURI(String key) {

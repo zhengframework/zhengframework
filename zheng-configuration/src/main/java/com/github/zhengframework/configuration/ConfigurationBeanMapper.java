@@ -4,6 +4,7 @@ import static com.github.zhengframework.configuration.ConfigurationDefineUtils.c
 
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
+import com.github.zhengframework.core.Configuration;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import java.io.IOException;
@@ -77,6 +78,9 @@ public class ConfigurationBeanMapper {
         Map<String, ? extends C> resolveMap = resolveMap(configuration, prefix, aClass);
         resolveMap.forEach(consumer);
       }
+    } else {
+      C resolve = resolve(configuration, prefix, aClass);
+      consumer.accept(null, resolve);
     }
   }
 }

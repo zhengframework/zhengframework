@@ -2,6 +2,7 @@ package com.github.zhengframework.configuration;
 
 import com.github.zhengframework.configuration.environment.Environment;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
+import com.github.zhengframework.core.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;

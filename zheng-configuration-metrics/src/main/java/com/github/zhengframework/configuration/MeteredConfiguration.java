@@ -3,6 +3,7 @@ package com.github.zhengframework.configuration;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.codahale.metrics.Timer.Context;
+import com.github.zhengframework.core.Configuration;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;

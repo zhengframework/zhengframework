@@ -1,8 +1,8 @@
 package com.github.zhengframework.rest;
 
-import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.core.Configuration;
 import com.github.zhengframework.service.Application;
 import com.github.zhengframework.web.WebConfig;
 import com.github.zhengframework.web.WebModule;

@@ -157,6 +157,9 @@
     <module>zheng-webjars</module>
     <module>zheng-jdbc</module>
     <module>zheng-shiro</module>
+    <module>zheng-core</module>
+    <module>zheng-bootstrap</module>
+    <module>zheng-configuration-metrics</module>
   </modules>
 
   <packaging>pom</packaging>

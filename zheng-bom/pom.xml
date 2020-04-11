@@ -400,11 +400,6 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-core</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
         <artifactId>zheng-web</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${project.version}</version>
@@ -546,6 +541,12 @@
       </dependency>
       <dependency>
         <artifactId>zheng-webjars</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>zheng-core</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${project.version}</version>
       </dependency>

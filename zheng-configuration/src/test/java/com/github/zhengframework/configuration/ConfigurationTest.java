@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.github.zhengframework.configuration.parser.PropertiesConfigurationParser;
+import com.github.zhengframework.core.Configuration;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
-
 public class ConfigurationTest {
 
   private Map<String, String> map;

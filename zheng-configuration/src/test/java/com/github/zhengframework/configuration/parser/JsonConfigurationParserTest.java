@@ -1,8 +1,8 @@
 package com.github.zhengframework.configuration.parser;
 
-import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.core.Configuration;
 import org.junit.Assert;
 import org.junit.Test;
 

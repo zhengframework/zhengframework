@@ -3,6 +3,7 @@ package com.github.zhengframework.configuration;
 
 import static com.github.zhengframework.configuration.SimpleConfiguration.checkPrefix;
 
+import com.github.zhengframework.core.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;

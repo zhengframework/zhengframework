@@ -5,17 +5,13 @@
   <artifactId>zheng-configuration</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
       <artifactId>junit</artifactId>
       <groupId>junit</groupId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
     </dependency>
     <dependency>
       <artifactId>slf4j-simple</artifactId>
@@ -76,10 +72,6 @@
     <dependency>
       <artifactId>commons-io</artifactId>
       <groupId>commons-io</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-core</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
     </dependency>
   </dependencies>
 

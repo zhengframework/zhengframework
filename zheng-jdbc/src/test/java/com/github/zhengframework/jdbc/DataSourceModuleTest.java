@@ -2,9 +2,9 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.core.Configuration;
 import com.github.zhengframework.service.Application;
 import com.google.inject.Key;
 import java.sql.Connection;

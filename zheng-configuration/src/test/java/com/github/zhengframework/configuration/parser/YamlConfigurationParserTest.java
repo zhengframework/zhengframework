@@ -2,9 +2,9 @@ package com.github.zhengframework.configuration.parser;
 
 import static org.junit.Assert.assertEquals;
 
-import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.core.Configuration;
 import org.junit.Test;
 
 public class YamlConfigurationParserTest {

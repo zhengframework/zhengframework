@@ -15,7 +15,6 @@ public class FallbackConfigurationSource implements ConfigurationSource {
 
   public FallbackConfigurationSource(ConfigurationSource... sources) {
     Objects.requireNonNull(sources);
-
     for (ConfigurationSource source : sources) {
       this.sources.add(Objects.requireNonNull(source));
     }

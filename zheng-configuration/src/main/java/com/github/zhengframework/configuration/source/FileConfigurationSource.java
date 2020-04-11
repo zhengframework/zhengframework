@@ -25,8 +25,10 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+@Slf4j
 public class FileConfigurationSource extends AbstractConfigurationSource {
 
   public static final CombinedLocationStrategy FILE_LOCATION_STRATEGY = new CombinedLocationStrategy(
@@ -120,6 +122,7 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
       copy.setFileName(fileName.replace(ENV_PATTERN, env));
     }
     URL url = fileLocationStrategy.locate(fileSystem, copy);
+    log.info("find configuration file, url={}", url);
     try (InputStream inputStream = url.openStream()) {
       return Collections
           .unmodifiableMap(fileConfigurationParser.parse(url.toString(), inputStream));
