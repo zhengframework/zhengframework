@@ -15,6 +15,7 @@ zheng framework use google guice for DI, and most module support auto load.
 | RestModule | OK    |
 | RedisModule | OK    |
 | RabbitMQModule | OK    |
+| CacheModule | OK    |
 | MybatisModule | Waiting    |
 | MongoDBModule | Waiting    |
 | MetricsModule | Waiting    |
@@ -27,6 +28,5 @@ zheng framework use google guice for DI, and most module support auto load.
 | QuerydslModule | Waiting    |
 | HibernateModule | Waiting    |
 | HealthCheckModule | Waiting    |
-| CacheModule | Waiting    |
 | ActiveMQModule | Waiting    |
 | ActiveMQArtemisModule | Waiting    |
