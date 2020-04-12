@@ -5,11 +5,14 @@ import static com.github.zhengframework.rest.RestConfig.PREFIX;
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.web.PathUtils;
+import com.github.zhengframework.web.WebConfig;
 import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -37,30 +40,40 @@ public class RestModule extends ServletModule implements ConfigurationAware {
 
   private Configuration configuration;
 
-
   @Override
   protected void configureServlets() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    WebModule webModule = new WebModule();
-    webModule.initConfiguration(configuration);
-    install(webModule);
-    install(new RequestScopeModule());
+    Map<String, WebConfig> webConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, WebConfig.class);
+    WebConfig webConfig = webConfigMap.getOrDefault("", new WebConfig());
+
+    Map<String, RestConfig> restConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, RestConfig.class);
+    RestConfig restConfig = restConfigMap.getOrDefault("",new RestConfig());
+    bind(RestConfig.class).toInstance(restConfig);
+    String path = PathUtils.fixPath(
+//        webConfig.getContextPath(),
+        restConfig.getPath());
+    HashMap<String, String> hashMap = new HashMap<>();
+    for (Entry<String, String> entry : restConfig.getProperties().entrySet()) {
+      if (entry.getKey().startsWith("resteasy.")) {
+        hashMap.put(entry.getKey(), entry.getValue());
+      }
+    }
+    if (!hashMap.containsKey("resteasy.servlet.mapping.prefix")) {
+      hashMap.put("resteasy.servlet.mapping.prefix", PathUtils.fixPath(
+//          webConfig.getContextPath(),
+          restConfig.getPath()));
+      log.info("rest prefix path={}",hashMap.get("resteasy.servlet.mapping.prefix"));
+    }
+    log.info("rest path={}",path);
+    serve(path + "/*").with(HttpServletDispatcher.class, hashMap);
+    bind(HttpServletDispatcher.class).in(Scopes.SINGLETON);
 
     bind(AcceptEncodingGZIPFilter.class);
     bind(GZIPDecodingInterceptor.class);
     bind(GZIPEncodingInterceptor.class);
 
-    bind(InputStreamProvider.class);
-    bind(ByteArrayProvider.class);
-    bind(DefaultBooleanWriter.class);
-    bind(DefaultNumberWriter.class);
-    bind(DefaultTextPlain.class);
-    bind(FileProvider.class);
-    bind(FileRangeWriter.class);
-    bind(StringTextStar.class);
-    bind(StreamingOutputProvider.class);
-
-    bind(ResteasyJackson2Provider.class);
     bind(ObjectMapperContextResolver.class);
 
     bind(CacheControlFeature.class);
@@ -69,33 +82,9 @@ public class RestModule extends ServletModule implements ConfigurationAware {
     bind(JsonMappingExceptionMapper.class);
     bind(DefaultGenericExceptionMapper.class);
 
-    bind(GuiceResteasyBootstrapServletContextListener.class);
-    bind(HttpServletDispatcher.class).in(Scopes.SINGLETON);
-
-    RestConfig restConfig = ConfigurationBeanMapper
-        .resolve(configuration, PREFIX, RestConfig.class);
-    bind(RestConfig.class).toInstance(restConfig);
-    String path = restConfig.getPath();
-    if ("/".equals(path)) {
-      path = null;
-    }
-    if (path != null && path.length() > 1 && path.endsWith("/")) {
-      path = path.substring(0, path.length() - 1);
-    }
-    if (path == null) {
-      serve("/*").with(HttpServletDispatcher.class);
-    } else {
-      HashMap<String, String> hashMap = new HashMap<>();
-      for (Entry<String, String> entry : restConfig.getProperties().entrySet()) {
-        if (entry.getKey().startsWith("resteasy.")) {
-          hashMap.put(entry.getKey(), entry.getValue());
-        }
-      }
-      if (!hashMap.containsKey("resteasy.servlet.mapping.prefix")) {
-        hashMap.put("resteasy.servlet.mapping.prefix", path);
-      }
-      serve(path + "/*").with(HttpServletDispatcher.class, hashMap);
-    }
+    // bind(GuiceResteasyBootstrapServletContextListener.class);
+    // replace custom @PostConstruct and @PreDestroy by LifecycleModule
+    bind(ResteasyBootstrapServletContextListener.class);
 
   }
 

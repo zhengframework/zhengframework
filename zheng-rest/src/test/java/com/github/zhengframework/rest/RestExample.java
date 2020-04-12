@@ -1,11 +1,11 @@
 package com.github.zhengframework.rest;
 
-import com.github.zhengframework.bootstrap.Application;
+import com.github.zhengframework.bootstrap.ZhengApplication;
+import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import com.github.zhengframework.web.WebConfig;
-import com.github.zhengframework.web.WebModule;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class RestExample {
 
   WebConfig webConfig;
-  Application application;
+  ZhengApplication application;
 
   @After
   public void stop() {
@@ -30,12 +30,14 @@ public class RestExample {
         .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
     System.out.println(configuration.asMap());
-    application = Application
-        .create(configuration,
+    application = ZhengApplicationBuilder.create()
+        .addModule(
             new MyModule(),
-            new WebModule(),
             new RestModule()
-        );
+        )
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
     webConfig = application.getInjector().getInstance(WebConfig.class);
     application.start();
   }

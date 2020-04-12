@@ -21,10 +21,9 @@ public class TestResource {
 
   @Path("inject")
   @GET
-  public String getit() {
+  public String get() {
     return "Success: " + service.call() + ", " + requestService.call();
   }
-
 
   @GET
   public String sayHello() {

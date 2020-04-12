@@ -9,9 +9,7 @@ public class MyModule extends ServletModule {
   @Override
   protected void configureServlets() {
 
-    bind(HelloResource.class);
     bind(TestResource.class);
-    serve("/hello1234").with(HelloServlet.class);
     bind(MySingleton.class).in(Scopes.SINGLETON);
     bind(PerRequestService.class).in(ServletScopes.REQUEST);
   }
