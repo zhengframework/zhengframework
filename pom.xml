@@ -45,30 +45,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>3.0.0-M3</version>
       </plugin>
-      <!--<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <additionalOptions>
-            <additionalOption>-Xdoclint:none</additionalOption>
-          </additionalOptions>
-          <charset>UTF-8</charset>
-          <docencoding>UTF-8</docencoding>
-          <encoding>UTF-8</encoding>
-          <nohelp>true</nohelp>
-          <show>package</show>
-          <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <id>attach-javadocs</id>
-          </execution>
-        </executions>
-      </plugin>-->
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
@@ -126,11 +102,6 @@
   <modules>
     <module>zheng-configuration</module>
     <module>zheng-cache</module>
-    <module>zheng-cache-ehcache</module>
-    <module>zheng-cache-cache2k</module>
-    <module>zheng-cache-infinispan</module>
-    <module>zheng-cache-caffeine</module>
-    <module>zheng-cache-jcs</module>
     <module>zheng-bom</module>
     <module>zheng-web</module>
     <module>zheng-web-jetty</module>
