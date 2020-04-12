@@ -1,4 +1,4 @@
-package com.github.zhengframework.healthchecks;
+package com.github.zhengframework.healthcheck;
 
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;

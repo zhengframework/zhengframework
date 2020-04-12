@@ -2,7 +2,8 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.bootstrap.Application;
+import com.github.zhengframework.bootstrap.ZhengApplication;
+import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
@@ -22,7 +23,11 @@ public class DataSourceModuleTest {
         .withConfigurationSource(new FileConfigurationSource("application.properties"))
         .build();
 
-    Application application = Application.create(configuration, new DataSourceModule());
+    ZhengApplication application = ZhengApplicationBuilder.create()
+        .addModule(new DataSourceModule())
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
     DataSource dataSource = application.getInjector().getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
@@ -35,8 +40,11 @@ public class DataSourceModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
         .build();
-
-    Application application = Application.create(configuration, new DataSourceModule());
+    ZhengApplication application = ZhengApplicationBuilder.create()
+        .addModule(new DataSourceModule())
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
     DataSource dataSourceA = application.getInjector()
         .getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();

@@ -16,7 +16,7 @@ public class ConfigurationMapperTest {
         .withConfigurationSource(new FileConfigurationSource("food.properties"))
         .build();
 
-    Food food = ConfigurationBeanMapper.resolve(configuration, Food.class);
+    Food food = ConfigurationBeanMapper.resolve(configuration, null, Food.class);
     System.out.println(food);
     assertEquals(1, food.getApples().size());
     assertEquals(3, food.getBananas().size());

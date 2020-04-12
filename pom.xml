@@ -43,25 +43,22 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>3.0.0-M1</version>
+        <version>3.0.0-M3</version>
       </plugin>
-      <plugin>
+      <!--<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
         <configuration>
-          <aggregate>true</aggregate>
+          <additionalOptions>
+            <additionalOption>-Xdoclint:none</additionalOption>
+          </additionalOptions>
           <charset>UTF-8</charset>
           <docencoding>UTF-8</docencoding>
           <encoding>UTF-8</encoding>
           <nohelp>true</nohelp>
-          <show>private</show>
-          <tags>
-            <tag>
-              <head>Http Response Details:</head>
-              <name>http.response.details</name>
-              <placement>a</placement>
-            </tag>
-          </tags>
-          <!--<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>-->
+          <show>package</show>
+          <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
         </configuration>
         <executions>
           <execution>
@@ -71,9 +68,7 @@
             <id>attach-javadocs</id>
           </execution>
         </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>2.10.4</version>
-      </plugin>
+      </plugin>-->
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
@@ -85,7 +80,7 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>2.2.1</version>
+        <version>3.2.1</version>
       </plugin>
       <plugin>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -146,7 +141,7 @@
     <module>zheng-swagger</module>
     <module>zheng-hibernate</module>
     <module>zheng-rabbitmq</module>
-    <module>zheng-healthchecks</module>
+    <module>zheng-healthcheck</module>
     <module>zheng-mongodb</module>
     <module>zheng-memcached</module>
     <module>zheng-redis</module>
@@ -163,6 +158,75 @@
 
   <packaging>pom</packaging>
   <profiles>
+    <profile>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <jdk>8</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+              <encoding>UTF-8</encoding>
+              <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+              <nohelp>true</nohelp>
+              <show>package</show>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <id>attach-javadocs</id>
+              </execution>
+            </executions>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>3.2.0</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>javadoc8</id>
+    </profile>
+    <profile>
+      <activation>
+        <jdk>14+</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+              <encoding>UTF-8</encoding>
+              <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+              <nohelp>true</nohelp>
+              <show>package</show>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <id>attach-javadocs</id>
+              </execution>
+            </executions>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>3.2.0</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>javadoc14</id>
+    </profile>
     <profile>
       <build>
         <plugins>

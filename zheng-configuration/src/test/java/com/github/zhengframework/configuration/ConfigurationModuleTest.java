@@ -73,7 +73,7 @@ public class ConfigurationModuleTest {
   public void testAnnotation() {
 
     Configuration configuration = injector.getInstance(Configuration.class);
-    Food food2 = ConfigurationBeanMapper.resolve(configuration, Food.class);
+    Food food2 = ConfigurationBeanMapper.resolve(configuration, null, Food.class);
     assertEquals(food.getApple(), food2.getApple());
     System.out.println(food2.getApple());
 
@@ -107,13 +107,13 @@ public class ConfigurationModuleTest {
 
     @Provides
     Food food(Configuration configuration) {
-      return ConfigurationBeanMapper.resolve(configuration, Food.class);
+      return ConfigurationBeanMapper.resolve(configuration, null, Food.class);
     }
 
     @Provides
     Apple apple(Configuration configuration) {
       Configuration configuration1 = configuration.prefix("apple");
-      return ConfigurationBeanMapper.resolve(configuration1, Apple.class);
+      return ConfigurationBeanMapper.resolve(configuration1, null, Apple.class);
     }
 
   }

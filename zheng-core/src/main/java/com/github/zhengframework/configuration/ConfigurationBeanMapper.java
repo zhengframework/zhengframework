@@ -7,6 +7,8 @@ import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -24,10 +26,6 @@ public class ConfigurationBeanMapper {
     } catch (IOException e) {
       throw new RuntimeException("resolve configuration error", e);
     }
-  }
-
-  public static <T> T resolve(Configuration configuration, Class<T> aClass) {
-    return resolve(configuration, null, aClass);
   }
 
   public static <T> T resolve(Configuration configuration, String prefix, Class<T> aClass) {
@@ -63,6 +61,28 @@ public class ConfigurationBeanMapper {
     return map;
   }
 
+  public static <C> Map<String, C> resolve(Configuration configuration, Class<? extends C> aClass) {
+    checkConfigurationDefine(aClass);
+    Map<String, C> map = new HashMap<>();
+    ConfigurationInfo configurationInfo = aClass.getAnnotation(ConfigurationInfo.class);
+    String prefix = configurationInfo.prefix();
+    if (configurationInfo.supportGroup()) {
+      Boolean group = configuration.getBoolean(prefix + ".group", false);
+      if (!group) {
+        C resolve = resolve(configuration, prefix, aClass);
+        map.put("", resolve);
+      } else {
+        Map<String, ? extends C> resolveMap = resolveMap(configuration, prefix, aClass);
+        resolveMap.forEach((BiConsumer<String, C>) map::put);
+
+      }
+    } else {
+      C resolve = resolve(configuration, prefix, aClass);
+      map.put("", resolve);
+    }
+    return Collections.unmodifiableMap(map);
+  }
+
   public static <C> void resolve(Configuration configuration, Class<? extends C> aClass,
       BiConsumer<String, C> consumer) {
     checkConfigurationDefine(aClass);
@@ -72,14 +92,14 @@ public class ConfigurationBeanMapper {
       Boolean group = configuration.getBoolean(prefix + ".group", false);
       if (!group) {
         C resolve = resolve(configuration, prefix, aClass);
-        consumer.accept(null, resolve);
+        consumer.accept("", resolve);
       } else {
         Map<String, ? extends C> resolveMap = resolveMap(configuration, prefix, aClass);
         resolveMap.forEach(consumer);
       }
     } else {
       C resolve = resolve(configuration, prefix, aClass);
-      consumer.accept(null, resolve);
+      consumer.accept("", resolve);
     }
   }
 }

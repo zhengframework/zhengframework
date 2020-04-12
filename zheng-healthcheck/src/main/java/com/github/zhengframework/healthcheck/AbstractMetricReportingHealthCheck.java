@@ -1,4 +1,4 @@
-package com.github.zhengframework.healthchecks;
+package com.github.zhengframework.healthcheck;
 
 import com.codahale.metrics.CachedGauge;
 import com.codahale.metrics.Gauge;
