@@ -18,15 +18,16 @@ public class JettyWebModuleTest {
         new MyModule())
         .enableAutoLoadModule()
         .build();
-
     application.getInjector().getInstance(WebServerService.class).start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     System.out.println(webConfig);
     OkHttpClient okHttpClient = new Builder()
         .build();
+    String path=PathUtils.fixPath(webConfig.getContextPath());
     Request request = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "/hello")
+        .url("http://localhost:" + webConfig.getPort() + path + "/hello")
         .get().build();
+    System.out.println(request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
     System.out.println(resp);
@@ -45,17 +46,12 @@ public class JettyWebModuleTest {
     try {
       OkHttpClient okHttpClient = new Builder()
           .build();
-      Request request;
-      if (webConfig.getContextPath().endsWith("/")) {
-        request = new Request.Builder()
-            .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "hello")
-            .get().build();
-      } else {
-        request = new Request.Builder()
-            .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "/hello")
-            .get().build();
-      }
 
+      String path=PathUtils.fixPath(webConfig.getContextPath());
+      Request request = new Request.Builder()
+          .url("http://localhost:" + webConfig.getPort() + path + "/hello")
+          .get().build();
+      System.out.println(request);
       Response response1 = okHttpClient.newCall(request).execute();
       String resp = Objects.requireNonNull(response1.body()).string();
       System.out.println(resp);
