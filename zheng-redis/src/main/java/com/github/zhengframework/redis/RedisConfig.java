@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.redis")
+@ConfigurationInfo(prefix = "zheng.redis",supportGroup = true)
 public class RedisConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.redis";
-  private boolean group = false;
   private String host = "localhost";
   private String clientName;
   private int port = 6379;

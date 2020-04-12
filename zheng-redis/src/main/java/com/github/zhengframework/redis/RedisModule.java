@@ -24,16 +24,15 @@ public class RedisModule extends AbstractModule implements ConfigurationAware {
   @Override
   protected void configure() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    Boolean group = configuration.getBoolean("zheng.redis.group", false);
-    if (!group) {
-      RedisConfig redisConfig = ConfigurationBeanMapper
-          .resolve(configuration, RedisConfig.PREFIX, RedisConfig.class);
-      bind(RedisConfig.class).toInstance(redisConfig);
-      bind(RedisClient.class).toProvider(RedisClientProvider.class);
-    } else {
-      Map<String, RedisConfig> map = ConfigurationBeanMapper
-          .resolveMap(configuration, RedisConfig.PREFIX, RedisConfig.class);
-      for (Entry<String, RedisConfig> entry : map.entrySet()) {
+
+    Map<String, RedisConfig> redisConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, RedisConfig.class);
+    for (Entry<String, RedisConfig> entry : redisConfigMap.entrySet()) {
+      if(entry.getKey().isEmpty()){
+        RedisConfig redisConfig = entry.getValue();
+        bind(RedisConfig.class).toInstance(redisConfig);
+        bind(RedisClient.class).toProvider(RedisClientProvider.class);
+      }else {
         String name = entry.getKey();
         RedisConfig redisConfig = entry.getValue();
         bind(Key.get(RedisConfig.class, named(name))).toInstance(redisConfig);
