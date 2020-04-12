@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @ConfigurationInfo(prefix = "zheng.swagger")
 public final class SwaggerConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.swagger";
-  private String basePath = "/api-docs";
+  private String docsPath = "/api-docs";
+
+  private String apiUrl = "http://127.0.0.1:8080/openapi.json";
 
   private boolean enableUI = true;
 

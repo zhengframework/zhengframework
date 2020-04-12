@@ -9,7 +9,7 @@ public class TestResource {
 
   @GET
   @Path("/{a}/{b}")
-  public String test(@PathParam("a") String a, @PathParam("b") Integer b) {
+  public String test(@PathParam("a") String a, @PathParam("b") String b) {
     return a + "/" + b;
   }
 }

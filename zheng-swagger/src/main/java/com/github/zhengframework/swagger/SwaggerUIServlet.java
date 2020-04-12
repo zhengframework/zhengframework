@@ -1,14 +1,18 @@
 package com.github.zhengframework.swagger;
 
+import com.github.zhengframework.web.PathUtils;
+import com.github.zhengframework.web.WebConfig;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.webjars.NotFoundException;
 import org.webjars.WebJarAssetLocator;
 
@@ -30,6 +34,7 @@ public class SwaggerUIServlet extends HttpServlet {
   @Inject
   public SwaggerUIServlet(SwaggerConfig swaggerConfig) {
     this.swaggerConfig = swaggerConfig;
+
   }
 
   /**
@@ -86,17 +91,21 @@ public class SwaggerUIServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
+    System.out.println("getContextPath="+request.getContextPath());
+    System.out.println("getRequestURI="+request.getRequestURI());
     String eTagName;
     String uri = request.getRequestURI()
         .replaceFirst(request.getContextPath(), "")
-        .replaceFirst(swaggerConfig.getBasePath(), "");
+        .replaceFirst(swaggerConfig.getDocsPath(), "");
     if (uri.endsWith("/")) {
       uri = uri + "index.html";
     }
     if (uri.endsWith("/index.html")) {
-      eTagName = swaggerConfig.getBasePath() + "/index.html";
+      eTagName = swaggerConfig.getDocsPath() + "/index.html";
       URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
+
       try (InputStream inputStream = resource.openStream()) {
+
         if (!disableCache) {
           prepareCacheHeaders(response, eTagName);
         }
@@ -104,7 +113,12 @@ public class SwaggerUIServlet extends HttpServlet {
         String mimeType = this.getServletContext().getMimeType(filename);
 
         response.setContentType(mimeType != null ? mimeType : "application/octet-stream");
-        copy(inputStream, response.getOutputStream());
+//        copy(inputStream, response.getOutputStream());
+
+        String string = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        string = string.replace("http://127.0.0.1:8080/openapi.json", swaggerConfig.getApiUrl());
+
+        IOUtils.write(string, response.getOutputStream(), StandardCharsets.UTF_8);
         return;
       }
     }

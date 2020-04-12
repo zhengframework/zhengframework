@@ -15,10 +15,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
@@ -45,13 +41,16 @@
       <groupId>com.google.inject.extensions</groupId>
     </dependency>
     <dependency>
+      <artifactId>commons-io</artifactId>
+      <groupId>commons-io</groupId>
+    </dependency>
+    <dependency>
       <artifactId>jackson-dataformat-yaml</artifactId>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
     </dependency>
     <dependency>
       <artifactId>zheng-rest</artifactId>
       <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>zheng-web-jetty</artifactId>
