@@ -1,6 +1,6 @@
 package com.github.zhengframework.webjars;
 
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

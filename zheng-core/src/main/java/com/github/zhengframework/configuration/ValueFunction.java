@@ -1,4 +1,4 @@
-package com.github.zhengframework.core.value;
+package com.github.zhengframework.configuration;
 
 import java.util.function.Function;
 

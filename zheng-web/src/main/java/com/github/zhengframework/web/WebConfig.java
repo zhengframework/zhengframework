@@ -1,7 +1,7 @@
 package com.github.zhengframework.web;
 
+import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;

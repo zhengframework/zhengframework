@@ -32,7 +32,7 @@
       <groupId>org.webjars</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-service</artifactId>
+      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
@@ -66,6 +66,11 @@
     <dependency>
       <artifactId>zheng-webjars</artifactId>
       <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

@@ -1,9 +1,9 @@
 package com.github.zhengframework.metrics.servlet;
 
 import com.codahale.metrics.servlets.AdminServlet;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.servlet.ServletModule;

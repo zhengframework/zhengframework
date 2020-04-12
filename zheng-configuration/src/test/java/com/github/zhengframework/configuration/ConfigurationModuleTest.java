@@ -7,7 +7,6 @@ import com.github.zhengframework.configuration.objects.Banana;
 import com.github.zhengframework.configuration.objects.Food;
 import com.github.zhengframework.configuration.objects.NamedAnnotation;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
-import com.github.zhengframework.core.Configuration;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

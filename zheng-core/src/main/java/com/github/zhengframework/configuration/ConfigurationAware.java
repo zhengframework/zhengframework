@@ -1,4 +1,4 @@
-package com.github.zhengframework.core;
+package com.github.zhengframework.configuration;
 
 public interface ConfigurationAware {
 

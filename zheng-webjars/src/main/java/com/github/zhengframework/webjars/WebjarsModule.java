@@ -1,8 +1,8 @@
 package com.github.zhengframework.webjars;
 
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;

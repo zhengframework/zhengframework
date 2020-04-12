@@ -24,11 +24,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-service</artifactId>
+      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>

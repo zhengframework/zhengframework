@@ -1,6 +1,5 @@
 package com.github.zhengframework.configuration;
 
-import com.github.zhengframework.core.Configuration;
 import javax.inject.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

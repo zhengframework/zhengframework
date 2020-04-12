@@ -57,7 +57,7 @@ public abstract class AbstractMetricReportingHealthCheck extends HealthCheck {
       }
       return result.isHealthy() ? 1 : 0;
     } catch (Exception e) {
-      log.warn("exception performing health check: ", e.getMessage());
+      log.warn("exception performing health check: {}", e.getMessage());
       return null;
     }
   }

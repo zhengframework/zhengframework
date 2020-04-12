@@ -415,11 +415,6 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-service</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
         <artifactId>zheng-rest</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${project.version}</version>

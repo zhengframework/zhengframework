@@ -29,18 +29,13 @@
       <version>3.4.2</version>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
       <artifactId>hsqldb</artifactId>
       <groupId>org.hsqldb</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-service</artifactId>
+      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>flyway-core</artifactId>
@@ -70,13 +65,6 @@
       <groupId>com.querydsl</groupId>
       <version>4.3.1</version>
     </dependency>
-    <!--<dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-sql-codegen</artifactId>
-      <version>4.3.1</version>
-      <scope>provided</scope>
-    </dependency>-->
-
     <dependency>
       <artifactId>jooq</artifactId>
       <groupId>org.jooq</groupId>
@@ -91,6 +79,11 @@
       <artifactId>jooq-codegen</artifactId>
       <groupId>org.jooq</groupId>
       <version>3.13.1</version>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>

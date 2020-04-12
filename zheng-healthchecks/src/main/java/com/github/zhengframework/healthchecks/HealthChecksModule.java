@@ -1,7 +1,6 @@
 package com.github.zhengframework.healthchecks;
 
 import com.codahale.metrics.health.HealthCheckRegistry;
-import com.github.zhengframework.service.ServicesModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -12,8 +11,6 @@ public class HealthChecksModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    install(new ServicesModule());
-
     bind(HealthChecksService.class).asEagerSingleton();
   }
 

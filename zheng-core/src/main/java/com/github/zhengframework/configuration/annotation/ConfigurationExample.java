@@ -1,6 +1,6 @@
 package com.github.zhengframework.configuration.annotation;
 
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

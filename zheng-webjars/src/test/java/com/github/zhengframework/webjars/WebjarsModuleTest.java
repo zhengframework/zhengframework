@@ -2,13 +2,12 @@ package com.github.zhengframework.webjars;
 
 import static org.junit.Assert.assertEquals;
 
+import com.github.zhengframework.bootstrap.Application;
+import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.service.Application;
 import com.github.zhengframework.web.WebConfig;
 import com.github.zhengframework.web.WebModule;
-import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
 import okhttp3.Request;
@@ -17,7 +16,7 @@ import org.junit.Test;
 public class WebjarsModuleTest {
 
   @Test
-  public void testDefaultPath() throws IOException {
+  public void testDefaultPath() throws Exception {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
@@ -54,7 +53,7 @@ public class WebjarsModuleTest {
   }
 
   @Test
-  public void testDisableCache() throws IOException {
+  public void testDisableCache() throws Exception {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_cache.properties"))
         .build();
@@ -91,7 +90,7 @@ public class WebjarsModuleTest {
   }
 
   @Test
-  public void testPath() throws IOException {
+  public void testPath() throws Exception {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_path.properties"))
         .build();

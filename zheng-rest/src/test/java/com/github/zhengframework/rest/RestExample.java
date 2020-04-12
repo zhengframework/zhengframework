@@ -1,9 +1,9 @@
 package com.github.zhengframework.rest;
 
+import com.github.zhengframework.bootstrap.Application;
+import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.service.Application;
 import com.github.zhengframework.web.WebConfig;
 import com.github.zhengframework.web.WebModule;
 import javax.ws.rs.client.Client;
@@ -25,7 +25,7 @@ public class RestExample {
   }
 
   @Before
-  public void setup() {
+  public void setup() throws Exception {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();

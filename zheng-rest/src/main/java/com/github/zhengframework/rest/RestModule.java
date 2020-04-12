@@ -2,9 +2,9 @@ package com.github.zhengframework.rest;
 
 import static com.github.zhengframework.rest.RestConfig.PREFIX;
 
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.Scopes;

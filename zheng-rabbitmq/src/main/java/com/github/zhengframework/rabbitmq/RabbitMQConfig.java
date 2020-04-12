@@ -1,14 +1,14 @@
 package com.github.zhengframework.rabbitmq;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
+@ConfigurationInfo(prefix = "zheng.rabbitmq")
 public class RabbitMQConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.rabbitmq";

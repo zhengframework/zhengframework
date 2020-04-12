@@ -2,7 +2,6 @@ package com.github.zhengframework.hibernate;
 
 import static org.junit.Assert.assertEquals;
 
-import com.github.zhengframework.service.Run;
 import com.google.inject.CreationException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -17,9 +16,9 @@ public class HibernatePersistModuleTest {
   }
 
   @Test
-  public void example() {
+  public void example() throws Exception {
     Injector injector = Guice.createInjector(new MyModule(), new HibernatePersistModule());
-    injector.getInstance(Run.class).start();
+    injector.getInstance(HibernateService.class).start();
     Work work = injector.getInstance(Work.class);
 
     work.makeAThing();
@@ -31,7 +30,7 @@ public class HibernatePersistModuleTest {
     assertEquals(3, work.countThings());
     // Without this, the program will not exit
 //    injector.getInstance(EntityManagerFactory.class).close();
-    injector.getInstance(Run.class).stop();
+    injector.getInstance(HibernateService.class).stop();
   }
 
 }

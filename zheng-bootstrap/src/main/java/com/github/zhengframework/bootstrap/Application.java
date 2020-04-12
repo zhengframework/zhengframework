@@ -1,5 +1,7 @@
 package com.github.zhengframework.bootstrap;
 
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.io.FileLocator;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
@@ -7,8 +9,6 @@ import com.github.zhengframework.configuration.source.EnvironmentVariablesConfig
 import com.github.zhengframework.configuration.source.FallbackConfigurationSource;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import com.github.zhengframework.configuration.source.SystemPropertiesConfigurationSource;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.github.zhengframework.core.ServiceManager;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;

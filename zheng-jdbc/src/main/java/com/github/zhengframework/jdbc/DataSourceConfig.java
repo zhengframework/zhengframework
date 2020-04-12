@@ -1,19 +1,19 @@
 package com.github.zhengframework.jdbc;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
+@ConfigurationInfo(prefix = "zheng.dataSource")
 public class DataSourceConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.datasource";
+  public static final String PREFIX = "zheng.dataSource";
 
   private boolean group = false;
 

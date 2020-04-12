@@ -1,13 +1,13 @@
 package com.github.zhengframework.redis;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
+@ConfigurationInfo(prefix = "zheng.redis")
 public class RedisConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.redis";

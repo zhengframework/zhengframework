@@ -1,10 +1,9 @@
 package com.github.zhengframework.metrics;
 
 import com.codahale.metrics.MetricRegistry;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
-import com.github.zhengframework.service.ServicesModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.palominolabs.metrics.guice.GaugeInstanceClassMetricNamer;
@@ -35,8 +34,6 @@ public class MetricsModule extends AbstractModule implements ConfigurationAware 
     MetricsConfig metricsServletConfig = ConfigurationBeanMapper
         .resolve(configuration, MetricsConfig.PREFIX, MetricsConfig.class);
     if (metricsServletConfig.isEnable()) {
-      install(new ServicesModule());
-
       bind(MetricRegistry.class).toInstance(metricRegistry);
       bind(MetricNamer.class).toInstance(metricNamer);
       bind(AnnotationResolver.class).toInstance(annotationResolver);

@@ -32,10 +32,6 @@
       <groupId>org.webjars</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
       <artifactId>bootstrap</artifactId>
       <groupId>org.webjars</groupId>
       <scope>test</scope>
@@ -58,6 +54,11 @@
     <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
   </dependencies>

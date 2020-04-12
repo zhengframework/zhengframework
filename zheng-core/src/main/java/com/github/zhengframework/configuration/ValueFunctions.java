@@ -1,4 +1,4 @@
-package com.github.zhengframework.configuration.value;
+package com.github.zhengframework.configuration;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;

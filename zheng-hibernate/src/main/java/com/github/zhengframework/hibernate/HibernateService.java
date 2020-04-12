@@ -1,28 +1,29 @@
 package com.github.zhengframework.hibernate;
 
-import com.github.zhengframework.service.ServiceRegistry;
-import com.google.common.util.concurrent.AbstractIdleService;
+import com.github.zhengframework.core.Service;
 import javax.inject.Inject;
 
-@SuppressWarnings("UnstableApiUsage")
-public class HibernateService extends AbstractIdleService {
+public class HibernateService implements Service {
 
   private final HibernatePersistService hibernatePersistService;
 
   @Inject
-  private HibernateService(ServiceRegistry serviceRegistry,
-      HibernatePersistService hibernatePersistService) {
+  private HibernateService(HibernatePersistService hibernatePersistService) {
     this.hibernatePersistService = hibernatePersistService;
-    serviceRegistry.add(this);
   }
 
   @Override
-  protected void startUp() throws Exception {
+  public int priority() {
+    return 0;
+  }
+
+  @Override
+  public void start() throws Exception {
     hibernatePersistService.start();
   }
 
   @Override
-  protected void shutDown() throws Exception {
+  public void stop() throws Exception {
     hibernatePersistService.stop();
   }
 }

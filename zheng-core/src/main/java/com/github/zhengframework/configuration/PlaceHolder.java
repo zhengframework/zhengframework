@@ -1,7 +1,6 @@
 package com.github.zhengframework.configuration;
 
 import com.github.zhengframework.configuration.ex.UnresolvablePlaceholdersException;
-import com.github.zhengframework.core.Configuration;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

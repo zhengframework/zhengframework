@@ -40,7 +40,7 @@
       <groupId>io.dropwizard.metrics</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-service</artifactId>
+      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
 
@@ -49,7 +49,6 @@
       <groupId>jakarta.ws.rs</groupId>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <dependencyManagement>

@@ -1,7 +1,8 @@
 package com.github.zhengframework.memcached;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
+@ConfigurationInfo(prefix = "zheng.memcached")
 public class MemcachedConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.memcached";

@@ -2,8 +2,6 @@ package com.github.zhengframework.configuration;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;

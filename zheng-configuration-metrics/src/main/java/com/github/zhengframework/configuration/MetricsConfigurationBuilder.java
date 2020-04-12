@@ -13,7 +13,6 @@ import com.github.zhengframework.configuration.reload.Reloadable;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
 import com.github.zhengframework.configuration.source.EmptyConfigurationSource;
 import com.github.zhengframework.configuration.source.MeteredConfigurationSource;
-import com.github.zhengframework.core.Configuration;
 
 public class MetricsConfigurationBuilder {
 

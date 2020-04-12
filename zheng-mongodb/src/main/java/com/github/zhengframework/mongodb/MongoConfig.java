@@ -1,13 +1,14 @@
 package com.github.zhengframework.mongodb;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 @Data
 @NoArgsConstructor
+@ConfigurationInfo(prefix = "zheng.mongo")
 public class MongoConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.mongo";

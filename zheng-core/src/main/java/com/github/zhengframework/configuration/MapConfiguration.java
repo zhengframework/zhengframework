@@ -1,8 +1,6 @@
 package com.github.zhengframework.configuration;
 
-import com.github.zhengframework.configuration.environment.Environment;
-import com.github.zhengframework.configuration.source.ConfigurationSource;
-import com.github.zhengframework.core.Configuration;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,16 +10,12 @@ import java.util.SortedMap;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.trie.PatriciaTrie;
 
-public class SimpleConfiguration implements Configuration {
+public class MapConfiguration implements Configuration {
 
-  private final ConfigurationSource configurationSource;
-  private final Environment environment;
+  private final PatriciaTrie<String> patriciaTrie;
 
-  public SimpleConfiguration(
-      ConfigurationSource configurationSource,
-      Environment environment) {
-    this.configurationSource = configurationSource;
-    this.environment = environment;
+  public MapConfiguration(Map<String, String> map) {
+    this.patriciaTrie = new PatriciaTrie<>(map);
   }
 
   public static void checkPrefix(String prefix) {
@@ -32,45 +26,31 @@ public class SimpleConfiguration implements Configuration {
 
   @Override
   public Optional<String> get(String key) {
-    Map<String, String> configuration = configurationSource.getConfiguration(environment);
-    String value = configuration.get(key);
-    if (value != null) {
-      PlaceHolder placeHolder = new PlaceHolder(this);
-      return Optional.ofNullable(placeHolder.replace(value));
-    }
-    return Optional.empty();
+    return Optional.ofNullable(patriciaTrie.get(key));
   }
 
   @Override
   public Set<String> keySet() {
-    return configurationSource.getConfiguration(environment).keySet();
+    return patriciaTrie.keySet();
   }
 
   @Override
   public Map<String, String> asMap() {
-    Map<String, String> configuration = configurationSource.getConfiguration(environment);
-    Map<String, String> copy = new HashMap<>();
-    PlaceHolder placeHolder = new PlaceHolder(this);
-    for (Entry<String, String> entry : configuration.entrySet()) {
-      copy.put(entry.getKey(), placeHolder.replace(entry.getValue()));
-    }
-    return copy;
+    return patriciaTrie;
   }
 
   @Override
   public Configuration prefix(String prefix) {
     checkPrefix(prefix);
-    PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
     int len = prefix.length() + 1;
-    return new SubsetConfiguration(prefixMap.entrySet().stream()
+    return new MapConfiguration(prefixMap.entrySet().stream()
         .collect(Collectors.toMap(entry -> entry.getKey().substring(len), Entry::getValue)));
   }
 
   @Override
   public Set<Configuration> prefixSet(String prefix) {
     checkPrefix(prefix);
-    PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
     int len = prefix.length() + 1;
     Map<Integer, Map<String, String>> map = new HashMap<>();
@@ -99,14 +79,13 @@ public class SimpleConfiguration implements Configuration {
       map.get(index).put(newKey, entry.getValue());
     }
     return map.entrySet().stream().sorted(Entry.comparingByKey())
-        .map(entry -> new SubsetConfiguration(entry.getValue()))
+        .map(entry -> new MapConfiguration(entry.getValue()))
         .collect(Collectors.toSet());
   }
 
   @Override
   public Map<String, Configuration> prefixMap(String prefix) {
     checkPrefix(prefix);
-    PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
     int len = prefix.length() + 1;
     Map<String, Map<String, String>> map = new HashMap<>();
@@ -130,6 +109,6 @@ public class SimpleConfiguration implements Configuration {
     }
     return map.entrySet().stream()
         .collect(Collectors.toMap(Entry::getKey,
-            entry -> new SubsetConfiguration(entry.getValue())));
+            entry -> new MapConfiguration(entry.getValue())));
   }
 }

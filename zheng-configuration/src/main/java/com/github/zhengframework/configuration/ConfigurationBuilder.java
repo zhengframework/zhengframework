@@ -8,7 +8,6 @@ import com.github.zhengframework.configuration.reload.ReloadStrategy;
 import com.github.zhengframework.configuration.reload.Reloadable;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
 import com.github.zhengframework.configuration.source.EmptyConfigurationSource;
-import com.github.zhengframework.core.Configuration;
 
 public class ConfigurationBuilder {
 

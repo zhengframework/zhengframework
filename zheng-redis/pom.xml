@@ -33,12 +33,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
+      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-service</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-bootstrap</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

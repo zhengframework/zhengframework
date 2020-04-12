@@ -1,9 +1,8 @@
 package com.github.zhengframework.hibernate;
 
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.github.zhengframework.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
-import com.github.zhengframework.service.ServicesModule;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
@@ -32,7 +31,7 @@ import org.hibernate.integrator.spi.Integrator;
 
 public class HibernatePersistModule extends PersistModule implements ConfigurationAware {
 
-  private com.github.zhengframework.core.Configuration configuration;
+  private com.github.zhengframework.configuration.Configuration configuration;
 
 
   private Map<String, String> hibernateConfigToMap(HibernateConfig hibernateConfig) {
@@ -59,7 +58,6 @@ public class HibernatePersistModule extends PersistModule implements Configurati
 
   @Override
   protected void configurePersistence() {
-    install(new ServicesModule());
     Preconditions.checkArgument(configuration != null, "configuration is null");
     HibernateConfig hibernateConfig = ConfigurationBeanMapper
         .resolve(configuration, HibernateConfig.PREFIX, HibernateConfig.class);
@@ -128,7 +126,7 @@ public class HibernatePersistModule extends PersistModule implements Configurati
 
   @Override
   public void initConfiguration(
-      com.github.zhengframework.core.Configuration configuration) {
+      com.github.zhengframework.configuration.Configuration configuration) {
     this.configuration = configuration;
   }
 

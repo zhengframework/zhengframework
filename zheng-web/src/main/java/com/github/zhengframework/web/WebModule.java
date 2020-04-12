@@ -1,8 +1,8 @@
 package com.github.zhengframework.web;
 
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.google.common.base.Preconditions;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.OptionalBinder;

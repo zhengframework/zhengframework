@@ -1,54 +1,65 @@
 package com.github.zhengframework.healthchecks;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.github.zhengframework.service.ServiceRegistry;
+import com.github.zhengframework.core.Service;
 import com.google.common.base.Strings;
-import com.google.common.util.concurrent.AbstractScheduledService;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * This service periodically runs health checks at a configured interval and reports any health
  * issues via slf4j
  */
-@SuppressWarnings("UnstableApiUsage")
 @Singleton
 @Slf4j
-public class HealthChecksService extends AbstractScheduledService {
+public class HealthChecksService implements Service {
 
   private final HealthChecks healthChecks;
   private final HealthChecksConfig config;
+  private ScheduledExecutorService scheduledExecutorService;
 
   @Inject
-  public HealthChecksService(ServiceRegistry services, HealthChecksConfig config,
+  public HealthChecksService(HealthChecksConfig config,
       HealthChecks healthChecks) {
     this.config = config;
     this.healthChecks = healthChecks;
+    scheduledExecutorService = Executors
+        .newScheduledThreadPool(Runtime.getRuntime().availableProcessors(),
+            new ThreadFactoryBuilder()
+                .setNameFormat("healthCheck-%d")
+                .setDaemon(true)
+                .build());
+  }
 
-    // No need to start it up if we're not configured
+  @Override
+  public int priority() {
+    return 0;
+  }
+
+  @Override
+  public void start() throws Exception {
     if (config.getInterval() != null) {
-      services.add(this);
+      scheduledExecutorService.schedule(() -> {
+        for (Map.Entry<String, HealthCheck.Result> entry : healthChecks.run().entrySet()) {
+          if (entry.getValue().isHealthy()) {
+            log.trace("{} : OK {}", entry.getKey(),
+                Strings.nullToEmpty(entry.getValue().getMessage()));
+          } else {
+            log.warn("{} : FAIL - {}", entry.getKey(),
+                Strings.nullToEmpty(entry.getValue().getMessage()), entry.getValue().getError());
+          }
+        }
+      }, config.getInterval().getQuantity(), config.getInterval().getUnit());
     }
   }
 
   @Override
-  protected void runOneIteration() throws Exception {
-
-    for (Map.Entry<String, HealthCheck.Result> entry : healthChecks.run().entrySet()) {
-      if (entry.getValue().isHealthy()) {
-        log.trace("{} : OK {}", entry.getKey(), Strings.nullToEmpty(entry.getValue().getMessage()));
-      } else {
-        log.warn("{} : FAIL - {}", entry.getKey(),
-            Strings.nullToEmpty(entry.getValue().getMessage()), entry.getValue().getError());
-      }
-    }
-  }
-
-  @Override
-  protected Scheduler scheduler() {
-    return Scheduler.newFixedRateSchedule(0, config.getInterval().getQuantity(),
-        config.getInterval().getUnit());
+  public void stop() throws Exception {
+    scheduledExecutorService.shutdownNow();
   }
 }

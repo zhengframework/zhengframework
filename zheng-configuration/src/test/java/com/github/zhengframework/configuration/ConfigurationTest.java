@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.github.zhengframework.configuration.parser.PropertiesConfigurationParser;
-import com.github.zhengframework.core.Configuration;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Before;
@@ -22,7 +21,7 @@ public class ConfigurationTest {
 
   @Test
   public void testGet() {
-    SubsetConfiguration configuration = new SubsetConfiguration(map);
+    MapConfiguration configuration = new MapConfiguration(map);
     Configuration apple = configuration.prefix("apple");
     assertTrue(Boolean.parseBoolean(apple.get("big").get()));
     assertEquals("110", apple.get("name").get());
@@ -31,7 +30,7 @@ public class ConfigurationTest {
 
   @Test
   public void getList() {
-    SubsetConfiguration configuration = new SubsetConfiguration(map);
+    MapConfiguration configuration = new MapConfiguration(map);
     Set<Configuration> bananas = configuration.prefixSet("bananas");
     assertEquals(3, bananas.size());
 
@@ -39,7 +38,7 @@ public class ConfigurationTest {
 
   @Test
   public void getMap() {
-    SubsetConfiguration configuration = new SubsetConfiguration(map);
+    MapConfiguration configuration = new MapConfiguration(map);
     Map<String, Configuration> apples = configuration.prefixMap("apples");
     assertEquals(1, apples.size());
   }

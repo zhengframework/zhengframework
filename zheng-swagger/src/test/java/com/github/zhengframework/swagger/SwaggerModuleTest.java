@@ -3,12 +3,11 @@ package com.github.zhengframework.swagger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.github.zhengframework.bootstrap.Application;
 import com.github.zhengframework.rest.RestModule;
-import com.github.zhengframework.service.Application;
 import com.github.zhengframework.web.WebConfig;
 import com.github.zhengframework.web.WebModule;
 import com.github.zhengframework.webjars.WebjarsModule;
-import java.io.IOException;
 import java.util.Objects;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
@@ -18,7 +17,7 @@ import org.junit.Test;
 
 public class SwaggerModuleTest {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws Exception {
     Application application = Application
         .create(
             new MyModule(),
@@ -44,7 +43,7 @@ public class SwaggerModuleTest {
   }
 
   @Test
-  public void test() throws IOException {
+  public void test() throws Exception {
     Application application = Application
         .create(
             new MyModule(),

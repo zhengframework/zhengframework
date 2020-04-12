@@ -3,7 +3,6 @@ package com.github.zhengframework.configuration;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.github.zhengframework.configuration.annotation.ConfigurationExample;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Map;

@@ -38,8 +38,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
     </dependency>
   </dependencies>
 

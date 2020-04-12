@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.github.zhengframework.configuration.objects.Food;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
-import com.github.zhengframework.core.Configuration;
 import java.io.IOException;
 import org.junit.Test;
 

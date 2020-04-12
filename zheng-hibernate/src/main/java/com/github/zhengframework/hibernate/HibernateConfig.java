@@ -1,6 +1,7 @@
 package com.github.zhengframework.hibernate;
 
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@ConfigurationInfo(prefix = "zheng.hibernate")
 public class HibernateConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.hibernate";

@@ -1,9 +1,9 @@
 package com.github.zhengframework.swagger;
 
 
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.core.Configuration;
-import com.github.zhengframework.core.ConfigurationAware;
 import com.google.common.base.Preconditions;
 import com.google.inject.servlet.ServletModule;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;

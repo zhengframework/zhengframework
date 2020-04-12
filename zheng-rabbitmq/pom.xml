@@ -33,7 +33,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-service</artifactId>
+      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
   </dependencies>

@@ -1,24 +1,17 @@
 package com.github.zhengframework.healthchecks;
 
+import com.github.zhengframework.configuration.ConfigurationDefine;
+import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import io.dropwizard.util.Duration;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
-public class HealthChecksConfig {
+@ConfigurationInfo(prefix = "zheng.healthCheck")
+public class HealthChecksConfig implements ConfigurationDefine {
 
-  /**
-   * health checks which extend AbstractMetricsHealthCheck will register metrics with this prefix.
-   */
-  private String metricsPrefix = "zheng.healthChecks";
-  /**
-   * <p>Run health checks periodically at this interval. Failing health checks will be logged at
-   * level WARN. This accepts a flexible format like "10 minutes" or "30s".</p>
-   *
-   * Default is null, which disables periodic health checks.
-   */
+  private String metricsPrefix = "zheng.healthCheck";
   private Duration interval = Duration.minutes(10);
 
-  public void setDuration(Duration value) {
-    this.interval = value;
-  }
 }

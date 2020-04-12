@@ -22,6 +22,18 @@
       <groupId>org.projectlombok</groupId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <artifactId>jackson-databind</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-dataformat-properties</artifactId>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>commons-collections4</artifactId>
+      <groupId>org.apache.commons</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

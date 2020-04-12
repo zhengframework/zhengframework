@@ -45,10 +45,6 @@
       <groupId>com.google.inject</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
       <artifactId>zheng-web</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
@@ -81,6 +77,11 @@
     <dependency>
       <artifactId>metrics-annotation</artifactId>
       <groupId>io.dropwizard.metrics</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

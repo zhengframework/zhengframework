@@ -1,7 +1,6 @@
 package com.github.zhengframework.configuration;
 
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
-import com.github.zhengframework.configuration.spi.ConfigurationDefine;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
