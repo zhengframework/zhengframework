@@ -4,7 +4,6 @@ import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
-import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.servlet.ServletModule;
 import java.util.Collections;
@@ -18,11 +17,9 @@ public class WebjarsModule extends ServletModule implements ConfigurationAware {
   @Override
   protected void configureServlets() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    WebModule webModule = new WebModule();
-    webModule.initConfiguration(configuration);
-    install(webModule);
-    WebjarsConfig webjarsConfig = ConfigurationBeanMapper
-        .resolve(configuration, WebjarsConfig.PREFIX, WebjarsConfig.class);
+    Map<String, WebjarsConfig> configMap = ConfigurationBeanMapper
+        .resolve(configuration, WebjarsConfig.class);
+    WebjarsConfig webjarsConfig = configMap.getOrDefault("", new WebjarsConfig());
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
     bind(WebjarsServlet.class).in(Singleton.class);
     String path = webjarsConfig.getBasePath();

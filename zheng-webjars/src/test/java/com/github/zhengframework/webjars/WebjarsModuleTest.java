@@ -2,12 +2,13 @@ package com.github.zhengframework.webjars;
 
 import static org.junit.Assert.assertEquals;
 
-import com.github.zhengframework.bootstrap.Application;
+import com.github.zhengframework.bootstrap.ZhengApplication;
+import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.web.JettyWebModule;
 import com.github.zhengframework.web.WebConfig;
-import com.github.zhengframework.web.WebModule;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
 import okhttp3.Request;
@@ -20,10 +21,11 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
-    Application application = Application
-        .create(configuration,
-            new WebjarsModule()
-        );
+    ZhengApplication application = ZhengApplicationBuilder.create().addModule(
+        new WebjarsModule())
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
     application.start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     WebjarsConfig webjarsConfig = application.getInjector().getInstance(WebjarsConfig.class);
@@ -57,10 +59,11 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_cache.properties"))
         .build();
-    Application application = Application
-        .create(configuration,
-            new WebjarsModule()
-        );
+    ZhengApplication application = ZhengApplicationBuilder.create().addModule(
+        new WebjarsModule())
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
     application.start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     WebjarsConfig webjarsConfig = application.getInjector().getInstance(WebjarsConfig.class);
@@ -94,11 +97,13 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_path.properties"))
         .build();
-    Application application = Application
-        .create(configuration,
-            new WebModule(),
-            new WebjarsModule()
-        );
+    ZhengApplication application = ZhengApplicationBuilder.create()
+        .addModule(
+            new JettyWebModule(),
+            new WebjarsModule())
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
     application.start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     WebjarsConfig webjarsConfig = application.getInjector().getInstance(WebjarsConfig.class);
