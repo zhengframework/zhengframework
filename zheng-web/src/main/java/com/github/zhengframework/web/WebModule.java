@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.OptionalBinder;
 import com.google.inject.servlet.ServletModule;
+import java.util.Map;
 import javax.websocket.server.ServerEndpointConfig;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +27,10 @@ public class WebModule extends ServletModule implements ConfigurationAware {
   @Override
   protected void configureServlets() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    ConfigurationBeanMapper.resolve(configuration, WebConfig.class,
-        (s, webConfig) -> {
-         log.debug("webConfig={}", webConfig);
-          bind(WebConfig.class).toInstance(webConfig);
-        });
+    Map<String, WebConfig> configMap = ConfigurationBeanMapper
+        .resolve(configuration, WebConfig.class);
+    WebConfig webConfig = configMap.getOrDefault("", new WebConfig());
+    bind(WebConfig.class).toInstance(webConfig);
     OptionalBinder
         .newOptionalBinder(binder(), new TypeLiteral<WebSocketEndpoint>() {
         });
