@@ -1,7 +1,5 @@
 package com.github.zhengframework.swagger;
 
-import com.github.zhengframework.web.PathUtils;
-import com.github.zhengframework.web.WebConfig;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,12 +26,21 @@ public class SwaggerUIServlet extends HttpServlet {
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
   private static final int EOF = -1;
   private final SwaggerConfig swaggerConfig;
+  private final String indexContent;
   private boolean disableCache = false;
   private WebJarAssetLocator locator = new WebJarAssetLocator();
 
   @Inject
   public SwaggerUIServlet(SwaggerConfig swaggerConfig) {
     this.swaggerConfig = swaggerConfig;
+
+    URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
+    try (InputStream inputStream = resource.openStream()) {
+      String string = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+      indexContent = string.replace("http://127.0.0.1:8080/openapi.json", swaggerConfig.getApiUrl());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
@@ -91,8 +98,6 @@ public class SwaggerUIServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
-    System.out.println("getContextPath="+request.getContextPath());
-    System.out.println("getRequestURI="+request.getRequestURI());
     String eTagName;
     String uri = request.getRequestURI()
         .replaceFirst(request.getContextPath(), "")
@@ -102,25 +107,15 @@ public class SwaggerUIServlet extends HttpServlet {
     }
     if (uri.endsWith("/index.html")) {
       eTagName = swaggerConfig.getDocsPath() + "/index.html";
-      URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
 
-      try (InputStream inputStream = resource.openStream()) {
-
-        if (!disableCache) {
-          prepareCacheHeaders(response, eTagName);
-        }
-        String filename = getFileName(uri);
-        String mimeType = this.getServletContext().getMimeType(filename);
-
-        response.setContentType(mimeType != null ? mimeType : "application/octet-stream");
-//        copy(inputStream, response.getOutputStream());
-
-        String string = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        string = string.replace("http://127.0.0.1:8080/openapi.json", swaggerConfig.getApiUrl());
-
-        IOUtils.write(string, response.getOutputStream(), StandardCharsets.UTF_8);
-        return;
+      if (!disableCache) {
+        prepareCacheHeaders(response, eTagName);
       }
+      String filename = getFileName(uri);
+      String mimeType = this.getServletContext().getMimeType(filename);
+      response.setContentType(mimeType != null ? mimeType : "application/octet-stream");
+      IOUtils.write(indexContent, response.getOutputStream(), StandardCharsets.UTF_8);
+      return;
     }
     String webjarsResourceURI;
     try {
