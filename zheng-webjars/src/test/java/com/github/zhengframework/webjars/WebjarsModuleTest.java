@@ -21,8 +21,7 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app.properties"))
         .build();
-    ZhengApplication application = ZhengApplicationBuilder.create().addModule(
-        new WebjarsModule())
+    ZhengApplication application = ZhengApplicationBuilder.create()
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
@@ -59,8 +58,7 @@ public class WebjarsModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("app_cache.properties"))
         .build();
-    ZhengApplication application = ZhengApplicationBuilder.create().addModule(
-        new WebjarsModule())
+    ZhengApplication application = ZhengApplicationBuilder.create()
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
@@ -98,9 +96,6 @@ public class WebjarsModuleTest {
         .withConfigurationSource(new FileConfigurationSource("app_path.properties"))
         .build();
     ZhengApplication application = ZhengApplicationBuilder.create()
-        .addModule(
-            new JettyWebModule(),
-            new WebjarsModule())
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
