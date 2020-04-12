@@ -2,7 +2,8 @@ package com.github.zhengframework.web;
 
 import static org.junit.Assert.assertEquals;
 
-import com.github.zhengframework.bootstrap.Application;
+import com.github.zhengframework.bootstrap.ZhengApplication;
+import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
 import java.util.Objects;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
@@ -13,7 +14,10 @@ import org.junit.Test;
 public class UndertowWebModuleTest {
 
   public static void main(String[] aaa) throws Exception {
-    Application application = Application.create(new UndertowWebModule(), new MyModule());
+    ZhengApplication application = ZhengApplicationBuilder.create().addModule(
+        new MyModule())
+        .enableAutoLoadModule()
+        .build();
     application.getInjector().getInstance(WebServerService.class).start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     System.out.println(webConfig);
@@ -38,7 +42,10 @@ public class UndertowWebModuleTest {
 
   @Test
   public void configure() throws Exception {
-    Application application = Application.create(new UndertowWebModule(), new MyModule());
+    ZhengApplication application = ZhengApplicationBuilder.create().addModule(
+        new MyModule())
+        .enableAutoLoadModule()
+        .build();
     application.getInjector().getInstance(WebServerService.class).start();
     WebConfig webConfig = application.getInjector().getInstance(WebConfig.class);
     System.out.println(webConfig);
@@ -61,7 +68,6 @@ public class UndertowWebModuleTest {
       System.out.println(resp);
       assertEquals("Hello, World", resp);
     } finally {
-//      application.stop();
       application.getInjector().getInstance(WebServerService.class).stop();
     }
   }
