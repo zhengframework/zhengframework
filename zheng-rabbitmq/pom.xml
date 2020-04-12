@@ -36,6 +36,11 @@
       <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-bootstrap</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

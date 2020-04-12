@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.rabbitmq")
+@ConfigurationInfo(prefix = "zheng.rabbitmq",supportGroup = true)
 public class RabbitMQConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.rabbitmq";
