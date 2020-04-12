@@ -3,25 +3,20 @@ package com.github.zhengframework.cache;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import com.github.zhengframework.core.Configurer;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
-import com.google.inject.Module;
-import com.google.inject.util.Modules;
+import com.google.inject.TypeLiteral;
+import com.google.inject.multibindings.OptionalBinder;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
-import javax.cache.Caching;
-import javax.cache.annotation.CacheResolverFactory;
 import javax.cache.annotation.CacheResult;
-import javax.cache.spi.CachingProvider;
 import javax.inject.Inject;
 import org.cache2k.Cache2kBuilder;
 import org.cache2k.jcache.ExtendedMutableConfiguration;
-import org.cache2k.jcache.provider.JCacheProvider;
-import org.jsr107.ri.annotations.DefaultCacheResolverFactory;
-import org.jsr107.ri.annotations.guice.module.CacheAnnotationsModule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +31,25 @@ public class CacheModuleTest {
 
   @Before
   public void beforeMethod() {
-    Module module = Modules.override(new CacheAnnotationsModule()).with(new JCacheModule());
-    Guice.createInjector(module).injectMembers(this);
-//    Guice.createInjector(new CacheAnnotationsModule()).injectMembers(this);
+
+    Guice.createInjector(new CacheModule(), new AbstractModule() {
+      @Override
+      protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<Configurer<CacheManager>>() {
+        })
+            .setBinding().toInstance(cacheManager -> {
+              String cacheName = "guice";
+              Cache<?, ?> cache = cacheManager.getCache(cacheName);
+              if (cache == null) {
+                cacheManager.createCache("guice", ExtendedMutableConfiguration
+                    .of(new Cache2kBuilder<Integer, Integer>() {}
+                        .entryCapacity(1000)
+                        .expireAfterWrite(10, TimeUnit.SECONDS)));
+              }
+            });
+      }
+
+    }).injectMembers(this);
   }
 
   @Test
@@ -73,26 +84,5 @@ public class CacheModuleTest {
     }
   }
 
-
-  static final class JCacheModule extends AbstractModule {
-
-    @Override
-    protected void configure() {
-      configureCachingProvider();
-    }
-
-    void configureCachingProvider() {
-      CachingProvider cachingProvider =
-          Caching.getCachingProvider(JCacheProvider.class.getName());
-      CacheManager cacheManager = cachingProvider.getCacheManager();
-      cacheManager.destroyCache("guice");
-      cacheManager.createCache("guice", ExtendedMutableConfiguration
-          .of(new Cache2kBuilder<Integer, Integer>() {
-          }
-              .entryCapacity(1000).expireAfterWrite(10, TimeUnit.SECONDS)));
-      bind(CacheResolverFactory.class).toInstance(new DefaultCacheResolverFactory(cacheManager));
-      bind(CacheManager.class).toInstance(cacheManager);
-    }
-  }
 
 }

@@ -27,6 +27,15 @@
       <groupId>org.cache2k</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-simple</artifactId>
+      <groupId>org.slf4j</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
