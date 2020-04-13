@@ -2,8 +2,8 @@ package com.github.zhengframework.cache;
 
 public enum CachingProviderType {
 
-  NOOP("noop", "com.github.zhengframework.cache.NoOpCachingProvider") //
-  , SIMPLE("simple", "com.github.zhengframework.cache.SimpleCachingProvider") //
+  NOOP("noop", "com.github.zhengframework.cache.noop.NoOpCachingProvider") //
+  , SIMPLE("simple", "com.github.zhengframework.cache.simple.SimpleCachingProvider") //
   , CACHE2K("cache2k", "org.cache2k.jcache.provider.JCacheProvider")//
   , EHCACHE("ehcache", "org.ehcache.jsr107.EhcacheCachingProvider")//
   , INFINISPAN("infinispan", "org.infinispan.jcache.embedded.JCachingProvider")//

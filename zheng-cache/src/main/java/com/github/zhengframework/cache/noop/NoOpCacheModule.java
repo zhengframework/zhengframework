@@ -1,4 +1,4 @@
-package com.github.zhengframework.cache;
+package com.github.zhengframework.cache.noop;
 
 import com.google.inject.AbstractModule;
 import javax.cache.CacheManager;

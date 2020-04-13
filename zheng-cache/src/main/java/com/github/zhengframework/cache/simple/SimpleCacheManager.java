@@ -1,4 +1,4 @@
-package com.github.zhengframework.cache;
+package com.github.zhengframework.cache.simple;
 
 import java.net.URI;
 import java.util.Collections;

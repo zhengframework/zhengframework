@@ -1,4 +1,4 @@
-package com.github.zhengframework.cache;
+package com.github.zhengframework.cache.simple;
 
 import javax.cache.Cache;
 

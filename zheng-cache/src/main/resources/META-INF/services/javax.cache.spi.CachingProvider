@@ -1,2 +1,2 @@
-com.github.zhengframework.cache.NoOpCachingProvider
-com.github.zhengframework.cache.SimpleCachingProvider
+com.github.zhengframework.cache.noop.NoOpCachingProvider
+com.github.zhengframework.cache.simple.SimpleCachingProvider

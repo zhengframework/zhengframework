@@ -1,13 +1,9 @@
-package com.github.zhengframework.cache;
+package com.github.zhengframework.cache.noop;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.configuration.CacheEntryListenerConfiguration;
@@ -17,36 +13,29 @@ import javax.cache.processor.EntryProcessor;
 import javax.cache.processor.EntryProcessorException;
 import javax.cache.processor.EntryProcessorResult;
 
-public class SimpleCache<K, V> implements Cache<K, V> {
+public class NoOpCache<K, V> implements Cache<K, V> {
 
-  private final ConcurrentMap<K, V> caches = new ConcurrentHashMap<>(16);
-  private final SimpleCacheManager simpleCacheManager;
-  private final String name;
+  private final CacheManager cacheManager;
+  private String name;
 
-  private boolean isClosed = false;
-
-  public SimpleCache(SimpleCacheManager simpleCacheManager, String name) {
-    this.simpleCacheManager = simpleCacheManager;
+  public NoOpCache(CacheManager cacheManager, String name) {
+    this.cacheManager = cacheManager;
     this.name = name;
   }
 
   @Override
   public V get(K k) {
-    return caches.get(k);
+    return null;
   }
 
   @Override
   public Map<K, V> getAll(Set<? extends K> set) {
-    HashMap<K, V> map = new HashMap<>();
-    for (K k : set) {
-      map.put(k, get(k));
-    }
-    return map;
+    return null;
   }
 
   @Override
   public boolean containsKey(K k) {
-    return caches.containsKey(k);
+    return false;
   }
 
   @Override
@@ -56,82 +45,67 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public void put(K k, V v) {
-    caches.put(k, v);
+
   }
 
   @Override
   public V getAndPut(K k, V v) {
-    V v1 = caches.get(k);
-    caches.replace(k, v);
-    return v1;
+    return null;
   }
 
   @Override
   public void putAll(Map<? extends K, ? extends V> map) {
-    for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
-      put(entry.getKey(), entry.getValue());
-    }
+
   }
 
   @Override
   public boolean putIfAbsent(K k, V v) {
-    caches.putIfAbsent(k, v);
-    return true;
+    return false;
   }
 
   @Override
   public boolean remove(K k) {
-    caches.remove(k);
-    return true;
+    return false;
   }
 
   @Override
   public boolean remove(K k, V v) {
-    caches.remove(k, v);
-    return true;
+    return false;
   }
 
   @Override
   public V getAndRemove(K k) {
-    V v = caches.get(k);
-    caches.remove(k);
-    return v;
+    return null;
   }
 
   @Override
   public boolean replace(K k, V v, V v1) {
-    caches.replace(k, v1);
-    return true;
+    return false;
   }
 
   @Override
   public boolean replace(K k, V v) {
-    caches.replace(k, v);
-    return true;
+    return false;
   }
 
   @Override
   public V getAndReplace(K k, V v) {
-    V v1 = caches.get(k);
-    caches.replace(k, v);
-    return v1;
+    return null;
   }
 
   @Override
   public void removeAll(Set<? extends K> set) {
-    for (K k : set) {
-      caches.remove(k);
-    }
+
   }
 
   @Override
   public void removeAll() {
-    caches.clear();
+
   }
 
   @Override
   public void clear() {
-    caches.clear();
+
   }
 
   @Override
@@ -158,20 +132,17 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public CacheManager getCacheManager() {
-    return simpleCacheManager;
+    return cacheManager;
   }
 
   @Override
   public void close() {
-    synchronized (caches) {
-      isClosed = true;
-      caches.clear();
-    }
+
   }
 
   @Override
   public boolean isClosed() {
-    return isClosed;
+    return false;
   }
 
   @Override
@@ -191,11 +162,7 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   }
 
-  @Override
   public Iterator<Entry<K, V>> iterator() {
-    List<Entry<K, V>> list = caches.entrySet()
-        .stream().map(entry -> new SimpleCacheEntry<>(entry.getKey(), entry.getValue()))
-        .collect(Collectors.toList());
-    return list.iterator();
+    return Collections.emptyIterator();
   }
 }
