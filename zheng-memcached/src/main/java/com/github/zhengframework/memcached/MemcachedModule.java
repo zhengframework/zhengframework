@@ -19,16 +19,16 @@ public class MemcachedModule extends AbstractModule implements ConfigurationAwar
   @Override
   protected void configure() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    Boolean group = configuration.getBoolean(MemcachedConfig.PREFIX + ".group", false);
-    if (!group) {
-      MemcachedConfig memcachedConfig = ConfigurationBeanMapper
-          .resolve(configuration, MemcachedConfig.PREFIX, MemcachedConfig.class);
-      bind(MemcachedConfig.class).toInstance(memcachedConfig);
-      bind(MemcachedClient.class).toProvider(MemcachedClientProvider.class);
-    } else {
-      Map<String, MemcachedConfig> map = ConfigurationBeanMapper
-          .resolveMap(configuration, MemcachedConfig.PREFIX, MemcachedConfig.class);
-      for (Entry<String, MemcachedConfig> entry : map.entrySet()) {
+
+    Map<String, MemcachedConfig> memcachedConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, MemcachedConfig.class);
+    for (Entry<String, MemcachedConfig> entry : memcachedConfigMap
+        .entrySet()) {
+      if (entry.getKey().isEmpty()) {
+        MemcachedConfig memcachedConfig = entry.getValue();
+        bind(MemcachedConfig.class).toInstance(memcachedConfig);
+        bind(MemcachedClient.class).toProvider(MemcachedClientProvider.class);
+      } else {
         String name = entry.getKey();
         MemcachedConfig memcachedConfig = entry.getValue();
         bind(Key.get(MemcachedConfig.class, named(name))).toInstance(memcachedConfig);

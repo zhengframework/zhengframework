@@ -1,26 +1,20 @@
 package com.github.zhengframework.memcached;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.memcached")
+@ConfigurationInfo(prefix = "zheng.memcached", supportGroup = true)
 public class MemcachedConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.memcached";
-  private boolean group = false;
-  private String addresses;
-  @Nullable
+  private String addresses = "localhost:11211";
+
   private String username;
-  @Nullable
+
   private String password;
 
-  @Nullable
   private AuthType authType;
 }
