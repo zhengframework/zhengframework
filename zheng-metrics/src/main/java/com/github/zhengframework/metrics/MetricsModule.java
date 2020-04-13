@@ -11,6 +11,8 @@ import com.palominolabs.metrics.guice.MetricNamer;
 import com.palominolabs.metrics.guice.MetricsInstrumentationModule;
 import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import com.palominolabs.metrics.guice.annotation.MethodAnnotationResolver;
+import java.util.Map;
+import java.util.Map.Entry;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,9 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @EqualsAndHashCode(callSuper = false)
 public class MetricsModule extends AbstractModule implements ConfigurationAware {
 
-  private final MetricRegistry metricRegistry = new MetricRegistry();
-  private final MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
-  private final AnnotationResolver annotationResolver = new MethodAnnotationResolver();
   private Configuration configuration;
 
   @Override
@@ -31,23 +30,29 @@ public class MetricsModule extends AbstractModule implements ConfigurationAware 
   @Override
   protected void configure() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    MetricsConfig metricsServletConfig = ConfigurationBeanMapper
-        .resolve(configuration, MetricsConfig.PREFIX, MetricsConfig.class);
-    if (metricsServletConfig.isEnable()) {
-      bind(MetricRegistry.class).toInstance(metricRegistry);
-      bind(MetricNamer.class).toInstance(metricNamer);
-      bind(AnnotationResolver.class).toInstance(annotationResolver);
-      MetricsInstrumentationModule metricsInstrumentationModule = MetricsInstrumentationModule
-          .builder()
-          .withMetricRegistry(metricRegistry)
-          .withMetricNamer(metricNamer)
-          .withAnnotationMatcher(annotationResolver)
-          .build();
-      install(metricsInstrumentationModule);
-      bind(MetricsService.class).asEagerSingleton();
-    } else {
-      log.warn("MetricsModule is not bind, zheng.metrics.enable=false");
-    }
+    Map<String, MetricsConfig> metricsConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, MetricsConfig.class);
+    for (Entry<String, MetricsConfig> entry : metricsConfigMap.entrySet()) {
+      MetricsConfig metricsConfig = entry.getValue();
+      if (metricsConfig.isEnable()) {
+        MetricRegistry metricRegistry = new MetricRegistry();
+        MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
+        AnnotationResolver annotationResolver = new MethodAnnotationResolver();
+//        OptionalBinder.newOptionalBinder(binder(),MetricRegistry.class)
+//            .setDefault().to(MetricRegistry.class);
+        bind(MetricRegistry.class).toInstance(metricRegistry);
+        MetricsInstrumentationModule metricsInstrumentationModule = MetricsInstrumentationModule
+            .builder()
+            .withMetricRegistry(metricRegistry)
+            .withMetricNamer(metricNamer)
+            .withAnnotationMatcher(annotationResolver)
+            .build();
+        install(metricsInstrumentationModule);
 
+        bind(MetricsService.class).asEagerSingleton();
+      } else {
+        log.warn("MetricsModule is disable");
+      }
+    }
   }
 }

@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @ConfigurationInfo(prefix = "zheng.metrics")
 public class MetricsConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.metrics";
-
   private boolean enable = true;
 }
