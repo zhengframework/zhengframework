@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @ConfigurationInfo(prefix = "zheng.metrics.servlet")
 public class MetricsServletConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.metrics.servlet";
   private boolean enable = true;
   private String path = "/metrics";
 }
