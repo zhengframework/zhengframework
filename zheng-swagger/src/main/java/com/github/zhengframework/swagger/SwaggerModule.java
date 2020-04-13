@@ -52,7 +52,7 @@ public class SwaggerModule extends ServletModule implements ConfigurationAware {
 
     if (swaggerConfig.isEnableUI()) {
       bind(SwaggerUIServlet.class).in(Singleton.class);
-      String path = PathUtils.fixPath(swaggerConfig.getDocsPath());
+      String path = PathUtils.fixPath(swaggerConfig.getUiPath());
       serve(path + "/*").with(SwaggerUIServlet.class);
       log.info("open api browser: {}", "http://localhost:" + webConfig.getPort() + PathUtils
           .fixPath(webConfig.getContextPath(), path) + "/");

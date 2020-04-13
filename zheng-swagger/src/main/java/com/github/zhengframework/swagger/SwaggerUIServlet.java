@@ -101,12 +101,12 @@ public class SwaggerUIServlet extends HttpServlet {
     String eTagName;
     String uri = request.getRequestURI()
         .replaceFirst(request.getContextPath(), "")
-        .replaceFirst(swaggerConfig.getDocsPath(), "");
+        .replaceFirst(swaggerConfig.getUiPath(), "");
     if (uri.endsWith("/")) {
       uri = uri + "index.html";
     }
     if (uri.endsWith("/index.html")) {
-      eTagName = swaggerConfig.getDocsPath() + "/index.html";
+      eTagName = swaggerConfig.getUiPath() + "/index.html";
 
       if (!disableCache) {
         prepareCacheHeaders(response, eTagName);
