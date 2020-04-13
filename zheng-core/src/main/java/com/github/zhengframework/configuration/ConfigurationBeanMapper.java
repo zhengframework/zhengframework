@@ -2,6 +2,7 @@ package com.github.zhengframework.configuration;
 
 import static com.github.zhengframework.configuration.ConfigurationDefineUtils.checkConfigurationDefine;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.google.common.base.Preconditions;
@@ -18,7 +19,10 @@ import java.util.function.BiConsumer;
 
 public class ConfigurationBeanMapper {
 
-  private static final JavaPropsMapper mapper = new JavaPropsMapper();
+  private static final JavaPropsMapper mapper = JavaPropsMapper.builder()
+      .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+      .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
+      .build();
 
   private static <T> T resolveClass(Configuration configuration, Class<T> tClass) {
     try {
