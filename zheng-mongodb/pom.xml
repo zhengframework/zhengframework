@@ -15,10 +15,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
@@ -40,6 +36,11 @@
     <dependency>
       <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-core</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

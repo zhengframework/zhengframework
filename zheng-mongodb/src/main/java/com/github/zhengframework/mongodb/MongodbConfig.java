@@ -8,10 +8,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.mongo")
-public class MongoConfig implements ConfigurationDefine {
+@ConfigurationInfo(prefix = "zheng.mongodb", supportGroup = true)
+public class MongodbConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.mongo";
-  private boolean group = false;
   private String url;
 }

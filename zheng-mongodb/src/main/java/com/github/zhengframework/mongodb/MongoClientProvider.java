@@ -10,16 +10,16 @@ import javax.inject.Singleton;
 @Singleton
 public class MongoClientProvider implements Provider<MongoClient> {
 
-  private final MongoConfig mongoConfig;
+  private final MongodbConfig mongodbConfig;
 
   @Inject
-  public MongoClientProvider(MongoConfig mongoConfig) {
-    this.mongoConfig = mongoConfig;
+  public MongoClientProvider(MongodbConfig mongodbConfig) {
+    this.mongodbConfig = mongodbConfig;
   }
 
   @Override
   public MongoClient get() {
-    ConnectionString connectionString = new ConnectionString(mongoConfig.getUrl());
+    ConnectionString connectionString = new ConnectionString(mongodbConfig.getUrl());
     return MongoClients.create(connectionString);
   }
 }

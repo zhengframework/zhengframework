@@ -34,6 +34,12 @@
       <artifactId>commons-collections4</artifactId>
       <groupId>org.apache.commons</groupId>
     </dependency>
+    <dependency>
+      <artifactId>javax.annotation-api</artifactId>
+      <groupId>javax.annotation</groupId>
+      <version>1.3.2</version>
+    </dependency>
+
   </dependencies>
 
   <dependencyManagement>
