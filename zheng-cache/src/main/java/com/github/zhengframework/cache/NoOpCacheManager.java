@@ -12,6 +12,7 @@ import javax.cache.CacheManager;
 import javax.cache.configuration.Configuration;
 import javax.cache.spi.CachingProvider;
 
+@SuppressWarnings("rawtypes")
 public class NoOpCacheManager implements CacheManager {
 
   private final CachingProvider cachingProvider;

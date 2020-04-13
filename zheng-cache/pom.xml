@@ -20,12 +20,57 @@
     <dependency>
       <artifactId>cache2k-jcache</artifactId>
       <groupId>org.cache2k</groupId>
-      <scope>test</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>cache2k-api</artifactId>
       <groupId>org.cache2k</groupId>
-      <scope>test</scope>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>caffeine</artifactId>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>jcache</artifactId>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>ehcache</artifactId>
+      <groupId>org.ehcache</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>infinispan-core</artifactId>
+      <groupId>org.infinispan</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>infinispan-jcache</artifactId>
+      <groupId>org.infinispan</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>commons-jcs-core</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>commons-jcs-jcache</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.hazelcast</groupId>
+      <artifactId>hazelcast</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ignite</groupId>
+      <artifactId>ignite-core</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.github.zhengframework</groupId>
@@ -36,6 +81,16 @@
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+
   </dependencies>
   <dependencyManagement>
     <dependencies>

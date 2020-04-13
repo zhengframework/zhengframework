@@ -29,8 +29,7 @@ public class CacheModule extends AbstractModule {
   @Override
   protected void configure() {
     OptionalBinder.newOptionalBinder(binder(), CachingProvider.class)
-        .setDefault().toProvider(
-        () -> Caching.getCachingProvider(Thread.currentThread().getContextClassLoader()));
+        .setDefault().toProvider(CachingProviderProvider.class);
 
     OptionalBinder.newOptionalBinder(binder(),new TypeLiteral<Configurer<CacheManager>>(){});
     OptionalBinder.newOptionalBinder(binder(), CacheManager.class)
