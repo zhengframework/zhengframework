@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import javax.cache.Caching;
 import javax.cache.spi.CachingProvider;
+import javax.inject.Inject;
 import javax.inject.Provider;
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,6 +12,7 @@ public class CachingProviderProvider implements Provider<CachingProvider> {
 
   private final CacheConfig cacheConfig;
 
+  @Inject
   public CachingProviderProvider(CacheConfig cacheConfig) {
     this.cacheConfig = cacheConfig;
   }
