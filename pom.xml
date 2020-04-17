@@ -69,6 +69,31 @@
         <groupId>org.sonatype.plugins</groupId>
         <version>1.6.8</version>
       </plugin>
+      <plugin>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <configuration>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+          <updatePomFile>true</updatePomFile>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+          </execution>
+          <execution>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+          </execution>
+        </executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.2.2</version>
+      </plugin>
     </plugins>
   </build>
   <description>zheng framework is a modular framework with many ready-to-use modules</description>
@@ -231,6 +256,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <zhengframework.version>1.0.0</zhengframework.version>
+    <revision>1.0.0-SNAPSHOT</revision>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
@@ -239,5 +265,5 @@
     <url>https://github.com/zhengframework/zhengframework</url>
   </scm>
   <url>https://github.com/zhengframework/zhengframework</url>
-  <version>1.0.0</version>
+  <version>${revision}</version>
 </project>

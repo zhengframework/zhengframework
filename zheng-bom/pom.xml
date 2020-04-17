@@ -404,161 +404,127 @@
         <version>6.0-alpha-3</version>
       </dependency>
 
-      <dependency>
-        <artifactId>zheng-cache</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-web</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-web-jetty</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-web-undertow</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-rest</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-swagger</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-redis</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-rabbitmq</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-mybatis</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-monogodb</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-metrics</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-memcached</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-hibernate</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-healthchecks</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration-yaml</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration-toml</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration-json</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration-jdbc</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration-ini</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-configuration-http</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-cache-jcs</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-cache-infinispan</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-cache-ehcache</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-cache-caffeine</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-cache-cache2k</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
+
+      <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-activemq</artifactId>
         <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
+        <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
         <artifactId>zheng-activemq-artemis</artifactId>
         <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-webjars</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <artifactId>zheng-core</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
+        <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
         <artifactId>zheng-bootstrap</artifactId>
         <groupId>com.github.zhengframework</groupId>
-        <version>${project.version}</version>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-configuration</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-configuration-metrics</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-core</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-healthcheck</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-hibernate</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jdbc</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-memcached</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-metrics</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-metrics-servlet</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-monogodb</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-mybatis</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-rabbitmq</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-redis</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-rest</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-shiro</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-swagger</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-web</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-web-jetty</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-web-undertow</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-webjars</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -568,10 +534,10 @@
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
   </parent>
   <properties>
-    <zhengframework.version>1.0.0</zhengframework.version>
+    <zhengframework.version>${revision}</zhengframework.version>
     <activemq-client.version>5.15.12</activemq-client.version>
     <amqp-client.version>5.8.0</amqp-client.version>
     <artemis.version>2.11.0</artemis.version>
