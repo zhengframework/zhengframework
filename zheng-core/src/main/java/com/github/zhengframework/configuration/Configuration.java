@@ -2,6 +2,7 @@ package com.github.zhengframework.configuration;
 
 import static java.util.Arrays.stream;
 
+import com.github.zhengframework.configuration.parser.Parser;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -42,8 +43,10 @@ public interface Configuration {
    * 根据prefix获得静态Configuration实例
    *
    * @param prefix String
-   * @return Configuration Set
+   * @return Configuration List
    */
+  List<Configuration> prefixList(String prefix);
+
   Set<Configuration> prefixSet(String prefix);
 
   /**
@@ -103,7 +106,7 @@ public interface Configuration {
   }
 
   default Optional<Boolean> getBoolean(String key) {
-    return getValue(key, ValueFunctions.toBoolean());
+    return getValue(key, s -> ValueFunctions.toBoolean().parse(s));
   }
 
   default Boolean getBoolean(String key, Boolean defaultValue) {
@@ -143,7 +146,7 @@ public interface Configuration {
   }
 
   default Optional<Calendar> getCalendar(String key) {
-    return getValue(key, ValueFunctions.toCalendar());
+    return getValue(key, s -> ValueFunctions.toCalendar().parse(s));
   }
 
   default Calendar getCalendar(String key, Calendar defaultValue) {
@@ -175,7 +178,9 @@ public interface Configuration {
   }
 
   default Optional<URI> getURI(String key) {
-    return getValue(key, ValueFunctions.toURI());
+    return getValue(key,
+
+        s -> ValueFunctions.toURI().parse(s));
   }
 
   default URI getURI(String key, URI defaultValue) {
@@ -184,7 +189,9 @@ public interface Configuration {
 
 
   default Optional<URL> getURL(String key) {
-    return getValue(key, ValueFunctions.toURL());
+    return getValue(key,
+        s -> ValueFunctions.toURL().parse(s)
+    );
   }
 
   default URL getURL(String key, URL defaultValue) {
@@ -216,7 +223,8 @@ public interface Configuration {
   }
 
   default Optional<String[]> getArray(String key, String separator) {
-    return get(key).map(ValueFunctions.toArray(separator));
+    return get(key).map(
+        s -> ValueFunctions.toArray(separator).parse(s));
   }
 
   default String[] getArray(String key, String separator, String[] defaultValue) {
@@ -224,40 +232,42 @@ public interface Configuration {
   }
 
   default List<String> getList(String key, String separator, List<String> defaultValue) {
-    return get(key).map(ValueFunctions.toList(separator)).orElse(defaultValue);
+    return get(key).map(s -> ValueFunctions.toList(separator).parse(s)).orElse(defaultValue);
   }
 
   default Optional<List<String>> getList(String key, String separator) {
-    return get(key).map(ValueFunctions.toList(separator));
+    return get(key).map(
+        s -> ValueFunctions.toList(separator).parse(s));
   }
 
   default Optional<List<String>> getList(String key) {
-    return get(key).map(ValueFunctions.toList(","));
+    return get(key).map(
+        s -> ValueFunctions.toList(",").parse(s));
   }
 
   default List<String> getList(String key, List<String> defaultValue) {
-    return get(key).map(ValueFunctions.toList(",")).orElse(defaultValue);
+    return get(key).map(s -> ValueFunctions.toList(",").parse(s)).orElse(defaultValue);
   }
 
-  default <T> List<T> getList(String key, String separator, ValueFunction<T> map) {
-    return getList(key, separator).orElse(Collections.emptyList()).stream().map(map)
+  default <T> List<T> getList(String key, String separator, Parser<T> map) {
+    return getList(key, separator).orElse(Collections.emptyList()).stream().map(map::parse)
         .collect(Collectors.toList());
   }
 
   @SuppressWarnings("unchecked")
-  default <T> T[] getArray(String key, String separator, ValueFunction<T> map) {
+  default <T> T[] getArray(String key, String separator, Parser<T> map) {
     return (T[]) stream(getArray(key, separator).orElse(new String[0]))
-        .map(map).toArray();
+        .map(map::parse).toArray();
   }
 
-  default <T> List<T> getList(String key, ValueFunction<T> map) {
-    return getList(key, ",").orElse(Collections.emptyList()).stream().map(map)
+  default <T> List<T> getList(String key, Parser<T> map) {
+    return getList(key, ",").orElse(Collections.emptyList()).stream().map(map::parse)
         .collect(Collectors.toList());
   }
 
   @SuppressWarnings("unchecked")
-  default <T> T[] getArray(String key, ValueFunction<T> map) {
+  default <T> T[] getArray(String key, Parser<T> map) {
     return (T[]) stream(getArray(key, ",").orElse(new String[0]))
-        .map(map).toArray();
+        .map(map::parse).toArray();
   }
 }

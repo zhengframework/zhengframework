@@ -15,7 +15,7 @@ public class YamlConfigurationParserTest {
         .withConfigurationSource(new FileConfigurationSource("food.yaml"))
         .build();
 
-    assertEquals(3, configuration.prefixSet("bananas").size());
+    assertEquals(3, configuration.prefixList("bananas").size());
 
 
   }

@@ -7,7 +7,10 @@ import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
 import com.google.inject.Key;
+import com.google.inject.Provider;
+import com.google.inject.multibindings.Multibinder;
 import com.zaxxer.hikari.HikariConfig;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,12 +27,14 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
 
   @Override
   protected void configure() {
+    Provider<Injector> injectorProvider = getProvider(Injector.class);
     Preconditions.checkArgument(configuration != null, "configuration is null");
     DataSourceConfig dataSourceConfig = ConfigurationBeanMapper
         .resolve(configuration, DataSourceConfig.PREFIX, DataSourceConfig.class);
     if (!dataSourceConfig.isGroup()) {
       HikariConfig config = getHikariConfig(dataSourceConfig);
-      bind(DataSource.class).toProvider(new DataSourceProvider(config)).in(Singleton.class);
+      bind(DataSource.class).toProvider(new DataSourceProvider(config, injectorProvider))
+          .in(Singleton.class);
     } else {
       Map<String, DataSourceConfig> dataSourceConfigMap = ConfigurationBeanMapper
           .resolveMap(configuration, DataSourceConfig.PREFIX, DataSourceConfig.class);
@@ -38,10 +43,14 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
         String name = entry.getKey();
         DataSourceConfig dataSourceConfig1 = entry.getValue();
         HikariConfig config = getHikariConfig(dataSourceConfig1);
-        bind(Key.get(DataSource.class, named(name))).toProvider(new DataSourceProvider(config))
+        bind(Key.get(DataSource.class, named(name))).toProvider(new DataSourceProvider(config,
+            injectorProvider))
             .in(Singleton.class);
       }
     }
+
+    Multibinder.newSetBinder(binder(), DataSourceProxy.class)
+        .addBinding().toInstance(dataSource -> dataSource);
 
   }
 

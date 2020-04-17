@@ -49,7 +49,7 @@ public class ConfigurationBuilder {
     reloadable.reload();
     reloadStrategy.register(reloadable);
 
-    return new SimpleConfiguration(cachedConfigurationSource, environment);
+    return new SourceBasedConfiguration(cachedConfigurationSource, environment);
   }
 
 }

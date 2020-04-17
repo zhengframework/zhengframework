@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -21,6 +22,14 @@ public class ConfigurationBeanMapper {
 
   private static final JavaPropsMapper mapper = JavaPropsMapper.builder()
       .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+      .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
+      .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
+      .configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, false)
+      .configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, false)
+      .configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
+      .configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, false)
+      .configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false)
+      .configure(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY, false)
       .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
       .build();
 
@@ -43,8 +52,8 @@ public class ConfigurationBeanMapper {
   public static <T> Set<T> resolveSet(Configuration configuration, String prefix,
       Class<T> aClass) {
     Preconditions.checkState(!Strings.isNullOrEmpty(prefix), "prefix cannot null or empty");
-    Set<Configuration> configurationList = configuration
-        .prefixSet(prefix);
+    List<Configuration> configurationList = configuration
+        .prefixList(prefix);
     Set<T> objects = new LinkedHashSet<>(configurationList.size());
     for (Configuration configuration1 : configurationList) {
       objects.add(resolveClass(configuration1, aClass));

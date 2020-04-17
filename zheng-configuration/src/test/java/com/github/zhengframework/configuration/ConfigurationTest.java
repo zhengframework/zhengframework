@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.github.zhengframework.configuration.parser.PropertiesConfigurationParser;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 public class ConfigurationTest {
@@ -31,7 +31,7 @@ public class ConfigurationTest {
   @Test
   public void getList() {
     MapConfiguration configuration = new MapConfiguration(map);
-    Set<Configuration> bananas = configuration.prefixSet("bananas");
+    List<Configuration> bananas = configuration.prefixList("bananas");
     assertEquals(3, bananas.size());
 
   }

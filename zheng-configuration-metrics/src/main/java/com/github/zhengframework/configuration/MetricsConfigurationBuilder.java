@@ -72,7 +72,7 @@ public class MetricsConfigurationBuilder {
     reloadable.reload();
     reloadStrategy.register(reloadable);
 
-    SimpleConfiguration configuration = new SimpleConfiguration(cachedConfigurationSource,
+    SourceBasedConfiguration configuration = new SourceBasedConfiguration(cachedConfigurationSource,
         environment);
     if (metricRegistry != null) {
       return new MeteredConfiguration(metricRegistry, prefix, configuration);

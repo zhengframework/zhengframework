@@ -1,5 +1,6 @@
 package com.github.zhengframework.configuration;
 
+import com.github.zhengframework.configuration.parser.Parser;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import java.net.MalformedURLException;
@@ -18,7 +19,7 @@ public class ValueFunctions {
 
   private static final Set<String> TRUE = ImmutableSet.of("true", "yes", "on", "1");
   private static final Set<String> FALSE = ImmutableSet.of("false", "no", "off", "0");
-  private static final ValueFunction<Boolean> STRING_TO_BOOLEAN = value -> {
+  private static final Parser<Boolean> STRING_TO_BOOLEAN = value -> {
     String lower = Strings.nullToEmpty(value).toLowerCase();
     if (TRUE.contains(lower)) {
       return true;
@@ -28,11 +29,11 @@ public class ValueFunctions {
     throw new IllegalStateException("cannot parse boolean value: " + value);
   };
 
-  public static ValueFunction<Boolean> toBoolean() {
+  public static Parser<Boolean> toBoolean() {
     return STRING_TO_BOOLEAN;
   }
 
-  public static ValueFunction<Calendar> toCalendar() {
+  public static Parser<Calendar> toCalendar() {
     return s -> {
       Calendar c = Calendar.getInstance();
       try {
@@ -49,7 +50,7 @@ public class ValueFunctions {
     };
   }
 
-  public static ValueFunction<URI> toURI() {
+  public static Parser<URI> toURI() {
     return s -> {
       try {
         return new URI(s);
@@ -59,7 +60,7 @@ public class ValueFunctions {
     };
   }
 
-  public static ValueFunction<URL> toURL() {
+  public static Parser<URL> toURL() {
     return s -> {
       try {
         return new URL(s);
@@ -69,11 +70,11 @@ public class ValueFunctions {
     };
   }
 
-  public static ValueFunction<String[]> toArray(String separator) {
+  public static Parser<String[]> toArray(String separator) {
     return value -> value.split(separator);
   }
 
-  public static ValueFunction<List<String>> toList(String separator) {
+  public static Parser<List<String>> toList(String separator) {
     return value -> Arrays.asList(value.split(separator));
   }
 

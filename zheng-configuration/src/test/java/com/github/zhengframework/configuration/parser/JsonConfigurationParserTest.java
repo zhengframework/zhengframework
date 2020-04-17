@@ -13,6 +13,6 @@ public class JsonConfigurationParserTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("food.json"))
         .build();
-    Assert.assertEquals(3, configuration.prefixSet("bananas").size());
+    Assert.assertEquals(3, configuration.prefixList("bananas").size());
   }
 }

@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 import javax.jms.ConnectionFactory;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-@SuppressWarnings("ALL")
 public class ActiveMQModule extends AbstractModule {
 
   private String brokerURL;
