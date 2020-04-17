@@ -9,6 +9,10 @@
       <groupId>io.dropwizard.metrics</groupId>
     </dependency>
     <dependency>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>

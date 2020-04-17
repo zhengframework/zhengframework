@@ -29,6 +29,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <artifactId>shiro-core</artifactId>
+      <groupId>org.apache.shiro</groupId>
+      <version>1.5.2</version>
+    </dependency>
+    <dependency>
       <artifactId>shiro-guice</artifactId>
       <groupId>org.apache.shiro</groupId>
       <version>1.5.2</version>
@@ -47,7 +52,10 @@
       <artifactId>javax.servlet-api</artifactId>
       <groupId>javax.servlet</groupId>
     </dependency>
-
+    <dependency>
+      <artifactId>slf4j-api</artifactId>
+      <groupId>org.slf4j</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

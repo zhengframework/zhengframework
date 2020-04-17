@@ -40,5 +40,17 @@ https://maven.apache.org/maven-ci-friendly.html
 ```
 mvn -Drevision=2.0.0 -DskipTests=true clean package 
 mvn -Drevision=2.0.0 clean package 
+
+```
+
+deploy to maven repo
+```
 mvn -Drevision=2.0.0 clean package deploy
 ```
+
+find dependency info
+```
+mvn dependency:analyze -DignoreNonCompile
+mvn dependency:tree
+```
+
