@@ -28,10 +28,6 @@
       <groupId>org.webjars</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
       <artifactId>javax.servlet-api</artifactId>
       <groupId>javax.servlet</groupId>
       <scope>provided</scope>
@@ -45,11 +41,11 @@
       <groupId>commons-io</groupId>
     </dependency>
     <dependency>
-      <artifactId>jackson-dataformat-yaml</artifactId>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>zheng-rest</artifactId>
+      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-rest</artifactId>
+      <artifactId>zheng-webjars</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
@@ -62,10 +58,7 @@
       <groupId>com.squareup.okhttp3</groupId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <artifactId>zheng-webjars</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
+
     <dependency>
       <artifactId>zheng-bootstrap</artifactId>
       <groupId>com.github.zhengframework</groupId>

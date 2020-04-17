@@ -175,3 +175,5 @@ hs_err_pid*
 *.iml
 .idea/
 /rabbitmq-embedded/
+*/.flattened-pom.xml
+.flattened-pom.xml
