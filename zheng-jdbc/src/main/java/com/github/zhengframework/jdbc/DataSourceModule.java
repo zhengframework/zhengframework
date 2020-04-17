@@ -6,6 +6,7 @@ import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -29,26 +30,27 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
   protected void configure() {
     Provider<Injector> injectorProvider = getProvider(Injector.class);
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    DataSourceConfig dataSourceConfig = ConfigurationBeanMapper
-        .resolve(configuration, DataSourceConfig.PREFIX, DataSourceConfig.class);
-    if (!dataSourceConfig.isGroup()) {
-      HikariConfig config = getHikariConfig(dataSourceConfig);
-      bind(DataSource.class).toProvider(new DataSourceProvider(config, injectorProvider))
-          .in(Singleton.class);
-    } else {
-      Map<String, DataSourceConfig> dataSourceConfigMap = ConfigurationBeanMapper
-          .resolveMap(configuration, DataSourceConfig.PREFIX, DataSourceConfig.class);
-      for (Entry<String, DataSourceConfig> entry : dataSourceConfigMap
-          .entrySet()) {
-        String name = entry.getKey();
-        DataSourceConfig dataSourceConfig1 = entry.getValue();
-        HikariConfig config = getHikariConfig(dataSourceConfig1);
+
+    Map<String, DataSourceConfig> dataSourceConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, DataSourceConfig.class);
+    for (Entry<String, DataSourceConfig> entry : dataSourceConfigMap
+        .entrySet()) {
+      String name = entry.getKey();
+      DataSourceConfig dataSourceConfig = entry.getValue();
+      if (name.isEmpty()) {
+        HikariConfig config = getHikariConfig(dataSourceConfig);
+        bind(HikariConfig.class).toInstance(config);
+        bind(DataSource.class).toProvider(new DataSourceProvider(config, injectorProvider))
+            .in(Singleton.class);
+      } else {
+        HikariConfig config = getHikariConfig(dataSourceConfig);
+        bind(Key.get(HikariConfig.class, named(name))).toInstance(config);
         bind(Key.get(DataSource.class, named(name))).toProvider(new DataSourceProvider(config,
             injectorProvider))
             .in(Singleton.class);
       }
-    }
 
+    }
     Multibinder.newSetBinder(binder(), DataSourceProxy.class)
         .addBinding().toInstance(dataSource -> dataSource);
 
@@ -56,18 +58,36 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
 
   private HikariConfig getHikariConfig(DataSourceConfig dataSourceConfig) {
     HikariConfig config = new HikariConfig();
-    config.setDriverClassName(dataSourceConfig.getDriverClassName());
-    config.setJdbcUrl(dataSourceConfig.getJdbcUrl());
-    config.setUsername(dataSourceConfig.getUsername());
-    config.setPassword(dataSourceConfig.getPassword());
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getDriverClassName())) {
+      config.setDriverClassName(dataSourceConfig.getDriverClassName());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getJdbcUrl())) {
+      config.setJdbcUrl(dataSourceConfig.getJdbcUrl());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getUsername())) {
+      config.setUsername(dataSourceConfig.getUsername());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getPassword())) {
+      config.setPassword(dataSourceConfig.getPassword());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getCatalog())) {
+      config.setCatalog(dataSourceConfig.getCatalog());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getConnectionInitSql())) {
+      config.setConnectionInitSql(dataSourceConfig.getConnectionInitSql());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getConnectionTestQuery())) {
+      config.setConnectionTestQuery(dataSourceConfig.getConnectionTestQuery());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getDataSourceClassName())) {
+      config.setDataSourceClassName(dataSourceConfig.getDataSourceClassName());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getDataSourceJndiName())) {
+      config.setDataSourceJNDI(dataSourceConfig.getDataSourceJndiName());
+    }
     config.setAutoCommit(dataSourceConfig.isAutoCommit());
-    config.setCatalog(dataSourceConfig.getCatalog());
-    config.setConnectionInitSql(dataSourceConfig.getConnectionInitSql());
-    config.setConnectionTestQuery(dataSourceConfig.getConnectionTestQuery());
     config.setConnectionTimeout(dataSourceConfig.getConnectionTimeout());
-    config.setDataSourceClassName(dataSourceConfig.getDataSourceClassName());
     config.setIdleTimeout(dataSourceConfig.getIdleTimeout());
-    config.setDataSourceJNDI(dataSourceConfig.getDataSourceJndiName());
     config.setInitializationFailTimeout(dataSourceConfig.getInitializationFailTimeout());
     config.setLeakDetectionThreshold(dataSourceConfig.getLeakDetectionThreshold());
     if (dataSourceConfig.getMaxPoolSize() > 1) {
@@ -79,9 +99,16 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
     if (dataSourceConfig.getMinIdle() > 1) {
       config.setMinimumIdle(dataSourceConfig.getMinIdle());
     }
-    config.setPoolName(dataSourceConfig.getPoolName());
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getPoolName())) {
+      config.setPoolName(dataSourceConfig.getPoolName());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getSchema())) {
+      config.setSchema(dataSourceConfig.getSchema());
+    }
+    if (!Strings.isNullOrEmpty(dataSourceConfig.getDataSourceJndiName())) {
+      config.setDataSourceJNDI(dataSourceConfig.getDataSourceJndiName());
+    }
     config.setReadOnly(dataSourceConfig.isReadOnly());
-    config.setSchema(dataSourceConfig.getSchema());
     config.setValidationTimeout(dataSourceConfig.getValidationTimeout());
     for (Entry<String, String> entry : dataSourceConfig.getProperties().entrySet()) {
       config.addDataSourceProperty(entry.getKey(), entry.getValue());

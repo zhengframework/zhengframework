@@ -10,13 +10,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.dataSource")
+@ConfigurationInfo(prefix = "zheng.dataSource", supportGroup = true)
 public class DataSourceConfig implements ConfigurationDefine {
-
-  public static final String PREFIX = "zheng.dataSource";
-
-  private boolean group = false;
-
   private String catalog;
   private long connectionTimeout = TimeUnit.SECONDS.toMillis(30L);
   private long validationTimeout = TimeUnit.SECONDS.toMillis(5L);

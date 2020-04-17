@@ -22,6 +22,7 @@ public class DataSourceModuleTest {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("application.properties"))
         .build();
+    System.out.println(configuration.asMap());
 
     ZhengApplication application = ZhengApplicationBuilder.create()
         .addModule(new DataSourceModule())
