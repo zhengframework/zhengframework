@@ -22,10 +22,8 @@ public class HibernatePersistModuleTest {
     map.put("zheng.hibernate.username", "sa");
     map.put("zheng.hibernate.entityPackages",
         HibernatePersistModuleTest.class.getPackage().getName());
-//    map.put("zheng.hibernate.properties.hibernate_dialect", "org.hibernate.dialect.H2Dialect");
-    map.put("zheng.hibernate.properties.hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-//    map.put("zheng.hibernate.properties.hibernate_hbm2ddl_auto", "create");
-    map.put("zheng.hibernate.properties.hibernate.hbm2ddl.auto", "create");
+    map.put("zheng.hibernate.properties.hibernate_dialect", "org.hibernate.dialect.H2Dialect");
+    map.put("zheng.hibernate.properties.hibernate_hbm2ddl_auto", "create");
 
     Configuration configuration = new MapConfiguration(map);
 

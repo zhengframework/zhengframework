@@ -2,8 +2,6 @@ package com.github.zhengframework.hibernate;
 
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.github.zhengframework.configuration.MapConfiguration;
-import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.github.zhengframework.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -18,8 +16,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
@@ -56,13 +52,8 @@ public class HibernatePersistModule extends PersistModule implements Configurati
     }
     if (hibernateConfig.getProperties() != null && !hibernateConfig.getProperties().isEmpty()) {
 
-//      hibernateConfig.getProperties().forEach(new BiConsumer<String, String>() {
-//        @Override
-//        public void accept(String s, String s2) {
-//          map.put(s.replace("_","."),s2);
-//        }
-//      });
-      hibernateConfig.getProperties().forEach(map::put);
+      hibernateConfig.getProperties().forEach((s, s2) -> map.put(s.replace("_", "."), s2));
+//      hibernateConfig.getProperties().forEach(map::put);
     }
     return map;
   }
@@ -70,26 +61,10 @@ public class HibernatePersistModule extends PersistModule implements Configurati
   @Override
   protected void configurePersistence() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
-    ConfigurationInfo configurationInfo = HibernateConfig.class
-        .getAnnotation(ConfigurationInfo.class);
 
-    com.github.zhengframework.configuration.Configuration prefixConfiguration = configuration
-        .prefix(configurationInfo.prefix());
-    Map<String, String> asMap = prefixConfiguration.asMap();
-
-    Map<String, String> map = asMap.entrySet().stream()
-        .filter(stringStringEntry -> !stringStringEntry.getKey().startsWith("properties."))
-        .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
-
-    HibernateConfig hibernateConfig = ConfigurationBeanMapper
-        .resolve(new MapConfiguration(map), null, HibernateConfig.class);
-    int beginIndex = "properties.".length();
-    Map<String, String> properties = asMap.entrySet().stream()
-        .filter(stringStringEntry -> stringStringEntry.getKey().startsWith("properties."))
-        .collect(Collectors
-            .toMap(stringStringEntry1 -> stringStringEntry1.getKey().substring(beginIndex),
-                Entry::getValue));
-    hibernateConfig.setProperties(properties);
+    Map<String, HibernateConfig> hibernateConfigMap = ConfigurationBeanMapper
+        .resolve(configuration, HibernateConfig.class);
+    HibernateConfig hibernateConfig = hibernateConfigMap.getOrDefault("", new HibernateConfig());
 
     bind(HibernateConfig.class).toInstance(hibernateConfig);
 
