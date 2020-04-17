@@ -9,10 +9,14 @@ import java.util.Objects;
 import lombok.EqualsAndHashCode;
 import org.jooq.DSLContext;
 
-@EqualsAndHashCode(callSuper = false, of = {"qualifier"})
+@EqualsAndHashCode(callSuper = false)
 public class JOOQModule extends AbstractModule {
 
   private Annotation qualifier;
+
+  public JOOQModule() {
+    this.qualifier = null;
+  }
 
   public JOOQModule(Annotation qualifier) {
     this.qualifier = qualifier;
@@ -21,7 +25,6 @@ public class JOOQModule extends AbstractModule {
   public JOOQModule(String name) {
     this.qualifier = named(Objects.requireNonNull(name));
   }
-
 
   @Override
   protected void configure() {
