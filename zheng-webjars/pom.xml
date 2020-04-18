@@ -35,7 +35,7 @@
       <artifactId>bootstrap</artifactId>
       <groupId>org.webjars</groupId>
       <scope>test</scope>
-      <version>3.1.0</version>
+      <version>${bootstrap.version}</version>
     </dependency>
     <dependency>
       <artifactId>zheng-web</artifactId>
@@ -74,6 +74,9 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <properties>
+    <bootstrap.version>3.1.0</bootstrap.version>
+  </properties>
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>zhengframework</artifactId>

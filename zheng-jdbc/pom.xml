@@ -26,7 +26,6 @@
     <dependency>
       <artifactId>HikariCP</artifactId>
       <groupId>com.zaxxer</groupId>
-      <version>3.4.2</version>
     </dependency>
     <dependency>
       <artifactId>hsqldb</artifactId>

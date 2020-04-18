@@ -24,7 +24,7 @@
         <groupId>org.jdbi</groupId>
         <scope>import</scope>
         <type>pom</type>
-        <version>3.12.2</version>
+        <version>${jdbi3-bom.version}</version>
       </dependency>
       <dependency>
         <artifactId>guice</artifactId>
@@ -198,7 +198,7 @@
       <dependency>
         <artifactId>cache-annotations-ri-guice</artifactId>
         <groupId>org.jsr107.ri</groupId>
-        <version>1.1.1</version>
+        <version>${cache-annotations-ri-guice.version}</version>
       </dependency>
       <dependency>
         <artifactId>javax.servlet-api</artifactId>
@@ -218,62 +218,62 @@
       <dependency>
         <artifactId>cache2k-jcache</artifactId>
         <groupId>org.cache2k</groupId>
-        <version>1.2.4.Final</version>
+        <version>${cache2k.version}</version>
       </dependency>
       <dependency>
         <artifactId>cache2k-api</artifactId>
         <groupId>org.cache2k</groupId>
-        <version>1.2.4.Final</version>
+        <version>${cache2k.version}</version>
       </dependency>
       <dependency>
         <artifactId>caffeine</artifactId>
         <groupId>com.github.ben-manes.caffeine</groupId>
-        <version>2.8.1</version>
+        <version>${caffeine.version}</version>
       </dependency>
       <dependency>
         <artifactId>jcache</artifactId>
         <groupId>com.github.ben-manes.caffeine</groupId>
-        <version>2.8.1</version>
+        <version>${caffeine.version}</version>
       </dependency>
       <dependency>
         <artifactId>ehcache</artifactId>
         <groupId>org.ehcache</groupId>
-        <version>3.8.1</version>
+        <version>${ehcache.version}</version>
       </dependency>
       <dependency>
         <artifactId>infinispan-core</artifactId>
         <groupId>org.infinispan</groupId>
-        <version>10.1.5.Final</version>
+        <version>${infinispan.version}</version>
       </dependency>
       <dependency>
         <artifactId>infinispan-jcache</artifactId>
         <groupId>org.infinispan</groupId>
-        <version>10.1.5.Final</version>
+        <version>${infinispan.version}</version>
       </dependency>
       <dependency>
         <artifactId>commons-jcs-core</artifactId>
         <groupId>org.apache.commons</groupId>
-        <version>2.2.1</version>
+        <version>${commons-jcs.version}</version>
       </dependency>
       <dependency>
         <artifactId>commons-jcs-jcache</artifactId>
         <groupId>org.apache.commons</groupId>
-        <version>2.2.1</version>
+        <version>${commons-jcs.version}</version>
       </dependency>
       <dependency>
         <groupId>com.hazelcast</groupId>
         <artifactId>hazelcast</artifactId>
-        <version>4.0.1</version>
+        <version>${hazelcast.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ignite</groupId>
         <artifactId>ignite-core</artifactId>
-        <version>2.8.0</version>
+        <version>${ignite.version}</version>
       </dependency>
       <dependency>
         <artifactId>system-rules</artifactId>
         <groupId>com.github.stefanbirkner</groupId>
-        <version>1.19.0</version>
+        <version>${system-rules.version}</version>
       </dependency>
       <dependency>
         <artifactId>jackson-dataformat-yaml</artifactId>
@@ -301,19 +301,19 @@
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>ini4j</artifactId>
         <groupId>org.ini4j</groupId>
-        <version>0.5.4</version>
+        <version>${ini4j.version}</version>
       </dependency>
       <dependency>
         <artifactId>tomlj</artifactId>
         <groupId>org.tomlj</groupId>
-        <version>1.0.0</version>
-      </dependency>
-      <dependency>
-        <artifactId>dropwizard-util</artifactId>
-        <groupId>io.dropwizard</groupId>
-        <version>2.0.3</version>
+        <version>${tomlj.version}</version>
       </dependency>
       <dependency>
         <artifactId>resteasy-guice</artifactId>
@@ -334,76 +334,85 @@
       <dependency>
         <artifactId>swagger-jaxrs2</artifactId>
         <groupId>io.swagger.core.v3</groupId>
-        <version>2.1.1</version>
+        <version>${swagger-jaxrs2.version}</version>
       </dependency>
       <dependency>
         <artifactId>okhttp</artifactId>
         <groupId>com.squareup.okhttp3</groupId>
-        <version>4.4.1</version>
+        <version>${okhttp.version}</version>
       </dependency>
       <dependency>
         <artifactId>javax.websocket-api</artifactId>
         <groupId>javax.websocket</groupId>
-        <version>1.1</version>
+        <version>${javax.websocket-api.version}</version>
       </dependency>
       <dependency>
         <artifactId>undertow-servlet</artifactId>
         <groupId>io.undertow</groupId>
-        <version>2.0.30.Final</version>
+        <version>${undertow.version}</version>
       </dependency>
       <dependency>
         <artifactId>undertow-websockets-jsr</artifactId>
         <groupId>io.undertow</groupId>
-        <version>2.0.30.Final</version>
+        <version>${undertow.version}</version>
       </dependency>
       <dependency>
         <artifactId>hk2-api</artifactId>
         <groupId>org.glassfish.hk2</groupId>
-        <version>2.6.1</version>
+        <version>${hk2-api.version}</version>
       </dependency>
       <dependency>
         <artifactId>jakarta.ws.rs-api</artifactId>
         <groupId>jakarta.ws.rs</groupId>
-        <version>2.1.6</version>
+        <version>${jakarta.ws.rs-api.version}</version>
       </dependency>
 
       <dependency>
         <artifactId>commons-cli</artifactId>
         <groupId>commons-cli</groupId>
-        <version>1.4</version>
+        <version>${commons-cli.version}</version>
       </dependency>
       <dependency>
         <artifactId>commons-io</artifactId>
         <groupId>commons-io</groupId>
-        <version>2.6</version>
+        <version>${commons-io.version}</version>
       </dependency>
       <dependency>
         <artifactId>commons-lang3</artifactId>
         <groupId>org.apache.commons</groupId>
-        <version>3.10</version>
+        <version>${commons-lang3.version}</version>
       </dependency>
       <dependency>
         <artifactId>commons-collections4</artifactId>
         <groupId>org.apache.commons</groupId>
-        <version>4.4</version>
+        <version>${commons-collections4.version}</version>
       </dependency>
       <dependency>
         <artifactId>webjars-locator-core</artifactId>
         <groupId>org.webjars</groupId>
-        <version>0.44</version>
+        <version>${webjars-locator-core.version}</version>
       </dependency>
       <dependency>
         <artifactId>swagger-ui</artifactId>
         <groupId>org.webjars</groupId>
-        <version>3.25.0</version>
+        <version>${swagger-ui.version}</version>
       </dependency>
 
       <dependency>
         <artifactId>jopt-simple</artifactId>
         <groupId>net.sf.jopt-simple</groupId>
-        <version>6.0-alpha-3</version>
+        <version>${jopt-simple.version}</version>
       </dependency>
-
+      <dependency>
+        <artifactId>javax.annotation-api</artifactId>
+        <groupId>javax.annotation</groupId>
+        <version>${javax.annotation-api.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>HikariCP</artifactId>
+        <groupId>com.zaxxer</groupId>
+        <version>${HikariCP.version}</version>
+      </dependency>
 
       <!-- zheng framework module -->
       <dependency>
@@ -573,6 +582,33 @@
     <resteasy.version>4.5.3.Final</resteasy.version>
     <slf4j.version>1.7.30</slf4j.version>
     <xmemcached.version>2.4.6</xmemcached.version>
+    <HikariCP.version>3.4.2</HikariCP.version>
+    <cache-annotations-ri-guice.version>1.1.1</cache-annotations-ri-guice.version>
+    <cache2k.version>1.2.4.Final</cache2k.version>
+    <caffeine.version>2.8.1</caffeine.version>
+    <commons-cli.version>1.4</commons-cli.version>
+    <commons-collections4.version>4.4</commons-collections4.version>
+    <commons-io.version>2.6</commons-io.version>
+    <commons-jcs.version>2.2.1</commons-jcs.version>
+    <commons-lang3.version>3.10</commons-lang3.version>
+    <ehcache.version>3.8.1</ehcache.version>
+    <hazelcast.version>4.0.1</hazelcast.version>
+    <hk2-api.version>2.6.1</hk2-api.version>
+    <ignite.version>2.8.0</ignite.version>
+    <infinispan.version>10.1.5.Final</infinispan.version>
+    <ini4j.version>0.5.4</ini4j.version>
+    <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
+    <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
+    <javax.websocket-api.version>1.1</javax.websocket-api.version>
+    <jdbi3-bom.version>3.12.2</jdbi3-bom.version>
+    <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
+    <okhttp.version>4.4.1</okhttp.version>
+    <swagger-jaxrs2.version>2.1.1</swagger-jaxrs2.version>
+    <swagger-ui.version>3.25.0</swagger-ui.version>
+    <system-rules.version>1.19.0</system-rules.version>
+    <tomlj.version>1.0.0</tomlj.version>
+    <undertow.version>2.0.30.Final</undertow.version>
+    <webjars-locator-core.version>0.44</webjars-locator-core.version>
   </properties>
 
 </project>
