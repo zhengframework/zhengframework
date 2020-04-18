@@ -26,7 +26,6 @@
     <dependency>
       <artifactId>HikariCP</artifactId>
       <groupId>com.zaxxer</groupId>
-      <version>3.4.2</version>
     </dependency>
     <dependency>
       <artifactId>hsqldb</artifactId>
@@ -38,54 +37,10 @@
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>flyway-core</artifactId>
-      <groupId>org.flywaydb</groupId>
-      <scope>provided</scope>
-      <version>6.3.3</version>
-    </dependency>
-    <dependency>
-      <artifactId>liquibase-core</artifactId>
-      <groupId>org.liquibase</groupId>
-      <scope>provided</scope>
-      <version>3.8.8</version>
-    </dependency>
-    <dependency>
-      <artifactId>jdbi3-core</artifactId>
-      <groupId>org.jdbi</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>jdbi3-sqlobject</artifactId>
-      <groupId>org.jdbi</groupId>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <artifactId>querydsl-sql</artifactId>
-      <groupId>com.querydsl</groupId>
-      <version>4.3.1</version>
-    </dependency>
-    <dependency>
-      <artifactId>jooq</artifactId>
-      <groupId>org.jooq</groupId>
-      <version>3.13.1</version>
-    </dependency>
-    <dependency>
-      <artifactId>jooq-meta</artifactId>
-      <groupId>org.jooq</groupId>
-      <version>3.13.1</version>
-    </dependency>
-    <dependency>
-      <artifactId>jooq-codegen</artifactId>
-      <groupId>org.jooq</groupId>
-      <version>3.13.1</version>
-    </dependency>
-    <dependency>
       <artifactId>zheng-bootstrap</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <dependencyManagement>

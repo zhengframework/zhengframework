@@ -4,5 +4,5 @@ import javax.sql.DataSource;
 
 public interface ManagedSchema {
 
-  DataSource migrate();
+  void migrate(DataSource dataSource);
 }

@@ -7,8 +7,9 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheck;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
-import io.dropwizard.util.Duration;
+import java.time.Duration;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -67,8 +68,8 @@ public abstract class AbstractMetricReportingHealthCheck extends HealthCheck {
     Metric m;
     Optional<Duration> cacheInterval = Optional.ofNullable(this.cacheInterval);
     if (cacheInterval.isPresent()) {
-      m = new CachedGauge<Integer>(cacheInterval.get().getQuantity(),
-          cacheInterval.get().getUnit()) {
+      m = new CachedGauge<Integer>(cacheInterval.get().getSeconds(),
+          TimeUnit.SECONDS) {
         @Override
         protected Integer loadValue() {
           return checkAndConvert();

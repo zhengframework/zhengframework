@@ -151,6 +151,18 @@
     <module>zheng-core</module>
     <module>zheng-bootstrap</module>
     <module>zheng-configuration-metrics</module>
+    <module>zheng-cache-cache2k</module>
+    <module>zheng-cache-caffeine</module>
+    <module>zheng-cache-ehcache</module>
+    <module>zheng-cache-infinispan</module>
+    <module>zheng-cache-commons-jcs</module>
+    <module>zheng-cache-hazelcast</module>
+    <module>zheng-cache-ignite</module>
+    <module>zheng-migrate-flyway</module>
+    <module>zheng-migrate-liquibase</module>
+    <module>zheng-jooq</module>
+    <module>zheng-querydsl</module>
+    <module>zheng-jdbi</module>
   </modules>
 
   <packaging>pom</packaging>

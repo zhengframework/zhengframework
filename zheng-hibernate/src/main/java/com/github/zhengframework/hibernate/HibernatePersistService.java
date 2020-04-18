@@ -3,6 +3,8 @@ package com.github.zhengframework.hibernate;
 import com.google.common.base.Preconditions;
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.UnitOfWork;
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -10,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
+import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -27,11 +30,39 @@ public class HibernatePersistService implements Provider<EntityManager>, UnitOfW
   private volatile SessionFactory sessionFactory;
   private volatile boolean started;
 
+
   @Inject
-  public HibernatePersistService(final BootstrapServiceRegistry bootstrapServiceRegistry,
-      final Configuration configuration) {
-    this.configuration = configuration;
-    this.bootstrapServiceRegistry = bootstrapServiceRegistry;
+  public HibernatePersistService(HibernateEntityClassProvider entityClassProvider,
+      IntegratorClassScanner integratorScanner, HibernateConfig hibernateConfig) {
+    final BootstrapServiceRegistryBuilder builder = new BootstrapServiceRegistryBuilder();
+    integratorScanner.accept(builder::applyIntegrator);
+    this.bootstrapServiceRegistry = builder.build();
+
+    this.configuration = new Configuration();
+    hibernateConfigToMap(hibernateConfig).forEach(configuration::setProperty);
+    entityClassProvider.get().forEach(configuration::addAnnotatedClass);
+  }
+
+  private Map<String, String> hibernateConfigToMap(HibernateConfig hibernateConfig) {
+    Map<String, String> map = new HashMap<>();
+    if (hibernateConfig.getDriverClassName() != null) {
+      map.put("hibernate.connection.driver_class", hibernateConfig.getDriverClassName());
+    }
+    if (hibernateConfig.getUrl() != null) {
+      map.put("hibernate.connection.url", hibernateConfig.getUrl());
+    }
+    if (hibernateConfig.getUsername() != null) {
+      map.put("hibernate.connection.username", hibernateConfig.getUsername());
+    }
+    if (hibernateConfig.getPassword() != null) {
+      map.put("hibernate.connection.password", hibernateConfig.getPassword());
+    } else {
+      map.put("hibernate.connection.password", "");
+    }
+    if (hibernateConfig.getProperties() != null && !hibernateConfig.getProperties().isEmpty()) {
+      hibernateConfig.getProperties().forEach((s, s2) -> map.put(s.replace("_", "."), s2));
+    }
+    return map;
   }
 
   public SessionFactory getSessionFactory() {

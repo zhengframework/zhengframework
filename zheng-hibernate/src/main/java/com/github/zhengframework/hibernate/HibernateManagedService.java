@@ -3,12 +3,12 @@ package com.github.zhengframework.hibernate;
 import com.github.zhengframework.core.Service;
 import javax.inject.Inject;
 
-public class HibernateService implements Service {
+public class HibernateManagedService implements Service {
 
   private final HibernatePersistService hibernatePersistService;
 
   @Inject
-  private HibernateService(HibernatePersistService hibernatePersistService) {
+  private HibernateManagedService(HibernatePersistService hibernatePersistService) {
     this.hibernatePersistService = hibernatePersistService;
   }
 

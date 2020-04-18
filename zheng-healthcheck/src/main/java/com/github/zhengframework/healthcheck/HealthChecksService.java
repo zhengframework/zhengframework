@@ -9,6 +9,7 @@ import com.google.inject.Singleton;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -54,7 +55,7 @@ public class HealthChecksService implements Service {
                 Strings.nullToEmpty(entry.getValue().getMessage()), entry.getValue().getError());
           }
         }
-      }, config.getInterval().getQuantity(), config.getInterval().getUnit());
+      }, config.getInterval().getSeconds(), TimeUnit.SECONDS);
     }
   }
 
