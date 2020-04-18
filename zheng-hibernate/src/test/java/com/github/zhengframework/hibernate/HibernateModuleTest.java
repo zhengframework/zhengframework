@@ -9,6 +9,7 @@ import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.MapConfiguration;
 import com.github.zhengframework.hibernate.a.Work;
 import com.github.zhengframework.hibernate.b.Work2;
+import com.github.zhengframework.hibernate.c.Work3;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import java.util.HashMap;
@@ -106,4 +107,37 @@ public class HibernateModuleTest {
     application.stop();
   }
 
+
+  @Test
+  public void testJavaxTransactional() throws Exception {
+
+    HashMap<String, String> map = new HashMap<>();
+    map.put("zheng.hibernate.driverClassName", "org.h2.Driver");
+    map.put("zheng.hibernate.url", "jdbc:h2:mem:test");
+    map.put("zheng.hibernate.username", "sa");
+    map.put("zheng.hibernate.entityPackages", "com.github.zhengframework.hibernate.c");
+    map.put("zheng.hibernate.properties.hibernate_dialect", "org.hibernate.dialect.H2Dialect");
+    map.put("zheng.hibernate.properties.hibernate_hbm2ddl_auto", "create");
+
+    Configuration configuration = new MapConfiguration(map);
+
+    ZhengApplication application = ZhengApplicationBuilder.create()
+        .enableAutoLoadModule()
+        .withConfiguration(configuration)
+        .build();
+    application.start();
+    Injector injector = application.getInjector();
+
+    Work3 work = injector.getInstance(Work3.class);
+
+    work.makeAThing();
+    work.makeAThing();
+    work.makeAThing();
+
+    System.out.println("There are now " + work.countThings() + " things");
+
+    assertEquals(3, work.countThings());
+
+    application.stop();
+  }
 }

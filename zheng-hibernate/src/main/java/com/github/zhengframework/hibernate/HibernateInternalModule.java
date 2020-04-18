@@ -58,14 +58,26 @@ public class HibernateInternalModule extends AbstractModule {
         AutoRegisteringListenerIntegrator.class
     );
 
-    this.bindInterceptor(Matchers.annotatedWith(Transactional.class), Matchers.any(),
-        this.getTransactionInterceptor());
-    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(Transactional.class),
-        this.getTransactionInterceptor());
+    bindInterceptor(Matchers.annotatedWith(Transactional.class), Matchers.any(),
+        getTransactionInterceptor());
+    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Transactional.class),
+        getTransactionInterceptor());
+
+    bindInterceptor(Matchers.annotatedWith(javax.transaction.Transactional.class), Matchers.any(),
+        getJavaxTransactionInterceptor());
+    bindInterceptor(Matchers.any(), Matchers.annotatedWith(javax.transaction.Transactional.class),
+        getJavaxTransactionInterceptor());
+
   }
 
   protected MethodInterceptor getTransactionInterceptor() {
     MethodInterceptor txInterceptor = new HibernateTransactionInterceptor();
+    requestInjection(txInterceptor);
+    return txInterceptor;
+  }
+
+  protected MethodInterceptor getJavaxTransactionInterceptor() {
+    MethodInterceptor txInterceptor = new HibernateJavaxTransactionInterceptor();
     requestInjection(txInterceptor);
     return txInterceptor;
   }
