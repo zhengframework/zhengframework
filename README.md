@@ -45,7 +45,7 @@ mvn -Drevision=2.0.0 clean package
 
 deploy to maven repo
 ```
-mvn -Drevision=2.0.0 clean package deploy
+mvn -Drevision=1.0.1 clean package deploy
 ```
 
 find dependency info
