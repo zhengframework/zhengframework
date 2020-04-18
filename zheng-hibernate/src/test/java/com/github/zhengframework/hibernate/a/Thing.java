@@ -1,4 +1,4 @@
-package com.github.zhengframework.hibernate;
+package com.github.zhengframework.hibernate.a;
 
 import java.util.UUID;
 import javax.persistence.Entity;

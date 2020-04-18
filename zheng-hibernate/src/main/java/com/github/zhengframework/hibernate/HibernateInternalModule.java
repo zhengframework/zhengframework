@@ -1,29 +1,31 @@
 package com.github.zhengframework.hibernate;
 
 import com.github.zhengframework.hibernate.HibernatePersistService.EntityManagerFactoryProvider;
+import com.github.zhengframework.hibernate.integrator.AutoRegisteringListener;
+import com.github.zhengframework.hibernate.integrator.AutoRegisteringListenerIntegrator;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.inject.PrivateModule;
+import com.google.common.collect.ImmutableSet;
+import com.google.inject.AbstractModule;
+import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.multibindings.Multibinder;
+import com.google.inject.multibindings.OptionalBinder;
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.Transactional;
 import com.google.inject.persist.UnitOfWork;
-import java.lang.annotation.Annotation;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.hibernate.integrator.spi.Integrator;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
-public class HibernatePersistPrivateModule extends PrivateModule {
-
-  private final Annotation qualifier;
+public class HibernateInternalModule extends AbstractModule {
 
   private final HibernateConfig hibernateConfig;
 
-  public HibernatePersistPrivateModule(Annotation qualifier,
+  public HibernateInternalModule(
       HibernateConfig hibernateConfig) {
-    this.qualifier = qualifier;
     this.hibernateConfig = hibernateConfig;
   }
 
@@ -44,49 +46,28 @@ public class HibernatePersistPrivateModule extends PrivateModule {
     bind(UnitOfWork.class).to(HibernatePersistService.class);
     bind(EntityManager.class).toProvider(HibernatePersistService.class);
     bind(EntityManagerFactory.class).toProvider(EntityManagerFactoryProvider.class);
-    bind(HibernateService.class).asEagerSingleton();
+    bind(HibernateManagedService.class).asEagerSingleton();
+
+    ImmutableSet<? extends AutoRegisteringListener> listeners = ImmutableSet.of();
+    OptionalBinder.newOptionalBinder(binder(),
+        new TypeLiteral<ImmutableSet<? extends AutoRegisteringListener>>() {
+        })
+        .setDefault().toInstance(listeners);
+
+    Multibinder.newSetBinder(binder(), Integrator.class).addBinding().to(
+        AutoRegisteringListenerIntegrator.class
+    );
+
+    this.bindInterceptor(Matchers.annotatedWith(Transactional.class), Matchers.any(),
+        this.getTransactionInterceptor());
+    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(Transactional.class),
+        this.getTransactionInterceptor());
+  }
+
+  protected MethodInterceptor getTransactionInterceptor() {
     MethodInterceptor txInterceptor = new HibernateTransactionInterceptor();
     requestInjection(txInterceptor);
-    this.bindInterceptor(Matchers.annotatedWith(Transactional.class), Matchers.any(),
-        txInterceptor);
-    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(Transactional.class),
-        txInterceptor);
-
-//    for (Class<?> aClass : entityClassProvider.get()) {
-//      if (qualifier != null) {
-//        bind(aClass).annotatedWith(qualifier);
-//        expose(aClass).annotatedWith(qualifier);
-//      } else {
-//        bind(aClass);
-//        expose(aClass);
-//      }
-//    }
-
-//    if(qualifier==null){
-//      Key<PersistFilter> key = Key.get(PersistFilter.class);
-//      bind(key).to(PersistFilter.class);
-//      expose(key);
-//    }else {
-//      Key<PersistFilter> key = Key.get(PersistFilter.class, qualifier);
-//      bind(key).to(PersistFilter.class);
-//      expose(key);
-//    }
-
-    Class[] classes = new Class[]{EntityManagerFactory.class,
-        EntityManager.class,
-//        PersistService.class,
-//        UnitOfWork.class,
-        HibernatePersistService.class, HibernateService.class};
-    for (Class aClass : classes) {
-      if (qualifier != null) {
-        bind(aClass).annotatedWith(qualifier)
-            .toProvider(binder().getProvider(aClass));
-        expose(aClass).annotatedWith(qualifier);
-      } else {
-        expose(aClass);
-      }
-    }
-
+    return txInterceptor;
   }
 
 }
