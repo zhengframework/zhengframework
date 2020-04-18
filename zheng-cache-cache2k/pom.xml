@@ -2,50 +2,18 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-cache</artifactId>
+  <artifactId>zheng-cache-cache2k</artifactId>
   <dependencies>
-    <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>cache-annotations-ri-guice</artifactId>
-      <groupId>org.jsr107.ri</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <artifactId>cache2k-jcache</artifactId>
       <groupId>org.cache2k</groupId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>cache2k-api</artifactId>
       <groupId>org.cache2k</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.zhengframework</groupId>
-      <artifactId>zheng-core</artifactId>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -57,8 +25,8 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>

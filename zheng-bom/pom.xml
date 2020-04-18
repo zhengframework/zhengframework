@@ -436,6 +436,41 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <artifactId>zheng-cache-cache2k</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache-caffeine</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache-ehcache</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache-infinispan</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache-commons-jcs</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache-hazelcast</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-cache-ignite</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>zheng-configuration</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
