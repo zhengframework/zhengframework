@@ -397,7 +397,6 @@
         <groupId>org.webjars</groupId>
         <version>${swagger-ui.version}</version>
       </dependency>
-
       <dependency>
         <artifactId>jopt-simple</artifactId>
         <groupId>net.sf.jopt-simple</groupId>
@@ -413,7 +412,36 @@
         <groupId>com.zaxxer</groupId>
         <version>${HikariCP.version}</version>
       </dependency>
-
+      <dependency>
+        <artifactId>liquibase-core</artifactId>
+        <groupId>org.liquibase</groupId>
+        <version>${liquibase.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jooq</artifactId>
+        <groupId>org.jooq</groupId>
+        <version>${jooq.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jooq-meta</artifactId>
+        <groupId>org.jooq</groupId>
+        <version>${jooq.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jooq-codegen</artifactId>
+        <groupId>org.jooq</groupId>
+        <version>${jooq.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>flyway-core</artifactId>
+        <groupId>org.flywaydb</groupId>
+        <version>${flyway.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>querydsl-sql</artifactId>
+        <groupId>com.querydsl</groupId>
+        <version>${querydsl.version}</version>
+      </dependency>
       <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-activemq</artifactId>
@@ -497,6 +525,31 @@
       </dependency>
       <dependency>
         <artifactId>zheng-jdbc</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-migrate-flyway</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-migrate-liquibase</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jooq</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-querydsl</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jdbi</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
@@ -644,6 +697,10 @@
     <tomlj.version>1.0.0</tomlj.version>
     <undertow.version>2.0.30.Final</undertow.version>
     <webjars-locator-core.version>0.44</webjars-locator-core.version>
+    <flyway.version>6.3.3</flyway.version>
+    <jooq.version>3.13.1</jooq.version>
+    <liquibase.version>3.8.8</liquibase.version>
+    <querydsl.version>4.3.1</querydsl.version>
   </properties>
 
 </project>

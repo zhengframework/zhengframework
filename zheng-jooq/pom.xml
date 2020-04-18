@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-jdbc</artifactId>
+  <artifactId>zheng-jooq</artifactId>
   <dependencies>
     <dependency>
       <artifactId>lombok</artifactId>
@@ -10,39 +10,22 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>HikariCP</artifactId>
-      <groupId>com.zaxxer</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>hsqldb</artifactId>
-      <groupId>org.hsqldb</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-core</artifactId>
+      <artifactId>zheng-jdbc</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-bootstrap</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
+      <artifactId>jooq</artifactId>
+      <groupId>org.jooq</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jooq-meta</artifactId>
+      <groupId>org.jooq</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jooq-codegen</artifactId>
+      <groupId>org.jooq</groupId>
     </dependency>
   </dependencies>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -54,10 +37,12 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+
 </project>

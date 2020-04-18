@@ -38,6 +38,12 @@ public class DataSourceProvider implements Provider<DataSource> {
     for (DataSourceProxy dataSourceProxy : collect) {
       dataSource = dataSourceProxy.apply(dataSource);
     }
+    Set<ManagedSchema> managedSchemaSet = injector
+        .getInstance(Key.get(new TypeLiteral<Set<ManagedSchema>>() {
+        }));
+    for (ManagedSchema managedSchema : managedSchemaSet) {
+      managedSchema.migrate(dataSource);
+    }
     return dataSource;
   }
 }

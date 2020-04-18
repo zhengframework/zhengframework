@@ -14,14 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LiquibaseManagedSchema implements ManagedSchema {
 
-  private final DataSource dataSource;
-
-  public LiquibaseManagedSchema(DataSource dataSource) {
-    this.dataSource = dataSource;
-  }
-
   @Override
-  public DataSource migrate() {
+  public void migrate(DataSource dataSource) {
     log.info("Starting DB migration");
     try {
       Database database = DatabaseFactory.getInstance()
@@ -36,6 +30,5 @@ public class LiquibaseManagedSchema implements ManagedSchema {
       log.error("DB migration fail", e);
     }
     log.info("DB migration success");
-    return dataSource;
   }
 }

@@ -2,25 +2,17 @@ package com.github.zhengframework.jdbc;
 
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;
 
 @Slf4j
 public class FlywayManagedSchema implements ManagedSchema {
 
-  private final DataSource dataSource;
-
-  public FlywayManagedSchema(DataSource dataSource) {
-    this.dataSource = dataSource;
-  }
-
-
   @Override
-  public DataSource migrate() {
+  public void migrate(DataSource dataSource) {
     log.info("Starting DB migration");
 
-    val flyway = Flyway.configure().dataSource(dataSource)
+    Flyway flyway = Flyway.configure().dataSource(dataSource)
         .load();
 
     MigrationInfo current = flyway.info().current();
@@ -33,7 +25,5 @@ public class FlywayManagedSchema implements ManagedSchema {
     flyway.migrate();
 
     log.info("Schema migrated to version {}", flyway.info().current().getVersion());
-
-    return dataSource;
   }
 }

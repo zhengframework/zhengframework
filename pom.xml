@@ -158,6 +158,11 @@
     <module>zheng-cache-commons-jcs</module>
     <module>zheng-cache-hazelcast</module>
     <module>zheng-cache-ignite</module>
+    <module>zheng-migrate-flyway</module>
+    <module>zheng-migrate-liquibase</module>
+    <module>zheng-jooq</module>
+    <module>zheng-querydsl</module>
+    <module>zheng-jdbi</module>
   </modules>
 
   <packaging>pom</packaging>

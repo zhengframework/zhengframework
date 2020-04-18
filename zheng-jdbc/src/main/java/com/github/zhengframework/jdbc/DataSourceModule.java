@@ -54,6 +54,9 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
     Multibinder.newSetBinder(binder(), DataSourceProxy.class)
         .addBinding().toInstance(dataSource -> dataSource);
 
+    Multibinder.newSetBinder(binder(), ManagedSchema.class).addBinding()
+        .toInstance(dataSource -> {
+        });
   }
 
   private HikariConfig getHikariConfig(DataSourceConfig dataSourceConfig) {
