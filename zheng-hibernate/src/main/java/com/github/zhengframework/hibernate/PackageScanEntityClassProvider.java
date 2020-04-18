@@ -5,10 +5,12 @@ import io.github.classgraph.ScanResult;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Recursively locates {@code @Entity} annotated classes in the argument {@link #entityPackages}.
  */
+@Slf4j
 public class PackageScanEntityClassProvider implements HibernateEntityClassProvider {
 
   private final String[] entityPackages;
@@ -46,6 +48,7 @@ public class PackageScanEntityClassProvider implements HibernateEntityClassProvi
         .getClassesWithAnnotation(entityName)) {
       entityClasses.add(classInfo.loadClass());
     }
+    log.info("entityClasses={}", entityClasses);
     return entityClasses;
   }
 }

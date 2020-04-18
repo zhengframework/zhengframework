@@ -15,6 +15,9 @@ public class Thing {
     setName(name);
   }
 
+  public Thing() {
+  }
+
   public UUID getId() {
     return id;
   }
