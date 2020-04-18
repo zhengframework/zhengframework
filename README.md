@@ -16,7 +16,7 @@ zheng framework use google guice for DI, and most module support auto load.
 | RedisModule | OK    | yes |
 | RabbitMQModule | OK    | yes |
 | CacheModule | OK    | yes |
-| MongoDBModule | OK    | yes |
+| MongodbModule | OK    | yes |
 | MemcachedModule | OK    | yes |
 | MetricsModule | OK    | yes |
 | MetricsServletModule | OK    | yes |
