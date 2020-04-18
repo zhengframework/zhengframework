@@ -20,6 +20,8 @@ zheng framework use google guice for DI, and most module support auto load.
 | MemcachedModule | OK    | yes |
 | MetricsModule | OK    | yes |
 | MetricsServletModule | OK    | yes |
+| HibernateModule | OK    | yes |
+| HibernateMultiModule | OK    | no |
 | MybatisModule | Waiting    |  |
 | ShiroModule | Waiting    |  |
 | DataSourceModule | Waiting    |  |
