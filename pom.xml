@@ -173,7 +173,7 @@
               <encoding>UTF-8</encoding>
               <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
               <nohelp>true</nohelp>
-              <show>package</show>
+              <show>private</show>
             </configuration>
             <executions>
               <execution>
