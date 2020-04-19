@@ -1,34 +1,36 @@
 package com.github.zhengframework.healthcheck;
 
 import com.codahale.metrics.health.HealthCheck;
+import com.codahale.metrics.health.HealthCheckRegistry;
 import com.github.zhengframework.core.Service;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * This service periodically runs health checks at a configured interval and reports any health
- * issues via slf4j
- */
 @Singleton
 @Slf4j
-public class HealthChecksService implements Service {
+public class HealthCheckManagedService implements Service {
 
-  private final HealthChecks healthChecks;
-  private final HealthChecksConfig config;
+  private final HealthCheckConfig config;
+  private final HealthCheckRegistry healthCheckRegistry;
+  private final HealthCheckScanner healthCheckScanner;
+  private final Injector injector;
   private ScheduledExecutorService scheduledExecutorService;
 
   @Inject
-  public HealthChecksService(HealthChecksConfig config,
-      HealthChecks healthChecks) {
+  public HealthCheckManagedService(HealthCheckConfig config,
+      HealthCheckRegistry healthCheckRegistry,
+      HealthCheckScanner healthCheckScanner, Injector injector) {
     this.config = config;
-    this.healthChecks = healthChecks;
+    this.healthCheckRegistry = healthCheckRegistry;
+    this.healthCheckScanner = healthCheckScanner;
+    this.injector = injector;
     scheduledExecutorService = Executors
         .newScheduledThreadPool(Runtime.getRuntime().availableProcessors(),
             new ThreadFactoryBuilder()
@@ -44,9 +46,19 @@ public class HealthChecksService implements Service {
 
   @Override
   public void start() throws Exception {
-    if (config.getInterval() != null) {
+    healthCheckScanner.accept(
+        thing -> {
+          if (thing instanceof NamedHealthCheck) {
+            NamedHealthCheck namedHealthCheck = (NamedHealthCheck) thing;
+            healthCheckRegistry.register(namedHealthCheck.getName(), thing);
+          } else {
+            healthCheckRegistry.register(thing.getClass().getSimpleName(), thing);
+          }
+        });
+    if (config.isEnable()) {
       scheduledExecutorService.schedule(() -> {
-        for (Map.Entry<String, HealthCheck.Result> entry : healthChecks.run().entrySet()) {
+        for (Map.Entry<String, HealthCheck.Result> entry : healthCheckRegistry.runHealthChecks()
+            .entrySet()) {
           if (entry.getValue().isHealthy()) {
             log.trace("{} : OK {}", entry.getKey(),
                 Strings.nullToEmpty(entry.getValue().getMessage()));
@@ -55,7 +67,7 @@ public class HealthChecksService implements Service {
                 Strings.nullToEmpty(entry.getValue().getMessage()), entry.getValue().getError());
           }
         }
-      }, config.getInterval().getSeconds(), TimeUnit.SECONDS);
+      }, config.getDuration(), config.getUnit());
     }
   }
 

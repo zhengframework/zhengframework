@@ -1,4 +1,4 @@
-package com.github.zhengframework.metrics.servlet;
+package com.github.zhengframework.healthcheck;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.github.zhengframework.core.ClassScanner;
