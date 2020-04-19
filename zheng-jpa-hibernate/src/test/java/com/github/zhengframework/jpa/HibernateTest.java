@@ -1,7 +1,5 @@
 package com.github.zhengframework.jpa;
 
-import com.github.zhengframework.jpa.a.Work;
-import com.github.zhengframework.jpa.b.Work2;
 import java.util.HashMap;
 import org.junit.Test;
 
@@ -30,7 +28,7 @@ public class HibernateTest {
     map.put("zheng.jpa.a.managedClassPackages", "com.github.zhengframework.jpa.a");
     map.put("zheng.jpa.a.properties.hibernate_dialect", "org.hibernate.dialect.H2Dialect");
     map.put("zheng.jpa.a.properties.hibernate_hbm2ddl_auto", "create");
-    map.put("zheng.jpa.a.exposeClassSet.1", Work.class.getName());
+    map.put("zheng.jpa.a.extraModuleClass", "com.github.zhengframework.jpa.ExposedPrivateModule1");
 
     map.put("zheng.jpa.b.driverClassName", "org.h2.Driver");
     map.put("zheng.jpa.b.url", "jdbc:h2:mem:test_b");
@@ -38,7 +36,7 @@ public class HibernateTest {
     map.put("zheng.jpa.b.managedClassPackages", "com.github.zhengframework.jpa.b");
     map.put("zheng.jpa.b.properties.hibernate_dialect", "org.hibernate.dialect.H2Dialect");
     map.put("zheng.jpa.b.properties.hibernate_hbm2ddl_auto", "create");
-    map.put("zheng.jpa.b.exposeClassSet.1", Work2.class.getName());
+    map.put("zheng.jpa.b.extraModuleClass", "com.github.zhengframework.jpa.ExposedPrivateModule2");
     JpaMultiModuleTest.test(map);
   }
 }

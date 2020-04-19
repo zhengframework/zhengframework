@@ -2,6 +2,7 @@ package com.github.zhengframework.jpa;
 
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
+import com.github.zhengframework.guice.ExposedPrivateModule;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,8 +23,7 @@ public class JpaConfig implements ConfigurationDefine {
   private String username;
   private String password;
   private String managedClassPackages;
-  private Set<String> managedClassSet = new HashSet<>();
+  private Set<String> managedClasses = new HashSet<>();
   private Map<String, String> properties = new HashMap<>();
-  private Set<Class<?>> exposeClassSet = new HashSet<>();// multi support, expose class
-
+  private Class<? extends ExposedPrivateModule> extraModuleClass;
 }

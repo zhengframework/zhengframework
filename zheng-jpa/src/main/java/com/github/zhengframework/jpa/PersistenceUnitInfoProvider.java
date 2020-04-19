@@ -33,8 +33,8 @@ public class PersistenceUnitInfoProvider implements Provider<PersistenceUnitInfo
     persistenceUnitInfo.setTransactionType(PersistenceUnitTransactionType.RESOURCE_LOCAL);
 
     List<String> managedClassNames = new ArrayList<>();
-    if (jpaConfig.getManagedClassSet() != null) {
-      managedClassNames.addAll(jpaConfig.getManagedClassSet());
+    if (jpaConfig.getManagedClasses() != null) {
+      managedClassNames.addAll(jpaConfig.getManagedClasses());
     }
     String managedClassPackages = jpaConfig.getManagedClassPackages();
     if (managedClassPackages != null && !managedClassPackages.isEmpty()) {
