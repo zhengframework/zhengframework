@@ -24,17 +24,14 @@
     <dependency>
       <artifactId>javax.transaction-api</artifactId>
       <groupId>javax.transaction</groupId>
-      <version>1.3</version>
     </dependency>
     <dependency>
       <artifactId>javax.persistence-api</artifactId>
       <groupId>javax.persistence</groupId>
-      <version>2.2</version>
     </dependency>
     <dependency>
       <artifactId>javax.interceptor-api</artifactId>
       <groupId>javax.interceptor</groupId>
-      <version>1.2.2</version>
     </dependency>
     <dependency>
       <artifactId>classgraph</artifactId>

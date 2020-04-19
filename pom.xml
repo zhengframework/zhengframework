@@ -169,6 +169,7 @@
     <module>zheng-jpa-eclipselink</module>
     <module>zheng-jpa-test</module>
     <module>zheng-jdbc-sql2o</module>
+    <module>zheng-jdbc-commons-dbutils</module>
   </modules>
 
   <packaging>pom</packaging>

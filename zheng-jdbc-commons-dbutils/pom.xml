@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-jdbc-sql2o</artifactId>
+  <artifactId>zheng-jdbc-commons-dbutils</artifactId>
   <dependencies>
     <dependency>
       <artifactId>lombok</artifactId>
@@ -14,10 +14,11 @@
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>sql2o</artifactId>
-      <groupId>org.sql2o</groupId>
+      <artifactId>commons-dbutils</artifactId>
+      <groupId>commons-dbutils</groupId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -35,5 +36,6 @@
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+
 
 </project>
