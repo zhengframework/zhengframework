@@ -14,6 +14,6 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public User getUser(String userId) {
-    return session.selectOne("com.github.zhengframework.mybatis.UserMapper.getUser", userId);
+    return session.selectOne("com.github.zhengframework.mybatis.mapper.UserMapper.getUser", userId);
   }
 }

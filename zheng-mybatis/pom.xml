@@ -40,6 +40,28 @@
       <artifactId>guice</artifactId>
       <groupId>com.google.inject</groupId>
     </dependency>
+    <dependency>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-jdbc</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>classgraph</artifactId>
+      <groupId>io.github.classgraph</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-configuration</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

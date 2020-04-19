@@ -1,19 +1,18 @@
 package com.github.zhengframework.mybatis;
 
-import com.github.zhengframework.mybatis.mapper.UserMapper;
+import com.github.zhengframework.mybatis.mapper2.UserMapper2;
 import javax.inject.Inject;
 import org.mybatis.guice.transactional.Transactional;
 
-public class FooServiceMapperImpl implements FooService {
+public class FooServiceMapper2Impl implements FooService {
 
   @Inject
-  private UserMapper userMapper;
-
+  private UserMapper2 userMapper2;
 
   @Override
   @Transactional
   public User doSomeBusinessStuff(String userId) {
-    return this.userMapper.getUser(userId);
+    return this.userMapper2.getUser(userId);
   }
 
 }
