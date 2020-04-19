@@ -25,9 +25,10 @@ zheng framework use google guice for DI, and most module support auto load.
 | JpaModule(EclipseLink) | OK    | yes |
 | JpaMultiModule(EclipseLink) | OK    | no |
 | DataSourceModule | OK    | yes |
-| JdbiModule | OK    | no |
-| JOOQModule | OK    | no |
-| QuerydslModule | OK    | no |
+| JdbiModule | OK    | yes |
+| JOOQModule | OK    | yes |
+| QuerydslModule | OK    | yes |
+| Sql2oModule | OK    | yes |
 | MybatisModule | Waiting    |  |
 | ShiroModule | Waiting    |  |
 | HealthCheckModule | Waiting    |  |

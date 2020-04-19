@@ -161,13 +161,14 @@
     <module>zheng-cache-ignite</module>
     <module>zheng-migrate-flyway</module>
     <module>zheng-migrate-liquibase</module>
-    <module>zheng-jooq</module>
-    <module>zheng-querydsl</module>
-    <module>zheng-jdbi</module>
+    <module>zheng-jdbc-jooq</module>
+    <module>zheng-jdbc-querydsl</module>
+    <module>zheng-jdbc-jdbi</module>
     <module>zheng-jpa</module>
     <module>zheng-jpa-hibernate</module>
     <module>zheng-jpa-eclipselink</module>
     <module>zheng-jpa-test</module>
+    <module>zheng-jdbc-sql2o</module>
   </modules>
 
   <packaging>pom</packaging>

@@ -1,11 +1,14 @@
 package com.github.zhengframework.jpa.b;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Thing2")
 public class Thing2 {
 
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Id
   private Integer id;
   private String name;

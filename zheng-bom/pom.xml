@@ -452,6 +452,11 @@
         <groupId>org.eclipse.persistence</groupId>
         <version>${eclipse.persistence.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>sql2o</artifactId>
+        <groupId>org.sql2o</groupId>
+        <version>${sql2o.version}</version>
+      </dependency>
       <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-activemq</artifactId>
@@ -544,17 +549,22 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-jooq</artifactId>
+        <artifactId>zheng-jdbc-jooq</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-querydsl</artifactId>
+        <artifactId>zheng-jdbc-querydsl</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-jdbi</artifactId>
+        <artifactId>zheng-jdbc-jdbi</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jdbc-sql2o</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
@@ -727,6 +737,7 @@
     <liquibase.version>3.8.8</liquibase.version>
     <querydsl.version>4.3.1</querydsl.version>
     <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
+    <sql2o.version>1.6.0</sql2o.version>
   </properties>
 
 </project>
