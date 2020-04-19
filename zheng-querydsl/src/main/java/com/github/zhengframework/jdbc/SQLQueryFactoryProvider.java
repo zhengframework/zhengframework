@@ -6,26 +6,24 @@ import com.querydsl.sql.Configuration;
 import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.SQLTemplates;
 import java.lang.annotation.Annotation;
-import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.sql.DataSource;
 
 public class SQLQueryFactoryProvider implements Provider<SQLQueryFactory> {
 
   private final Annotation qualifier;
+  private Provider<Injector> injectorProvider;
 
-  @Inject
-  private Injector injector;
-
-  public SQLQueryFactoryProvider(Annotation qualifier) {
+  public SQLQueryFactoryProvider(Annotation qualifier, Provider<Injector> injectorProvider) {
     this.qualifier = qualifier;
+    this.injectorProvider = injectorProvider;
   }
-
 
   @Override
   public SQLQueryFactory get() {
     DataSource dataSource;
     SQLTemplates sqlTemplates;
+    Injector injector = injectorProvider.get();
     if (qualifier == null) {
       dataSource = injector.getInstance(Key.get(DataSource.class));
       sqlTemplates = injector.getInstance(Key.get(SQLTemplates.class));

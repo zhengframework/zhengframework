@@ -20,18 +20,23 @@ zheng framework use google guice for DI, and most module support auto load.
 | MemcachedModule | OK    | yes |
 | MetricsModule | OK    | yes |
 | MetricsServletModule | OK    | yes |
-| HibernateModule | OK    | yes |
-| HibernateMultiModule | OK    | no |
+| JpaModule(Hibernate) | OK    | yes |
+| JpaMultiModule(Hibernate) | OK    | no |
+| JpaModule(EclipseLink) | OK    | yes |
+| JpaMultiModule(EclipseLink) | OK    | no |
+| DataSourceModule | OK    | yes |
+| JdbiModule | OK    | no |
+| JOOQModule | OK    | no |
+| QuerydslModule | OK    | no |
 | MybatisModule | Waiting    |  |
 | ShiroModule | Waiting    |  |
-| DataSourceModule | Waiting    |  |
-| JdbiModule | Waiting    |  |
-| JOOQModule | Waiting    |  |
-| QuerydslModule | Waiting    |  |
-| HibernateModule | Waiting    |  |
 | HealthCheckModule | Waiting    |  |
 | ActiveMQModule | Waiting    |  |
 | ActiveMQArtemisModule | Waiting    |  |
+| ActiveMQArtemisModule | Waiting    |  |
+| ActiveMQArtemisModule | Waiting    |  |
+| FlywayMigrateModule | Waiting    |  |
+| LiquibaseMigrateModule | Waiting    |  |
 
 
 

@@ -12,6 +12,7 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.multibindings.Multibinder;
+import com.google.inject.multibindings.OptionalBinder;
 import com.zaxxer.hikari.HikariConfig;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,20 +31,18 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
   protected void configure() {
     Provider<Injector> injectorProvider = getProvider(Injector.class);
     Preconditions.checkArgument(configuration != null, "configuration is null");
-
     Map<String, DataSourceConfig> dataSourceConfigMap = ConfigurationBeanMapper
         .resolve(configuration, DataSourceConfig.class);
     for (Entry<String, DataSourceConfig> entry : dataSourceConfigMap
         .entrySet()) {
       String name = entry.getKey();
       DataSourceConfig dataSourceConfig = entry.getValue();
+      HikariConfig config = getHikariConfig(dataSourceConfig);
       if (name.isEmpty()) {
-        HikariConfig config = getHikariConfig(dataSourceConfig);
         bind(HikariConfig.class).toInstance(config);
         bind(DataSource.class).toProvider(new DataSourceProvider(config, injectorProvider))
             .in(Singleton.class);
       } else {
-        HikariConfig config = getHikariConfig(dataSourceConfig);
         bind(Key.get(HikariConfig.class, named(name))).toInstance(config);
         bind(Key.get(DataSource.class, named(name))).toProvider(new DataSourceProvider(config,
             injectorProvider))
@@ -53,10 +52,9 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
     }
     Multibinder.newSetBinder(binder(), DataSourceProxy.class)
         .addBinding().toInstance(dataSource -> dataSource);
-
-    Multibinder.newSetBinder(binder(), ManagedSchema.class).addBinding()
-        .toInstance(dataSource -> {
-        });
+    OptionalBinder.newOptionalBinder(binder(), ManagedSchema.class)
+        .setDefault().toInstance(dataSource -> {
+    });
   }
 
   private HikariConfig getHikariConfig(DataSourceConfig dataSourceConfig) {

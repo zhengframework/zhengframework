@@ -3,6 +3,7 @@ package com.github.zhengframework.jdbc;
 import static com.google.inject.name.Names.named;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.querydsl.sql.SQLQueryFactory;
 import java.lang.annotation.Annotation;
@@ -12,7 +13,7 @@ import lombok.EqualsAndHashCode;
 /**
  * http://www.querydsl.com/static/querydsl/latest/reference/html/ch02s03.html
  */
-@EqualsAndHashCode(callSuper = false, of = {"qualifier"})
+@EqualsAndHashCode(callSuper = false)
 public class QuerydslModule extends AbstractModule {
 
   private Annotation qualifier;
@@ -25,10 +26,10 @@ public class QuerydslModule extends AbstractModule {
     this.qualifier = named(Objects.requireNonNull(name));
   }
 
-
   @Override
   protected void configure() {
-    SQLQueryFactoryProvider sqlQueryFactoryProvider = new SQLQueryFactoryProvider(qualifier);
+    SQLQueryFactoryProvider sqlQueryFactoryProvider = new SQLQueryFactoryProvider(qualifier,
+        getProvider(Injector.class));
     if (qualifier == null) {
       bind(Key.get(SQLQueryFactory.class)).toProvider(sqlQueryFactoryProvider);
     } else {

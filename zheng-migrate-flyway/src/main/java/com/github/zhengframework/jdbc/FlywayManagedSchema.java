@@ -13,6 +13,7 @@ public class FlywayManagedSchema implements ManagedSchema {
     log.info("Starting DB migration");
 
     Flyway flyway = Flyway.configure().dataSource(dataSource)
+        .loadDefaultConfigurationFiles()
         .load();
 
     MigrationInfo current = flyway.info().current();
