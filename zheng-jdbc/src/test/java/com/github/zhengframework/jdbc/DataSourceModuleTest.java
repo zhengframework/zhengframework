@@ -25,7 +25,6 @@ public class DataSourceModuleTest {
     System.out.println(configuration.asMap());
 
     ZhengApplication application = ZhengApplicationBuilder.create()
-        .addModule(new DataSourceModule())
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
