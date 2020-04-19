@@ -442,6 +442,16 @@
         <groupId>com.querydsl</groupId>
         <version>${querydsl.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>org.eclipse.persistence.core</artifactId>
+        <groupId>org.eclipse.persistence</groupId>
+        <version>${eclipse.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>org.eclipse.persistence.jpa</artifactId>
+        <groupId>org.eclipse.persistence</groupId>
+        <version>${eclipse.persistence.version}</version>
+      </dependency>
       <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-activemq</artifactId>
@@ -515,11 +525,6 @@
       </dependency>
       <dependency>
         <artifactId>zheng-healthcheck</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${zhengframework.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-hibernate</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
@@ -623,6 +628,26 @@
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>zheng-jpa</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jpa-test</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jpa-hibernate</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jpa-eclipselink</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
@@ -701,6 +726,7 @@
     <jooq.version>3.13.1</jooq.version>
     <liquibase.version>3.8.8</liquibase.version>
     <querydsl.version>4.3.1</querydsl.version>
+    <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
   </properties>
 
 </project>

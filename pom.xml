@@ -97,7 +97,9 @@
       </plugin>
     </plugins>
   </build>
-  <description>zheng framework is a modular framework with many ready-to-use modules</description>
+  <description>zheng framework is com.github.zhengframework.jpa.a modular framework with many
+    ready-to-use modules
+  </description>
   <developers>
     <developer>
       <email>ysykart@gmail.com</email>
@@ -136,7 +138,6 @@
     <module>zheng-activemq-artemis</module>
     <module>zheng-metrics</module>
     <module>zheng-swagger</module>
-    <module>zheng-hibernate</module>
     <module>zheng-rabbitmq</module>
     <module>zheng-healthcheck</module>
     <module>zheng-mongodb</module>
@@ -163,6 +164,10 @@
     <module>zheng-jooq</module>
     <module>zheng-querydsl</module>
     <module>zheng-jdbi</module>
+    <module>zheng-jpa</module>
+    <module>zheng-jpa-hibernate</module>
+    <module>zheng-jpa-eclipselink</module>
+    <module>zheng-jpa-test</module>
   </modules>
 
   <packaging>pom</packaging>

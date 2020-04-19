@@ -1,6 +1,6 @@
 # zheng framework
 
-zheng framework is a modular framework with many ready-to-use modules
+zheng framework is com.github.zhengframework.jpa.a modular framework with many ready-to-use modules
 
 zheng framework use google guice for DI, and most module support auto load.
 
