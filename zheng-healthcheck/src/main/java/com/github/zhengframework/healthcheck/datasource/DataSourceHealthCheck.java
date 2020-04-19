@@ -1,54 +1,47 @@
 package com.github.zhengframework.healthcheck.datasource;
 
-import com.github.zhengframework.healthcheck.NamedHealthCheck;
+import com.codahale.metrics.health.HealthCheck;
+import com.github.zhengframework.core.ClassScanner;
+import com.google.inject.Injector;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.sql.DataSource;
 
-public class DataSourceHealthCheck extends NamedHealthCheck {
+public class DataSourceHealthCheck extends HealthCheck {
 
-  private final String dataSourceName;
-  private final DataSource dataSource;
-  private final String testQuery;
+  private List<DataSource> dataSourceList;
 
-  public DataSourceHealthCheck(String dataSourceName, DataSource dataSource,
-      String testQuery) {
-    this.dataSourceName = dataSourceName;
-    this.dataSource = dataSource;
-    this.testQuery = testQuery;
+  @Inject
+  public DataSourceHealthCheck(
+      Provider<Injector> injectorProvider) {
+    Injector injector = injectorProvider.get();
+    dataSourceList = new ArrayList<>();
+    ClassScanner<DataSource> classScanner = new ClassScanner<>(injector, DataSource.class);
+    classScanner.accept(thing -> dataSourceList.add(thing));
   }
 
-  public DataSourceHealthCheck(String dataSourceName, DataSource dataSource) {
-    this(dataSourceName, dataSource, "select 1");
-  }
 
   @Override
-  public String getName() {
-    return "DataSourceHealthCheck-" + dataSourceName;
-  }
-
-  @Override
-  protected Result check() throws Exception {
-    try {
-      if (dataSourceCheck(dataSource)) {
-        return Result.healthy();
-      }
-    } catch (SQLException e) {
-      return Result.unhealthy(e);
+  protected Result check() {
+    if (dataSourceList.isEmpty()) {
+      return Result.healthy("dataSource not found");
     }
-    throw new IllegalStateException();
-  }
-
-  protected boolean dataSourceCheck(DataSource dataSource) throws SQLException {
-    Connection connection = dataSource.getConnection();
-    PreparedStatement preparedStatement = connection.prepareStatement(testQuery);
-    ResultSet resultSet = preparedStatement.executeQuery();
-    resultSet.close();
-    preparedStatement.close();
-    connection.close();
-    return true;
+    for (DataSource dataSource : dataSourceList) {
+      try (Connection connection = dataSource.getConnection()) {
+        int timeout = 2;
+        if (connection.isValid(timeout)) {
+          return Result.healthy();
+        } else {
+          return Result.unhealthy("dataSource is invalid with timeout " + timeout + " second");
+        }
+      } catch (Exception e) {
+        return Result.unhealthy(e.getMessage());
+      }
+    }
+    return Result.healthy();
   }
 
 }

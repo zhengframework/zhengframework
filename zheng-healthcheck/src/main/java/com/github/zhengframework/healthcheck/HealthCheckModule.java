@@ -2,6 +2,7 @@ package com.github.zhengframework.healthcheck;
 
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.health.jvm.ThreadDeadlockHealthCheck;
+import com.github.zhengframework.healthcheck.datasource.DataSourceHealthCheck;
 import com.github.zhengframework.healthcheck.sys.SystemLoadHealthCheck;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.OptionalBinder;
@@ -17,6 +18,7 @@ public class HealthCheckModule extends AbstractModule {
     bind(HealthCheckManagedService.class).asEagerSingleton();
     bind(SystemLoadHealthCheck.class);
     bind(ThreadDeadlockHealthCheck.class);
+    bind(DataSourceHealthCheck.class);
   }
 
 }
