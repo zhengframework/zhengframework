@@ -1,6 +1,5 @@
 package com.github.zhengframework.jpa.a;
 
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,7 +7,7 @@ import javax.persistence.Id;
 public class Thing {
 
   @Id
-  private UUID id = UUID.randomUUID();
+  private Integer id;
   private String name;
 
   public Thing(String name) {
@@ -18,11 +17,11 @@ public class Thing {
   public Thing() {
   }
 
-  public UUID getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

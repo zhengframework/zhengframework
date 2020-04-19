@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
-import javax.persistence.PersistenceException;
 import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.persistence.spi.ClassTransformer;
@@ -271,7 +270,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   @Override
   public String getPersistenceXMLSchemaVersion() {
     // TODO
-    throw new PersistenceException("Not Yet Implemented");
+//    throw new PersistenceException("Not Yet Implemented");
+    return "2.1";
   }
 
   /**
