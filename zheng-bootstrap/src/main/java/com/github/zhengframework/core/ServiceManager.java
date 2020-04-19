@@ -46,7 +46,7 @@ public class ServiceManager {
         log.info("stop service[{}]", service.getClass());
         service.stop();
       } catch (Exception e) {
-        log.error("fail start service[{}]", service.getClass(), e);
+        log.error("fail stop service[{}]", service.getClass(), e);
       }
     }
   }
