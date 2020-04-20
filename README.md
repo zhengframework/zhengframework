@@ -32,6 +32,8 @@ zheng framework use google guice for DI, and most module support auto load.
 | CommonsDBUtilsModule | OK    | yes |
 | MybatisModule | OK    | yes |
 | MybatisMultiModule | OK    | no |
+| MybatisXmlModule | OK    | no |
+| MybatisXmlMultiModule | OK    | no |
 | HealthCheckModule | OK    | yes |
 | ShiroModule | Waiting    |  |
 | ActiveMQModule | Waiting    |  |
