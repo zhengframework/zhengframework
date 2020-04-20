@@ -26,7 +26,6 @@
     <dependency>
       <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>shiro-core</artifactId>
@@ -39,22 +38,22 @@
       <version>1.5.2</version>
     </dependency>
     <dependency>
-      <artifactId>shiro-web</artifactId>
-      <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
-    </dependency>
-    <dependency>
-      <artifactId>shiro-jaxrs</artifactId>
-      <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
-    </dependency>
-    <dependency>
       <artifactId>javax.servlet-api</artifactId>
       <groupId>javax.servlet</groupId>
     </dependency>
     <dependency>
       <artifactId>slf4j-api</artifactId>
       <groupId>org.slf4j</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
     </dependency>
   </dependencies>
 
