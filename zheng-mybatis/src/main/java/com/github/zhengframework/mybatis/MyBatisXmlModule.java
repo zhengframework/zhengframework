@@ -6,10 +6,8 @@ import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.guice.ExposedPrivateModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
-import com.google.inject.Key;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -24,7 +22,6 @@ public class MyBatisXmlModule extends AbstractModule implements ConfigurationAwa
     Map<String, MyBatisConfig> myBatisConfigMap = ConfigurationBeanMapper
         .resolve(configuration, MyBatisConfig.class);
     MyBatisConfig myBatisConfig = myBatisConfigMap.get("");
-    requireBinding(Key.get(DataSource.class));
     install(new MyBatisXmlInternalModule(myBatisConfig));
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();
     if (extraModuleClass != null) {
