@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -121,16 +122,19 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
       }
       copy.setFileName(fileName.replace(ENV_PATTERN, env));
     }
-    URL url = fileLocationStrategy.locate(fileSystem, copy);
-    log.info("find configuration file, url={}", url);
-    if (url != null) {
+    Optional<URL> urlOptional = fileLocationStrategy.locate(fileSystem, copy);
+    if (urlOptional.isPresent()) {
+      URL url = urlOptional.get();
+      log.info("find configuration file, url={}", url);
       try (InputStream inputStream = url.openStream()) {
         return Collections
             .unmodifiableMap(fileConfigurationParser.parse(url.toString(), inputStream));
       } catch (IOException e) {
         throw new IllegalStateException("Unable to load configuration from file: " + url, e);
       }
+    } else {
+      log.warn("file not found, fileLocator={}", fileLocator);
+      return Collections.emptyMap();
     }
-    return Collections.emptyMap();
   }
 }

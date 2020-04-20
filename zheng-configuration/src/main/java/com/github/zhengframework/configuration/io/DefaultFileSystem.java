@@ -34,13 +34,7 @@ public class DefaultFileSystem extends FileSystem {
       final URL baseURL = new URL(basePath);
       url = new URL(baseURL, fileName);
 
-      InputStream in = null;
-      try {
-        in = url.openStream();
-      } finally {
-        if (in != null) {
-          in.close();
-        }
+      try (InputStream in = url.openStream()) {
       }
       return url;
     } catch (IOException e) {

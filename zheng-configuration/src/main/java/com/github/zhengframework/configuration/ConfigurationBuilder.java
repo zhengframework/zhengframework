@@ -46,7 +46,7 @@ public class ConfigurationBuilder {
     cachedConfigurationSource.init();
 
     Reloadable reloadable = () -> cachedConfigurationSource.reload(environment);
-    reloadable.reload();
+//    reloadable.reload();
     reloadStrategy.register(reloadable);
 
     return new SourceBasedConfiguration(cachedConfigurationSource, environment);

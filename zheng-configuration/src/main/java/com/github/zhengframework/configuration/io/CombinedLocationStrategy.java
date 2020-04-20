@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 public class CombinedLocationStrategy implements FileLocationStrategy {
 
@@ -17,13 +18,13 @@ public class CombinedLocationStrategy implements FileLocationStrategy {
   }
 
   @Override
-  public URL locate(FileSystem fileSystem, FileLocator locator) {
+  public Optional<URL> locate(FileSystem fileSystem, FileLocator locator) {
     for (final FileLocationStrategy sub : subStrategies) {
-      final URL url = sub.locate(fileSystem, locator);
-      if (url != null) {
-        return url;
+      Optional<URL> optional = sub.locate(fileSystem, locator);
+      if (optional.isPresent()) {
+        return optional;
       }
     }
-    return null;
+    return Optional.empty();
   }
 }
