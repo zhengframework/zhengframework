@@ -47,15 +47,11 @@
     <dependency>
       <artifactId>zheng-jdbc</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>classgraph</artifactId>
       <groupId>io.github.classgraph</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-configuration</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>zheng-bootstrap</artifactId>
