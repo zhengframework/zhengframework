@@ -123,11 +123,14 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
     }
     URL url = fileLocationStrategy.locate(fileSystem, copy);
     log.info("find configuration file, url={}", url);
-    try (InputStream inputStream = url.openStream()) {
-      return Collections
-          .unmodifiableMap(fileConfigurationParser.parse(url.toString(), inputStream));
-    } catch (IOException e) {
-      throw new IllegalStateException("Unable to load configuration from file: " + url, e);
+    if (url != null) {
+      try (InputStream inputStream = url.openStream()) {
+        return Collections
+            .unmodifiableMap(fileConfigurationParser.parse(url.toString(), inputStream));
+      } catch (IOException e) {
+        throw new IllegalStateException("Unable to load configuration from file: " + url, e);
+      }
     }
+    return Collections.emptyMap();
   }
 }
