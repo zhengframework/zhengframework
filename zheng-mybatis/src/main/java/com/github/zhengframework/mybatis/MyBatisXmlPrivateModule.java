@@ -5,16 +5,15 @@ import com.google.inject.Key;
 import com.google.inject.PrivateModule;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
-import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MyBatisPrivateModule extends PrivateModule {
+public class MyBatisXmlPrivateModule extends PrivateModule {
 
   private final Annotation qualifier;
   private final MyBatisConfig myBatisConfig;
 
-  public MyBatisPrivateModule(Annotation qualifier,
+  public MyBatisXmlPrivateModule(Annotation qualifier,
       MyBatisConfig myBatisConfig) {
     this.qualifier = qualifier;
     this.myBatisConfig = myBatisConfig;
@@ -24,11 +23,7 @@ public class MyBatisPrivateModule extends PrivateModule {
   @SuppressWarnings("rawtypes")
   @Override
   protected void configure() {
-    if (qualifier != null) {
-      bind(DataSource.class).toProvider(getProvider(Key.get(DataSource.class, qualifier)));
-    }
-    install(new MyBatisInternalModule(myBatisConfig));
-
+    install(new MyBatisXmlInternalModule(myBatisConfig));
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();
     if (extraModuleClass != null) {
       try {

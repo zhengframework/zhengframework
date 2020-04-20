@@ -4,7 +4,9 @@ import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.github.zhengframework.guice.ExposedPrivateModule;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.plugin.Interceptor;
@@ -36,4 +38,6 @@ public class MyBatisConfig implements ConfigurationDefine {
   private LocalCacheScope localeCacheScope;
   private Boolean mapUnderscoreToCamelCase;
   private Class<? extends ExposedPrivateModule> extraModuleClass;
+  private String configFile;
+  private Map<String, String> properties = new HashMap<>();
 }
