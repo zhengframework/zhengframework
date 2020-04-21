@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @ConfigurationInfo(prefix = "zheng.shiro")
 public class ShiroConfig implements ConfigurationDefine {
 
-  String iniConfig = "classpath:shiro.ini";
+  private String iniConfig = "classpath:shiro.ini";
 }

@@ -11,7 +11,7 @@ import org.apache.shiro.event.EventBus;
 import org.apache.shiro.event.Subscribe;
 import org.apache.shiro.util.ClassUtils;
 
-public class SubscribedEventTypeListener implements TypeListener {
+class SubscribedEventTypeListener implements TypeListener {
 
   @Override
   public <I> void hear(TypeLiteral<I> typeLiteral, TypeEncounter<I> typeEncounter) {

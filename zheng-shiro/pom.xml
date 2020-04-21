@@ -15,10 +15,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
@@ -30,20 +26,10 @@
     <dependency>
       <artifactId>shiro-core</artifactId>
       <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
     </dependency>
     <dependency>
-      <artifactId>shiro-guice</artifactId>
       <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
-    </dependency>
-    <dependency>
-      <artifactId>javax.servlet-api</artifactId>
-      <groupId>javax.servlet</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>shiro-guice</artifactId>
     </dependency>
     <dependency>
       <artifactId>zheng-bootstrap</artifactId>
@@ -53,7 +39,6 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <version>1.2</version>
     </dependency>
   </dependencies>
 

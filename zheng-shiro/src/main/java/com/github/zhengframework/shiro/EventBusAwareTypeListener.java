@@ -8,16 +8,16 @@ import com.google.inject.spi.TypeListener;
 import org.apache.shiro.event.EventBus;
 import org.apache.shiro.event.EventBusAware;
 
-public class EventBusAwareTypeListener implements TypeListener {
+ class EventBusAwareTypeListener implements TypeListener {
 
-  @Override
-  public <I> void hear(TypeLiteral<I> typeLiteral, TypeEncounter<I> typeEncounter) {
+   @Override
+   public <I> void hear(TypeLiteral<I> typeLiteral, TypeEncounter<I> typeEncounter) {
 
-    final Provider<EventBus> eventBusProvider = typeEncounter.getProvider(EventBus.class);
+     final Provider<EventBus> eventBusProvider = typeEncounter.getProvider(EventBus.class);
 
-    if (EventBusAware.class.isAssignableFrom(typeLiteral.getRawType())) {
-      typeEncounter.register(
-          (InjectionListener<I>) o -> ((EventBusAware) o).setEventBus(eventBusProvider.get()));
-    }
+     if (EventBusAware.class.isAssignableFrom(typeLiteral.getRawType())) {
+       typeEncounter.register(
+           (InjectionListener<I>) o -> ((EventBusAware) o).setEventBus(eventBusProvider.get()));
+     }
   }
 }

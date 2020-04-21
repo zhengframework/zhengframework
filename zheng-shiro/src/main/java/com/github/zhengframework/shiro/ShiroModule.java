@@ -8,6 +8,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.Authenticator;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.cache.CacheManager;
@@ -44,67 +45,63 @@ public class ShiroModule extends AbstractModule implements ConfigurationAware {
     ini.loadFromPath(shiroConfig.getIniConfig());
     BasicIniEnvironment environment = new BasicIniEnvironment(ini);
     bind(Environment.class).toInstance(environment);
-    if (environment.getSecurityManager() instanceof DefaultSecurityManager) {
-      DefaultSecurityManager securityManager = (DefaultSecurityManager) environment
-          .getSecurityManager();
-      requestInjection(securityManager);
-      RememberMeManager rememberMeManager = securityManager.getRememberMeManager();
-      if (rememberMeManager != null) {
-        requestInjection(rememberMeManager);
-        bind(RememberMeManager.class).toInstance(rememberMeManager);
-      }
-      SubjectDAO subjectDAO = securityManager.getSubjectDAO();
-      if (subjectDAO != null) {
-        requestInjection(subjectDAO);
-        bind(SubjectDAO.class).toInstance(subjectDAO);
-      }
-      SubjectFactory subjectFactory = securityManager.getSubjectFactory();
-      if (subjectFactory != null) {
-        requestInjection(subjectFactory);
-        bind(SubjectFactory.class).toInstance(subjectFactory);
-      }
-      Authenticator authenticator = securityManager.getAuthenticator();
-      if (authenticator != null) {
-        requestInjection(authenticator);
-        bind(Authenticator.class).toInstance(authenticator);
-      }
-      Authorizer authorizer = securityManager.getAuthorizer();
-      if (authorizer != null) {
-        requestInjection(authorizer);
-        bind(Authorizer.class).toInstance(authorizer);
-      }
-      CacheManager cacheManager = securityManager.getCacheManager();
-      if (cacheManager != null) {
-        requestInjection(cacheManager);
-        bind(CacheManager.class).toInstance(cacheManager);
-      }
-      EventBus eventBus = securityManager.getEventBus();
-      if (eventBus != null) {
-        requestInjection(eventBus);
-      } else {
-        securityManager.setEventBus(new DefaultEventBus());
-      }
-      bind(EventBus.class).toInstance(securityManager.getEventBus());
-      bindListener(Matchers.any(), new SubscribedEventTypeListener());
-      bindListener(Matchers.any(), new EventBusAwareTypeListener());
-
-      for (Realm realm : Objects.requireNonNull(securityManager.getRealms())) {
-        requestInjection(realm);
-      }
-      SessionManager sessionManager = securityManager.getSessionManager();
-      if (sessionManager != null) {
-        requestInjection(sessionManager);
-      } else {
-        securityManager.setSessionManager(new DefaultSessionManager());
-      }
-      bind(SessionManager.class).toInstance(sessionManager);
-      bind(SecurityManager.class).toInstance(securityManager);
-
-      install(new ShiroAopModule());
-      bind(ShiroService.class).asEagerSingleton();
+    DefaultSecurityManager securityManager = (DefaultSecurityManager) environment
+        .getSecurityManager();
+    RememberMeManager rememberMeManager = securityManager.getRememberMeManager();
+    if (rememberMeManager != null) {
+      requestInjection(rememberMeManager);
+      bind(RememberMeManager.class).toInstance(rememberMeManager);
     }
-  }
+    SubjectDAO subjectDAO = securityManager.getSubjectDAO();
+    if (subjectDAO != null) {
+      requestInjection(subjectDAO);
+      bind(SubjectDAO.class).toInstance(subjectDAO);
+    }
+    SubjectFactory subjectFactory = securityManager.getSubjectFactory();
+    if (subjectFactory != null) {
+      requestInjection(subjectFactory);
+      bind(SubjectFactory.class).toInstance(subjectFactory);
+    }
+    Authenticator authenticator = securityManager.getAuthenticator();
+    if (authenticator != null) {
+      requestInjection(authenticator);
+      bind(Authenticator.class).toInstance(authenticator);
+    }
+    Authorizer authorizer = securityManager.getAuthorizer();
+    if (authorizer != null) {
+      requestInjection(authorizer);
+      bind(Authorizer.class).toInstance(authorizer);
+    }
+    CacheManager cacheManager = securityManager.getCacheManager();
+    if (cacheManager != null) {
+      requestInjection(cacheManager);
+      bind(CacheManager.class).toInstance(cacheManager);
+    }
+    EventBus eventBus = securityManager.getEventBus();
+    if (eventBus != null) {
+      requestInjection(eventBus);
+    } else {
+      securityManager.setEventBus(new DefaultEventBus());
+    }
+    bind(EventBus.class).toInstance(securityManager.getEventBus());
+    bindListener(Matchers.any(), new SubscribedEventTypeListener());
+    bindListener(Matchers.any(), new EventBusAwareTypeListener());
 
+    for (Realm realm : Objects.requireNonNull(securityManager.getRealms())) {
+      requestInjection(realm);
+    }
+    SessionManager sessionManager = securityManager.getSessionManager();
+    if (sessionManager != null) {
+      requestInjection(sessionManager);
+    } else {
+      securityManager.setSessionManager(new DefaultSessionManager());
+    }
+    bind(SessionManager.class).toInstance(sessionManager);
+    bind(SecurityManager.class).toInstance(securityManager);
+    SecurityUtils.setSecurityManager(securityManager);
+    install(new ShiroAopModule());
+    bind(ShiroService.class).asEagerSingleton();
+  }
 
   @Override
   public void initConfiguration(Configuration configuration) {
