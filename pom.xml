@@ -170,6 +170,8 @@
     <module>zheng-jpa-test</module>
     <module>zheng-jdbc-sql2o</module>
     <module>zheng-jdbc-commons-dbutils</module>
+    <module>zheng-shiro-web</module>
+    <module>zheng-shiro-jaxrs</module>
   </modules>
 
   <packaging>pom</packaging>

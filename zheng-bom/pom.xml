@@ -460,22 +460,47 @@
       <dependency>
         <artifactId>javax.transaction-api</artifactId>
         <groupId>javax.transaction</groupId>
-        <version>1.3</version>
+        <version>${javax.transaction-api.version}</version>
       </dependency>
       <dependency>
         <artifactId>javax.persistence-api</artifactId>
         <groupId>javax.persistence</groupId>
-        <version>2.2</version>
+        <version>${javax.persistence-api.version}</version>
       </dependency>
       <dependency>
         <artifactId>javax.interceptor-api</artifactId>
         <groupId>javax.interceptor</groupId>
-        <version>1.2.2</version>
+        <version>${javax.interceptor-api.version}</version>
       </dependency>
       <dependency>
         <artifactId>commons-dbutils</artifactId>
         <groupId>commons-dbutils</groupId>
-        <version>1.7</version>
+        <version>${commons-dbutils.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-core</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-web</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-guice</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-jaxrs</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>${commons-logging.version}</version>
       </dependency>
 
       <!-- zheng framework module -->
@@ -640,6 +665,16 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <artifactId>zheng-shiro-web</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-shiro-jaxrs</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>zheng-swagger</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
@@ -684,6 +719,7 @@
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
+
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
@@ -764,6 +800,12 @@
     <querydsl.version>4.3.1</querydsl.version>
     <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
     <sql2o.version>1.6.0</sql2o.version>
+    <javax.transaction-api.version>1.3</javax.transaction-api.version>
+    <javax.persistence-api.version>2.2</javax.persistence-api.version>
+    <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
+    <commons-dbutils.version>1.7</commons-dbutils.version>
+    <shiro.version>1.5.2</shiro.version>
+    <commons-logging.version>1.2</commons-logging.version>
   </properties>
 
 </project>
