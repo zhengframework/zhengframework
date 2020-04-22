@@ -38,8 +38,6 @@ zheng framework use google guice for DI, and most module support auto load.
 | ShiroModule | OK    | yes |
 | ShiroWebModule | OK    | yes |
 | ShiroJaxrsModule | OK    | yes |
-| ActiveMQModule | Waiting    |  |
-| ActiveMQArtemisModule | Waiting    |  |
 | FlywayMigrateModule | Waiting    |  |
 | LiquibaseMigrateModule | Waiting    |  |
 

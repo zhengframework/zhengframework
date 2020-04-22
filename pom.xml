@@ -134,8 +134,6 @@
     <module>zheng-web</module>
     <module>zheng-web-jetty</module>
     <module>zheng-web-undertow</module>
-    <module>zheng-activemq</module>
-    <module>zheng-activemq-artemis</module>
     <module>zheng-metrics</module>
     <module>zheng-swagger</module>
     <module>zheng-rabbitmq</module>
