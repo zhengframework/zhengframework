@@ -8,6 +8,7 @@ import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import javax.websocket.server.ServerEndpointConfig;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 public class JettyWebModule extends AbstractModule implements ConfigurationAware {
 
@@ -29,7 +30,12 @@ public class JettyWebModule extends AbstractModule implements ConfigurationAware
     Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
     });
 
-    OptionalBinder.newOptionalBinder(binder(), Server.class).setDefault().toProvider(Server::new);
+    OptionalBinder.newOptionalBinder(binder(), Server.class).setDefault().toProvider(
+        () -> {
+          QueuedThreadPool threadPool = new QueuedThreadPool();
+          threadPool.setMaxThreads(500);
+          return new Server(threadPool);
+        });
     OptionalBinder.newOptionalBinder(binder(), JettyServerConfigurer.class)
         .setDefault().to(DefaultJettyServerConfigurer.class);
 
