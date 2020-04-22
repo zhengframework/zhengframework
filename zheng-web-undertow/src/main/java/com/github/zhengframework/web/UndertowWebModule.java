@@ -7,9 +7,14 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import io.undertow.Undertow;
+import io.undertow.server.handlers.resource.ResourceManager;
 import io.undertow.servlet.api.ClassIntrospecter;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 import javax.websocket.server.ServerEndpointConfig;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class UndertowWebModule extends AbstractModule implements ConfigurationAware {
 
   private Configuration configuration;
@@ -37,6 +42,12 @@ public class UndertowWebModule extends AbstractModule implements ConfigurationAw
 
     OptionalBinder.newOptionalBinder(binder(), UndertowServerConfigurer.class)
         .setDefault().to(DefaultUndertowServerConfigurer.class);
+
+    OptionalBinder.newOptionalBinder(binder(), ResourceManager.class)
+        .setDefault().toProvider((Provider<ResourceManager>) () -> {
+      log.info("Configuring Resources to be found in META-INF/resources/");
+      return new UndertowResourceManager();
+    }).in(Singleton.class);
 
     bind(WebServer.class).to(UndertowWebServer.class);
   }
