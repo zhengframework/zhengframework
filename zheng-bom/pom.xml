@@ -211,6 +211,16 @@
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.eclipse.jetty.http2</groupId>
+        <artifactId>http2-server</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-alpn-server</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>javax-websocket-server-impl</artifactId>
         <groupId>org.eclipse.jetty.websocket</groupId>
         <version>${jetty.version}</version>

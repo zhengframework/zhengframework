@@ -28,11 +28,15 @@ public class WebConfig implements ConfigurationDefine {
 
   private String keyStoreType;
 
-  private String serverTruststore;
+  private String keyStorePath;
 
-  private String serverKeystore;
+  private String keyStorePassword;
 
-  private String storePassword;
+  private String trustStoreType;
+
+  private String trustStorePath;
+
+  private String trustStorePassword;
 
   private Map<String, String> properties = new HashMap<>();
 
