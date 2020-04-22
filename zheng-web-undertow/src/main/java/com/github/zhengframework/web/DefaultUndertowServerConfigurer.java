@@ -95,7 +95,7 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
           webSocketDeploymentInfo.addEndpoint(serverEndpointConfig);
         }
       }
-      DeploymentInfo websocketDeployment = Servlets.deployment()
+      DeploymentInfo webSocketDeployment = Servlets.deployment()
           .setClassIntrospecter(classIntrospecter)
           .setContextPath(webConfig.getContextPath())
           .setSecurityDisabled(true)
@@ -105,7 +105,7 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
           .setDeploymentName("zheng-web-undertow-websocket")
           .setClassLoader(Thread.currentThread().getContextClassLoader());
       DeploymentManager websocketManager = Servlets.defaultContainer()
-          .addDeployment(websocketDeployment);
+          .addDeployment(webSocketDeployment);
       websocketManager.deploy();
 
       PathHandler rootHandler = Handlers.path();
@@ -114,7 +114,6 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
           .wrap(manager.start());
       rootHandler.addPrefixPath(webConfig.getContextPath(), encodingHandler);
       rootHandler.addPrefixPath(webConfig.getWebSocketPath(), websocketManager.start());
-
       server.setHandler(new SessionAttachmentHandler(
           new LearningPushHandler(100, -1,
               Handlers.header(rootHandler,
@@ -122,7 +121,6 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
           new InMemorySessionManager("sessionManager"), new SessionCookieConfig().setSecure(true)
           .setHttpOnly(true)
       ));
-
 //      server.setHandler(rootHandler);
     } catch (ServletException e) {
       throw new RuntimeException(e);

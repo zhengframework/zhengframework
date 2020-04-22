@@ -7,6 +7,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import io.undertow.Undertow;
+import io.undertow.server.handlers.resource.ClassPathResourceManager;
 import io.undertow.server.handlers.resource.ResourceManager;
 import io.undertow.servlet.api.ClassIntrospecter;
 import javax.inject.Provider;
@@ -46,7 +47,9 @@ public class UndertowWebModule extends AbstractModule implements ConfigurationAw
     OptionalBinder.newOptionalBinder(binder(), ResourceManager.class)
         .setDefault().toProvider((Provider<ResourceManager>) () -> {
       log.info("Configuring Resources to be found in META-INF/resources/");
-      return new UndertowResourceManager();
+      ClassPathResourceManager classPathResourceManager = new ClassPathResourceManager(
+          Thread.currentThread().getContextClassLoader(), "META-INF/resources/");
+      return new ResourceManagerCollection(classPathResourceManager);
     }).in(Singleton.class);
 
     bind(WebServer.class).to(UndertowWebServer.class);

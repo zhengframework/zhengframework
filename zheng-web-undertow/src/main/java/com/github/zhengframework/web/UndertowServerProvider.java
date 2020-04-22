@@ -33,13 +33,13 @@ public class UndertowServerProvider implements Provider<Undertow.Builder> {
       if (webConfig.isSsl()) {
         try {
           KeyStore keyStore = WebUtils.loadKeyStore(webConfig.getKeyStoreType(),
-              webConfig.getServerKeystore(),
-              webConfig.getStorePassword());
-          KeyStore trustStore = WebUtils.loadKeyStore(webConfig.getKeyStoreType(),
-              webConfig.getServerTruststore(),
-              webConfig.getStorePassword());
+              webConfig.getKeyStorePath(),
+              webConfig.getKeyStorePassword());
+          KeyStore trustStore = WebUtils.loadKeyStore(webConfig.getTrustStoreType(),
+              webConfig.getTrustStorePath(),
+              webConfig.getTrustStorePassword());
           sslContext = WebUtils
-              .createSSLContext(keyStore, trustStore, webConfig.getStorePassword());
+              .createSSLContext(keyStore, trustStore, webConfig.getKeyStorePassword());
           server.addHttpsListener(webConfig.getSslPort(), "localhost", sslContext);
         } catch (Exception e) {
           log.error("init sslContext fail", e);
