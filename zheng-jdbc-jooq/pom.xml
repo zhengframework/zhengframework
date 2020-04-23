@@ -10,10 +10,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-jdbc</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
       <artifactId>jooq</artifactId>
       <groupId>org.jooq</groupId>
     </dependency>
@@ -26,8 +22,38 @@
       <groupId>org.jooq</groupId>
     </dependency>
     <dependency>
-      <artifactId>guice-persist</artifactId>
-      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>zheng-jdbc</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>junit</artifactId>
+      <groupId>junit</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-configuration</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>logback-classic</artifactId>
+      <groupId>ch.qos.logback</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>hsqldb</artifactId>
+      <groupId>org.hsqldb</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <dependencyManagement>
