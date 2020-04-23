@@ -4,6 +4,28 @@ zheng framework is com.github.zhengframework.jpa.a modular framework with many r
 
 zheng framework use google guice for DI, and most module support auto load.
 
+zheng.version=1.0.2
+
+```
+<dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${zheng.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+<dependencies>
+    <dependency>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+</dependencies>
+```
 
 | Module      | status      | auto load   |
 | ----------- | ----------- | ----------- |
@@ -55,7 +77,7 @@ mvn -Drevision=2.0.0 clean package
 
 deploy to maven repo
 ```
-mvn -Drevision=1.0.1 deploy -P ossrh,javadoc8
+mvn -Drevision=1.0.2 deploy -P ossrh,javadoc8
 ```
 
 find dependency info
