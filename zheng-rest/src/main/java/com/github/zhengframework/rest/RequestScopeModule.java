@@ -5,8 +5,6 @@ import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.Scope;
 import com.google.inject.servlet.RequestScoped;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
@@ -43,12 +41,12 @@ public class RequestScopeModule extends AbstractModule {
       }
     });
 
-    bind(HttpServletRequest.class)
-        .toProvider(new ResteasyContextProvider<HttpServletRequest>(HttpServletRequest.class))
-        .in(RequestScoped.class);
-    bind(HttpServletResponse.class)
-        .toProvider(new ResteasyContextProvider<HttpServletResponse>(HttpServletResponse.class))
-        .in(RequestScoped.class);
+//    bind(HttpServletRequest.class)
+//        .toProvider(new ResteasyContextProvider<HttpServletRequest>(HttpServletRequest.class))
+//        .in(RequestScoped.class);
+//    bind(HttpServletResponse.class)
+//        .toProvider(new ResteasyContextProvider<HttpServletResponse>(HttpServletResponse.class))
+//        .in(RequestScoped.class);
     bind(Request.class).toProvider(new ResteasyContextProvider<Request>(Request.class))
         .in(RequestScoped.class);
     bind(HttpHeaders.class).toProvider(new ResteasyContextProvider<HttpHeaders>(HttpHeaders.class))
