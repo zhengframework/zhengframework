@@ -39,6 +39,18 @@
       <groupId>javax.annotation</groupId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <artifactId>jul-to-slf4j</artifactId>
+      <groupId>org.slf4j</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>logback-core</artifactId>
+      <groupId>ch.qos.logback</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>logback-classic</artifactId>
+      <groupId>ch.qos.logback</groupId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

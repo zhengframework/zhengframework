@@ -85,8 +85,22 @@
       <dependency>
         <artifactId>slf4j-simple</artifactId>
         <groupId>org.slf4j</groupId>
-        <scope>test</scope>
         <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jul-to-slf4j</artifactId>
+        <groupId>org.slf4j</groupId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>logback-core</artifactId>
+        <groupId>ch.qos.logback</groupId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>logback-classic</artifactId>
+        <groupId>ch.qos.logback</groupId>
+        <version>${logback.version}</version>
       </dependency>
       <dependency>
         <artifactId>classgraph</artifactId>
@@ -779,6 +793,7 @@
     <commons-dbutils.version>1.7</commons-dbutils.version>
     <shiro.version>1.5.2</shiro.version>
     <commons-logging.version>1.2</commons-logging.version>
+    <logback.version>1.2.3</logback.version>
   </properties>
 
 </project>
