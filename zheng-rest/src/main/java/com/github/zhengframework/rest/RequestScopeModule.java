@@ -1,9 +1,7 @@
 package com.github.zhengframework.rest;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Key;
 import com.google.inject.Provider;
-import com.google.inject.Scope;
 import com.google.inject.servlet.RequestScoped;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Request;
@@ -15,49 +13,15 @@ public class RequestScopeModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    bindScope(RequestScoped.class, new Scope() {
-      @Override
-      public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
-        return new Provider<T>() {
-          @SuppressWarnings("unchecked")
-          @Override
-          public T get() {
-            Class<T> instanceClass = (Class<T>) key.getTypeLiteral().getType();
-            T instance = ResteasyContext.getContextData(instanceClass);
-
-            if (instance == null) {
-              instance = creator.get();
-              ResteasyContext.pushContext(instanceClass, instance);
-            }
-
-            return instance;
-          }
-
-          @Override
-          public String toString() {
-            return String.format("%s[%s]", creator, super.toString());
-          }
-        };
-      }
-    });
-
-//    bind(HttpServletRequest.class)
-//        .toProvider(new ResteasyContextProvider<HttpServletRequest>(HttpServletRequest.class))
-//        .in(RequestScoped.class);
-//    bind(HttpServletResponse.class)
-//        .toProvider(new ResteasyContextProvider<HttpServletResponse>(HttpServletResponse.class))
-//        .in(RequestScoped.class);
-    bind(Request.class).toProvider(new ResteasyContextProvider<Request>(Request.class))
+    bind(Request.class).toProvider(new ResteasyContextProvider<>(Request.class))
         .in(RequestScoped.class);
-    bind(HttpHeaders.class).toProvider(new ResteasyContextProvider<HttpHeaders>(HttpHeaders.class))
+    bind(HttpHeaders.class).toProvider(new ResteasyContextProvider<>(HttpHeaders.class))
         .in(RequestScoped.class);
-    bind(UriInfo.class).toProvider(new ResteasyContextProvider<UriInfo>(UriInfo.class))
+    bind(UriInfo.class).toProvider(new ResteasyContextProvider<>(UriInfo.class))
         .in(RequestScoped.class);
     bind(SecurityContext.class)
-        .toProvider(new ResteasyContextProvider<SecurityContext>(SecurityContext.class))
+        .toProvider(new ResteasyContextProvider<>(SecurityContext.class))
         .in(RequestScoped.class);
-//      bind(ServletConfig.class).toProvider(new ResteasyContextProvider<ServletConfig>(ServletConfig.class)).in(Singleton.class);
-//      bind(ServletContext.class).toProvider(new ResteasyContextProvider<ServletContext>(ServletContext.class)).in(Singleton.class);
   }
 
   private static class ResteasyContextProvider<T> implements Provider<T> {
