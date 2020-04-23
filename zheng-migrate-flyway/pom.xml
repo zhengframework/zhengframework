@@ -7,6 +7,7 @@
     <dependency>
       <artifactId>zheng-jdbc</artifactId>
       <groupId>com.github.zhengframework</groupId>
+<!--      <scope>test</scope>-->
     </dependency>
     <dependency>
       <artifactId>flyway-core</artifactId>
@@ -20,6 +21,11 @@
     <dependency>
       <artifactId>junit</artifactId>
       <groupId>junit</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
       <artifactId>zheng-bootstrap</artifactId>
@@ -35,6 +41,10 @@
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
     </dependency>
   </dependencies>
   <dependencyManagement>

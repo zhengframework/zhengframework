@@ -14,7 +14,6 @@ public class FlywayMigrateModuleTest {
     ZhengApplication application = ZhengApplicationBuilder.create().addModule(
         new FlywayMigrateModule())
         .enableAutoLoadModule()
-//        .withConfiguration(configuration)
         .build();
     application.start();
     Injector injector = application.getInjector();

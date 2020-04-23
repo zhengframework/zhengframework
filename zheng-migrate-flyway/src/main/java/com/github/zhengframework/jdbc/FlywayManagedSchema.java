@@ -18,23 +18,28 @@ public class FlywayManagedSchema implements ManagedSchema {
 
   @Override
   public void migrate(DataSource dataSource) {
-    log.info("flywayConfig={}", flywayConfig);
+    log.debug("flywayConfig={}", flywayConfig);
     if (flywayConfig.isEnable()) {
-      log.info("Starting DB migration");
-      Flyway flyway = Flyway.configure().dataSource(dataSource)
-          .locations(flywayConfig.getLocations())
-          .load();
+      try {
+        log.info("Starting DB migration");
+        Flyway flyway = Flyway.configure().dataSource(dataSource)
+            .locations(flywayConfig.getLocation())
+            .load();
 
-      MigrationInfo current = flyway.info().current();
-      if (current == null) {
-        log.info("No existing schema found");
-      } else {
-        log.info("Current schema version is {}", current.getVersion());
+        MigrationInfo current = flyway.info().current();
+        if (current == null) {
+          log.info("No existing schema found");
+        } else {
+          log.info("Current schema version is {}", current.getVersion());
+        }
+
+        flyway.migrate();
+        log.info("Schema migrated to version {}", flyway.info().current().getVersion());
+      } catch (Exception e) {
+        log.error("DB migration fail", e);
+        throw new RuntimeException(e);
       }
-
-      flyway.migrate();
-
-      log.info("Schema migrated to version {}", flyway.info().current().getVersion());
+      log.info("DB migration success");
     }
   }
 }

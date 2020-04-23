@@ -22,9 +22,9 @@ public class FlywayMigrateModule extends AbstractModule implements Configuration
   protected void configure() {
     Preconditions.checkArgument(configuration != null, "configuration is null");
 
-    Map<String, FlywayConfig> metricsConfigMap = ConfigurationBeanMapper
+    Map<String, FlywayConfig> flywayConfigMap = ConfigurationBeanMapper
         .resolve(configuration, FlywayConfig.class);
-    for (Entry<String, FlywayConfig> entry : metricsConfigMap.entrySet()) {
+    for (Entry<String, FlywayConfig> entry : flywayConfigMap.entrySet()) {
       String name = entry.getKey();
       FlywayConfig flywayConfig = entry.getValue();
       if (name.isEmpty()) {

@@ -12,5 +12,5 @@ public class FlywayConfig implements ConfigurationDefine {
 
   private boolean enable = true;
 
-  private String[] locations = new String[]{"classpath:db/migration/"};
+  private String location = "classpath:db/migration/";
 }
