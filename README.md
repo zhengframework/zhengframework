@@ -60,8 +60,8 @@ zheng.version=1.0.2
 | ShiroModule | OK    | yes |
 | ShiroWebModule | OK    | yes |
 | ShiroJaxrsModule | OK    | yes |
-| FlywayMigrateModule | Waiting    |  |
-| LiquibaseMigrateModule | Waiting    |  |
+| FlywayMigrateModule | Ok    | yes |
+| LiquibaseMigrateModule | OK    | yes |
 
 
 
