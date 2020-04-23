@@ -5,6 +5,7 @@ import io.undertow.Undertow.Builder;
 import io.undertow.UndertowOptions;
 import java.io.IOException;
 import java.security.KeyStore;
+import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.net.ssl.SSLContext;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ public class UndertowServerProvider implements Provider<Undertow.Builder> {
 
   private final WebConfig webConfig;
 
+  @Inject
   public UndertowServerProvider(WebConfig webConfig) {
     this.webConfig = webConfig;
   }

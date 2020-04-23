@@ -1,2 +1,2 @@
 com.github.zhengframework.guice.LifecycleModuleProvider
-com.github.zhengframework.log.LoggingModuleProvider
+com.github.zhengframework.log.SLF4JBridgeModuleProvider

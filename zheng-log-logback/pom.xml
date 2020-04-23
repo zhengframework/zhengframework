@@ -2,34 +2,23 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-jpa-eclipselink</artifactId>
+  <artifactId>zheng-log-logback</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>zheng-jpa</artifactId>
-      <groupId>com.github.zhengframework</groupId>
+      <artifactId>guice</artifactId>
+      <groupId>com.google.inject</groupId>
     </dependency>
     <dependency>
-      <artifactId>org.eclipse.persistence.core</artifactId>
-      <groupId>org.eclipse.persistence</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>org.eclipse.persistence.jpa</artifactId>
-      <groupId>org.eclipse.persistence</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-jpa-test</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-      <scope>test</scope>
+      <artifactId>logback-core</artifactId>
+      <groupId>ch.qos.logback</groupId>
     </dependency>
     <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
-      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
     </dependency>
   </dependencies>
   <dependencyManagement>
@@ -44,10 +33,10 @@
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+
 </project>

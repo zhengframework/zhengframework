@@ -27,8 +27,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>logback-classic</artifactId>
+      <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
     </dependency>
   </dependencies>

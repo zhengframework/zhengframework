@@ -16,10 +16,6 @@
       <artifactId>h2</artifactId>
       <groupId>com.h2database</groupId>
     </dependency>
-    <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
-    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>

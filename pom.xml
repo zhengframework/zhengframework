@@ -170,6 +170,7 @@
     <module>zheng-jdbc-commons-dbutils</module>
     <module>zheng-shiro-web</module>
     <module>zheng-shiro-jaxrs</module>
+    <module>zheng-log-logback</module>
   </modules>
 
   <packaging>pom</packaging>
