@@ -54,7 +54,7 @@ zheng.version=1.0.2
 | CommonsDBUtilsModule | OK    | yes |
 | MybatisModule | OK    | yes |
 | MybatisMultiModule | OK    | no |
-| MybatisXmlModule | OK    | no |
+| MybatisXmlModule | OK    | yes |
 | MybatisXmlMultiModule | OK    | no |
 | HealthCheckModule | OK    | yes |
 | ShiroModule | OK    | yes |
