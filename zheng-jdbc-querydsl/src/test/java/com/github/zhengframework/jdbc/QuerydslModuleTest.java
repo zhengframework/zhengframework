@@ -46,7 +46,6 @@ public class QuerydslModuleTest {
         .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
         .build();
     ZhengApplication application = ZhengApplicationBuilder.create()
-        .addModule(new DataSourceModule())
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
