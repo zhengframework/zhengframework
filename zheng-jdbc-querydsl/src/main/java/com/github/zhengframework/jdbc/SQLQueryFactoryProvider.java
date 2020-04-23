@@ -1,38 +1,25 @@
 package com.github.zhengframework.jdbc;
 
-import com.google.inject.Injector;
-import com.google.inject.Key;
 import com.querydsl.sql.Configuration;
 import com.querydsl.sql.SQLQueryFactory;
-import com.querydsl.sql.SQLTemplates;
-import java.lang.annotation.Annotation;
+import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.sql.DataSource;
 
 public class SQLQueryFactoryProvider implements Provider<SQLQueryFactory> {
 
-  private final Annotation qualifier;
-  private Provider<Injector> injectorProvider;
+  private Provider<DataSource> dataSourceProvider;
+  private Provider<Configuration> configurationProvider;
 
-  public SQLQueryFactoryProvider(Annotation qualifier, Provider<Injector> injectorProvider) {
-    this.qualifier = qualifier;
-    this.injectorProvider = injectorProvider;
+  @Inject
+  public SQLQueryFactoryProvider(Provider<DataSource> dataSourceProvider,
+      Provider<Configuration> configurationProvider) {
+    this.dataSourceProvider = dataSourceProvider;
+    this.configurationProvider = configurationProvider;
   }
 
   @Override
   public SQLQueryFactory get() {
-    DataSource dataSource;
-    SQLTemplates sqlTemplates;
-    Injector injector = injectorProvider.get();
-    if (qualifier == null) {
-      dataSource = injector.getInstance(Key.get(DataSource.class));
-      sqlTemplates = injector.getInstance(Key.get(SQLTemplates.class));
-    } else {
-      dataSource = injector
-          .getInstance(Key.get(DataSource.class, qualifier));
-      sqlTemplates = injector.getInstance(Key.get(SQLTemplates.class, qualifier));
-    }
-    Configuration configuration = new Configuration(sqlTemplates);
-    return new SQLQueryFactory(configuration, dataSource);
+    return new SQLQueryFactory(configurationProvider.get(), dataSourceProvider.get());
   }
 }
