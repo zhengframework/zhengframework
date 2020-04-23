@@ -1,1 +1,1 @@
-com.github.zhengframework.jdbc.LiquibaseConfig
+com.github.zhengframework.jdbc.migrate.LiquibaseConfig

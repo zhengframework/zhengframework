@@ -1,5 +1,6 @@
-package com.github.zhengframework.jdbc;
+package com.github.zhengframework.jdbc.migrate;
 
+import com.github.zhengframework.jdbc.ManagedSchema;
 import javax.sql.DataSource;
 import liquibase.Contexts;
 import liquibase.Liquibase;

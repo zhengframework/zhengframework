@@ -1,4 +1,4 @@
-package com.github.zhengframework.jdbc;
+package com.github.zhengframework.jdbc.migrate;
 
 import com.github.zhengframework.core.ModuleProvider;
 import com.google.inject.Module;

@@ -1,10 +1,11 @@
-package com.github.zhengframework.jdbc;
+package com.github.zhengframework.jdbc.migrate;
 
 import static com.google.inject.name.Names.named;
 
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
+import com.github.zhengframework.jdbc.ManagedSchema;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;

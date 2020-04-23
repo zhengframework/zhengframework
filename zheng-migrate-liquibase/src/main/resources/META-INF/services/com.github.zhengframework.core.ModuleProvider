@@ -1,1 +1,1 @@
-com.github.zhengframework.jdbc.LiquibaseMigrateModuleProvider
+com.github.zhengframework.jdbc.migrate.LiquibaseMigrateModuleProvider

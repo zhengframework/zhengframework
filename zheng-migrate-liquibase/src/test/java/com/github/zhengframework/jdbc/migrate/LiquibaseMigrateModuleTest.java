@@ -1,4 +1,4 @@
-package com.github.zhengframework.jdbc;
+package com.github.zhengframework.jdbc.migrate;
 
 import static org.junit.Assert.assertTrue;
 

@@ -5,7 +5,11 @@
   <artifactId>zheng-migrate-liquibase</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>zheng-jdbc</artifactId>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-jdbc-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
@@ -35,6 +39,11 @@
     <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-jdbc</artifactId>
+      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
   </dependencies>
