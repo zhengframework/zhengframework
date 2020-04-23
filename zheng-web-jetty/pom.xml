@@ -14,10 +14,17 @@
       <groupId>org.eclipse.jetty</groupId>
     </dependency>
     <dependency>
+      <groupId>org.eclipse.jetty.http2</groupId>
+      <artifactId>http2-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-alpn-server</artifactId>
+    </dependency>
+    <dependency>
       <artifactId>javax-websocket-server-impl</artifactId>
       <groupId>org.eclipse.jetty.websocket</groupId>
     </dependency>
-
     <dependency>
       <artifactId>zheng-web</artifactId>
       <groupId>com.github.zhengframework</groupId>
@@ -33,8 +40,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>logback-classic</artifactId>
+      <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>

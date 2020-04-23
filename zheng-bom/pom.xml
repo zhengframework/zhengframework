@@ -85,8 +85,22 @@
       <dependency>
         <artifactId>slf4j-simple</artifactId>
         <groupId>org.slf4j</groupId>
-        <scope>test</scope>
         <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jul-to-slf4j</artifactId>
+        <groupId>org.slf4j</groupId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>logback-core</artifactId>
+        <groupId>ch.qos.logback</groupId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>logback-classic</artifactId>
+        <groupId>ch.qos.logback</groupId>
+        <version>${logback.version}</version>
       </dependency>
       <dependency>
         <artifactId>classgraph</artifactId>
@@ -170,32 +184,6 @@
         <version>${fastjson.version}</version>
       </dependency>
       <dependency>
-        <artifactId>activemq-client</artifactId>
-        <groupId>org.apache.activemq</groupId>
-        <version>${activemq-client.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>activemq-junit</artifactId>
-        <groupId>org.apache.activemq.tooling</groupId>
-        <version>${activemq-client.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>activemq-broker</artifactId>
-        <groupId>org.apache.activemq</groupId>
-        <version>${activemq-client.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>artemis-jms-client</artifactId>
-        <groupId>org.apache.activemq</groupId>
-        <version>${artemis.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>artemis-junit</artifactId>
-        <groupId>org.apache.activemq</groupId>
-        <version>${artemis.version}</version>
-      </dependency>
-
-      <dependency>
         <artifactId>cache-annotations-ri-guice</artifactId>
         <groupId>org.jsr107.ri</groupId>
         <version>${cache-annotations-ri-guice.version}</version>
@@ -208,6 +196,16 @@
       <dependency>
         <artifactId>jetty-webapp</artifactId>
         <groupId>org.eclipse.jetty</groupId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty.http2</groupId>
+        <artifactId>http2-server</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-alpn-server</artifactId>
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
@@ -442,17 +440,68 @@
         <groupId>com.querydsl</groupId>
         <version>${querydsl.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>org.eclipse.persistence.core</artifactId>
+        <groupId>org.eclipse.persistence</groupId>
+        <version>${eclipse.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>org.eclipse.persistence.jpa</artifactId>
+        <groupId>org.eclipse.persistence</groupId>
+        <version>${eclipse.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>sql2o</artifactId>
+        <groupId>org.sql2o</groupId>
+        <version>${sql2o.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>javax.transaction-api</artifactId>
+        <groupId>javax.transaction</groupId>
+        <version>${javax.transaction-api.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>javax.persistence-api</artifactId>
+        <groupId>javax.persistence</groupId>
+        <version>${javax.persistence-api.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>javax.interceptor-api</artifactId>
+        <groupId>javax.interceptor</groupId>
+        <version>${javax.interceptor-api.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-dbutils</artifactId>
+        <groupId>commons-dbutils</groupId>
+        <version>${commons-dbutils.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-core</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-web</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-guice</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>shiro-jaxrs</artifactId>
+        <groupId>org.apache.shiro</groupId>
+        <version>${shiro.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>${commons-logging.version}</version>
+      </dependency>
+
       <!-- zheng framework module -->
-      <dependency>
-        <artifactId>zheng-activemq</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${zhengframework.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>zheng-activemq-artemis</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <version>${zhengframework.version}</version>
-      </dependency>
       <dependency>
         <artifactId>zheng-bootstrap</artifactId>
         <groupId>com.github.zhengframework</groupId>
@@ -519,12 +568,12 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-hibernate</artifactId>
+        <artifactId>zheng-jdbc</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-jdbc</artifactId>
+        <artifactId>zheng-jdbc-core</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
@@ -539,17 +588,27 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-jooq</artifactId>
+        <artifactId>zheng-jdbc-jooq</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-querydsl</artifactId>
+        <artifactId>zheng-jdbc-querydsl</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-jdbi</artifactId>
+        <artifactId>zheng-jdbc-jdbi</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jdbc-commons-dbutils</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jdbc-sql2o</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
@@ -599,6 +658,16 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <artifactId>zheng-shiro-web</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-shiro-jaxrs</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>zheng-swagger</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
@@ -623,6 +692,31 @@
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>zheng-jpa</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jpa-test</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jpa-hibernate</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-jpa-eclipselink</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-log-logback</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
@@ -635,7 +729,6 @@
   </parent>
   <properties>
     <zhengframework.version>${revision}</zhengframework.version>
-    <activemq-client.version>5.15.12</activemq-client.version>
     <amqp-client.version>5.8.0</amqp-client.version>
     <artemis.version>2.11.0</artemis.version>
     <classgraph.version>4.8.65</classgraph.version>
@@ -701,6 +794,15 @@
     <jooq.version>3.13.1</jooq.version>
     <liquibase.version>3.8.8</liquibase.version>
     <querydsl.version>4.3.1</querydsl.version>
+    <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
+    <sql2o.version>1.6.0</sql2o.version>
+    <javax.transaction-api.version>1.3</javax.transaction-api.version>
+    <javax.persistence-api.version>2.2</javax.persistence-api.version>
+    <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
+    <commons-dbutils.version>1.7</commons-dbutils.version>
+    <shiro.version>1.5.2</shiro.version>
+    <commons-logging.version>1.2</commons-logging.version>
+    <logback.version>1.2.3</logback.version>
   </properties>
 
 </project>

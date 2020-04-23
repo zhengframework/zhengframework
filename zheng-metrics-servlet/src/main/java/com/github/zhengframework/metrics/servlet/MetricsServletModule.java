@@ -46,7 +46,6 @@ public class MetricsServletModule extends ServletModule implements Configuration
         bind(AdminServlet.class).in(Singleton.class);
         log.info("Metrics Admin Page: {}", "http://localhost:" + webConfig.getPort() + PathUtils
             .fixPath(webConfig.getContextPath(), path) + "/");
-        bind(HealthCheckScanner.class);
         bind(MetricsServletContextListener.class).in(Singleton.class);
         bind(HealthCheckServletContextListener.class).in(Singleton.class);
       } else {

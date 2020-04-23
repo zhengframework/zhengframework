@@ -9,10 +9,8 @@ public class HealthCheckServletContextListener extends HealthCheckServlet.Contex
   private final HealthCheckRegistry healthCheckRegistry;
 
   @Inject
-  public HealthCheckServletContextListener(
-      HealthCheckRegistry healthCheckRegistry, HealthCheckScanner scanner) {
+  public HealthCheckServletContextListener(HealthCheckRegistry healthCheckRegistry) {
     this.healthCheckRegistry = healthCheckRegistry;
-    scanner.accept(thing -> healthCheckRegistry.register(thing.getClass().getName(), thing));
   }
 
   @Override

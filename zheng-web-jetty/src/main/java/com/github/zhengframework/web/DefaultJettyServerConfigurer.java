@@ -11,12 +11,28 @@ import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerEndpoint;
 import javax.websocket.server.ServerEndpointConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.jetty.alpn.server.ALPNServerConnectionFactory;
+import org.eclipse.jetty.http.HttpScheme;
+import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.http2.HTTP2Cipher;
+import org.eclipse.jetty.http2.server.HTTP2ServerConnectionFactory;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.ResourceService;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.util.resource.ResourceCollection;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
+import org.eclipse.jetty.util.thread.ScheduledExecutorScheduler;
 import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
@@ -47,13 +63,18 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
 
   @Override
   public void configure(Server server) {
-    final ServerConnector connector = new ServerConnector(server);
-    log.info("jetty web server port={} contextPath={}", webConfig.getPort(),
-        webConfig.getContextPath());
-    connector.setPort(webConfig.getPort());
+    server.addBean(new ScheduledExecutorScheduler(null, false));
 
-    server.addConnector(connector);
+    server.addConnector(createHttpConnector(server));
 
+    if (webConfig.isSsl()) {
+      try {
+        final ServerConnector httpsConnector = createHttpsConnector(server, webConfig.isHttp2());
+        server.addConnector(httpsConnector);
+      } catch (Exception e) {
+        log.error("init sslContext fail", e);
+      }
+    }
     final ServletContextHandler context = new ServletContextHandler(null,
         webConfig.getContextPath(),
         ServletContextHandler.SESSIONS);
@@ -76,8 +97,83 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
 
     handlerScanner.accept(handlers::addHandler);
 
+    Resource resource = Resource.newClassPathResource("META-INF/resources/");
+    ResourceCollection resourceCollection = new ResourceCollection(resource);
+
+    ResourceService resourceService = new ResourceService();
+    resourceService.setEtags(true);
+    resourceService.setAcceptRanges(true);
+    resourceService.setDirAllowed(false);
+
+    ResourceHandler resourceHandler = new ResourceHandler(resourceService);
+    resourceHandler.setBaseResource(resourceCollection);
+    handlers.addHandler(resourceHandler);
+
+    handlers.addHandler(new DefaultHandler());
     server.setHandler(handlers);
 
+  }
+
+  private ServerConnector createHttpsConnector(Server server, boolean http2) throws Exception {
+    SslContextFactory.Server sslContextFactory = new SslContextFactory.Server();
+    sslContextFactory.setKeyStoreType(webConfig.getKeyStoreType());
+    sslContextFactory.setKeyStorePath(webConfig.getKeyStorePath());
+    sslContextFactory.setKeyStorePassword(webConfig.getKeyStorePassword());
+    sslContextFactory.setKeyManagerPassword(webConfig.getKeyStorePassword());
+
+    sslContextFactory.setTrustStorePath(webConfig.getTrustStorePath());
+    sslContextFactory.setTrustStoreType(webConfig.getTrustStoreType());
+    sslContextFactory.setTrustStorePassword(webConfig.getTrustStorePassword());
+    HttpConfiguration httpConfig = createHttpConfiguration();
+
+    // SSL HTTP Configuration
+    HttpConfiguration httpsConfig = new HttpConfiguration(httpConfig);
+    httpsConfig.addCustomizer(new SecureRequestCustomizer());
+
+    HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(httpConfig);
+
+    if (http2) {
+      HTTP2ServerConnectionFactory http2ConnectionFactory = new HTTP2ServerConnectionFactory(
+          httpConfig);
+      ALPNServerConnectionFactory alpnServerConnectionFactory = new ALPNServerConnectionFactory();
+      alpnServerConnectionFactory.setDefaultProtocol(httpConnectionFactory.getProtocol());
+      sslContextFactory.setCipherComparator(HTTP2Cipher.COMPARATOR);
+      sslContextFactory.setUseCipherSuitesOrder(true);
+      SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(sslContextFactory,
+          alpnServerConnectionFactory.getProtocol());
+      ServerConnector connector = new ServerConnector(server, sslConnectionFactory,
+          alpnServerConnectionFactory, http2ConnectionFactory, httpConnectionFactory);
+      connector.setPort(webConfig.getSslPort());
+      return connector;
+    } else {
+      final ServerConnector httpsConnector = new ServerConnector(server,
+          new SslConnectionFactory(sslContextFactory, HttpVersion.HTTP_1_1.asString()),
+          httpConnectionFactory);
+      httpsConnector.setPort(webConfig.getSslPort());
+      return httpsConnector;
+    }
+  }
+
+  private HttpConfiguration createHttpConfiguration() {
+    HttpConfiguration httpConfig = new HttpConfiguration();
+    httpConfig.setSecureScheme(HttpScheme.HTTPS.asString());
+    httpConfig.setSecurePort(webConfig.getSslPort());
+    httpConfig.setOutputBufferSize(32768);
+    httpConfig.setRequestHeaderSize(8192);
+    httpConfig.setResponseHeaderSize(8192);
+    httpConfig.setSendServerVersion(false);
+    httpConfig.setSendDateHeader(false);
+    httpConfig.setSendXPoweredBy(false);
+    return httpConfig;
+  }
+
+  private ServerConnector createHttpConnector(Server server) {
+    HttpConfiguration httpConfig = createHttpConfiguration();
+    final ServerConnector connector = new ServerConnector(server,
+        new HttpConnectionFactory(httpConfig));
+    log.info("http port={}", webConfig.getPort());
+    connector.setPort(webConfig.getPort());
+    return connector;
   }
 
   private void initWebSocket(ServletContextHandler context) {

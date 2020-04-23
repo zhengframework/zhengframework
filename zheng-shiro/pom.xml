@@ -15,46 +15,30 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>logback-classic</artifactId>
+      <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>shiro-core</artifactId>
       <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-guice</artifactId>
-      <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
     </dependency>
     <dependency>
-      <artifactId>shiro-web</artifactId>
-      <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
+      <artifactId>zheng-bootstrap</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>shiro-jaxrs</artifactId>
-      <groupId>org.apache.shiro</groupId>
-      <version>1.5.2</version>
-    </dependency>
-    <dependency>
-      <artifactId>javax.servlet-api</artifactId>
-      <groupId>javax.servlet</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
     </dependency>
   </dependencies>
 

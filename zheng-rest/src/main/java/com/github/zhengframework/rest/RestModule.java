@@ -1,13 +1,10 @@
 package com.github.zhengframework.rest;
 
-import static com.github.zhengframework.rest.RestConfig.PREFIX;
-
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebConfig;
-import com.github.zhengframework.web.WebModule;
 import com.google.common.base.Preconditions;
 import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;
@@ -16,22 +13,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
 import org.jboss.resteasy.plugins.interceptors.AcceptEncodingGZIPFilter;
 import org.jboss.resteasy.plugins.interceptors.CacheControlFeature;
 import org.jboss.resteasy.plugins.interceptors.GZIPDecodingInterceptor;
 import org.jboss.resteasy.plugins.interceptors.GZIPEncodingInterceptor;
 import org.jboss.resteasy.plugins.interceptors.ServerContentEncodingAnnotationFeature;
-import org.jboss.resteasy.plugins.providers.ByteArrayProvider;
-import org.jboss.resteasy.plugins.providers.DefaultBooleanWriter;
-import org.jboss.resteasy.plugins.providers.DefaultNumberWriter;
-import org.jboss.resteasy.plugins.providers.DefaultTextPlain;
-import org.jboss.resteasy.plugins.providers.FileProvider;
-import org.jboss.resteasy.plugins.providers.FileRangeWriter;
-import org.jboss.resteasy.plugins.providers.InputStreamProvider;
-import org.jboss.resteasy.plugins.providers.StreamingOutputProvider;
-import org.jboss.resteasy.plugins.providers.StringTextStar;
-import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 @Slf4j
@@ -42,6 +28,7 @@ public class RestModule extends ServletModule implements ConfigurationAware {
 
   @Override
   protected void configureServlets() {
+    install(new RequestScopeModule());
     Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, WebConfig> webConfigMap = ConfigurationBeanMapper
         .resolve(configuration, WebConfig.class);

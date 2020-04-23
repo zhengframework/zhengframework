@@ -31,14 +31,18 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-simple</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>logback-classic</artifactId>
+      <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>zheng-bootstrap</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
     </dependency>
 
   </dependencies>
