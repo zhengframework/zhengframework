@@ -573,6 +573,11 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <artifactId>zheng-jdbc-core</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
         <artifactId>zheng-migrate-flyway</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>

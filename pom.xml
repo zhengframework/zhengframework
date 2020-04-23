@@ -171,6 +171,7 @@
     <module>zheng-shiro-web</module>
     <module>zheng-shiro-jaxrs</module>
     <module>zheng-log-logback</module>
+    <module>zheng-jdbc-core</module>
   </modules>
 
   <packaging>pom</packaging>

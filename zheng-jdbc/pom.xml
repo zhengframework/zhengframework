@@ -5,6 +5,10 @@
   <artifactId>zheng-jdbc</artifactId>
   <dependencies>
     <dependency>
+      <artifactId>zheng-jdbc-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
       <scope>provided</scope>
