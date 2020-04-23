@@ -1,4 +1,4 @@
-package com.github.zhengframework.jdbc;
+package com.github.zhengframework.jdbc.migrate;
 
 import com.github.zhengframework.bootstrap.ZhengApplication;
 import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;

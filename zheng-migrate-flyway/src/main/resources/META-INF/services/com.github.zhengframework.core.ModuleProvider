@@ -1,1 +1,1 @@
-com.github.zhengframework.jdbc.FlywayMigrateModuleProvider
+com.github.zhengframework.jdbc.migrate.FlywayMigrateModuleProvider

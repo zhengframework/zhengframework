@@ -1,1 +1,1 @@
-com.github.zhengframework.jdbc.FlywayConfig
+com.github.zhengframework.jdbc.migrate.FlywayConfig

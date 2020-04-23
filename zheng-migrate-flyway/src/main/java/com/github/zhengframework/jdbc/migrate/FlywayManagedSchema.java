@@ -1,5 +1,6 @@
-package com.github.zhengframework.jdbc;
+package com.github.zhengframework.jdbc.migrate;
 
+import com.github.zhengframework.jdbc.ManagedSchema;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
