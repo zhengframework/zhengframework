@@ -40,21 +40,28 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
       HikariConfig config = getHikariConfig(dataSourceConfig);
       if (name.isEmpty()) {
         bind(HikariConfig.class).toInstance(config);
-        bind(DataSource.class).toProvider(new DataSourceProvider(config, injectorProvider))
+        bind(DataSource.class).toProvider(new DataSourceProvider(config, injectorProvider,
+            null))
             .in(Singleton.class);
+        Multibinder.newSetBinder(binder(), DataSourceProxy.class)
+            .addBinding().toInstance(dataSource -> dataSource);
+        OptionalBinder.newOptionalBinder(binder(), ManagedSchema.class)
+            .setDefault().toInstance(dataSource -> {
+        });
       } else {
         bind(Key.get(HikariConfig.class, named(name))).toInstance(config);
         bind(Key.get(DataSource.class, named(name))).toProvider(new DataSourceProvider(config,
-            injectorProvider))
+            injectorProvider, named(name)))
             .in(Singleton.class);
+        Multibinder.newSetBinder(binder(), Key.get(DataSourceProxy.class, named(name)))
+            .addBinding().toInstance(dataSource -> dataSource);
+        OptionalBinder.newOptionalBinder(binder(), Key.get(ManagedSchema.class, named(name)))
+            .setDefault().toInstance(dataSource -> {
+        });
       }
 
     }
-    Multibinder.newSetBinder(binder(), DataSourceProxy.class)
-        .addBinding().toInstance(dataSource -> dataSource);
-    OptionalBinder.newOptionalBinder(binder(), ManagedSchema.class)
-        .setDefault().toInstance(dataSource -> {
-    });
+
   }
 
   private HikariConfig getHikariConfig(DataSourceConfig dataSourceConfig) {
