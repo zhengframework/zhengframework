@@ -21,5 +21,4 @@ public class LoggingModule extends AbstractModule {
     root.getLoggerContext().addListener(propagator);
   }
 
-
 }
