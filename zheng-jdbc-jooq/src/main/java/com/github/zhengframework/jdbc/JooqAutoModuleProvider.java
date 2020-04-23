@@ -1,13 +1,13 @@
 package com.github.zhengframework.jdbc;
 
-public class JOOQAutoModuleProvider extends AbstractAutoModule {
+public class JooqAutoModuleProvider extends AbstractAutoModule {
 
   @Override
   protected void installModule(String name) {
     if (name.isEmpty()) {
-      install(new JOOQModule());
+      install(new JooqModule());
     } else {
-      install(new JOOQModule(name));
+      install(new JooqModule(name));
     }
   }
 

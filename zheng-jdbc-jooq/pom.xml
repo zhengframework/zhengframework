@@ -25,6 +25,10 @@
       <artifactId>jooq-codegen</artifactId>
       <groupId>org.jooq</groupId>
     </dependency>
+    <dependency>
+      <artifactId>guice-persist</artifactId>
+      <groupId>com.google.inject.extensions</groupId>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>

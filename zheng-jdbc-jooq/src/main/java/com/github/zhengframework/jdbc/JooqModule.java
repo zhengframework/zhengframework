@@ -13,19 +13,19 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 
 @EqualsAndHashCode(callSuper = false)
-public class JOOQModule extends AbstractModule {
+public class JooqModule extends AbstractModule {
 
   private Annotation qualifier;
 
-  public JOOQModule() {
+  public JooqModule() {
     this.qualifier = null;
   }
 
-  public JOOQModule(Annotation qualifier) {
+  public JooqModule(Annotation qualifier) {
     this.qualifier = qualifier;
   }
 
-  public JOOQModule(String name) {
+  public JooqModule(String name) {
     this.qualifier = named(Objects.requireNonNull(name));
   }
 
