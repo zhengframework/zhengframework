@@ -1,12 +1,9 @@
 package com.github.zhengframework.shiro.web;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
-import com.google.common.base.Preconditions;
 import com.google.inject.matcher.Matchers;
-import com.google.inject.servlet.ServletModule;
 import java.util.Map;
 import java.util.Objects;
 import org.apache.shiro.authc.Authenticator;
@@ -32,16 +29,12 @@ import org.apache.shiro.web.session.mgt.ServletContainerSessionManager;
 /**
  * https://shiro.apache.org/configuration.html https://shiro.apache.org/web.html#Web-configuration
  */
-public class ShiroWebModule extends ServletModule implements ConfigurationAware {
-
-  private Configuration configuration;
+public class ShiroWebModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-
-    Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, ShiroWebConfig> shiroConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, ShiroWebConfig.class);
+        .resolve(getConfiguration(), ShiroWebConfig.class);
     ShiroWebConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroWebConfig());
 
     Ini ini = new Ini();
@@ -115,8 +108,4 @@ public class ShiroWebModule extends ServletModule implements ConfigurationAware 
     install(new ShiroAopModule());
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

@@ -12,7 +12,6 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.apache.commons.dbutils.AsyncQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
@@ -22,7 +21,7 @@ import org.junit.Test;
 public class CommonsDBUtilsModuleTest {
 
   @Test
-  public void configure() throws SQLException {
+  public void configure() throws Exception {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("application.properties"))
         .build();
@@ -32,6 +31,7 @@ public class CommonsDBUtilsModuleTest {
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
+    application.start();
     Injector injector = application.getInjector();
     DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
@@ -40,10 +40,11 @@ public class CommonsDBUtilsModuleTest {
     Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
     assertNotNull(injector.getInstance(QueryRunner.class));
     assertNotNull(injector.getInstance(AsyncQueryRunner.class));
+    application.stop();
   }
 
   @Test
-  public void configureGroup() throws SQLException {
+  public void configureGroup() throws Exception {
     Configuration configuration = new ConfigurationBuilder()
         .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
         .build();
@@ -52,6 +53,7 @@ public class CommonsDBUtilsModuleTest {
         .enableAutoLoadModule()
         .withConfiguration(configuration)
         .build();
+    application.start();
     Injector injector = application.getInjector();
     DataSource dataSourceA = injector
         .getInstance(Key.get(DataSource.class, named("a")));
@@ -68,6 +70,6 @@ public class CommonsDBUtilsModuleTest {
     assertNotNull(injector.getInstance(Key.get(AsyncQueryRunner.class, named("a"))));
     assertNotNull(injector.getInstance(Key.get(QueryRunner.class, named("b"))));
     assertNotNull(injector.getInstance(Key.get(AsyncQueryRunner.class, named("b"))));
-
+    application.stop();
   }
 }

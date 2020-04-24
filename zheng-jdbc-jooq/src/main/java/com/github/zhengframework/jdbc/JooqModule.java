@@ -2,11 +2,8 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.multibindings.OptionalBinder;
 import java.util.Map;
@@ -18,15 +15,12 @@ import org.jooq.SQLDialect;
 import org.jooq.conf.Settings;
 
 @EqualsAndHashCode(callSuper = false)
-public class JooqModule extends AbstractModule implements ConfigurationAware {
-
-  private Configuration configuration;
+public class JooqModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, JooqConfig> configMap = ConfigurationBeanMapper
-        .resolve(configuration, JooqConfig.class);
+        .resolve(getConfiguration(), JooqConfig.class);
     for (Entry<String, JooqConfig> entry : configMap.entrySet()) {
       String name = entry.getKey();
       JooqConfig jooqConfig = entry.getValue();
@@ -54,8 +48,4 @@ public class JooqModule extends AbstractModule implements ConfigurationAware {
     }
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

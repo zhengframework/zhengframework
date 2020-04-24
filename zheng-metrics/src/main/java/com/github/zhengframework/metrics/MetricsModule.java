@@ -1,11 +1,8 @@
 package com.github.zhengframework.metrics;
 
 import com.codahale.metrics.MetricRegistry;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.palominolabs.metrics.guice.GaugeInstanceClassMetricNamer;
 import com.palominolabs.metrics.guice.MetricNamer;
 import com.palominolabs.metrics.guice.MetricsInstrumentationModule;
@@ -18,20 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false)
-public class MetricsModule extends AbstractModule implements ConfigurationAware {
-
-  private Configuration configuration;
-
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
+public class MetricsModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, MetricsConfig> metricsConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, MetricsConfig.class);
+        .resolve(getConfiguration(), MetricsConfig.class);
     for (Entry<String, MetricsConfig> entry : metricsConfigMap.entrySet()) {
       MetricsConfig metricsConfig = entry.getValue();
       if (metricsConfig.isEnable()) {

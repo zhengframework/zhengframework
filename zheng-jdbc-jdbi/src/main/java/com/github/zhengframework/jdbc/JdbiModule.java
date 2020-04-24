@@ -2,11 +2,8 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.OptionalBinder;
@@ -21,16 +18,13 @@ import org.jdbi.v3.core.spi.JdbiPlugin;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 @EqualsAndHashCode(callSuper = false)
-public class JdbiModule extends AbstractModule implements ConfigurationAware {
+public class JdbiModule extends ConfigurationAwareModule {
 
-  private Configuration configuration;
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
-
     Map<String, JdbiConfig> configMap = ConfigurationBeanMapper
-        .resolve(configuration, JdbiConfig.class);
+        .resolve(getConfiguration(), JdbiConfig.class);
     for (Entry<String, JdbiConfig> entry : configMap.entrySet()) {
       String name = entry.getKey();
       JdbiConfig jdbiConfig = entry.getValue();
@@ -61,8 +55,4 @@ public class JdbiModule extends AbstractModule implements ConfigurationAware {
     }
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

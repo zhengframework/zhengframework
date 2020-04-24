@@ -2,11 +2,8 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.multibindings.OptionalBinder;
 import java.util.Map;
@@ -19,16 +16,12 @@ import org.apache.commons.dbutils.AsyncQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 
 @EqualsAndHashCode(callSuper = false)
-public class CommonsDBUtilsModule extends AbstractModule implements ConfigurationAware {
-
-  private Configuration configuration;
+public class CommonsDBUtilsModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
-
     Map<String, CommonsDbUtilsConfig> configMap = ConfigurationBeanMapper
-        .resolve(configuration, CommonsDbUtilsConfig.class);
+        .resolve(getConfiguration(), CommonsDbUtilsConfig.class);
     for (Entry<String, CommonsDbUtilsConfig> entry : configMap.entrySet()) {
       String name = entry.getKey();
       CommonsDbUtilsConfig dbUtilsConfig = entry.getValue();
@@ -60,8 +53,4 @@ public class CommonsDBUtilsModule extends AbstractModule implements Configuratio
     }
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

@@ -1,8 +1,6 @@
 package com.github.zhengframework.web;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
-import com.google.inject.AbstractModule;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
@@ -10,19 +8,12 @@ import javax.websocket.server.ServerEndpointConfig;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
-public class JettyWebModule extends AbstractModule implements ConfigurationAware {
-
-  private Configuration configuration;
-
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
+public class JettyWebModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
     WebModule webModule = new WebModule();
-    webModule.initConfiguration(configuration);
+    webModule.initConfiguration(getConfiguration());
     install(webModule);
     // web socket
     bind(GuiceServerEndpointConfigurator.class);

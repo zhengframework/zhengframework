@@ -1,10 +1,7 @@
 package com.github.zhengframework.shiro;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
 import java.util.Map;
 import java.util.Objects;
@@ -30,15 +27,13 @@ import org.apache.shiro.session.mgt.SessionManager;
 /**
  * https://shiro.apache.org/configuration.html
  */
-public class ShiroModule extends AbstractModule implements ConfigurationAware {
+public class ShiroModule extends ConfigurationAwareModule {
 
-  private Configuration configuration;
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, ShiroConfig> shiroConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, ShiroConfig.class);
+        .resolve(getConfiguration(), ShiroConfig.class);
     ShiroConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroConfig());
 
     Ini ini = new Ini();
@@ -103,8 +98,4 @@ public class ShiroModule extends AbstractModule implements ConfigurationAware {
     bind(ShiroService.class).asEagerSingleton();
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

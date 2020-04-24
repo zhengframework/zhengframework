@@ -1,24 +1,18 @@
 package com.github.zhengframework.webjars;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
-import com.google.common.base.Preconditions;
-import com.google.inject.servlet.ServletModule;
 import java.util.Collections;
 import java.util.Map;
 import javax.inject.Singleton;
 
-public class WebjarsModule extends ServletModule implements ConfigurationAware {
-
-  private Configuration configuration;
+public class WebjarsModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, WebjarsConfig> configMap = ConfigurationBeanMapper
-        .resolve(configuration, WebjarsConfig.class);
+        .resolve(getConfiguration(), WebjarsConfig.class);
     WebjarsConfig webjarsConfig = configMap.getOrDefault("", new WebjarsConfig());
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
     bind(WebjarsServlet.class).in(Singleton.class);
@@ -33,8 +27,4 @@ public class WebjarsModule extends ServletModule implements ConfigurationAware {
     }
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }
