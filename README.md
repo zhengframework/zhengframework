@@ -62,6 +62,7 @@ zheng.version=1.1.0
 | ShiroJaxrsModule | OK    | yes |
 | FlywayMigrateModule | Ok    | yes |
 | LiquibaseMigrateModule | OK    | yes |
+| EventBusModule | OK    | yes |
 
 
 
