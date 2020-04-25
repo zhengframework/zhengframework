@@ -2,31 +2,21 @@ package com.github.zhengframework.metrics.servlet;
 
 import com.codahale.metrics.servlets.AdminServlet;
 import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.metrics.MetricsConfig;
 import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebConfig;
-import com.google.common.base.Preconditions;
-import com.google.inject.servlet.ServletModule;
 import java.util.Map;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MetricsServletModule extends ServletModule implements ConfigurationAware {
-
-  private Configuration configuration;
-
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
+public class MetricsServletModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
-
+    Configuration configuration = getConfiguration();
     Map<String, MetricsConfig> metricsConfigMap = ConfigurationBeanMapper
         .resolve(configuration, MetricsConfig.class);
     MetricsConfig metricsConfig = metricsConfigMap.getOrDefault("", new MetricsConfig());

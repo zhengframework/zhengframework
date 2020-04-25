@@ -1,13 +1,11 @@
 package com.github.zhengframework.rest;
 
 import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebConfig;
-import com.google.common.base.Preconditions;
 import com.google.inject.Scopes;
-import com.google.inject.servlet.ServletModule;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,22 +19,21 @@ import org.jboss.resteasy.plugins.interceptors.ServerContentEncodingAnnotationFe
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 @Slf4j
-@EqualsAndHashCode(callSuper = false, of = {})
-public class RestModule extends ServletModule implements ConfigurationAware {
+@EqualsAndHashCode(callSuper = false)
+public class RestModule extends ConfigurationAwareServletModule {
 
-  private Configuration configuration;
 
   @Override
   protected void configureServlets() {
     install(new RequestScopeModule());
-    Preconditions.checkArgument(configuration != null, "configuration is null");
+    Configuration configuration = getConfiguration();
     Map<String, WebConfig> webConfigMap = ConfigurationBeanMapper
         .resolve(configuration, WebConfig.class);
     WebConfig webConfig = webConfigMap.getOrDefault("", new WebConfig());
 
     Map<String, RestConfig> restConfigMap = ConfigurationBeanMapper
         .resolve(configuration, RestConfig.class);
-    RestConfig restConfig = restConfigMap.getOrDefault("",new RestConfig());
+    RestConfig restConfig = restConfigMap.getOrDefault("", new RestConfig());
     bind(RestConfig.class).toInstance(restConfig);
     String path = PathUtils.fixPath(
 //        webConfig.getContextPath(),
@@ -51,9 +48,9 @@ public class RestModule extends ServletModule implements ConfigurationAware {
       hashMap.put("resteasy.servlet.mapping.prefix", PathUtils.fixPath(
 //          webConfig.getContextPath(),
           restConfig.getPath()));
-      log.info("rest prefix path={}",hashMap.get("resteasy.servlet.mapping.prefix"));
+      log.info("rest prefix path={}", hashMap.get("resteasy.servlet.mapping.prefix"));
     }
-    log.info("rest path={}",path);
+    log.info("rest path={}", path);
     serve(path + "/*").with(HttpServletDispatcher.class, hashMap);
     bind(HttpServletDispatcher.class).in(Scopes.SINGLETON);
 
@@ -75,8 +72,4 @@ public class RestModule extends ServletModule implements ConfigurationAware {
 
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

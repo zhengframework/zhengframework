@@ -2,12 +2,9 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Provider;
@@ -23,16 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false)
-public class DataSourceModule extends AbstractModule implements ConfigurationAware {
+public class DataSourceModule extends ConfigurationAwareModule {
 
-  private Configuration configuration;
 
   @Override
   protected void configure() {
     Provider<Injector> injectorProvider = getProvider(Injector.class);
-    Preconditions.checkArgument(configuration != null, "configuration is null");
     Map<String, DataSourceConfig> dataSourceConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, DataSourceConfig.class);
+        .resolve(getConfiguration(), DataSourceConfig.class);
     for (Entry<String, DataSourceConfig> entry : dataSourceConfigMap
         .entrySet()) {
       String name = entry.getKey();
@@ -124,8 +119,4 @@ public class DataSourceModule extends AbstractModule implements ConfigurationAwa
     return config;
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

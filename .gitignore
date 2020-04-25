@@ -178,3 +178,6 @@ hs_err_pid*
 */.flattened-pom.xml
 .flattened-pom.xml
 /target/*
+.project
+*/.project
+*/.classpath

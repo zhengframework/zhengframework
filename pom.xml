@@ -172,6 +172,7 @@
     <module>zheng-shiro-jaxrs</module>
     <module>zheng-log-logback</module>
     <module>zheng-jdbc-core</module>
+    <module>zheng-eventbus</module>
   </modules>
 
   <packaging>pom</packaging>
@@ -277,7 +278,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.1.0</revision>
+    <revision>1.2.0</revision>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>

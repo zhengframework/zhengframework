@@ -43,6 +43,11 @@
       <groupId>javax.annotation</groupId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <artifactId>guice-servlet</artifactId>
+      <groupId>com.google.inject.extensions</groupId>
+      <scope>provided</scope>
+    </dependency>
 
   </dependencies>
 

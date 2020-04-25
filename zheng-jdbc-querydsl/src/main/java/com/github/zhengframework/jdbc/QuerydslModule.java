@@ -2,11 +2,8 @@ package com.github.zhengframework.jdbc;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.multibindings.OptionalBinder;
 import com.querydsl.sql.SQLQueryFactory;
@@ -21,16 +18,13 @@ import lombok.EqualsAndHashCode;
  * http://www.querydsl.com/static/querydsl/latest/reference/html/ch02s03.html
  */
 @EqualsAndHashCode(callSuper = false)
-public class QuerydslModule extends AbstractModule implements ConfigurationAware {
+public class QuerydslModule extends ConfigurationAwareModule {
 
-  private Configuration configuration;
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
-
     Map<String, QuerydslConfig> configMap = ConfigurationBeanMapper
-        .resolve(configuration, QuerydslConfig.class);
+        .resolve(getConfiguration(), QuerydslConfig.class);
     for (Entry<String, QuerydslConfig> entry : configMap.entrySet()) {
       String name = entry.getKey();
       QuerydslConfig querydslConfig = entry.getValue();
@@ -62,8 +56,4 @@ public class QuerydslModule extends AbstractModule implements ConfigurationAware
     }
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

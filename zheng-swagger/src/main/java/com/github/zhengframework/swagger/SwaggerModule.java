@@ -2,13 +2,11 @@ package com.github.zhengframework.swagger;
 
 
 import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.rest.RestConfig;
 import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebConfig;
-import com.google.common.base.Preconditions;
-import com.google.inject.servlet.ServletModule;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import java.util.Map;
@@ -18,14 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false, of = {})
-public class SwaggerModule extends ServletModule implements ConfigurationAware {
-
-  private Configuration configuration;
+public class SwaggerModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
-
+    Configuration configuration = getConfiguration();
     Map<String, SwaggerConfig> configMap = ConfigurationBeanMapper
         .resolve(configuration, SwaggerConfig.class);
     SwaggerConfig swaggerConfig = configMap.getOrDefault("", new SwaggerConfig());
@@ -61,8 +56,4 @@ public class SwaggerModule extends ServletModule implements ConfigurationAware {
     }
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }

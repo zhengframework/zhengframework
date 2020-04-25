@@ -61,11 +61,12 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
   @Override
   public void configure(Undertow.Builder server) {
     try {
+      ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
       DeploymentInfo deploymentInfo = Servlets.deployment()
           .setClassIntrospecter(classIntrospecter)
-          .setClassLoader(Thread.currentThread().getContextClassLoader())
-          .setContextPath("/")
-          .setDeploymentName("zheng-web-undertow-" + webConfig.getPort() + ".war");
+          .setClassLoader(contextClassLoader)
+          .setContextPath(webConfig.getContextPath())
+          .setDeploymentName("zheng-web-undertow-" + webConfig.getPort());
 
       eventListenerScanner
           .accept(thing -> deploymentInfo.addListener(new ListenerInfo(thing.getClass(),
@@ -81,29 +82,27 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
       manager.deploy();
 
       WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
-
+      for (ServerEndpointConfig serverEndpointConfig : serverEndpointConfigSet) {
+        log.info("ServerEndpointConfig={} path={}",
+            serverEndpointConfig.getEndpointClass().getName(), serverEndpointConfig.getPath());
+      }
       webSocketDeploymentInfo.addProgramaticEndpoints(serverEndpointConfigSet);
       for (Class<? extends WebSocketEndpoint> clazz : annotatedEndpoints) {
         ServerEndpoint annotation = clazz.getAnnotation(ServerEndpoint.class);
         if (annotation != null) {
-          ServerEndpointConfig serverEndpointConfig = Builder.create(clazz, annotation.value())
-              .configurator(guiceServerEndpointConfigurator)
-              .decoders(Lists.newArrayList(annotation.decoders()))
-              .encoders(Lists.newArrayList(annotation.encoders()))
-              .subprotocols(Lists.newArrayList(annotation.subprotocols()))
-              .build();
+          log.info("WebSocketEndpoint={} path={}", clazz, annotation.value());
+          ServerEndpointConfig serverEndpointConfig = createServerEndpointConfig(clazz, annotation);
           webSocketDeploymentInfo.addEndpoint(serverEndpointConfig);
         }
       }
       DeploymentInfo webSocketDeployment = Servlets.deployment()
           .setClassIntrospecter(classIntrospecter)
-          .setContextPath(webConfig.getContextPath())
-          .setSecurityDisabled(true)
-          .setAuthorizationManager(null)
+          .setContextPath(
+              PathUtils.fixPath(webConfig.getContextPath(), webConfig.getWebSocketPath()))
           .addServletContextAttribute(WebSocketDeploymentInfo.ATTRIBUTE_NAME,
               webSocketDeploymentInfo)
           .setDeploymentName("zheng-web-undertow-websocket")
-          .setClassLoader(Thread.currentThread().getContextClassLoader());
+          .setClassLoader(contextClassLoader);
       DeploymentManager websocketManager = Servlets.defaultContainer()
           .addDeployment(webSocketDeployment);
       websocketManager.deploy();
@@ -112,18 +111,31 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
 
       HttpHandler encodingHandler = new EncodingHandler.Builder().build(null)
           .wrap(manager.start());
+
       rootHandler.addPrefixPath(webConfig.getContextPath(), encodingHandler);
-      rootHandler.addPrefixPath(webConfig.getWebSocketPath(), websocketManager.start());
+      rootHandler.addPrefixPath(
+          PathUtils.fixPath(webConfig.getContextPath(), webConfig.getWebSocketPath()),
+          websocketManager.start());
       server.setHandler(new SessionAttachmentHandler(
           new LearningPushHandler(100, -1,
-              Handlers.header(rootHandler,
-                  "x-undertow-transport", ExchangeAttributes.transportProtocol())),
+              Handlers
+                  .header(Handlers.gracefulShutdown(Handlers.urlDecodingHandler("", rootHandler)),
+                      "x-undertow-transport", ExchangeAttributes.transportProtocol())),
           new InMemorySessionManager("sessionManager"), new SessionCookieConfig().setSecure(true)
           .setHttpOnly(true)
       ));
-//      server.setHandler(rootHandler);
     } catch (ServletException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private ServerEndpointConfig createServerEndpointConfig(Class<? extends WebSocketEndpoint> clazz,
+      ServerEndpoint annotation) {
+    return Builder.create(clazz, annotation.value())
+        .configurator(guiceServerEndpointConfigurator)
+        .decoders(Lists.newArrayList(annotation.decoders()))
+        .encoders(Lists.newArrayList(annotation.encoders()))
+        .subprotocols(Lists.newArrayList(annotation.subprotocols()))
+        .build();
   }
 }

@@ -2,12 +2,9 @@ package com.github.zhengframework.jdbc.migrate;
 
 import static com.google.inject.name.Names.named;
 
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.jdbc.ManagedSchema;
-import com.google.common.base.Preconditions;
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.multibindings.OptionalBinder;
 import java.util.Map;
@@ -15,16 +12,12 @@ import java.util.Map.Entry;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
-public class FlywayMigrateModule extends AbstractModule implements ConfigurationAware {
-
-  private Configuration configuration;
+public class FlywayMigrateModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Preconditions.checkArgument(configuration != null, "configuration is null");
-
     Map<String, FlywayConfig> flywayConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, FlywayConfig.class);
+        .resolve(getConfiguration(), FlywayConfig.class);
     for (Entry<String, FlywayConfig> entry : flywayConfigMap.entrySet()) {
       String name = entry.getKey();
       FlywayConfig flywayConfig = entry.getValue();
@@ -42,8 +35,4 @@ public class FlywayMigrateModule extends AbstractModule implements Configuration
 
   }
 
-  @Override
-  public void initConfiguration(Configuration configuration) {
-    this.configuration = configuration;
-  }
 }
