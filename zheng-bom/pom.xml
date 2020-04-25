@@ -722,6 +722,11 @@
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>zheng-test</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
