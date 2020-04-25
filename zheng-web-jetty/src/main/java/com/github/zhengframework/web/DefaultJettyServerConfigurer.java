@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerEndpoint;
 import javax.websocket.server.ServerEndpointConfig;
+import javax.websocket.server.ServerEndpointConfig.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.alpn.server.ALPNServerConnectionFactory;
 import org.eclipse.jetty.http.HttpScheme;
@@ -33,6 +34,7 @@ import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.util.resource.ResourceCollection;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.ScheduledExecutorScheduler;
+import org.eclipse.jetty.websocket.api.InvalidWebSocketException;
 import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
@@ -61,6 +63,7 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     this.guiceServerEndpointConfigurator = guiceServerEndpointConfigurator;
   }
 
+
   @Override
   public void configure(Server server) {
     server.addBean(new ScheduledExecutorScheduler(null, false));
@@ -78,7 +81,6 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     final ServletContextHandler context = new ServletContextHandler(null,
         webConfig.getContextPath(),
         ServletContextHandler.SESSIONS);
-    initWebSocket(context);
 
     final FilterHolder filterHolder = new FilterHolder();
     filterHolder.setDisplayName("GuiceFilter");
@@ -88,8 +90,11 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     context.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
 
     context.addServlet(DefaultServlet.class, "/");
+    context.setWelcomeFiles(new String[]{"index.html"});
 
     eventListenerScanner.accept(context::addEventListener);
+
+    initWebSocket(context);
 
     final HandlerCollection handlers = new HandlerCollection();
 
@@ -180,19 +185,22 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     try {
       ServerContainer serverContainer = WebSocketServerContainerInitializer.initialize(context);
       for (ServerEndpointConfig serverEndpointConfig : serverEndpointConfigSet) {
-        serverContainer.addEndpoint(serverEndpointConfig);
+        BasePathServerEndpointConfig basePathServerEndpointConfig = new BasePathServerEndpointConfig(
+            webConfig.getWebSocketPath(), serverEndpointConfig);
+        log.info("ServerEndpointConfig={} path={}",
+            basePathServerEndpointConfig.getEndpointClass().getName(),
+            basePathServerEndpointConfig.getPath());
+        serverContainer.addEndpoint(basePathServerEndpointConfig);
       }
 
       for (Class<? extends WebSocketEndpoint> clazz : annotatedEndpoints) {
         ServerEndpoint annotation = clazz.getAnnotation(ServerEndpoint.class);
         if (annotation != null) {
           serverContainer
-              .addEndpoint(ServerEndpointConfig.Builder.create(clazz, annotation.value())
-                  .configurator(guiceServerEndpointConfigurator)
-                  .decoders(Lists.newArrayList(annotation.decoders()))
-                  .encoders(Lists.newArrayList(annotation.encoders()))
-                  .subprotocols(Lists.newArrayList(annotation.subprotocols()))
-                  .build());
+              .addEndpoint(createServerEndpointConfig(clazz, annotation));
+        } else {
+          throw new InvalidWebSocketException(
+              "Unsupported WebSocket object, missing @" + ServerEndpoint.class + " annotation");
         }
       }
     } catch (DeploymentException | ServletException e) {
@@ -200,4 +208,21 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     }
   }
 
+  private ServerEndpointConfig createServerEndpointConfig(Class<? extends WebSocketEndpoint> clazz,
+      ServerEndpoint annotation) {
+
+    ServerEndpointConfig serverEndpointConfig = Builder
+        .create(clazz, annotation.value())
+        .configurator(guiceServerEndpointConfigurator)
+        .decoders(Lists.newArrayList(annotation.decoders()))
+        .encoders(Lists.newArrayList(annotation.encoders()))
+        .subprotocols(Lists.newArrayList(annotation.subprotocols()))
+        .build();
+    BasePathServerEndpointConfig basePathServerEndpointConfig = new BasePathServerEndpointConfig(
+        webConfig.getWebSocketPath(), serverEndpointConfig);
+    log.info("WebSocketEndpoint={} path={}",
+        basePathServerEndpointConfig.getEndpointClass().getName(),
+        basePathServerEndpointConfig.getPath());
+    return basePathServerEndpointConfig;
+  }
 }
