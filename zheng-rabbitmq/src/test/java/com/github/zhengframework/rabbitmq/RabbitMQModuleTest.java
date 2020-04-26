@@ -2,27 +2,29 @@ package com.github.zhengframework.rabbitmq;
 
 import static org.junit.Assert.assertTrue;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.MapConfiguration;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Injector;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import io.arivera.oss.embedded.rabbitmq.EmbeddedRabbitMq;
 import io.arivera.oss.embedded.rabbitmq.EmbeddedRabbitMqConfig;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeoutException;
+import javax.inject.Inject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class RabbitMQModuleTest {
-
 
   EmbeddedRabbitMq rabbitMq;
   EmbeddedRabbitMqConfig config;
+  @Inject
+  private Injector injector;
 
   @SuppressWarnings("ResultOfMethodCallIgnored")
   @Before
@@ -43,14 +45,13 @@ public class RabbitMQModuleTest {
     config = new EmbeddedRabbitMqConfig.Builder()
         .downloadFolder(download)
         .extractionFolder(extract)
-        .randomPort()
+        .port(25599)
         .useCachedDownload(true)
         .deleteDownloadedFileOnErrors(true)
         .downloadReadTimeoutInMillis(10000000)
         .defaultRabbitMqCtlTimeoutInMillis(1000000)
         .downloadConnectionTimeoutInMillis(1000000)
         .rabbitMqServerInitializationTimeoutInMillis(1000000)
-        .randomPort()
         .build();
 
     rabbitMq = new EmbeddedRabbitMq(config);
@@ -64,19 +65,9 @@ public class RabbitMQModuleTest {
   }
 
   @Test
+  @WithZhengApplication
   public void connectionFactory() throws IOException, TimeoutException {
-    Map<String, String> map = new HashMap<>();
-    map.put("zheng.rabbitmq.host", "localhost");
-    map.put("zheng.rabbitmq.port", "" + config.getRabbitMqPort());
-    System.out.println(map);
-    MapConfiguration configuration = new MapConfiguration(map);
-
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-
-    Connection connection = application.getInjector().getInstance(Connection.class);
+    Connection connection = injector.getInstance(Connection.class);
     assertTrue(connection.isOpen());
     Channel channel = connection.createChannel();
     assertTrue(channel.isOpen());
