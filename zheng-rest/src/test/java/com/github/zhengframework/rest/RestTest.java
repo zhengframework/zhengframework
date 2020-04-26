@@ -1,48 +1,24 @@
 package com.github.zhengframework.rest;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationBuilder;
-import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.github.zhengframework.web.WebConfig;
+import com.google.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class RestExample {
+@RunWith(ZhengApplicationRunner.class)
+public class RestTest {
 
-  WebConfig webConfig;
-  ZhengApplication application;
-
-  @After
-  public void stop() {
-    application.stop();
-  }
-
-  @Before
-  public void setup() throws Exception {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("app.properties"))
-        .build();
-    System.out.println(configuration.asMap());
-    application = ZhengApplicationBuilder.create()
-        .addModule(
-            new MyModule(),
-            new RestModule()
-        )
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-    webConfig = application.getInjector().getInstance(WebConfig.class);
-    application.start();
-  }
+  @Inject
+  private WebConfig webConfig;
 
   @Test
+  @WithZhengApplication(moduleClass = {MyModule.class})
   public void start() throws Exception {
 
     Client client = ClientBuilder.newClient();
@@ -54,6 +30,7 @@ public class RestExample {
   }
 
   @Test
+  @WithZhengApplication(moduleClass = {MyModule.class})
   public void testInject() throws Exception {
     Client client = ClientBuilder.newClient();
     WebTarget target = client.target("http://localhost:" + webConfig.getPort())
