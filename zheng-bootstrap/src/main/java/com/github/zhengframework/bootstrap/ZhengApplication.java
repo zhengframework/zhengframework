@@ -10,7 +10,7 @@ import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import com.github.zhengframework.configuration.source.MergeConfigurationSource;
 import com.github.zhengframework.configuration.source.SystemPropertiesConfigurationSource;
 import com.github.zhengframework.core.ModuleProvider;
-import com.github.zhengframework.core.ServiceManager;
+import com.github.zhengframework.service.ServiceManager;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;
@@ -102,7 +102,6 @@ public class ZhengApplication {
   public void stop() {
     injector.getInstance(ServiceManager.class).stop();
   }
-
 
   private Configuration buildConfiguration(Arguments arguments) {
     ArgumentAcceptingOptionSpec<String> configOpt = arguments.getOptionParser().accepts("config")

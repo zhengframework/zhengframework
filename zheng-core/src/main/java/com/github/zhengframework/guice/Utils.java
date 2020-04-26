@@ -2,13 +2,14 @@ package com.github.zhengframework.guice;
 
 import java.lang.reflect.Method;
 
-public class Utils {
+@SuppressWarnings("rawtypes")
+class Utils {
 
   public static boolean isPackageValid(final Class type) {
     boolean res = false;
     if (type != null) {
-      final Package packaj = type.getPackage();
-      res = !(packaj == null || packaj.getName().startsWith("java"));
+      final Package pack = type.getPackage();
+      res = !(pack == null || pack.getName().startsWith("java"));
     }
     return res;
   }
