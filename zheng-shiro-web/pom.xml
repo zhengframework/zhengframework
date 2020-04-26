@@ -28,11 +28,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
@@ -42,7 +37,7 @@
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-bootstrap</artifactId>
+      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
@@ -66,10 +61,6 @@
       <artifactId>javax.servlet-api</artifactId>
       <groupId>javax.servlet</groupId>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.inject.extensions</groupId>
-      <artifactId>guice-servlet</artifactId>
     </dependency>
     <dependency>
       <groupId>com.github.zhengframework</groupId>
