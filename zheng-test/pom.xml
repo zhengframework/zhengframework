@@ -10,10 +10,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>

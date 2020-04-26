@@ -22,15 +22,16 @@ import org.junit.runners.model.InitializationError;
 @Slf4j
 public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
 
-  private WithZhengApplicationHolder classHolder = new WithZhengApplicationHolder();
-
-  private transient WithZhengApplicationHolder current;
+  private final WithZhengApplicationHolder classHolder;
+  private volatile Injector injector;
 
   public ZhengApplicationRunner(final Class<?> testClass) throws InitializationError {
     super(testClass);
     WithZhengApplication withZhengApplication = testClass.getAnnotation(WithZhengApplication.class);
     if (withZhengApplication != null) {
       classHolder = WithZhengApplicationHolder.create(withZhengApplication);
+    } else {
+      classHolder = new WithZhengApplicationHolder();
     }
 
   }
@@ -44,9 +45,7 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
   @Override
   protected Object createTest() throws Exception {
     Class<?> javaClass = getTestClass().getJavaClass();
-    ZhengApplication application = createZhengApplication(current);
-    application.start();
-    Injector injector = application.getInjector();
+
     return injector.getInstance(javaClass);
   }
 
@@ -89,8 +88,12 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
   @SneakyThrows
   @Override
   protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
-    current = classHolder
+    WithZhengApplicationHolder current = classHolder
         .merge(getWithZhengApplicationFor(method).orElse(new WithZhengApplicationHolder()));
+    ZhengApplication application = createZhengApplication(current);
+    application.start();
+    injector = application.getInjector();
     super.runChild(method, notifier);
+    application.stop();
   }
 }
