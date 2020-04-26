@@ -3,11 +3,9 @@ package com.github.zhengframework.jdbc;
 import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertNotNull;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationBuilder;
-import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import java.sql.Connection;
@@ -17,22 +15,17 @@ import org.apache.commons.dbutils.AsyncQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class CommonsDBUtilsModuleTest {
 
-  @Test
-  public void configure() throws Exception {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("application.properties"))
-        .build();
-    System.out.println(configuration.asMap());
+  @Inject
+  private Injector injector;
 
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-    application.start();
-    Injector injector = application.getInjector();
+  @Test
+  @WithZhengApplication(configFile = "application.properties")
+  public void configure() throws Exception {
     DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
@@ -40,21 +33,11 @@ public class CommonsDBUtilsModuleTest {
     Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
     assertNotNull(injector.getInstance(QueryRunner.class));
     assertNotNull(injector.getInstance(AsyncQueryRunner.class));
-    application.stop();
   }
 
   @Test
+  @WithZhengApplication(configFile = "application_group.properties")
   public void configureGroup() throws Exception {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
-        .build();
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .addModule(new DataSourceModule())
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-    application.start();
-    Injector injector = application.getInjector();
     DataSource dataSourceA = injector
         .getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
@@ -70,6 +53,5 @@ public class CommonsDBUtilsModuleTest {
     assertNotNull(injector.getInstance(Key.get(AsyncQueryRunner.class, named("a"))));
     assertNotNull(injector.getInstance(Key.get(QueryRunner.class, named("b"))));
     assertNotNull(injector.getInstance(Key.get(AsyncQueryRunner.class, named("b"))));
-    application.stop();
   }
 }
