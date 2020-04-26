@@ -6,7 +6,7 @@ import com.codahale.metrics.jvm.BufferPoolMetricSet;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
-import com.github.zhengframework.core.Service;
+import com.github.zhengframework.service.Service;
 import com.google.inject.Inject;
 import java.lang.management.ManagementFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class MetricsService implements Service {
 
 
   @Override
-  public int priority() {
+  public int order() {
     return 0;
   }
 

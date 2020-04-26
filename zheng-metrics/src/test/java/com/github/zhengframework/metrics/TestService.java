@@ -1,4 +1,4 @@
-package com.github.zhengframework.metrics.example;
+package com.github.zhengframework.metrics;
 
 import com.codahale.metrics.annotation.Counted;
 import com.codahale.metrics.annotation.Gauge;
