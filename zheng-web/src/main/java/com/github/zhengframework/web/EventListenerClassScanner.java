@@ -1,6 +1,6 @@
 package com.github.zhengframework.web;
 
-import com.github.zhengframework.core.ClassScanner;
+import com.github.zhengframework.guice.ClassScanner;
 import com.google.inject.Injector;
 import java.util.EventListener;
 import javax.inject.Inject;

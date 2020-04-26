@@ -5,10 +5,6 @@
   <artifactId>zheng-log-logback</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>logback-core</artifactId>
       <groupId>ch.qos.logback</groupId>
     </dependency>
