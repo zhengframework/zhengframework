@@ -1,8 +1,9 @@
 package com.github.zhengframework.shiro;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.google.inject.Injector;
+import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,21 +15,21 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * https://shiro.apache.org/tutorial.html
  */
+@RunWith(ZhengApplicationRunner.class)
 @Slf4j
 public class ShiroModuleTest {
 
-  @Test
-  public void configure() throws Exception {
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .build();
+  @Inject
+  private Injector injector;
 
-    application.start();
-    Injector injector = application.getInjector();
+  @Test
+  @WithZhengApplication
+  public void configure() throws Exception {
     SecurityManager securityManager = injector.getInstance(SecurityManager.class);
     SecurityUtils.setSecurityManager(securityManager);
 
@@ -86,7 +87,5 @@ public class ShiroModuleTest {
 
     //all done - log out!
     currentUser.logout();
-
-    application.stop();
   }
 }

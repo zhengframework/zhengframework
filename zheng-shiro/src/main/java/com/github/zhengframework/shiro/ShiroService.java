@@ -1,7 +1,7 @@
 package com.github.zhengframework.shiro;
 
-import com.github.zhengframework.core.ClassScanner;
-import com.github.zhengframework.core.Service;
+import com.github.zhengframework.guice.ClassScanner;
+import com.github.zhengframework.service.Service;
 import com.google.inject.Injector;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ public class ShiroService implements Service {
   }
 
   @Override
-  public int priority() {
+  public int order() {
     return 0;
   }
 
