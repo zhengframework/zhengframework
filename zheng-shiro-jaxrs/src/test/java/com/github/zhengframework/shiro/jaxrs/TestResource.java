@@ -1,10 +1,13 @@
-package com.github.zhengframework.shiro;
+package com.github.zhengframework.shiro.jaxrs;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,29 +15,26 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 @Slf4j
-public class LoginServlet extends HttpServlet {
+@Path(TestResource.PATH)
+public class TestResource {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    System.out.println("getContextPath=" + req.getContextPath());
-    System.out.println("getRequestURI=" + req.getRequestURI());
-    resp.getWriter().print("Hello, World");
-  }
+  public static final String PATH = "test";
 
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-    String username = req.getParameter("username");
-    String password = req.getParameter("password");
-    String rememberMe = req.getParameter("rememberMe");
+  @Path("login")
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  @POST
+  public String login(
+      @FormParam("username") String username
+      , @FormParam("password") String password
+      , @Context Response response) {
     log.info("username={}", username);
     log.info("password={}", password);
-    log.info("rememberMe={}", rememberMe);
+
     UsernamePasswordToken token = new UsernamePasswordToken(username, password);
     token.setRememberMe(true);
     Subject currentUser = SecurityUtils.getSubject();
@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
     if (value.equals("aValue")) {
       log.info("Retrieved the correct value! [" + value + "]");
     }
+
     if (!currentUser.isAuthenticated()) {
       try {
         currentUser.login(token);
@@ -85,10 +86,15 @@ public class LoginServlet extends HttpServlet {
     } else {
       log.info("Sorry, you aren't allowed to drive the 'eagle5' winnebago!");
     }
-
-    resp.getWriter().println("currentUser=" + currentUser.getPrincipal());
-    //all done - log out!
-    currentUser.logout();
-
+    log.info("currentUser=" + currentUser.getPrincipal());
+    return "currentUser=" + currentUser.getPrincipal() + "\n";
   }
+
+  @GET
+  @Path("requiresRoles")
+  @RequiresRoles("goodguy")
+  public String RequiresRoles() {
+    return "OK";
+  }
+
 }
