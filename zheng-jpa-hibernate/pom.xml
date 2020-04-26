@@ -17,18 +17,18 @@
       <groupId>org.hibernate.javax.persistence</groupId>
     </dependency>
     <dependency>
-      <artifactId>zheng-jpa-test</artifactId>
+      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-jpa-test</artifactId>
+      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
   </dependencies>

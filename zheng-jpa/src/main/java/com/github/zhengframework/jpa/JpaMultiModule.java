@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 
 public class JpaMultiModule extends ConfigurationAwareModule {
 
-
   @Override
   protected void configure() {
     Map<String, JpaConfig> persistenceConfigMap = ConfigurationBeanMapper

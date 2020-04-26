@@ -10,10 +10,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>guice-persist</artifactId>
       <groupId>com.google.inject.extensions</groupId>
     </dependency>

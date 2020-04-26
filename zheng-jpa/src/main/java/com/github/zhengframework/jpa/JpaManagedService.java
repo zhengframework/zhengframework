@@ -1,6 +1,6 @@
 package com.github.zhengframework.jpa;
 
-import com.github.zhengframework.core.Service;
+import com.github.zhengframework.service.Service;
 import javax.inject.Inject;
 
 public class JpaManagedService implements Service {
@@ -14,7 +14,7 @@ public class JpaManagedService implements Service {
   }
 
   @Override
-  public int priority() {
+  public int order() {
     return 0;
   }
 
