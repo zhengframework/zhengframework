@@ -2,10 +2,10 @@ package com.github.zhengframework.mongodb;
 
 import static org.junit.Assert.assertEquals;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.MapConfiguration;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -22,25 +22,28 @@ import de.flapdoodle.embed.mongo.config.Net;
 import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import me.alexpanov.net.FreePortFinder;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class MongodbModuleTest {
 
   private int port;
   private String bindIp;
   private MongodProcess mongod;
+  @Inject
+  private Injector injector;
 
+  @SuppressWarnings("SpellCheckingInspection")
   @Before
   public void setup() throws IOException {
     MongodStarter starter = MongodStarter.getDefaultInstance();
 
-    port = FreePortFinder.findFreeLocalPort();
+//    port = FreePortFinder.findFreeLocalPort();
+    port = 48761;
 
     bindIp = "localhost";
     IMongodConfig mongodConfig = new MongodConfigBuilder()
@@ -58,16 +61,9 @@ public class MongodbModuleTest {
   }
 
   @Test
-  public void mongoClient() {
-    Map<String, String> map = new HashMap<>();
-    map.put("zheng.mongodb.url", String.format("mongodb://%s:%d", bindIp, port));
-    Configuration configuration = new MapConfiguration(map);
-
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-    MongoClient mongoClient = application.getInjector().getInstance(MongoClient.class);
+  @WithZhengApplication
+  public void test() {
+    MongoClient mongoClient = injector.getInstance(MongoClient.class);
     MongoDatabase database = mongoClient.getDatabase("test");
     MongoCollection<BasicDBObject> testCollection = database
         .getCollection("testCollection", BasicDBObject.class);
