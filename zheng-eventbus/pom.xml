@@ -9,27 +9,20 @@
       <groupId>com.google.guava</groupId>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
-      <groupId>com.google.inject</groupId>
-    </dependency>
-    <dependency>
       <artifactId>slf4j-api</artifactId>
       <groupId>org.slf4j</groupId>
     </dependency>
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-bootstrap</artifactId>
+      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>

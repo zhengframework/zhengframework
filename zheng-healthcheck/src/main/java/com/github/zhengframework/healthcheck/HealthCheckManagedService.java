@@ -2,7 +2,7 @@ package com.github.zhengframework.healthcheck;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.codahale.metrics.health.HealthCheckRegistry;
-import com.github.zhengframework.core.Service;
+import com.github.zhengframework.service.Service;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.Inject;
@@ -40,7 +40,7 @@ public class HealthCheckManagedService implements Service {
   }
 
   @Override
-  public int priority() {
+  public int order() {
     return 0;
   }
 
