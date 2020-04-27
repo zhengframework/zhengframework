@@ -718,7 +718,12 @@
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-eventbus</artifactId>
+        <artifactId>zheng-event</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>zheng-event-guava</artifactId>
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
