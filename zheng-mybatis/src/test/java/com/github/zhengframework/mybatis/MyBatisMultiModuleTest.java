@@ -5,41 +5,31 @@ import static org.apache.ibatis.io.Resources.getResourceAsReader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationBuilder;
-import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import java.io.IOException;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class MyBatisMultiModuleTest {
 
+  @Inject
+  private Injector injector;
+
+  @WithZhengApplication(configFile = "application_group.properties"
+      , moduleClass = {MyBatisMultiModule.class}
+      , excludeModuleProviderClass = {
+      MyBatisModuleProvider.class
+  })
   @Test
   public void configure() throws Exception {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
-        .build();
-    System.out.println(configuration.asMap());
-
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .excludeModuleProvider(MyBatisModuleProvider.class)
-        .addModule(new MyBatisMultiModule()
-        )
-        .withConfiguration(configuration)
-        .build();
-    application.start();
-    Injector injector = application.getInjector();
-
     runGroup(injector, "a");
     runGroup(injector, "b");
-
-    application.stop();
-
   }
 
   private void runGroup(Injector injector, String group) throws IOException {

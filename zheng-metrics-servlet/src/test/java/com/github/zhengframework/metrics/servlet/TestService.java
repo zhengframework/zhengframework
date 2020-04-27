@@ -5,6 +5,7 @@ import com.codahale.metrics.annotation.Gauge;
 import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
 
+@SuppressWarnings("UnusedReturnValue")
 public class TestService {
 
   @Metered

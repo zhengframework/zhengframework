@@ -1,1 +1,1 @@
-com.github.zhengframework.web.JettyWebModuleProvider
+com.github.zhengframework.web.jetty.JettyWebModuleProvider

@@ -3,22 +3,23 @@ package com.github.zhengframework.healthcheck;
 import com.codahale.metrics.health.HealthCheck;
 import com.codahale.metrics.health.HealthCheck.Result;
 import com.codahale.metrics.health.HealthCheckRegistry;
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Map.Entry;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class HealthCheckModuleTest {
 
-  @Test
-  public void configure() throws Exception {
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .build();
+  @Inject
+  private Injector injector;
 
-    application.start();
-    Injector injector = application.getInjector();
+  @Test
+  @WithZhengApplication
+  public void configure() throws Exception {
     HealthCheckRegistry healthCheckRegistry = injector.getInstance(HealthCheckRegistry.class);
 
     for (Entry<String, Result> entry : healthCheckRegistry.runHealthChecks()
@@ -43,6 +44,5 @@ public class HealthCheckModuleTest {
         .getHealthCheck("ThreadDeadlockHealthCheck");
     assert systemLoadHealthCheck != null;
     assert threadDeadlockHealthCheck != null;
-    application.stop();
   }
 }

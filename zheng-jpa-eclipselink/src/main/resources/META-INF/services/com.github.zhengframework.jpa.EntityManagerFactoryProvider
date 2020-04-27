@@ -1,1 +1,1 @@
-com.github.zhengframework.jpa.EclipseLinkEntityManagerFactoryProvider
+com.github.zhengframework.jpa.eclipselink.EclipseLinkEntityManagerFactoryProvider

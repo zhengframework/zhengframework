@@ -4,31 +4,23 @@ import static org.apache.ibatis.io.Resources.getResourceAsReader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationBuilder;
-import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class MyBatisModuleTest {
 
+  @Inject
+  private Injector injector;
+
+  @WithZhengApplication
   @Test
   public void configure() throws Exception {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("application.properties"))
-        .build();
-    System.out.println(configuration.asMap());
-
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-
-    application.start();
-    Injector injector = application.getInjector();
     ScriptRunner runner = injector.getInstance(ScriptRunner.class);
     runner.setAutoCommit(true);
     runner.setStopOnError(true);
@@ -43,7 +35,5 @@ public class MyBatisModuleTest {
     UserDAO userDAO = injector.getInstance(UserDAO.class);
     User user1 = userDAO.getUser("u1");
     assertEquals("Pocoyo", user1.getName());
-
-    application.stop();
   }
 }

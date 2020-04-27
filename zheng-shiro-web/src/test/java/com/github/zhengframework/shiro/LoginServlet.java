@@ -32,9 +32,6 @@ public class LoginServlet extends HttpServlet {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
     String rememberMe = req.getParameter("rememberMe");
-    System.out.println("username=" + username);
-    System.out.println("password=" + password);
-    System.out.println("rememberMe=" + rememberMe);
     log.info("username={}", username);
     log.info("password={}", password);
     log.info("rememberMe={}", rememberMe);

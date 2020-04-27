@@ -1,1 +1,1 @@
-com.github.zhengframework.jdbc.QuerydslModuleProvider
+com.github.zhengframework.jdbc.querydsl.QuerydslModuleProvider

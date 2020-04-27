@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class RabbitMQConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.rabbitmq";
-  private boolean group = false;
   private String virtualHost = ConnectionFactory.DEFAULT_VHOST;
   private String host = ConnectionFactory.DEFAULT_HOST;
   private int port = ConnectionFactory.USE_DEFAULT_PORT;

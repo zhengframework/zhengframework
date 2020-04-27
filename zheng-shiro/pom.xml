@@ -10,11 +10,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
@@ -32,7 +27,7 @@
       <artifactId>shiro-guice</artifactId>
     </dependency>
     <dependency>
-      <artifactId>zheng-bootstrap</artifactId>
+      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>

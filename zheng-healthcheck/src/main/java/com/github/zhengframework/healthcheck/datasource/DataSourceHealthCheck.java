@@ -1,7 +1,7 @@
 package com.github.zhengframework.healthcheck.datasource;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.github.zhengframework.core.ClassScanner;
+import com.github.zhengframework.guice.ClassScanner;
 import com.google.inject.Injector;
 import java.sql.Connection;
 import java.util.ArrayList;

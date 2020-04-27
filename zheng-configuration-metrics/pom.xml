@@ -16,6 +16,11 @@
       <artifactId>zheng-configuration</artifactId>
       <groupId>com.github.zhengframework</groupId>
     </dependency>
+    <dependency>
+      <artifactId>zheng-test</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

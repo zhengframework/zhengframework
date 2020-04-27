@@ -1,1 +1,1 @@
-com.github.zhengframework.web.UndertowWebModuleProvider
+com.github.zhengframework.web.undertow.UndertowWebModuleProvider

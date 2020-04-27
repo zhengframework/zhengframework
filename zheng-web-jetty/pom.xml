@@ -30,11 +30,6 @@
       <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
-      <groupId>junit</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <artifactId>okhttp</artifactId>
       <groupId>com.squareup.okhttp3</groupId>
       <scope>test</scope>
@@ -45,7 +40,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-bootstrap</artifactId>
+      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>

@@ -3,11 +3,9 @@ package com.github.zhengframework.jdbc;
 import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertNotNull;
 
-import com.github.zhengframework.bootstrap.ZhengApplication;
-import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
-import com.github.zhengframework.configuration.Configuration;
-import com.github.zhengframework.configuration.ConfigurationBuilder;
-import com.github.zhengframework.configuration.source.FileConfigurationSource;
+import com.github.zhengframework.test.WithZhengApplication;
+import com.github.zhengframework.test.ZhengApplicationRunner;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.querydsl.sql.SQLQueryFactory;
@@ -17,39 +15,29 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(ZhengApplicationRunner.class)
 public class QuerydslModuleTest {
 
-  @Test
-  public void configure() throws SQLException {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("application.properties"))
-        .build();
-    System.out.println(configuration.asMap());
+  @Inject
+  private Injector injector;
 
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-    DataSource dataSource = application.getInjector().getInstance(DataSource.class);
+  @Test
+  @WithZhengApplication(configFile = "application.properties")
+  public void configure() throws SQLException {
+    DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
     System.out.println(metaData.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
-    SQLQueryFactory instance = application.getInjector().getInstance(SQLQueryFactory.class);
+    SQLQueryFactory instance = injector.getInstance(SQLQueryFactory.class);
     assertNotNull(instance);
   }
 
   @Test
+  @WithZhengApplication(configFile = "application_group.properties")
   public void configureGroup() throws SQLException {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("application_group.properties"))
-        .build();
-    ZhengApplication application = ZhengApplicationBuilder.create()
-        .enableAutoLoadModule()
-        .withConfiguration(configuration)
-        .build();
-    Injector injector = application.getInjector();
     DataSource dataSourceA = injector
         .getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();

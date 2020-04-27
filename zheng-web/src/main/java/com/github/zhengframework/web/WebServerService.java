@@ -1,6 +1,6 @@
 package com.github.zhengframework.web;
 
-import com.github.zhengframework.core.Service;
+import com.github.zhengframework.service.Service;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -15,7 +15,7 @@ public class WebServerService implements Service {
   }
 
   @Override
-  public int priority() {
+  public int order() {
     return Integer.MIN_VALUE;
   }
 

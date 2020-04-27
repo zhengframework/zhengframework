@@ -4,7 +4,7 @@ zheng framework is com.github.zhengframework.jpa.a modular framework with many r
 
 zheng framework use google guice for DI, and most module support auto load.
 
-zheng.version=1.2.0
+zheng.version=1.3.0
 
 ```
 <dependencyManagement>
