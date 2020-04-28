@@ -175,6 +175,9 @@
     <module>zheng-test</module>
     <module>zheng-event</module>
     <module>zheng-event-guava</module>
+    <module>zheng-validator</module>
+    <module>zheng-validator-hibernate</module>
+    <module>zheng-validator-bval</module>
   </modules>
 
   <packaging>pom</packaging>
