@@ -63,6 +63,8 @@ zheng.version=1.4.0
 | FlywayMigrateModule | Ok    | yes |
 | LiquibaseMigrateModule | OK    | yes |
 | EventModule | OK    | yes |
+| ValidatorModule(Apache Bval) | OK    | yes |
+| ValidatorModule(Hibernate) | OK    | yes |
 
 
 
