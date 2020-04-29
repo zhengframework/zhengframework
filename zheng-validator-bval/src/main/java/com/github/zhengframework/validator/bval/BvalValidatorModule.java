@@ -1,7 +1,7 @@
 package com.github.zhengframework.validator.bval;
 
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.validator.ValidatorModule;
-import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.multibindings.OptionalBinder;
 import javax.validation.MessageInterpolator;
@@ -12,11 +12,13 @@ import org.apache.bval.jsr.DefaultMessageInterpolator;
 import org.apache.bval.jsr.parameter.DefaultParameterNameProvider;
 import org.apache.bval.jsr.resolver.DefaultTraversableResolver;
 
-public class BvalValidatorModule extends AbstractModule {
+public class BvalValidatorModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    install(new ValidatorModule());
+    ValidatorModule validatorModule = new ValidatorModule();
+    validatorModule.initConfiguration(getConfiguration());
+    install(validatorModule);
     OptionalBinder.newOptionalBinder(binder(), MessageInterpolator.class).setBinding()
         .to(DefaultMessageInterpolator.class).in(Scopes.SINGLETON);
     OptionalBinder.newOptionalBinder(binder(), TraversableResolver.class).setBinding()
