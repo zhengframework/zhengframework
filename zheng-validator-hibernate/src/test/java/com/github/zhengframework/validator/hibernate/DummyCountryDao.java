@@ -1,19 +1,17 @@
 package com.github.zhengframework.validator.hibernate;
 
-import com.github.zhengframework.validator.Validate;
+import com.github.zhengframework.validator.ValidationGroups;
 import javax.inject.Singleton;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
+@SuppressWarnings("UnusedReturnValue")
 @Singleton
 public class DummyCountryDao {
 
-  @Validate(
-      groups = {Insert.class},
-      validateReturnedValue = true
-  )
+  @ValidationGroups(Insert.class)
   public Country insertCountry(@NotNull(groups = {Insert.class}) String name,
       @NotNull(groups = {Insert.class}) @Size(max = 2, groups = {Insert.class,
           Update.class}) String iso2Code,
@@ -27,11 +25,7 @@ public class DummyCountryDao {
     return country;
   }
 
-  @Validate(
-      groups = {Update.class},
-      rethrowExceptionsAs = DummyException.class,
-      exceptionMessage = "This is just a dummy message %s"
-  )
+  @ValidationGroups(Update.class)
   public int updateCountry(@Valid Country country) {
     System.out.println("updateCountry " + country.hashCode());
     return 0;

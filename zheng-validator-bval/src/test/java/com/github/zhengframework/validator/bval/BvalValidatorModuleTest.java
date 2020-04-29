@@ -1,9 +1,9 @@
 package com.github.zhengframework.validator.bval;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import com.github.zhengframework.test.WithZhengApplication;
 import com.github.zhengframework.test.ZhengApplicationRunner;
 import java.util.Set;
 import javax.inject.Inject;
@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(ZhengApplicationRunner.class)
+@WithZhengApplication
 public class BvalValidatorModuleTest {
 
   @Inject
@@ -53,10 +54,8 @@ public class BvalValidatorModuleTest {
   public void testRethrowWrappedException() {
     try {
       this.dummyCountryDao.updateCountry(new Country());
-      fail("org.apache.bval.guice.DummyException expected");
-    } catch (Exception e) {
-      assertEquals(DummyException.class, e.getClass());
-      assertTrue(e.getMessage().startsWith("This is just a dummy message "));
+      fail("javax.validation.ConstraintViolationException expected");
+    } catch (ConstraintViolationException e) {
     }
   }
 }

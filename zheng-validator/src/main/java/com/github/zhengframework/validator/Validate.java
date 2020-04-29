@@ -10,7 +10,6 @@ import javax.validation.ConstraintViolationException;
 /**
  * Marker for methods which arguments have to be validated.
  *
- * @version $Id$
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)

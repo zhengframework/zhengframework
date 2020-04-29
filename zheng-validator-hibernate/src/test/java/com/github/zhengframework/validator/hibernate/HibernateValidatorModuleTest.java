@@ -1,6 +1,5 @@
 package com.github.zhengframework.validator.hibernate;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -53,10 +52,8 @@ public class HibernateValidatorModuleTest {
   public void testRethrowWrappedException() {
     try {
       this.dummyCountryDao.updateCountry(new Country());
-      fail("org.apache.bval.guice.DummyException expected");
-    } catch (Exception e) {
-      assertEquals(DummyException.class, e.getClass());
-      assertTrue(e.getMessage().startsWith("This is just a dummy message "));
+      fail("javax.validation.ConstraintViolationException expected");
+    } catch (ConstraintViolationException e) {
     }
   }
 }

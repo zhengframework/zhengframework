@@ -1,6 +1,7 @@
 package com.github.zhengframework.validator;
 
 import com.google.inject.Inject;
+import java.util.Optional;
 import javax.validation.Configuration;
 import javax.validation.ConstraintValidatorFactory;
 import javax.validation.MessageInterpolator;
@@ -20,18 +21,10 @@ public class ValidatorConfigurationConfigurerImpl implements ValidatorConfigurat
 
   @Override
   public void configure(Configuration<?> configuration) {
-    if (messageInterpolator != null) {
-      configuration.messageInterpolator(messageInterpolator);
-    }
-    if (traversableResolver != null) {
-      configuration.traversableResolver(traversableResolver);
-    }
-    if (parameterNameProvider != null) {
-      configuration.parameterNameProvider(parameterNameProvider);
-    }
-    if (constraintValidatorFactory != null) {
-      configuration.constraintValidatorFactory(constraintValidatorFactory);
-    }
-
+    Optional.ofNullable(messageInterpolator).ifPresent(configuration::messageInterpolator);
+    Optional.ofNullable(traversableResolver).ifPresent(configuration::traversableResolver);
+    Optional.ofNullable(parameterNameProvider).ifPresent(configuration::parameterNameProvider);
+    Optional.ofNullable(constraintValidatorFactory)
+        .ifPresent(configuration::constraintValidatorFactory);
   }
 }
