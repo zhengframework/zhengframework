@@ -777,6 +777,11 @@
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>zheng-jdbc-ebean</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
