@@ -1,5 +1,6 @@
 # zheng framework
 
+![Java CI with Maven](https://github.com/zhengframework/zhengframework/workflows/Java%20CI%20with%20Maven/badge.svg)
 [![][maven img]][maven]
 [![][release img]][release]
 [![][license img]][license]
