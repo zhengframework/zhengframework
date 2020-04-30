@@ -23,7 +23,7 @@ public class JavaxTransactionInterceptor implements MethodInterceptor {
   @Override
   public Object invoke(final MethodInvocation methodInvocation) throws Throwable {
 
-    // Should we start com.github.zhengframework.jpa.a unit of work?
+    // Should we start a unit of work?
     if (!emProvider.isWorking()) {
       emProvider.begin();
       didWeStartWork.set(true);
@@ -113,7 +113,7 @@ public class JavaxTransactionInterceptor implements MethodInterceptor {
     // check rollback clauses
     for (final Class rollBackOn : transactional.rollbackOn()) {
 
-      // if one matched, try to perform com.github.zhengframework.jpa.a rollback
+      // if one matched, try to perform a rollback
       if (rollBackOn.isInstance(e)) {
         commit = false;
 

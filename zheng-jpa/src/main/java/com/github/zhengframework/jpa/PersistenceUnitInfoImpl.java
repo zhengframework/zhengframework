@@ -102,7 +102,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The non-JTA-enabled data source to be used by the persistence provider for accessing
-   * data outside com.github.zhengframework.jpa.a JTA transaction. The data source corresponds to
+   * data outside a JTA transaction. The data source corresponds to
    * the named &lt;non-jta-data-source&gt; element in the persistence.xml file or provided at
    * deployment or by the container.
    */
@@ -120,7 +120,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
    * mappings for the entity classes. The mapping files must be in the standard XML mapping format,
    * be uniquely named and be resource-loadable from the application classpath. This list will not
    * include the orm.xml file if one was specified. Each mapping file name corresponds to
-   * com.github.zhengframework.jpa.a &lt;mapping-file&gt; element in the persistence.xml file.
+   * a &lt;mapping-file&gt; element in the persistence.xml file.
    */
   @Override
   public List<String> getMappingFileNames() {
@@ -134,7 +134,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   /**
    * @return The list of JAR file URLs that the persistence provider must examine for managed
    * classes of the persistence unit. Each jar file URL corresponds to
-   * com.github.zhengframework.jpa.a named &lt;jar-file&gt; element in the persistence.xml file.
+   * a named &lt;jar-file&gt; element in the persistence.xml file.
    */
   @Override
   public List<URL> getJarFileUrls() {
@@ -142,7 +142,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
       List<URL> jarFileUrls = new ArrayList<URL>(jarFiles.size());
       for (String jarFile : jarFiles) {
         try {
-          // build com.github.zhengframework.jpa.a URL relative to the PU Root
+          // build a URL relative to the PU Root
           URL jarFileURL = new URL(persistenceUnitRootUrl, jarFile);
           jarFileUrls.add(jarFileURL);
         } catch (MalformedURLException e) {
@@ -175,7 +175,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The list of the names of the classes that the persistence provider must add it to its
-   * set of managed classes. Each name corresponds to com.github.zhengframework.jpa.a named
+   * set of managed classes. Each name corresponds to a named
    * &lt;class&gt; element in the persistence.xml file.
    */
   @Override
@@ -202,8 +202,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   }
 
   /**
-   * @return Properties object. Each property corresponds to com.github.zhengframework.jpa.a
-   * &lt;property&gt; element in the persistence.xml file
+   * @return Properties object. Each property corresponds to a &lt;property&gt; element in the
+   * persistence.xml file
    */
   @Override
   public Properties getProperties() {
@@ -227,12 +227,12 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   }
 
   /**
-   * Add com.github.zhengframework.jpa.a transformer supplied by the provider that will be called
-   * for every new class definition or class redefinition that gets loaded by the loader returned by
-   * the PersistenceUnitInfo.getClassLoader method. The transformer has no effect on the result
-   * returned by the PersistenceUnitInfo.getNewTempClassLoader method. Classes are only transformed
-   * once within the same classloading scope, regardless of how many persistence units they may be
-   * com.github.zhengframework.jpa.a part of.
+   * Add a transformer supplied by the provider that will be called for every new class definition
+   * or class redefinition that gets loaded by the loader returned by the
+   * PersistenceUnitInfo.getClassLoader method. The transformer has no effect on the result returned
+   * by the PersistenceUnitInfo.getNewTempClassLoader method. Classes are only transformed once
+   * within the same classloading scope, regardless of how many persistence units they may be a part
+   * of.
    *
    * @param transformer A provider-supplied transformer that the Container invokes at
    * class-(re)definition time
@@ -243,10 +243,10 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   }
 
   /**
-   * Return com.github.zhengframework.jpa.a ClassLoader that the provider may use to temporarily
-   * load any classes, resources, or open URLs. The scope and classpath of this loader is exactly
-   * the same as that of the loader returned by PersistenceUnitInfo.getClassLoader. None of the
-   * classes loaded by this class loader will be visible to application components.
+   * Return a ClassLoader that the provider may use to temporarily load any classes, resources, or
+   * open URLs. The scope and classpath of this loader is exactly the same as that of the loader
+   * returned by PersistenceUnitInfo.getClassLoader. None of the classes loaded by this class loader
+   * will be visible to application components.
    *
    * @return Temporary ClassLoader with same visibility as current loader
    */
