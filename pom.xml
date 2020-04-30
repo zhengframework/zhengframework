@@ -97,7 +97,7 @@
       </plugin>
     </plugins>
   </build>
-  <description>zheng framework is com.github.zhengframework.jpa.a modular framework with many
+  <description>zheng framework is a modular framework with many
     ready-to-use modules
   </description>
   <developers>
@@ -179,6 +179,7 @@
     <module>zheng-validator-hibernate</module>
     <module>zheng-validator-bval</module>
     <module>zheng-validator-test</module>
+    <module>zheng-module-template</module>
     <module>zheng-scheduler</module>
   </modules>
 
