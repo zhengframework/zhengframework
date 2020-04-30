@@ -11,13 +11,12 @@
     <dependency>
       <artifactId>jakarta.validation-api</artifactId>
       <groupId>jakarta.validation</groupId>
-      <version>2.0.2</version>
     </dependency>
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
     </dependency>
-
   </dependencies>
   <dependencyManagement>
     <dependencies>

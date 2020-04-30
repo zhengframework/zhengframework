@@ -11,17 +11,14 @@
     <dependency>
       <artifactId>hibernate-validator</artifactId>
       <groupId>org.hibernate.validator</groupId>
-      <version>6.1.4.Final</version>
     </dependency>
     <dependency>
       <artifactId>jakarta.el</artifactId>
       <groupId>org.glassfish</groupId>
-      <version>3.0.3</version>
     </dependency>
     <dependency>
       <artifactId>paranamer</artifactId>
       <groupId>com.thoughtworks.paranamer</groupId>
-      <version>2.8</version>
     </dependency>
     <dependency>
       <artifactId>zheng-test</artifactId>
@@ -31,6 +28,7 @@
     <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <artifactId>zheng-validator-test</artifactId>
