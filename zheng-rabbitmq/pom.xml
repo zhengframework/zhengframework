@@ -51,5 +51,27 @@
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
-
+  <profiles>
+    <profile>
+      <activation>
+        <property>
+          <name>skip-rabbitmq-test</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skipTests>true</skipTests>
+            </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>3.0.0-M4</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>noTest</id>
+    </profile>
+  </profiles>
 </project>

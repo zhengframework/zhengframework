@@ -21,4 +21,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -P javadoc8 -B package --file pom.xml
+      run: mvn -P javadoc8 -Dskip-rabbitmq-test=true -B package --file pom.xml
