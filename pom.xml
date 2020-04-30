@@ -178,6 +178,7 @@
     <module>zheng-validator</module>
     <module>zheng-validator-hibernate</module>
     <module>zheng-validator-bval</module>
+    <module>zheng-validator-test</module>
   </modules>
 
   <packaging>pom</packaging>

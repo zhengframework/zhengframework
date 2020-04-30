@@ -1,6 +1,5 @@
-package com.github.zhengframework.validator.hibernate;
+package com.github.zhengframework.validator;
 
-import com.github.zhengframework.validator.ValidationGroups;
 import javax.inject.Singleton;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

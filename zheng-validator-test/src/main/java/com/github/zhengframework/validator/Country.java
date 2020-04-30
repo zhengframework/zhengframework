@@ -1,5 +1,5 @@
 
-package com.github.zhengframework.validator.bval;
+package com.github.zhengframework.validator;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

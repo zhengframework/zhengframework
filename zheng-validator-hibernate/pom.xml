@@ -32,6 +32,11 @@
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
     </dependency>
+    <dependency>
+      <artifactId>zheng-validator-test</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
