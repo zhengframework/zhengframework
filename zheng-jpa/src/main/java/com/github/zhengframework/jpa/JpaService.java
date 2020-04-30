@@ -34,8 +34,8 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
     Preconditions.checkState(
         null != em,
         "Requested EntityManager outside work unit. "
-            + "Try calling UnitOfWork.begin() first, or use com.github.zhengframework.jpa.a PersistFilter if you "
-            + "are inside com.github.zhengframework.jpa.a servlet environment.");
+            + "Try calling UnitOfWork.begin() first, or use a PersistFilter if you "
+            + "are inside a servlet environment.");
 
     return em;
   }
@@ -49,7 +49,7 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
     Preconditions.checkState(
         null == entityManager.get(),
         "Work already begun on this thread. Looks like you have called UnitOfWork.begin() twice"
-            + " without com.github.zhengframework.jpa.a balancing call to end() in between.");
+            + " without a balancing call to end() in between.");
 
     entityManager.set(emFactory.createEntityManager());
   }

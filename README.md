@@ -14,7 +14,7 @@
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
 
 
-zheng framework is com.github.zhengframework.jpa.a modular framework with many ready-to-use modules
+zheng framework is a modular framework with many ready-to-use modules
 
 zheng framework use google guice for DI, and most module support auto load.
 
