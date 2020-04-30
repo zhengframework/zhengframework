@@ -8,9 +8,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+@ToString
 @NoArgsConstructor
 @Setter(AccessLevel.PACKAGE)
 @Getter(AccessLevel.PACKAGE)

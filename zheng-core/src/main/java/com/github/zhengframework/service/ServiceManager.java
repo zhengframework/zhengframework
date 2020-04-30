@@ -26,13 +26,6 @@ public class ServiceManager {
     serviceClassScanner.accept(copyList::add);
     copyList.sort(Comparator.comparing(Service::order).reversed());
     services = ImmutableList.copyOf(copyList);
-    Runtime.getRuntime().addShutdownHook(new Thread() {
-      @Override
-      public void run() {
-        log.info("stop by ShutdownHook");
-        ServiceManager.this.stop();
-      }
-    });
   }
 
   public void start() throws Exception {

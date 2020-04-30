@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-validator-hibernate</artifactId>
+  <dependencies>
+    <dependency>
+      <artifactId>zheng-validator</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>hibernate-validator</artifactId>
+      <groupId>org.hibernate.validator</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jakarta.el</artifactId>
+      <groupId>org.glassfish</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>paranamer</artifactId>
+      <groupId>com.thoughtworks.paranamer</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-test</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-simple</artifactId>
+      <groupId>org.slf4j</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-validator-test</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>zhengframework</artifactId>
+    <groupId>com.github.zhengframework</groupId>
+    <version>${revision}</version>
+  </parent>
+
+</project>

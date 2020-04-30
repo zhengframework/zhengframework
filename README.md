@@ -4,7 +4,7 @@ zheng framework is com.github.zhengframework.jpa.a modular framework with many r
 
 zheng framework use google guice for DI, and most module support auto load.
 
-zheng.version=1.3.0
+zheng.version=1.4.0
 
 ```
 <dependencyManagement>
@@ -62,7 +62,9 @@ zheng.version=1.3.0
 | ShiroJaxrsModule | OK    | yes |
 | FlywayMigrateModule | Ok    | yes |
 | LiquibaseMigrateModule | OK    | yes |
-| EventBusModule | OK    | yes |
+| EventModule | OK    | yes |
+| ValidatorModule(Apache Bval) | OK    | yes |
+| ValidatorModule(Hibernate) | OK    | yes |
 
 
 

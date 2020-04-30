@@ -76,6 +76,7 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
       try {
         moduleList.add(moduleClass.getConstructor().newInstance());
       } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        log.error("create ZhengApplication fail, holder={}", holder, e);
         throw new InitializationError(e);
       }
     }
