@@ -503,27 +503,27 @@
       <dependency>
         <artifactId>jakarta.validation-api</artifactId>
         <groupId>jakarta.validation</groupId>
-        <version>2.0.2</version>
+        <version>${jakarta.validation-api.version}</version>
       </dependency>
       <dependency>
         <artifactId>bval-jsr</artifactId>
         <groupId>org.apache.bval</groupId>
-        <version>2.0.3</version>
+        <version>${bval-jsr.version}</version>
       </dependency>
       <dependency>
         <artifactId>jakarta.el</artifactId>
         <groupId>org.glassfish</groupId>
-        <version>3.0.3</version>
+        <version>${jakarta.el.version}</version>
       </dependency>
       <dependency>
         <artifactId>paranamer</artifactId>
         <groupId>com.thoughtworks.paranamer</groupId>
-        <version>2.8</version>
+        <version>${paranamer.version}</version>
       </dependency>
       <dependency>
         <artifactId>hibernate-validator</artifactId>
         <groupId>org.hibernate.validator</groupId>
-        <version>6.1.4.Final</version>
+        <version>${hibernate-validator.version}</version>
       </dependency>
 
       <!-- zheng framework module -->
@@ -863,6 +863,11 @@
     <shiro.version>1.5.2</shiro.version>
     <commons-logging.version>1.2</commons-logging.version>
     <logback.version>1.2.3</logback.version>
+    <bval-jsr.version>2.0.3</bval-jsr.version>
+    <hibernate-validator.version>6.1.4.Final</hibernate-validator.version>
+    <jakarta.el.version>3.0.3</jakarta.el.version>
+    <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+    <paranamer.version>2.8</paranamer.version>
   </properties>
 
 </project>
