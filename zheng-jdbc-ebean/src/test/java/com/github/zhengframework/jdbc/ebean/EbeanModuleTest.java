@@ -4,7 +4,7 @@ import static com.google.inject.name.Names.named;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.github.zhengframework.ebean.query.QCustomer;
+import com.github.zhengframework.jdbc.ebean.query.QCustomer;
 import com.github.zhengframework.test.WithZhengApplication;
 import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.google.inject.Inject;
