@@ -180,6 +180,7 @@
     <module>zheng-validator-bval</module>
     <module>zheng-validator-test</module>
     <module>zheng-module-template</module>
+    <module>zheng-jdbc-ebean</module>
   </modules>
 
   <packaging>pom</packaging>
@@ -285,7 +286,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.4.0</revision>
+    <revision>1.5.0</revision>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>

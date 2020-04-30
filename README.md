@@ -1,5 +1,6 @@
 # zheng framework
 
+![Java CI with Maven](https://github.com/zhengframework/zhengframework/workflows/Java%20CI%20with%20Maven/badge.svg)
 [![][maven img]][maven]
 [![][release img]][release]
 [![][license img]][license]
@@ -78,6 +79,7 @@ zheng framework use google guice for DI, and most module support auto load.
 | EventModule | OK    | yes |
 | ValidatorModule(Apache Bval) | OK    | yes |
 | ValidatorModule(Hibernate) | OK    | yes |
+| EbeanModule | OK    | yes |
 
 
 
