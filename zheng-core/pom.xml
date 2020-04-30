@@ -48,7 +48,11 @@
       <groupId>com.google.inject.extensions</groupId>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <artifactId>type-parser</artifactId>
+      <groupId>com.github.drapostolos</groupId>
+      <version>0.6.0</version>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
