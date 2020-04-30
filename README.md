@@ -1,10 +1,23 @@
 # zheng framework
 
+[![][maven img]][maven]
+[![][release img]][release]
+[![][license img]][license]
+
+[maven]:http://search.maven.org/#search|gav|1|g:"com.github.zhengframework"%20AND%20a:"zheng-core"
+[maven img]:https://maven-badges.herokuapp.com/maven-central/com.github.zhengframework/zheng-bootstrap/badge.svg
+
+[release]:https://github.com/zhengframework/zhengframework/releases
+[release img]:https://img.shields.io/github/v/release/zhengframework/zhengframework.svg
+
+[license]:LICENSE.txt
+[license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
+
+
 zheng framework is com.github.zhengframework.jpa.a modular framework with many ready-to-use modules
 
 zheng framework use google guice for DI, and most module support auto load.
 
-zheng.version=1.4.0
 
 ```
 <dependencyManagement>
