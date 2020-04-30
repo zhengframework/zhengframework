@@ -79,6 +79,7 @@ zheng framework use google guice for DI, and most module support auto load.
 | EventModule | OK    | yes |
 | ValidatorModule(Apache Bval) | OK    | yes |
 | ValidatorModule(Hibernate) | OK    | yes |
+| EbeanModule | OK    | yes |
 
 
 
