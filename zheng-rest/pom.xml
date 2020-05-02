@@ -75,6 +75,11 @@
       <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <artifactId>jboss-logging-annotations</artifactId>
+      <groupId>org.jboss.logging</groupId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
