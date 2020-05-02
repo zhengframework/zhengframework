@@ -1,5 +1,6 @@
 package com.github.zhengframework.jdbc;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class DataSourceConfig implements ConfigurationDefine {
   private String transactionIsolationName;
   private boolean isAutoCommit = true;
   private boolean isReadOnly = false;
+  @JsonIgnore
   private Map<String, String> properties = new HashMap<>();
 
 }

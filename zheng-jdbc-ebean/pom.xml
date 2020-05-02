@@ -46,14 +46,12 @@
     <dependency>
       <artifactId>ebean</artifactId>
       <groupId>io.ebean</groupId>
-      <version>12.2.3</version>
     </dependency>
 
     <!-- Query bean support -->
     <dependency>
       <artifactId>ebean-querybean</artifactId>
       <groupId>io.ebean</groupId>
-      <version>12.2.3</version>
     </dependency>
 
     <!-- APT Query bean generation for Java -->
@@ -61,23 +59,12 @@
       <artifactId>querybean-generator</artifactId>
       <groupId>io.ebean</groupId>
       <scope>provided</scope>
-      <version>12.2.3</version>
     </dependency>
-
-
-    <!-- Test dependencies -->
-    <!-- includes docker test database container support  -->
-    <dependency>
-      <artifactId>ebean-test</artifactId>
-      <groupId>io.ebean</groupId>
-      <scope>test</scope>
-      <version>12.2.3</version>
-    </dependency>
-    <dependency>
+   <!-- <dependency>
       <artifactId>h2</artifactId>
       <groupId>com.h2database</groupId>
       <scope>test</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
       <artifactId>hsqldb</artifactId>
       <groupId>org.hsqldb</groupId>

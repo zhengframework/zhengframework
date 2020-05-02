@@ -1,5 +1,6 @@
 package com.github.zhengframework.web;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.HashMap;
@@ -38,9 +39,7 @@ public class WebConfig implements ConfigurationDefine {
 
   private String trustStorePassword;
 
+  @JsonIgnore
   private Map<String, String> properties = new HashMap<>();
 
-  public void addProperty(String key, String value) {
-    properties.put(key, value);
-  }
 }

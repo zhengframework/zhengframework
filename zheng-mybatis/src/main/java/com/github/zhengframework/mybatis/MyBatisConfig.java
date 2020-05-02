@@ -1,5 +1,6 @@
 package com.github.zhengframework.mybatis;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.github.zhengframework.guice.ExposedPrivateModule;
@@ -39,5 +40,6 @@ public class MyBatisConfig implements ConfigurationDefine {
   private Boolean mapUnderscoreToCamelCase;
   private Class<? extends ExposedPrivateModule> extraModuleClass;
   private String configFile;
+  @JsonIgnore
   private Map<String, String> properties = new HashMap<>();
 }
