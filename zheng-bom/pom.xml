@@ -525,7 +525,33 @@
         <groupId>org.hibernate.validator</groupId>
         <version>${hibernate-validator.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>jboss-logging-annotations</artifactId>
+        <groupId>org.jboss.logging</groupId>
+        <version>${jboss-logging-annotations.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>type-parser</artifactId>
+        <groupId>com.github.drapostolos</groupId>
+        <version>${type-parser.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>ebean</artifactId>
+        <groupId>io.ebean</groupId>
+        <version>${ebean.version}</version>
+      </dependency>
 
+      <!-- Query bean support -->
+      <dependency>
+        <artifactId>ebean-querybean</artifactId>
+        <groupId>io.ebean</groupId>
+        <version>${ebean.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>querybean-generator</artifactId>
+        <groupId>io.ebean</groupId>
+        <version>${ebean.version}</version>
+      </dependency>
       <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-bootstrap</artifactId>
@@ -777,6 +803,11 @@
         <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>zheng-jdbc-ebean</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <version>${zhengframework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modelVersion>4.0.0</modelVersion>
@@ -868,6 +899,9 @@
     <jakarta.el.version>3.0.3</jakarta.el.version>
     <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
     <paranamer.version>2.8</paranamer.version>
+    <ebean.version>12.2.3</ebean.version>
+    <jboss-logging-annotations.version>2.2.1.Final</jboss-logging-annotations.version>
+    <type-parser.version>0.6.0</type-parser.version>
   </properties>
 
 </project>

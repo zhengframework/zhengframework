@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-jdbc-ebean</artifactId>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>tiles-maven-plugin</artifactId>
+        <configuration>
+          <tiles>
+            <tile>io.ebean.tile:enhancement:12.2.3</tile>
+          </tiles>
+        </configuration>
+        <extensions>true</extensions>
+        <groupId>io.repaint.maven</groupId>
+        <version>2.16</version>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <artifactId>zheng-core</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-test</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>zheng-jdbc</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-simple</artifactId>
+      <groupId>org.slf4j</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>ebean</artifactId>
+      <groupId>io.ebean</groupId>
+    </dependency>
+
+    <!-- Query bean support -->
+    <dependency>
+      <artifactId>ebean-querybean</artifactId>
+      <groupId>io.ebean</groupId>
+    </dependency>
+
+    <!-- APT Query bean generation for Java -->
+    <dependency>
+      <artifactId>querybean-generator</artifactId>
+      <groupId>io.ebean</groupId>
+      <scope>provided</scope>
+    </dependency>
+   <!-- <dependency>
+      <artifactId>h2</artifactId>
+      <groupId>com.h2database</groupId>
+      <scope>test</scope>
+    </dependency>-->
+    <dependency>
+      <artifactId>hsqldb</artifactId>
+      <groupId>org.hsqldb</groupId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <parent>
+    <artifactId>zhengframework</artifactId>
+    <groupId>com.github.zhengframework</groupId>
+    <version>${revision}</version>
+  </parent>
+</project>

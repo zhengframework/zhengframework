@@ -67,7 +67,7 @@ public class PersistenceUnitInfoProvider implements Provider<PersistenceUnitInfo
       properties.put("javax.persistence.jdbc.password", "");
     }
     if (persistenceConfig.getProperties() != null && !persistenceConfig.getProperties().isEmpty()) {
-      persistenceConfig.getProperties().forEach((s, s2) -> properties.put(s.replace("_", "."), s2));
+      persistenceConfig.getProperties().forEach(properties::put);
     }
     return properties;
   }

@@ -1,5 +1,6 @@
 package com.github.zhengframework.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.github.zhengframework.guice.ExposedPrivateModule;
@@ -24,6 +25,7 @@ public class JpaConfig implements ConfigurationDefine {
   private String password;
   private String managedClassPackages;
   private Set<String> managedClasses = new HashSet<>();
+  @JsonIgnore
   private Map<String, String> properties = new HashMap<>();
   private Class<? extends ExposedPrivateModule> extraModuleClass;
 }

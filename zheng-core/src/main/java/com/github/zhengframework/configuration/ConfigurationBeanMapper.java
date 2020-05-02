@@ -2,12 +2,17 @@ package com.github.zhengframework.configuration;
 
 import static com.github.zhengframework.configuration.ConfigurationDefineUtils.checkConfigurationDefine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+import com.github.drapostolos.typeparser.TypeParser;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -35,8 +40,30 @@ public class ConfigurationBeanMapper {
 
   private static <T> T resolveClass(Configuration configuration, Class<T> tClass) {
     try {
-      return mapper.readMapAs(configuration.asMap(), tClass);
-    } catch (IOException e) {
+      T t = mapper.readMapAs(configuration.asMap(), tClass);
+      for (Field field : tClass.getDeclaredFields()) {
+        if (field.isAnnotationPresent(JsonIgnore.class)) {
+          field.setAccessible(true);
+          Class<?> fieldType = field.getType();
+          if (Map.class.isAssignableFrom(fieldType)) {
+            Configuration prefix = configuration.prefix(field.getName());
+            TypeParser parser = TypeParser.newBuilder().build();
+            Type genericType = field.getGenericType();
+            ParameterizedType parameterizedType = (ParameterizedType) genericType;
+            Type[] typeArguments = parameterizedType.getActualTypeArguments();
+            Type keyType = typeArguments[0];
+            Type valueType = typeArguments[1];
+            HashMap<Object, Object> map = new HashMap<>();
+            for (Entry<String, String> entry : prefix.asMap().entrySet()) {
+              map.put(parser.parseType(entry.getKey(), keyType),
+                  parser.parseType(entry.getValue(), valueType));
+            }
+            field.set(t, map);
+          }
+        }
+      }
+      return t;
+    } catch (IOException | IllegalAccessException e) {
       throw new RuntimeException("resolve configuration error", e);
     }
   }
