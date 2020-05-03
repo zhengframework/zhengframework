@@ -1,6 +1,6 @@
 package com.github.zhengframework.guice;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import com.github.zhengframework.core.ModuleProvider;
 import java.util.Iterator;

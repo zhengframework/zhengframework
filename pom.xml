@@ -180,8 +180,8 @@
     <module>zheng-validator-bval</module>
     <module>zheng-validator-test</module>
     <module>zheng-module-template</module>
-    <module>zheng-scheduler</module>
     <module>zheng-jdbc-ebean</module>
+    <module>zheng-job</module>
   </modules>
 
   <packaging>pom</packaging>
