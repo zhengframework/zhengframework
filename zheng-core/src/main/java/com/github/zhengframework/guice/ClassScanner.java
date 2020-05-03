@@ -55,18 +55,14 @@ public class ClassScanner<T> {
       if (type != null) {
         Class<?> targetType = getTargetClass(binding);
         if (targetType != null) {
-          if (isConcrete(targetType)) {
-            if (scanFor.isAssignableFrom(targetType)) {
-              log.debug("{} targetType={}", scanFor, targetType);
-              visitor.visit((T) binding.getProvider().get());
-            }
+          if (scanFor.isAssignableFrom(targetType)) {
+            log.debug("{} targetType={}", scanFor, targetType);
+            visitor.visit((T) binding.getProvider().get());
           }
         } else {
-          if (isConcrete(type)) {
-            if (scanFor.isAssignableFrom(type)) {
-              log.debug("{} type={}", scanFor, type);
-              visitor.visit((T) binding.getProvider().get());
-            }
+          if (scanFor.isAssignableFrom(type)) {
+            log.debug("{} type={}", scanFor, type);
+            visitor.visit((T) binding.getProvider().get());
           }
         }
 

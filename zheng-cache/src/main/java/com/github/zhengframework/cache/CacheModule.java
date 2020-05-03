@@ -6,7 +6,6 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.OptionalBinder;
 import javax.cache.CacheManager;
-import javax.cache.Caching;
 import javax.cache.annotation.CacheKeyGenerator;
 import javax.cache.annotation.CachePut;
 import javax.cache.annotation.CacheRemove;
@@ -22,7 +21,6 @@ import org.jsr107.ri.annotations.guice.CachePutInterceptor;
 import org.jsr107.ri.annotations.guice.CacheRemoveAllInterceptor;
 import org.jsr107.ri.annotations.guice.CacheRemoveEntryInterceptor;
 import org.jsr107.ri.annotations.guice.CacheResultInterceptor;
-import org.jsr107.ri.annotations.guice.module.CacheAnnotationsModule;
 
 public class CacheModule extends AbstractModule {
 

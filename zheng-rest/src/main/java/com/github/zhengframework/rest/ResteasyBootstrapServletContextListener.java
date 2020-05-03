@@ -1,18 +1,11 @@
 package com.github.zhengframework.rest;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.Stage;
-import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.jboss.resteasy.plugins.guice.ModuleProcessor;
-import org.jboss.resteasy.plugins.guice.i18n.LogMessages;
-import org.jboss.resteasy.plugins.guice.i18n.Messages;
 import org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap;
 import org.jboss.resteasy.spi.Registry;
 import org.jboss.resteasy.spi.ResteasyDeployment;
