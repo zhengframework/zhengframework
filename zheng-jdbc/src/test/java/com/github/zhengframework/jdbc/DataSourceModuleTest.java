@@ -46,4 +46,60 @@ public class DataSourceModuleTest {
     Assert.assertEquals(metaDataB.getDatabaseProductName(), metaDataA.getDatabaseProductName());
     Assert.assertNotEquals(dataSourceA, dataSourceB);
   }
+
+  @Test
+  @WithZhengApplication(configFile = "application_druid.properties")
+  public void configureDruid() throws SQLException {
+    DataSource dataSource = injector.getInstance(DataSource.class);
+    Connection connection = dataSource.getConnection();
+    DatabaseMetaData metaData = connection.getMetaData();
+    System.out.println(metaData.getDatabaseProductName());
+    Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
+  }
+
+  @Test
+  @WithZhengApplication(configFile = "application_dbcp_basic.properties")
+  public void configureDbcpBasic() throws SQLException {
+    DataSource dataSource = injector.getInstance(DataSource.class);
+    Connection connection = dataSource.getConnection();
+    DatabaseMetaData metaData = connection.getMetaData();
+    System.out.println(metaData.getDatabaseProductName());
+    Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
+  }
+
+  @Test
+  @WithZhengApplication(configFile = "application_dbcp_shared.properties")
+  public void configureDbcpShared() throws SQLException {
+    DataSource dataSource = injector.getInstance(DataSource.class);
+    Connection connection = dataSource.getConnection();
+    DatabaseMetaData metaData = connection.getMetaData();
+    System.out.println(metaData.getDatabaseProductName());
+    Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
+  }
+
+  @Test
+  @WithZhengApplication(configFile = "application_c3p0.properties")
+  public void configureC3p0() throws SQLException {
+    DataSource dataSource = injector.getInstance(DataSource.class);
+    Connection connection = dataSource.getConnection();
+    DatabaseMetaData metaData = connection.getMetaData();
+    System.out.println(metaData.getDatabaseProductName());
+    Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
+  }
+
+  @Test
+  @WithZhengApplication(configFile = "application_mix.properties")
+  public void configureMix() throws SQLException {
+    DataSource dataSourceA = injector
+        .getInstance(Key.get(DataSource.class, named("a")));
+    DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
+    System.out.println(metaDataA.getDatabaseProductName());
+    Assert.assertEquals("HSQL Database Engine", metaDataA.getDatabaseProductName());
+
+    DataSource dataSourceB = injector
+        .getInstance(Key.get(DataSource.class, named("b")));
+    DatabaseMetaData metaDataB = dataSourceB.getConnection().getMetaData();
+    Assert.assertEquals(metaDataB.getDatabaseProductName(), metaDataA.getDatabaseProductName());
+    Assert.assertNotEquals(dataSourceA, dataSourceB);
+  }
 }
