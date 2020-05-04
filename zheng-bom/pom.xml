@@ -552,6 +552,22 @@
         <groupId>io.ebean</groupId>
         <version>${ebean.version}</version>
       </dependency>
+
+      <dependency>
+        <artifactId>druid</artifactId>
+        <groupId>com.alibaba</groupId>
+        <version>${druid.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>commons-dbcp2</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>${commons-dbcp2.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>c3p0</artifactId>
+        <groupId>com.mchange</groupId>
+        <version>${c3p0.version}</version>
+      </dependency>
       <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-bootstrap</artifactId>
@@ -907,6 +923,9 @@
     <ebean.version>12.2.3</ebean.version>
     <jboss-logging-annotations.version>2.2.1.Final</jboss-logging-annotations.version>
     <type-parser.version>0.6.0</type-parser.version>
+    <c3p0.version>0.9.5.5</c3p0.version>
+    <commons-dbcp2.version>2.7.0</commons-dbcp2.version>
+    <druid.version>1.1.22</druid.version>
   </properties>
 
 </project>
