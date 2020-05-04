@@ -7,7 +7,9 @@ import java.util.List;
 import javax.persistence.EnumType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.ebean", supportGroup = true)

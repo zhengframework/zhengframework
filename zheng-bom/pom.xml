@@ -568,6 +568,16 @@
         <groupId>com.mchange</groupId>
         <version>${c3p0.version}</version>
       </dependency>
+      <dependency>
+        <artifactId>metainf-services</artifactId>
+        <groupId>org.kohsuke.metainf-services</groupId>
+        <version>${metainf-services.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>quartz</artifactId>
+        <groupId>org.quartz-scheduler</groupId>
+        <version>${quartz.version}</version>
+      </dependency>
       <!-- zheng framework module -->
       <dependency>
         <artifactId>zheng-bootstrap</artifactId>
@@ -926,6 +936,8 @@
     <c3p0.version>0.9.5.5</c3p0.version>
     <commons-dbcp2.version>2.7.0</commons-dbcp2.version>
     <druid.version>1.1.22</druid.version>
+    <metainf-services.version>1.8</metainf-services.version>
+    <quartz.version>2.3.2</quartz.version>
   </properties>
 
 </project>

@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.job")

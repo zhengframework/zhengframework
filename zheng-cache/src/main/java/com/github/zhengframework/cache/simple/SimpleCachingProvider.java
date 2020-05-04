@@ -5,7 +5,9 @@ import java.util.Properties;
 import javax.cache.CacheManager;
 import javax.cache.configuration.OptionalFeature;
 import javax.cache.spi.CachingProvider;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 public class SimpleCachingProvider implements CachingProvider {
 
   private final SimpleCacheManager cacheManager;

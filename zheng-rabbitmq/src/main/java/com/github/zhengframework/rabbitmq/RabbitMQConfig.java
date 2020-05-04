@@ -5,7 +5,9 @@ import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.rabbitmq",supportGroup = true)

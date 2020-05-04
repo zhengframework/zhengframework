@@ -6,7 +6,9 @@ import java.lang.annotation.Annotation;
 import javax.validation.executable.ValidateOnExecution;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @NoArgsConstructor
 @Data
 @ConfigurationInfo(prefix = "zheng.validator")
