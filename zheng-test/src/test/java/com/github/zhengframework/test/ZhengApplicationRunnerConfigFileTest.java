@@ -21,7 +21,7 @@ public class ZhengApplicationRunnerConfigFileTest {
   public void testDefault() {
     assertNotNull(injector);
     String url = injector
-        .getInstance(Key.get(String.class, named("zheng.dataSource.jdbcUrl")));
+        .getInstance(Key.get(String.class, named("zheng.dataSource.url")));
     assertNotNull(url);
     assertEquals("jdbc:hsqldb:mem:test_db", url);
   }
@@ -31,9 +31,9 @@ public class ZhengApplicationRunnerConfigFileTest {
   public void testConfigA() {
     assertNotNull(injector);
     String url = injector
-        .getInstance(Key.get(String.class, named("zheng.dataSource.jdbcUrl")));
+        .getInstance(Key.get(String.class, named("zheng.dataSource.url")));
     assertNotNull(url);
-    assertEquals("a", url);
+    assertEquals("jdbc:hsqldb:mem:test_a", url);
   }
 
   @Test
@@ -41,8 +41,8 @@ public class ZhengApplicationRunnerConfigFileTest {
   public void testConfigB() {
     assertNotNull(injector);
     String url = injector
-        .getInstance(Key.get(String.class, named("zheng.dataSource.jdbcUrl")));
+        .getInstance(Key.get(String.class, named("zheng.dataSource.url")));
     assertNotNull(url);
-    assertEquals("b", url);
+    assertEquals("jdbc:hsqldb:mem:test_b", url);
   }
 }

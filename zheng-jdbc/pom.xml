@@ -33,8 +33,38 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <artifactId>h2</artifactId>
+      <groupId>com.h2database</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>druid</artifactId>
+      <groupId>com.alibaba</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>commons-dbcp2</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>c3p0</artifactId>
+      <groupId>com.mchange</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>metrics-core</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>metrics-healthchecks</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
