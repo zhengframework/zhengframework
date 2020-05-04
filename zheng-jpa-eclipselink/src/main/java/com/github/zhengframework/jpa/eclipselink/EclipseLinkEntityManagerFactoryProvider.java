@@ -7,7 +7,9 @@ import java.net.URL;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.spi.PersistenceUnitInfo;
 import org.eclipse.persistence.jpa.PersistenceProvider;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 public class EclipseLinkEntityManagerFactoryProvider implements EntityManagerFactoryProvider {
 
   @Override

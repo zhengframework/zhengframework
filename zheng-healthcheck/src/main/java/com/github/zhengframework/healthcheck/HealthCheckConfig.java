@@ -5,7 +5,9 @@ import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.concurrent.TimeUnit;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @NoArgsConstructor
 @Data
 @ConfigurationInfo(prefix = "zheng.healthCheck")

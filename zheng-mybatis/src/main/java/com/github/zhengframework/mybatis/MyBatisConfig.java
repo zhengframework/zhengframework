@@ -15,7 +15,9 @@ import org.apache.ibatis.session.AutoMappingBehavior;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.type.TypeHandler;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.mybatis", supportGroup = true)

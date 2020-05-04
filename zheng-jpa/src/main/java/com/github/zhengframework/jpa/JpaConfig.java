@@ -11,7 +11,9 @@ import java.util.Set;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
 @ToString
 @Data
 @NoArgsConstructor
