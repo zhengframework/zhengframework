@@ -1,0 +1,6 @@
+com.github.zhengframework.jdbc
+com.github.zhengframework.jdbc.wrapper
+com.github.zhengframework.jdbc.wrapper.c3p0
+com.github.zhengframework.jdbc.wrapper.dbcp2
+com.github.zhengframework.jdbc.wrapper.druid
+com.github.zhengframework.jdbc.wrapper.hikari
