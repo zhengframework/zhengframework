@@ -28,5 +28,14 @@
     <version>${revision}</version>
   </parent>
 
-
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+  <description>zheng framework module: cache support by ehcache</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

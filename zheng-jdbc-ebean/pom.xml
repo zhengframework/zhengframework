@@ -3,21 +3,7 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>zheng-jdbc-ebean</artifactId>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>tiles-maven-plugin</artifactId>
-        <configuration>
-          <tiles>
-            <tile>io.ebean.tile:enhancement:12.2.3</tile>
-          </tiles>
-        </configuration>
-        <extensions>true</extensions>
-        <groupId>io.repaint.maven</groupId>
-        <version>2.16</version>
-      </plugin>
-    </plugins>
-  </build>
+
   <dependencies>
     <dependency>
       <artifactId>zheng-core</artifactId>
@@ -90,4 +76,27 @@
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>tiles-maven-plugin</artifactId>
+        <configuration>
+          <tiles>
+            <tile>io.ebean.tile:enhancement:12.2.3</tile>
+          </tiles>
+        </configuration>
+        <extensions>true</extensions>
+        <groupId>io.repaint.maven</groupId>
+        <version>2.16</version>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+  <description>zheng framework module: jdbc ebean support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

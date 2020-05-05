@@ -51,6 +51,15 @@
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+  <description>zheng framework module: rabbitmq support</description>
   <profiles>
     <profile>
       <activation>
@@ -67,11 +76,12 @@
               <skipTests>true</skipTests>
             </configuration>
             <groupId>org.apache.maven.plugins</groupId>
-            <version>3.0.0-M4</version>
+            <!--            <version>3.0.0-M4</version>-->
           </plugin>
         </plugins>
       </build>
       <id>noTest</id>
     </profile>
   </profiles>
+  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

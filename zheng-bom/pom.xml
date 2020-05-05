@@ -939,5 +939,14 @@
     <metainf-services.version>1.8</metainf-services.version>
     <quartz.version>2.3.2</quartz.version>
   </properties>
-
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+  <description>zheng framework bom</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

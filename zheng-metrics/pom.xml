@@ -73,4 +73,14 @@
       <url>https://dl.bintray.com/marshallpierce/maven</url>
     </repository>
   </repositories>
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+  <description>zheng framework module: metrics support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 </project>
