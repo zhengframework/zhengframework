@@ -6,13 +6,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>jersey-bom</artifactId>
-        <groupId>org.glassfish.jersey</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${jersey.version}</version>
-      </dependency>
-      <dependency>
         <artifactId>metrics-bom</artifactId>
         <groupId>io.dropwizard.metrics</groupId>
         <scope>import</scope>
@@ -861,8 +854,6 @@
     <guava.version>28.2-jre</guava.version>
     <guice-bridge.version>2.6.1</guice-bridge.version>
     <guice-servlet.version>4.2.2</guice-servlet.version>
-    <guice-servlet.version>4.2.2</guice-servlet.version>
-    <guice.version>4.2.2</guice.version>
     <guice.version>4.2.2</guice.version>
     <h2.version>1.4.200</h2.version>
     <hibernate-core.version>5.4.12.Final</hibernate-core.version>
@@ -871,7 +862,6 @@
     <jackson.version>2.10.3</jackson.version>
     <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
     <jedis-mock.version>0.1.16</jedis-mock.version>
-    <jersey.version>2.30.1</jersey.version>
     <jetty.version>9.4.27.v20200227</jetty.version>
     <jmemcached-core.version>1.0.0</jmemcached-core.version>
     <junit.version>4.12</junit.version>
