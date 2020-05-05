@@ -1,4 +1,3 @@
-
 package com.github.zhengframework.validator;
 
 /*-
@@ -20,7 +19,6 @@ package com.github.zhengframework.validator;
  * limitations under the License.
  * #L%
  */
-
 
 public interface Insert {
 

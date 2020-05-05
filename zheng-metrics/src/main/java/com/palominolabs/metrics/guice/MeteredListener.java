@@ -37,7 +37,9 @@ public class MeteredListener extends DeclaredMethodsTypeListener {
   private final MetricNamer metricNamer;
   private final AnnotationResolver annotationResolver;
 
-  public MeteredListener(MetricRegistry metricRegistry, MetricNamer metricNamer,
+  public MeteredListener(
+      MetricRegistry metricRegistry,
+      MetricNamer metricNamer,
       AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.metricNamer = metricNamer;

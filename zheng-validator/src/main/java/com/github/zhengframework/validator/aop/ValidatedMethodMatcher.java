@@ -51,8 +51,8 @@ public class ValidatedMethodMatcher extends AbstractMatcher<Method> {
     boolean matches = false;
     for (Annotation ann : annotations) {
       final Class<? extends Annotation> annotationType = ann.annotationType();
-      if (Valid.class.equals(annotationType) || annotationType
-          .isAnnotationPresent(Constraint.class)) {
+      if (Valid.class.equals(annotationType)
+          || annotationType.isAnnotationPresent(Constraint.class)) {
         matches = true;
         break;
       }

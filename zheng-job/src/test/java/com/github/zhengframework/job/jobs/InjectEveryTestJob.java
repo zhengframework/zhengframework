@@ -20,7 +20,6 @@ package com.github.zhengframework.job.jobs;
  * #L%
  */
 
-
 import com.github.zhengframework.job.annotations.Every;
 import com.google.inject.Inject;
 import org.quartz.JobExecutionContext;
@@ -43,6 +42,5 @@ public class InjectEveryTestJob extends AbstractJob {
       throw new IllegalStateException("dependency is null");
     }
     super.doJob(context);
-
   }
 }

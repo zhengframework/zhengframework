@@ -34,8 +34,7 @@ public class MyBatisPrivateModule extends PrivateModule {
   private final Annotation qualifier;
   private final MyBatisConfig myBatisConfig;
 
-  public MyBatisPrivateModule(Annotation qualifier,
-      MyBatisConfig myBatisConfig) {
+  public MyBatisPrivateModule(Annotation qualifier, MyBatisConfig myBatisConfig) {
     this.qualifier = qualifier;
     this.myBatisConfig = myBatisConfig;
     log.info("qualifier={}", qualifier);
@@ -58,7 +57,10 @@ public class MyBatisPrivateModule extends PrivateModule {
         for (Key key : module.getExposeList()) {
           exposeClass(key);
         }
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new RuntimeException(e);
       }
     }
@@ -67,22 +69,11 @@ public class MyBatisPrivateModule extends PrivateModule {
   @SuppressWarnings({"unchecked", "rawtypes"})
   private void exposeClass(Key key) {
     if (qualifier != null) {
-      bind(key.getTypeLiteral()).annotatedWith(qualifier)
-          .toProvider(binder().getProvider(key));
+      bind(key.getTypeLiteral()).annotatedWith(qualifier).toProvider(binder().getProvider(key));
       expose(key.getTypeLiteral()).annotatedWith(qualifier);
     } else {
       expose(key.getTypeLiteral());
     }
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  private void exposeClass(Class aClass) {
-    if (qualifier != null) {
-      bind(aClass).annotatedWith(qualifier)
-          .toProvider(binder().getProvider(aClass));
-      expose(aClass).annotatedWith(qualifier);
-    } else {
-      expose(aClass);
-    }
-  }
 }

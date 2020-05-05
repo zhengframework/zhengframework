@@ -46,5 +46,4 @@ public interface ConfigurationSource {
    * @throws IllegalStateException when unable to fetch configuration
    */
   Map<String, String> getConfiguration(Environment environment);
-
 }

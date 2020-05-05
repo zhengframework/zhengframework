@@ -36,23 +36,22 @@ public class FlywayMigrateModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, FlywayConfig> flywayConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), FlywayConfig.class);
+    Map<String, FlywayConfig> flywayConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), FlywayConfig.class);
     for (Entry<String, FlywayConfig> entry : flywayConfigMap.entrySet()) {
       String name = entry.getKey();
       FlywayConfig flywayConfig = entry.getValue();
       if (name.isEmpty()) {
         bind(FlywayConfig.class).toInstance(flywayConfig);
         OptionalBinder.newOptionalBinder(binder(), Key.get(ManagedSchema.class))
-            .setBinding().toInstance(new FlywayManagedSchema(flywayConfig));
+            .setBinding()
+            .toInstance(new FlywayManagedSchema(flywayConfig));
       } else {
         bind(Key.get(FlywayConfig.class, named(name))).toInstance(flywayConfig);
         OptionalBinder.newOptionalBinder(binder(), Key.get(ManagedSchema.class, named(name)))
-            .setBinding().toInstance(new FlywayManagedSchema(flywayConfig));
+            .setBinding()
+            .toInstance(new FlywayManagedSchema(flywayConfig));
       }
-
     }
-
   }
-
 }

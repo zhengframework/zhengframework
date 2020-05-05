@@ -30,10 +30,9 @@ public class CombinedLocationStrategy implements FileLocationStrategy {
 
   private final Collection<FileLocationStrategy> subStrategies;
 
-  public CombinedLocationStrategy(
-      Collection<FileLocationStrategy> subStrategies) {
-    Preconditions
-        .checkState(subStrategies != null, "Collection with sub strategies must not be null!");
+  public CombinedLocationStrategy(Collection<FileLocationStrategy> subStrategies) {
+    Preconditions.checkState(
+        subStrategies != null, "Collection with sub strategies must not be null!");
     this.subStrategies = Collections.unmodifiableCollection(subStrategies);
   }
 

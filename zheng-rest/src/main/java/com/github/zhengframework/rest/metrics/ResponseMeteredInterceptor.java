@@ -36,8 +36,9 @@ public class ResponseMeteredInterceptor implements ContainerResponseFilter {
   }
 
   @Override
-  public void filter(ContainerRequestContext requestContext,
-      ContainerResponseContext responseContext) throws IOException {
+  public void filter(
+      ContainerRequestContext requestContext, ContainerResponseContext responseContext)
+      throws IOException {
     final int responseStatus = responseContext.getStatus() / 100;
     if (responseStatus >= 1 && responseStatus <= 5) {
       meters.get(responseStatus - 1).mark();

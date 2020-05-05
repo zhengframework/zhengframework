@@ -37,25 +37,29 @@ public class MetricsServletModule extends ConfigurationAwareServletModule {
   @Override
   protected void configureServlets() {
     Configuration configuration = getConfiguration();
-    Map<String, MetricsConfig> metricsConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, MetricsConfig.class);
+    Map<String, MetricsConfig> metricsConfigMap =
+        ConfigurationBeanMapper.resolve(configuration, MetricsConfig.class);
     MetricsConfig metricsConfig = metricsConfigMap.getOrDefault("", new MetricsConfig());
 
-    Map<String, MetricsServletConfig> metricsServletConfigMap = ConfigurationBeanMapper
-        .resolve(configuration, MetricsServletConfig.class);
-    MetricsServletConfig metricsServletConfig = metricsServletConfigMap
-        .getOrDefault("", new MetricsServletConfig());
+    Map<String, MetricsServletConfig> metricsServletConfigMap =
+        ConfigurationBeanMapper.resolve(configuration, MetricsServletConfig.class);
+    MetricsServletConfig metricsServletConfig =
+        metricsServletConfigMap.getOrDefault("", new MetricsServletConfig());
     if (metricsConfig.isEnable()) {
       if (metricsServletConfig.isEnable()) {
-        Map<String, WebConfig> webConfigMap = ConfigurationBeanMapper
-            .resolve(configuration, WebConfig.class);
+        Map<String, WebConfig> webConfigMap =
+            ConfigurationBeanMapper.resolve(configuration, WebConfig.class);
         WebConfig webConfig = webConfigMap.getOrDefault("", new WebConfig());
 
         String path = PathUtils.fixPath(metricsServletConfig.getPath());
         serve(path + "/*").with(AdminServlet.class);
         bind(AdminServlet.class).in(Singleton.class);
-        log.info("Metrics Admin Page: {}", "http://localhost:" + webConfig.getPort() + PathUtils
-            .fixPath(webConfig.getContextPath(), path) + "/");
+        log.info(
+            "Metrics Admin Page: {}",
+            "http://localhost:"
+                + webConfig.getPort()
+                + PathUtils.fixPath(webConfig.getContextPath(), path)
+                + "/");
         bind(MetricsServletContextListener.class).in(Singleton.class);
         bind(HealthCheckServletContextListener.class).in(Singleton.class);
       } else {

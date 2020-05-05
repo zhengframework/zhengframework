@@ -40,7 +40,8 @@ public class RedisClientProvider implements Provider<RedisClient> {
   @Override
   public RedisClient get() {
     Builder builder = RedisURI.builder();
-    builder.withHost(redisConfig.getHost())
+    builder
+        .withHost(redisConfig.getHost())
         .withPort(redisConfig.getPort())
         .withDatabase(redisConfig.getDatabase())
         .withTimeout(Duration.ofSeconds(redisConfig.getTimeout()));

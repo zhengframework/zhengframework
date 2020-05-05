@@ -36,5 +36,4 @@ public class HealthCheckConfig implements ConfigurationDefine {
   private boolean enable = true;
   private long duration = 60;
   private TimeUnit unit = TimeUnit.SECONDS;
-
 }

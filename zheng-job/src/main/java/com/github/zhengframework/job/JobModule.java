@@ -31,13 +31,14 @@ public class JobModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, JobConfig> configMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), JobConfig.class);
+    Map<String, JobConfig> configMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), JobConfig.class);
     JobConfig jobConfig = configMap.get("");
     bind(JobConfig.class).toInstance(jobConfig);
     bind(GuiceJobFactory.class);
     OptionalBinder.newOptionalBinder(binder(), SchedulerFactory.class)
-        .setDefault().toProvider(SchedulerFactoryProvider.class);
+        .setDefault()
+        .toProvider(SchedulerFactoryProvider.class);
     bind(Scheduler.class).toProvider(SchedulerProvider.class);
     bind(JobManagerService.class).asEagerSingleton();
   }

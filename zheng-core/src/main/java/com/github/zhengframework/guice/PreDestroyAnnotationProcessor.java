@@ -34,9 +34,9 @@ public class PreDestroyAnnotationProcessor implements MethodPostProcessor<PreDes
   }
 
   @Override
-  public void process(final PreDestroy annotation, final Method method, final Object instance) throws Exception {
+  public void process(final PreDestroy annotation, final Method method, final Object instance)
+      throws Exception {
     Utils.checkNoParams(method);
     manager.register(new AnnotatedMethodDestroyable(method, instance));
   }
-
 }

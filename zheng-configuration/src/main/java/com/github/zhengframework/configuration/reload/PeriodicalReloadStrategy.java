@@ -35,29 +35,31 @@ public class PeriodicalReloadStrategy implements ReloadStrategy {
 
   final ThreadFactory factory =
       new BasicThreadFactory.Builder()
-          .namingPattern("PeriodicalReloadStrategy-%s").daemon(true)
+          .namingPattern("PeriodicalReloadStrategy-%s")
+          .daemon(true)
           .build();
 
   private final long duration;
   private final TimeUnit unit;
   private final ScheduledExecutorService executorService;
-  private final Map<Reloadable, ScheduledFuture<?>> tasks = new ConcurrentHashMap<Reloadable, ScheduledFuture<?>>();
-
+  private final Map<Reloadable, ScheduledFuture<?>> tasks =
+      new ConcurrentHashMap<Reloadable, ScheduledFuture<?>>();
 
   public PeriodicalReloadStrategy(long duration, TimeUnit unit) {
     this.duration = duration;
     this.unit = unit;
-    executorService = Executors
-        .newScheduledThreadPool(Runtime.getRuntime().availableProcessors(), factory);
+    executorService =
+        Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors(), factory);
   }
-
 
   @Override
   public void register(Reloadable resource) {
-    log.debug("Registering resource " + resource
-        + " with reload time of {} {}", duration, unit.toString().toLowerCase());
-    ScheduledFuture<?> scheduledFuture = executorService
-        .scheduleWithFixedDelay(resource::reload, duration, duration, unit);
+    log.debug(
+        "Registering resource " + resource + " with reload time of {} {}",
+        duration,
+        unit.toString().toLowerCase());
+    ScheduledFuture<?> scheduledFuture =
+        executorService.scheduleWithFixedDelay(resource::reload, duration, duration, unit);
     tasks.put(resource, scheduledFuture);
   }
 

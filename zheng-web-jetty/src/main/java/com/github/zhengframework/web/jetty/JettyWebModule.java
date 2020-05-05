@@ -45,16 +45,18 @@ public class JettyWebModule extends ConfigurationAwareModule {
     Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
     });
 
-    OptionalBinder.newOptionalBinder(binder(), Server.class).setDefault().toProvider(
-        () -> {
-          QueuedThreadPool threadPool = new QueuedThreadPool();
-          threadPool.setMaxThreads(500);
-          return new Server(threadPool);
-        });
+    OptionalBinder.newOptionalBinder(binder(), Server.class)
+        .setDefault()
+        .toProvider(
+            () -> {
+              QueuedThreadPool threadPool = new QueuedThreadPool();
+              threadPool.setMaxThreads(500);
+              return new Server(threadPool);
+            });
     OptionalBinder.newOptionalBinder(binder(), JettyServerConfigurer.class)
-        .setDefault().to(DefaultJettyServerConfigurer.class);
+        .setDefault()
+        .to(DefaultJettyServerConfigurer.class);
 
     bind(WebServer.class).to(JettyWebServer.class);
   }
-
 }

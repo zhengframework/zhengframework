@@ -55,18 +55,21 @@ public class DataSourceProvider implements Provider<DataSource> {
   @Override
   public DataSource get() {
     lock.lock();
-    if (copyDataSource == null) {
-      List<DataSourceProxy> collect = dataSourceProxySetProvider.get().stream()
-          .sorted(Comparator.comparing(DataSourceProxy::priority))
-          .collect(Collectors.toList());
-      copyDataSource = dataSourceWrapperProvider.get();
-      for (DataSourceProxy dataSourceProxy : collect) {
-        copyDataSource = dataSourceProxy.apply(copyDataSource);
+    try {
+      if (copyDataSource == null) {
+        List<DataSourceProxy> collect =
+            dataSourceProxySetProvider.get().stream()
+                .sorted(Comparator.comparing(DataSourceProxy::priority))
+                .collect(Collectors.toList());
+        copyDataSource = dataSourceWrapperProvider.get();
+        for (DataSourceProxy dataSourceProxy : collect) {
+          copyDataSource = dataSourceProxy.apply(copyDataSource);
+        }
+        managedSchemaProvider.get().migrate(copyDataSource);
       }
-      managedSchemaProvider.get().migrate(copyDataSource);
+    } finally {
+      lock.unlock();
     }
-    lock.unlock();
     return copyDataSource;
   }
-
 }

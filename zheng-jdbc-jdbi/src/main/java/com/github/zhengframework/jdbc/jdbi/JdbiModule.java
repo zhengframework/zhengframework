@@ -40,11 +40,10 @@ import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 @EqualsAndHashCode(callSuper = false)
 public class JdbiModule extends ConfigurationAwareModule {
 
-
   @Override
   protected void configure() {
-    Map<String, JdbiConfig> configMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), JdbiConfig.class);
+    Map<String, JdbiConfig> configMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), JdbiConfig.class);
     for (Entry<String, JdbiConfig> entry : configMap.entrySet()) {
       String name = entry.getKey();
       JdbiConfig jdbiConfig = entry.getValue();
@@ -52,27 +51,34 @@ public class JdbiModule extends ConfigurationAwareModule {
         bind(JdbiConfig.class).toInstance(jdbiConfig);
 
         if (jdbiConfig.isEnable()) {
-          OptionalBinder.newOptionalBinder(binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-          }))
-              .setDefault().toInstance(Collections.singletonList(new SqlObjectPlugin()));
-          bind(Jdbi.class).toProvider(new JdbiProvider(
-              getProvider(Key.get(DataSource.class)),
-              getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-              }))));
+          OptionalBinder.newOptionalBinder(
+              binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {
+              }))
+              .setDefault()
+              .toInstance(Collections.singletonList(new SqlObjectPlugin()));
+          bind(Jdbi.class)
+              .toProvider(
+                  new JdbiProvider(
+                      getProvider(Key.get(DataSource.class)),
+                      getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {
+                      }))));
         }
       } else {
         bind(Key.get(JdbiConfig.class, named(name))).toInstance(jdbiConfig);
         if (jdbiConfig.isEnable()) {
-          OptionalBinder.newOptionalBinder(binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-          }, named(name)))
-              .setDefault().toInstance(Collections.singletonList(new SqlObjectPlugin()));
-          bind(Key.get(Jdbi.class, named(name))).toProvider(new JdbiProvider(
-              getProvider(Key.get(DataSource.class, named(name))),
-              getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-              }, named(name)))));
+          OptionalBinder.newOptionalBinder(
+              binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {
+              }, named(name)))
+              .setDefault()
+              .toInstance(Collections.singletonList(new SqlObjectPlugin()));
+          bind(Key.get(Jdbi.class, named(name)))
+              .toProvider(
+                  new JdbiProvider(
+                      getProvider(Key.get(DataSource.class, named(name))),
+                      getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {
+                      }, named(name)))));
         }
       }
     }
   }
-
 }

@@ -39,11 +39,16 @@ public class BvalValidatorModule extends ConfigurationAwareModule {
     ValidatorModule validatorModule = new ValidatorModule();
     validatorModule.initConfiguration(getConfiguration());
     install(validatorModule);
-    OptionalBinder.newOptionalBinder(binder(), MessageInterpolator.class).setBinding()
-        .to(DefaultMessageInterpolator.class).in(Scopes.SINGLETON);
-    OptionalBinder.newOptionalBinder(binder(), TraversableResolver.class).setBinding()
-        .to(DefaultTraversableResolver.class).in(Scopes.SINGLETON);
-    OptionalBinder.newOptionalBinder(binder(), ParameterNameProvider.class).setBinding()
+    OptionalBinder.newOptionalBinder(binder(), MessageInterpolator.class)
+        .setBinding()
+        .to(DefaultMessageInterpolator.class)
+        .in(Scopes.SINGLETON);
+    OptionalBinder.newOptionalBinder(binder(), TraversableResolver.class)
+        .setBinding()
+        .to(DefaultTraversableResolver.class)
+        .in(Scopes.SINGLETON);
+    OptionalBinder.newOptionalBinder(binder(), ParameterNameProvider.class)
+        .setBinding()
         .to(DefaultParameterNameProvider.class);
 
     bind(ValidatorFactory.class).toProvider(BvalValidatorFactoryProvider.class);

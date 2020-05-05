@@ -9,7 +9,6 @@ import javax.annotation.PreDestroy;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class PreDestroyTest {
 
   Injector injector;

@@ -42,17 +42,17 @@ public class MongodbModuleTest {
   public void setup() throws IOException {
     MongodStarter starter = MongodStarter.getDefaultInstance();
 
-//    port = FreePortFinder.findFreeLocalPort();
+    //    port = FreePortFinder.findFreeLocalPort();
     port = 48761;
 
     bindIp = "localhost";
-    IMongodConfig mongodConfig = new MongodConfigBuilder()
-        .version(Version.Main.PRODUCTION)
-        .net(new Net(bindIp, port, Network.localhostIsIPv6()))
-        .build();
+    IMongodConfig mongodConfig =
+        new MongodConfigBuilder()
+            .version(Version.Main.PRODUCTION)
+            .net(new Net(bindIp, port, Network.localhostIsIPv6()))
+            .build();
     MongodExecutable mongodExecutable = starter.prepare(mongodConfig);
     mongod = mongodExecutable.start();
-
   }
 
   @After
@@ -65,8 +65,8 @@ public class MongodbModuleTest {
   public void test() {
     MongoClient mongoClient = injector.getInstance(MongoClient.class);
     MongoDatabase database = mongoClient.getDatabase("test");
-    MongoCollection<BasicDBObject> testCollection = database
-        .getCollection("testCollection", BasicDBObject.class);
+    MongoCollection<BasicDBObject> testCollection =
+        database.getCollection("testCollection", BasicDBObject.class);
     Document document = Document.parse("{\"name\":\"hello world\"}");
     BasicDBObject basicDBObject = new BasicDBObject();
     basicDBObject.append("name", "hello");
@@ -79,7 +79,8 @@ public class MongodbModuleTest {
     while (iterator.hasNext()) {
       BasicDBObject next = iterator.next();
       System.out.println("getObjectId=" + next.getObjectId("_id"));
-      assertEquals(insertOneResult.getInsertedId().asObjectId().getValue().toHexString(),
+      assertEquals(
+          insertOneResult.getInsertedId().asObjectId().getValue().toHexString(),
           next.getObjectId("_id").toString());
     }
 

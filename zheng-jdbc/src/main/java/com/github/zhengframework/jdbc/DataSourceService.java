@@ -41,7 +41,6 @@ public class DataSourceService implements Service {
 
   @Override
   public void start() throws Exception {
-
   }
 
   @Override

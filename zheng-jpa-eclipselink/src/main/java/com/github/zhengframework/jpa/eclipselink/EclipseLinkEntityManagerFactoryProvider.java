@@ -36,9 +36,8 @@ public class EclipseLinkEntityManagerFactoryProvider implements EntityManagerFac
   public EntityManagerFactory get(PersistenceUnitInfo persistenceUnitInfo) {
     try {
       PersistenceUnitInfoImpl persistenceUnitInfo1 = (PersistenceUnitInfoImpl) persistenceUnitInfo;
-      //fake root url
-      persistenceUnitInfo1
-          .setPersistenceUnitRootUrl(new URL("http://localhost/"));
+      // fake root url
+      persistenceUnitInfo1.setPersistenceUnitRootUrl(new URL("http://localhost/"));
       return new PersistenceProvider()
           .createContainerEntityManagerFactory(persistenceUnitInfo1, null);
     } catch (MalformedURLException e) {

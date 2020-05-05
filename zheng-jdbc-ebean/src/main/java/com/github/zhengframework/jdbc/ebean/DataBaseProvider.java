@@ -35,7 +35,9 @@ public class DataBaseProvider implements Provider<Database> {
   private final Provider<DataSource> dataSourceProvider;
   private final Provider<DatabaseConfigConfigurer> databaseConfigConfigurerProvider;
 
-  public DataBaseProvider(EbeanConfig ebeanConfig, Provider<DataSource> dataSourceProvider,
+  public DataBaseProvider(
+      EbeanConfig ebeanConfig,
+      Provider<DataSource> dataSourceProvider,
       Provider<DatabaseConfigConfigurer> databaseConfigConfigurerProvider) {
     this.ebeanConfig = ebeanConfig;
     this.dataSourceProvider = dataSourceProvider;
@@ -56,8 +58,8 @@ public class DataBaseProvider implements Provider<Database> {
     config.setClasses(ebeanConfig.getClasses());
     config.setPackages(ebeanConfig.getPackages());
     config.setDefaultEnumType(ebeanConfig.getDefaultEnumType());
-    Optional.ofNullable(ebeanConfig.getDatabasePlatformName()).ifPresent(
-        config::setDatabasePlatformName);
+    Optional.ofNullable(ebeanConfig.getDatabasePlatformName())
+        .ifPresent(config::setDatabasePlatformName);
     config.setMappingLocations(ebeanConfig.getMappingLocations());
     config.setIdGeneratorAutomatic(ebeanConfig.isIdGeneratorAutomatic());
     databaseConfigConfigurerProvider.get().configure(config);

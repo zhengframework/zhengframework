@@ -34,14 +34,12 @@ public class DataSourceModuleTest {
   @Test
   @WithZhengApplication(configFile = "application_group.properties")
   public void configureGroup() throws SQLException {
-    DataSource dataSourceA = injector
-        .getInstance(Key.get(DataSource.class, named("a")));
+    DataSource dataSourceA = injector.getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
     System.out.println(metaDataA.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaDataA.getDatabaseProductName());
 
-    DataSource dataSourceB = injector
-        .getInstance(Key.get(DataSource.class, named("b")));
+    DataSource dataSourceB = injector.getInstance(Key.get(DataSource.class, named("b")));
     DatabaseMetaData metaDataB = dataSourceB.getConnection().getMetaData();
     Assert.assertEquals(metaDataB.getDatabaseProductName(), metaDataA.getDatabaseProductName());
     Assert.assertNotEquals(dataSourceA, dataSourceB);
@@ -90,14 +88,12 @@ public class DataSourceModuleTest {
   @Test
   @WithZhengApplication(configFile = "application_mix.properties")
   public void configureMix() throws SQLException {
-    DataSource dataSourceA = injector
-        .getInstance(Key.get(DataSource.class, named("a")));
+    DataSource dataSourceA = injector.getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
     System.out.println(metaDataA.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaDataA.getDatabaseProductName());
 
-    DataSource dataSourceB = injector
-        .getInstance(Key.get(DataSource.class, named("b")));
+    DataSource dataSourceB = injector.getInstance(Key.get(DataSource.class, named("b")));
     DatabaseMetaData metaDataB = dataSourceB.getConnection().getMetaData();
     Assert.assertEquals(metaDataB.getDatabaseProductName(), metaDataA.getDatabaseProductName());
     Assert.assertNotEquals(dataSourceA, dataSourceB);

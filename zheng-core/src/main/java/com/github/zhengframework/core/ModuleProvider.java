@@ -25,5 +25,4 @@ import com.google.inject.Module;
 public interface ModuleProvider {
 
   Module getModule();
-
 }

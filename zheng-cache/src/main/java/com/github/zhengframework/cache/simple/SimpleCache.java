@@ -71,7 +71,6 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {
-
   }
 
   @Override
@@ -166,8 +165,8 @@ public class SimpleCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public <T> Map<K, EntryProcessorResult<T>> invokeAll(Set<? extends K> set,
-      EntryProcessor<K, V, T> entryProcessor, Object... objects) {
+  public <T> Map<K, EntryProcessorResult<T>> invokeAll(
+      Set<? extends K> set, EntryProcessor<K, V, T> entryProcessor, Object... objects) {
     return null;
   }
 
@@ -183,10 +182,8 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public void close() {
-    synchronized (caches) {
-      isClosed = true;
-      caches.clear();
-    }
+    isClosed = true;
+    caches.clear();
   }
 
   @Override
@@ -202,20 +199,19 @@ public class SimpleCache<K, V> implements Cache<K, V> {
   @Override
   public void registerCacheEntryListener(
       CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-
   }
 
   @Override
   public void deregisterCacheEntryListener(
       CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-
   }
 
   @Override
   public Iterator<Entry<K, V>> iterator() {
-    List<Entry<K, V>> list = caches.entrySet()
-        .stream().map(entry -> new SimpleCacheEntry<>(entry.getKey(), entry.getValue()))
-        .collect(Collectors.toList());
+    List<Entry<K, V>> list =
+        caches.entrySet().stream()
+            .map(entry -> new SimpleCacheEntry<>(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
     return list.iterator();
   }
 }

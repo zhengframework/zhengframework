@@ -1,4 +1,3 @@
-
 package com.github.zhengframework.validator;
 
 /*-
@@ -24,7 +23,6 @@ package com.github.zhengframework.validator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 public class Country {
 
   @NotNull(groups = {Update.class})
@@ -34,11 +32,15 @@ public class Country {
   private String name;
 
   @NotNull(groups = {Insert.class})
-  @Size(max = 2, groups = {Insert.class, Update.class})
+  @Size(
+      max = 2,
+      groups = {Insert.class, Update.class})
   private String iso2Code;
 
   @NotNull(groups = {Insert.class})
-  @Size(max = 3, groups = {Insert.class, Update.class})
+  @Size(
+      max = 3,
+      groups = {Insert.class, Update.class})
   private String iso3Code;
 
   public Long getId() {
@@ -72,5 +74,4 @@ public class Country {
   public void setIso3Code(String iso3Code) {
     this.iso3Code = iso3Code;
   }
-
 }

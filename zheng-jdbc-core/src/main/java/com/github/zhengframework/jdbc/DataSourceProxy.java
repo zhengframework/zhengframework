@@ -28,5 +28,4 @@ public interface DataSourceProxy extends Function<DataSource, DataSource> {
   default int priority() {
     return 0;
   }
-
 }

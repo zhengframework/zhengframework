@@ -63,5 +63,4 @@ public class WebConfig implements ConfigurationDefine {
 
   @JsonIgnore
   private Map<String, String> properties = new HashMap<>();
-
 }

@@ -52,21 +52,21 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class FileConfigurationSource extends AbstractConfigurationSource {
 
-  public static final CombinedLocationStrategy FILE_LOCATION_STRATEGY = new CombinedLocationStrategy(
-      Arrays.asList(
-          new ProvidedURLLocationStrategy(),
-          new AbsoluteNameLocationStrategy(),
-          new BasePathLocationStrategy(),
-          new HomeDirectoryLocationStrategy(),
-          new FileSystemLocationStrategy(),
-          new ClasspathLocationStrategy()
-      ));
-  public static final FileConfigurationParserSelector FILE_CONFIGURATION_PARSER = new FileConfigurationParserSelector(
-      Arrays.asList(
-          new PropertiesConfigurationParser()
-          , new YamlConfigurationParser()
-          , new JsonConfigurationParser()
-      ));
+  public static final CombinedLocationStrategy FILE_LOCATION_STRATEGY =
+      new CombinedLocationStrategy(
+          Arrays.asList(
+              new ProvidedURLLocationStrategy(),
+              new AbsoluteNameLocationStrategy(),
+              new BasePathLocationStrategy(),
+              new HomeDirectoryLocationStrategy(),
+              new FileSystemLocationStrategy(),
+              new ClasspathLocationStrategy()));
+  public static final FileConfigurationParserSelector FILE_CONFIGURATION_PARSER =
+      new FileConfigurationParserSelector(
+          Arrays.asList(
+              new PropertiesConfigurationParser(),
+              new YamlConfigurationParser(),
+              new JsonConfigurationParser()));
   private static final String ENV_PATTERN = "${env}";
   private final FileSystem fileSystem;
   private final FileLocationStrategy fileLocationStrategy;
@@ -77,8 +77,7 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
     this("application.properties");
   }
 
-  public FileConfigurationSource(
-      String fileName) {
+  public FileConfigurationSource(String fileName) {
     this(FileLocator.builder().fileName(fileName).build());
   }
 
@@ -87,18 +86,17 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
   }
 
   public FileConfigurationSource(
-      FileLocationStrategy fileLocationStrategy,
-      FileLocator fileLocator) {
+      FileLocationStrategy fileLocationStrategy, FileLocator fileLocator) {
     this(new DefaultFileSystem(), fileLocationStrategy, fileLocator);
   }
 
-  public FileConfigurationSource(FileSystem fileSystem,
-      FileLocationStrategy fileLocationStrategy,
-      FileLocator fileLocator) {
+  public FileConfigurationSource(
+      FileSystem fileSystem, FileLocationStrategy fileLocationStrategy, FileLocator fileLocator) {
     this(fileSystem, fileLocationStrategy, fileLocator, FILE_CONFIGURATION_PARSER);
   }
 
-  public FileConfigurationSource(FileSystem fileSystem,
+  public FileConfigurationSource(
+      FileSystem fileSystem,
       FileLocationStrategy fileLocationStrategy,
       FileLocator fileLocator,
       FileConfigurationParser fileConfigurationParser) {
@@ -114,7 +112,6 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
 
   @Override
   public void init() {
-
   }
 
   @Override
@@ -147,8 +144,8 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
       URL url = urlOptional.get();
       log.info("find configuration file, url={}", url);
       try (InputStream inputStream = url.openStream()) {
-        return Collections
-            .unmodifiableMap(fileConfigurationParser.parse(url.toString(), inputStream));
+        return Collections.unmodifiableMap(
+            fileConfigurationParser.parse(url.toString(), inputStream));
       } catch (IOException e) {
         throw new IllegalStateException("Unable to load configuration from file: " + url, e);
       }

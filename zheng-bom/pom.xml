@@ -4,14 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>zheng-bom</artifactId>
 
+  <description>zheng framework bom</description>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>io.dropwizard.metrics</groupId>
         <artifactId>metrics-bom</artifactId>
-        <scope>import</scope>
         <type>pom</type>
         <version>${metrics.version}</version>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.jdbi</groupId>
@@ -835,8 +837,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <description>zheng framework bom</description>
   <modelVersion>4.0.0</modelVersion>
 
   <packaging>pom</packaging>

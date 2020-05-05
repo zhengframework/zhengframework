@@ -85,15 +85,13 @@ public final class ZhengApplicationBuilder {
   }
 
   @SafeVarargs
-  public final ZhengApplicationBuilder excludeModule(
-      Class<? extends Module>... moduleList) {
+  public final ZhengApplicationBuilder excludeModule(Class<? extends Module>... moduleList) {
     Preconditions.checkNotNull(moduleList);
     this.excludeModuleList.addAll(Arrays.asList(moduleList));
     return this;
   }
 
-  public ZhengApplicationBuilder excludeModule(
-      Set<Class<? extends Module>> moduleList) {
+  public ZhengApplicationBuilder excludeModule(Set<Class<? extends Module>> moduleList) {
     Preconditions.checkNotNull(moduleList);
     this.excludeModuleList.addAll(moduleList);
     return this;
@@ -115,9 +113,12 @@ public final class ZhengApplicationBuilder {
   }
 
   public ZhengApplication build() {
-    return new ZhengApplication(configuration, arguments, moduleList, autoLoadModule,
-        excludeModuleList, excludeModuleProviderList);
+    return new ZhengApplication(
+        configuration,
+        arguments,
+        moduleList,
+        autoLoadModule,
+        excludeModuleList,
+        excludeModuleProviderList);
   }
-
-
 }

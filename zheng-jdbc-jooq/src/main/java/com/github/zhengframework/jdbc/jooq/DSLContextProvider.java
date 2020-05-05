@@ -35,8 +35,10 @@ public class DSLContextProvider implements Provider<DSLContext> {
   private Provider<Settings> settingsProvider;
 
   @Inject
-  public DSLContextProvider(Provider<DataSource> dataSourceProvider,
-      Provider<SQLDialect> sqlDialectProvider, Provider<Settings> settingsProvider) {
+  public DSLContextProvider(
+      Provider<DataSource> dataSourceProvider,
+      Provider<SQLDialect> sqlDialectProvider,
+      Provider<Settings> settingsProvider) {
     this.dataSourceProvider = dataSourceProvider;
     this.sqlDialectProvider = sqlDialectProvider;
     this.settingsProvider = settingsProvider;

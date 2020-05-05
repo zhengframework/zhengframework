@@ -93,8 +93,8 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
   @Override
   public synchronized void start() {
     Preconditions.checkState(null == emFactory, "Persistence service was already initialized.");
-    ServiceLoader<EntityManagerFactoryProvider> load = ServiceLoader
-        .load(EntityManagerFactoryProvider.class);
+    ServiceLoader<EntityManagerFactoryProvider> load =
+        ServiceLoader.load(EntityManagerFactoryProvider.class);
     Iterator<EntityManagerFactoryProvider> iterator = load.iterator();
     if (iterator.hasNext()) {
       EntityManagerFactoryProvider entityManagerFactoryProvider = iterator.next();
@@ -112,8 +112,8 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
   }
 
   @Singleton
-  public static class EntityManagerFactoryInternalProvider implements
-      Provider<EntityManagerFactory> {
+  public static class EntityManagerFactoryInternalProvider
+      implements Provider<EntityManagerFactory> {
 
     private final JpaService emProvider;
 
@@ -128,5 +128,4 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
       return emProvider.emFactory;
     }
   }
-
 }

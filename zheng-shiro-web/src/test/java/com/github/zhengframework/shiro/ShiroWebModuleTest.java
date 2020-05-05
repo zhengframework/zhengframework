@@ -37,29 +37,32 @@ public class ShiroWebModuleTest {
     WebConfig webConfig = injector.getInstance(WebConfig.class);
     System.out.println(webConfig);
 
-    OkHttpClient okHttpClient = new Builder()
-        .build();
+    OkHttpClient okHttpClient = new Builder().build();
 
-    Response response = okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + "/login")
-        .get().build()).execute();
+    Response response =
+        okHttpClient
+            .newCall(
+                new Request.Builder()
+                    .url("http://localhost:" + webConfig.getPort() + "/login")
+                    .get()
+                    .build())
+            .execute();
     System.out.println();
     assertEquals("Hello, World", Objects.requireNonNull(response.body()).string());
 
-    FormBody formBody = new FormBody.Builder()
-        .add("username", "lonestarr")
-        .add("password", "vespa")
-        .build();
-    Request request = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + "/login")
-        .post(formBody).build();
+    FormBody formBody =
+        new FormBody.Builder().add("username", "lonestarr").add("password", "vespa").build();
+    Request request =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + "/login")
+            .post(formBody)
+            .build();
     System.out.println(request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
     System.out.println(resp);
     assertEquals("currentUser=lonestarr\n", resp);
-    for (Entry<String, List<String>> entry : response1.headers().toMultimap()
-        .entrySet()) {
+    for (Entry<String, List<String>> entry : response1.headers().toMultimap().entrySet()) {
       System.out.println(entry.getKey());
       System.out.println(entry.getValue());
     }

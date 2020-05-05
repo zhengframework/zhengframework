@@ -33,8 +33,8 @@ public class JdbiProvider implements Provider<Jdbi> {
   private final Provider<List<JdbiPlugin>> jdbiPluginListProvider;
 
   @Inject
-  public JdbiProvider(Provider<DataSource> dataSourceProvider,
-      Provider<List<JdbiPlugin>> jdbiPluginListProvider) {
+  public JdbiProvider(
+      Provider<DataSource> dataSourceProvider, Provider<List<JdbiPlugin>> jdbiPluginListProvider) {
     this.dataSourceProvider = dataSourceProvider;
     this.jdbiPluginListProvider = jdbiPluginListProvider;
   }

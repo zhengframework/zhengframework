@@ -50,9 +50,8 @@ public class ConfigurationDefineUtils {
           writer.println("group=true");
         }
         for (ConfigurationExample example : configurationInfo.examples()) {
-          Map<String, String> map = javaPropsMapper
-              .writeValueAsMap(example.example()
-                  .newInstance());
+          Map<String, String> map =
+              javaPropsMapper.writeValueAsMap(example.example().newInstance());
           for (Entry<String, String> entry : map.entrySet()) {
             if (!prefix.isEmpty()) {
               writer.print(prefix);
@@ -91,11 +90,9 @@ public class ConfigurationDefineUtils {
     }
   }
 
-  public static void print(PrintWriter writer)
-      throws Exception {
+  public static void print(PrintWriter writer) throws Exception {
     ServiceLoader<ConfigurationDefine> loader = ServiceLoader.load(ConfigurationDefine.class);
     Iterator<ConfigurationDefine> iterator = loader.iterator();
     print(iterator, writer);
   }
-
 }

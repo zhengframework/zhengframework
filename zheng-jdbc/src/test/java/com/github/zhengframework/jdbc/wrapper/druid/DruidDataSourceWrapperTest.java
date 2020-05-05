@@ -51,46 +51,62 @@ public class DruidDataSourceWrapperTest {
     final String filters = "com.alibaba.druid.filter.logging.Slf4jLogFilter";
     final String exceptionSorterClassName = TestExceptionSorter.class.getName();
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
 
-        bindConstant().annotatedWith(Names.named("druid.defaultAutoCommit")).to(autoCommit);
-        bindConstant().annotatedWith(Names.named("druid.defaultReadOnly")).to(readOnly);
-        bindConstant().annotatedWith(Names.named("druid.defaultTransactionIsolation"))
-            .to(transactionIsolation);
-        bindConstant().annotatedWith(Names.named("druid.defaultCatalog")).to(catalog);
-        bindConstant().annotatedWith(Names.named("druid.maxActive")).to(maxActive);
-        bindConstant().annotatedWith(Names.named("druid.minIdle")).to(minIdle);
-        bindConstant().annotatedWith(Names.named("druid.initialSize")).to(initialSize);
-        bindConstant().annotatedWith(Names.named("druid.maxWait")).to(maxWait);
-        bindConstant().annotatedWith(Names.named("druid.testOnBorrow")).to(testOnBorrow);
-        bindConstant().annotatedWith(Names.named("druid.testOnReturn")).to(testOnReturn);
-        bindConstant().annotatedWith(Names.named("druid.timeBetweenEvictionRunsMillis"))
-            .to(timeBetweenEvictionRunsMillis);
-        bindConstant().annotatedWith(Names.named("druid.minEvictableIdleTimeMillis"))
-            .to(minEvictableIdleTimeMillis);
-        bindConstant().annotatedWith(Names.named("druid.testWhileIdle")).to(testWhileIdle);
-        bindConstant().annotatedWith(Names.named("druid.validationQuery")).to(validationQuery);
-        bindConstant().annotatedWith(Names.named("druid.validationQueryTimeout"))
-            .to(validationQueryTimeout);
-        bindConstant().annotatedWith(Names.named("druid.accessToUnderlyingConnectionAllowed"))
-            .to(accessToUnderlyingConnectionAllowed);
-        bindConstant().annotatedWith(Names.named("druid.removeAbandoned")).to(removeAbandoned);
-        bindConstant().annotatedWith(Names.named("druid.removeAbandonedTimeout"))
-            .to(removeAbandonedTimeout);
-        bindConstant().annotatedWith(Names.named("druid.logAbandoned")).to(logAbandoned);
-        bindConstant().annotatedWith(Names.named("druid.poolPreparedStatements"))
-            .to(poolPreparedStatements);
-        bindConstant().annotatedWith(Names.named("druid.maxOpenPreparedStatements"))
-            .to(maxOpenPreparedStatements);
-        bind(Properties.class).annotatedWith(Names.named("druid.connectProperties"))
-            .toInstance(connectProperties);
-        bindConstant().annotatedWith(Names.named("druid.filters")).to(filters);
-        bindConstant().annotatedWith(Names.named("druid.exceptionSorterClassName"))
-            .to(exceptionSorterClassName);
-      }
-    });
+                bindConstant().annotatedWith(Names.named("druid.defaultAutoCommit")).to(autoCommit);
+                bindConstant().annotatedWith(Names.named("druid.defaultReadOnly")).to(readOnly);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.defaultTransactionIsolation"))
+                    .to(transactionIsolation);
+                bindConstant().annotatedWith(Names.named("druid.defaultCatalog")).to(catalog);
+                bindConstant().annotatedWith(Names.named("druid.maxActive")).to(maxActive);
+                bindConstant().annotatedWith(Names.named("druid.minIdle")).to(minIdle);
+                bindConstant().annotatedWith(Names.named("druid.initialSize")).to(initialSize);
+                bindConstant().annotatedWith(Names.named("druid.maxWait")).to(maxWait);
+                bindConstant().annotatedWith(Names.named("druid.testOnBorrow")).to(testOnBorrow);
+                bindConstant().annotatedWith(Names.named("druid.testOnReturn")).to(testOnReturn);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.timeBetweenEvictionRunsMillis"))
+                    .to(timeBetweenEvictionRunsMillis);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.minEvictableIdleTimeMillis"))
+                    .to(minEvictableIdleTimeMillis);
+                bindConstant().annotatedWith(Names.named("druid.testWhileIdle")).to(testWhileIdle);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.validationQuery"))
+                    .to(validationQuery);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.validationQueryTimeout"))
+                    .to(validationQueryTimeout);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.accessToUnderlyingConnectionAllowed"))
+                    .to(accessToUnderlyingConnectionAllowed);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.removeAbandoned"))
+                    .to(removeAbandoned);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.removeAbandonedTimeout"))
+                    .to(removeAbandonedTimeout);
+                bindConstant().annotatedWith(Names.named("druid.logAbandoned")).to(logAbandoned);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.poolPreparedStatements"))
+                    .to(poolPreparedStatements);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.maxOpenPreparedStatements"))
+                    .to(maxOpenPreparedStatements);
+                bind(Properties.class)
+                    .annotatedWith(Names.named("druid.connectProperties"))
+                    .toInstance(connectProperties);
+                bindConstant().annotatedWith(Names.named("druid.filters")).to(filters);
+                bindConstant()
+                    .annotatedWith(Names.named("druid.exceptionSorterClassName"))
+                    .to(exceptionSorterClassName);
+              }
+            });
 
     DataSourceConfig dataSourceConfig = new DataSourceConfig();
     dataSourceConfig.setDriverClassName(driverClassName);
@@ -125,8 +141,8 @@ public class DruidDataSourceWrapperTest {
     assertEquals(testWhileIdle, dataSource.isTestWhileIdle());
     assertEquals(validationQuery, dataSource.getValidationQuery());
     assertEquals(validationQueryTimeout, dataSource.getValidationQueryTimeout());
-    assertEquals(accessToUnderlyingConnectionAllowed,
-        dataSource.isAccessToUnderlyingConnectionAllowed());
+    assertEquals(
+        accessToUnderlyingConnectionAllowed, dataSource.isAccessToUnderlyingConnectionAllowed());
     assertEquals(removeAbandoned, dataSource.isRemoveAbandoned());
     assertEquals(removeAbandonedTimeout, dataSource.getRemoveAbandonedTimeout());
     assertEquals(logAbandoned, dataSource.isLogAbandoned());

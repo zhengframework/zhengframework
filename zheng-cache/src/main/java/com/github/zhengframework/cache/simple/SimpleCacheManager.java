@@ -35,12 +35,12 @@ import javax.cache.spi.CachingProvider;
 public class SimpleCacheManager implements CacheManager {
 
   private final SimpleCachingProvider simpleCachingProvider;
+  @SuppressWarnings("rawtypes")
   private final ConcurrentMap<String, Cache> caches = new ConcurrentHashMap<>(16);
   private final Set<String> cacheNames = new LinkedHashSet<>(16);
   private boolean isClosed = false;
 
-  public SimpleCacheManager(
-      SimpleCachingProvider simpleCachingProvider) {
+  public SimpleCacheManager(SimpleCachingProvider simpleCachingProvider) {
     this.simpleCachingProvider = simpleCachingProvider;
   }
 
@@ -75,6 +75,7 @@ public class SimpleCacheManager implements CacheManager {
     return getCache(name);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public <K, V> Cache<K, V> getCache(String name) {
     Cache<K, V> cache = this.caches.get(name);
@@ -103,12 +104,10 @@ public class SimpleCacheManager implements CacheManager {
 
   @Override
   public void enableManagement(String s, boolean b) {
-
   }
 
   @Override
   public void enableStatistics(String s, boolean b) {
-
   }
 
   @Override

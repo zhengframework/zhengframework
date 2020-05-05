@@ -36,8 +36,7 @@ public class JpaPrivateModule extends PrivateModule {
 
   private final JpaConfig jpaConfig;
 
-  public JpaPrivateModule(Annotation qualifier,
-      JpaConfig jpaConfig) {
+  public JpaPrivateModule(Annotation qualifier, JpaConfig jpaConfig) {
     this.qualifier = qualifier;
     this.jpaConfig = jpaConfig;
     log.info("qualifier={}", qualifier);
@@ -61,8 +60,7 @@ public class JpaPrivateModule extends PrivateModule {
     } catch (ClassNotFoundException ignored) {
 
     }
-    Class<?>[] classes = new Class<?>[]{
-        JpaManagedService.class, PersistenceUnitInfo.class};
+    Class<?>[] classes = new Class<?>[]{JpaManagedService.class, PersistenceUnitInfo.class};
     for (Class<?> aClass : classes) {
       exposeClass(aClass);
     }
@@ -70,25 +68,25 @@ public class JpaPrivateModule extends PrivateModule {
     Class<? extends ExposedPrivateModule> extraModuleClass = jpaConfig.getExtraModuleClass();
     if (extraModuleClass != null) {
       try {
-        ExposedPrivateModule module = extraModuleClass
-            .getDeclaredConstructor().newInstance();
+        ExposedPrivateModule module = extraModuleClass.getDeclaredConstructor().newInstance();
         log.info("install extra module: " + extraModuleClass.getName());
         install(module);
         for (Key key : module.getExposeList()) {
           exposeClass(key);
         }
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new RuntimeException(e);
       }
     }
-
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
   private void exposeClass(Class aClass) {
     if (qualifier != null) {
-      bind(aClass).annotatedWith(qualifier)
-          .toProvider(binder().getProvider(aClass));
+      bind(aClass).annotatedWith(qualifier).toProvider(binder().getProvider(aClass));
       expose(aClass).annotatedWith(qualifier);
     } else {
       expose(aClass);
@@ -98,8 +96,7 @@ public class JpaPrivateModule extends PrivateModule {
   @SuppressWarnings({"unchecked", "rawtypes"})
   private void exposeClass(Key key) {
     if (qualifier != null) {
-      bind(key.getTypeLiteral()).annotatedWith(qualifier)
-          .toProvider(binder().getProvider(key));
+      bind(key.getTypeLiteral()).annotatedWith(qualifier).toProvider(binder().getProvider(key));
       expose(key.getTypeLiteral()).annotatedWith(qualifier);
     } else {
       expose(key.getTypeLiteral());

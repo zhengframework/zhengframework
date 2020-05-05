@@ -31,5 +31,4 @@ public interface Apple {
       bind(Apple.class).to(AppleImpl.class);
     }
   }
-
 }

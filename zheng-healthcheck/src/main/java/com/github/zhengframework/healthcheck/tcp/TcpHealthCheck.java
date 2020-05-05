@@ -40,15 +40,15 @@ public class TcpHealthCheck extends NamedHealthCheck {
   public TcpHealthCheck(String host, int port, Duration connectionTimeout) {
     this.host = Objects.requireNonNull(host);
     this.port = port;
-    Preconditions.checkState(!connectionTimeout.isNegative(),
-        "connectionTimeout must be a non-negative value.");
-    Preconditions.checkState(connectionTimeout.toMillis() <= Integer.MAX_VALUE,
+    Preconditions.checkState(
+        !connectionTimeout.isNegative(), "connectionTimeout must be a non-negative value.");
+    Preconditions.checkState(
+        connectionTimeout.toMillis() <= Integer.MAX_VALUE,
         "Cannot configure a connectionTimeout greater than the max integer value");
     this.connectionTimeout = connectionTimeout;
   }
 
-  public TcpHealthCheck(final String host,
-      final int port) {
+  public TcpHealthCheck(final String host, final int port) {
     this(host, port, DEFAULT_CONNECTION_TIMEOUT);
   }
 

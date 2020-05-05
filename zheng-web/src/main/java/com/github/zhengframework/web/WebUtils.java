@@ -36,17 +36,17 @@ public class WebUtils {
   private WebUtils() {
   }
 
-  public static SSLContext createSSLContext(final KeyStore keyStore, final KeyStore trustStore,
-      String password) throws Exception {
+  public static SSLContext createSSLContext(
+      final KeyStore keyStore, final KeyStore trustStore, String password) throws Exception {
     KeyManager[] keyManagers;
-    KeyManagerFactory keyManagerFactory = KeyManagerFactory
-        .getInstance(KeyManagerFactory.getDefaultAlgorithm());
+    KeyManagerFactory keyManagerFactory =
+        KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
     keyManagerFactory.init(keyStore, Objects.requireNonNull(password).toCharArray());
     keyManagers = keyManagerFactory.getKeyManagers();
 
     TrustManager[] trustManagers;
-    TrustManagerFactory trustManagerFactory = TrustManagerFactory
-        .getInstance(KeyManagerFactory.getDefaultAlgorithm());
+    TrustManagerFactory trustManagerFactory =
+        TrustManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
     trustManagerFactory.init(trustStore);
     trustManagers = trustManagerFactory.getTrustManagers();
 

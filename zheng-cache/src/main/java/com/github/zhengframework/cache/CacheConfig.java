@@ -33,5 +33,4 @@ public class CacheConfig implements ConfigurationDefine {
   private String cachingProviderName = null;
   private String cacheManagerResource = null;
   private String type = "simple";
-
 }

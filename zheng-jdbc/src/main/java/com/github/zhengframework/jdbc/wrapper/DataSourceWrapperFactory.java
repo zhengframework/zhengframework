@@ -30,12 +30,11 @@ public class DataSourceWrapperFactory {
 
   public DataSourceWrapper create(DataSourceConfig dataSourceConfig, Injector injector)
       throws Exception {
-    Class<? extends DataSourceWrapper> dataSourceWrapperClass = dataSourceConfig
-        .getDataSourceWrapperClass();
+    Class<? extends DataSourceWrapper> dataSourceWrapperClass =
+        dataSourceConfig.getDataSourceWrapperClass();
     log.info("dataSourceWrapperClass={}", dataSourceWrapperClass);
-    DataSourceWrapper dataSourceWrapper = Objects
-        .requireNonNull(dataSourceWrapperClass).getConstructor()
-        .newInstance();
+    DataSourceWrapper dataSourceWrapper =
+        Objects.requireNonNull(dataSourceWrapperClass).getConstructor().newInstance();
     dataSourceWrapper.setDataSourceConfig(dataSourceConfig);
     injector.injectMembers(dataSourceWrapper);
     dataSourceWrapper.init();

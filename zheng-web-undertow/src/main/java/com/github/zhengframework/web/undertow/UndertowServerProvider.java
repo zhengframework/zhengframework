@@ -45,7 +45,6 @@ public class UndertowServerProvider implements Provider<Undertow.Builder> {
     this.webConfig = webConfig;
   }
 
-
   @Override
   public Undertow.Builder get() {
     try {
@@ -56,14 +55,18 @@ public class UndertowServerProvider implements Provider<Undertow.Builder> {
       SSLContext sslContext;
       if (webConfig.isSsl()) {
         try {
-          KeyStore keyStore = WebUtils.loadKeyStore(webConfig.getKeyStoreType(),
-              webConfig.getKeyStorePath(),
-              webConfig.getKeyStorePassword());
-          KeyStore trustStore = WebUtils.loadKeyStore(webConfig.getTrustStoreType(),
-              webConfig.getTrustStorePath(),
-              webConfig.getTrustStorePassword());
-          sslContext = WebUtils
-              .createSSLContext(keyStore, trustStore, webConfig.getKeyStorePassword());
+          KeyStore keyStore =
+              WebUtils.loadKeyStore(
+                  webConfig.getKeyStoreType(),
+                  webConfig.getKeyStorePath(),
+                  webConfig.getKeyStorePassword());
+          KeyStore trustStore =
+              WebUtils.loadKeyStore(
+                  webConfig.getTrustStoreType(),
+                  webConfig.getTrustStorePath(),
+                  webConfig.getTrustStorePassword());
+          sslContext =
+              WebUtils.createSSLContext(keyStore, trustStore, webConfig.getKeyStorePassword());
           server.addHttpsListener(webConfig.getSslPort(), "localhost", sslContext);
         } catch (Exception e) {
           log.error("init sslContext fail", e);

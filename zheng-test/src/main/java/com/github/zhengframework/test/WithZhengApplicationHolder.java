@@ -81,8 +81,9 @@ class WithZhengApplicationHolder {
     }
     holder.setExcludeModuleClass(
         ArrayUtils.addAll(holder.getExcludeModuleClass(), merged.getExcludeModuleClass()));
-    holder.setExcludeModuleProviderClass(ArrayUtils
-        .addAll(holder.getExcludeModuleProviderClass(), merged.getExcludeModuleProviderClass()));
+    holder.setExcludeModuleProviderClass(
+        ArrayUtils.addAll(
+            holder.getExcludeModuleProviderClass(), merged.getExcludeModuleProviderClass()));
     holder.setModuleClass(ArrayUtils.addAll(holder.getModuleClass(), merged.getModuleClass()));
     holder.setAutoLoadModule(merged.isAutoLoadModule());
     holder.setArguments(ArrayUtils.addAll(holder.getArguments(), merged.getArguments()));

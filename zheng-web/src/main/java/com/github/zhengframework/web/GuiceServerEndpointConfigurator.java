@@ -39,8 +39,8 @@ public class GuiceServerEndpointConfigurator extends ServerEndpointConfig.Config
   }
 
   @Override
-  public String getNegotiatedSubprotocol(final List<String> supported,
-      final List<String> requested) {
+  public String getNegotiatedSubprotocol(
+      final List<String> supported, final List<String> requested) {
     for (String proto : requested) {
       if (supported.contains(proto)) {
         return proto;
@@ -50,8 +50,8 @@ public class GuiceServerEndpointConfigurator extends ServerEndpointConfig.Config
   }
 
   @Override
-  public List<Extension> getNegotiatedExtensions(final List<Extension> installed,
-      final List<Extension> requested) {
+  public List<Extension> getNegotiatedExtensions(
+      final List<Extension> installed, final List<Extension> requested) {
     final List<Extension> ret = new ArrayList<>();
     for (Extension req : requested) {
       for (Extension extension : installed) {
@@ -66,12 +66,14 @@ public class GuiceServerEndpointConfigurator extends ServerEndpointConfig.Config
 
   @Override
   public boolean checkOrigin(final String originHeaderValue) {
-    //we can't actually do anything here, because have have absolutely no context.
+    // we can't actually do anything here, because have have absolutely no context.
     return true;
   }
 
   @Override
-  public void modifyHandshake(final ServerEndpointConfig sec, final HandshakeRequest request,
+  public void modifyHandshake(
+      final ServerEndpointConfig sec,
+      final HandshakeRequest request,
       final HandshakeResponse response) {
   }
 

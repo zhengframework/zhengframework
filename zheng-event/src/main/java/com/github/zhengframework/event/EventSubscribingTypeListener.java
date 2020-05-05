@@ -34,8 +34,7 @@ class EventSubscribingTypeListener implements TypeListener {
 
   private final Provider<EventDispatcher> dispatcherProvider;
 
-  EventSubscribingTypeListener(
-      Provider<EventDispatcher> dispatcherProvider) {
+  EventSubscribingTypeListener(Provider<EventDispatcher> dispatcherProvider) {
     this.dispatcherProvider = dispatcherProvider;
   }
 
@@ -45,12 +44,18 @@ class EventSubscribingTypeListener implements TypeListener {
     final Class<?> clazz = type.getRawType();
     final List<Method> handlerMethods = getAllDeclaredHandlerMethods(clazz);
     if (!handlerMethods.isEmpty()) {
-      encounter.register((InjectionListener<Object>) injectee -> {
-        for (final Method handlerMethod : handlerMethods) {
-          dispatcherProvider.get().registerListener(injectee, handlerMethod,
-              (Class<? extends Event>) handlerMethod.getParameterTypes()[0]);
-        }
-      });
+      encounter.register(
+          (InjectionListener<Object>)
+              injectee -> {
+                for (final Method handlerMethod : handlerMethods) {
+                  dispatcherProvider
+                      .get()
+                      .registerListener(
+                          injectee,
+                          handlerMethod,
+                          (Class<? extends Event>) handlerMethod.getParameterTypes()[0]);
+                }
+              });
     }
   }
 
@@ -65,7 +70,10 @@ class EventSubscribingTypeListener implements TypeListener {
             handlerMethods.add(handlerMethod);
           } else {
             throw new IllegalArgumentException(
-                "@EventSubscribe " + clazz.getName() + "." + handlerMethod.getName()
+                "@EventSubscribe "
+                    + clazz.getName()
+                    + "."
+                    + handlerMethod.getName()
                     + "skipped. Methods must be public, void, and accept exactly"
                     + " one argument extending Event.");
           }

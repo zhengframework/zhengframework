@@ -31,8 +31,7 @@ public class GuiceConstraintValidatorFactory implements ConstraintValidatorFacto
   private final Provider<Injector> injectorProvider;
 
   @Inject
-  public GuiceConstraintValidatorFactory(
-      Provider<Injector> injectorProvider) {
+  public GuiceConstraintValidatorFactory(Provider<Injector> injectorProvider) {
     this.injectorProvider = injectorProvider;
   }
 
@@ -43,6 +42,5 @@ public class GuiceConstraintValidatorFactory implements ConstraintValidatorFacto
 
   @Override
   public void releaseInstance(ConstraintValidator<?, ?> constraintValidator) {
-
   }
 }

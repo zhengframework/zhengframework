@@ -50,8 +50,9 @@ public class MyBatisInternalModule extends org.mybatis.guice.MyBatisModule {
     String managedClassPackages = myBatisConfig.getMapperClassPackages();
     if (managedClassPackages != null && !managedClassPackages.isEmpty()) {
       String[] strings = managedClassPackages.trim().split(",");
-      PackageScanMapperClassProvider managedClassProvider = new PackageScanMapperClassProvider(
-          Arrays.stream(strings).map(String::trim).distinct().toArray(String[]::new));
+      PackageScanMapperClassProvider managedClassProvider =
+          new PackageScanMapperClassProvider(
+              Arrays.stream(strings).map(String::trim).distinct().toArray(String[]::new));
       Collection<Class<?>> stringList = managedClassProvider.get();
       if (stringList != null) {
         addMapperClasses(stringList);
@@ -65,6 +66,5 @@ public class MyBatisInternalModule extends org.mybatis.guice.MyBatisModule {
     if (myBatisConfig.getLocaleCacheScope() != null) {
       localCacheScope(myBatisConfig.getLocaleCacheScope());
     }
-
   }
 }

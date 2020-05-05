@@ -21,7 +21,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class CacheModuleTest {
 
   @Inject
@@ -32,24 +31,31 @@ public class CacheModuleTest {
   @Before
   public void beforeMethod() {
 
-    Guice.createInjector(new CacheModule(), new AbstractModule() {
-      @Override
-      protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<Configurer<CacheManager>>() {
+    Guice.createInjector(
+        new CacheModule(),
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(
+                binder(), new TypeLiteral<Configurer<CacheManager>>() {
+                })
+                .setBinding()
+                .toInstance(
+                    cacheManager -> {
+                      String cacheName = "guice";
+                      Cache<?, ?> cache = cacheManager.getCache(cacheName);
+                      if (cache == null) {
+                        cacheManager.createCache(
+                            "guice",
+                            ExtendedMutableConfiguration.of(
+                                new Cache2kBuilder<Integer, Integer>() {
+                                }.entryCapacity(1000)
+                                    .expireAfterWrite(10, TimeUnit.SECONDS)));
+                      }
+                    });
+          }
         })
-            .setBinding().toInstance(cacheManager -> {
-              String cacheName = "guice";
-              Cache<?, ?> cache = cacheManager.getCache(cacheName);
-              if (cache == null) {
-                cacheManager.createCache("guice", ExtendedMutableConfiguration
-                    .of(new Cache2kBuilder<Integer, Integer>() {}
-                        .entryCapacity(1000)
-                        .expireAfterWrite(10, TimeUnit.SECONDS)));
-              }
-            });
-      }
-
-    }).injectMembers(this);
+        .injectMembers(this);
   }
 
   @Test
@@ -63,7 +69,6 @@ public class CacheModuleTest {
     cache.put(3, 3);
     Map<Integer, Integer> result = cache.getAll(ImmutableSet.of(1, 2, 3));
     Assert.assertEquals(ImmutableSet.of(1, 2, 3), ImmutableSet.copyOf(result.values()));
-
   }
 
   @Test
@@ -83,6 +88,4 @@ public class CacheModuleTest {
       return ++times;
     }
   }
-
-
 }

@@ -34,8 +34,7 @@ public class PersistenceUnitInfoProvider implements Provider<PersistenceUnitInfo
   private final JpaConfig jpaConfig;
 
   @Inject
-  public PersistenceUnitInfoProvider(
-      JpaConfig jpaConfig) {
+  public PersistenceUnitInfoProvider(JpaConfig jpaConfig) {
     this.jpaConfig = jpaConfig;
   }
 
@@ -59,8 +58,9 @@ public class PersistenceUnitInfoProvider implements Provider<PersistenceUnitInfo
     String managedClassPackages = jpaConfig.getManagedClassPackages();
     if (managedClassPackages != null && !managedClassPackages.isEmpty()) {
       String[] strings = managedClassPackages.trim().split(",");
-      PackageScanManagedClassProvider managedClassProvider = new PackageScanManagedClassProvider(
-          Arrays.stream(strings).map(String::trim).distinct().toArray(String[]::new));
+      PackageScanManagedClassProvider managedClassProvider =
+          new PackageScanManagedClassProvider(
+              Arrays.stream(strings).map(String::trim).distinct().toArray(String[]::new));
       List<String> stringList = managedClassProvider.get();
       if (stringList != null) {
         managedClassNames.addAll(stringList);

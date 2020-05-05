@@ -33,5 +33,4 @@ import org.kohsuke.MetaInfServices;
 public class Sql2oConfig implements ConfigurationDefine {
 
   private boolean enable = true;
-
 }

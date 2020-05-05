@@ -39,7 +39,8 @@ public class CacheManagerProvider implements Provider<CacheManager> {
   private final Optional<Configurer<CacheManager>> cacheManagerConfigurer;
 
   @Inject
-  public CacheManagerProvider(CacheConfig cacheConfig,
+  public CacheManagerProvider(
+      CacheConfig cacheConfig,
       CachingProvider cachingProvider,
       Optional<Configurer<CacheManager>> cacheManagerConfigurer) {
     this.cacheConfig = cacheConfig;
@@ -53,21 +54,22 @@ public class CacheManagerProvider implements Provider<CacheManager> {
 
     String cacheManagerResource = StringUtils.trimToEmpty(cacheConfig.getCacheManagerResource());
     if (!cacheManagerResource.isEmpty()) {
-      URL resource = Thread.currentThread().getContextClassLoader()
-          .getResource(cacheManagerResource);
+      URL resource =
+          Thread.currentThread().getContextClassLoader().getResource(cacheManagerResource);
       try {
-        cacheManager = cachingProvider
-            .getCacheManager(Objects.requireNonNull(resource).toURI(), cachingProvider.getDefaultClassLoader());
+        cacheManager =
+            cachingProvider.getCacheManager(
+                Objects.requireNonNull(resource).toURI(), cachingProvider.getDefaultClassLoader());
       } catch (URISyntaxException e) {
         throw new RuntimeException(e);
       }
     } else {
-      cacheManager = cachingProvider
-          .getCacheManager(cachingProvider.getDefaultURI(),
-              cachingProvider.getDefaultClassLoader());
+      cacheManager =
+          cachingProvider.getCacheManager(
+              cachingProvider.getDefaultURI(), cachingProvider.getDefaultClassLoader());
     }
-    cacheManagerConfigurer
-        .ifPresent(managerConfigurer -> managerConfigurer.configure(cacheManager));
+    cacheManagerConfigurer.ifPresent(
+        managerConfigurer -> managerConfigurer.configure(cacheManager));
     return cacheManager;
   }
 }

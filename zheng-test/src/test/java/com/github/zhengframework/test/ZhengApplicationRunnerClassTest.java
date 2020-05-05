@@ -30,7 +30,10 @@ public class ZhengApplicationRunnerClassTest {
   }
 
   @Test
-  @WithZhengApplication(moduleClass = {Server.Module.class,})
+  @WithZhengApplication(
+      moduleClass = {
+          Server.Module.class,
+      })
   public void testB() {
     assertNotNull(injector);
     assertNotNull(user);

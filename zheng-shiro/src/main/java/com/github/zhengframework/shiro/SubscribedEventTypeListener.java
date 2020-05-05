@@ -38,8 +38,8 @@ class SubscribedEventTypeListener implements TypeListener {
 
     final Provider<EventBus> eventBusProvider = typeEncounter.getProvider(EventBus.class);
 
-    List<Method> methods = ClassUtils
-        .getAnnotatedMethods(typeLiteral.getRawType(), Subscribe.class);
+    List<Method> methods =
+        ClassUtils.getAnnotatedMethods(typeLiteral.getRawType(), Subscribe.class);
     if (!methods.isEmpty()) {
       typeEncounter.register((InjectionListener<I>) o -> eventBusProvider.get().register(o));
     }

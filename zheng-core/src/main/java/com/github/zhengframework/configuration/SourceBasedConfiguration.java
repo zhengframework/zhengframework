@@ -34,8 +34,7 @@ public class SourceBasedConfiguration extends AbstractConfiguration {
   private final Environment environment;
 
   public SourceBasedConfiguration(
-      ConfigurationSource configurationSource,
-      Environment environment) {
+      ConfigurationSource configurationSource, Environment environment) {
     this.configurationSource = configurationSource;
     this.environment = environment;
   }
@@ -71,5 +70,4 @@ public class SourceBasedConfiguration extends AbstractConfiguration {
   public String toString() {
     return asMap().toString();
   }
-
 }

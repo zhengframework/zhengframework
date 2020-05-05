@@ -37,8 +37,7 @@ public class JpaInternalModule extends AbstractModule {
 
   private final JpaConfig persistenceConfig;
 
-  public JpaInternalModule(
-      JpaConfig persistenceConfig) {
+  public JpaInternalModule(JpaConfig persistenceConfig) {
     this.persistenceConfig = persistenceConfig;
   }
 
@@ -46,7 +45,8 @@ public class JpaInternalModule extends AbstractModule {
   protected void configure() {
     bind(JpaConfig.class).toInstance(persistenceConfig);
     OptionalBinder.newOptionalBinder(binder(), PersistenceUnitInfo.class)
-        .setDefault().toProvider(PersistenceUnitInfoProvider.class);
+        .setDefault()
+        .toProvider(PersistenceUnitInfoProvider.class);
 
     bind(JpaService.class).in(Singleton.class);
     bind(PersistService.class).to(JpaService.class);
@@ -56,14 +56,18 @@ public class JpaInternalModule extends AbstractModule {
 
     bind(JpaManagedService.class).asEagerSingleton();
 
-    bindInterceptor(Matchers.annotatedWith(Transactional.class), Matchers.any(),
-        getTransactionInterceptor());
-    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Transactional.class),
-        getTransactionInterceptor());
+    bindInterceptor(
+        Matchers.annotatedWith(Transactional.class), Matchers.any(), getTransactionInterceptor());
+    bindInterceptor(
+        Matchers.any(), Matchers.annotatedWith(Transactional.class), getTransactionInterceptor());
 
-    bindInterceptor(Matchers.annotatedWith(javax.transaction.Transactional.class), Matchers.any(),
+    bindInterceptor(
+        Matchers.annotatedWith(javax.transaction.Transactional.class),
+        Matchers.any(),
         getJavaxTransactionInterceptor());
-    bindInterceptor(Matchers.any(), Matchers.annotatedWith(javax.transaction.Transactional.class),
+    bindInterceptor(
+        Matchers.any(),
+        Matchers.annotatedWith(javax.transaction.Transactional.class),
         getJavaxTransactionInterceptor());
   }
 

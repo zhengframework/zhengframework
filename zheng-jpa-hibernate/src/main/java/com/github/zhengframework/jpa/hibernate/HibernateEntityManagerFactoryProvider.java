@@ -41,19 +41,21 @@ public class HibernateEntityManagerFactoryProvider implements EntityManagerFacto
     Configuration configuration = new Configuration();
     Properties properties = persistenceUnitInfo.getProperties();
     if (properties.getProperty("javax.persistence.jdbc.driver") != null) {
-      properties.put("hibernate.connection.driver_class",
+      properties.put(
+          "hibernate.connection.driver_class",
           properties.getProperty("javax.persistence.jdbc.driver"));
     }
     if (properties.getProperty("javax.persistence.jdbc.url") != null) {
-      properties
-          .put("hibernate.connection.url", properties.getProperty("javax.persistence.jdbc.url"));
+      properties.put(
+          "hibernate.connection.url", properties.getProperty("javax.persistence.jdbc.url"));
     }
     if (properties.getProperty("javax.persistence.jdbc.user") != null) {
-      properties.put("hibernate.connection.username",
-          properties.getProperty("javax.persistence.jdbc.user"));
+      properties.put(
+          "hibernate.connection.username", properties.getProperty("javax.persistence.jdbc.user"));
     }
     if (properties.getProperty("javax.persistence.jdbc.password") != null) {
-      properties.put("hibernate.connection.password",
+      properties.put(
+          "hibernate.connection.password",
           properties.getProperty("javax.persistence.jdbc.password"));
     } else {
       properties.put("hibernate.connection.password", "");
@@ -67,9 +69,10 @@ public class HibernateEntityManagerFactoryProvider implements EntityManagerFacto
         throw new RuntimeException(e);
       }
     }
-    ServiceRegistry registry = new StandardServiceRegistryBuilder(bootstrapServiceRegistry)
-        .applySettings(configuration.getProperties())
-        .build();
+    ServiceRegistry registry =
+        new StandardServiceRegistryBuilder(bootstrapServiceRegistry)
+            .applySettings(configuration.getProperties())
+            .build();
     return configuration.buildSessionFactory(registry);
   }
 }

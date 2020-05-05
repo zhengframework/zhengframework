@@ -33,8 +33,8 @@ public class MongodbModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MongodbConfig> mongodbConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MongodbConfig.class);
+    Map<String, MongodbConfig> mongodbConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MongodbConfig.class);
 
     for (Entry<String, MongodbConfig> entry : mongodbConfigMap.entrySet()) {
       if (entry.getKey().isEmpty()) {
@@ -50,5 +50,4 @@ public class MongodbModule extends ConfigurationAwareModule {
       }
     }
   }
-
 }

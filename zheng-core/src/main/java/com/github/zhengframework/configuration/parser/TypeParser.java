@@ -1,4 +1,4 @@
-//package com.github.zhengframework.configuration.parser;
+// package com.github.zhengframework.configuration.parser;
 
 /*-
  * #%L
@@ -21,10 +21,10 @@
  */
 //
 //
-//import java.lang.reflect.Type;
-//import java.util.Map;
+// import java.lang.reflect.Type;
+// import java.util.Map;
 //
-//public class TypeParser {
+// public class TypeParser {
 //
 //  private final Map<Type, Parser<?>> parsers;
 //
@@ -87,4 +87,4 @@
 //    }
 //  }
 //
-//}
+// }

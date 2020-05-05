@@ -33,7 +33,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-
 public class FileLocator {
 
   private String fileName;

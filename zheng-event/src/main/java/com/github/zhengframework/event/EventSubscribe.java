@@ -27,9 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marks a method as an {@link Event} subscriber.
- *
- * </code>
+ * Marks a method as an {@link Event} subscriber. </code>
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

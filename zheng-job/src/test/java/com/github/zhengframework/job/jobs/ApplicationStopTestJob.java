@@ -29,10 +29,10 @@ public class ApplicationStopTestJob extends AbstractJob {
 
   public ApplicationStopTestJob() {
     super(1);
-    }
+  }
 
-    @Override
-    public void doJob(JobExecutionContext context) throws JobExecutionException {
-        super.doJob(context);
-    }
+  @Override
+  public void doJob(JobExecutionContext context) throws JobExecutionException {
+    super.doJob(context);
+  }
 }

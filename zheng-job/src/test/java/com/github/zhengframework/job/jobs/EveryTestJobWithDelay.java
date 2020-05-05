@@ -20,7 +20,6 @@ package com.github.zhengframework.job.jobs;
  * #L%
  */
 
-
 import com.github.zhengframework.job.annotations.DelayStart;
 import com.github.zhengframework.job.annotations.Every;
 
@@ -29,6 +28,6 @@ import com.github.zhengframework.job.annotations.Every;
 public class EveryTestJobWithDelay extends AbstractJob {
 
   public EveryTestJobWithDelay() {
-        super(5);
-    }
+    super(5);
+  }
 }

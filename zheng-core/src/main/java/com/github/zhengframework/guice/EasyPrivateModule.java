@@ -29,13 +29,19 @@ import java.util.function.Consumer;
 
 public class EasyPrivateModule extends AbstractModule {
 
-  public <T> void bindAndExpose(Class<T> superClass, Class<? extends Annotation> annotation,
-      Class<? extends T> implementation, Consumer<Binder> requirements) {
+  public <T> void bindAndExpose(
+      Class<T> superClass,
+      Class<? extends Annotation> annotation,
+      Class<? extends T> implementation,
+      Consumer<Binder> requirements) {
     install(new LegModule<>(Key.get(superClass, annotation), implementation, requirements));
   }
 
-  public <T> void bindAndExpose(Class<T> superClass, Annotation annotation,
-      Class<? extends T> implementation, Consumer<Binder> requirements) {
+  public <T> void bindAndExpose(
+      Class<T> superClass,
+      Annotation annotation,
+      Class<? extends T> implementation,
+      Consumer<Binder> requirements) {
     install(new LegModule<>(Key.get(superClass, annotation), implementation, requirements));
   }
 

@@ -55,8 +55,7 @@ public class Banana {
       return false;
     }
     Banana banana = (Banana) o;
-    return getColor() == banana.getColor() &&
-        Objects.equals(getName(), banana.getName());
+    return getColor() == banana.getColor() && Objects.equals(getName(), banana.getName());
   }
 
   @Override

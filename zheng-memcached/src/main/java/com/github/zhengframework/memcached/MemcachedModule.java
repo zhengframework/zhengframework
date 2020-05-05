@@ -33,10 +33,9 @@ public class MemcachedModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MemcachedConfig> memcachedConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MemcachedConfig.class);
-    for (Entry<String, MemcachedConfig> entry : memcachedConfigMap
-        .entrySet()) {
+    Map<String, MemcachedConfig> memcachedConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MemcachedConfig.class);
+    for (Entry<String, MemcachedConfig> entry : memcachedConfigMap.entrySet()) {
       if (entry.getKey().isEmpty()) {
         MemcachedConfig memcachedConfig = entry.getValue();
         bind(MemcachedConfig.class).toInstance(memcachedConfig);
@@ -50,5 +49,4 @@ public class MemcachedModule extends ConfigurationAwareModule {
       }
     }
   }
-
 }

@@ -26,7 +26,6 @@ import com.google.inject.matcher.Matchers;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-
 public class LifecycleModule extends AbstractModule {
 
   private Matcher<Object> typeMatcher;
@@ -48,14 +47,18 @@ public class LifecycleModule extends AbstractModule {
     DestroyableManager manager = new DestroyableManager();
     bind(DestroyableManager.class).toInstance(manager);
 
-    bindListener(typeMatcher, new GeneralTypeListener<>(
-        Destroyable.class, new DestroyableTypeProcessor(manager)));
+    bindListener(
+        typeMatcher,
+        new GeneralTypeListener<>(Destroyable.class, new DestroyableTypeProcessor(manager)));
 
-    bindListener(typeMatcher, new AnnotatedMethodTypeListener<>(
-        PostConstruct.class, new PostConstructAnnotationProcessor()));
+    bindListener(
+        typeMatcher,
+        new AnnotatedMethodTypeListener<>(
+            PostConstruct.class, new PostConstructAnnotationProcessor()));
 
-    bindListener(typeMatcher, new AnnotatedMethodTypeListener<>(
-        PreDestroy.class, new PreDestroyAnnotationProcessor(manager)));
-
+    bindListener(
+        typeMatcher,
+        new AnnotatedMethodTypeListener<>(
+            PreDestroy.class, new PreDestroyAnnotationProcessor(manager)));
   }
 }

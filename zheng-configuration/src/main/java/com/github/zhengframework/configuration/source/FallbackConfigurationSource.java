@@ -41,15 +41,21 @@ public class FallbackConfigurationSource implements ConfigurationSource {
   }
 
   public FallbackConfigurationSource(Iterator<ConfigurationSource> sources) {
-    Objects.requireNonNull(sources).forEachRemaining(configurationSource -> {
-      FallbackConfigurationSource.this.sources.add(Objects.requireNonNull(configurationSource));
-    });
+    Objects.requireNonNull(sources)
+        .forEachRemaining(
+            configurationSource -> {
+              FallbackConfigurationSource.this.sources.add(
+                  Objects.requireNonNull(configurationSource));
+            });
   }
 
   public FallbackConfigurationSource(Iterable<ConfigurationSource> sources) {
-    Objects.requireNonNull(sources).forEach(configurationSource -> {
-      FallbackConfigurationSource.this.sources.add(Objects.requireNonNull(configurationSource));
-    });
+    Objects.requireNonNull(sources)
+        .forEach(
+            configurationSource -> {
+              FallbackConfigurationSource.this.sources.add(
+                  Objects.requireNonNull(configurationSource));
+            });
   }
 
   @Override

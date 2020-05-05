@@ -35,14 +35,12 @@ public class DataSourceHealthCheck extends HealthCheck {
   private List<DataSource> dataSourceList;
 
   @Inject
-  public DataSourceHealthCheck(
-      Provider<Injector> injectorProvider) {
+  public DataSourceHealthCheck(Provider<Injector> injectorProvider) {
     Injector injector = injectorProvider.get();
     dataSourceList = new ArrayList<>();
     ClassScanner<DataSource> classScanner = new ClassScanner<>(injector, DataSource.class);
     classScanner.accept(thing -> dataSourceList.add(thing));
   }
-
 
   @Override
   protected Result check() {
@@ -63,5 +61,4 @@ public class DataSourceHealthCheck extends HealthCheck {
     }
     return Result.healthy();
   }
-
 }

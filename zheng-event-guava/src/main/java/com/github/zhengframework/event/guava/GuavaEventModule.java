@@ -31,5 +31,4 @@ public class GuavaEventModule extends AbstractModule {
     install(new EventModule());
     bind(EventDispatcher.class).to(GuavaEventDispatcher.class).asEagerSingleton();
   }
-
 }

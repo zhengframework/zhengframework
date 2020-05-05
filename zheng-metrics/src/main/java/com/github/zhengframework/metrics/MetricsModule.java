@@ -39,23 +39,23 @@ public class MetricsModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MetricsConfig> metricsConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MetricsConfig.class);
+    Map<String, MetricsConfig> metricsConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MetricsConfig.class);
     for (Entry<String, MetricsConfig> entry : metricsConfigMap.entrySet()) {
       MetricsConfig metricsConfig = entry.getValue();
       if (metricsConfig.isEnable()) {
         MetricRegistry metricRegistry = new MetricRegistry();
         MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
         AnnotationResolver annotationResolver = new MethodAnnotationResolver();
-//        OptionalBinder.newOptionalBinder(binder(),MetricRegistry.class)
-//            .setDefault().to(MetricRegistry.class);
+        //        OptionalBinder.newOptionalBinder(binder(),MetricRegistry.class)
+        //            .setDefault().to(MetricRegistry.class);
         bind(MetricRegistry.class).toInstance(metricRegistry);
-        MetricsInstrumentationModule metricsInstrumentationModule = MetricsInstrumentationModule
-            .builder()
-            .withMetricRegistry(metricRegistry)
-            .withMetricNamer(metricNamer)
-            .withAnnotationMatcher(annotationResolver)
-            .build();
+        MetricsInstrumentationModule metricsInstrumentationModule =
+            MetricsInstrumentationModule.builder()
+                .withMetricRegistry(metricRegistry)
+                .withMetricNamer(metricNamer)
+                .withAnnotationMatcher(annotationResolver)
+                .build();
         install(metricsInstrumentationModule);
 
         bind(MetricsService.class).asEagerSingleton();

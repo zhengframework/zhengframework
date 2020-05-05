@@ -32,7 +32,8 @@ public class AnnotatedFieldTypeListener<T extends Annotation> implements TypeLis
   private final Class<T> annotationClass;
   private final FieldPostProcessor<T> postProcessor;
 
-  public AnnotatedFieldTypeListener(final Class<T> annotationClass, final FieldPostProcessor<T> postProcessor) {
+  public AnnotatedFieldTypeListener(
+      final Class<T> annotationClass, final FieldPostProcessor<T> postProcessor) {
     this.annotationClass = annotationClass;
     this.postProcessor = postProcessor;
   }
@@ -46,17 +47,22 @@ public class AnnotatedFieldTypeListener<T extends Annotation> implements TypeLis
     while (investigatingType != null && !investigatingType.equals(Object.class)) {
       for (final Field field : investigatingType.getDeclaredFields()) {
         if (field.isAnnotationPresent(annotationClass)) {
-          encounter.register((InjectionListener<I>) injected -> {
-            try {
-              field.setAccessible(true);
-              postProcessor.process(field.getAnnotation(annotationClass), field, injected);
-            } catch (Exception ex) {
-              throw new IllegalStateException(
-                  String.format("Failed to process annotation %s of field %s of class %s",
-                      annotationClass.getSimpleName(), field.getName(),
-                      injected.getClass().getSimpleName()), ex);
-            }
-          });
+          encounter.register(
+              (InjectionListener<I>)
+                  injected -> {
+                    try {
+                      field.setAccessible(true);
+                      postProcessor.process(field.getAnnotation(annotationClass), field, injected);
+                    } catch (Exception ex) {
+                      throw new IllegalStateException(
+                          String.format(
+                              "Failed to process annotation %s of field %s of class %s",
+                              annotationClass.getSimpleName(),
+                              field.getName(),
+                              injected.getClass().getSimpleName()),
+                          ex);
+                    }
+                  });
         }
       }
       investigatingType = investigatingType.getSuperclass();

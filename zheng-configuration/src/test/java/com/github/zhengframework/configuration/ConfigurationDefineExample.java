@@ -34,11 +34,14 @@ import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ConfigurationInfo(prefix = "zheng.example", supportGroup = true, examples = {
-    @ConfigurationExample(example = DefaultConfigurationDefineExample.class),
-    @ConfigurationExample(groupName = "first", example = FirstConfigurationDefineExample.class),
-    @ConfigurationExample(groupName = "second", example = SecondConfigurationDefineExample.class)
-})
+@ConfigurationInfo(
+    prefix = "zheng.example",
+    supportGroup = true,
+    examples = {
+        @ConfigurationExample(example = DefaultConfigurationDefineExample.class),
+        @ConfigurationExample(groupName = "first", example = FirstConfigurationDefineExample.class),
+        @ConfigurationExample(groupName = "second", example = SecondConfigurationDefineExample.class)
+    })
 @Data
 @NoArgsConstructor
 public class ConfigurationDefineExample implements ConfigurationDefine {

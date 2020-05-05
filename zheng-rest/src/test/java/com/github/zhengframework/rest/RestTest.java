@@ -22,8 +22,7 @@ public class RestTest {
   public void start() throws Exception {
 
     Client client = ClientBuilder.newClient();
-    WebTarget target = client.target("http://localhost:" + webConfig.getPort())
-        .path("/");
+    WebTarget target = client.target("http://localhost:" + webConfig.getPort()).path("/");
     String response = target.path(TestResource.PATH).request().get().readEntity(String.class);
     System.out.println(response);
     Assert.assertEquals(TestResource.MESSAGE, response);
@@ -33,15 +32,14 @@ public class RestTest {
   @WithZhengApplication(moduleClass = {MyModule.class})
   public void testInject() throws Exception {
     Client client = ClientBuilder.newClient();
-    WebTarget target = client.target("http://localhost:" + webConfig.getPort())
-        .path(webConfig.getContextPath());
-    String response1 = target.path(TestResource.PATH + "/inject").request().get()
-        .readEntity(String.class);
+    WebTarget target =
+        client.target("http://localhost:" + webConfig.getPort()).path(webConfig.getContextPath());
+    String response1 =
+        target.path(TestResource.PATH + "/inject").request().get().readEntity(String.class);
     System.out.println(response1);
-    String response2 = target.path(TestResource.PATH + "/inject").request().get()
-        .readEntity(String.class);
+    String response2 =
+        target.path(TestResource.PATH + "/inject").request().get().readEntity(String.class);
     System.out.println(response2);
     Assert.assertNotEquals(response1, response2);
   }
-
 }

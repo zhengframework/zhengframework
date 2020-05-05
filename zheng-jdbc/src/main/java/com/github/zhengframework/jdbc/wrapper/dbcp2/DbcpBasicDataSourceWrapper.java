@@ -288,8 +288,8 @@ public class DbcpBasicDataSourceWrapper extends DataSourceWrapper {
   public void setDataSourceConfig(DataSourceConfig dataSourceConfig) {
     super.setDataSourceConfig(dataSourceConfig);
     origDataSource.setDriverClassLoader(Thread.currentThread().getContextClassLoader());
-    origDataSource
-        .setDriverClassName(Objects.requireNonNull(dataSourceConfig.getDriverClassName()));
+    origDataSource.setDriverClassName(
+        Objects.requireNonNull(dataSourceConfig.getDriverClassName()));
     origDataSource.setUrl(dataSourceConfig.getUrl());
     origDataSource.setUsername(dataSourceConfig.getUsername());
     origDataSource.setPassword(dataSourceConfig.getPassword());

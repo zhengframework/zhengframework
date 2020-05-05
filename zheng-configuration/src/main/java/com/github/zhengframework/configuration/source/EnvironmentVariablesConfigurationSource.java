@@ -30,13 +30,12 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class EnvironmentVariablesConfigurationSource extends AbstractConfigurationSource {
 
-  private final static char ENV_DELIMITER = '_';
-  private final static char PROPERTIES_DELIMITER = '.';
+  private static final char ENV_DELIMITER = '_';
+  private static final char PROPERTIES_DELIMITER = '.';
 
-
-  static String convertToPropertiesKey(String environmentVariableKey,
-      String environmentContext) {
-    return environmentVariableKey.substring(environmentContext.length())
+  static String convertToPropertiesKey(String environmentVariableKey, String environmentContext) {
+    return environmentVariableKey
+        .substring(environmentContext.length())
         .replace(ENV_DELIMITER, PROPERTIES_DELIMITER);
   }
 
@@ -55,8 +54,7 @@ public class EnvironmentVariablesConfigurationSource extends AbstractConfigurati
     String environmentContext = formatEnvironmentContext(environment);
     for (Entry<String, String> entry : System.getenv().entrySet()) {
       if (entry.getKey().startsWith(environmentContext)) {
-        copyMap
-            .put(convertToPropertiesKey(entry.getKey(), environmentContext), entry.getValue());
+        copyMap.put(convertToPropertiesKey(entry.getKey(), environmentContext), entry.getValue());
       }
     }
     return copyMap;

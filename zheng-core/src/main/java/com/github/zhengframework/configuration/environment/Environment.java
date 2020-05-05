@@ -20,9 +20,7 @@ package com.github.zhengframework.configuration.environment;
  * #L%
  */
 
-
 public interface Environment {
 
   String getName();
-
 }

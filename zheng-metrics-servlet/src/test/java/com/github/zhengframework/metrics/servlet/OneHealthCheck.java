@@ -26,9 +26,6 @@ public class OneHealthCheck extends HealthCheck {
 
   @Override
   protected Result check() throws Exception {
-    return Result.builder()
-        .withDetail("key", "value")
-        .healthy()
-        .build();
+    return Result.builder().withDetail("key", "value").healthy().build();
   }
 }

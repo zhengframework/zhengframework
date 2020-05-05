@@ -28,10 +28,11 @@ public class ProgrammingWSModule extends AbstractModule {
 
   protected void configure() {
     String echoPath = "/echo222";
-    BasicServerEndpointConfig serverEndpointConfig = new BasicServerEndpointConfig(
-        EchoEndpoint.class, echoPath);
+    BasicServerEndpointConfig serverEndpointConfig =
+        new BasicServerEndpointConfig(EchoEndpoint.class, echoPath);
     requestInjection(serverEndpointConfig);
     Multibinder.newSetBinder(binder(), ServerEndpointConfig.class)
-        .addBinding().toInstance(serverEndpointConfig);
+        .addBinding()
+        .toInstance(serverEndpointConfig);
   }
 }

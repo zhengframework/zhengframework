@@ -47,18 +47,22 @@ public class CacheModule extends AbstractModule {
   @Override
   protected void configure() {
     OptionalBinder.newOptionalBinder(binder(), CachingProvider.class)
-        .setDefault().toProvider(CachingProviderProvider.class);
+        .setDefault()
+        .toProvider(CachingProviderProvider.class);
 
-    OptionalBinder.newOptionalBinder(binder(),new TypeLiteral<Configurer<CacheManager>>(){});
+    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<Configurer<CacheManager>>() {
+    });
     OptionalBinder.newOptionalBinder(binder(), CacheManager.class)
         .setDefault()
         .toProvider(CacheManagerProvider.class);
 
     OptionalBinder.newOptionalBinder(binder(), CacheResolverFactory.class)
-        .setDefault().toProvider(CacheResolverFactoryProvider.class);
+        .setDefault()
+        .toProvider(CacheResolverFactoryProvider.class);
 
     OptionalBinder.newOptionalBinder(binder(), CacheKeyGenerator.class)
-        .setDefault().to(DefaultCacheKeyGenerator.class);
+        .setDefault()
+        .to(DefaultCacheKeyGenerator.class);
 
     this.bind(new TypeLiteral<CacheContextSource<MethodInvocation>>() {
     }).to(CacheLookupUtil.class);
@@ -66,26 +70,25 @@ public class CacheModule extends AbstractModule {
     this.requestInjection(cachePutInterceptor);
     this.bindInterceptor(
         Matchers.annotatedWith(CachePut.class), Matchers.any(), cachePutInterceptor);
-    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(CachePut.class),
-        cachePutInterceptor);
+    this.bindInterceptor(
+        Matchers.any(), Matchers.annotatedWith(CachePut.class), cachePutInterceptor);
     CacheResultInterceptor cacheResultInterceptor = new CacheResultInterceptor();
     this.requestInjection(cacheResultInterceptor);
-    this.bindInterceptor(Matchers.annotatedWith(CacheResult.class), Matchers.any(),
-        cacheResultInterceptor);
-    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(CacheResult.class),
-        cacheResultInterceptor);
+    this.bindInterceptor(
+        Matchers.annotatedWith(CacheResult.class), Matchers.any(), cacheResultInterceptor);
+    this.bindInterceptor(
+        Matchers.any(), Matchers.annotatedWith(CacheResult.class), cacheResultInterceptor);
     CacheRemoveEntryInterceptor cacheRemoveEntryInterceptor = new CacheRemoveEntryInterceptor();
     this.requestInjection(cacheRemoveEntryInterceptor);
-    this.bindInterceptor(Matchers.annotatedWith(CacheRemove.class), Matchers.any(),
-        cacheRemoveEntryInterceptor);
-    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(CacheRemove.class),
-        cacheRemoveEntryInterceptor);
+    this.bindInterceptor(
+        Matchers.annotatedWith(CacheRemove.class), Matchers.any(), cacheRemoveEntryInterceptor);
+    this.bindInterceptor(
+        Matchers.any(), Matchers.annotatedWith(CacheRemove.class), cacheRemoveEntryInterceptor);
     CacheRemoveAllInterceptor cacheRemoveAllInterceptor = new CacheRemoveAllInterceptor();
     this.requestInjection(cacheRemoveAllInterceptor);
-    this.bindInterceptor(Matchers.annotatedWith(CacheRemoveAll.class), Matchers.any(),
-        cacheRemoveAllInterceptor);
-    this.bindInterceptor(Matchers.any(), Matchers.annotatedWith(CacheRemoveAll.class),
-        cacheRemoveAllInterceptor);
-
+    this.bindInterceptor(
+        Matchers.annotatedWith(CacheRemoveAll.class), Matchers.any(), cacheRemoveAllInterceptor);
+    this.bindInterceptor(
+        Matchers.any(), Matchers.annotatedWith(CacheRemoveAll.class), cacheRemoveAllInterceptor);
   }
 }

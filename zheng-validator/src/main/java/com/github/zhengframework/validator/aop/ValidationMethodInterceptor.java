@@ -44,8 +44,8 @@ public class ValidationMethodInterceptor implements MethodInterceptor {
   private final Provider<ValidationContext> validationContext;
 
   @Inject
-  public ValidationMethodInterceptor(Provider<Validator> validatorProvider,
-      Provider<ValidationContext> validationContext) {
+  public ValidationMethodInterceptor(
+      Provider<Validator> validatorProvider, Provider<ValidationContext> validationContext) {
     this.validatorProvider = validatorProvider;
     this.validationContext = validationContext;
   }
@@ -55,25 +55,20 @@ public class ValidationMethodInterceptor implements MethodInterceptor {
     ValidationContext context = this.validationContext.get();
     final Class<?>[] groups = context.getContextGroups();
     ExecutableValidator executableValidator = validatorProvider.get().forExecutables();
-    Set<ConstraintViolation<Object>> violations = executableValidator.validateParameters(
-        invocation.getThis(), invocation.getMethod(), invocation.getArguments(), groups
-    );
+    Set<ConstraintViolation<Object>> violations =
+        executableValidator.validateParameters(
+            invocation.getThis(), invocation.getMethod(), invocation.getArguments(), groups);
 
     if (!violations.isEmpty()) {
       throw new ConstraintViolationException(
-          getMessage(invocation.getMethod(), invocation.getArguments(), violations),
-          violations
-      );
+          getMessage(invocation.getMethod(), invocation.getArguments(), violations), violations);
     }
 
     Object result = invocation.proceed();
 
-    violations = executableValidator.validateReturnValue(
-        invocation.getThis(),
-        invocation.getMethod(),
-        result,
-        groups
-    );
+    violations =
+        executableValidator.validateReturnValue(
+            invocation.getThis(), invocation.getMethod(), result, groups);
 
     if (!violations.isEmpty()) {
       throw new ConstraintViolationException(
@@ -82,8 +77,8 @@ public class ValidationMethodInterceptor implements MethodInterceptor {
     return result;
   }
 
-  private String getMessage(Member member, Object[] args,
-      Set<? extends ConstraintViolation<?>> violations) {
+  private String getMessage(
+      Member member, Object[] args, Set<? extends ConstraintViolation<?>> violations) {
 
     StringBuilder message = new StringBuilder();
     message.append(violations.size());

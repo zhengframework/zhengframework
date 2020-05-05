@@ -38,6 +38,8 @@ import org.apache.shiro.subject.Subject;
 @Slf4j
 public class LoginServlet extends HttpServlet {
 
+  private static final long serialVersionUID = -479470808266555787L;
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -72,43 +74,46 @@ public class LoginServlet extends HttpServlet {
       } catch (IncorrectCredentialsException ice) {
         log.info("Password for account " + token.getPrincipal() + " was incorrect!");
       } catch (LockedAccountException lae) {
-        log.info("The account for username " + token.getPrincipal() + " is locked.  " +
-            "Please contact your administrator to unlock it.");
+        log.info(
+            "The account for username "
+                + token.getPrincipal()
+                + " is locked.  "
+                + "Please contact your administrator to unlock it.");
       }
       // ... catch more exceptions here (maybe custom ones specific to your application?
       catch (AuthenticationException ae) {
-        //unexpected condition?  error?
+        // unexpected condition?  error?
       }
     }
 
-    //say who they are:
-    //print their identifying principal (in this case, a username):
+    // say who they are:
+    // print their identifying principal (in this case, a username):
     log.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
-    //test a role:
+    // test a role:
     if (currentUser.hasRole("schwartz")) {
       log.info("May the Schwartz be with you!");
     } else {
       log.info("Hello, mere mortal.");
     }
 
-    //test a typed permission (not instance-level)
+    // test a typed permission (not instance-level)
     if (currentUser.isPermitted("lightsaber:wield")) {
       log.info("You may use a lightsaber ring.  Use it wisely.");
     } else {
       log.info("Sorry, lightsaber rings are for schwartz masters only.");
     }
 
-    //a (very powerful) Instance Level permission:
+    // a (very powerful) Instance Level permission:
     if (currentUser.isPermitted("winnebago:drive:eagle5")) {
-      log.info("You are permitted to 'drive' the winnebago with license plate (id) 'eagle5'.  " +
-          "Here are the keys - have fun!");
+      log.info(
+          "You are permitted to 'drive' the winnebago with license plate (id) 'eagle5'.  "
+              + "Here are the keys - have fun!");
     } else {
       log.info("Sorry, you aren't allowed to drive the 'eagle5' winnebago!");
     }
 
     resp.getWriter().println("currentUser=" + currentUser.getPrincipal());
-    //all done - log out!
+    // all done - log out!
     currentUser.logout();
-
   }
 }

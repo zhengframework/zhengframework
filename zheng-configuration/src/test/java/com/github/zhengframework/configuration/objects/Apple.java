@@ -61,9 +61,9 @@ public class Apple {
       return false;
     }
     Apple apple = (Apple) o;
-    return isBig() == apple.isBig() &&
-        Double.compare(apple.getWeight(), getWeight()) == 0 &&
-        Objects.equals(getName(), apple.getName());
+    return isBig() == apple.isBig()
+        && Double.compare(apple.getWeight(), getWeight()) == 0
+        && Objects.equals(getName(), apple.getName());
   }
 
   @Override
@@ -73,10 +73,6 @@ public class Apple {
 
   @Override
   public String toString() {
-    return "Apple{" +
-        "name='" + name + '\'' +
-        ", big=" + big +
-        ", weight=" + weight +
-        '}';
+    return "Apple{" + "name='" + name + '\'' + ", big=" + big + ", weight=" + weight + '}';
   }
 }

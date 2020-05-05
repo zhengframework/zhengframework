@@ -29,5 +29,4 @@ public class SLF4JBridgeModule extends AbstractModule {
     SLF4JBridgeHandler.removeHandlersForRootLogger();
     SLF4JBridgeHandler.install();
   }
-
 }

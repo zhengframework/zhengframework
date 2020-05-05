@@ -39,5 +39,4 @@ public final class SwaggerConfig implements ConfigurationDefine {
   private boolean enableUI = true;
 
   private boolean disableCache = false;
-
 }

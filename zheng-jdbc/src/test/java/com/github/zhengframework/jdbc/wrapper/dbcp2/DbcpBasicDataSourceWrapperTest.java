@@ -39,37 +39,50 @@ public class DbcpBasicDataSourceWrapperTest {
     final boolean testWhileIdle = true;
     final long timeBetweenEvictionRunsMillis = 100;
     final String validationQuery = "SELECT 1";
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(Names.named("dbcp.defaultAutoCommit")).to(autoCommit);
-        bind(Properties.class).annotatedWith(Names.named("JDBC.driverProperties"))
-            .toInstance(driverProperties);
-        bindConstant().annotatedWith(Names.named("dbcp.accessToUnderlyingConnectionAllowed"))
-            .to(accessToUnderlyingConnectionAllowed);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultCatalog")).to(defaultCatalog);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultReadOnly")).to(defaultReadOnly);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultTransactionIsolation"))
-            .to(defaultTransactionIsolation);
-        bindConstant().annotatedWith(Names.named("dbcp.initialSize")).to(initialSize);
-        bindConstant().annotatedWith(Names.named("dbcp.maxTotal")).to(maxTotal);
-        bindConstant().annotatedWith(Names.named("dbcp.maxIdle")).to(maxIdle);
-        bindConstant().annotatedWith(Names.named("dbcp.maxOpenPreparedStatements"))
-            .to(maxOpenPreparedStatements);
-        bindConstant().annotatedWith(Names.named("dbcp.maxWaitMillis")).to(maxWaitMillis);
-        bindConstant().annotatedWith(Names.named("dbcp.minIdle")).to(minIdle);
-        bindConstant().annotatedWith(Names.named("dbcp.numTestsPerEvictionRun"))
-            .to(numTestsPerEvictionRun);
-        bindConstant().annotatedWith(Names.named("dbcp.poolPreparedStatements"))
-            .to(poolPreparedStatements);
-        bindConstant().annotatedWith(Names.named("dbcp.testOnBorrow")).to(testOnBorrow);
-        bindConstant().annotatedWith(Names.named("dbcp.testOnReturn")).to(testOnReturn);
-        bindConstant().annotatedWith(Names.named("dbcp.testWhileIdle")).to(testWhileIdle);
-        bindConstant().annotatedWith(Names.named("dbcp.timeBetweenEvictionRunsMillis"))
-            .to(timeBetweenEvictionRunsMillis);
-        bindConstant().annotatedWith(Names.named("dbcp.validationQuery")).to(validationQuery);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(Names.named("dbcp.defaultAutoCommit")).to(autoCommit);
+                bind(Properties.class)
+                    .annotatedWith(Names.named("JDBC.driverProperties"))
+                    .toInstance(driverProperties);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.accessToUnderlyingConnectionAllowed"))
+                    .to(accessToUnderlyingConnectionAllowed);
+                bindConstant().annotatedWith(Names.named("dbcp.defaultCatalog")).to(defaultCatalog);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultReadOnly"))
+                    .to(defaultReadOnly);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultTransactionIsolation"))
+                    .to(defaultTransactionIsolation);
+                bindConstant().annotatedWith(Names.named("dbcp.initialSize")).to(initialSize);
+                bindConstant().annotatedWith(Names.named("dbcp.maxTotal")).to(maxTotal);
+                bindConstant().annotatedWith(Names.named("dbcp.maxIdle")).to(maxIdle);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.maxOpenPreparedStatements"))
+                    .to(maxOpenPreparedStatements);
+                bindConstant().annotatedWith(Names.named("dbcp.maxWaitMillis")).to(maxWaitMillis);
+                bindConstant().annotatedWith(Names.named("dbcp.minIdle")).to(minIdle);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.numTestsPerEvictionRun"))
+                    .to(numTestsPerEvictionRun);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.poolPreparedStatements"))
+                    .to(poolPreparedStatements);
+                bindConstant().annotatedWith(Names.named("dbcp.testOnBorrow")).to(testOnBorrow);
+                bindConstant().annotatedWith(Names.named("dbcp.testOnReturn")).to(testOnReturn);
+                bindConstant().annotatedWith(Names.named("dbcp.testWhileIdle")).to(testWhileIdle);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.timeBetweenEvictionRunsMillis"))
+                    .to(timeBetweenEvictionRunsMillis);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.validationQuery"))
+                    .to(validationQuery);
+              }
+            });
     DataSourceConfig dataSourceConfig = new DataSourceConfig();
     dataSourceConfig.setDriverClassName(driverClassName);
     dataSourceConfig.setUrl(url);
@@ -87,8 +100,8 @@ public class DbcpBasicDataSourceWrapperTest {
     assertEquals(password, dataSource.getPassword());
     assertEquals(autoCommit, dataSource.getDefaultAutoCommit());
     // Cannot test driver properties.
-    assertEquals(accessToUnderlyingConnectionAllowed,
-        dataSource.isAccessToUnderlyingConnectionAllowed());
+    assertEquals(
+        accessToUnderlyingConnectionAllowed, dataSource.isAccessToUnderlyingConnectionAllowed());
     assertEquals(defaultCatalog, dataSource.getDefaultCatalog());
     assertEquals(defaultReadOnly, dataSource.getDefaultReadOnly());
     assertEquals(defaultTransactionIsolation, dataSource.getDefaultTransactionIsolation());
@@ -106,5 +119,4 @@ public class DbcpBasicDataSourceWrapperTest {
     assertEquals(timeBetweenEvictionRunsMillis, dataSource.getTimeBetweenEvictionRunsMillis());
     assertEquals(validationQuery, dataSource.getValidationQuery());
   }
-
 }

@@ -33,27 +33,28 @@ public class FileConfigurationParserSelector implements FileConfigurationParser 
   private final List<FileConfigurationParser> parsers;
   private final String[] supportFileTypes;
 
-  public FileConfigurationParserSelector(
-      List<FileConfigurationParser> parsers) {
+  public FileConfigurationParserSelector(List<FileConfigurationParser> parsers) {
     this.parsers = Objects.requireNonNull(parsers);
 
-    supportFileTypes = parsers.stream().map(FileConfigurationParser::supportFileTypes)
-        .flatMap(Arrays::stream)
-        .distinct().toArray(String[]::new);
+    supportFileTypes =
+        parsers.stream()
+            .map(FileConfigurationParser::supportFileTypes)
+            .flatMap(Arrays::stream)
+            .distinct()
+            .toArray(String[]::new);
   }
 
   @Override
   public String[] supportFileTypes() {
-    return supportFileTypes;
+    return Arrays.copyOf(supportFileTypes, supportFileTypes.length);
   }
 
   @Override
   public Map<String, String> parse(String fileName, InputStream inputStream) {
     String s = Objects.requireNonNull(fileName);
     String type = s.substring(s.lastIndexOf("."));
-    Optional<FileConfigurationParser> first = parsers.stream()
-        .filter(p -> ArrayUtils.contains(p.supportFileTypes(), type))
-        .findFirst();
+    Optional<FileConfigurationParser> first =
+        parsers.stream().filter(p -> ArrayUtils.contains(p.supportFileTypes(), type)).findFirst();
     if (first.isPresent()) {
       return first.get().parse(fileName, inputStream);
     }

@@ -34,5 +34,4 @@ public class LogbackModule extends AbstractModule {
     propagator.setResetJUL(true);
     root.getLoggerContext().addListener(propagator);
   }
-
 }

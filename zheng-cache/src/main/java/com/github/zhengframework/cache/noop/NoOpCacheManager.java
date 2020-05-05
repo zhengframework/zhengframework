@@ -75,6 +75,7 @@ public class NoOpCacheManager implements CacheManager {
     return getCache(name);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public <K, V> Cache<K, V> getCache(String name) {
     Cache cache = this.caches.get(name);
@@ -103,12 +104,10 @@ public class NoOpCacheManager implements CacheManager {
 
   @Override
   public void enableManagement(String s, boolean b) {
-
   }
 
   @Override
   public void enableStatistics(String s, boolean b) {
-
   }
 
   @Override

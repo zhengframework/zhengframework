@@ -30,34 +30,33 @@ import org.quartz.Trigger;
 @Target(ElementType.TYPE)
 public @interface Every {
 
-    String value() default "";
+  String value() default "";
 
-    /**
-     * The name of this job. If not specified, the name of the job will default to the canonical name
-     * of the annotated class
-     *
-     * @return the name of the job
-     */
-    String jobName() default "";
+  /**
+   * The name of this job. If not specified, the name of the job will default to the canonical name
+   * of the annotated class
+   *
+   * @return the name of the job
+   */
+  String jobName() default "";
 
-    int repeatCount() default -1;
+  int repeatCount() default -1;
 
-    boolean requestRecovery() default false;
+  boolean requestRecovery() default false;
 
-    boolean storeDurably() default false;
+  boolean storeDurably() default false;
 
-    int priority() default Trigger.DEFAULT_PRIORITY;
+  int priority() default Trigger.DEFAULT_PRIORITY;
 
-    MisfirePolicy misfirePolicy() default MisfirePolicy.SMART;
+  MisfirePolicy misfirePolicy() default MisfirePolicy.SMART;
 
-    enum MisfirePolicy {
-        SMART,
-        IGNORE_MISFIRES,
-        FIRE_NOW,
-        NOW_WITH_EXISTING_COUNT,
-        NOW_WITH_REMAINING_COUNT,
-        NEXT_WITH_EXISTING_COUNT,
-        NEXT_WITH_REMAINING_COUNT,
-    }
-
+  enum MisfirePolicy {
+    SMART,
+    IGNORE_MISFIRES,
+    FIRE_NOW,
+    NOW_WITH_EXISTING_COUNT,
+    NOW_WITH_REMAINING_COUNT,
+    NEXT_WITH_EXISTING_COUNT,
+    NEXT_WITH_REMAINING_COUNT,
+  }
 }

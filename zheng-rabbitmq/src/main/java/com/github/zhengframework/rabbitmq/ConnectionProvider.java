@@ -27,14 +27,13 @@ import java.util.concurrent.TimeoutException;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-//@Singleton
+// @Singleton
 public class ConnectionProvider implements Provider<Connection> {
 
   private Provider<ConnectionFactory> connectionFactoryProvider;
 
   @Inject
-  public ConnectionProvider(
-      Provider<ConnectionFactory> connectionFactoryProvider) {
+  public ConnectionProvider(Provider<ConnectionFactory> connectionFactoryProvider) {
 
     this.connectionFactoryProvider = connectionFactoryProvider;
   }
@@ -47,5 +46,4 @@ public class ConnectionProvider implements Provider<Connection> {
       throw new RuntimeException(e);
     }
   }
-
 }

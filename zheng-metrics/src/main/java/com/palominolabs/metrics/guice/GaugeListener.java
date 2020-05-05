@@ -37,7 +37,9 @@ public class GaugeListener implements TypeListener {
   private final MetricNamer metricNamer;
   private final AnnotationResolver annotationResolver;
 
-  public GaugeListener(MetricRegistry metricRegistry, MetricNamer metricNamer,
+  public GaugeListener(
+      MetricRegistry metricRegistry,
+      MetricNamer metricNamer,
       final AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.metricNamer = metricNamer;
@@ -67,8 +69,8 @@ public class GaugeListener implements TypeListener {
 
             encounter.register(new GaugeInjectionListener<>(metricRegistry, metricName, method));
           } else {
-            encounter.addError("Method %s is annotated with @Gauge but requires parameters.",
-                method);
+            encounter.addError(
+                "Method %s is annotated with @Gauge but requires parameters.", method);
           }
         }
       }

@@ -39,15 +39,16 @@ public class ValueFunctions {
 
   private static final Set<String> TRUE = ImmutableSet.of("true", "yes", "on", "1");
   private static final Set<String> FALSE = ImmutableSet.of("false", "no", "off", "0");
-  private static final Parser<Boolean> STRING_TO_BOOLEAN = value -> {
-    String lower = Strings.nullToEmpty(value).toLowerCase();
-    if (TRUE.contains(lower)) {
-      return true;
-    } else if (FALSE.contains(lower)) {
-      return false;
-    }
-    throw new IllegalStateException("cannot parse boolean value: " + value);
-  };
+  private static final Parser<Boolean> STRING_TO_BOOLEAN =
+      value -> {
+        String lower = Strings.nullToEmpty(value).toLowerCase();
+        if (TRUE.contains(lower)) {
+          return true;
+        } else if (FALSE.contains(lower)) {
+          return false;
+        }
+        throw new IllegalStateException("cannot parse boolean value: " + value);
+      };
 
   public static Parser<Boolean> toBoolean() {
     return STRING_TO_BOOLEAN;
@@ -97,5 +98,4 @@ public class ValueFunctions {
   public static Parser<List<String>> toList(String separator) {
     return value -> Arrays.asList(value.split(separator));
   }
-
 }

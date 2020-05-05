@@ -34,8 +34,8 @@ public class MyBatisModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MyBatisConfig> myBatisConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MyBatisConfig.class);
+    Map<String, MyBatisConfig> myBatisConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MyBatisConfig.class);
     MyBatisConfig myBatisConfig = myBatisConfigMap.get("");
     requireBinding(Key.get(DataSource.class));
     install(new MyBatisInternalModule(myBatisConfig));
@@ -45,10 +45,12 @@ public class MyBatisModule extends ConfigurationAwareModule {
         ExposedPrivateModule module = extraModuleClass.getDeclaredConstructor().newInstance();
         log.info("install extra module: " + extraModuleClass.getName());
         install(module);
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new RuntimeException(e);
       }
     }
   }
-
 }

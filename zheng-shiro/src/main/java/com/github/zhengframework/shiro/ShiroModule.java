@@ -49,19 +49,18 @@ import org.apache.shiro.session.mgt.SessionManager;
  */
 public class ShiroModule extends ConfigurationAwareModule {
 
-
   @Override
   protected void configure() {
-    Map<String, ShiroConfig> shiroConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), ShiroConfig.class);
+    Map<String, ShiroConfig> shiroConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), ShiroConfig.class);
     ShiroConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroConfig());
 
     Ini ini = new Ini();
     ini.loadFromPath(shiroConfig.getIniConfig());
     BasicIniEnvironment environment = new BasicIniEnvironment(ini);
     bind(Environment.class).toInstance(environment);
-    DefaultSecurityManager securityManager = (DefaultSecurityManager) environment
-        .getSecurityManager();
+    DefaultSecurityManager securityManager =
+        (DefaultSecurityManager) environment.getSecurityManager();
     RememberMeManager rememberMeManager = securityManager.getRememberMeManager();
     if (rememberMeManager != null) {
       requestInjection(rememberMeManager);
@@ -117,5 +116,4 @@ public class ShiroModule extends ConfigurationAwareModule {
     install(new ShiroAopModule());
     bind(ShiroService.class).asEagerSingleton();
   }
-
 }

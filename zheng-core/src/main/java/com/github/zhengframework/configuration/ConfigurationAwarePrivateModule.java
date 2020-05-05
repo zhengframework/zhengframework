@@ -23,8 +23,8 @@ package com.github.zhengframework.configuration;
 import com.google.common.base.Preconditions;
 import com.google.inject.PrivateModule;
 
-public abstract class ConfigurationAwarePrivateModule extends PrivateModule implements
-    ConfigurationAware {
+public abstract class ConfigurationAwarePrivateModule extends PrivateModule
+    implements ConfigurationAware {
 
   private Configuration configuration;
 
@@ -37,5 +37,4 @@ public abstract class ConfigurationAwarePrivateModule extends PrivateModule impl
   public void initConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
-
 }

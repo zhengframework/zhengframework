@@ -40,9 +40,8 @@ public class HttpHealthCheck extends NamedHealthCheck {
   private final Duration readTimeout;
   private final Duration connectionTimeout;
 
-  public HttpHealthCheck(final String url,
-      final Duration readTimeout,
-      final Duration connectionTimeout) {
+  public HttpHealthCheck(
+      final String url, final Duration readTimeout, final Duration connectionTimeout) {
     this.url = Objects.requireNonNull(url);
     this.readTimeout = readTimeout;
     this.connectionTimeout = connectionTimeout;
@@ -69,8 +68,8 @@ public class HttpHealthCheck extends NamedHealthCheck {
     }
 
     log.debug("Health check against url={} failed with response={}", url, httpHealthResponse);
-    return Result.unhealthy("Http health check against url=%s failed with response=%s", url,
-        httpHealthResponse);
+    return Result.unhealthy(
+        "Http health check against url=%s failed with response=%s", url, httpHealthResponse);
   }
 
   protected HttpHealthResponse httpCheck(final String input) throws IOException {
@@ -80,7 +79,8 @@ public class HttpHealthCheck extends NamedHealthCheck {
     urlConnection.setReadTimeout((int) readTimeout.toMillis());
     urlConnection.setRequestMethod("GET");
     urlConnection.connect();
-    return new HttpHealthResponse(urlConnection.getResponseCode(),
+    return new HttpHealthResponse(
+        urlConnection.getResponseCode(),
         urlConnection.getResponseMessage(),
         IOUtils.toString(urlConnection.getInputStream(), Charset.defaultCharset()));
   }

@@ -31,5 +31,4 @@ public class MySingleton {
   public String call() {
     return "MyService(" + hashCode() + ")";
   }
-
 }

@@ -40,8 +40,8 @@ public class CommonsDBUtilsModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, CommonsDbUtilsConfig> configMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), CommonsDbUtilsConfig.class);
+    Map<String, CommonsDbUtilsConfig> configMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), CommonsDbUtilsConfig.class);
     for (Entry<String, CommonsDbUtilsConfig> entry : configMap.entrySet()) {
       String name = entry.getKey();
       CommonsDbUtilsConfig dbUtilsConfig = entry.getValue();
@@ -49,28 +49,32 @@ public class CommonsDBUtilsModule extends ConfigurationAwareModule {
         bind(CommonsDbUtilsConfig.class).toInstance(dbUtilsConfig);
         if (dbUtilsConfig.isEnable()) {
           OptionalBinder.newOptionalBinder(binder(), Key.get(ExecutorService.class))
-              .setDefault().toInstance(Executors.newCachedThreadPool());
+              .setDefault()
+              .toInstance(Executors.newCachedThreadPool());
           bind(Key.get(QueryRunner.class))
               .toProvider(new QueryRunnerProvider(getProvider(Key.get(DataSource.class))));
           bind(Key.get(AsyncQueryRunner.class))
-              .toProvider(new AsyncQueryRunnerProvider(getProvider(Key.get(DataSource.class))
-                  , getProvider(Key.get(ExecutorService.class))));
+              .toProvider(
+                  new AsyncQueryRunnerProvider(
+                      getProvider(Key.get(DataSource.class)),
+                      getProvider(Key.get(ExecutorService.class))));
         }
       } else {
         bind(Key.get(CommonsDbUtilsConfig.class, named(name))).toInstance(dbUtilsConfig);
         if (dbUtilsConfig.isEnable()) {
           OptionalBinder.newOptionalBinder(binder(), Key.get(ExecutorService.class, named(name)))
-              .setDefault().toInstance(Executors.newCachedThreadPool());
+              .setDefault()
+              .toInstance(Executors.newCachedThreadPool());
           bind(Key.get(QueryRunner.class, named(name)))
               .toProvider(
                   new QueryRunnerProvider(getProvider(Key.get(DataSource.class, named(name)))));
           bind(Key.get(AsyncQueryRunner.class, named(name)))
               .toProvider(
-                  new AsyncQueryRunnerProvider(getProvider(Key.get(DataSource.class, named(name)))
-                      , getProvider(Key.get(ExecutorService.class, named(name)))));
+                  new AsyncQueryRunnerProvider(
+                      getProvider(Key.get(DataSource.class, named(name))),
+                      getProvider(Key.get(ExecutorService.class, named(name)))));
         }
       }
     }
   }
-
 }

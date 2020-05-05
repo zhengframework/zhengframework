@@ -24,15 +24,16 @@ import io.undertow.server.handlers.resource.Resource;
 import io.undertow.server.handlers.resource.ResourceChangeListener;
 import io.undertow.server.handlers.resource.ResourceManager;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class ResourceManagerCollection implements ResourceManager {
 
   private final ResourceManager[] resourceManagers;
 
-  public ResourceManagerCollection(
-      ResourceManager... resourceManagers) {
-    this.resourceManagers = Objects.requireNonNull(resourceManagers);
+  public ResourceManagerCollection(ResourceManager... resourceManagers) {
+    ResourceManager[] resourceManagers1 = Objects.requireNonNull(resourceManagers);
+    this.resourceManagers = Arrays.copyOf(resourceManagers1, resourceManagers1.length);
   }
 
   @Override

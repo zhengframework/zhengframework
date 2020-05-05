@@ -38,7 +38,8 @@ public class TimedInterceptor implements MethodInterceptor {
 
   @Override
   public Object invoke(MethodInvocation invocation) throws Throwable {
-    // Since these timers are always created via the default ctor (via MetricRegister#timer), they always use
+    // Since these timers are always created via the default ctor (via MetricRegister#timer), they
+    // always use
     // nanoTime, so we can save an allocation here by not using Context.
     long start = System.nanoTime();
     try {

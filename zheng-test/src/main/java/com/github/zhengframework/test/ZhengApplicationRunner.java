@@ -53,7 +53,6 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
     } else {
       classHolder = new WithZhengApplicationHolder();
     }
-
   }
 
   private Optional<WithZhengApplicationHolder> getWithZhengApplicationFor(
@@ -75,9 +74,10 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
     if (holder.getConfigurationClass() == null) {
       if (StringUtils.isNotEmpty(holder.getConfigFile())) {
         log.info("use ConfigFile={}", holder.getConfigFile());
-        Configuration configuration = new ConfigurationBuilder()
-            .withConfigurationSource(new FileConfigurationSource(holder.getConfigFile()))
-            .build();
+        Configuration configuration =
+            new ConfigurationBuilder()
+                .withConfigurationSource(new FileConfigurationSource(holder.getConfigFile()))
+                .build();
         builder.withConfiguration(configuration);
       }
     } else {
@@ -85,7 +85,10 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
         log.info("user Configuration={}", holder.getConfigurationClass().getName());
         Configuration configuration = holder.getConfigurationClass().getConstructor().newInstance();
         builder.withConfiguration(configuration);
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new InitializationError(e);
       }
     }
@@ -95,7 +98,10 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
     for (Class<? extends Module> moduleClass : holder.getModuleClass()) {
       try {
         moduleList.add(moduleClass.getConstructor().newInstance());
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         log.error("create ZhengApplication fail, holder={}", holder, e);
         throw new InitializationError(e);
       }
@@ -109,8 +115,9 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
   @SneakyThrows
   @Override
   protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
-    WithZhengApplicationHolder current = classHolder
-        .merge(getWithZhengApplicationFor(method).orElse(new WithZhengApplicationHolder()));
+    WithZhengApplicationHolder current =
+        classHolder.merge(
+            getWithZhengApplicationFor(method).orElse(new WithZhengApplicationHolder()));
     ZhengApplication application = createZhengApplication(current);
     application.start();
     injector = application.getInjector();

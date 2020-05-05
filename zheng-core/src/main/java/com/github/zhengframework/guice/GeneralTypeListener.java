@@ -35,24 +35,25 @@ public class GeneralTypeListener<T> implements TypeListener {
     this.postProcessor = postProcessor;
   }
 
+  @SuppressWarnings("unchecked")
   public <I> void hear(final TypeLiteral<I> type, final TypeEncounter<I> encounter) {
     final Class<? super I> actualType = type.getRawType();
     if (!Utils.isPackageValid(actualType)) {
       return;
     }
     if (typeClass.isAssignableFrom(actualType)) {
-      encounter.register(new InjectionListener<I>() {
-        @Override
-        public void afterInjection(final I injectee) {
-          try {
-            postProcessor.process((T) injectee);
-          } catch (Exception ex) {
-            throw new IllegalStateException(
-                String.format("Failed to process type %s of class %s",
-                    typeClass.getSimpleName(), injectee.getClass().getSimpleName()), ex);
-          }
-        }
-      });
+      encounter.register(
+          (InjectionListener<I>) injectee -> {
+            try {
+              postProcessor.process((T) injectee);
+            } catch (Exception ex) {
+              throw new IllegalStateException(
+                  String.format(
+                      "Failed to process type %s of class %s",
+                      typeClass.getSimpleName(), injectee.getClass().getSimpleName()),
+                  ex);
+            }
+          });
     }
   }
 }

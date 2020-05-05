@@ -69,8 +69,7 @@ public class HomeDirectoryLocationStrategy implements FileLocationStrategy {
   }
 
   private String fetchBasePath(final FileLocator locator) {
-    if (withBasePath
-        && StringUtils.isNotEmpty(locator.getBasePath())) {
+    if (withBasePath && StringUtils.isNotEmpty(locator.getBasePath())) {
 
       final StringBuilder fName = new StringBuilder();
       fName.append(homeDirectory);

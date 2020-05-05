@@ -28,8 +28,7 @@ public class JpaManagedService implements Service {
   private final JpaService jpaService;
 
   @Inject
-  public JpaManagedService(
-      JpaService jpaService) {
+  public JpaManagedService(JpaService jpaService) {
     this.jpaService = jpaService;
   }
 

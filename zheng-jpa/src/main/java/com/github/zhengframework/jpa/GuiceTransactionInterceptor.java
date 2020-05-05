@@ -126,8 +126,8 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
    * @param txn A JPA Transaction to issue rollbacks on
    * @return rollbackIfNecessary
    */
-  private boolean rollbackIfNecessary(final Transactional transactional, final Exception e,
-      final EntityTransaction txn) {
+  private boolean rollbackIfNecessary(
+      final Transactional transactional, final Exception e, final EntityTransaction txn) {
     boolean commit = true;
 
     // check rollback clauses

@@ -19,8 +19,9 @@ public class EclipseLinkTest {
     JpaModuleTest.test(injector);
   }
 
-  @WithZhengApplication(configFile = "application_group.properties"
-      , moduleClass = JpaMultiModule.class,
+  @WithZhengApplication(
+      configFile = "application_group.properties",
+      moduleClass = JpaMultiModule.class,
       excludeModuleProviderClass = JpaModuleProvider.class)
   @Test
   public void testGroup() throws Exception {

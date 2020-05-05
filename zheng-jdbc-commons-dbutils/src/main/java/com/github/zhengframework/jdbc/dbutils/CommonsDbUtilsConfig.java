@@ -33,5 +33,4 @@ import org.kohsuke.MetaInfServices;
 public class CommonsDbUtilsConfig implements ConfigurationDefine {
 
   private boolean enable = true;
-
 }

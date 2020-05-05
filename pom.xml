@@ -4,6 +4,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>zhengframework</artifactId>
 
+  <ciManagement>
+    <system>github</system>
+    <url>
+      https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
+    </url>
+  </ciManagement>
   <build>
     <pluginManagement>
       <plugins>
@@ -92,24 +98,14 @@
           <artifactId>tidy-maven-plugin</artifactId>
           <version>${tidy-maven-plugin.version}</version>
         </plugin>
+        <plugin>
+          <artifactId>fmt-maven-plugin</artifactId>
+          <groupId>com.coveo</groupId>
+          <version>${fmt-maven-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>tidy-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs</artifactId>
-            <version>${spotbugs.version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
@@ -133,7 +129,6 @@
         <artifactId>maven-resources-plugin</artifactId>
       </plugin>
       <plugin>
-        <artifactId>maven-site-plugin</artifactId>
         <executions>
           <execution>
             <goals>
@@ -143,6 +138,7 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
         <configuration>
           <locales>en</locales>
           <skipDeploy>true</skipDeploy>
@@ -164,16 +160,7 @@
           <target>1.8</target>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <goals>deploy</goals>
-          <releaseProfiles>ossrh</releaseProfiles>
-          <useReleaseProfile>false</useReleaseProfile>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
@@ -205,16 +192,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <configuration>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <serverId>ossrh</serverId>
-        </configuration>
-        <extensions>true</extensions>
-      </plugin>
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>
@@ -239,25 +217,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>license-maven-plugin</artifactId>
-        <configuration>
-          <canUpdateCopyright>true</canUpdateCopyright>
-          <canUpdateDescription>true</canUpdateDescription>
-          <canUpdateLicense>true</canUpdateLicense>
-          <excludes>
-            <exclude>**/*Test.java</exclude>
-          </excludes>
-          <inceptionYear>2020</inceptionYear>
-          <includes>
-            <include>**/*.java</include>
-          </includes>
-          <licenseName>apache_v2</licenseName>
-          <organizationName>Zheng MingHai</organizationName>
-        </configuration>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.16</version>
-      </plugin>
+
     </plugins>
     <resources>
       <resource>
@@ -266,12 +226,6 @@
       </resource>
     </resources>
   </build>
-  <ciManagement>
-    <system>github</system>
-    <url>
-      https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
-    </url>
-  </ciManagement>
   <dependencies>
     <dependency>
       <artifactId>metainf-services</artifactId>
@@ -372,10 +326,264 @@
 
   <name>zheng framework</name>
   <packaging>pom</packaging>
+  <profiles>
+    <profile>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <id>extra-report</id>
+      <reporting>
+        <plugins>
+          <plugin>
+            <artifactId>maven-changelog-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
+          </plugin>
+          <plugin>
+            <artifactId>dependency-check-maven</artifactId>
+            <groupId>org.owasp</groupId>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>aggregate</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
+    <profile>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>fmt-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>format</goal>
+                </goals>
+                <phase>prepare-package</phase>
+              </execution>
+            </executions>
+            <groupId>com.coveo</groupId>
+          </plugin>
+          <plugin>
+            <artifactId>tidy-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>pom</goal>
+                </goals>
+                <id>pom-tidy</id>
+                <phase>prepare-package</phase>
+              </execution>
+            </executions>
+            <groupId>org.codehaus.mojo</groupId>
+          </plugin>
+          <plugin>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <artifactId>spotbugs</artifactId>
+                <groupId>com.github.spotbugs</groupId>
+                <version>${spotbugs.version}</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <id>spotbugs-check</id>
+                <phase>prepare-package</phase>
+              </execution>
+            </executions>
+            <groupId>com.github.spotbugs</groupId>
+          </plugin>
+          <plugin>
+            <artifactId>license-maven-plugin</artifactId>
+            <configuration>
+              <canUpdateCopyright>true</canUpdateCopyright>
+              <canUpdateDescription>true</canUpdateDescription>
+              <canUpdateLicense>true</canUpdateLicense>
+              <excludes>
+                <exclude>**/*Test.java</exclude>
+              </excludes>
+              <inceptionYear>2020</inceptionYear>
+              <includes>
+                <include>**/*.java</include>
+              </includes>
+              <licenseName>apache_v2</licenseName>
+              <organizationName>Zheng MingHai</organizationName>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
+                <id>license</id>
+                <phase>prepare-package</phase>
+              </execution>
+            </executions>
+            <groupId>org.codehaus.mojo</groupId>
+            <version>1.16</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>pre-package</id>
+    </profile>
+    <profile>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <jdk>8</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+              <encoding>UTF-8</encoding>
+              <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+              <nohelp>true</nohelp>
+              <show>private</show>
+              <locale>en</locale>
+            </configuration>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <id>attach-javadocs</id>
+              </execution>
+            </executions>
+            <groupId>org.apache.maven.plugins</groupId>
+          </plugin>
+        </plugins>
+      </build>
+      <reporting>
+        <plugins>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+              <encoding>UTF-8</encoding>
+              <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+              <nohelp>true</nohelp>
+              <show>private</show>
+              <locale>en</locale>
+            </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>aggregate</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
+      <id>javadoc8</id>
+    </profile>
+    <profile>
+      <activation>
+        <jdk>14+</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+              <encoding>UTF-8</encoding>
+              <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+              <nohelp>true</nohelp>
+              <show>package</show>
+              <locale>en</locale>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <id>attach-javadocs</id>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <id>javadoc14</id>
+    </profile>
+    <profile>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+              <autoVersionSubmodules>true</autoVersionSubmodules>
+              <goals>deploy</goals>
+              <releaseProfiles>ossrh</releaseProfiles>
+              <useReleaseProfile>false</useReleaseProfile>
+            </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+          </plugin>
+          <plugin>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <configuration>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <serverId>ossrh</serverId>
+            </configuration>
+            <extensions>true</extensions>
+            <groupId>org.sonatype.plugins</groupId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <id>ossrh</id>
+    </profile>
+  </profiles>
+
   <properties>
     <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
     <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
     <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
+    <fmt-maven-plugin.version>2.9</fmt-maven-plugin.version>
     <license-maven-plugin.version>3.0</license-maven-plugin.version>
     <main.basedir>${project.basedir}</main.basedir>
     <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
@@ -404,21 +612,6 @@
   <reporting>
     <plugins>
       <plugin>
-        <artifactId>maven-changelog-plugin</artifactId>
-        <groupId>org.apache.maven.plugins</groupId>
-      </plugin>
-      <plugin>
-        <artifactId>dependency-check-maven</artifactId>
-        <groupId>org.owasp</groupId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>aggregate</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
       </plugin>
@@ -435,126 +628,4 @@
   <url>https://github.com/zhengframework/zhengframework</url>
 
   <version>${revision}</version>
-
-  <profiles>
-    <profile>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <jdk>8</jdk>
-      </activation>
-      <reporting>
-        <plugins>
-          <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <additionalOptions>
-                <additionalOption>-Xdoclint:none</additionalOption>
-              </additionalOptions>
-              <charset>UTF-8</charset>
-              <docencoding>UTF-8</docencoding>
-              <encoding>UTF-8</encoding>
-              <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
-              <nohelp>true</nohelp>
-              <show>private</show>
-            </configuration>
-            <groupId>org.apache.maven.plugins</groupId>
-            <reportSets>
-              <reportSet>
-                <reports>
-                  <report>aggregate</report>
-                </reports>
-              </reportSet>
-            </reportSets>
-          </plugin>
-        </plugins>
-      </reporting>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <additionalOptions>
-                <additionalOption>-Xdoclint:none</additionalOption>
-              </additionalOptions>
-              <charset>UTF-8</charset>
-              <docencoding>UTF-8</docencoding>
-              <encoding>UTF-8</encoding>
-              <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
-              <nohelp>true</nohelp>
-              <show>private</show>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <id>attach-javadocs</id>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <id>javadoc8</id>
-    </profile>
-    <profile>
-      <activation>
-        <jdk>14+</jdk>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <additionalOptions>
-                <additionalOption>-Xdoclint:none</additionalOption>
-              </additionalOptions>
-              <charset>UTF-8</charset>
-              <docencoding>UTF-8</docencoding>
-              <encoding>UTF-8</encoding>
-              <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-              <nohelp>true</nohelp>
-              <show>package</show>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <id>attach-javadocs</id>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <id>javadoc14</id>
-    </profile>
-    <profile>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <configuration>
-                  <gpgArguments>
-                    <arg>--pinentry-mode</arg>
-                    <arg>loopback</arg>
-                  </gpgArguments>
-                </configuration>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <id>ossrh</id>
-    </profile>
-  </profiles>
 </project>

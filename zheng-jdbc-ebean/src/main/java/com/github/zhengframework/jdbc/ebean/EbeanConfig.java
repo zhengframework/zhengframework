@@ -47,9 +47,7 @@ public class EbeanConfig implements ConfigurationDefine {
    */
   private boolean register = true;
 
-  /**
-   * Set to true if this is the default/primary database.
-   */
+  /** Set to true if this is the default/primary database. */
   private boolean defaultServer = true;
 
   /**
@@ -64,11 +62,8 @@ public class EbeanConfig implements ConfigurationDefine {
    */
   private List<String> packages = new ArrayList<>();
 
-  /**
-   * The database platform name. Used to imply a DatabasePlatform to use.
-   */
+  /** The database platform name. Used to imply a DatabasePlatform to use. */
   private String databasePlatformName;
-
 
   private EnumType defaultEnumType = EnumType.ORDINAL;
 
@@ -80,14 +75,9 @@ public class EbeanConfig implements ConfigurationDefine {
 
   private boolean ddlCreateOnly;
 
-  /**
-   * The mappingLocations for searching xml mapping.
-   */
+  /** The mappingLocations for searching xml mapping. */
   private List<String> mappingLocations = new ArrayList<>();
 
-  /**
-   * When true we do not need explicit GeneratedValue mapping.
-   */
+  /** When true we do not need explicit GeneratedValue mapping. */
   private boolean idGeneratorAutomatic = true;
-
 }

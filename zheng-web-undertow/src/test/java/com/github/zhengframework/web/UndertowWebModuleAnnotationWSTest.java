@@ -29,43 +29,42 @@ public class UndertowWebModuleAnnotationWSTest {
   @WithZhengApplication(moduleClass = {MyModule.class, AnnotationWSModule.class})
   public void configureAnnotationWS() throws Exception {
     System.out.println(webConfig);
-    OkHttpClient okHttpClient = new Builder()
-        .build();
+    OkHttpClient okHttpClient = new Builder().build();
 
     String path = PathUtils.fixPath(webConfig.getContextPath());
-    Request request = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + path + "/hello")
-        .get().build();
+    Request request =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + path + "/hello")
+            .get()
+            .build();
     System.out.println(request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
     System.out.println(resp);
     assertEquals("Hello, World", resp);
 
-    WebSocket webSocket = okHttpClient.newWebSocket(new Request.Builder()
-            .url(
-                "ws://localhost:" + webConfig.getPort()
-                    + PathUtils.fixPath(
-                    webConfig.getContextPath(),
-                    webConfig.getWebSocketPath(),
-                    "/echo")
-            ).build()
+    WebSocket webSocket =
+        okHttpClient.newWebSocket(
+            new Request.Builder()
+                .url(
+                    "ws://localhost:"
+                        + webConfig.getPort()
+                        + PathUtils.fixPath(
+                        webConfig.getContextPath(), webConfig.getWebSocketPath(), "/echo"))
+                .build(),
+            new WebSocketListener() {
+              @Override
+              public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
+                log.info("onMessage={}", text);
+                assertEquals("hello", text);
+              }
 
-        , new WebSocketListener() {
-          @Override
-          public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
-            log.info("onMessage={}", text);
-            assertEquals("hello", text);
-          }
-
-          @Override
-          public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
-            webSocket.send("hello");
-          }
-        });
+              @Override
+              public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
+                webSocket.send("hello");
+              }
+            });
 
     okHttpClient.dispatcher().executorService().awaitTermination(1, TimeUnit.SECONDS);
   }
-
-
 }

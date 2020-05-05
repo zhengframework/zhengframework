@@ -32,10 +32,13 @@ public class ValidatorConfigurationConfigurerImpl implements ValidatorConfigurat
 
   @Inject(optional = true)
   private MessageInterpolator messageInterpolator;
+
   @Inject(optional = true)
   private TraversableResolver traversableResolver;
+
   @Inject(optional = true)
   private ParameterNameProvider parameterNameProvider;
+
   @Inject(optional = true)
   private ConstraintValidatorFactory constraintValidatorFactory;
 

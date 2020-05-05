@@ -13,7 +13,7 @@ The <code>@OnApplicationStart</code> annotation triggers a job after the quartz 
 
 ```java
 @OnApplicationStart
-public class StartupJob extends Job {
+public class StartupJob extends AbstractJob {
   @Override
   public void doJob(JobExecutionContext context) throws JobExecutionException {
     // logic run once on application start
@@ -25,7 +25,7 @@ The <code>@OnApplicationStop</code> annotation triggers a job when the applicati
 
 ```java
 @OnApplicationStop
-public class StopJob extends Job {
+public class StopJob extends AbstractJob {
   @Override
   public void doJob(JobExecutionContext context) throws JobExecutionException {
     // logic run once on application stop
@@ -38,7 +38,7 @@ Use in conjunction with <code>@DelayStart</code> to delay the first invocation o
 
 ```java
 @Every("1s")
-public class EveryTestJob extends Job {
+public class EveryTestJob extends AbstractJob {
   @Override
   public void doJob(JobExecutionContext context) throws JobExecutionException {
     // logic run every time and time again
@@ -51,7 +51,7 @@ The <code>@DelayStart</code> annotation can be used in conjunction with @Every t
 ```java
 @DelayStart("5s")
 @Every("1s")
-public class EveryTestJobWithDelayedStart extends Job {
+public class EveryTestJobWithDelayedStart extends AbstractJob {
   @Override
   public void doJob(JobExecutionContext context) throws JobExecutionException {
     // logic run every time and time again
@@ -65,7 +65,7 @@ This expression would run on Mondays at 1pm, Los Angeles time. If the optional p
 
 ```java
 @On("0 0 13 ? * MON", timeZone = "America/Los_Angeles")
-public class OnTestJob extends Job {
+public class OnTestJob extends AbstractJob {
   @Override
   public void doJob(JobExecutionContext context) throws JobExecutionException {
     // logic run via cron expression
@@ -81,7 +81,7 @@ public class MyJobModule extends AbstractModule {
   protected void configure() {
     bind(MyJob1.class).asEagerSingleton();// work fine
     bind(MyJob2.class).asEagerSingleton();// work fine
-    bind(Job.class).to(MyJob3.class).asEagerSingleton();// not working
+    bind(AbstractJob.class).to(MyJob3.class).asEagerSingleton();// not working
   }
 }
 ```

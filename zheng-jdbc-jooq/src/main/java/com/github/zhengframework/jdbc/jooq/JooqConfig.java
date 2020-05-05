@@ -33,5 +33,4 @@ import org.kohsuke.MetaInfServices;
 public class JooqConfig implements ConfigurationDefine {
 
   private boolean enable = true;
-
 }

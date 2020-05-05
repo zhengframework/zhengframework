@@ -39,8 +39,8 @@ public class ListAnnotationResolver implements AnnotationResolver {
 
   @Nullable
   @Override
-  public <T extends Annotation> T findAnnotation(@Nonnull Class<T> annotationClass,
-      @Nonnull Method method) {
+  public <T extends Annotation> T findAnnotation(
+      @Nonnull Class<T> annotationClass, @Nonnull Method method) {
     for (AnnotationResolver resolver : resolvers) {
       T result = resolver.findAnnotation(annotationClass, method);
       if (result != null) {

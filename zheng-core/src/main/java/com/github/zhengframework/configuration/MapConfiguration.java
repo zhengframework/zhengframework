@@ -20,7 +20,6 @@ package com.github.zhengframework.configuration;
  * #L%
  */
 
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;

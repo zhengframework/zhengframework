@@ -39,8 +39,8 @@ public class ConfigurationException extends RuntimeException {
     super(cause);
   }
 
-  public ConfigurationException(String message, Throwable cause, boolean enableSuppression,
-      boolean writableStackTrace) {
+  public ConfigurationException(
+      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
     super(message, cause, enableSuppression, writableStackTrace);
   }
 }

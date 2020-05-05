@@ -28,24 +28,55 @@ public class WebjarsModuleTest {
     System.out.println(webConfig);
     System.out.println(webjarsConfig);
 
-    OkHttpClient okHttpClient = new Builder()
-        .build();
+    OkHttpClient okHttpClient = new Builder().build();
 
-    String bootstrap1 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/3.1.0/js/bootstrap.js")
-        .get().build()).execute().body()).string();
-    String bootstrap2 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/js/bootstrap.js")
-        .get().build()).execute().body()).string();
+    String bootstrap1 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/3.1.0/js/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
+    String bootstrap2 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/js/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
     assertEquals(bootstrap1, bootstrap2);
-    String bootstrap3 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/bootstrap.js")
-        .get().build()).execute().body()).string();
+    String bootstrap3 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
     assertEquals(bootstrap1, bootstrap3);
-
   }
 
   @Test
@@ -55,19 +86,52 @@ public class WebjarsModuleTest {
     System.out.println(webjarsConfig);
     OkHttpClient okHttpClient = new Builder().build();
 
-    String bootstrap1 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/3.1.0/js/bootstrap.js")
-        .get().build()).execute().body()).string();
-    String bootstrap2 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/js/bootstrap.js")
-        .get().build()).execute().body()).string();
+    String bootstrap1 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/3.1.0/js/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
+    String bootstrap2 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/js/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
     assertEquals(bootstrap1, bootstrap2);
-    String bootstrap3 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/bootstrap.js")
-        .get().build()).execute().body()).string();
+    String bootstrap3 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
     assertEquals(bootstrap1, bootstrap3);
   }
 
@@ -76,22 +140,54 @@ public class WebjarsModuleTest {
   public void testPath() throws Exception {
     System.out.println(webConfig);
     System.out.println(webjarsConfig);
-    OkHttpClient okHttpClient = new Builder()
-        .build();
+    OkHttpClient okHttpClient = new Builder().build();
 
-    String bootstrap1 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/3.1.0/js/bootstrap.js")
-        .get().build()).execute().body()).string();
-    String bootstrap2 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/js/bootstrap.js")
-        .get().build()).execute().body()).string();
+    String bootstrap1 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/3.1.0/js/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
+    String bootstrap2 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/js/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
     assertEquals(bootstrap1, bootstrap2);
-    String bootstrap3 = Objects.requireNonNull(okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort()
-            + webjarsConfig.getBasePath() + "/bootstrap/bootstrap.js")
-        .get().build()).execute().body()).string();
+    String bootstrap3 =
+        Objects.requireNonNull(
+            okHttpClient
+                .newCall(
+                    new Request.Builder()
+                        .url(
+                            "http://localhost:"
+                                + webConfig.getPort()
+                                + webjarsConfig.getBasePath()
+                                + "/bootstrap/bootstrap.js")
+                        .get()
+                        .build())
+                .execute()
+                .body())
+            .string();
     assertEquals(bootstrap1, bootstrap3);
   }
 }

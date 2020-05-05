@@ -37,7 +37,9 @@ public class CountedListener extends DeclaredMethodsTypeListener {
   private final MetricNamer metricNamer;
   private final AnnotationResolver annotationResolver;
 
-  public CountedListener(MetricRegistry metricRegistry, MetricNamer metricNamer,
+  public CountedListener(
+      MetricRegistry metricRegistry,
+      MetricNamer metricNamer,
       AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.metricNamer = metricNamer;
@@ -49,8 +51,8 @@ public class CountedListener extends DeclaredMethodsTypeListener {
   protected MethodInterceptor getInterceptor(Method method) {
     final Counted annotation = annotationResolver.findAnnotation(Counted.class, method);
     if (annotation != null) {
-      final Counter counter = metricRegistry
-          .counter(metricNamer.getNameForCounted(method, annotation));
+      final Counter counter =
+          metricRegistry.counter(metricNamer.getNameForCounted(method, annotation));
       return new CountedInterceptor(counter, annotation);
     }
     return null;

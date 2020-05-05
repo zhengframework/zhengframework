@@ -30,5 +30,4 @@ public class ZhengApplicationRunnerProviderTest {
     assertNotNull(injector);
     assertNull(apple);
   }
-
 }

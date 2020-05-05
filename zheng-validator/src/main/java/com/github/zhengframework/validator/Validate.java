@@ -29,7 +29,6 @@ import javax.validation.ConstraintViolationException;
 
 /**
  * Marker for methods which arguments have to be validated.
- *
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
@@ -61,12 +60,11 @@ public @interface Validate {
   /**
    * A custom error message when throwing the custom exception.
    *
-   * It supports java.util.Formatter place holders, intercepted method arguments will be used as
+   * <p>It supports java.util.Formatter place holders, intercepted method arguments will be used as
    * message format arguments.
    *
    * @return a custom error message when throwing the custom exception.
    * @see java.util.Formatter#format(String, Object...)
    */
   String exceptionMessage() default "";
-
 }

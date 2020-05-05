@@ -34,5 +34,4 @@ public class FooServiceMapperAImpl implements FooService {
   public User doSomeBusinessStuff(String userId) {
     return this.userMapper.getUser(userId);
   }
-
 }

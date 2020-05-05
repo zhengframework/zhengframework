@@ -41,9 +41,8 @@ public class HibernateValidatorFactoryProvider implements Provider<ValidatorFact
   }
 
   public ValidatorFactory get() {
-    HibernateValidatorConfiguration validatorConfiguration = Validation
-        .byProvider(HibernateValidator.class)
-        .configure();
+    HibernateValidatorConfiguration validatorConfiguration =
+        Validation.byProvider(HibernateValidator.class).configure();
     validatorConfigurationConfigurer.configure(validatorConfiguration);
     return validatorConfiguration.buildValidatorFactory();
   }

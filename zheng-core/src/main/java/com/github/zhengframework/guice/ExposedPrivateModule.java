@@ -41,5 +41,4 @@ public class ExposedPrivateModule extends AbstractModule {
   protected void expose(Class clazz) {
     exposeList.add(Key.get(clazz));
   }
-
 }

@@ -43,9 +43,8 @@ public class FlywayManagedSchema implements ManagedSchema {
     if (flywayConfig.isEnable()) {
       try {
         log.info("Starting DB migration");
-        Flyway flyway = Flyway.configure().dataSource(dataSource)
-            .locations(flywayConfig.getLocation())
-            .load();
+        Flyway flyway =
+            Flyway.configure().dataSource(dataSource).locations(flywayConfig.getLocation()).load();
 
         MigrationInfo current = flyway.info().current();
         if (current == null) {

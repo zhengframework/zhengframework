@@ -42,16 +42,16 @@ public class GuiceShiroFilter extends AbstractShiroFilter {
   @Override
   public void init() {
     DefaultWebEnvironment webEnvironment = (DefaultWebEnvironment) env;
-    ServletContext servletContext = Objects
-        .requireNonNull(getServletContext(), "servletContext is null");
+    ServletContext servletContext =
+        Objects.requireNonNull(getServletContext(), "servletContext is null");
     webEnvironment.setServletContext(servletContext);
     servletContext.setAttribute(EnvironmentLoader.ENVIRONMENT_ATTRIBUTE_KEY, webEnvironment);
-    WebSecurityManager webSecurityManager = Objects
-        .requireNonNull(env.getWebSecurityManager(), "WebSecurityManager is null");
+    WebSecurityManager webSecurityManager =
+        Objects.requireNonNull(env.getWebSecurityManager(), "WebSecurityManager is null");
     this.setSecurityManager(webSecurityManager);
     this.setStaticSecurityManagerEnabled(true);
-    FilterChainResolver resolver = Objects
-        .requireNonNull(env.getFilterChainResolver(), "FilterChainResolver is null");
+    FilterChainResolver resolver =
+        Objects.requireNonNull(env.getFilterChainResolver(), "FilterChainResolver is null");
     setFilterChainResolver(resolver);
   }
 }

@@ -2,14 +2,23 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-cache-ignite</artifactId>
-
   <dependencies>
     <dependency>
       <artifactId>ignite-core</artifactId>
       <groupId>org.apache.ignite</groupId>
     </dependency>
   </dependencies>
+
+  <artifactId>zheng-cache-ignite</artifactId>
+
+  <description>zheng framework module: cache support by ignite</description>
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>zhengframework</artifactId>
+    <groupId>com.github.zhengframework</groupId>
+    <version>${revision}</version>
+  </parent>
 
   <dependencyManagement>
     <dependencies>
@@ -22,15 +31,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <description>zheng framework module: cache support by ignite</description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
   <url>https://github.com/zhengframework/zhengframework</url>
 
   <build>

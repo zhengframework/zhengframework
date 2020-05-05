@@ -85,7 +85,6 @@ public class ClassScanner<T> {
             visitor.visit((T) binding.getProvider().get());
           }
         }
-
       }
     }
   }
@@ -95,8 +94,8 @@ public class ClassScanner<T> {
     void visit(V thing);
   }
 
-  private static final class BindingInspectorVisitor<T, C extends Class<? extends T>> extends
-      DefaultBindingTargetVisitor<T, C> implements MultibindingsTargetVisitor<T, C> {
+  private static final class BindingInspectorVisitor<T, C extends Class<? extends T>>
+      extends DefaultBindingTargetVisitor<T, C> implements MultibindingsTargetVisitor<T, C> {
 
     @SuppressWarnings("unchecked")
     @Override

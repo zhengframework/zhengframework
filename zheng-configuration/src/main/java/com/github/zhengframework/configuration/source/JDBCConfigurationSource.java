@@ -43,7 +43,6 @@ public class JDBCConfigurationSource extends AbstractConfigurationSource {
 
   @Override
   public void init() {
-
   }
 
   @Override

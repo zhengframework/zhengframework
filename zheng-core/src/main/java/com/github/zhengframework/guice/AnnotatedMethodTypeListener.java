@@ -34,9 +34,8 @@ public class AnnotatedMethodTypeListener<T extends Annotation> implements TypeLi
   private final Class<T> annotationClass;
   private final MethodPostProcessor<T> postProcessor;
 
-
-  public AnnotatedMethodTypeListener(final Class<T> annotationClass,
-      final MethodPostProcessor<T> postProcessor) {
+  public AnnotatedMethodTypeListener(
+      final Class<T> annotationClass, final MethodPostProcessor<T> postProcessor) {
     this.annotationClass = annotationClass;
     this.postProcessor = postProcessor;
   }
@@ -50,20 +49,24 @@ public class AnnotatedMethodTypeListener<T extends Annotation> implements TypeLi
     while (investigatingType != null && !investigatingType.equals(Object.class)) {
       for (final Method method : investigatingType.getDeclaredMethods()) {
         if (method.isAnnotationPresent(annotationClass)) {
-          encounter.register(new InjectionListener<I>() {
-            @Override
-            public void afterInjection(I injected) {
-              try {
-                method.setAccessible(true);
-                postProcessor.process(method.getAnnotation(annotationClass), method, injected);
-              } catch (Exception ex) {
-                throw new IllegalStateException(
-                    String.format("Failed to process annotation %s on method %s of class %s",
-                        annotationClass.getSimpleName(), method.getName(),
-                        injected.getClass().getSimpleName()), ex);
-              }
-            }
-          });
+          encounter.register(
+              new InjectionListener<I>() {
+                @Override
+                public void afterInjection(I injected) {
+                  try {
+                    method.setAccessible(true);
+                    postProcessor.process(method.getAnnotation(annotationClass), method, injected);
+                  } catch (Exception ex) {
+                    throw new IllegalStateException(
+                        String.format(
+                            "Failed to process annotation %s on method %s of class %s",
+                            annotationClass.getSimpleName(),
+                            method.getName(),
+                            injected.getClass().getSimpleName()),
+                        ex);
+                  }
+                }
+              });
         }
       }
       investigatingType = investigatingType.getSuperclass();

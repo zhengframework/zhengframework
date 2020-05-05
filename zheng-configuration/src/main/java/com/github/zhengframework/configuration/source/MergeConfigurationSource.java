@@ -40,15 +40,19 @@ public class MergeConfigurationSource implements ConfigurationSource {
   }
 
   public MergeConfigurationSource(Iterator<ConfigurationSource> sources) {
-    Objects.requireNonNull(sources).forEachRemaining(
-        configurationSource -> MergeConfigurationSource.this.sources
-            .add(Objects.requireNonNull(configurationSource)));
+    Objects.requireNonNull(sources)
+        .forEachRemaining(
+            configurationSource ->
+                MergeConfigurationSource.this.sources.add(
+                    Objects.requireNonNull(configurationSource)));
   }
 
   public MergeConfigurationSource(Iterable<ConfigurationSource> sources) {
-    Objects.requireNonNull(sources).forEach(
-        configurationSource -> MergeConfigurationSource.this.sources
-            .add(Objects.requireNonNull(configurationSource)));
+    Objects.requireNonNull(sources)
+        .forEach(
+            configurationSource ->
+                MergeConfigurationSource.this.sources.add(
+                    Objects.requireNonNull(configurationSource)));
   }
 
   @Override

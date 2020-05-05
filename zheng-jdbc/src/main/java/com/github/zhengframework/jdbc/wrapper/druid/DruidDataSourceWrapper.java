@@ -61,8 +61,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setStatLogger(
-      @Named("druid.statLogger") DruidDataSourceStatLogger statLogger) {
+  public void setStatLogger(@Named("druid.statLogger") DruidDataSourceStatLogger statLogger) {
     origDataSource.setStatLogger(statLogger);
   }
 
@@ -126,8 +125,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   public void setMaxPoolPreparedStatementPerConnectionSize(
       @Named("druid.maxPoolPreparedStatementPerConnectionSize")
           int maxPoolPreparedStatementPerConnectionSize) {
-    origDataSource
-        .setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
+    origDataSource.setMaxPoolPreparedStatementPerConnectionSize(
+        maxPoolPreparedStatementPerConnectionSize);
   }
 
   @Inject(optional = true)
@@ -137,8 +136,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setValidConnectionChecker(@Named("druid.validConnectionChecker")
-      ValidConnectionChecker validConnectionChecker) {
+  public void setValidConnectionChecker(
+      @Named("druid.validConnectionChecker") ValidConnectionChecker validConnectionChecker) {
     origDataSource.setValidConnectionChecker(validConnectionChecker);
   }
 
@@ -233,8 +232,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setInitGlobalVariants(
-      @Named("druid.initGlobalVariants") boolean initGlobalVariants) {
+  public void setInitGlobalVariants(@Named("druid.initGlobalVariants") boolean initGlobalVariants) {
     origDataSource.setInitGlobalVariants(initGlobalVariants);
   }
 
@@ -255,8 +253,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setExceptionSorter(
-      @Named("druid.exceptionSorter") ExceptionSorter exceptionSorter) {
+  public void setExceptionSorter(@Named("druid.exceptionSorter") ExceptionSorter exceptionSorter) {
     origDataSource.setExceptionSorter(exceptionSorter);
   }
 
@@ -266,8 +263,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setClearFiltersEnable(
-      @Named("druid.clearFiltersEnable") boolean clearFiltersEnable) {
+  public void setClearFiltersEnable(@Named("druid.clearFiltersEnable") boolean clearFiltersEnable) {
     origDataSource.setClearFiltersEnable(clearFiltersEnable);
   }
 
@@ -458,8 +454,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   public void setDataSourceConfig(DataSourceConfig dataSourceConfig) {
     super.setDataSourceConfig(dataSourceConfig);
     origDataSource.setDriverClassLoader(Thread.currentThread().getContextClassLoader());
-    origDataSource
-        .setDriverClassName(Objects.requireNonNull(dataSourceConfig.getDriverClassName()));
+    origDataSource.setDriverClassName(
+        Objects.requireNonNull(dataSourceConfig.getDriverClassName()));
     origDataSource.setUrl(dataSourceConfig.getUrl());
     origDataSource.setUsername(dataSourceConfig.getUsername());
     origDataSource.setPassword(dataSourceConfig.getPassword());

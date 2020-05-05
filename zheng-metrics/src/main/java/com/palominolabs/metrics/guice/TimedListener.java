@@ -37,7 +37,9 @@ public class TimedListener extends DeclaredMethodsTypeListener {
   private final MetricNamer metricNamer;
   private final AnnotationResolver annotationResolver;
 
-  public TimedListener(MetricRegistry metricRegistry, MetricNamer metricNamer,
+  public TimedListener(
+      MetricRegistry metricRegistry,
+      MetricNamer metricNamer,
       final AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.metricNamer = metricNamer;

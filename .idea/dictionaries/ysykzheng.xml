@@ -11,6 +11,7 @@
       <w>guice</w>
       <w>hikari</w>
       <w>hikaricp</w>
+      <w>injectee</w>
       <w>jcache</w>
       <w>jdbc</w>
       <w>jdbi</w>

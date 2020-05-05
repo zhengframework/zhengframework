@@ -1,8 +1,8 @@
-package com.github.zhengframework.rest;
+package com.github.zhengframework.job;
 
 /*-
  * #%L
- * zheng-rest
+ * zheng-job
  * %%
  * Copyright (C) 2020 Zheng MingHai
  * %%
@@ -20,17 +20,29 @@ package com.github.zhengframework.rest;
  * #L%
  */
 
-import com.google.inject.Scopes;
-import com.google.inject.servlet.ServletModule;
-import com.google.inject.servlet.ServletScopes;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
-public class MyModule extends ServletModule {
+public abstract class AbstractJob implements org.quartz.Job {
+
+  private final String groupName;
+
+  public AbstractJob(String groupName) {
+    this.groupName = groupName;
+  }
+
+  public AbstractJob() {
+    groupName = null;
+  }
 
   @Override
-  protected void configureServlets() {
+  public void execute(JobExecutionContext context) throws JobExecutionException {
+    doJob(context);
+  }
 
-    bind(TestResource.class);
-    bind(MySingleton.class).in(Scopes.SINGLETON);
-    bind(PerRequestService.class).in(ServletScopes.REQUEST);
+  public abstract void doJob(JobExecutionContext context) throws JobExecutionException;
+
+  public String getGroupName() {
+    return groupName;
   }
 }

@@ -33,8 +33,8 @@ public class RedisModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, RedisConfig> redisConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), RedisConfig.class);
+    Map<String, RedisConfig> redisConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), RedisConfig.class);
     for (Entry<String, RedisConfig> entry : redisConfigMap.entrySet()) {
       if (entry.getKey().isEmpty()) {
         RedisConfig redisConfig = entry.getValue();

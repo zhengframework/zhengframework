@@ -45,13 +45,12 @@ public class MetricsService implements Service {
   public MetricsService(MetricRegistry metricRegistry) {
     this.metricRegistry = metricRegistry;
 
-    metricRegistry.register("jvm.buffers",
-        new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
+    metricRegistry.register(
+        "jvm.buffers", new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
     metricRegistry.register("jvm.gc", new GarbageCollectorMetricSet());
     metricRegistry.register("jvm.memory", new MemoryUsageGaugeSet());
     metricRegistry.register("jvm.threads", new ThreadStatesGaugeSet());
   }
-
 
   @Override
   public int order() {

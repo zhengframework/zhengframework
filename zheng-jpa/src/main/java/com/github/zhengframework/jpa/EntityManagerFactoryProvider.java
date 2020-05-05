@@ -26,5 +26,4 @@ import javax.persistence.spi.PersistenceUnitInfo;
 public interface EntityManagerFactoryProvider {
 
   EntityManagerFactory get(PersistenceUnitInfo persistenceUnitInfo);
-
 }

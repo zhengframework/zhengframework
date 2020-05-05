@@ -28,5 +28,4 @@ public class MyModule extends AbstractModule {
   protected void configure() {
     bind(TestService.class);
   }
-
 }

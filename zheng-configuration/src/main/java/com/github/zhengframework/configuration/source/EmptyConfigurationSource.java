@@ -30,17 +30,14 @@ public class EmptyConfigurationSource implements ConfigurationSource {
 
   @Override
   public void init() {
-
   }
 
   @Override
   public void addListener(ConfigurationSourceListener listener) {
-
   }
 
   @Override
   public void removeListener(ConfigurationSourceListener listener) {
-
   }
 
   @Override

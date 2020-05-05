@@ -45,46 +45,73 @@ public class C3p0DataSourceWrapperTest {
     final boolean testConnectionOnCheckout = true;
     final int unreturnedConnectionTimeout = 160;
     final boolean usesTraditionalReflectiveProxies = true;
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(Names.named("JDBC.autoCommitOnClose")).to(autoCommit);
-        bindConstant().annotatedWith(Names.named("c3p0.acquireIncrement")).to(acquireIncrement);
-        bindConstant().annotatedWith(Names.named("c3p0.acquireRetryAttempts"))
-            .to(acquireRetryAttempts);
-        bindConstant().annotatedWith(Names.named("c3p0.acquireRetryDelay")).to(acquireRetryDelay);
-        bindConstant().annotatedWith(Names.named("c3p0.automaticTestTable")).to(automaticTestTable);
-        bindConstant().annotatedWith(Names.named("c3p0.breakAfterAcquireFailure"))
-            .to(breakAfterAcquireFailure);
-        bindConstant().annotatedWith(Names.named("c3p0.checkoutTimeout")).to(checkoutTimeout);
-        bindConstant().annotatedWith(Names.named("c3p0.connectionTesterClassName"))
-            .to(connectionTesterClassName);
-        bindConstant().annotatedWith(Names.named("c3p0.idleConnectionTestPeriod"))
-            .to(idleConnectionTestPeriod);
-        bindConstant().annotatedWith(Names.named("c3p0.initialPoolSize")).to(initialPoolSize);
-        bindConstant().annotatedWith(Names.named("c3p0.maxAdministrativeTaskTime"))
-            .to(maxAdministrativeTaskTime);
-        bindConstant().annotatedWith(Names.named("c3p0.maxConnectionAge")).to(maxConnectionAge);
-        bindConstant().annotatedWith(Names.named("c3p0.maxIdleTime")).to(maxIdleTime);
-        bindConstant().annotatedWith(Names.named("c3p0.maxIdleTimeExcessConnections"))
-            .to(maxIdleTimeExcessConnections);
-        bindConstant().annotatedWith(Names.named("c3p0.maxPoolSize")).to(maxPoolSize);
-        bindConstant().annotatedWith(Names.named("c3p0.maxStatements")).to(maxStatements);
-        bindConstant().annotatedWith(Names.named("c3p0.maxStatementsPerConnection"))
-            .to(maxStatementsPerConnection);
-        bindConstant().annotatedWith(Names.named("c3p0.minPoolSize")).to(minPoolSize);
-        bindConstant().annotatedWith(Names.named("c3p0.preferredTestQuery")).to(preferredTestQuery);
-        bindConstant().annotatedWith(Names.named("c3p0.propertyCycle")).to(propertyCycle);
-        bindConstant().annotatedWith(Names.named("c3p0.testConnectionOnCheckin"))
-            .to(testConnectionOnCheckin);
-        bindConstant().annotatedWith(Names.named("c3p0.testConnectionOnCheckout"))
-            .to(testConnectionOnCheckout);
-        bindConstant().annotatedWith(Names.named("c3p0.unreturnedConnectionTimeout"))
-            .to(unreturnedConnectionTimeout);
-        bindConstant().annotatedWith(Names.named("c3p0.usesTraditionalReflectiveProxies"))
-            .to(usesTraditionalReflectiveProxies);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(Names.named("JDBC.autoCommitOnClose")).to(autoCommit);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.acquireIncrement"))
+                    .to(acquireIncrement);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.acquireRetryAttempts"))
+                    .to(acquireRetryAttempts);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.acquireRetryDelay"))
+                    .to(acquireRetryDelay);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.automaticTestTable"))
+                    .to(automaticTestTable);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.breakAfterAcquireFailure"))
+                    .to(breakAfterAcquireFailure);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.checkoutTimeout"))
+                    .to(checkoutTimeout);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.connectionTesterClassName"))
+                    .to(connectionTesterClassName);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.idleConnectionTestPeriod"))
+                    .to(idleConnectionTestPeriod);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.initialPoolSize"))
+                    .to(initialPoolSize);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.maxAdministrativeTaskTime"))
+                    .to(maxAdministrativeTaskTime);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.maxConnectionAge"))
+                    .to(maxConnectionAge);
+                bindConstant().annotatedWith(Names.named("c3p0.maxIdleTime")).to(maxIdleTime);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.maxIdleTimeExcessConnections"))
+                    .to(maxIdleTimeExcessConnections);
+                bindConstant().annotatedWith(Names.named("c3p0.maxPoolSize")).to(maxPoolSize);
+                bindConstant().annotatedWith(Names.named("c3p0.maxStatements")).to(maxStatements);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.maxStatementsPerConnection"))
+                    .to(maxStatementsPerConnection);
+                bindConstant().annotatedWith(Names.named("c3p0.minPoolSize")).to(minPoolSize);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.preferredTestQuery"))
+                    .to(preferredTestQuery);
+                bindConstant().annotatedWith(Names.named("c3p0.propertyCycle")).to(propertyCycle);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.testConnectionOnCheckin"))
+                    .to(testConnectionOnCheckin);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.testConnectionOnCheckout"))
+                    .to(testConnectionOnCheckout);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.unreturnedConnectionTimeout"))
+                    .to(unreturnedConnectionTimeout);
+                bindConstant()
+                    .annotatedWith(Names.named("c3p0.usesTraditionalReflectiveProxies"))
+                    .to(usesTraditionalReflectiveProxies);
+              }
+            });
 
     DataSourceConfig dataSourceConfig = new DataSourceConfig();
     dataSourceConfig.setDriverClassName(driverClassName);

@@ -29,7 +29,7 @@ import org.kohsuke.MetaInfServices;
 @MetaInfServices
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.redis",supportGroup = true)
+@ConfigurationInfo(prefix = "zheng.redis", supportGroup = true)
 public class RedisConfig implements ConfigurationDefine {
 
   private String host = "localhost";
@@ -40,5 +40,5 @@ public class RedisConfig implements ConfigurationDefine {
   private Boolean verifyPeer;
   private Boolean startTls;
   private Boolean ssl;
-  private Long timeout = 6L;// seconds
+  private Long timeout = 6L; // seconds
 }

@@ -20,6 +20,7 @@ package com.github.zhengframework.bootstrap;
  * #L%
  */
 
+import java.util.Arrays;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import lombok.Getter;
@@ -31,14 +32,16 @@ public class Arguments {
 
   private final String[] arguments;
 
-  public Arguments(String[] arguments) {
-    this.arguments = arguments;
+  public Arguments(String[] args) {
+    if (args != null) {
+      this.arguments = Arrays.copyOf(args, args.length);
+    } else {
+      this.arguments = new String[0];
+    }
     optionParser.allowsUnrecognizedOptions();
   }
 
   public OptionSet parse() {
     return optionParser.parse(arguments);
   }
-
-
 }

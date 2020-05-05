@@ -33,14 +33,14 @@ import javax.validation.groups.Default;
 /**
  * Defines validation groups used by method validation. Actual groups are defined with {@link
  * ValidationGroups} annotation.
- * <p>
- * Context is thread bound.
- * <p>
- * Inline contexts inherit all groups from upper levels.
- * <p>
- * Default group is implicitly appended if allowed by module configuration (default true).
- * <p>
- * Groups may be defined directly (without annotations usage) by using {@link
+ *
+ * <p>Context is thread bound.
+ *
+ * <p>Inline contexts inherit all groups from upper levels.
+ *
+ * <p>Default group is implicitly appended if allowed by module configuration (default true).
+ *
+ * <p>Groups may be defined directly (without annotations usage) by using {@link
  * ValidationContext#doWithGroups(GroupAction, Class[])}.
  *
  * @author Vyacheslav Rusakov

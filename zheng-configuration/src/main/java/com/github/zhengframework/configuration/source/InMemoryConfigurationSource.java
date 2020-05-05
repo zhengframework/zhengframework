@@ -40,7 +40,6 @@ public class InMemoryConfigurationSource extends AbstractConfigurationSource {
 
   @Override
   public void init() {
-
   }
 
   @Override
@@ -49,11 +48,9 @@ public class InMemoryConfigurationSource extends AbstractConfigurationSource {
     Map<String, String> copyMap = new HashMap<>();
     for (Entry<String, String> entry : map.entrySet()) {
       if (entry.getKey().startsWith(environmentContext)) {
-        copyMap
-            .put(convertToPropertiesKey(entry.getKey(), environmentContext), entry.getValue());
+        copyMap.put(convertToPropertiesKey(entry.getKey(), environmentContext), entry.getValue());
       }
     }
     return Collections.unmodifiableMap(copyMap);
   }
-
 }

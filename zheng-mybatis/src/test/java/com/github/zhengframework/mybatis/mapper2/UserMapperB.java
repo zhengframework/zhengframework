@@ -26,5 +26,4 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapperB {
 
   User getUser(@Param("userId") String userId);
-
 }

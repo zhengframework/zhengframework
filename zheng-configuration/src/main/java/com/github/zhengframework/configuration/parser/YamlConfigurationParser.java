@@ -58,5 +58,4 @@ public class YamlConfigurationParser implements ConfigurationParser, FileConfigu
       throw new ConfigurationSourceException("fail load configuration from file: " + fileName, e);
     }
   }
-
 }

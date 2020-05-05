@@ -37,5 +37,4 @@ public class NoOpCacheModule extends AbstractModule {
     bind(CacheResolverFactory.class).toInstance(new DefaultCacheResolverFactory(cacheManager));
     bind(CacheManager.class).toInstance(cacheManager);
   }
-
 }

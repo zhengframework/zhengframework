@@ -47,46 +47,48 @@ public class ValidatorModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, ValidatorConfig> configMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), ValidatorConfig.class);
+    Map<String, ValidatorConfig> configMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), ValidatorConfig.class);
     ValidatorConfig validatorConfig = configMap.get("");
 
     if (validatorConfig.isEnable()) {
-      OptionalBinder.newOptionalBinder(binder(),
-          ConstraintValidatorFactory.class)
-          .setDefault().to(GuiceConstraintValidatorFactory.class);
+      OptionalBinder.newOptionalBinder(binder(), ConstraintValidatorFactory.class)
+          .setDefault()
+          .to(GuiceConstraintValidatorFactory.class);
       OptionalBinder.newOptionalBinder(binder(), MessageInterpolator.class);
       OptionalBinder.newOptionalBinder(binder(), TraversableResolver.class);
       OptionalBinder.newOptionalBinder(binder(), ParameterNameProvider.class);
       OptionalBinder.newOptionalBinder(binder(), ValidatorConfigurationConfigurer.class)
-          .setDefault().to(ValidatorConfigurationConfigurerImpl.class);
+          .setDefault()
+          .to(ValidatorConfigurationConfigurerImpl.class);
 
       bind(Validator.class).toProvider(ValidatorProvider.class);
 
       bind(ValidationContext.class);
 
-      ValidationGroupInterceptor groupInterceptor = new ValidationGroupInterceptor(
-          getProvider(ValidationContext.class), getProvider(MethodGroupsFactory.class));
+      ValidationGroupInterceptor groupInterceptor =
+          new ValidationGroupInterceptor(
+              getProvider(ValidationContext.class), getProvider(MethodGroupsFactory.class));
 
       bindInterceptor(Matchers.any(), new ValidationGroupMatcher(), groupInterceptor);
 
-      ValidationMethodInterceptor methodInterceptor = new ValidationMethodInterceptor(
-          getProvider(Validator.class), getProvider(ValidationContext.class));
+      ValidationMethodInterceptor methodInterceptor =
+          new ValidationMethodInterceptor(
+              getProvider(Validator.class), getProvider(ValidationContext.class));
 
       if (validatorConfig.isAnnotationOnly()) {
-        Class<? extends Annotation> annotationClass = Objects
-            .requireNonNull(validatorConfig.getAnnotationClass());
+        Class<? extends Annotation> annotationClass =
+            Objects.requireNonNull(validatorConfig.getAnnotationClass());
         // all annotated methods
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(annotationClass), methodInterceptor);
         // all methods in annotated beans (do not search for validation annotations!)
-        bindInterceptor(Matchers.annotatedWith(annotationClass), new DeclaredMethodMatcher(),
+        bindInterceptor(
+            Matchers.annotatedWith(annotationClass),
+            new DeclaredMethodMatcher(),
             methodInterceptor);
       } else {
         bindInterceptor(Matchers.any(), new ValidatedMethodMatcher(), methodInterceptor);
       }
-
     }
-
   }
-
 }

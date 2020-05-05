@@ -25,21 +25,30 @@ public class MetricsModuleTest {
     }
     MetricRegistry metricRegistry = injector.getInstance(MetricRegistry.class);
 
-    assertEquals(10, metricRegistry
-        .counter("com.github.zhengframework.metrics.TestService.count.current").getCount());
-    assertEquals(10,
-        metricRegistry.timer("com.github.zhengframework.metrics.TestService.count.timer")
+    assertEquals(
+        10,
+        metricRegistry
+            .counter("com.github.zhengframework.metrics.TestService.count.current")
             .getCount());
-    assertEquals(10,
-        metricRegistry.meter("com.github.zhengframework.metrics.TestService.count.meter")
+    assertEquals(
+        10,
+        metricRegistry
+            .timer("com.github.zhengframework.metrics.TestService.count.timer")
             .getCount());
-    metricRegistry.getGauges().forEach((key, value) -> {
-      System.out.println(key);
-      System.out.println(value.getValue());
-      if ("com.github.zhengframework.metrics.TestService.count.gauge".equals(key)) {
-        assertEquals("1111", value.getValue());
-      }
-    });
+    assertEquals(
+        10,
+        metricRegistry
+            .meter("com.github.zhengframework.metrics.TestService.count.meter")
+            .getCount());
+    metricRegistry
+        .getGauges()
+        .forEach(
+            (key, value) -> {
+              System.out.println(key);
+              System.out.println(value.getValue());
+              if ("com.github.zhengframework.metrics.TestService.count.gauge".equals(key)) {
+                assertEquals("1111", value.getValue());
+              }
+            });
   }
-
 }

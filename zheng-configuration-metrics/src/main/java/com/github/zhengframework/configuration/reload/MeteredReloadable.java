@@ -30,8 +30,8 @@ public class MeteredReloadable implements Reloadable {
   private final Reloadable delegate;
   private final Timer reloadTimer;
 
-  public MeteredReloadable(MetricRegistry metricRegistry, String metricPrefix,
-      Reloadable delegate) {
+  public MeteredReloadable(
+      MetricRegistry metricRegistry, String metricPrefix, Reloadable delegate) {
     requireNonNull(metricRegistry);
     requireNonNull(metricPrefix);
     this.delegate = requireNonNull(delegate);

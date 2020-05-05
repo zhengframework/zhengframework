@@ -30,31 +30,30 @@ import org.quartz.Trigger;
 @Target(ElementType.TYPE)
 public @interface On {
 
-    String value() default "";
+  String value() default "";
 
-    /**
-     * The name of this job. If not specified, the name of the job will default to the canonical name
-     * of the annotated class
-     *
-     * @return the name of the job
-     */
-    String jobName() default "";
+  /**
+   * The name of this job. If not specified, the name of the job will default to the canonical name
+   * of the annotated class
+   *
+   * @return the name of the job
+   */
+  String jobName() default "";
 
-    String timeZone() default "";
+  String timeZone() default "";
 
-    boolean requestRecovery() default false;
+  boolean requestRecovery() default false;
 
-    boolean storeDurably() default false;
+  boolean storeDurably() default false;
 
-    int priority() default Trigger.DEFAULT_PRIORITY;
+  int priority() default Trigger.DEFAULT_PRIORITY;
 
-    MisfirePolicy misfirePolicy() default MisfirePolicy.SMART;
+  MisfirePolicy misfirePolicy() default MisfirePolicy.SMART;
 
-    enum MisfirePolicy {
-        SMART,
-        IGNORE_MISFIRES,
-        DO_NOTHING,
-        FIRE_AND_PROCEED
-    }
-
+  enum MisfirePolicy {
+    SMART,
+    IGNORE_MISFIRES,
+    DO_NOTHING,
+    FIRE_AND_PROCEED
+  }
 }

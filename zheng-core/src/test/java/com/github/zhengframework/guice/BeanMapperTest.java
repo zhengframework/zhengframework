@@ -1,46 +1,46 @@
-//package com.github.zhengframework.guice;
+// package com.github.zhengframework.guice;
 //
-//import static org.junit.Assert.assertArrayEquals;
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertNull;
+// import static org.junit.Assert.assertArrayEquals;
+// import static org.junit.Assert.assertEquals;
+// import static org.junit.Assert.assertNull;
 //
-//import com.fasterxml.jackson.annotation.JsonAutoDetect;
-//import com.fasterxml.jackson.databind.DeserializationFeature;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.SerializationFeature;
-//import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
-//import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-//import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
-//import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-//import com.github.zhengframework.configuration.Configuration;
-//import com.github.zhengframework.configuration.ConfigurationDefine;
-//import com.github.zhengframework.configuration.MapConfiguration;
-//import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
-//import com.github.zhengframework.configuration.annotation.ConfigurationTypeParser;
-//import com.github.zhengframework.configuration.parser.BeanMapper;
-//import com.github.zhengframework.configuration.parser.Parser;
-//import com.google.common.collect.Lists;
-//import com.google.common.collect.Sets;
-//import java.math.BigDecimal;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.HashMap;
-//import java.util.HashSet;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Set;
-//import java.util.stream.Collectors;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
-//import lombok.NoArgsConstructor;
-//import lombok.ToString;
-//import org.apache.commons.beanutils.BeanUtils;
-//import org.apache.commons.beanutils.BeanUtilsBean;
-//import org.junit.Test;
-//import org.yaml.snakeyaml.Yaml;
+// import com.fasterxml.jackson.annotation.JsonAutoDetect;
+// import com.fasterxml.jackson.databind.DeserializationFeature;
+// import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.SerializationFeature;
+// import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+// import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+// import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
+// import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+// import com.github.zhengframework.configuration.Configuration;
+// import com.github.zhengframework.configuration.ConfigurationDefine;
+// import com.github.zhengframework.configuration.MapConfiguration;
+// import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
+// import com.github.zhengframework.configuration.annotation.ConfigurationTypeParser;
+// import com.github.zhengframework.configuration.parser.BeanMapper;
+// import com.github.zhengframework.configuration.parser.Parser;
+// import com.google.common.collect.Lists;
+// import com.google.common.collect.Sets;
+// import java.math.BigDecimal;
+// import java.util.ArrayList;
+// import java.util.Arrays;
+// import java.util.HashMap;
+// import java.util.HashSet;
+// import java.util.List;
+// import java.util.Map;
+// import java.util.Set;
+// import java.util.stream.Collectors;
+// import lombok.AllArgsConstructor;
+// import lombok.Data;
+// import lombok.EqualsAndHashCode;
+// import lombok.NoArgsConstructor;
+// import lombok.ToString;
+// import org.apache.commons.beanutils.BeanUtils;
+// import org.apache.commons.beanutils.BeanUtilsBean;
+// import org.junit.Test;
+// import org.yaml.snakeyaml.Yaml;
 //
-//public class BeanMapperTest {
+// public class BeanMapperTest {
 //
 //  @Test
 //  public void example() throws Exception {
@@ -107,7 +107,8 @@
 //    map.put("zheng.hibernate.stringServerMap.server2.stringSet.2", "5555");
 //    map.put("zheng.hibernate.stringServerMap.server2.stringSet.3", "4444");
 //
-//    map.put("zheng.hibernate.stringStringMap.hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+//    map.put("zheng.hibernate.stringStringMap.hibernate.dialect",
+// "org.hibernate.dialect.H2Dialect");
 //    map.put("zheng.hibernate.stringStringMap.hibernate.hbm2ddl.auto", "create");
 //
 //    map.put("zheng.hibernate.integerServerMap.1.host", "192.168.1.101");
@@ -199,7 +200,8 @@
 //    user.setId(1);
 //    assertEquals(user, hibernateConfig.getUser());
 //
-//    assertArrayEquals(new User[]{new User("zheng", 1), new User("zheng", 2), new User("zheng", 3)},
+//    assertArrayEquals(new User[]{new User("zheng", 1), new User("zheng", 2), new User("zheng",
+// 3)},
 //        hibernateConfig.getUserArray());
 //
 //    ObjectMapper mapper=new ObjectMapper(new YAMLFactory()
@@ -379,4 +381,4 @@
 //
 ////    private Map<Server, Server> serverServerMaps = new HashMap<>();// not support
 //  }
-//}
+// }

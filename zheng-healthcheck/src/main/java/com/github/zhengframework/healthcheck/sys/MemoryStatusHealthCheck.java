@@ -50,9 +50,15 @@ public class MemoryStatusHealthCheck extends NamedHealthCheck {
       return Result.healthy();
     } else {
       String msg =
-          "max:" + (maxMemory / 1024 / 1024) + "M,total:" + (totalMemory / 1024 / 1024) + "M,used:"
-              + ((totalMemory / 1024 / 1024) - (freeMemory / 1024 / 1024)) + "M,free:" + (freeMemory
-              / 1024 / 1024) + "M";
+          "max:"
+              + (maxMemory / 1024 / 1024)
+              + "M,total:"
+              + (totalMemory / 1024 / 1024)
+              + "M,used:"
+              + ((totalMemory / 1024 / 1024) - (freeMemory / 1024 / 1024))
+              + "M,free:"
+              + (freeMemory / 1024 / 1024)
+              + "M";
       return Result.unhealthy(msg);
     }
   }

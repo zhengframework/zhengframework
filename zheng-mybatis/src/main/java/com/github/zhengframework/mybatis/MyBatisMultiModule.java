@@ -29,11 +29,10 @@ import java.util.Map.Entry;
 
 public class MyBatisMultiModule extends ConfigurationAwareModule {
 
-
   @Override
   protected void configure() {
-    Map<String, MyBatisConfig> myBatisConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MyBatisConfig.class);
+    Map<String, MyBatisConfig> myBatisConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MyBatisConfig.class);
     for (Entry<String, MyBatisConfig> entry : myBatisConfigMap.entrySet()) {
       String name = entry.getKey();
       MyBatisConfig myBatisConfig = entry.getValue();
@@ -43,7 +42,5 @@ public class MyBatisMultiModule extends ConfigurationAwareModule {
         install(new MyBatisPrivateModule(null, myBatisConfig));
       }
     }
-
   }
-
 }

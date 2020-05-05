@@ -31,8 +31,7 @@ public class JettyWebServer implements WebServer {
   private final JettyServerConfigurer jettyServerConfigurer;
 
   @Inject
-  public JettyWebServer(Server server,
-      JettyServerConfigurer jettyServerConfigurer) {
+  public JettyWebServer(Server server, JettyServerConfigurer jettyServerConfigurer) {
     this.server = server;
     this.jettyServerConfigurer = jettyServerConfigurer;
   }

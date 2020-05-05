@@ -62,15 +62,15 @@ public class DeclaringClassMetricNamer implements MetricNamer {
 
   @Nonnull
   @Override
-  public String getNameForExceptionMetered(@Nonnull Method method,
-      @Nonnull ExceptionMetered exceptionMetered) {
+  public String getNameForExceptionMetered(
+      @Nonnull Method method, @Nonnull ExceptionMetered exceptionMetered) {
     if (exceptionMetered.absolute()) {
       return exceptionMetered.name();
     }
 
     if (exceptionMetered.name().isEmpty()) {
-      return
-          name(method.getDeclaringClass(), method.getName(), ExceptionMetered.DEFAULT_NAME_SUFFIX);
+      return name(
+          method.getDeclaringClass(), method.getName(), ExceptionMetered.DEFAULT_NAME_SUFFIX);
     }
 
     return name(method.getDeclaringClass(), exceptionMetered.name());
@@ -78,8 +78,8 @@ public class DeclaringClassMetricNamer implements MetricNamer {
 
   @Nonnull
   @Override
-  public String getNameForGauge(@Nonnull Class<?> instanceClass, @Nonnull Method method,
-      @Nonnull Gauge gauge) {
+  public String getNameForGauge(
+      @Nonnull Class<?> instanceClass, @Nonnull Method method, @Nonnull Gauge gauge) {
     if (gauge.absolute()) {
       return gauge.name();
     }

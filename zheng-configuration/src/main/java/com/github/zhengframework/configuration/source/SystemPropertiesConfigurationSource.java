@@ -30,17 +30,15 @@ public class SystemPropertiesConfigurationSource extends AbstractConfigurationSo
 
   @Override
   public void init() {
-
   }
 
   @Override
   public Map<String, String> getConfigurationInternal(Environment environment) {
-    return Collections.unmodifiableMap(System.getProperties()
-        .entrySet()
-        .stream()
-        .collect(Collectors.toMap(
-            entry -> Objects.toString(entry.getKey()),
-            entry -> Objects.toString(entry.getValue())
-        )));
+    return Collections.unmodifiableMap(
+        System.getProperties().entrySet().stream()
+            .collect(
+                Collectors.toMap(
+                    entry -> Objects.toString(entry.getKey()),
+                    entry -> Objects.toString(entry.getValue()))));
   }
 }

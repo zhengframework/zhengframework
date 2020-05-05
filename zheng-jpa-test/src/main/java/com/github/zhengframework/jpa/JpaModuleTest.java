@@ -1,6 +1,5 @@
 package com.github.zhengframework.jpa;
 
-
 import com.github.zhengframework.jpa.a.Work;
 import com.google.inject.Injector;
 

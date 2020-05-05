@@ -35,12 +35,12 @@ public class HealthCheckModule extends AbstractModule {
   @Override
   protected void configure() {
     OptionalBinder.newOptionalBinder(binder(), HealthCheckRegistry.class)
-        .setDefault().toInstance(new HealthCheckRegistry());
+        .setDefault()
+        .toInstance(new HealthCheckRegistry());
     bind(HealthCheckManagedService.class).asEagerSingleton();
     bind(SystemLoadHealthCheck.class);
     bind(ThreadDeadlockHealthCheck.class);
     bind(MemoryStatusHealthCheck.class);
     bind(DataSourceHealthCheck.class);
   }
-
 }

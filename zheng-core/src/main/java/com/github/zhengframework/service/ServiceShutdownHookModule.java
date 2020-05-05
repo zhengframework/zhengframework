@@ -38,16 +38,19 @@ public class ServiceShutdownHookModule extends AbstractModule {
 
     @Inject
     public SystemShutdownHook(final ServiceManager serviceManager) {
-      Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-        try {
-          log.info("Runtime Lifecycle shutdown hook begin running");
-          serviceManager.stop();
-        } catch (Throwable t) {
-          log.info("Runtime Lifecycle shutdown hook result in error ", t);
-          throw t;
-        }
-        log.info("Runtime Lifecycle shutdown hook finished running");
-      }));
+      Runtime.getRuntime()
+          .addShutdownHook(
+              new Thread(
+                  () -> {
+                    try {
+                      log.info("Runtime Lifecycle shutdown hook begin running");
+                      serviceManager.stop();
+                    } catch (Throwable t) {
+                      log.info("Runtime Lifecycle shutdown hook result in error ", t);
+                      throw t;
+                    }
+                    log.info("Runtime Lifecycle shutdown hook finished running");
+                  }));
     }
   }
 }

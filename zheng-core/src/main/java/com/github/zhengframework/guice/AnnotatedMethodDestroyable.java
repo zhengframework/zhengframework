@@ -34,7 +34,7 @@ public class AnnotatedMethodDestroyable implements Destroyable {
 
   @Override
   public void preDestroy() throws Exception {
-    if(instance!=null){
+    if (instance != null) {
       method.invoke(instance);
     }
   }

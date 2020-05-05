@@ -45,14 +45,15 @@ public class LiquibaseManagedSchema implements ManagedSchema {
     if (liquibaseConfig.isEnable()) {
       log.info("Starting DB migration");
       try {
-        Database database = DatabaseFactory.getInstance()
-            .findCorrectDatabaseImplementation(new JdbcConnection(dataSource.getConnection()));
+        Database database =
+            DatabaseFactory.getInstance()
+                .findCorrectDatabaseImplementation(new JdbcConnection(dataSource.getConnection()));
 
-        ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(
-            Thread.currentThread().getContextClassLoader());
+        ClassLoaderResourceAccessor resourceAccessor =
+            new ClassLoaderResourceAccessor(Thread.currentThread().getContextClassLoader());
 
-        Liquibase liquibase = new Liquibase(liquibaseConfig.getChangeLogFile(), resourceAccessor,
-            database);
+        Liquibase liquibase =
+            new Liquibase(liquibaseConfig.getChangeLogFile(), resourceAccessor, database);
         liquibase.update(new Contexts());
       } catch (Exception e) {
         log.error("DB migration fail", e);

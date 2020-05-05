@@ -32,8 +32,8 @@ public class ClassAnnotationResolver implements AnnotationResolver {
 
   @Override
   @Nullable
-  public <T extends Annotation> T findAnnotation(@Nonnull final Class<T> annotationClass,
-      @Nonnull final Method method) {
+  public <T extends Annotation> T findAnnotation(
+      @Nonnull final Class<T> annotationClass, @Nonnull final Method method) {
     return method.getDeclaringClass().getAnnotation(annotationClass);
   }
 }

@@ -20,8 +20,7 @@ public class ZhengApplicationRunnerConfigFileTest {
   @WithZhengApplication()
   public void testDefault() {
     assertNotNull(injector);
-    String url = injector
-        .getInstance(Key.get(String.class, named("zheng.dataSource.url")));
+    String url = injector.getInstance(Key.get(String.class, named("zheng.dataSource.url")));
     assertNotNull(url);
     assertEquals("jdbc:hsqldb:mem:test_db", url);
   }
@@ -30,8 +29,7 @@ public class ZhengApplicationRunnerConfigFileTest {
   @WithZhengApplication(configFile = "a.properties")
   public void testConfigA() {
     assertNotNull(injector);
-    String url = injector
-        .getInstance(Key.get(String.class, named("zheng.dataSource.url")));
+    String url = injector.getInstance(Key.get(String.class, named("zheng.dataSource.url")));
     assertNotNull(url);
     assertEquals("jdbc:hsqldb:mem:test_a", url);
   }
@@ -40,8 +38,7 @@ public class ZhengApplicationRunnerConfigFileTest {
   @WithZhengApplication(configFile = "b.properties")
   public void testConfigB() {
     assertNotNull(injector);
-    String url = injector
-        .getInstance(Key.get(String.class, named("zheng.dataSource.url")));
+    String url = injector.getInstance(Key.get(String.class, named("zheng.dataSource.url")));
     assertNotNull(url);
     assertEquals("jdbc:hsqldb:mem:test_b", url);
   }

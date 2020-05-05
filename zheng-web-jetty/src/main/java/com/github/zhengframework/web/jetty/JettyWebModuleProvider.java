@@ -31,5 +31,4 @@ public class JettyWebModuleProvider implements ModuleProvider {
   public Module getModule() {
     return new JettyWebModule();
   }
-
 }

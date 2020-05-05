@@ -67,9 +67,9 @@ public class Food {
       return false;
     }
     Food food = (Food) o;
-    return Objects.equals(getApple(), food.getApple()) &&
-        Objects.equals(getBananas(), food.getBananas()) &&
-        Objects.equals(getApples(), food.getApples());
+    return Objects.equals(getApple(), food.getApple())
+        && Objects.equals(getBananas(), food.getBananas())
+        && Objects.equals(getApples(), food.getApples());
   }
 
   @Override

@@ -36,26 +36,39 @@ public class SwaggerModuleTest {
     System.out.println("restConfig=" + restConfig);
     String path = PathUtils.fixPath(webConfig.getContextPath(), restConfig.getPath());
 
-    OkHttpClient okHttpClient = new Builder()
-        .build();
-    Request request = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + path + "/test/aa/bb")
-        .get().build();
+    OkHttpClient okHttpClient = new Builder().build();
+    Request request =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + path + "/test/aa/bb")
+            .get()
+            .build();
 
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
     System.out.println(resp);
     assertEquals("aa/bb", resp);
 
-    String openapiJSON = okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + path
-            + "/openapi.json")
-        .get().build()).execute().body().string();
+    String openapiJSON =
+        okHttpClient
+            .newCall(
+                new Request.Builder()
+                    .url("http://localhost:" + webConfig.getPort() + path + "/openapi.json")
+                    .get()
+                    .build())
+            .execute()
+            .body()
+            .string();
     assertTrue(openapiJSON.contains("/test/{a}/{b}"));
-    String openapiYAML = okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + path
-            + "/openapi.yaml")
-        .get().build()).execute().body().string();
+    String openapiYAML =
+        okHttpClient
+            .newCall(
+                new Request.Builder()
+                    .url("http://localhost:" + webConfig.getPort() + path + "/openapi.yaml")
+                    .get()
+                    .build())
+            .execute()
+            .body()
+            .string();
     assertTrue(openapiYAML.contains("/test/{a}/{b}"));
   }
 }

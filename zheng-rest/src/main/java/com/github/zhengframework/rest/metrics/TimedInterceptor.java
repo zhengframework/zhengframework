@@ -41,8 +41,8 @@ public class TimedInterceptor implements ContainerRequestFilter, ContainerRespon
   }
 
   @Override
-  public void filter(ContainerRequestContext requestContext,
-      ContainerResponseContext responseContext) {
+  public void filter(
+      ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
 
     context.stop();
   }

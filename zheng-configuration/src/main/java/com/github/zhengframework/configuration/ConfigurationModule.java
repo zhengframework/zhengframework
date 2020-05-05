@@ -31,7 +31,8 @@ public class ConfigurationModule extends ConfigurationAwareModule {
   private void bindConfiguration(Binder binder, Configuration configuration) {
     binder = binder.skipSources(Names.class);
     for (String key : configuration.keySet()) {
-      binder.bind(Key.get(String.class, named(key)))
+      binder
+          .bind(Key.get(String.class, named(key)))
           .toProvider(new ConfigurationValueProvider(configuration, key));
     }
   }

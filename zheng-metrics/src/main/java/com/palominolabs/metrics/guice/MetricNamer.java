@@ -37,8 +37,8 @@ public interface MetricNamer {
   String getNameForCounted(@Nonnull Method method, @Nonnull Counted counted);
 
   @Nonnull
-  String getNameForExceptionMetered(@Nonnull Method method,
-      @Nonnull ExceptionMetered exceptionMetered);
+  String getNameForExceptionMetered(
+      @Nonnull Method method, @Nonnull ExceptionMetered exceptionMetered);
 
   /**
    * For AOP-wrapped method invocations (which is how all metrics other than Gauges have to be
@@ -52,8 +52,8 @@ public interface MetricNamer {
    * @return a name
    */
   @Nonnull
-  String getNameForGauge(@Nonnull Class<?> instanceClass, @Nonnull Method method,
-      @Nonnull Gauge gauge);
+  String getNameForGauge(
+      @Nonnull Class<?> instanceClass, @Nonnull Method method, @Nonnull Gauge gauge);
 
   @Nonnull
   String getNameForMetered(@Nonnull Method method, @Nonnull Metered metered);

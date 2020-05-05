@@ -22,8 +22,7 @@ public class HealthCheckModuleTest {
   public void configure() throws Exception {
     HealthCheckRegistry healthCheckRegistry = injector.getInstance(HealthCheckRegistry.class);
 
-    for (Entry<String, Result> entry : healthCheckRegistry.runHealthChecks()
-        .entrySet()) {
+    for (Entry<String, Result> entry : healthCheckRegistry.runHealthChecks().entrySet()) {
       Result result = entry.getValue();
       System.out.println(entry.getKey());
       boolean healthy = result.isHealthy();
@@ -37,11 +36,10 @@ public class HealthCheckModuleTest {
           throwable.printStackTrace();
         }
       }
-
     }
     HealthCheck systemLoadHealthCheck = healthCheckRegistry.getHealthCheck("SystemLoadHealthCheck");
-    HealthCheck threadDeadlockHealthCheck = healthCheckRegistry
-        .getHealthCheck("ThreadDeadlockHealthCheck");
+    HealthCheck threadDeadlockHealthCheck =
+        healthCheckRegistry.getHealthCheck("ThreadDeadlockHealthCheck");
     assert systemLoadHealthCheck != null;
     assert threadDeadlockHealthCheck != null;
   }

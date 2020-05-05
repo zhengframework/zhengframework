@@ -18,7 +18,6 @@ public class ValidatorModuleTest {
   @Inject
   private DummyCountryDao dummyCountryDao;
 
-
   @Test
   public void testInjectedValidation() {
     Country country = new Country();

@@ -30,11 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MyBatisXmlModule extends ConfigurationAwareModule {
 
-
   @Override
   protected void configure() {
-    Map<String, MyBatisConfig> myBatisConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MyBatisConfig.class);
+    Map<String, MyBatisConfig> myBatisConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MyBatisConfig.class);
     MyBatisConfig myBatisConfig = myBatisConfigMap.get("");
     install(new MyBatisXmlInternalModule(myBatisConfig));
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();
@@ -43,10 +42,12 @@ public class MyBatisXmlModule extends ConfigurationAwareModule {
         ExposedPrivateModule module = extraModuleClass.getDeclaredConstructor().newInstance();
         log.info("install module: " + extraModuleClass.getName());
         install(module);
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new RuntimeException(e);
       }
     }
   }
-
 }

@@ -61,15 +61,14 @@ public class ConfigurationBuilder {
   }
 
   public Configuration build() {
-    final CachedConfigurationSource cachedConfigurationSource = new CachedConfigurationSource(
-        configurationSource);
+    final CachedConfigurationSource cachedConfigurationSource =
+        new CachedConfigurationSource(configurationSource);
     cachedConfigurationSource.init();
 
     Reloadable reloadable = () -> cachedConfigurationSource.reload(environment);
-//    reloadable.reload();
+    //    reloadable.reload();
     reloadStrategy.register(reloadable);
 
     return new SourceBasedConfiguration(cachedConfigurationSource, environment);
   }
-
 }

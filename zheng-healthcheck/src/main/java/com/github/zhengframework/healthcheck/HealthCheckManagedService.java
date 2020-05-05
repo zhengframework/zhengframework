@@ -44,19 +44,19 @@ public class HealthCheckManagedService implements Service {
   private ScheduledExecutorService scheduledExecutorService;
 
   @Inject
-  public HealthCheckManagedService(HealthCheckConfig config,
+  public HealthCheckManagedService(
+      HealthCheckConfig config,
       HealthCheckRegistry healthCheckRegistry,
-      HealthCheckScanner healthCheckScanner, Injector injector) {
+      HealthCheckScanner healthCheckScanner,
+      Injector injector) {
     this.config = config;
     this.healthCheckRegistry = healthCheckRegistry;
     this.healthCheckScanner = healthCheckScanner;
     this.injector = injector;
-    scheduledExecutorService = Executors
-        .newScheduledThreadPool(Runtime.getRuntime().availableProcessors(),
-            new ThreadFactoryBuilder()
-                .setNameFormat("healthCheck-%d")
-                .setDaemon(true)
-                .build());
+    scheduledExecutorService =
+        Executors.newScheduledThreadPool(
+            Runtime.getRuntime().availableProcessors(),
+            new ThreadFactoryBuilder().setNameFormat("healthCheck-%d").setDaemon(true).build());
   }
 
   @Override
@@ -76,18 +76,26 @@ public class HealthCheckManagedService implements Service {
           }
         });
     if (config.isEnable()) {
-      scheduledExecutorService.schedule(() -> {
-        for (Map.Entry<String, HealthCheck.Result> entry : healthCheckRegistry.runHealthChecks()
-            .entrySet()) {
-          if (entry.getValue().isHealthy()) {
-            log.trace("{} : OK {}", entry.getKey(),
-                Strings.nullToEmpty(entry.getValue().getMessage()));
-          } else {
-            log.warn("{} : FAIL - {}", entry.getKey(),
-                Strings.nullToEmpty(entry.getValue().getMessage()), entry.getValue().getError());
-          }
-        }
-      }, config.getDuration(), config.getUnit());
+      scheduledExecutorService.schedule(
+          () -> {
+            for (Map.Entry<String, HealthCheck.Result> entry :
+                healthCheckRegistry.runHealthChecks().entrySet()) {
+              if (entry.getValue().isHealthy()) {
+                log.trace(
+                    "{} : OK {}",
+                    entry.getKey(),
+                    Strings.nullToEmpty(entry.getValue().getMessage()));
+              } else {
+                log.warn(
+                    "{} : FAIL - {}",
+                    entry.getKey(),
+                    Strings.nullToEmpty(entry.getValue().getMessage()),
+                    entry.getValue().getError());
+              }
+            }
+          },
+          config.getDuration(),
+          config.getUnit());
     }
   }
 

@@ -76,11 +76,11 @@ public class MetricsConfigurationBuilder {
   }
 
   public Configuration build() {
-    final CachedConfigurationSource cachedConfigurationSource = new CachedConfigurationSource(
-        configurationSource);
+    final CachedConfigurationSource cachedConfigurationSource =
+        new CachedConfigurationSource(configurationSource);
     if (metricRegistry != null) {
-      configurationSource = new MeteredConfigurationSource(metricRegistry, prefix,
-          cachedConfigurationSource);
+      configurationSource =
+          new MeteredConfigurationSource(metricRegistry, prefix, cachedConfigurationSource);
     }
     cachedConfigurationSource.init();
 
@@ -92,12 +92,11 @@ public class MetricsConfigurationBuilder {
     reloadable.reload();
     reloadStrategy.register(reloadable);
 
-    SourceBasedConfiguration configuration = new SourceBasedConfiguration(cachedConfigurationSource,
-        environment);
+    SourceBasedConfiguration configuration =
+        new SourceBasedConfiguration(cachedConfigurationSource, environment);
     if (metricRegistry != null) {
       return new MeteredConfiguration(metricRegistry, prefix, configuration);
     }
     return configuration;
   }
-
 }

@@ -176,8 +176,11 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
     try {
       origDataSource.setConnectionTesterClassName(connectionTesterClassName);
     } catch (PropertyVetoException e) {
-      throw new RuntimeException("Impossible to set C3P0 Data Source connection tester class name '"
-          + connectionTesterClassName + "', see nested exceptions", e);
+      throw new RuntimeException(
+          "Impossible to set C3P0 Data Source connection tester class name '"
+              + connectionTesterClassName
+              + "', see nested exceptions",
+          e);
     }
   }
 
@@ -365,14 +368,15 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setForceSynchronousCheckins(@Named("c3p0.forceSynchronousCheckins")
-      boolean forceSynchronousCheckins) {
+  public void setForceSynchronousCheckins(
+      @Named("c3p0.forceSynchronousCheckins") boolean forceSynchronousCheckins) {
     origDataSource.setForceSynchronousCheckins(forceSynchronousCheckins);
   }
 
   @Inject(optional = true)
   public void setStatementCacheNumDeferredCloseThreads(
-      @Named("c3p0.statementCacheNumDeferredCloseThreads") int statementCacheNumDeferredCloseThreads) {
+      @Named("c3p0.statementCacheNumDeferredCloseThreads")
+          int statementCacheNumDeferredCloseThreads) {
     origDataSource.setStatementCacheNumDeferredCloseThreads(statementCacheNumDeferredCloseThreads);
   }
 
@@ -390,27 +394,23 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setDataSourceName(
-      @Named("c3p0.dataSourceName") String dataSourceName) {
+  public void setDataSourceName(@Named("c3p0.dataSourceName") String dataSourceName) {
     origDataSource.setDataSourceName(dataSourceName);
   }
 
   @SuppressWarnings("rawtypes")
   @Inject(optional = true)
-  public void setExtensions(
-      @Named("c3p0.extensions") Map extensions) {
+  public void setExtensions(@Named("c3p0.extensions") Map extensions) {
     origDataSource.setExtensions(extensions);
   }
 
   @Inject(optional = true)
-  public void setIdentityToken(
-      @Named("c3p0.identityToken") String identityToken) {
+  public void setIdentityToken(@Named("c3p0.identityToken") String identityToken) {
     origDataSource.setIdentityToken(identityToken);
   }
 
   @Inject(optional = true)
-  public void setNumHelperThreads(
-      @Named("c3p0.numHelperThreads") int numHelperThreads) {
+  public void setNumHelperThreads(@Named("c3p0.numHelperThreads") int numHelperThreads) {
     origDataSource.setNumHelperThreads(numHelperThreads);
   }
 

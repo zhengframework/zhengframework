@@ -38,10 +38,7 @@ public class PackageScanMapperClassProvider implements MapperClassProvider {
 
   @Override
   public Collection<Class<?>> get() {
-    ScanResult scanResult = new ClassGraph()
-        .whitelistPackages(packages)
-        .enableClassInfo()
-        .scan();
+    ScanResult scanResult = new ClassGraph().whitelistPackages(packages).enableClassInfo().scan();
     ClassInfoList allClasses = scanResult.getAllClasses();
 
     List<Class<?>> loadClasses = allClasses.loadClasses();

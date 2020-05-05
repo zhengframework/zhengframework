@@ -20,7 +20,6 @@ package com.github.zhengframework.web.undertow;
  * #L%
  */
 
-
 import com.github.zhengframework.web.WebServer;
 import io.undertow.Undertow;
 import io.undertow.Undertow.Builder;
@@ -35,8 +34,7 @@ public class UndertowWebServer implements WebServer {
   private Undertow undertow;
 
   @Inject
-  public UndertowWebServer(Builder server,
-      UndertowServerConfigurer undertowServerConfigurer) {
+  public UndertowWebServer(Builder server, UndertowServerConfigurer undertowServerConfigurer) {
     this.server = server;
     this.undertowServerConfigurer = undertowServerConfigurer;
   }
@@ -52,5 +50,4 @@ public class UndertowWebServer implements WebServer {
   public void stop() throws Exception {
     undertow.stop();
   }
-
 }

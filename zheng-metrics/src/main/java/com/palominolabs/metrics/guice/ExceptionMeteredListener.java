@@ -37,7 +37,9 @@ public class ExceptionMeteredListener extends DeclaredMethodsTypeListener {
   private final MetricNamer metricNamer;
   private final AnnotationResolver annotationResolver;
 
-  public ExceptionMeteredListener(MetricRegistry metricRegistry, MetricNamer metricNamer,
+  public ExceptionMeteredListener(
+      MetricRegistry metricRegistry,
+      MetricNamer metricNamer,
       final AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.metricNamer = metricNamer;
@@ -47,11 +49,11 @@ public class ExceptionMeteredListener extends DeclaredMethodsTypeListener {
   @Nullable
   @Override
   protected MethodInterceptor getInterceptor(Method method) {
-    final ExceptionMetered annotation = annotationResolver
-        .findAnnotation(ExceptionMetered.class, method);
+    final ExceptionMetered annotation =
+        annotationResolver.findAnnotation(ExceptionMetered.class, method);
     if (annotation != null) {
-      final Meter meter = metricRegistry
-          .meter(metricNamer.getNameForExceptionMetered(method, annotation));
+      final Meter meter =
+          metricRegistry.meter(metricNamer.getNameForExceptionMetered(method, annotation));
       return new ExceptionMeteredInterceptor(meter, annotation.cause());
     }
     return null;

@@ -180,7 +180,8 @@ public class DbcpSharedDataSourceWrapper extends DataSourceWrapper {
 
   @com.google.inject.Inject(optional = true)
   public void setDefaultTimeBetweenEvictionRunsMillis(
-      @Named("dbcp.defaultTimeBetweenEvictionRunsMillis") int defaultTimeBetweenEvictionRunsMillis) {
+      @Named("dbcp.defaultTimeBetweenEvictionRunsMillis")
+          int defaultTimeBetweenEvictionRunsMillis) {
     origDataSource.setDefaultTimeBetweenEvictionRunsMillis(defaultTimeBetweenEvictionRunsMillis);
   }
 

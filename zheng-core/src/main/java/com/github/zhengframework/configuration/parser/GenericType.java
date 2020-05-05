@@ -1,4 +1,4 @@
-//package com.github.zhengframework.configuration.parser;
+// package com.github.zhengframework.configuration.parser;
 
 /*-
  * #%L
@@ -20,10 +20,10 @@
  * #L%
  */
 //
-//import java.lang.reflect.ParameterizedType;
-//import java.lang.reflect.Type;
+// import java.lang.reflect.ParameterizedType;
+// import java.lang.reflect.Type;
 //
-//public abstract class GenericType<T> {
+// public abstract class GenericType<T> {
 //
 //  private final Type type;
 //
@@ -38,7 +38,8 @@
 //      ParameterizedType superClass = (ParameterizedType) t;
 //      type = superClass.getActualTypeArguments()[0];
 //    } else {
-//      String message = "'%s' must be parameterized (for example \"new GenericType<List<Integer>>(){}\"), "
+//      String message = "'%s' must be parameterized (for example \"new
+// GenericType<List<Integer>>(){}\"), "
 //          + "it cannot be of raw type \"new GenericType(){}\".";
 //      throw new IllegalStateException(String.format(message, getClass().getName()));
 //    }
@@ -53,4 +54,4 @@
 //    return type.toString();
 //  }
 //
-//}
+// }

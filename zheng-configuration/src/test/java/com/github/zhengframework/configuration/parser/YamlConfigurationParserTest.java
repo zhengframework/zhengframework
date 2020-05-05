@@ -11,12 +11,11 @@ public class YamlConfigurationParserTest {
 
   @Test
   public void parse() {
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("food.yaml"))
-        .build();
+    Configuration configuration =
+        new ConfigurationBuilder()
+            .withConfigurationSource(new FileConfigurationSource("food.yaml"))
+            .build();
 
     assertEquals(3, configuration.prefixList("bananas").size());
-
-
   }
 }

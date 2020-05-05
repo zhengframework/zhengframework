@@ -54,20 +54,26 @@ public class UndertowWebModule extends ConfigurationAwareModule {
     bind(GuiceServerEndpointConfigurator.class);
 
     OptionalBinder.newOptionalBinder(binder(), Undertow.Builder.class)
-        .setDefault().toProvider(UndertowServerProvider.class);
+        .setDefault()
+        .toProvider(UndertowServerProvider.class);
 
     OptionalBinder.newOptionalBinder(binder(), UndertowServerConfigurer.class)
-        .setDefault().to(DefaultUndertowServerConfigurer.class);
+        .setDefault()
+        .to(DefaultUndertowServerConfigurer.class);
 
     OptionalBinder.newOptionalBinder(binder(), ResourceManager.class)
-        .setDefault().toProvider((Provider<ResourceManager>) () -> {
-      log.info("Configuring Resources to be found in META-INF/resources/");
-      ClassPathResourceManager classPathResourceManager = new ClassPathResourceManager(
-          Thread.currentThread().getContextClassLoader(), "META-INF/resources/");
-      return new ResourceManagerCollection(classPathResourceManager);
-    }).in(Singleton.class);
+        .setDefault()
+        .toProvider(
+            (Provider<ResourceManager>)
+                () -> {
+                  log.info("Configuring Resources to be found in META-INF/resources/");
+                  ClassPathResourceManager classPathResourceManager =
+                      new ClassPathResourceManager(
+                          Thread.currentThread().getContextClassLoader(), "META-INF/resources/");
+                  return new ResourceManagerCollection(classPathResourceManager);
+                })
+        .in(Singleton.class);
 
     bind(WebServer.class).to(UndertowWebServer.class);
   }
-
 }

@@ -30,8 +30,8 @@ public interface EventDispatcher {
 
   EventRegistration registerListener(EventListener<? extends Event> eventListener);
 
-  EventRegistration registerListener(Object instance, Method method,
-      Class<? extends Event> acceptedType);
+  EventRegistration registerListener(
+      Object instance, Method method, Class<? extends Event> acceptedType);
 
   void publishEvent(Event event);
 }

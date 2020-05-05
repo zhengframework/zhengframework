@@ -62,9 +62,11 @@ public class MetricsInstrumentationModule extends AbstractModule {
    * methods
    * @param annotationResolver The annotation provider
    */
-  private MetricsInstrumentationModule(MetricRegistry metricRegistry,
+  private MetricsInstrumentationModule(
+      MetricRegistry metricRegistry,
       Matcher<? super TypeLiteral<?>> matcher,
-      MetricNamer metricNamer, AnnotationResolver annotationResolver) {
+      MetricNamer metricNamer,
+      AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.matcher = matcher;
     this.metricNamer = metricNamer;
@@ -80,8 +82,8 @@ public class MetricsInstrumentationModule extends AbstractModule {
     bindListener(matcher, new MeteredListener(metricRegistry, metricNamer, annotationResolver));
     bindListener(matcher, new TimedListener(metricRegistry, metricNamer, annotationResolver));
     bindListener(matcher, new GaugeListener(metricRegistry, metricNamer, annotationResolver));
-    bindListener(matcher,
-        new ExceptionMeteredListener(metricRegistry, metricNamer, annotationResolver));
+    bindListener(
+        matcher, new ExceptionMeteredListener(metricRegistry, metricNamer, annotationResolver));
     bindListener(matcher, new CountedListener(metricRegistry, metricNamer, annotationResolver));
   }
 
@@ -116,7 +118,7 @@ public class MetricsInstrumentationModule extends AbstractModule {
 
     /**
      * @param metricNamer The metric namer to use when creating names for metrics for annotated
-     * methods
+     *     methods
      * @return this
      */
     @Nonnull
@@ -143,8 +145,7 @@ public class MetricsInstrumentationModule extends AbstractModule {
           Preconditions.checkNotNull(metricRegistry),
           Preconditions.checkNotNull(matcher),
           Preconditions.checkNotNull(metricNamer),
-          Preconditions.checkNotNull(annotationResolver)
-      );
+          Preconditions.checkNotNull(annotationResolver));
     }
   }
 }

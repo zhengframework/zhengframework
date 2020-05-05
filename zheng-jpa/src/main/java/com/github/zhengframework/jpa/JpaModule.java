@@ -32,8 +32,8 @@ public class JpaModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, JpaConfig> persistenceConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), JpaConfig.class);
+    Map<String, JpaConfig> persistenceConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), JpaConfig.class);
     JpaConfig jpaConfig = persistenceConfigMap.getOrDefault("", new JpaConfig());
     if (jpaConfig.getPersistenceUnitName() == null) {
       jpaConfig.setPersistenceUnitName("zheng-jpa");
@@ -43,14 +43,15 @@ public class JpaModule extends ConfigurationAwareModule {
     Class<? extends ExposedPrivateModule> extraModuleClass = jpaConfig.getExtraModuleClass();
     if (extraModuleClass != null) {
       try {
-        ExposedPrivateModule module = extraModuleClass
-            .getDeclaredConstructor().newInstance();
+        ExposedPrivateModule module = extraModuleClass.getDeclaredConstructor().newInstance();
         log.info("install extra module: " + extraModuleClass.getName());
         install(module);
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new RuntimeException(e);
       }
     }
   }
-
 }

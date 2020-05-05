@@ -33,8 +33,8 @@ public class MeteredConfigurationSource implements ConfigurationSource {
   private final Timer getConfigurationTimer;
   private final Timer initTimer;
 
-  public MeteredConfigurationSource(MetricRegistry metricRegistry, String metricPrefix,
-      ConfigurationSource delegate) {
+  public MeteredConfigurationSource(
+      MetricRegistry metricRegistry, String metricPrefix, ConfigurationSource delegate) {
     Objects.requireNonNull(metricRegistry);
     Objects.requireNonNull(metricPrefix);
     this.delegate = Objects.requireNonNull(delegate);

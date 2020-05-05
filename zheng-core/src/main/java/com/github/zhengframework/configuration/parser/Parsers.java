@@ -1,4 +1,4 @@
-//package com.github.zhengframework.configuration.parser;
+// package com.github.zhengframework.configuration.parser;
 
 /*-
  * #%L
@@ -20,16 +20,16 @@
  * #L%
  */
 //
-//import java.lang.reflect.Type;
-//import java.math.BigDecimal;
-//import java.math.BigInteger;
-//import java.text.NumberFormat;
-//import java.text.ParseException;
-//import java.util.LinkedHashMap;
-//import java.util.Locale;
-//import java.util.Map;
+// import java.lang.reflect.Type;
+// import java.math.BigDecimal;
+// import java.math.BigInteger;
+// import java.text.NumberFormat;
+// import java.text.ParseException;
+// import java.util.LinkedHashMap;
+// import java.util.Locale;
+// import java.util.Map;
 //
-//public enum Parsers implements Parser<Object> {
+// public enum Parsers implements Parser<Object> {
 //  BYTE(Byte.class, Byte.TYPE) {
 //    public Byte parse(String input) {
 //      return Byte.valueOf(input.trim());
@@ -164,4 +164,4 @@
 //    return input -> input == null ? null : parser.parse(input);
 //
 //  }
-//}
+// }

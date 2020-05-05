@@ -19,11 +19,10 @@ public class MyBatisXmlModuleTest {
   @Inject
   private Injector injector;
 
-  @WithZhengApplication(configFile = "application_xml.properties"
-      , moduleClass = {MyBatisXmlModule.class}
-      , excludeModuleProviderClass = {
-      MyBatisModuleProvider.class, DataSourceModuleProvider.class
-  })
+  @WithZhengApplication(
+      configFile = "application_xml.properties",
+      moduleClass = {MyBatisXmlModule.class},
+      excludeModuleProviderClass = {MyBatisModuleProvider.class, DataSourceModuleProvider.class})
   @Test
   public void configure() throws Exception {
     ScriptRunner runner = injector.getInstance(ScriptRunner.class);

@@ -44,5 +44,4 @@ public class ValidatorConfig implements ConfigurationDefine {
    * with {@link ValidationGroups} annotation.
    */
   private boolean addDefaultGroup = true;
-
 }

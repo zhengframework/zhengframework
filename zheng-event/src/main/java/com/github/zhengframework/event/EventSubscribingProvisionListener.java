@@ -27,8 +27,7 @@ class EventSubscribingProvisionListener implements ProvisionListener {
 
   private final Provider<EventDispatcher> dispatcherProvider;
 
-  EventSubscribingProvisionListener(
-      Provider<EventDispatcher> dispatcherProvider) {
+  EventSubscribingProvisionListener(Provider<EventDispatcher> dispatcherProvider) {
     this.dispatcherProvider = dispatcherProvider;
   }
 

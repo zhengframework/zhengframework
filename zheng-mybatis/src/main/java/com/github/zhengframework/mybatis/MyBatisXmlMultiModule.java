@@ -31,8 +31,8 @@ public class MyBatisXmlMultiModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MyBatisConfig> myBatisConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), MyBatisConfig.class);
+    Map<String, MyBatisConfig> myBatisConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), MyBatisConfig.class);
     for (Entry<String, MyBatisConfig> entry : myBatisConfigMap.entrySet()) {
       String name = entry.getKey();
       MyBatisConfig myBatisConfig = entry.getValue();
@@ -42,7 +42,5 @@ public class MyBatisXmlMultiModule extends ConfigurationAwareModule {
         install(new MyBatisXmlPrivateModule(null, myBatisConfig));
       }
     }
-
   }
-
 }

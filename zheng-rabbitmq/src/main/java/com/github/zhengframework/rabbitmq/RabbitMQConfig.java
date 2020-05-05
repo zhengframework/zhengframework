@@ -30,7 +30,7 @@ import org.kohsuke.MetaInfServices;
 @MetaInfServices
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.rabbitmq",supportGroup = true)
+@ConfigurationInfo(prefix = "zheng.rabbitmq", supportGroup = true)
 public class RabbitMQConfig implements ConfigurationDefine {
 
   public static final String PREFIX = "zheng.rabbitmq";
@@ -52,5 +52,4 @@ public class RabbitMQConfig implements ConfigurationDefine {
   private int shutdownTimeout = ConnectionFactory.DEFAULT_SHUTDOWN_TIMEOUT;
   private int channelRpcTimeout = ConnectionFactory.DEFAULT_CHANNEL_RPC_TIMEOUT;
   private int workPoolTimeout = ConnectionFactory.DEFAULT_WORK_POOL_TIMEOUT;
-
 }

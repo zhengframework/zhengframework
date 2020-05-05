@@ -38,6 +38,6 @@ public interface AnnotationResolver {
    * @return a T instance, if found, else null
    */
   @Nullable
-  <T extends Annotation> T findAnnotation(@Nonnull Class<T> annotationClass,
-      @Nonnull Method method);
+  <T extends Annotation> T findAnnotation(
+      @Nonnull Class<T> annotationClass, @Nonnull Method method);
 }

@@ -72,10 +72,10 @@ public class PlaceHolder {
   /**
    * Returns a string modified in according to supplied source and arguments.
    *
-   * If the source string has pattern-replacement content like {@code "a.${var}.b"}, the pattern is
-   * replaced property value of "var".
+   * <p>If the source string has pattern-replacement content like {@code "a.${var}.b"}, the pattern
+   * is replaced property value of "var".
    *
-   * Otherwise the return string is formatted by source and arguments as with {@link
+   * <p>Otherwise the return string is formatted by source and arguments as with {@link
    * String#format(String, Object...)}
    *
    * @param source A source formatting format string. {@code null} returns {@code null}
@@ -89,5 +89,4 @@ public class PlaceHolder {
     Matcher m = PATTERN.matcher(source);
     return m.find() ? replace(source) : String.format(source, args);
   }
-
 }

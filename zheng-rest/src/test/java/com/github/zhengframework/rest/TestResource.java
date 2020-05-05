@@ -49,5 +49,4 @@ public class TestResource {
   public String sayHello() {
     return MESSAGE;
   }
-
 }

@@ -31,7 +31,6 @@ import java.util.Set;
 
 public class MeteredConfiguration implements Configuration {
 
-
   private final Configuration delegate;
 
   private final Timer getTimer;
@@ -42,9 +41,7 @@ public class MeteredConfiguration implements Configuration {
   private final Timer prefixMapTimer;
 
   public MeteredConfiguration(
-      MetricRegistry metricRegistry,
-      String metricPrefix,
-      Configuration delegate) {
+      MetricRegistry metricRegistry, String metricPrefix, Configuration delegate) {
     Objects.requireNonNull(metricRegistry);
     Objects.requireNonNull(metricPrefix);
     this.delegate = Objects.requireNonNull(delegate);
@@ -52,10 +49,10 @@ public class MeteredConfiguration implements Configuration {
     keySetTimer = metricRegistry.timer(MetricRegistry.name(metricPrefix, "configuration.keySet"));
     asMapTimer = metricRegistry.timer(MetricRegistry.name(metricPrefix, "configuration.asMap"));
     prefixTimer = metricRegistry.timer(MetricRegistry.name(metricPrefix, "configuration.prefix"));
-    prefixSetTimer = metricRegistry
-        .timer(MetricRegistry.name(metricPrefix, "configuration.prefixSet"));
-    prefixMapTimer = metricRegistry
-        .timer(MetricRegistry.name(metricPrefix, "configuration.prefixMap"));
+    prefixSetTimer =
+        metricRegistry.timer(MetricRegistry.name(metricPrefix, "configuration.prefixSet"));
+    prefixMapTimer =
+        metricRegistry.timer(MetricRegistry.name(metricPrefix, "configuration.prefixMap"));
   }
 
   @Override

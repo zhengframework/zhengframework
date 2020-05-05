@@ -55,8 +55,7 @@ public class HttpHealthResponse {
       return false;
     }
     final HttpHealthResponse that = (HttpHealthResponse) other;
-    return status == that.status && message.equals(that.message)
-        && Objects.equals(body, that.body);
+    return status == that.status && message.equals(that.message) && Objects.equals(body, that.body);
   }
 
   @Override
@@ -66,9 +65,13 @@ public class HttpHealthResponse {
 
   @Override
   public String toString() {
-    return "HttpHealthResponse{status=" + status
-        + "message=" + message
-        + ", body='" + body + '\''
+    return "HttpHealthResponse{status="
+        + status
+        + "message="
+        + message
+        + ", body='"
+        + body
+        + '\''
         + '}';
   }
 }

@@ -33,5 +33,4 @@ import org.kohsuke.MetaInfServices;
 public class QuerydslConfig implements ConfigurationDefine {
 
   private boolean enable = true;
-
 }

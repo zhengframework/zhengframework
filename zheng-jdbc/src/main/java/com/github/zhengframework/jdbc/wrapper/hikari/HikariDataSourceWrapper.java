@@ -83,10 +83,8 @@ public class HikariDataSourceWrapper extends DataSourceWrapper {
     configuration.setConnectionTestQuery(connectionTestQuery);
   }
 
-
   @com.google.inject.Inject(optional = true)
-  public void setConnectionTimeout(
-      @Named("hikaricp.connectionTimeout") long connectionTimeout) {
+  public void setConnectionTimeout(@Named("hikaricp.connectionTimeout") long connectionTimeout) {
     configuration.setConnectionTimeout(connectionTimeout);
   }
 
@@ -189,8 +187,7 @@ public class HikariDataSourceWrapper extends DataSourceWrapper {
   }
 
   @com.google.inject.Inject(optional = true)
-  public void setValidationTimeout(
-      @Named("hikaricp.validationTimeout") long validationTimeout) {
+  public void setValidationTimeout(@Named("hikaricp.validationTimeout") long validationTimeout) {
     configuration.setValidationTimeout(validationTimeout);
   }
 

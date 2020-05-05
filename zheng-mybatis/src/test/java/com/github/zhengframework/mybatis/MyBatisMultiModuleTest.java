@@ -21,11 +21,10 @@ public class MyBatisMultiModuleTest {
   @Inject
   private Injector injector;
 
-  @WithZhengApplication(configFile = "application_group.properties"
-      , moduleClass = {MyBatisMultiModule.class}
-      , excludeModuleProviderClass = {
-      MyBatisModuleProvider.class
-  })
+  @WithZhengApplication(
+      configFile = "application_group.properties",
+      moduleClass = {MyBatisMultiModule.class},
+      excludeModuleProviderClass = {MyBatisModuleProvider.class})
   @Test
   public void configure() throws Exception {
     runGroup(injector, "a");

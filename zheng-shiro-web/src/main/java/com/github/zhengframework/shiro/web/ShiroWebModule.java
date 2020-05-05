@@ -53,8 +53,8 @@ public class ShiroWebModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Map<String, ShiroWebConfig> shiroConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), ShiroWebConfig.class);
+    Map<String, ShiroWebConfig> shiroConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), ShiroWebConfig.class);
     ShiroWebConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroWebConfig());
 
     Ini ini = new Ini();
@@ -69,8 +69,8 @@ public class ShiroWebModule extends ConfigurationAwareServletModule {
     requestInjection(filterChainResolver);
     bind(FilterChainResolver.class).toInstance(filterChainResolver);
 
-    DefaultWebSecurityManager securityManager = (DefaultWebSecurityManager) environment
-        .getWebSecurityManager();
+    DefaultWebSecurityManager securityManager =
+        (DefaultWebSecurityManager) environment.getWebSecurityManager();
     bind(WebSecurityManager.class).toInstance(securityManager);
     bind(SecurityManager.class).toInstance(securityManager);
 
@@ -127,5 +127,4 @@ public class ShiroWebModule extends ConfigurationAwareServletModule {
     filter(path + "/*").through(GuiceShiroFilter.class);
     install(new ShiroAopModule());
   }
-
 }

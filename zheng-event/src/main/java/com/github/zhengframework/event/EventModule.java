@@ -30,7 +30,6 @@ public class EventModule extends AbstractModule {
   protected void configure() {
     Provider<EventDispatcher> dispatcherProvider = getProvider(EventDispatcher.class);
     bindListener(Matchers.any(), new EventSubscribingTypeListener(dispatcherProvider));
-    bindListener(Matchers.any(), new EventSubscribingProvisionListener(
-        dispatcherProvider));
+    bindListener(Matchers.any(), new EventSubscribingProvisionListener(dispatcherProvider));
   }
 }

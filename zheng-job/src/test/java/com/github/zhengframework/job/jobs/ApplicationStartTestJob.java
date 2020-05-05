@@ -20,7 +20,6 @@ package com.github.zhengframework.job.jobs;
  * #L%
  */
 
-
 import com.github.zhengframework.job.annotations.OnApplicationStart;
 
 @OnApplicationStart

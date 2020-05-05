@@ -41,9 +41,8 @@ public class BvalValidatorFactoryProvider implements Provider<ValidatorFactory> 
   }
 
   public ValidatorFactory get() {
-    ApacheValidatorConfiguration validatorConfiguration = Validation
-        .byProvider(ApacheValidationProvider.class)
-        .configure();
+    ApacheValidatorConfiguration validatorConfiguration =
+        Validation.byProvider(ApacheValidationProvider.class).configure();
     validatorConfigurationConfigurer.configure(validatorConfiguration);
     return validatorConfiguration.buildValidatorFactory();
   }

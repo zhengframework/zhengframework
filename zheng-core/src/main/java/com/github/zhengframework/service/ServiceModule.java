@@ -29,6 +29,4 @@ public class ServiceModule extends AbstractModule {
     super.configure();
     bind(ServiceManager.class).asEagerSingleton();
   }
-
-
 }

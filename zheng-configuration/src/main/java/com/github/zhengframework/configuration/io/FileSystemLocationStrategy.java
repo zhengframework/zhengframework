@@ -27,7 +27,7 @@ public class FileSystemLocationStrategy implements FileLocationStrategy {
 
   @Override
   public Optional<URL> locate(FileSystem fileSystem, FileLocator locator) {
-    return Optional.ofNullable(fileSystem.locateFromURL(locator.getBasePath(),
-        locator.getFileName()));
+    return Optional.ofNullable(
+        fileSystem.locateFromURL(locator.getBasePath(), locator.getFileName()));
   }
 }

@@ -36,14 +36,12 @@ package com.github.zhengframework.rest;
  * #L%
  */
 
-
 import com.fasterxml.jackson.databind.JsonMappingException;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
-
 
 @Singleton
 @Slf4j

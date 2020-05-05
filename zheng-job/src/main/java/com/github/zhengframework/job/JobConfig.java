@@ -38,16 +38,18 @@ public class JobConfig implements ConfigurationDefine {
 
   private String defaultTimezone;
 
-  private Map<String, String> properties = new HashMap<String, String>() {
-    {
-      put("org.quartz.scheduler.instanceName", "scheduler");
-      put("org.quartz.scheduler.instanceId", "AUTO");
-      put("org.quartz.scheduler.skipUpdateCheck", "true");
-      put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
-      put("org.quartz.threadPool.threadCount", "10");
-      put("org.quartz.threadPool.threadPriority", "5");
-      put("org.quartz.jobStore.misfireThreshold", "60000");
-    }
-  };
+  private Map<String, String> properties =
+      new HashMap<String, String>() {
+        private static final long serialVersionUID = 8840901850271582164L;
 
+        {
+          put("org.quartz.scheduler.instanceName", "scheduler");
+          put("org.quartz.scheduler.instanceId", "AUTO");
+          put("org.quartz.scheduler.skipUpdateCheck", "true");
+          put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
+          put("org.quartz.threadPool.threadCount", "10");
+          put("org.quartz.threadPool.threadPriority", "5");
+          put("org.quartz.jobStore.misfireThreshold", "60000");
+        }
+      };
 }

@@ -4,19 +4,19 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>zheng-shiro-jaxrs</artifactId>
 
+  <description>zheng framework module: shiro jaxrs support</description>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>zheng-bom</artifactId>
         <groupId>com.github.zhengframework</groupId>
+        <artifactId>zheng-bom</artifactId>
+        <version>${project.version}</version>
         <scope>import</scope>
         <type>pom</type>
-        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <description>zheng framework module: shiro jaxrs support</description>
 
   <modelVersion>4.0.0</modelVersion>
   <parent>

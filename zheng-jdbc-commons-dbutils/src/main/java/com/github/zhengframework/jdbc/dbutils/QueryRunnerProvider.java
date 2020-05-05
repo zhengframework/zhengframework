@@ -32,7 +32,6 @@ public class QueryRunnerProvider implements Provider<QueryRunner> {
     this.dataSourceProvider = dataSourceProvider;
   }
 
-
   @Override
   public QueryRunner get() {
     return new QueryRunner(dataSourceProvider.get());

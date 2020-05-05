@@ -32,8 +32,8 @@ public class SQLQueryFactoryProvider implements Provider<SQLQueryFactory> {
   private Provider<Configuration> configurationProvider;
 
   @Inject
-  public SQLQueryFactoryProvider(Provider<DataSource> dataSourceProvider,
-      Provider<Configuration> configurationProvider) {
+  public SQLQueryFactoryProvider(
+      Provider<DataSource> dataSourceProvider, Provider<Configuration> configurationProvider) {
     this.dataSourceProvider = dataSourceProvider;
     this.configurationProvider = configurationProvider;
   }

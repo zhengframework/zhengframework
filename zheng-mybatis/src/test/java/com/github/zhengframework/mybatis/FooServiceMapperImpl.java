@@ -29,11 +29,9 @@ public class FooServiceMapperImpl implements FooService {
   @Inject
   private UserMapper userMapper;
 
-
   @Override
   @Transactional
   public User doSomeBusinessStuff(String userId) {
     return this.userMapper.getUser(userId);
   }
-
 }

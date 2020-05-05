@@ -53,13 +53,13 @@ public abstract class AbstractConfigurationSource implements ConfigurationSource
     MapDifference<String, String> difference = Maps.difference(map, newConfig);
     oldConfig.put(environmentName, newConfig);
     if (!difference.areEqual()) {
-      for (Entry<String, ValueDifference<String>> entry : difference
-          .entriesDiffering().entrySet()) {
+      for (Entry<String, ValueDifference<String>> entry :
+          difference.entriesDiffering().entrySet()) {
         for (ConfigurationSourceListener listener : listenerList) {
           if (listener.accept(entry.getKey())) {
             ValueDifference<String> valueDifference = entry.getValue();
-            listener.onChanged(entry.getKey(), valueDifference.leftValue(),
-                valueDifference.rightValue());
+            listener.onChanged(
+                entry.getKey(), valueDifference.leftValue(), valueDifference.rightValue());
           }
         }
       }

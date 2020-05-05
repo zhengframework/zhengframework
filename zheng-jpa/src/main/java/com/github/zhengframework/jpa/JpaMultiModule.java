@@ -31,10 +31,9 @@ public class JpaMultiModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, JpaConfig> persistenceConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), JpaConfig.class);
-    for (Entry<String, JpaConfig> entry : persistenceConfigMap
-        .entrySet()) {
+    Map<String, JpaConfig> persistenceConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), JpaConfig.class);
+    for (Entry<String, JpaConfig> entry : persistenceConfigMap.entrySet()) {
       String name = entry.getKey();
       JpaConfig jpaConfig = entry.getValue();
       if (jpaConfig.getPersistenceUnitName() == null) {
@@ -43,5 +42,4 @@ public class JpaMultiModule extends ConfigurationAwareModule {
       install(new JpaPrivateModule(name.isEmpty() ? null : named(name), jpaConfig));
     }
   }
-
 }

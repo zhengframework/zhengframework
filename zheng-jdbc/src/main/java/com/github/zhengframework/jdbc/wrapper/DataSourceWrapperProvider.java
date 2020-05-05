@@ -37,8 +37,7 @@ public class DataSourceWrapperProvider implements Provider<DataSourceWrapper> {
 
   @Inject
   public DataSourceWrapperProvider(
-      Provider<DataSourceConfig> dataSourceConfigProvider,
-      Provider<Injector> injectorProvider) {
+      Provider<DataSourceConfig> dataSourceConfigProvider, Provider<Injector> injectorProvider) {
     this.dataSourceConfigProvider = dataSourceConfigProvider;
     this.injectorProvider = injectorProvider;
   }
@@ -46,17 +45,20 @@ public class DataSourceWrapperProvider implements Provider<DataSourceWrapper> {
   @Override
   public DataSourceWrapper get() {
     lock.lock();
-    if (dataSourceWrapper == null) {
-      DataSourceConfig dataSourceConfig = dataSourceConfigProvider.get();
-      Injector injector = injectorProvider.get();
-      DataSourceWrapperFactory factory = new DataSourceWrapperFactory();
-      try {
-        dataSourceWrapper = factory.create(dataSourceConfig, injector);
-      } catch (Exception e) {
-        throw new RuntimeException(e);
+    try {
+      if (dataSourceWrapper == null) {
+        DataSourceConfig dataSourceConfig = dataSourceConfigProvider.get();
+        Injector injector = injectorProvider.get();
+        DataSourceWrapperFactory factory = new DataSourceWrapperFactory();
+        try {
+          dataSourceWrapper = factory.create(dataSourceConfig, injector);
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
       }
+    } finally {
+      lock.unlock();
     }
-    lock.unlock();
     return dataSourceWrapper;
   }
 }

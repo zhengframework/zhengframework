@@ -44,19 +44,18 @@ public class ShiroService implements Service {
 
   @Override
   public void start() throws Exception {
-
   }
 
   @Override
   public void stop() throws Exception {
-    ClassScanner<Destroyable> classScanner = new ClassScanner<>(injector,
-        Destroyable.class);
-    classScanner.accept(destroyable -> {
-      try {
-        destroyable.destroy();
-      } catch (Exception e) {
-        log.warn("Error destroying component class: " + destroyable.getClass(), e);
-      }
-    });
+    ClassScanner<Destroyable> classScanner = new ClassScanner<>(injector, Destroyable.class);
+    classScanner.accept(
+        destroyable -> {
+          try {
+            destroyable.destroy();
+          } catch (Exception e) {
+            log.warn("Error destroying component class: " + destroyable.getClass(), e);
+          }
+        });
   }
 }

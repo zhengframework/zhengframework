@@ -29,7 +29,7 @@ public class PathUtils {
     path = path.replaceAll("[/]+", "/");
     if ("/".equals(path)) {
       path = "";
-    } else if(path.length() > 1) {
+    } else if (path.length() > 1) {
       if (path.endsWith("/")) {
         path = path.substring(0, path.length() - 1);
       }
@@ -39,5 +39,4 @@ public class PathUtils {
     }
     return path;
   }
-
 }

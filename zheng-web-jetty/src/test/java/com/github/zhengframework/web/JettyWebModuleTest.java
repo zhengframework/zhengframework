@@ -25,18 +25,18 @@ public class JettyWebModuleTest {
   @WithZhengApplication(moduleClass = {MyModule.class})
   public void configure() throws Exception {
     System.out.println(webConfig);
-    OkHttpClient okHttpClient = new Builder()
-        .build();
+    OkHttpClient okHttpClient = new Builder().build();
 
     String path = PathUtils.fixPath(webConfig.getContextPath());
-    Request request = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + path + "/hello")
-        .get().build();
+    Request request =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + path + "/hello")
+            .get()
+            .build();
     System.out.println(request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
     System.out.println(resp);
     assertEquals("Hello, World", resp);
   }
-
 }

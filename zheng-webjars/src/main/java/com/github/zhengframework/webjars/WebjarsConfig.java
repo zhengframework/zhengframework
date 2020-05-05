@@ -34,5 +34,4 @@ public class WebjarsConfig implements ConfigurationDefine {
 
   private String basePath = "/webjars";
   private boolean disableCache = false;
-
 }

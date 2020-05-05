@@ -43,8 +43,9 @@ public abstract class AbstractConfiguration implements Configuration {
     PatriciaTrie<String> patriciaTrie = new PatriciaTrie<>(asMap());
     SortedMap<String, String> prefixMap = patriciaTrie.prefixMap(prefix + ".");
     int len = prefix.length() + 1;
-    return new MapConfiguration(prefixMap.entrySet().stream()
-        .collect(Collectors.toMap(entry -> entry.getKey().substring(len), Entry::getValue)));
+    return new MapConfiguration(
+        prefixMap.entrySet().stream()
+            .collect(Collectors.toMap(entry -> entry.getKey().substring(len), Entry::getValue)));
   }
 
   @Override
@@ -88,9 +89,9 @@ public abstract class AbstractConfiguration implements Configuration {
         }
         map.get(index).put(newKey, entry.getValue());
       }
-
     }
-    return map.entrySet().stream().sorted(Entry.comparingByKey())
+    return map.entrySet().stream()
+        .sorted(Entry.comparingByKey())
         .map(entry -> new MapConfiguration(entry.getValue()))
         .collect(Collectors.toList());
   }
@@ -166,7 +167,6 @@ public abstract class AbstractConfiguration implements Configuration {
       map.get(mapKey).put(newKey, entry.getValue());
     }
     return map.entrySet().stream()
-        .collect(Collectors.toMap(Entry::getKey,
-            entry -> new MapConfiguration(entry.getValue())));
+        .collect(Collectors.toMap(Entry::getKey, entry -> new MapConfiguration(entry.getValue())));
   }
 }

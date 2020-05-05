@@ -31,6 +31,7 @@ public class Thing {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id
   private Integer id;
+
   private String name;
 
   public Thing(String name) {

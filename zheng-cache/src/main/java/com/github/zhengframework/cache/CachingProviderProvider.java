@@ -41,16 +41,15 @@ public class CachingProviderProvider implements Provider<CachingProvider> {
   public CachingProvider get() {
     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
     if (StringUtils.isNotEmpty(cacheConfig.getCachingProviderName())) {
-      return Caching.getCachingProvider(cacheConfig.getCachingProviderName(),
-          classLoader);
+      return Caching.getCachingProvider(cacheConfig.getCachingProviderName(), classLoader);
     }
     if (StringUtils.isNotEmpty(cacheConfig.getType())) {
-      Optional<CachingProviderType> first = Arrays.stream(CachingProviderType.values())
-          .filter(type -> type.getType().equalsIgnoreCase(cacheConfig.getType()))
-          .findFirst();
+      Optional<CachingProviderType> first =
+          Arrays.stream(CachingProviderType.values())
+              .filter(type -> type.getType().equalsIgnoreCase(cacheConfig.getType()))
+              .findFirst();
       if (first.isPresent()) {
-        return Caching.getCachingProvider(first.get().getClassName(),
-            classLoader);
+        return Caching.getCachingProvider(first.get().getClassName(), classLoader);
       }
     }
     return Caching.getCachingProvider(classLoader);

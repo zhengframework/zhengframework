@@ -36,8 +36,7 @@ public class SchedulerProvider implements Provider<Scheduler> {
   private Scheduler scheduler;
 
   @Inject
-  public SchedulerProvider(GuiceJobFactory guiceJobFactory,
-      SchedulerFactory schedulerFactory) {
+  public SchedulerProvider(GuiceJobFactory guiceJobFactory, SchedulerFactory schedulerFactory) {
     this.guiceJobFactory = guiceJobFactory;
 
     this.schedulerFactory = schedulerFactory;

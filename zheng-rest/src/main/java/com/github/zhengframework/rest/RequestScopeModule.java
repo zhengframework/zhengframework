@@ -33,11 +33,14 @@ public class RequestScopeModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    bind(Request.class).toProvider(new ResteasyContextProvider<>(Request.class))
+    bind(Request.class)
+        .toProvider(new ResteasyContextProvider<>(Request.class))
         .in(RequestScoped.class);
-    bind(HttpHeaders.class).toProvider(new ResteasyContextProvider<>(HttpHeaders.class))
+    bind(HttpHeaders.class)
+        .toProvider(new ResteasyContextProvider<>(HttpHeaders.class))
         .in(RequestScoped.class);
-    bind(UriInfo.class).toProvider(new ResteasyContextProvider<>(UriInfo.class))
+    bind(UriInfo.class)
+        .toProvider(new ResteasyContextProvider<>(UriInfo.class))
         .in(RequestScoped.class);
     bind(SecurityContext.class)
         .toProvider(new ResteasyContextProvider<>(SecurityContext.class))

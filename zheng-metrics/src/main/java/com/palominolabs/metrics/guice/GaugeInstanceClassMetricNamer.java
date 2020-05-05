@@ -32,15 +32,16 @@ import javax.annotation.Nonnull;
  * method. This allows for a gauge located in a superclass to be used by multiple inheritors without
  * causing a duplicate metric name clash.
  *
- * For other metric types, which are not available on superclass methods, the declaring class (which
- * would be the same as the instantiated class) is used, as in {@link DeclaringClassMetricNamer}.
+ * <p>For other metric types, which are not available on superclass methods, the declaring class
+ * (which would be the same as the instantiated class) is used, as in {@link
+ * DeclaringClassMetricNamer}.
  */
 public class GaugeInstanceClassMetricNamer extends DeclaringClassMetricNamer {
 
   @Nonnull
   @Override
-  public String getNameForGauge(@Nonnull Class<?> instanceClass, @Nonnull Method method,
-      @Nonnull Gauge gauge) {
+  public String getNameForGauge(
+      @Nonnull Class<?> instanceClass, @Nonnull Method method, @Nonnull Gauge gauge) {
     if (gauge.absolute()) {
       return gauge.name();
     }
