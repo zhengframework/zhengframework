@@ -442,6 +442,32 @@
         <activeByDefault>true</activeByDefault>
         <jdk>8</jdk>
       </activation>
+      <reporting>
+        <plugins>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+              <encoding>UTF-8</encoding>
+              <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+              <nohelp>true</nohelp>
+              <show>private</show>
+            </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>aggregate</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
       <build>
         <plugins>
           <plugin>
