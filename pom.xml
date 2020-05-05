@@ -5,39 +5,121 @@
   <artifactId>zhengframework</artifactId>
   <name>zheng framework</name>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-project-info-reports-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-resources-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-site-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-javadoc-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-enforcer-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-compiler-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-release-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <groupId>org.sonatype.plugins</groupId>
+          <version>${nexus-staging-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-source-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <groupId>org.codehaus.mojo</groupId>
+          <version>${flatten-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-gpg-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>3.0.0</version>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven-project-info-reports-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-resources-plugin.version}</version>
       </plugin>
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <locales>en</locales>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>doxia-module-markdown</artifactId>
+            <groupId>org.apache.maven.doxia</groupId>
+            <version>${doxia-module-markdown.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <goals>
+              <goal>attach-descriptor</goal>
+            </goals>
+            <id>attach-descriptor</id>
+          </execution>
+        </executions>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>3.9.0</version>
+        <version>${maven-site-plugin.version}</version>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>3.8.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <goals>deploy</goals>
           <releaseProfiles>ossrh</releaseProfiles>
           <useReleaseProfile>false</useReleaseProfile>
         </configuration>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>2.5</version>
       </plugin>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
         <executions>
           <execution>
             <configuration>
@@ -53,11 +135,10 @@
             <id>enforce-maven</id>
           </execution>
         </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>3.0.0-M3</version>
       </plugin>
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
         <executions>
           <execution>
             <goals>
@@ -66,22 +147,20 @@
             <id>attach-sources</id>
           </execution>
         </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>3.2.1</version>
       </plugin>
       <plugin>
         <artifactId>nexus-staging-maven-plugin</artifactId>
+        <groupId>org.sonatype.plugins</groupId>
         <configuration>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <serverId>ossrh</serverId>
         </configuration>
         <extensions>true</extensions>
-        <groupId>org.sonatype.plugins</groupId>
-        <version>1.6.8</version>
       </plugin>
       <plugin>
         <artifactId>flatten-maven-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
         <configuration>
           <flattenMode>resolveCiFriendliesOnly</flattenMode>
           <updatePomFile>true</updatePomFile>
@@ -102,11 +181,22 @@
             <phase>clean</phase>
           </execution>
         </executions>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.2.2</version>
+
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${basedir}/docs/</targetPath>
+      </resource>
+    </resources>
   </build>
+  <ciManagement>
+    <system>github</system>
+    <url>
+      https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
+    </url>
+  </ciManagement>
   <description>zheng framework is a modular framework with many
     ready-to-use modules
   </description>
@@ -117,6 +207,7 @@
       <url>https://github.com/ysykzheng</url>
     </developer>
   </developers>
+
   <dependencies>
     <dependency>
       <artifactId>metainf-services</artifactId>
@@ -203,6 +294,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -222,8 +314,6 @@
                 <id>attach-javadocs</id>
               </execution>
             </executions>
-            <groupId>org.apache.maven.plugins</groupId>
-            <version>3.2.0</version>
           </plugin>
         </plugins>
       </build>
@@ -237,6 +327,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -256,8 +347,7 @@
                 <id>attach-javadocs</id>
               </execution>
             </executions>
-            <groupId>org.apache.maven.plugins</groupId>
-            <version>3.2.0</version>
+
           </plugin>
         </plugins>
       </build>
@@ -268,6 +358,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
             <executions>
               <execution>
                 <configuration>
@@ -283,8 +374,7 @@
                 <phase>verify</phase>
               </execution>
             </executions>
-            <groupId>org.apache.maven.plugins</groupId>
-            <version>1.5</version>
+
           </plugin>
         </plugins>
       </build>
@@ -300,10 +390,6 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
-    <site>
-      <id>zheng framework website</id>
-      <url>file://${project.build.directory}/completesite</url>
-    </site>
   </distributionManagement>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
@@ -311,13 +397,50 @@
     </developerConnection>
     <url>https://github.com/zhengframework/zhengframework</url>
   </scm>
-  <url>https://github.com/zhengframework/zhengframework</url>
-  <version>${revision}</version>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <revision>1.7.0</revision>
     <metainf-services.version>1.8</metainf-services.version>
+    <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
+    <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+    <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+    <maven-release-plugin.version>2.5</maven-release-plugin.version>
+    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+    <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
   </properties>
+  <url>https://github.com/zhengframework/zhengframework</url>
+  <version>${revision}</version>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>dependencies</report>
+              <report>dependency-info</report>
+              <report>dependency-management</report>
+              <report>team</report>
+              <report>ci-management</report>
+              <report>issue-management</report>
+              <report>licenses</report>
+              <report>summary</report>
+              <report>index</report>
+              <report>modules</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+        <version>${maven-project-info-reports-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
