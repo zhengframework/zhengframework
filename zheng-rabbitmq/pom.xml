@@ -2,34 +2,33 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-rabbitmq</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>amqp-client</artifactId>
       <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
     </dependency>
     <dependency>
-      <artifactId>embedded-rabbitmq</artifactId>
       <groupId>io.arivera.oss</groupId>
+      <artifactId>embedded-rabbitmq</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -45,21 +44,17 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-rabbitmq</artifactId>
+
+  <description>zheng framework module: rabbitmq support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
-  <build>
-    <resources>
-      <resource>
-        <directory>${project.build.directory}/site/</directory>
-        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
-      </resource>
-    </resources>
-  </build>
-  <description>zheng framework module: rabbitmq support</description>
   <profiles>
     <profile>
       <activation>
@@ -71,16 +66,26 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <skipTests>true</skipTests>
             </configuration>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
       <id>noTest</id>
     </profile>
   </profiles>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+
   <url>https://github.com/zhengframework/zhengframework</url>
 </project>

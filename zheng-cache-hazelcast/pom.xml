@@ -2,7 +2,6 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-cache-hazelcast</artifactId>
   <dependencies>
     <dependency>
       <artifactId>hazelcast</artifactId>
@@ -13,20 +12,27 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>zheng-bom</artifactId>
         <groupId>com.github.zhengframework</groupId>
+        <artifactId>zheng-bom</artifactId>
+        <version>${project.version}</version>
         <scope>import</scope>
         <type>pom</type>
-        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-cache-hazelcast</artifactId>
+
+  <description>zheng framework module: cache support by hazelcast</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -35,7 +41,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: cache support by hazelcast</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
-
 </project>

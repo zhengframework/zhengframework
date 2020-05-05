@@ -2,58 +2,57 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-webjars</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>guice</artifactId>
       <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
     </dependency>
     <dependency>
-      <artifactId>javax.servlet-api</artifactId>
       <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>guice-servlet</artifactId>
       <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-servlet</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.webjars</groupId>
       <artifactId>webjars-locator-core</artifactId>
-      <groupId>org.webjars</groupId>
     </dependency>
     <dependency>
+      <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <groupId>org.webjars</groupId>
-      <scope>test</scope>
       <version>${bootstrap.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-web</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-web-jetty</artifactId>
-      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>okhttp</artifactId>
       <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -69,15 +68,23 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <properties>
-    <bootstrap.version>3.1.0</bootstrap.version>
-  </properties>
+
+  <artifactId>zheng-webjars</artifactId>
+
+  <description>zheng framework module: webjars support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+
+  <properties>
+    <bootstrap.version>3.1.0</bootstrap.version>
+  </properties>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -86,6 +93,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: webjars support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

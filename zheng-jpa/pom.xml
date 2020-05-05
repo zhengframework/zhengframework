@@ -2,38 +2,38 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-jpa</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>guice-persist</artifactId>
       <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-persist</artifactId>
     </dependency>
     <dependency>
-      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>javax.transaction-api</artifactId>
       <groupId>javax.transaction</groupId>
+      <artifactId>javax.transaction-api</artifactId>
     </dependency>
     <dependency>
-      <artifactId>javax.persistence-api</artifactId>
       <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
     </dependency>
     <dependency>
-      <artifactId>javax.interceptor-api</artifactId>
       <groupId>javax.interceptor</groupId>
+      <artifactId>javax.interceptor-api</artifactId>
     </dependency>
     <dependency>
-      <artifactId>classgraph</artifactId>
       <groupId>io.github.classgraph</groupId>
+      <artifactId>classgraph</artifactId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -46,12 +46,18 @@
     </dependencies>
   </dependencyManagement>
 
+  <artifactId>zheng-jpa</artifactId>
+
+  <description>zheng framework module: jpa support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -60,6 +66,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: jpa support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

@@ -2,36 +2,36 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-test</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>junit</artifactId>
       <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-configuration</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-bootstrap</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -43,12 +43,18 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-test</artifactId>
+
+  <description>zheng framework module: junit support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
 
   <build>
     <resources>
@@ -58,6 +64,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: junit support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

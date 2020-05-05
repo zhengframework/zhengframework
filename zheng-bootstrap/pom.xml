@@ -2,33 +2,32 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-bootstrap</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>slf4j-api</artifactId>
       <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
       <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>jopt-simple</artifactId>
       <groupId>net.sf.jopt-simple</groupId>
+      <artifactId>jopt-simple</artifactId>
     </dependency>
     <dependency>
-      <artifactId>zheng-configuration</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-configuration</artifactId>
     </dependency>
   </dependencies>
 
@@ -43,12 +42,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-bootstrap</artifactId>
+
+  <description>zheng framework module: bootstrap</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -57,6 +63,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: bootstrap</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

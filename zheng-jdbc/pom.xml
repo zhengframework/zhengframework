@@ -2,68 +2,67 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-jdbc</artifactId>
   <dependencies>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-jdbc-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-test</artifactId>
-      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>HikariCP</artifactId>
       <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
     </dependency>
     <dependency>
-      <artifactId>hsqldb</artifactId>
       <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>h2</artifactId>
       <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>druid</artifactId>
       <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>commons-dbcp2</artifactId>
       <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>c3p0</artifactId>
       <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>metrics-core</artifactId>
       <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>metrics-healthchecks</artifactId>
       <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-healthchecks</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -79,12 +78,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-jdbc</artifactId>
+
+  <description>zheng framework module: jdbc support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -93,6 +99,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: jdbc support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

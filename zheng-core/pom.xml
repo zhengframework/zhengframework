@@ -2,55 +2,54 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-core</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>guice</artifactId>
       <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <groupId>org.slf4j</groupId>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
       <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>jackson-databind</artifactId>
       <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
     </dependency>
     <dependency>
-      <artifactId>jackson-dataformat-properties</artifactId>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-properties</artifactId>
     </dependency>
     <dependency>
-      <artifactId>commons-collections4</artifactId>
       <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
     </dependency>
     <dependency>
-      <artifactId>javax.annotation-api</artifactId>
       <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>guice-servlet</artifactId>
       <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-servlet</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>type-parser</artifactId>
       <groupId>com.github.drapostolos</groupId>
+      <artifactId>type-parser</artifactId>
     </dependency>
   </dependencies>
 
@@ -65,12 +64,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-core</artifactId>
+
+  <description>zheng framework module: core</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -79,6 +85,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: core</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

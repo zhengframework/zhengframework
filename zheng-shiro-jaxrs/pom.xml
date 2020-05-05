@@ -2,52 +2,52 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-shiro-jaxrs</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-test</artifactId>
-      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>shiro-jaxrs</artifactId>
       <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-jaxrs</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-rest</artifactId>
-      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-web-jetty</artifactId>
-      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-shiro-web</artifactId>
-      <groupId>com.github.zhengframework</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>okhttp</artifactId>
       <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -60,12 +60,18 @@
     </dependencies>
   </dependencyManagement>
 
+  <artifactId>zheng-shiro-jaxrs</artifactId>
+
+  <description>zheng framework module: shiro jaxrs support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -74,6 +80,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: shiro jaxrs support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

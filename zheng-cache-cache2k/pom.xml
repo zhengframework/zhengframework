@@ -2,11 +2,10 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-cache-cache2k</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>cache2k-jcache</artifactId>
       <groupId>org.cache2k</groupId>
+      <artifactId>cache2k-jcache</artifactId>
     </dependency>
     <dependency>
       <artifactId>cache2k-api</artifactId>
@@ -25,6 +24,10 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-cache-cache2k</artifactId>
+
+  <description>zheng framework module: cache support by cache2k</description>
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -32,6 +35,8 @@
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -40,6 +45,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: cache support by cache2k</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

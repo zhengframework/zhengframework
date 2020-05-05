@@ -2,7 +2,6 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-validator-test</artifactId>
   <dependencies>
     <dependency>
       <artifactId>junit</artifactId>
@@ -14,6 +13,7 @@
       <groupId>com.github.zhengframework</groupId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -25,12 +25,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-validator-test</artifactId>
+
+  <description>zheng framework module: support test bean validator</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -39,6 +46,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: support test bean validator</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

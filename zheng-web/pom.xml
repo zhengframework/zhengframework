@@ -2,25 +2,24 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-web</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>javax.servlet-api</artifactId>
       <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
     </dependency>
     <dependency>
-      <artifactId>javax.websocket-api</artifactId>
       <groupId>javax.websocket</groupId>
+      <artifactId>javax.websocket-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>guice-servlet</artifactId>
       <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-servlet</artifactId>
     </dependency>
     <dependency>
       <groupId>com.github.zhengframework</groupId>
@@ -39,12 +38,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-web</artifactId>
+
+  <description>zheng framework module: web server</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -53,6 +59,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: web server</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

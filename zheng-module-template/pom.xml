@@ -2,28 +2,28 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-module-template</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>zheng-core</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -35,14 +35,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modelVersion>4.0.0</modelVersion>
 
+  <artifactId>zheng-module-template</artifactId>
+
+  <description>zheng framework module: module template</description>
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -51,6 +56,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: module template</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

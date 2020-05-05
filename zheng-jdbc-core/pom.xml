@@ -2,14 +2,19 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-jdbc-core</artifactId>
   <modelVersion>4.0.0</modelVersion>
 
+  <artifactId>zheng-jdbc-core</artifactId>
+
+  <description>zheng framework module: jdbc interface</description>
+
   <parent>
-    <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -18,7 +23,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: jdbc interface</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
-
 </project>

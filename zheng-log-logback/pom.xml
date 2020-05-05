@@ -2,11 +2,10 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-log-logback</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>logback-core</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
     </dependency>
     <dependency>
       <artifactId>logback-classic</artifactId>
@@ -17,6 +16,7 @@
       <groupId>com.github.zhengframework</groupId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -28,12 +28,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <artifactId>zheng-log-logback</artifactId>
+
+  <description>zheng framework module: logback support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -42,6 +49,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: logback support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>

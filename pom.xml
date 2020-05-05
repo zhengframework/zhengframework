@@ -2,111 +2,117 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zhengframework</artifactId>
-  <name>zheng framework</name>
   <build>
     <pluginManagement>
       <plugins>
         <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>${maven-project-info-reports-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
           <version>${maven-resources-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-site-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
           <version>${maven-site-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-javadoc-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
           <version>${maven-javadoc-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-enforcer-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
           <version>${maven-enforcer-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-release-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
           <version>${maven-release-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>nexus-staging-maven-plugin</artifactId>
           <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
           <version>${nexus-staging-maven-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-source-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
           <version>${maven-source-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>flatten-maven-plugin</artifactId>
           <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
           <version>${flatten-maven-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-gpg-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
           <version>${maven-gpg-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-changelog-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-changelog-plugin</artifactId>
           <version>${maven-changelog-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>dependency-check-maven</artifactId>
           <groupId>org.owasp</groupId>
+          <artifactId>dependency-check-maven</artifactId>
           <version>${dependency-check-maven.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven-surefire-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>versions-maven-plugin</artifactId>
           <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
           <version>${versions-maven-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>spotbugs-maven-plugin</artifactId>
           <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
           <version>${spotbugs-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>tidy-maven-plugin</artifactId>
+          <groupId>org.codehaus.mojo</groupId>
+          <version>${tidy-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <artifactId>spotbugs</artifactId>
-            <groupId>com.github.spotbugs</groupId>
-            <version>${spotbugs.version}</version>
-          </dependency>
-        </dependencies>
-        <groupId>com.github.spotbugs</groupId>
-      </plugin>
-      <plugin>
-        <artifactId>versions-maven-plugin</artifactId>
+        <artifactId>tidy-maven-plugin</artifactId>
         <groupId>org.codehaus.mojo</groupId>
       </plugin>
       <plugin>
-        <artifactId>dependency-check-maven</artifactId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <groupId>com.github.spotbugs</groupId>
+        <dependencies>
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>${spotbugs.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <configuration>
           <failBuildOnCVSS>8</failBuildOnCVSS>
         </configuration>
@@ -118,24 +124,18 @@
           </execution>
         </executions>
         <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
       </plugin>
       <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
       </plugin>
       <plugin>
-        <artifactId>maven-site-plugin</artifactId>
         <configuration>
           <locales>en</locales>
           <skipDeploy>true</skipDeploy>
         </configuration>
-        <dependencies>
-          <dependency>
-            <artifactId>doxia-module-markdown</artifactId>
-            <groupId>org.apache.maven.doxia</groupId>
-            <version>${doxia-module-markdown.version}</version>
-          </dependency>
-        </dependencies>
+        <artifactId>maven-site-plugin</artifactId>
         <executions>
           <execution>
             <goals>
@@ -145,19 +145,26 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia-module-markdown</artifactId>
+            <version>${doxia-module-markdown.version}</version>
+          </dependency>
+        </dependencies>
         <version>${maven-site-plugin.version}</version>
       </plugin>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-release-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <goals>deploy</goals>
@@ -166,8 +173,8 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-enforcer-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
           <execution>
             <configuration>
@@ -185,8 +192,8 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-source-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
             <goals>
@@ -197,8 +204,8 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
         <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
         <configuration>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
@@ -207,8 +214,8 @@
         <extensions>true</extensions>
       </plugin>
       <plugin>
-        <artifactId>flatten-maven-plugin</artifactId>
         <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
         <configuration>
           <flattenMode>resolveCiFriendliesOnly</flattenMode>
           <updatePomFile>true</updatePomFile>
@@ -229,7 +236,6 @@
             <phase>clean</phase>
           </execution>
         </executions>
-
       </plugin>
     </plugins>
     <resources>
@@ -239,23 +245,14 @@
       </resource>
     </resources>
   </build>
+
   <ciManagement>
     <system>github</system>
     <url>
       https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
     </url>
   </ciManagement>
-  <description>zheng framework is a modular framework with many
-    ready-to-use modules
-  </description>
-  <developers>
-    <developer>
-      <email>ysykart@gmail.com</email>
-      <name>Zheng MingHai</name>
-      <url>https://github.com/ysykzheng</url>
-    </developer>
-  </developers>
-
+  <artifactId>zhengframework</artifactId>
   <dependencies>
     <dependency>
       <artifactId>metainf-services</artifactId>
@@ -264,7 +261,30 @@
       <version>${metainf-services.version}</version>
     </dependency>
   </dependencies>
+  <description>zheng framework is a modular framework with many
+    ready-to-use modules
+  </description>
+
+  <name>zheng framework</name>
+  <developers>
+    <developer>
+      <email>ysykart@gmail.com</email>
+      <name>Zheng MingHai</name>
+      <url>https://github.com/ysykzheng</url>
+    </developer>
+  </developers>
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
   <groupId>com.github.zhengframework</groupId>
+
   <licenses>
     <license>
       <distribution>repo</distribution>
@@ -272,6 +292,7 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+
   <modelVersion>4.0.0</modelVersion>
 
   <modules>
@@ -330,7 +351,6 @@
     <module>zheng-jdbc-ebean</module>
     <module>zheng-job</module>
   </modules>
-
   <packaging>pom</packaging>
   <profiles>
     <profile>
@@ -341,8 +361,8 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -374,8 +394,8 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -395,7 +415,6 @@
                 <id>attach-javadocs</id>
               </execution>
             </executions>
-
           </plugin>
         </plugins>
       </build>
@@ -405,8 +424,8 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>maven-gpg-plugin</artifactId>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
             <executions>
               <execution>
                 <configuration>
@@ -422,37 +441,18 @@
                 <phase>verify</phase>
               </execution>
             </executions>
-
           </plugin>
         </plugins>
       </build>
       <id>ossrh</id>
     </profile>
   </profiles>
-  <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <scm>
-    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
-    </developerConnection>
-    <url>https://github.com/zhengframework/zhengframework</url>
-  </scm>
+
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.7.0</revision>
-    <metainf-services.version>1.8</metainf-services.version>
+    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
     <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
     <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
+    <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
     <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
@@ -462,16 +462,19 @@
     <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
     <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
-    <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
-    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <metainf-services.version>1.8</metainf-services.version>
+    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <revision>1.7.0</revision>
     <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
     <spotbugs.version>4.0.2</spotbugs.version>
+    <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
+    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
   </properties>
-  <url>https://github.com/zhengframework/zhengframework</url>
-  <version>${revision}</version>
+
   <reporting>
     <plugins>
       <plugin>
@@ -495,4 +498,15 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <scm>
+    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
+    <url>https://github.com/zhengframework/zhengframework</url>
+  </scm>
+
+  <url>https://github.com/zhengframework/zhengframework</url>
+
+  <version>${revision}</version>
 </project>

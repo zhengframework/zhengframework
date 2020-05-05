@@ -2,29 +2,28 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zheng-cache</artifactId>
   <dependencies>
     <dependency>
-      <artifactId>guice</artifactId>
       <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
     </dependency>
     <dependency>
-      <artifactId>cache-annotations-ri-guice</artifactId>
       <groupId>org.jsr107.ri</groupId>
+      <artifactId>cache-annotations-ri-guice</artifactId>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
       <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.cache2k</groupId>
       <artifactId>cache2k-jcache</artifactId>
-      <groupId>org.cache2k</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>cache2k-api</artifactId>
       <groupId>org.cache2k</groupId>
+      <artifactId>cache2k-api</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -32,8 +31,8 @@
       <artifactId>zheng-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -46,6 +45,7 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -58,12 +58,18 @@
     </dependencies>
   </dependencyManagement>
 
+  <artifactId>zheng-cache</artifactId>
+
+  <description>zheng framework module: cache support</description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
     <version>${revision}</version>
   </parent>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
   <build>
     <resources>
       <resource>
@@ -72,6 +78,4 @@
       </resource>
     </resources>
   </build>
-  <description>zheng framework module: cache support</description>
-  <url>https://github.com/zhengframework/zhengframework</url>
 </project>
