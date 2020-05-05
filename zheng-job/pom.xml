@@ -16,7 +16,6 @@
     <dependency>
       <artifactId>quartz</artifactId>
       <groupId>org.quartz-scheduler</groupId>
-      <version>2.3.2</version>
     </dependency>
     <dependency>
       <artifactId>lombok</artifactId>
