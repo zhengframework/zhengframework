@@ -76,7 +76,6 @@
               <skipTests>true</skipTests>
             </configuration>
             <groupId>org.apache.maven.plugins</groupId>
-            <!--            <version>3.0.0-M4</version>-->
           </plugin>
         </plugins>
       </build>
