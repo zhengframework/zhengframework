@@ -77,9 +77,18 @@
           <groupId>org.apache.maven.plugins</groupId>
           <version>${maven-surefire-plugin.version}</version>
         </plugin>
+        <plugin>
+          <artifactId>versions-maven-plugin</artifactId>
+          <groupId>org.codehaus.mojo</groupId>
+          <version>${versions-maven-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <artifactId>versions-maven-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+      </plugin>
       <plugin>
         <artifactId>dependency-check-maven</artifactId>
         <configuration>
@@ -441,6 +450,7 @@
     <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
     <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
   </properties>
   <url>https://github.com/zhengframework/zhengframework</url>
   <version>${revision}</version>
