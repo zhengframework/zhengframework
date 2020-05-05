@@ -62,18 +62,41 @@
           <groupId>org.apache.maven.plugins</groupId>
           <version>${maven-gpg-plugin.version}</version>
         </plugin>
+        <plugin>
+          <artifactId>maven-changelog-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-changelog-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>dependency-check-maven</artifactId>
+          <groupId>org.owasp</groupId>
+          <version>${dependency-check-maven.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>${maven-surefire-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>${maven-project-info-reports-plugin.version}</version>
+        <artifactId>dependency-check-maven</artifactId>
+        <configuration>
+          <failBuildOnCVSS>8</failBuildOnCVSS>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <groupId>org.owasp</groupId>
       </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-resources-plugin.version}</version>
       </plugin>
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
@@ -415,31 +438,32 @@
     <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
+    <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
   </properties>
   <url>https://github.com/zhengframework/zhengframework</url>
   <version>${revision}</version>
   <reporting>
     <plugins>
       <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <artifactId>maven-changelog-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
+      </plugin>
+      <plugin>
+        <artifactId>dependency-check-maven</artifactId>
+        <groupId>org.owasp</groupId>
         <reportSets>
           <reportSet>
             <reports>
-              <report>dependencies</report>
-              <report>dependency-info</report>
-              <report>dependency-management</report>
-              <report>team</report>
-              <report>ci-management</report>
-              <report>issue-management</report>
-              <report>licenses</report>
-              <report>summary</report>
-              <report>index</report>
-              <report>modules</report>
+              <report>aggregate</report>
             </reports>
           </reportSet>
         </reportSets>
-        <version>${maven-project-info-reports-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
       </plugin>
     </plugins>
   </reporting>
