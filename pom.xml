@@ -2,6 +2,8 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zhengframework</artifactId>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -86,20 +88,20 @@
           <version>${spotbugs-maven-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>tidy-maven-plugin</artifactId>
           <groupId>org.codehaus.mojo</groupId>
+          <artifactId>tidy-maven-plugin</artifactId>
           <version>${tidy-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
-        <artifactId>tidy-maven-plugin</artifactId>
         <groupId>org.codehaus.mojo</groupId>
+        <artifactId>tidy-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <artifactId>spotbugs-maven-plugin</artifactId>
         <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
         <dependencies>
           <dependency>
             <groupId>com.github.spotbugs</groupId>
@@ -131,10 +133,6 @@
         <artifactId>maven-resources-plugin</artifactId>
       </plugin>
       <plugin>
-        <configuration>
-          <locales>en</locales>
-          <skipDeploy>true</skipDeploy>
-        </configuration>
         <artifactId>maven-site-plugin</artifactId>
         <executions>
           <execution>
@@ -145,6 +143,10 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
+        <configuration>
+          <locales>en</locales>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
         <dependencies>
           <dependency>
             <groupId>org.apache.maven.doxia</groupId>
@@ -237,6 +239,25 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>license-maven-plugin</artifactId>
+        <configuration>
+          <canUpdateCopyright>true</canUpdateCopyright>
+          <canUpdateDescription>true</canUpdateDescription>
+          <canUpdateLicense>true</canUpdateLicense>
+          <excludes>
+            <exclude>**/*Test.java</exclude>
+          </excludes>
+          <inceptionYear>2020</inceptionYear>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+          <licenseName>apache_v2</licenseName>
+          <organizationName>Zheng MingHai</organizationName>
+        </configuration>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.16</version>
+      </plugin>
     </plugins>
     <resources>
       <resource>
@@ -245,14 +266,12 @@
       </resource>
     </resources>
   </build>
-
   <ciManagement>
     <system>github</system>
     <url>
       https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
     </url>
   </ciManagement>
-  <artifactId>zhengframework</artifactId>
   <dependencies>
     <dependency>
       <artifactId>metainf-services</artifactId>
@@ -265,7 +284,6 @@
     ready-to-use modules
   </description>
 
-  <name>zheng framework</name>
   <developers>
     <developer>
       <email>ysykart@gmail.com</email>
@@ -284,7 +302,7 @@
     </snapshotRepository>
   </distributionManagement>
   <groupId>com.github.zhengframework</groupId>
-
+  <inceptionYear>2020</inceptionYear>
   <licenses>
     <license>
       <distribution>repo</distribution>
@@ -351,7 +369,73 @@
     <module>zheng-jdbc-ebean</module>
     <module>zheng-job</module>
   </modules>
+
+  <name>zheng framework</name>
   <packaging>pom</packaging>
+  <properties>
+    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
+    <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
+    <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
+    <license-maven-plugin.version>3.0</license-maven-plugin.version>
+    <main.basedir>${project.basedir}</main.basedir>
+    <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+    <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+    <maven-release-plugin.version>2.5</maven-release-plugin.version>
+    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+    <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <metainf-services.version>1.8</metainf-services.version>
+    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <revision>1.7.0</revision>
+    <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
+    <spotbugs.version>4.0.2</spotbugs.version>
+    <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
+    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+  </properties>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-changelog-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+      </plugin>
+      <plugin>
+        <artifactId>dependency-check-maven</artifactId>
+        <groupId>org.owasp</groupId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <scm>
+    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
+    <url>https://github.com/zhengframework/zhengframework</url>
+  </scm>
+
+  <url>https://github.com/zhengframework/zhengframework</url>
+
+  <version>${revision}</version>
+
   <profiles>
     <profile>
       <activation>
@@ -447,66 +531,4 @@
       <id>ossrh</id>
     </profile>
   </profiles>
-
-  <properties>
-    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
-    <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
-    <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
-    <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
-    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-    <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-    <maven-release-plugin.version>2.5</maven-release-plugin.version>
-    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-    <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <metainf-services.version>1.8</metainf-services.version>
-    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.7.0</revision>
-    <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
-    <spotbugs.version>4.0.2</spotbugs.version>
-    <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
-    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
-  </properties>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-changelog-plugin</artifactId>
-        <groupId>org.apache.maven.plugins</groupId>
-      </plugin>
-      <plugin>
-        <artifactId>dependency-check-maven</artifactId>
-        <groupId>org.owasp</groupId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>aggregate</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <groupId>org.apache.maven.plugins</groupId>
-      </plugin>
-    </plugins>
-  </reporting>
-
-  <scm>
-    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
-    </developerConnection>
-    <url>https://github.com/zhengframework/zhengframework</url>
-  </scm>
-
-  <url>https://github.com/zhengframework/zhengframework</url>
-
-  <version>${revision}</version>
 </project>

@@ -2,6 +2,30 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-healthcheck</artifactId>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <description>zheng framework module: health check support</description>
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>zhengframework</artifactId>
+    <groupId>com.github.zhengframework</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <url>https://github.com/zhengframework/zhengframework</url>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -39,30 +63,6 @@
       <artifactId>commons-io</artifactId>
     </dependency>
   </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>zheng-bom</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${project.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <artifactId>zheng-healthcheck</artifactId>
-
-  <description>zheng framework module: health check support</description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
-  <url>https://github.com/zhengframework/zhengframework</url>
 
   <build>
     <resources>

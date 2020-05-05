@@ -2,6 +2,8 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-bom</artifactId>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -14,8 +16,8 @@
       <dependency>
         <groupId>org.jdbi</groupId>
         <artifactId>jdbi3-bom</artifactId>
-        <type>pom</type>
         <version>${jdbi3-bom.version}</version>
+        <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
@@ -835,8 +837,6 @@
   </dependencyManagement>
 
   <description>zheng framework bom</description>
-
-  <artifactId>zheng-bom</artifactId>
   <modelVersion>4.0.0</modelVersion>
 
   <packaging>pom</packaging>

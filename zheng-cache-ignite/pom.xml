@@ -2,6 +2,8 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-cache-ignite</artifactId>
+
   <dependencies>
     <dependency>
       <artifactId>ignite-core</artifactId>
@@ -15,13 +17,11 @@
         <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-bom</artifactId>
         <version>${project.version}</version>
-        <scope>import</scope>
         <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <artifactId>zheng-cache-ignite</artifactId>
 
   <description>zheng framework module: cache support by ignite</description>
   <modelVersion>4.0.0</modelVersion>

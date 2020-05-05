@@ -2,10 +2,12 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-configuration-metrics</artifactId>
+
   <dependencies>
     <dependency>
-      <artifactId>metrics-core</artifactId>
       <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.github.zhengframework</groupId>
@@ -16,8 +18,8 @@
       <artifactId>zheng-configuration</artifactId>
     </dependency>
     <dependency>
-      <artifactId>zheng-test</artifactId>
       <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -33,8 +35,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <artifactId>zheng-configuration-metrics</artifactId>
 
   <description>zheng framework module: configuration metrics support</description>
   <modelVersion>4.0.0</modelVersion>

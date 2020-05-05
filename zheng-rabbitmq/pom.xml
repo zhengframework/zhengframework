@@ -2,6 +2,37 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zheng-rabbitmq</artifactId>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zheng-bom</artifactId>
+        <groupId>com.github.zhengframework</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <description>zheng framework module: rabbitmq support</description>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>zhengframework</artifactId>
+    <groupId>com.github.zhengframework</groupId>
+    <version>${revision}</version>
+  </parent>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -33,28 +64,6 @@
     </dependency>
   </dependencies>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>zheng-bom</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${project.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <artifactId>zheng-rabbitmq</artifactId>
-
-  <description>zheng framework module: rabbitmq support</description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
   <profiles>
     <profile>
       <activation>
@@ -77,15 +86,6 @@
       <id>noTest</id>
     </profile>
   </profiles>
-
-  <build>
-    <resources>
-      <resource>
-        <directory>${project.build.directory}/site/</directory>
-        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
-      </resource>
-    </resources>
-  </build>
 
   <url>https://github.com/zhengframework/zhengframework</url>
 </project>
