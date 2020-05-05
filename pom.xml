@@ -82,9 +82,25 @@
           <groupId>org.codehaus.mojo</groupId>
           <version>${versions-maven-plugin.version}</version>
         </plugin>
+        <plugin>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <groupId>com.github.spotbugs</groupId>
+          <version>${spotbugs-maven-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <artifactId>spotbugs</artifactId>
+            <groupId>com.github.spotbugs</groupId>
+            <version>${spotbugs.version}</version>
+          </dependency>
+        </dependencies>
+        <groupId>com.github.spotbugs</groupId>
+      </plugin>
       <plugin>
         <artifactId>versions-maven-plugin</artifactId>
         <groupId>org.codehaus.mojo</groupId>
@@ -451,6 +467,8 @@
     <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
     <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+    <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
+    <spotbugs.version>4.0.2</spotbugs.version>
   </properties>
   <url>https://github.com/zhengframework/zhengframework</url>
   <version>${revision}</version>
