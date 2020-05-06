@@ -38,6 +38,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -186,7 +187,7 @@ public class JobManagerService implements Service {
       JobKey jobKey = createJobKey(onAnnotation.jobName(), job);
 
       createOrUpdateJob(jobKey, clazz, trigger, requestRecovery, storeDurably);
-      log.info(String.format("    %-21s %s", cron, jobKey.toString()));
+      log.info(String.format(Locale.ENGLISH,"    %-21s %s", cron, jobKey.toString()));
     }
   }
 
@@ -247,7 +248,7 @@ public class JobManagerService implements Service {
         scheduleBuilder.withMisfireHandlingInstructionNextWithRemainingCount();
       }
 
-      LocalDateTime start = LocalDateTime.now();
+      LocalDateTime start = LocalDateTime.now(ZoneOffset.systemDefault());
       DelayStart delayAnnotation = clazz.getAnnotation(DelayStart.class);
       if (delayAnnotation != null) {
         long milliSecondDelay = TimeParserUtil.parseDuration(delayAnnotation.value());
@@ -265,7 +266,7 @@ public class JobManagerService implements Service {
       JobKey jobKey = createJobKey(everyAnnotation.jobName(), job);
       createOrUpdateJob(jobKey, clazz, trigger, requestRecovery, storeDurably);
 
-      String logMessage = String.format("    %-7s %s", everyAnnotation.value(), jobKey.toString());
+      String logMessage = String.format(Locale.ENGLISH,"    %-7s %s", everyAnnotation.value(), jobKey.toString());
       if (delayAnnotation != null) {
         logMessage += " (" + delayAnnotation.value() + " delay)";
       }

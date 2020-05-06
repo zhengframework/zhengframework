@@ -288,7 +288,6 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
    */
   @Override
   public String getPersistenceXMLSchemaVersion() {
-    // TODO
     //    throw new PersistenceException("Not Yet Implemented");
     return "2.1";
   }

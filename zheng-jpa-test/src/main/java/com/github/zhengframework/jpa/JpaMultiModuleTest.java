@@ -6,7 +6,9 @@ import com.github.zhengframework.jpa.a.Work;
 import com.github.zhengframework.jpa.b.Work2;
 import com.google.inject.Injector;
 import com.google.inject.Key;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class JpaMultiModuleTest {
 
   public static void test(Injector injector) throws Exception {
@@ -17,7 +19,7 @@ public class JpaMultiModuleTest {
     work.makeAThing();
     work.makeAThing();
 
-    System.out.println("There are now " + work.countThings() + " things");
+    log.info("There are now {} things", work.countThings());
 
     assert (3 == work.countThings());
 
@@ -28,8 +30,7 @@ public class JpaMultiModuleTest {
     work2.makeAThing();
     work2.makeAThing();
 
-    System.out.println("There are now " + work2.countThings() + " things");
-
+    log.info("There are now {} things", work2.countThings());
     assert (4 == work2.countThings());
   }
 }

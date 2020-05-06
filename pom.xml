@@ -176,6 +176,30 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <groupId>de.thetaphi</groupId>
+        <artifactId>forbiddenapis</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <bundledSignatures>
+            <bundledSignature>jdk-unsafe</bundledSignature>
+            <bundledSignature>jdk-deprecated</bundledSignature>
+            <bundledSignature>jdk-non-portable</bundledSignature>
+<!--            <bundledSignature>jdk-reflection</bundledSignature>-->
+            <bundledSignature>jdk-system-out</bundledSignature>
+          </bundledSignatures>
+          <failOnViolation>false</failOnViolation>
+<!--          <failOnMissingClasses>false</failOnMissingClasses>-->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+              <goal>testCheck</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <version>${versions-maven-plugin.version}</version>

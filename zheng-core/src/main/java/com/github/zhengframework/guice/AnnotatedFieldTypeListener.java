@@ -26,6 +26,7 @@ import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 public class AnnotatedFieldTypeListener<T extends Annotation> implements TypeListener {
 
@@ -55,7 +56,7 @@ public class AnnotatedFieldTypeListener<T extends Annotation> implements TypeLis
                       postProcessor.process(field.getAnnotation(annotationClass), field, injected);
                     } catch (Exception ex) {
                       throw new IllegalStateException(
-                          String.format(
+                          String.format(Locale.ENGLISH,
                               "Failed to process annotation %s of field %s of class %s",
                               annotationClass.getSimpleName(),
                               field.getName(),

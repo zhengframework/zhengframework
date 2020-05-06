@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.time.Duration;
+import java.util.Locale;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +55,7 @@ public class TcpHealthCheck extends NamedHealthCheck {
 
   @Override
   public String getName() {
-    return String.format("TcpHealthCheck-%s:%d", host, port);
+    return String.format(Locale.ENGLISH,"TcpHealthCheck-%s:%d", host, port);
   }
 
   @Override

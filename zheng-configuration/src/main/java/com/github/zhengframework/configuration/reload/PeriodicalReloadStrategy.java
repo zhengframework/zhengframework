@@ -20,6 +20,7 @@ package com.github.zhengframework.configuration.reload;
  * #L%
  */
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -57,7 +58,7 @@ public class PeriodicalReloadStrategy implements ReloadStrategy {
     log.debug(
         "Registering resource " + resource + " with reload time of {} {}",
         duration,
-        unit.toString().toLowerCase());
+        unit.toString().toLowerCase(Locale.ENGLISH));
     ScheduledFuture<?> scheduledFuture =
         executorService.scheduleWithFixedDelay(resource::reload, duration, duration, unit);
     tasks.put(resource, scheduledFuture);

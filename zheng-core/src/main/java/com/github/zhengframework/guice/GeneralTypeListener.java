@@ -24,6 +24,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
+import java.util.Locale;
 
 public class GeneralTypeListener<T> implements TypeListener {
 
@@ -49,7 +50,7 @@ public class GeneralTypeListener<T> implements TypeListener {
                   postProcessor.process((T) injectee);
                 } catch (Exception ex) {
                   throw new IllegalStateException(
-                      String.format(
+                      String.format(Locale.ENGLISH,
                           "Failed to process type %s of class %s",
                           typeClass.getSimpleName(), injectee.getClass().getSimpleName()),
                       ex);

@@ -28,6 +28,7 @@ import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Locale;
 
 public class AnnotatedMethodTypeListener<T extends Annotation> implements TypeListener {
 
@@ -58,7 +59,7 @@ public class AnnotatedMethodTypeListener<T extends Annotation> implements TypeLi
                     postProcessor.process(method.getAnnotation(annotationClass), method, injected);
                   } catch (Exception ex) {
                     throw new IllegalStateException(
-                        String.format(
+                        String.format(Locale.ENGLISH,
                             "Failed to process annotation %s on method %s of class %s",
                             annotationClass.getSimpleName(),
                             method.getName(),

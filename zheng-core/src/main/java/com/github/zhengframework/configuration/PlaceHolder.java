@@ -21,6 +21,8 @@ package com.github.zhengframework.configuration;
  */
 
 import com.github.zhengframework.configuration.ex.UnresolvablePlaceholdersException;
+import java.util.Formatter;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -85,6 +87,6 @@ public class PlaceHolder {
       return null;
     }
     Matcher m = PATTERN.matcher(source);
-    return m.find() ? replace(source) : String.format(source, args);
+    return m.find() ? replace(source) : String.format(Locale.ENGLISH,source, args);
   }
 }

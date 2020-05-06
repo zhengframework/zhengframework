@@ -97,7 +97,7 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
     return result;
   }
 
-  // TODO(dhanji): Cache this method's results.
+  // (dhanji): Cache this method's results.
   private Transactional readTransactionMetadata(final MethodInvocation methodInvocation) {
     Transactional transactional;
     final Method method = methodInvocation.getMethod();
