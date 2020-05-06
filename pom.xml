@@ -1,16 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>zhengframework</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.github.zhengframework</groupId>
+  <artifactId>zhengframework</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+
+  <name>zheng framework</name>
+  <description>zheng framework is a modular framework with many
+    ready-to-use modules
+  </description>
+  <url>https://github.com/zhengframework/zhengframework</url>
+  <inceptionYear>2020</inceptionYear>
+  <licenses>
+    <license>
+      <distribution>repo</distribution>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <email>ysykart@gmail.com</email>
+      <name>Zheng MingHai</name>
+      <url>https://github.com/ysykzheng</url>
+    </developer>
+  </developers>
+
+  <modules>
+    <module>zheng-configuration</module>
+    <module>zheng-cache</module>
+    <module>zheng-bom</module>
+    <module>zheng-web</module>
+    <module>zheng-web-jetty</module>
+    <module>zheng-web-undertow</module>
+    <module>zheng-metrics</module>
+    <module>zheng-swagger</module>
+    <module>zheng-rabbitmq</module>
+    <module>zheng-healthcheck</module>
+    <module>zheng-mongodb</module>
+    <module>zheng-memcached</module>
+    <module>zheng-redis</module>
+    <module>zheng-mybatis</module>
+    <module>zheng-metrics-servlet</module>
+    <module>zheng-rest</module>
+    <module>zheng-webjars</module>
+    <module>zheng-jdbc</module>
+    <module>zheng-shiro</module>
+    <module>zheng-core</module>
+    <module>zheng-bootstrap</module>
+    <module>zheng-configuration-metrics</module>
+    <module>zheng-cache-cache2k</module>
+    <module>zheng-cache-caffeine</module>
+    <module>zheng-cache-ehcache</module>
+    <module>zheng-cache-infinispan</module>
+    <module>zheng-cache-commons-jcs</module>
+    <module>zheng-cache-hazelcast</module>
+    <module>zheng-cache-ignite</module>
+    <module>zheng-migrate-flyway</module>
+    <module>zheng-migrate-liquibase</module>
+    <module>zheng-jdbc-jooq</module>
+    <module>zheng-jdbc-querydsl</module>
+    <module>zheng-jdbc-jdbi</module>
+    <module>zheng-jpa</module>
+    <module>zheng-jpa-hibernate</module>
+    <module>zheng-jpa-eclipselink</module>
+    <module>zheng-jpa-test</module>
+    <module>zheng-jdbc-sql2o</module>
+    <module>zheng-jdbc-commons-dbutils</module>
+    <module>zheng-shiro-web</module>
+    <module>zheng-shiro-jaxrs</module>
+    <module>zheng-log-logback</module>
+    <module>zheng-jdbc-core</module>
+    <module>zheng-test</module>
+    <module>zheng-event</module>
+    <module>zheng-event-guava</module>
+    <module>zheng-validator</module>
+    <module>zheng-validator-hibernate</module>
+    <module>zheng-validator-bval</module>
+    <module>zheng-validator-test</module>
+    <module>zheng-module-template</module>
+    <module>zheng-jdbc-ebean</module>
+    <module>zheng-job</module>
+  </modules>
+
+  <scm>
+    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
+    <url>https://github.com/zhengframework/zhengframework</url>
+  </scm>
   <ciManagement>
     <system>github</system>
     <url>
       https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
     </url>
   </ciManagement>
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <properties>
+    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
+    <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
+    <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
+    <fmt-maven-plugin.version>2.9</fmt-maven-plugin.version>
+    <license-maven-plugin.version>3.0</license-maven-plugin.version>
+    <main.basedir>${project.basedir}</main.basedir>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+    <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+    <maven-release-plugin.version>2.5</maven-release-plugin.version>
+    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+    <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <metainf-services.version>1.8</metainf-services.version>
+    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <revision>1.7.0</revision>
+    <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
+    <spotbugs.version>4.0.2</spotbugs.version>
+    <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
+    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+    <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.kohsuke.metainf-services</groupId>
+      <artifactId>metainf-services</artifactId>
+      <version>${metainf-services.version}</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
   <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${basedir}/docs/</targetPath>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -26,8 +179,7 @@
         <artifactId>versions-maven-plugin</artifactId>
         <version>${versions-maven-plugin.version}</version>
       </plugin>
-      <plugin>
-        <configuration>
+      <plugin><configuration>
           <failBuildOnCVSS>8</failBuildOnCVSS>
         </configuration>
         <executions>
@@ -46,8 +198,7 @@
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven-resources-plugin.version}</version>
       </plugin>
-      <plugin>
-        <executions>
+      <plugin><executions>
           <execution>
             <goals>
               <goal>attach-descriptor</goal>
@@ -140,113 +291,18 @@
       </plugin>
 
     </plugins>
-    <resources>
-      <resource>
-        <directory>${project.build.directory}/site/</directory>
-        <targetPath>${basedir}/docs/</targetPath>
-      </resource>
-    </resources>
   </build>
-  <dependencies>
-    <dependency>
-      <artifactId>metainf-services</artifactId>
-      <groupId>org.kohsuke.metainf-services</groupId>
-      <optional>true</optional>
-      <version>${metainf-services.version}</version>
-    </dependency>
-  </dependencies>
-  <description>zheng framework is a modular framework with many
-    ready-to-use modules
-  </description>
 
-  <developers>
-    <developer>
-      <email>ysykart@gmail.com</email>
-      <name>Zheng MingHai</name>
-      <url>https://github.com/ysykzheng</url>
-    </developer>
-  </developers>
-  <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <groupId>com.github.zhengframework</groupId>
-  <inceptionYear>2020</inceptionYear>
-  <licenses>
-    <license>
-      <distribution>repo</distribution>
-      <name>Apache 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven-project-info-reports-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
-  <modelVersion>4.0.0</modelVersion>
-
-  <modules>
-    <module>zheng-configuration</module>
-    <module>zheng-cache</module>
-    <module>zheng-bom</module>
-    <module>zheng-web</module>
-    <module>zheng-web-jetty</module>
-    <module>zheng-web-undertow</module>
-    <module>zheng-metrics</module>
-    <module>zheng-swagger</module>
-    <module>zheng-rabbitmq</module>
-    <module>zheng-healthcheck</module>
-    <module>zheng-mongodb</module>
-    <module>zheng-memcached</module>
-    <module>zheng-redis</module>
-    <module>zheng-mybatis</module>
-    <module>zheng-metrics-servlet</module>
-    <module>zheng-rest</module>
-    <module>zheng-webjars</module>
-    <module>zheng-jdbc</module>
-    <module>zheng-shiro</module>
-    <module>zheng-core</module>
-    <module>zheng-bootstrap</module>
-    <module>zheng-configuration-metrics</module>
-    <module>zheng-cache-cache2k</module>
-    <module>zheng-cache-caffeine</module>
-    <module>zheng-cache-ehcache</module>
-    <module>zheng-cache-infinispan</module>
-    <module>zheng-cache-commons-jcs</module>
-    <module>zheng-cache-hazelcast</module>
-    <module>zheng-cache-ignite</module>
-    <module>zheng-migrate-flyway</module>
-    <module>zheng-migrate-liquibase</module>
-    <module>zheng-jdbc-jooq</module>
-    <module>zheng-jdbc-querydsl</module>
-    <module>zheng-jdbc-jdbi</module>
-    <module>zheng-jpa</module>
-    <module>zheng-jpa-hibernate</module>
-    <module>zheng-jpa-eclipselink</module>
-    <module>zheng-jpa-test</module>
-    <module>zheng-jdbc-sql2o</module>
-    <module>zheng-jdbc-commons-dbutils</module>
-    <module>zheng-shiro-web</module>
-    <module>zheng-shiro-jaxrs</module>
-    <module>zheng-log-logback</module>
-    <module>zheng-jdbc-core</module>
-    <module>zheng-test</module>
-    <module>zheng-event</module>
-    <module>zheng-event-guava</module>
-    <module>zheng-validator</module>
-    <module>zheng-validator-hibernate</module>
-    <module>zheng-validator-bval</module>
-    <module>zheng-validator-test</module>
-    <module>zheng-module-template</module>
-    <module>zheng-jdbc-ebean</module>
-    <module>zheng-job</module>
-  </modules>
-
-  <name>zheng framework</name>
-  <packaging>pom</packaging>
   <profiles>
     <profile>
       <activation>
@@ -256,8 +312,8 @@
       <reporting>
         <plugins>
           <plugin>
-            <artifactId>dependency-check-maven</artifactId>
             <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
             <reportSets>
               <reportSet>
                 <reports>
@@ -276,8 +332,6 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>fmt-maven-plugin</artifactId>
-            <version>${fmt-maven-plugin.version}</version>
             <executions>
               <execution>
                 <goals>
@@ -287,10 +341,10 @@
               </execution>
             </executions>
             <groupId>com.coveo</groupId>
+            <artifactId>fmt-maven-plugin</artifactId>
+            <version>${fmt-maven-plugin.version}</version>
           </plugin>
           <plugin>
-            <artifactId>tidy-maven-plugin</artifactId>
-            <version>${tidy-maven-plugin.version}</version>
             <executions>
               <execution>
                 <goals>
@@ -301,14 +355,14 @@
               </execution>
             </executions>
             <groupId>org.codehaus.mojo</groupId>
+            <artifactId>tidy-maven-plugin</artifactId>
+            <version>${tidy-maven-plugin.version}</version>
           </plugin>
           <plugin>
-            <artifactId>spotbugs-maven-plugin</artifactId>
-            <version>${spotbugs-maven-plugin.version}</version>
             <dependencies>
               <dependency>
-                <artifactId>spotbugs</artifactId>
                 <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs</artifactId>
                 <version>${spotbugs.version}</version>
               </dependency>
             </dependencies>
@@ -322,9 +376,10 @@
               </execution>
             </executions>
             <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <version>${spotbugs-maven-plugin.version}</version>
           </plugin>
           <plugin>
-            <artifactId>license-maven-plugin</artifactId>
             <configuration>
               <canUpdateCopyright>true</canUpdateCopyright>
               <canUpdateDescription>true</canUpdateDescription>
@@ -349,6 +404,7 @@
               </execution>
             </executions>
             <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
             <version>1.16</version>
           </plugin>
         </plugins>
@@ -362,8 +418,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
@@ -375,8 +430,6 @@
               <show>private</show>
               <locale>en</locale>
             </configuration>
-            <version>${maven-javadoc-plugin.version}</version>
-            <artifactId>maven-javadoc-plugin</artifactId>
             <executions>
               <execution>
                 <goals>
@@ -386,14 +439,14 @@
               </execution>
             </executions>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
           </plugin>
         </plugins>
       </build>
       <reporting>
         <plugins>
           <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${maven-javadoc-plugin.version}</version>
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -407,6 +460,8 @@
               <locale>en</locale>
             </configuration>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
             <reportSets>
               <reportSet>
                 <reports>
@@ -457,8 +512,6 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>maven-release-plugin</artifactId>
-            <version>${maven-release-plugin.version}</version>
             <configuration>
               <autoVersionSubmodules>true</autoVersionSubmodules>
               <goals>deploy</goals>
@@ -466,10 +519,10 @@
               <useReleaseProfile>false</useReleaseProfile>
             </configuration>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>${maven-release-plugin.version}</version>
           </plugin>
           <plugin>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>${nexus-staging-maven-plugin.version}</version>
             <configuration>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
@@ -477,6 +530,8 @@
             </configuration>
             <extensions>true</extensions>
             <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>${nexus-staging-maven-plugin.version}</version>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -503,55 +558,4 @@
       <id>ossrh</id>
     </profile>
   </profiles>
-
-  <properties>
-    <dependency-check-maven.version>5.3.2</dependency-check-maven.version>
-    <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
-    <flatten-maven-plugin.version>1.2.2</flatten-maven-plugin.version>
-    <fmt-maven-plugin.version>2.9</fmt-maven-plugin.version>
-    <license-maven-plugin.version>3.0</license-maven-plugin.version>
-    <main.basedir>${project.basedir}</main.basedir>
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
-    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-    <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-    <maven-release-plugin.version>2.5</maven-release-plugin.version>
-    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-    <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <metainf-services.version>1.8</metainf-services.version>
-    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.7.0</revision>
-    <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
-    <spotbugs.version>4.0.2</spotbugs.version>
-    <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
-    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
-    <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
-  </properties>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-project-info-reports-plugin.version}</version>
-      </plugin>
-    </plugins>
-  </reporting>
-
-  <scm>
-    <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
-    </developerConnection>
-    <url>https://github.com/zhengframework/zhengframework</url>
-  </scm>
-
-  <url>https://github.com/zhengframework/zhengframework</url>
-
-  <version>${revision}</version>
 </project>

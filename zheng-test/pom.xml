@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
+
   <artifactId>zheng-test</artifactId>
 
   <description>zheng framework module: junit support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 
   <dependencyManagement>
     <dependencies>
@@ -12,20 +19,11 @@
         <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-bom</artifactId>
         <version>${project.version}</version>
-        <scope>import</scope>
         <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
-
-  <url>https://github.com/zhengframework/zhengframework</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

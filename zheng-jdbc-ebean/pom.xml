@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>tiles-maven-plugin</artifactId>
-        <configuration>
-          <tiles>
-            <tile>io.ebean.tile:enhancement:12.2.3</tile>
-          </tiles>
-        </configuration>
-        <extensions>true</extensions>
-        <groupId>io.repaint.maven</groupId>
-        <version>2.16</version>
-      </plugin>
-    </plugins>
-    <resources>
-      <resource>
-        <directory>${project.build.directory}/site/</directory>
-        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
-      </resource>
-    </resources>
-  </build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
 
   <artifactId>zheng-jdbc-ebean</artifactId>
+
+  <description>zheng framework module: jdbc ebean support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 
   <dependencyManagement>
     <dependencies>
@@ -32,20 +19,11 @@
         <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-bom</artifactId>
         <version>${project.version}</version>
-        <scope>import</scope>
         <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <description>zheng framework module: jdbc ebean support</description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
   <dependencies>
     <dependency>
       <groupId>com.github.zhengframework</groupId>
@@ -100,5 +78,25 @@
     </dependency>
   </dependencies>
 
-  <url>https://github.com/zhengframework/zhengframework</url>
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <configuration>
+          <tiles>
+            <tile>io.ebean.tile:enhancement:12.2.3</tile>
+          </tiles>
+        </configuration>
+        <extensions>true</extensions>
+        <groupId>io.repaint.maven</groupId>
+        <artifactId>tiles-maven-plugin</artifactId>
+        <version>2.16</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
