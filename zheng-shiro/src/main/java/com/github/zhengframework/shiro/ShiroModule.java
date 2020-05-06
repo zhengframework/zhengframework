@@ -1,5 +1,25 @@
 package com.github.zhengframework.shiro;
 
+/*-
+ * #%L
+ * zheng-shiro
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.inject.matcher.Matchers;
@@ -24,24 +44,21 @@ import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionManager;
 
-/**
- * https://shiro.apache.org/configuration.html
- */
+/** https://shiro.apache.org/configuration.html */
 public class ShiroModule extends ConfigurationAwareModule {
-
 
   @Override
   protected void configure() {
-    Map<String, ShiroConfig> shiroConfigMap = ConfigurationBeanMapper
-        .resolve(getConfiguration(), ShiroConfig.class);
+    Map<String, ShiroConfig> shiroConfigMap =
+        ConfigurationBeanMapper.resolve(getConfiguration(), ShiroConfig.class);
     ShiroConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroConfig());
 
     Ini ini = new Ini();
     ini.loadFromPath(shiroConfig.getIniConfig());
     BasicIniEnvironment environment = new BasicIniEnvironment(ini);
     bind(Environment.class).toInstance(environment);
-    DefaultSecurityManager securityManager = (DefaultSecurityManager) environment
-        .getSecurityManager();
+    DefaultSecurityManager securityManager =
+        (DefaultSecurityManager) environment.getSecurityManager();
     RememberMeManager rememberMeManager = securityManager.getRememberMeManager();
     if (rememberMeManager != null) {
       requestInjection(rememberMeManager);
@@ -97,5 +114,4 @@ public class ShiroModule extends ConfigurationAwareModule {
     install(new ShiroAopModule());
     bind(ShiroService.class).asEagerSingleton();
   }
-
 }

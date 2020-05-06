@@ -1,5 +1,25 @@
 package com.github.zhengframework.mybatis;
 
+/*-
+ * #%L
+ * zheng-mybatis
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.guice.ExposedPrivateModule;
 import com.google.inject.Key;
 import com.google.inject.PrivateModule;
@@ -13,8 +33,7 @@ public class MyBatisXmlPrivateModule extends PrivateModule {
   private final Annotation qualifier;
   private final MyBatisConfig myBatisConfig;
 
-  public MyBatisXmlPrivateModule(Annotation qualifier,
-      MyBatisConfig myBatisConfig) {
+  public MyBatisXmlPrivateModule(Annotation qualifier, MyBatisConfig myBatisConfig) {
     this.qualifier = qualifier;
     this.myBatisConfig = myBatisConfig;
     log.info("qualifier={}", qualifier);
@@ -33,7 +52,10 @@ public class MyBatisXmlPrivateModule extends PrivateModule {
         for (Key key : module.getExposeList()) {
           exposeClass(key);
         }
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new RuntimeException(e);
       }
     }
@@ -42,22 +64,10 @@ public class MyBatisXmlPrivateModule extends PrivateModule {
   @SuppressWarnings({"unchecked", "rawtypes"})
   private void exposeClass(Key key) {
     if (qualifier != null) {
-      bind(key.getTypeLiteral()).annotatedWith(qualifier)
-          .toProvider(binder().getProvider(key));
+      bind(key.getTypeLiteral()).annotatedWith(qualifier).toProvider(binder().getProvider(key));
       expose(key.getTypeLiteral()).annotatedWith(qualifier);
     } else {
       expose(key.getTypeLiteral());
-    }
-  }
-
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  private void exposeClass(Class aClass) {
-    if (qualifier != null) {
-      bind(aClass).annotatedWith(qualifier)
-          .toProvider(binder().getProvider(aClass));
-      expose(aClass).annotatedWith(qualifier);
-    } else {
-      expose(aClass);
     }
   }
 }

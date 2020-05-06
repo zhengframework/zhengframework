@@ -1,5 +1,25 @@
 package com.github.zhengframework.healthcheck;
 
+/*-
+ * #%L
+ * zheng-healthcheck
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.codahale.metrics.health.HealthCheck;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.github.zhengframework.service.Service;
@@ -24,19 +44,19 @@ public class HealthCheckManagedService implements Service {
   private ScheduledExecutorService scheduledExecutorService;
 
   @Inject
-  public HealthCheckManagedService(HealthCheckConfig config,
+  public HealthCheckManagedService(
+      HealthCheckConfig config,
       HealthCheckRegistry healthCheckRegistry,
-      HealthCheckScanner healthCheckScanner, Injector injector) {
+      HealthCheckScanner healthCheckScanner,
+      Injector injector) {
     this.config = config;
     this.healthCheckRegistry = healthCheckRegistry;
     this.healthCheckScanner = healthCheckScanner;
     this.injector = injector;
-    scheduledExecutorService = Executors
-        .newScheduledThreadPool(Runtime.getRuntime().availableProcessors(),
-            new ThreadFactoryBuilder()
-                .setNameFormat("healthCheck-%d")
-                .setDaemon(true)
-                .build());
+    scheduledExecutorService =
+        Executors.newScheduledThreadPool(
+            Runtime.getRuntime().availableProcessors(),
+            new ThreadFactoryBuilder().setNameFormat("healthCheck-%d").setDaemon(true).build());
   }
 
   @Override
@@ -56,18 +76,26 @@ public class HealthCheckManagedService implements Service {
           }
         });
     if (config.isEnable()) {
-      scheduledExecutorService.schedule(() -> {
-        for (Map.Entry<String, HealthCheck.Result> entry : healthCheckRegistry.runHealthChecks()
-            .entrySet()) {
-          if (entry.getValue().isHealthy()) {
-            log.trace("{} : OK {}", entry.getKey(),
-                Strings.nullToEmpty(entry.getValue().getMessage()));
-          } else {
-            log.warn("{} : FAIL - {}", entry.getKey(),
-                Strings.nullToEmpty(entry.getValue().getMessage()), entry.getValue().getError());
-          }
-        }
-      }, config.getDuration(), config.getUnit());
+      scheduledExecutorService.schedule(
+          () -> {
+            for (Map.Entry<String, HealthCheck.Result> entry :
+                healthCheckRegistry.runHealthChecks().entrySet()) {
+              if (entry.getValue().isHealthy()) {
+                log.trace(
+                    "{} : OK {}",
+                    entry.getKey(),
+                    Strings.nullToEmpty(entry.getValue().getMessage()));
+              } else {
+                log.warn(
+                    "{} : FAIL - {}",
+                    entry.getKey(),
+                    Strings.nullToEmpty(entry.getValue().getMessage()),
+                    entry.getValue().getError());
+              }
+            }
+          },
+          config.getDuration(),
+          config.getUnit());
     }
   }
 

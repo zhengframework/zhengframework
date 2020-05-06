@@ -1,5 +1,25 @@
 package com.github.zhengframework.swagger;
 
+/*-
+ * #%L
+ * zheng-swagger
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,64 +37,54 @@ import org.webjars.WebJarAssetLocator;
 @Slf4j
 public class SwaggerUIServlet extends HttpServlet {
 
-  private static final long serialVersionUID = 1L;
   private static final long DEFAULT_EXPIRE_TIME_MS = 86400000L; // 1 day
   private static final long DEFAULT_EXPIRE_TIME_S = 86400L; // 1 day
-  /**
-   * The default buffer size ({@value}) to use
-   */
+  /** The default buffer size ({@value}) to use */
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
+
   private static final int EOF = -1;
-  private final SwaggerConfig swaggerConfig;
+  private static final long serialVersionUID = 6245564254901248946L;
+  private transient SwaggerConfig swaggerConfig;
   private final String indexContent;
   private boolean disableCache = false;
-  private WebJarAssetLocator locator = new WebJarAssetLocator();
+  private transient WebJarAssetLocator locator = new WebJarAssetLocator();
 
   @Inject
   public SwaggerUIServlet(SwaggerConfig swaggerConfig) {
     this.swaggerConfig = swaggerConfig;
 
-    URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
+    URL resource = getClass().getResource("/swagger-ui/index.html");
     try (InputStream inputStream = resource.openStream()) {
       String string = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-      indexContent = string.replace("http://127.0.0.1:8080/openapi.json", swaggerConfig.getApiUrl());
+      indexContent =
+          string.replace("http://127.0.0.1:8080/openapi.json", swaggerConfig.getApiUrl());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
   }
 
   /**
-   * Copy bytes from an <code>InputStream</code> to an
-   * <code>OutputStream</code>.
-   * <p>
-   * This method buffers the input internally, so there is no need to use a
-   * <code>BufferedInputStream</code>.
-   * <p>
-   * Large streams (over 2GB) will return a bytes copied value of
-   * <code>-1</code> after the copy has completed since the correct
-   * number of bytes cannot be returned as an int. For large streams use the
-   * <code>copyLarge(InputStream, OutputStream)</code> method.
+   * Copy bytes from an <code>InputStream</code> to an <code>OutputStream</code>.
+   *
+   * <p>This method buffers the input internally, so there is no need to use a <code>
+   * BufferedInputStream</code>.
+   *
+   * <p>Large streams (over 2GB) will return a bytes copied value of <code>-1</code> after the copy
+   * has completed since the correct number of bytes cannot be returned as an int. For large streams
+   * use the <code>copyLarge(InputStream, OutputStream)</code> method.
    *
    * @param input the <code>InputStream</code> to read from
    * @param output the <code>OutputStream</code> to write to
-   * @return the number of bytes copied, or -1 if &gt; Integer.MAX_VALUE
    * @throws NullPointerException if the input or output is null
    * @throws IOException if an I/O error occurs
    * @since 1.1
    */
-  private static int copy(InputStream input, OutputStream output) throws IOException {
-    long count = 0;
+  private static void copy(InputStream input, OutputStream output) throws IOException {
     int n;
     byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
     while (EOF != (n = input.read(buffer))) {
       output.write(buffer, 0, n);
-      count += n;
     }
-    if (count > Integer.MAX_VALUE) {
-      return -1;
-    }
-    return (int) count;
   }
 
   @Override
@@ -99,9 +109,11 @@ public class SwaggerUIServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     String eTagName;
-    String uri = request.getRequestURI()
-        .replaceFirst(request.getContextPath(), "")
-        .replaceFirst(swaggerConfig.getUiPath(), "");
+    String uri =
+        request
+            .getRequestURI()
+            .replaceFirst(request.getContextPath(), "")
+            .replaceFirst(swaggerConfig.getUiPath(), "");
     if (uri.endsWith("/")) {
       uri = uri + "index.html";
     }
@@ -136,8 +148,7 @@ public class SwaggerUIServlet extends HttpServlet {
     }
 
     if (!disableCache) {
-      if (checkETagMatch(request, eTagName)
-          || checkLastModify(request)) {
+      if (checkETagMatch(request, eTagName) || checkLastModify(request)) {
         response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
         return;
       }
@@ -194,7 +205,7 @@ public class SwaggerUIServlet extends HttpServlet {
   }
 
   // copy from InputStream
-  //-----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
 
   private void prepareCacheHeaders(HttpServletResponse response, String eTag) {
 

@@ -1,5 +1,25 @@
 package com.github.zhengframework.bootstrap;
 
+/*-
+ * #%L
+ * zheng-bootstrap
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.core.ModuleProvider;
 import com.google.common.base.Preconditions;
@@ -18,8 +38,7 @@ public final class ZhengApplicationBuilder {
   private Set<Class<? extends Module>> excludeModuleList = new LinkedHashSet<>();
   private Set<Class<? extends ModuleProvider>> excludeModuleProviderList = new LinkedHashSet<>();
 
-  private ZhengApplicationBuilder() {
-  }
+  private ZhengApplicationBuilder() {}
 
   public static ZhengApplicationBuilder create() {
     return new ZhengApplicationBuilder();
@@ -65,15 +84,13 @@ public final class ZhengApplicationBuilder {
   }
 
   @SafeVarargs
-  public final ZhengApplicationBuilder excludeModule(
-      Class<? extends Module>... moduleList) {
+  public final ZhengApplicationBuilder excludeModule(Class<? extends Module>... moduleList) {
     Preconditions.checkNotNull(moduleList);
     this.excludeModuleList.addAll(Arrays.asList(moduleList));
     return this;
   }
 
-  public ZhengApplicationBuilder excludeModule(
-      Set<Class<? extends Module>> moduleList) {
+  public ZhengApplicationBuilder excludeModule(Set<Class<? extends Module>> moduleList) {
     Preconditions.checkNotNull(moduleList);
     this.excludeModuleList.addAll(moduleList);
     return this;
@@ -95,9 +112,12 @@ public final class ZhengApplicationBuilder {
   }
 
   public ZhengApplication build() {
-    return new ZhengApplication(configuration, arguments, moduleList, autoLoadModule,
-        excludeModuleList, excludeModuleProviderList);
+    return new ZhengApplication(
+        configuration,
+        arguments,
+        moduleList,
+        autoLoadModule,
+        excludeModuleList,
+        excludeModuleProviderList);
   }
-
-
 }

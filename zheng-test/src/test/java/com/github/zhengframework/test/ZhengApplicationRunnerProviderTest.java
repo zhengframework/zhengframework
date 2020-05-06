@@ -14,8 +14,7 @@ public class ZhengApplicationRunnerProviderTest {
   @Inject(optional = true)
   private Apple apple;
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication()
@@ -30,5 +29,4 @@ public class ZhengApplicationRunnerProviderTest {
     assertNotNull(injector);
     assertNull(apple);
   }
-
 }

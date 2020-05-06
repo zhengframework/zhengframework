@@ -9,7 +9,6 @@ import javax.annotation.PreDestroy;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class PreDestroyTest {
 
   Injector injector;
@@ -63,8 +62,7 @@ public class PreDestroyTest {
 
   public static class KoBean {
     @PreDestroy
-    public void init(Object smth) {
-    }
+    public void init(Object smth) {}
   }
 
   public static class KoExceptionBean {

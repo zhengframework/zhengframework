@@ -1,5 +1,25 @@
 package com.github.zhengframework.web.jetty;
 
+/*-
+ * #%L
+ * zheng-web-jetty
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.web.EventListenerClassScanner;
 import com.github.zhengframework.web.GuiceServerEndpointConfigurator;
 import com.github.zhengframework.web.WebConfig;
@@ -53,7 +73,8 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
   private final GuiceServerEndpointConfigurator guiceServerEndpointConfigurator;
 
   @Inject
-  public DefaultJettyServerConfigurer(WebConfig webConfig,
+  public DefaultJettyServerConfigurer(
+      WebConfig webConfig,
       Set<ServerEndpointConfig> serverEndpointConfigSet,
       Set<Class<? extends WebSocketEndpoint>> annotatedEndpoints,
       EventListenerClassScanner eventListenerScanner,
@@ -66,7 +87,6 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     this.handlerScanner = handlerScanner;
     this.guiceServerEndpointConfigurator = guiceServerEndpointConfigurator;
   }
-
 
   @Override
   public void configure(Server server) {
@@ -82,9 +102,8 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
         log.error("init sslContext fail", e);
       }
     }
-    final ServletContextHandler context = new ServletContextHandler(null,
-        webConfig.getContextPath(),
-        ServletContextHandler.SESSIONS);
+    final ServletContextHandler context =
+        new ServletContextHandler(null, webConfig.getContextPath(), ServletContextHandler.SESSIONS);
 
     final FilterHolder filterHolder = new FilterHolder();
     filterHolder.setDisplayName("GuiceFilter");
@@ -94,7 +113,7 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     context.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
 
     context.addServlet(DefaultServlet.class, "/");
-    context.setWelcomeFiles(new String[]{"index.html"});
+    context.setWelcomeFiles(new String[] {"index.html"});
 
     eventListenerScanner.accept(context::addEventListener);
 
@@ -120,7 +139,6 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
 
     handlers.addHandler(new DefaultHandler());
     server.setHandler(handlers);
-
   }
 
   private ServerConnector createHttpsConnector(Server server, boolean http2) throws Exception {
@@ -142,22 +160,29 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(httpConfig);
 
     if (http2) {
-      HTTP2ServerConnectionFactory http2ConnectionFactory = new HTTP2ServerConnectionFactory(
-          httpConfig);
+      HTTP2ServerConnectionFactory http2ConnectionFactory =
+          new HTTP2ServerConnectionFactory(httpConfig);
       ALPNServerConnectionFactory alpnServerConnectionFactory = new ALPNServerConnectionFactory();
       alpnServerConnectionFactory.setDefaultProtocol(httpConnectionFactory.getProtocol());
       sslContextFactory.setCipherComparator(HTTP2Cipher.COMPARATOR);
       sslContextFactory.setUseCipherSuitesOrder(true);
-      SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(sslContextFactory,
-          alpnServerConnectionFactory.getProtocol());
-      ServerConnector connector = new ServerConnector(server, sslConnectionFactory,
-          alpnServerConnectionFactory, http2ConnectionFactory, httpConnectionFactory);
+      SslConnectionFactory sslConnectionFactory =
+          new SslConnectionFactory(sslContextFactory, alpnServerConnectionFactory.getProtocol());
+      ServerConnector connector =
+          new ServerConnector(
+              server,
+              sslConnectionFactory,
+              alpnServerConnectionFactory,
+              http2ConnectionFactory,
+              httpConnectionFactory);
       connector.setPort(webConfig.getSslPort());
       return connector;
     } else {
-      final ServerConnector httpsConnector = new ServerConnector(server,
-          new SslConnectionFactory(sslContextFactory, HttpVersion.HTTP_1_1.asString()),
-          httpConnectionFactory);
+      final ServerConnector httpsConnector =
+          new ServerConnector(
+              server,
+              new SslConnectionFactory(sslContextFactory, HttpVersion.HTTP_1_1.asString()),
+              httpConnectionFactory);
       httpsConnector.setPort(webConfig.getSslPort());
       return httpsConnector;
     }
@@ -178,8 +203,8 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
 
   private ServerConnector createHttpConnector(Server server) {
     HttpConfiguration httpConfig = createHttpConfiguration();
-    final ServerConnector connector = new ServerConnector(server,
-        new HttpConnectionFactory(httpConfig));
+    final ServerConnector connector =
+        new ServerConnector(server, new HttpConnectionFactory(httpConfig));
     log.info("http port={}", webConfig.getPort());
     connector.setPort(webConfig.getPort());
     return connector;
@@ -189,9 +214,10 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     try {
       ServerContainer serverContainer = WebSocketServerContainerInitializer.initialize(context);
       for (ServerEndpointConfig serverEndpointConfig : serverEndpointConfigSet) {
-        BasePathServerEndpointConfig basePathServerEndpointConfig = new BasePathServerEndpointConfig(
-            webConfig.getWebSocketPath(), serverEndpointConfig);
-        log.info("ServerEndpointConfig={} path={}",
+        BasePathServerEndpointConfig basePathServerEndpointConfig =
+            new BasePathServerEndpointConfig(webConfig.getWebSocketPath(), serverEndpointConfig);
+        log.info(
+            "ServerEndpointConfig={} path={}",
             basePathServerEndpointConfig.getEndpointClass().getName(),
             basePathServerEndpointConfig.getPath());
         serverContainer.addEndpoint(basePathServerEndpointConfig);
@@ -200,8 +226,7 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
       for (Class<? extends WebSocketEndpoint> clazz : annotatedEndpoints) {
         ServerEndpoint annotation = clazz.getAnnotation(ServerEndpoint.class);
         if (annotation != null) {
-          serverContainer
-              .addEndpoint(createServerEndpointConfig(clazz, annotation));
+          serverContainer.addEndpoint(createServerEndpointConfig(clazz, annotation));
         } else {
           throw new InvalidWebSocketException(
               "Unsupported WebSocket object, missing @" + ServerEndpoint.class + " annotation");
@@ -212,19 +237,20 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     }
   }
 
-  private ServerEndpointConfig createServerEndpointConfig(Class<? extends WebSocketEndpoint> clazz,
-      ServerEndpoint annotation) {
+  private ServerEndpointConfig createServerEndpointConfig(
+      Class<? extends WebSocketEndpoint> clazz, ServerEndpoint annotation) {
 
-    ServerEndpointConfig serverEndpointConfig = Builder
-        .create(clazz, annotation.value())
-        .configurator(guiceServerEndpointConfigurator)
-        .decoders(Lists.newArrayList(annotation.decoders()))
-        .encoders(Lists.newArrayList(annotation.encoders()))
-        .subprotocols(Lists.newArrayList(annotation.subprotocols()))
-        .build();
-    BasePathServerEndpointConfig basePathServerEndpointConfig = new BasePathServerEndpointConfig(
-        webConfig.getWebSocketPath(), serverEndpointConfig);
-    log.info("WebSocketEndpoint={} path={}",
+    ServerEndpointConfig serverEndpointConfig =
+        Builder.create(clazz, annotation.value())
+            .configurator(guiceServerEndpointConfigurator)
+            .decoders(Lists.newArrayList(annotation.decoders()))
+            .encoders(Lists.newArrayList(annotation.encoders()))
+            .subprotocols(Lists.newArrayList(annotation.subprotocols()))
+            .build();
+    BasePathServerEndpointConfig basePathServerEndpointConfig =
+        new BasePathServerEndpointConfig(webConfig.getWebSocketPath(), serverEndpointConfig);
+    log.info(
+        "WebSocketEndpoint={} path={}",
         basePathServerEndpointConfig.getEndpointClass().getName(),
         basePathServerEndpointConfig.getPath());
     return basePathServerEndpointConfig;

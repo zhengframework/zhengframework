@@ -23,8 +23,7 @@ public class RabbitMQModuleTest {
 
   EmbeddedRabbitMq rabbitMq;
   EmbeddedRabbitMqConfig config;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @SuppressWarnings("ResultOfMethodCallIgnored")
   @Before
@@ -42,22 +41,22 @@ public class RabbitMQModuleTest {
     if (!extract.exists()) {
       extract.mkdirs();
     }
-    config = new EmbeddedRabbitMqConfig.Builder()
-        .downloadFolder(download)
-        .extractionFolder(extract)
-        .port(25599)
-        .useCachedDownload(true)
-        .deleteDownloadedFileOnErrors(true)
-        .downloadReadTimeoutInMillis(10000000)
-        .defaultRabbitMqCtlTimeoutInMillis(1000000)
-        .downloadConnectionTimeoutInMillis(1000000)
-        .rabbitMqServerInitializationTimeoutInMillis(1000000)
-        .build();
+    config =
+        new EmbeddedRabbitMqConfig.Builder()
+            .downloadFolder(download)
+            .extractionFolder(extract)
+            .port(25599)
+            .useCachedDownload(true)
+            .deleteDownloadedFileOnErrors(true)
+            .downloadReadTimeoutInMillis(10000000)
+            .defaultRabbitMqCtlTimeoutInMillis(1000000)
+            .downloadConnectionTimeoutInMillis(1000000)
+            .rabbitMqServerInitializationTimeoutInMillis(1000000)
+            .build();
 
     rabbitMq = new EmbeddedRabbitMq(config);
     rabbitMq.start();
   }
-
 
   @After
   public void close() {

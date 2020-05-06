@@ -1,5 +1,25 @@
 package com.github.zhengframework.job.annotations;
 
+/*-
+ * #%L
+ * zheng-job
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,31 +30,30 @@ import org.quartz.Trigger;
 @Target(ElementType.TYPE)
 public @interface On {
 
-    String value() default "";
+  String value() default "";
 
-    /**
-     * The name of this job. If not specified, the name of the job will default to the canonical name
-     * of the annotated class
-     *
-     * @return the name of the job
-     */
-    String jobName() default "";
+  /**
+   * The name of this job. If not specified, the name of the job will default to the canonical name
+   * of the annotated class
+   *
+   * @return the name of the job
+   */
+  String jobName() default "";
 
-    String timeZone() default "";
+  String timeZone() default "";
 
-    boolean requestRecovery() default false;
+  boolean requestRecovery() default false;
 
-    boolean storeDurably() default false;
+  boolean storeDurably() default false;
 
-    int priority() default Trigger.DEFAULT_PRIORITY;
+  int priority() default Trigger.DEFAULT_PRIORITY;
 
-    MisfirePolicy misfirePolicy() default MisfirePolicy.SMART;
+  MisfirePolicy misfirePolicy() default MisfirePolicy.SMART;
 
-    enum MisfirePolicy {
-        SMART,
-        IGNORE_MISFIRES,
-        DO_NOTHING,
-        FIRE_AND_PROCEED
-    }
-
+  enum MisfirePolicy {
+    SMART,
+    IGNORE_MISFIRES,
+    DO_NOTHING,
+    FIRE_AND_PROCEED
+  }
 }

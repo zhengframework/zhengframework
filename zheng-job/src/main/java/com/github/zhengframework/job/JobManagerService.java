@@ -1,5 +1,25 @@
 package com.github.zhengframework.job;
 
+/*-
+ * #%L
+ * zheng-job
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.guice.ClassScanner;
 import com.github.zhengframework.job.annotations.DelayStart;
 import com.github.zhengframework.job.annotations.Every;
@@ -38,14 +58,15 @@ public class JobManagerService implements Service {
 
   private final Scheduler scheduler;
   private final Provider<Injector> injectorProvider;
-  protected Job[] jobs;
+  protected AbstractJob[] jobs;
   protected ZoneId defaultZoneId;
   private GuiceJobFactory guiceJobFactory;
   private volatile boolean stop = false;
 
-
   @Inject
-  public JobManagerService(JobConfig jobConfig, Scheduler scheduler,
+  public JobManagerService(
+      JobConfig jobConfig,
+      Scheduler scheduler,
       GuiceJobFactory guiceJobFactory,
       Provider<Injector> injectorProvider) {
     this.scheduler = scheduler;
@@ -57,10 +78,11 @@ public class JobManagerService implements Service {
       defaultZoneId = ZoneOffset.systemDefault();
     }
 
-    List<Job> jobs = new ArrayList<>();
-    ClassScanner<Job> jobClassScanner = new ClassScanner<>(injectorProvider.get(), Job.class);
+    List<AbstractJob> jobs = new ArrayList<>();
+    ClassScanner<AbstractJob> jobClassScanner =
+        new ClassScanner<>(injectorProvider.get(), AbstractJob.class);
     jobClassScanner.accept(jobs::add);
-    this.jobs = jobs.toArray(new Job[]{});
+    this.jobs = jobs.toArray(new AbstractJob[] {});
   }
 
   @Override
@@ -83,13 +105,15 @@ public class JobManagerService implements Service {
   }
 
   protected void scheduleAllJobsOnApplicationStop() throws SchedulerException {
-    List<JobDetail> jobDetails = Arrays.stream(jobs)
-        .filter(job -> job.getClass().isAnnotationPresent(OnApplicationStop.class))
-        .map(job -> JobBuilder
-            .newJob(job.getClass())
-            .withIdentity(job.getClass().getName(), job.getGroupName())
-            .build())
-        .collect(Collectors.toList());
+    List<JobDetail> jobDetails =
+        Arrays.stream(jobs)
+            .filter(job -> job.getClass().isAnnotationPresent(OnApplicationStop.class))
+            .map(
+                job ->
+                    JobBuilder.newJob(job.getClass())
+                        .withIdentity(job.getClass().getName(), job.getGroupName())
+                        .build())
+            .collect(Collectors.toList());
     for (JobDetail jobDetail : jobDetails) {
       scheduler.scheduleJob(jobDetail, executeNowTrigger());
     }
@@ -111,22 +135,22 @@ public class JobManagerService implements Service {
       zoneId = ZoneOffset.of(cronExpr.substring(i + 1, j));
       cronExpr = cronExpr.substring(0, i).trim();
     }
-    return CronScheduleBuilder.cronSchedule(cronExpr)
-        .inTimeZone(TimeZone.getTimeZone(zoneId));
+    return CronScheduleBuilder.cronSchedule(cronExpr).inTimeZone(TimeZone.getTimeZone(zoneId));
   }
 
   protected void scheduleAllJobsWithOnAnnotation() throws SchedulerException {
-    List<Job> onJobs = Arrays.stream(this.jobs)
-        .filter(job -> job.getClass().isAnnotationPresent(On.class))
-        .collect(Collectors.toList());
+    List<AbstractJob> onJobs =
+        Arrays.stream(this.jobs)
+            .filter(job -> job.getClass().isAnnotationPresent(On.class))
+            .collect(Collectors.toList());
 
     if (onJobs.isEmpty()) {
       return;
     }
 
     log.info("Jobs with @On annotation:");
-    for (Job job : onJobs) {
-      Class<? extends Job> clazz = job.getClass();
+    for (AbstractJob job : onJobs) {
+      Class<? extends AbstractJob> clazz = job.getClass();
       On onAnnotation = clazz.getAnnotation(On.class);
       String cron = onAnnotation.value();
 
@@ -155,8 +179,8 @@ public class JobManagerService implements Service {
         scheduleBuilder.withMisfireHandlingInstructionFireAndProceed();
       }
 
-      Trigger trigger = TriggerBuilder.newTrigger().withSchedule(scheduleBuilder)
-          .withPriority(priority).build();
+      Trigger trigger =
+          TriggerBuilder.newTrigger().withSchedule(scheduleBuilder).withPriority(priority).build();
 
       // ensure that only one instance of each job is scheduled
       JobKey jobKey = createJobKey(onAnnotation.jobName(), job);
@@ -166,24 +190,27 @@ public class JobManagerService implements Service {
     }
   }
 
-  private JobKey createJobKey(final String annotationJobName, final Job job) {
-    String key = StringUtils.isNotBlank(annotationJobName) ? annotationJobName
-        : job.getClass().getCanonicalName();
+  private JobKey createJobKey(final String annotationJobName, final AbstractJob job) {
+    String key =
+        StringUtils.isNotBlank(annotationJobName)
+            ? annotationJobName
+            : job.getClass().getCanonicalName();
     return JobKey.jobKey(key, job.getGroupName());
   }
 
   protected void scheduleAllJobsWithEveryAnnotation() throws SchedulerException {
-    List<Job> everyJobs = Arrays.stream(this.jobs)
-        .filter(job -> job.getClass().isAnnotationPresent(Every.class))
-        .collect(Collectors.toList());
+    List<AbstractJob> everyJobs =
+        Arrays.stream(this.jobs)
+            .filter(job -> job.getClass().isAnnotationPresent(Every.class))
+            .collect(Collectors.toList());
 
     if (everyJobs.isEmpty()) {
       return;
     }
 
     log.info("Jobs with @Every annotation:");
-    for (Job job : everyJobs) {
-      Class<? extends Job> clazz = job.getClass();
+    for (AbstractJob job : everyJobs) {
+      Class<? extends AbstractJob> clazz = job.getClass();
       Every everyAnnotation = clazz.getAnnotation(Every.class);
       int priority = everyAnnotation.priority();
       Every.MisfirePolicy misfirePolicy = everyAnnotation.misfirePolicy();
@@ -197,8 +224,8 @@ public class JobManagerService implements Service {
       }
       long milliSeconds = TimeParserUtil.parseDuration(value);
 
-      SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-          .withIntervalInMilliseconds(milliSeconds);
+      SimpleScheduleBuilder scheduleBuilder =
+          SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(milliSeconds);
 
       if (repeatCount > -1) {
         scheduleBuilder.withRepeatCount(repeatCount);
@@ -227,10 +254,12 @@ public class JobManagerService implements Service {
         start = start.plus(Duration.ofMillis(milliSecondDelay));
       }
 
-      Trigger trigger = TriggerBuilder.newTrigger().withSchedule(scheduleBuilder)
-          .startAt(Date.from(start.atZone(ZoneId.systemDefault()).toInstant()))
-          .withPriority(priority)
-          .build();
+      Trigger trigger =
+          TriggerBuilder.newTrigger()
+              .withSchedule(scheduleBuilder)
+              .startAt(Date.from(start.atZone(ZoneId.systemDefault()).toInstant()))
+              .withPriority(priority)
+              .build();
 
       // ensure that only one instance of each job is scheduled
       JobKey jobKey = createJobKey(everyAnnotation.jobName(), job);
@@ -245,13 +274,15 @@ public class JobManagerService implements Service {
   }
 
   protected void scheduleAllJobsOnApplicationStart() throws SchedulerException {
-    List<JobDetail> jobDetails = Arrays.stream(this.jobs)
-        .filter(job -> job.getClass().isAnnotationPresent(OnApplicationStart.class))
-        .map(job -> JobBuilder
-            .newJob(job.getClass())
-            .withIdentity(job.getClass().getName(), job.getGroupName())
-            .build())
-        .collect(Collectors.toList());
+    List<JobDetail> jobDetails =
+        Arrays.stream(this.jobs)
+            .filter(job -> job.getClass().isAnnotationPresent(OnApplicationStart.class))
+            .map(
+                job ->
+                    JobBuilder.newJob(job.getClass())
+                        .withIdentity(job.getClass().getName(), job.getGroupName())
+                        .build())
+            .collect(Collectors.toList());
 
     if (!jobDetails.isEmpty()) {
       log.info("Jobs to run on application start:");
@@ -271,30 +302,39 @@ public class JobManagerService implements Service {
 
     Arrays.stream(this.jobs)
         .filter(job -> job.getClass().isAnnotationPresent(OnApplicationStop.class))
-        .map(Job::getClass)
+        .map(AbstractJob::getClass)
         .forEach(clazz -> log.info("   " + clazz.getCanonicalName()));
   }
 
-  private void createOrUpdateJob(JobKey jobKey, Class<? extends org.quartz.Job> clazz,
-      Trigger trigger, boolean requestsRecovery,
-      boolean storeDurably) throws SchedulerException {
-    JobBuilder jobBuilder = JobBuilder.newJob(clazz).withIdentity(jobKey)
-        .requestRecovery(requestsRecovery)
-        .storeDurably(storeDurably);
+  private void createOrUpdateJob(
+      JobKey jobKey,
+      Class<? extends org.quartz.Job> clazz,
+      Trigger trigger,
+      boolean requestsRecovery,
+      boolean storeDurably)
+      throws SchedulerException {
+    JobBuilder jobBuilder =
+        JobBuilder.newJob(clazz)
+            .withIdentity(jobKey)
+            .requestRecovery(requestsRecovery)
+            .storeDurably(storeDurably);
 
     if (!scheduler.checkExists(jobKey)) {
-      // if the job doesn't already exist, we can create it, along with its trigger. this prevents us
+      // if the job doesn't already exist, we can create it, along with its trigger. this prevents
+      // us
       // from creating multiple instances of the same job when running in a clustered environment
       scheduler.scheduleJob(jobBuilder.build(), trigger);
       log.info("scheduled job with key " + jobKey.toString());
     } else {
-      // if the job has exactly one trigger, we can just reschedule it, which allows us to update the schedule for
+      // if the job has exactly one trigger, we can just reschedule it, which allows us to update
+      // the schedule for
       // that trigger.
       List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
       if (triggers.size() == 1) {
         scheduler.rescheduleJob(triggers.get(0).getKey(), trigger);
       } else {
-        // if for some reason the job has multiple triggers, it's easiest to just delete and re-create the job,
+        // if for some reason the job has multiple triggers, it's easiest to just delete and
+        // re-create the job,
         // since we want to enforce a one-to-one relationship between jobs and triggers
         scheduler.deleteJob(jobKey);
         scheduler.scheduleJob(jobBuilder.build(), trigger);
@@ -313,6 +353,5 @@ public class JobManagerService implements Service {
       scheduler.shutdown(true);
       stop = true;
     }
-
   }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
+
 public class ConfigurationTest {
 
   private Map<String, String> map;
@@ -15,8 +16,7 @@ public class ConfigurationTest {
   @Before
   public void setUp() {
     PropertiesConfigurationParser parser = new PropertiesConfigurationParser();
-    map = parser
-        .parse(ConfigurationTest.class.getResourceAsStream("/food.properties"));
+    map = parser.parse(ConfigurationTest.class.getResourceAsStream("/food.properties"));
   }
 
   @Test
@@ -33,7 +33,6 @@ public class ConfigurationTest {
     MapConfiguration configuration = new MapConfiguration(map);
     List<Configuration> bananas = configuration.prefixList("bananas");
     assertEquals(3, bananas.size());
-
   }
 
   @Test

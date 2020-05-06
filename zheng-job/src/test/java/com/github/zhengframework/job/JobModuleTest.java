@@ -50,35 +50,40 @@ public class JobModuleTest {
   public static EveryTestJobWithDelay everyTestJobWithDelay = new EveryTestJobWithDelay();
   public static EveryTestJobWithJobName everyTestJobWithJobName = new EveryTestJobWithJobName();
   public static ApplicationStopTestJob applicationStopTestJob = new ApplicationStopTestJob();
-  @Inject
-  private Scheduler scheduler;
-  @Inject
-  private Injector injector;
+  @Inject private Scheduler scheduler;
+  @Inject private Injector injector;
 
   @WithZhengApplication(moduleClass = Module1.class)
   @Test
   public void testThatJobsAreExecuted() throws Exception {
-    // a job with an @Every annotation that doesn't specify a job name should be assigned the canonical class name
+    // a job with an @Every annotation that doesn't specify a job name should be assigned the
+    // canonical class name
     String jobName = EveryTestJob.class.getCanonicalName();
     assertTrue(scheduler.checkExists(JobKey.jobKey(jobName)));
 
-    // a job with an @Every annotation that specifies a job name should get that name, not the canonical class name
+    // a job with an @Every annotation that specifies a job name should get that name, not the
+    // canonical class name
     jobName = EveryTestJobWithJobName.class.getAnnotation(Every.class).jobName();
     assertTrue(scheduler.checkExists(JobKey.jobKey(jobName)));
 
-    // a job with an @On annotation that doesn't specify a job name should be assigned the canonical class name
+    // a job with an @On annotation that doesn't specify a job name should be assigned the canonical
+    // class name
     jobName = OnTestJob.class.getCanonicalName();
     assertTrue(scheduler.checkExists(JobKey.jobKey(jobName)));
 
-    // a job with an @On annotation that specifies a job name should get that name, not the canonical class name
+    // a job with an @On annotation that specifies a job name should get that name, not the
+    // canonical class name
     jobName = OnTestJobWithJobName.class.getAnnotation(On.class).jobName();
     assertTrue(scheduler.checkExists(JobKey.jobKey(jobName)));
 
-    // if there are two jobs that have the same name, only one job and trigger will be created with that job name
-    // this simulates running in clustered environments where two or more nodes have the same set of jobs
+    // if there are two jobs that have the same name, only one job and trigger will be created with
+    // that job name
+    // this simulates running in clustered environments where two or more nodes have the same set of
+    // jobs
     jobName = EveryTestJobWithJobName.class.getAnnotation(Every.class).jobName();
-    assertThat(jobName, IsEqual
-        .equalTo(EveryTestJobWithSameJobName.class.getAnnotation(Every.class).jobName()));
+    assertThat(
+        jobName,
+        IsEqual.equalTo(EveryTestJobWithSameJobName.class.getAnnotation(Every.class).jobName()));
     assertTrue(scheduler.checkExists(JobKey.jobKey(jobName)));
     assertThat(scheduler.getTriggersOfJob(JobKey.jobKey(jobName)).size(), IsEqual.equalTo(1));
 
@@ -93,7 +98,6 @@ public class JobModuleTest {
     jobManagerService.stop();
     assertThat(applicationStopTestJob.latch().await(2, TimeUnit.SECONDS), is(true));
   }
-
 
   @WithZhengApplication(moduleClass = Module2.class)
   @Test
@@ -117,7 +121,6 @@ public class JobModuleTest {
     assertEquals(Trigger.MISFIRE_INSTRUCTION_SMART_POLICY, trigger.getMisfireInstruction());
   }
 
-
   @WithZhengApplication(moduleClass = Module3.class)
   @Test
   public void testJobsWithoutGroupShouldOnlyHaveOneInstance() throws Exception {
@@ -128,7 +131,6 @@ public class JobModuleTest {
     assertNotNull(jobDetail);
     assertNotNull(trigger);
     assertThat(scheduler.getJobKeys(GroupMatcher.anyGroup()).size(), equalTo(1));
-
   }
 
   @WithZhengApplication(moduleClass = Module4.class)
@@ -150,8 +152,8 @@ public class JobModuleTest {
     assertTrue(jobDetail.requestsRecovery());
     assertTrue(jobDetail.isDurable());
     assertEquals(20, trigger.getPriority());
-    assertEquals(Trigger.MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY,
-        trigger.getMisfireInstruction());
+    assertEquals(
+        Trigger.MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY, trigger.getMisfireInstruction());
 
     jobName = OnTestJobWithNonDefaultConfiguration.class.getCanonicalName();
     jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName));
@@ -160,9 +162,8 @@ public class JobModuleTest {
     assertTrue(jobDetail.requestsRecovery());
     assertTrue(jobDetail.isDurable());
     assertEquals(20, trigger.getPriority());
-    assertEquals(Trigger.MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY,
-        trigger.getMisfireInstruction());
-
+    assertEquals(
+        Trigger.MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY, trigger.getMisfireInstruction());
   }
 
   @WithZhengApplication(moduleClass = Module6.class)

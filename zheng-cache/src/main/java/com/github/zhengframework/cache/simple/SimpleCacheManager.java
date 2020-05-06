@@ -1,5 +1,25 @@
 package com.github.zhengframework.cache.simple;
 
+/*-
+ * #%L
+ * zheng-cache
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.net.URI;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -15,12 +35,14 @@ import javax.cache.spi.CachingProvider;
 public class SimpleCacheManager implements CacheManager {
 
   private final SimpleCachingProvider simpleCachingProvider;
+
+  @SuppressWarnings("rawtypes")
   private final ConcurrentMap<String, Cache> caches = new ConcurrentHashMap<>(16);
+
   private final Set<String> cacheNames = new LinkedHashSet<>(16);
   private boolean isClosed = false;
 
-  public SimpleCacheManager(
-      SimpleCachingProvider simpleCachingProvider) {
+  public SimpleCacheManager(SimpleCachingProvider simpleCachingProvider) {
     this.simpleCachingProvider = simpleCachingProvider;
   }
 
@@ -55,6 +77,7 @@ public class SimpleCacheManager implements CacheManager {
     return getCache(name);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public <K, V> Cache<K, V> getCache(String name) {
     Cache<K, V> cache = this.caches.get(name);
@@ -82,14 +105,10 @@ public class SimpleCacheManager implements CacheManager {
   }
 
   @Override
-  public void enableManagement(String s, boolean b) {
-
-  }
+  public void enableManagement(String s, boolean b) {}
 
   @Override
-  public void enableStatistics(String s, boolean b) {
-
-  }
+  public void enableStatistics(String s, boolean b) {}
 
   @Override
   public void close() {

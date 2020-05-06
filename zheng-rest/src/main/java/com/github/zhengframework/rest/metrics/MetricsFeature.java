@@ -1,5 +1,25 @@
 package com.github.zhengframework.rest.metrics;
 
+/*-
+ * #%L
+ * zheng-rest
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
@@ -38,7 +58,8 @@ public class MetricsFeature implements DynamicFeature {
   private ConcurrentMap<Method, MeterInterceptor> meters = new ConcurrentHashMap<>();
   private ConcurrentMap<Method, TimedInterceptor> timers = new ConcurrentHashMap<>();
   private ConcurrentMap<Method, CountedInterceptor> counters = new ConcurrentHashMap<>();
-  private ConcurrentMap<Method, ResponseMeteredInterceptor> responseMeters = new ConcurrentHashMap<>();
+  private ConcurrentMap<Method, ResponseMeteredInterceptor> responseMeters =
+      new ConcurrentHashMap<>();
 
   public MetricsFeature(MetricRegistry registry) {
     this.registry = registry;
@@ -88,18 +109,19 @@ public class MetricsFeature implements DynamicFeature {
       if (resourceMethod.isAnnotationPresent(ResponseMetered.class)) {
         ResponseMetered annotation = resourceMethod.getAnnotation(ResponseMetered.class);
         final String name = chooseName(annotation.name(), annotation.absolute(), resourceInfo);
-        List<Meter> meters = Collections.unmodifiableList(Arrays.asList(
-            registry.meter(MetricRegistry.name(name, "1xx-responses")), // 1xx
-            registry.meter(MetricRegistry.name(name, "2xx-responses")), // 2xx
-            registry.meter(MetricRegistry.name(name, "3xx-responses")), // 3xx
-            registry.meter(MetricRegistry.name(name, "4xx-responses")), // 4xx
-            registry.meter(MetricRegistry.name(name, "5xx-responses"))  // 5xx
-        ));
+        List<Meter> meters =
+            Collections.unmodifiableList(
+                Arrays.asList(
+                    registry.meter(MetricRegistry.name(name, "1xx-responses")), // 1xx
+                    registry.meter(MetricRegistry.name(name, "2xx-responses")), // 2xx
+                    registry.meter(MetricRegistry.name(name, "3xx-responses")), // 3xx
+                    registry.meter(MetricRegistry.name(name, "4xx-responses")), // 4xx
+                    registry.meter(MetricRegistry.name(name, "5xx-responses")) // 5xx
+                    ));
         responseMeters.putIfAbsent(resourceMethod, new ResponseMeteredInterceptor(meters));
         context.register(responseMeters.get(resourceMethod));
       }
     }
-
   }
 
   private String chooseName(String explicitName, boolean absolute, ResourceInfo resourceInfo) {

@@ -1,201 +1,293 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
+
   <artifactId>zheng-bom</artifactId>
+  <packaging>pom</packaging>
+
+  <description>zheng framework bom</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
+  <properties>
+    <HikariCP.version>3.4.2</HikariCP.version>
+    <amqp-client.version>5.8.0</amqp-client.version>
+    <artemis.version>2.11.0</artemis.version>
+    <bval-jsr.version>2.0.3</bval-jsr.version>
+    <c3p0.version>0.9.5.5</c3p0.version>
+    <cache-annotations-ri-guice.version>1.1.1</cache-annotations-ri-guice.version>
+    <cache2k.version>1.2.4.Final</cache2k.version>
+    <caffeine.version>2.8.1</caffeine.version>
+    <classgraph.version>4.8.65</classgraph.version>
+    <commons-cli.version>1.4</commons-cli.version>
+    <commons-collections4.version>4.4</commons-collections4.version>
+    <commons-dbcp2.version>2.7.0</commons-dbcp2.version>
+    <commons-dbutils.version>1.7</commons-dbutils.version>
+    <commons-io.version>2.6</commons-io.version>
+    <commons-jcs.version>2.2.1</commons-jcs.version>
+    <commons-lang3.version>3.10</commons-lang3.version>
+    <commons-logging.version>1.2</commons-logging.version>
+    <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
+    <druid.version>1.1.22</druid.version>
+    <ebean.version>12.2.3</ebean.version>
+    <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
+    <ehcache.version>3.8.1</ehcache.version>
+    <embedded-rabbitmq.version>1.4.0</embedded-rabbitmq.version>
+    <fastjson.version>1.2.67</fastjson.version>
+    <flyway.version>6.3.3</flyway.version>
+    <free-port-finder.version>1.1.1</free-port-finder.version>
+    <guava.version>28.2-jre</guava.version>
+    <guice-bridge.version>2.6.1</guice-bridge.version>
+    <guice-servlet.version>4.2.2</guice-servlet.version>
+    <guice.version>4.2.2</guice.version>
+    <h2.version>1.4.200</h2.version>
+    <hazelcast.version>4.0.1</hazelcast.version>
+    <hibernate-core.version>5.4.12.Final</hibernate-core.version>
+    <hibernate-jpa-2.1-api.version>1.0.2.Final</hibernate-jpa-2.1-api.version>
+    <hibernate-validator.version>6.1.4.Final</hibernate-validator.version>
+    <hk2-api.version>2.6.1</hk2-api.version>
+    <hsqldb.version>2.5.0</hsqldb.version>
+    <ignite.version>2.8.0</ignite.version>
+    <infinispan.version>10.1.5.Final</infinispan.version>
+    <ini4j.version>0.5.4</ini4j.version>
+    <jackson.version>2.10.3</jackson.version>
+    <jakarta.el.version>3.0.3</jakarta.el.version>
+    <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+    <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
+    <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
+    <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
+    <javax.persistence-api.version>2.2</javax.persistence-api.version>
+    <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+    <javax.transaction-api.version>1.3</javax.transaction-api.version>
+    <javax.websocket-api.version>1.1</javax.websocket-api.version>
+    <jboss-logging-annotations.version>2.2.1.Final</jboss-logging-annotations.version>
+    <jdbi3-bom.version>3.12.2</jdbi3-bom.version>
+    <jedis-mock.version>0.1.16</jedis-mock.version>
+    <jetty.version>9.4.27.v20200227</jetty.version>
+    <jmemcached-core.version>1.0.0</jmemcached-core.version>
+    <jooq.version>3.13.1</jooq.version>
+    <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
+    <junit.version>4.12</junit.version>
+    <lettuce-core.version>5.2.2.RELEASE</lettuce-core.version>
+    <liquibase.version>3.8.8</liquibase.version>
+    <logback.version>1.2.3</logback.version>
+    <lombok.version>1.18.12</lombok.version>
+    <metainf-services.version>1.8</metainf-services.version>
+    <metrics.version>4.1.5</metrics.version>
+    <mockito-all.version>2.0.2-beta</mockito-all.version>
+    <mongodb-driver-sync.version>4.0.0</mongodb-driver-sync.version>
+    <mybatis-guice.version>3.12</mybatis-guice.version>
+    <mybatis.version>3.5.4</mybatis.version>
+    <okhttp.version>4.4.1</okhttp.version>
+    <paranamer.version>2.8</paranamer.version>
+    <quartz.version>2.3.2</quartz.version>
+    <querydsl.version>4.3.1</querydsl.version>
+    <resteasy.version>4.5.3.Final</resteasy.version>
+    <shiro.version>1.5.2</shiro.version>
+    <slf4j.version>1.7.30</slf4j.version>
+    <sql2o.version>1.6.0</sql2o.version>
+    <swagger-jaxrs2.version>2.1.1</swagger-jaxrs2.version>
+    <swagger-ui.version>3.25.0</swagger-ui.version>
+    <system-rules.version>1.19.0</system-rules.version>
+    <tomlj.version>1.0.0</tomlj.version>
+    <type-parser.version>0.6.0</type-parser.version>
+    <undertow.version>2.0.30.Final</undertow.version>
+    <webjars-locator-core.version>0.44</webjars-locator-core.version>
+    <xmemcached.version>2.4.6</xmemcached.version>
+    <zhengframework.version>${revision}</zhengframework.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>jersey-bom</artifactId>
-        <groupId>org.glassfish.jersey</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${jersey.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>metrics-bom</artifactId>
         <groupId>io.dropwizard.metrics</groupId>
-        <scope>import</scope>
-        <type>pom</type>
+        <artifactId>metrics-bom</artifactId>
         <version>${metrics.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>jdbi3-bom</artifactId>
-        <groupId>org.jdbi</groupId>
-        <scope>import</scope>
         <type>pom</type>
-        <version>${jdbi3-bom.version}</version>
+        <scope>import</scope>
       </dependency>
       <dependency>
-        <artifactId>guice</artifactId>
+        <groupId>org.jdbi</groupId>
+        <artifactId>jdbi3-bom</artifactId>
+        <version>${jdbi3-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
         <version>${guice.version}</version>
       </dependency>
       <dependency>
-        <artifactId>guice-servlet</artifactId>
         <groupId>com.google.inject.extensions</groupId>
+        <artifactId>guice-servlet</artifactId>
         <version>${guice-servlet.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.google.inject.extensions</groupId>
         <artifactId>guice-persist</artifactId>
-        <groupId>com.google.inject.extensions</groupId>
         <version>${guice.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.google.inject.extensions</groupId>
         <artifactId>guice-multibindings</artifactId>
-        <groupId>com.google.inject.extensions</groupId>
         <version>${guice.version}</version>
       </dependency>
       <dependency>
-        <artifactId>guava</artifactId>
         <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
         <version>${guava.version}</version>
       </dependency>
       <dependency>
-        <artifactId>lombok</artifactId>
         <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
         <version>${lombok.version}</version>
       </dependency>
       <dependency>
-        <artifactId>hibernate-core</artifactId>
         <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
         <version>${hibernate-core.version}</version>
       </dependency>
       <dependency>
-        <artifactId>hibernate-jpa-2.1-api</artifactId>
         <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.1-api</artifactId>
         <version>${hibernate-jpa-2.1-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>guice-bridge</artifactId>
         <groupId>org.glassfish.hk2</groupId>
+        <artifactId>guice-bridge</artifactId>
         <version>${guice-bridge.version}</version>
       </dependency>
       <dependency>
-        <artifactId>junit</artifactId>
         <groupId>junit</groupId>
-        <scope>test</scope>
+        <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <groupId>org.slf4j</groupId>
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
-        <groupId>org.slf4j</groupId>
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.slf4j</groupId>
         <artifactId>jul-to-slf4j</artifactId>
-        <groupId>org.slf4j</groupId>
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <groupId>ch.qos.logback</groupId>
         <version>${logback.version}</version>
       </dependency>
       <dependency>
+        <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <groupId>ch.qos.logback</groupId>
         <version>${logback.version}</version>
       </dependency>
       <dependency>
-        <artifactId>classgraph</artifactId>
         <groupId>io.github.classgraph</groupId>
+        <artifactId>classgraph</artifactId>
         <version>${classgraph.version}</version>
       </dependency>
       <dependency>
-        <artifactId>mockito-all</artifactId>
         <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
         <version>${mockito-all.version}</version>
       </dependency>
       <dependency>
-        <artifactId>h2</artifactId>
         <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
         <version>${h2.version}</version>
       </dependency>
       <dependency>
-        <artifactId>lettuce-core</artifactId>
         <groupId>io.lettuce</groupId>
+        <artifactId>lettuce-core</artifactId>
         <version>${lettuce-core.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jedis-mock</artifactId>
         <groupId>com.github.fppt</groupId>
-        <scope>test</scope>
+        <artifactId>jedis-mock</artifactId>
         <version>${jedis-mock.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
-        <artifactId>amqp-client</artifactId>
         <groupId>com.rabbitmq</groupId>
+        <artifactId>amqp-client</artifactId>
         <version>${amqp-client.version}</version>
       </dependency>
       <dependency>
-        <artifactId>embedded-rabbitmq</artifactId>
         <groupId>io.arivera.oss</groupId>
+        <artifactId>embedded-rabbitmq</artifactId>
         <version>${embedded-rabbitmq.version}</version>
       </dependency>
       <dependency>
-        <artifactId>mybatis</artifactId>
         <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
         <version>${mybatis.version}</version>
       </dependency>
       <dependency>
-        <artifactId>mybatis-guice</artifactId>
         <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-guice</artifactId>
         <version>${mybatis-guice.version}</version>
       </dependency>
       <dependency>
-        <artifactId>hsqldb</artifactId>
         <groupId>org.hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
         <version>${hsqldb.version}</version>
       </dependency>
       <dependency>
-        <artifactId>mongodb-driver-sync</artifactId>
         <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
         <version>${mongodb-driver-sync.version}</version>
       </dependency>
       <dependency>
-        <artifactId>de.flapdoodle.embed.mongo</artifactId>
         <groupId>de.flapdoodle.embed</groupId>
+        <artifactId>de.flapdoodle.embed.mongo</artifactId>
         <version>${de.flapdoodle.embed.mongo.version}</version>
       </dependency>
       <dependency>
-        <artifactId>free-port-finder</artifactId>
         <groupId>me.alexpanov</groupId>
+        <artifactId>free-port-finder</artifactId>
         <version>${free-port-finder.version}</version>
       </dependency>
       <dependency>
-        <artifactId>xmemcached</artifactId>
         <groupId>com.googlecode.xmemcached</groupId>
+        <artifactId>xmemcached</artifactId>
         <version>${xmemcached.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jmemcached-core</artifactId>
         <groupId>com.thimbleware.jmemcached</groupId>
+        <artifactId>jmemcached-core</artifactId>
         <version>${jmemcached-core.version}</version>
       </dependency>
       <dependency>
-        <artifactId>fastjson</artifactId>
         <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
         <version>${fastjson.version}</version>
       </dependency>
       <dependency>
-        <artifactId>cache-annotations-ri-guice</artifactId>
         <groupId>org.jsr107.ri</groupId>
+        <artifactId>cache-annotations-ri-guice</artifactId>
         <version>${cache-annotations-ri-guice.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax.servlet-api</artifactId>
         <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
         <version>${javax.servlet-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jetty-webapp</artifactId>
         <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-webapp</artifactId>
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
@@ -209,53 +301,53 @@
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax-websocket-server-impl</artifactId>
         <groupId>org.eclipse.jetty.websocket</groupId>
+        <artifactId>javax-websocket-server-impl</artifactId>
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.cache2k</groupId>
         <artifactId>cache2k-jcache</artifactId>
-        <groupId>org.cache2k</groupId>
         <version>${cache2k.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.cache2k</groupId>
         <artifactId>cache2k-api</artifactId>
-        <groupId>org.cache2k</groupId>
         <version>${cache2k.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.ben-manes.caffeine</groupId>
         <artifactId>caffeine</artifactId>
-        <groupId>com.github.ben-manes.caffeine</groupId>
         <version>${caffeine.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.ben-manes.caffeine</groupId>
         <artifactId>jcache</artifactId>
-        <groupId>com.github.ben-manes.caffeine</groupId>
         <version>${caffeine.version}</version>
       </dependency>
       <dependency>
-        <artifactId>ehcache</artifactId>
         <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
         <version>${ehcache.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.infinispan</groupId>
         <artifactId>infinispan-core</artifactId>
-        <groupId>org.infinispan</groupId>
         <version>${infinispan.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.infinispan</groupId>
         <artifactId>infinispan-jcache</artifactId>
-        <groupId>org.infinispan</groupId>
         <version>${infinispan.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-jcs-core</artifactId>
         <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jcs-core</artifactId>
         <version>${commons-jcs.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-jcs-jcache</artifactId>
         <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jcs-jcache</artifactId>
         <version>${commons-jcs.version}</version>
       </dependency>
       <dependency>
@@ -269,230 +361,230 @@
         <version>${ignite.version}</version>
       </dependency>
       <dependency>
-        <artifactId>system-rules</artifactId>
         <groupId>com.github.stefanbirkner</groupId>
+        <artifactId>system-rules</artifactId>
         <version>${system-rules.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
         <artifactId>jackson-dataformat-yaml</artifactId>
-        <groupId>com.fasterxml.jackson.dataformat</groupId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
         <artifactId>jackson-dataformat-properties</artifactId>
-        <groupId>com.fasterxml.jackson.dataformat</groupId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <groupId>com.fasterxml.jackson.core</groupId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <groupId>com.fasterxml.jackson.core</groupId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <groupId>com.fasterxml.jackson.core</groupId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jackson-datatype-jsr310</artifactId>
         <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
-        <artifactId>ini4j</artifactId>
         <groupId>org.ini4j</groupId>
+        <artifactId>ini4j</artifactId>
         <version>${ini4j.version}</version>
       </dependency>
       <dependency>
-        <artifactId>tomlj</artifactId>
         <groupId>org.tomlj</groupId>
+        <artifactId>tomlj</artifactId>
         <version>${tomlj.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.jboss.resteasy</groupId>
         <artifactId>resteasy-guice</artifactId>
-        <groupId>org.jboss.resteasy</groupId>
         <version>${resteasy.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.jboss.resteasy</groupId>
         <artifactId>resteasy-core</artifactId>
-        <groupId>org.jboss.resteasy</groupId>
         <version>${resteasy.version}</version>
       </dependency>
       <dependency>
-        <artifactId>resteasy-jackson2-provider</artifactId>
         <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jackson2-provider</artifactId>
         <version>${resteasy.version}</version>
       </dependency>
 
       <dependency>
-        <artifactId>swagger-jaxrs2</artifactId>
         <groupId>io.swagger.core.v3</groupId>
+        <artifactId>swagger-jaxrs2</artifactId>
         <version>${swagger-jaxrs2.version}</version>
       </dependency>
       <dependency>
-        <artifactId>okhttp</artifactId>
         <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
         <version>${okhttp.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax.websocket-api</artifactId>
         <groupId>javax.websocket</groupId>
+        <artifactId>javax.websocket-api</artifactId>
         <version>${javax.websocket-api.version}</version>
       </dependency>
       <dependency>
+        <groupId>io.undertow</groupId>
         <artifactId>undertow-servlet</artifactId>
-        <groupId>io.undertow</groupId>
         <version>${undertow.version}</version>
       </dependency>
       <dependency>
+        <groupId>io.undertow</groupId>
         <artifactId>undertow-websockets-jsr</artifactId>
-        <groupId>io.undertow</groupId>
         <version>${undertow.version}</version>
       </dependency>
       <dependency>
-        <artifactId>hk2-api</artifactId>
         <groupId>org.glassfish.hk2</groupId>
+        <artifactId>hk2-api</artifactId>
         <version>${hk2-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jakarta.ws.rs-api</artifactId>
         <groupId>jakarta.ws.rs</groupId>
+        <artifactId>jakarta.ws.rs-api</artifactId>
         <version>${jakarta.ws.rs-api.version}</version>
       </dependency>
 
       <dependency>
-        <artifactId>commons-cli</artifactId>
         <groupId>commons-cli</groupId>
+        <artifactId>commons-cli</artifactId>
         <version>${commons-cli.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-io</artifactId>
         <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
         <version>${commons-io.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-lang3</artifactId>
         <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
         <version>${commons-lang3.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-collections4</artifactId>
         <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
         <version>${commons-collections4.version}</version>
       </dependency>
       <dependency>
-        <artifactId>webjars-locator-core</artifactId>
         <groupId>org.webjars</groupId>
+        <artifactId>webjars-locator-core</artifactId>
         <version>${webjars-locator-core.version}</version>
       </dependency>
       <dependency>
-        <artifactId>swagger-ui</artifactId>
         <groupId>org.webjars</groupId>
+        <artifactId>swagger-ui</artifactId>
         <version>${swagger-ui.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jopt-simple</artifactId>
         <groupId>net.sf.jopt-simple</groupId>
+        <artifactId>jopt-simple</artifactId>
         <version>${jopt-simple.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax.annotation-api</artifactId>
         <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
         <version>${javax.annotation-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>HikariCP</artifactId>
         <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
         <version>${HikariCP.version}</version>
       </dependency>
       <dependency>
-        <artifactId>liquibase-core</artifactId>
         <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-core</artifactId>
         <version>${liquibase.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.jooq</groupId>
         <artifactId>jooq</artifactId>
-        <groupId>org.jooq</groupId>
         <version>${jooq.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.jooq</groupId>
         <artifactId>jooq-meta</artifactId>
-        <groupId>org.jooq</groupId>
         <version>${jooq.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.jooq</groupId>
         <artifactId>jooq-codegen</artifactId>
-        <groupId>org.jooq</groupId>
         <version>${jooq.version}</version>
       </dependency>
       <dependency>
-        <artifactId>flyway-core</artifactId>
         <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
         <version>${flyway.version}</version>
       </dependency>
       <dependency>
-        <artifactId>querydsl-sql</artifactId>
         <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-sql</artifactId>
         <version>${querydsl.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.eclipse.persistence</groupId>
         <artifactId>org.eclipse.persistence.core</artifactId>
-        <groupId>org.eclipse.persistence</groupId>
         <version>${eclipse.persistence.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.eclipse.persistence</groupId>
         <artifactId>org.eclipse.persistence.jpa</artifactId>
-        <groupId>org.eclipse.persistence</groupId>
         <version>${eclipse.persistence.version}</version>
       </dependency>
       <dependency>
-        <artifactId>sql2o</artifactId>
         <groupId>org.sql2o</groupId>
+        <artifactId>sql2o</artifactId>
         <version>${sql2o.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax.transaction-api</artifactId>
         <groupId>javax.transaction</groupId>
+        <artifactId>javax.transaction-api</artifactId>
         <version>${javax.transaction-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax.persistence-api</artifactId>
         <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
         <version>${javax.persistence-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>javax.interceptor-api</artifactId>
         <groupId>javax.interceptor</groupId>
+        <artifactId>javax.interceptor-api</artifactId>
         <version>${javax.interceptor-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-dbutils</artifactId>
         <groupId>commons-dbutils</groupId>
+        <artifactId>commons-dbutils</artifactId>
         <version>${commons-dbutils.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.shiro</groupId>
         <artifactId>shiro-core</artifactId>
-        <groupId>org.apache.shiro</groupId>
         <version>${shiro.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.shiro</groupId>
         <artifactId>shiro-web</artifactId>
-        <groupId>org.apache.shiro</groupId>
         <version>${shiro.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.shiro</groupId>
         <artifactId>shiro-guice</artifactId>
-        <groupId>org.apache.shiro</groupId>
         <version>${shiro.version}</version>
       </dependency>
       <dependency>
-        <artifactId>shiro-jaxrs</artifactId>
         <groupId>org.apache.shiro</groupId>
+        <artifactId>shiro-jaxrs</artifactId>
         <version>${shiro.version}</version>
       </dependency>
       <dependency>
@@ -501,431 +593,353 @@
         <version>${commons-logging.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jakarta.validation-api</artifactId>
         <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
         <version>${jakarta.validation-api.version}</version>
       </dependency>
       <dependency>
-        <artifactId>bval-jsr</artifactId>
         <groupId>org.apache.bval</groupId>
+        <artifactId>bval-jsr</artifactId>
         <version>${bval-jsr.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jakarta.el</artifactId>
         <groupId>org.glassfish</groupId>
+        <artifactId>jakarta.el</artifactId>
         <version>${jakarta.el.version}</version>
       </dependency>
       <dependency>
-        <artifactId>paranamer</artifactId>
         <groupId>com.thoughtworks.paranamer</groupId>
+        <artifactId>paranamer</artifactId>
         <version>${paranamer.version}</version>
       </dependency>
       <dependency>
-        <artifactId>hibernate-validator</artifactId>
         <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
         <version>${hibernate-validator.version}</version>
       </dependency>
       <dependency>
-        <artifactId>jboss-logging-annotations</artifactId>
         <groupId>org.jboss.logging</groupId>
+        <artifactId>jboss-logging-annotations</artifactId>
         <version>${jboss-logging-annotations.version}</version>
       </dependency>
       <dependency>
-        <artifactId>type-parser</artifactId>
         <groupId>com.github.drapostolos</groupId>
+        <artifactId>type-parser</artifactId>
         <version>${type-parser.version}</version>
       </dependency>
       <dependency>
-        <artifactId>ebean</artifactId>
         <groupId>io.ebean</groupId>
+        <artifactId>ebean</artifactId>
         <version>${ebean.version}</version>
       </dependency>
 
       <!-- Query bean support -->
       <dependency>
-        <artifactId>ebean-querybean</artifactId>
         <groupId>io.ebean</groupId>
+        <artifactId>ebean-querybean</artifactId>
         <version>${ebean.version}</version>
       </dependency>
       <dependency>
-        <artifactId>querybean-generator</artifactId>
         <groupId>io.ebean</groupId>
+        <artifactId>querybean-generator</artifactId>
         <version>${ebean.version}</version>
       </dependency>
 
       <dependency>
-        <artifactId>druid</artifactId>
         <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
         <version>${druid.version}</version>
       </dependency>
       <dependency>
-        <artifactId>commons-dbcp2</artifactId>
         <groupId>org.apache.commons</groupId>
+        <artifactId>commons-dbcp2</artifactId>
         <version>${commons-dbcp2.version}</version>
       </dependency>
       <dependency>
-        <artifactId>c3p0</artifactId>
         <groupId>com.mchange</groupId>
+        <artifactId>c3p0</artifactId>
         <version>${c3p0.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kohsuke.metainf-services</groupId>
+        <artifactId>metainf-services</artifactId>
+        <version>${metainf-services.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
       </dependency>
       <!-- zheng framework module -->
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-bootstrap</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-cache2k</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-caffeine</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-ehcache</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-infinispan</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-commons-jcs</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-hazelcast</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-cache-ignite</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-configuration</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-configuration-metrics</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-core</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-healthcheck</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-core</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-migrate-flyway</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-migrate-liquibase</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-jooq</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-querydsl</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-jdbi</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-commons-dbutils</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-sql2o</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-memcached</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-metrics</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-metrics-servlet</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-monogodb</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-mybatis</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-rabbitmq</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-redis</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-rest</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-shiro</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-shiro-web</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-shiro-jaxrs</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-swagger</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-web</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-web-jetty</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-web-undertow</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-webjars</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jpa</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jpa-test</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jpa-hibernate</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jpa-eclipselink</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-log-logback</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-event</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-event-guava</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-test</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-validator</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-validator-hibernate</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-validator-bval</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-validator-test</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.github.zhengframework</groupId>
         <artifactId>zheng-jdbc-ebean</artifactId>
-        <groupId>com.github.zhengframework</groupId>
         <version>${zhengframework.version}</version>
       </dependency>
       <dependency>
-        <artifactId>zheng-job</artifactId>
         <groupId>com.github.zhengframework</groupId>
+        <artifactId>zheng-job</artifactId>
         <version>${zhengframework.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modelVersion>4.0.0</modelVersion>
-  <packaging>pom</packaging>
 
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
-  <properties>
-    <zhengframework.version>${revision}</zhengframework.version>
-    <amqp-client.version>5.8.0</amqp-client.version>
-    <artemis.version>2.11.0</artemis.version>
-    <classgraph.version>4.8.65</classgraph.version>
-    <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
-    <embedded-rabbitmq.version>1.4.0</embedded-rabbitmq.version>
-    <fastjson.version>1.2.67</fastjson.version>
-    <free-port-finder.version>1.1.1</free-port-finder.version>
-    <guava.version>28.2-jre</guava.version>
-    <guice-bridge.version>2.6.1</guice-bridge.version>
-    <guice-servlet.version>4.2.2</guice-servlet.version>
-    <guice-servlet.version>4.2.2</guice-servlet.version>
-    <guice.version>4.2.2</guice.version>
-    <guice.version>4.2.2</guice.version>
-    <h2.version>1.4.200</h2.version>
-    <hibernate-core.version>5.4.12.Final</hibernate-core.version>
-    <hibernate-jpa-2.1-api.version>1.0.2.Final</hibernate-jpa-2.1-api.version>
-    <hsqldb.version>2.5.0</hsqldb.version>
-    <jackson.version>2.10.3</jackson.version>
-    <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-    <jedis-mock.version>0.1.16</jedis-mock.version>
-    <jersey.version>2.30.1</jersey.version>
-    <jetty.version>9.4.27.v20200227</jetty.version>
-    <jmemcached-core.version>1.0.0</jmemcached-core.version>
-    <junit.version>4.12</junit.version>
-    <lettuce-core.version>5.2.2.RELEASE</lettuce-core.version>
-    <lombok.version>1.18.12</lombok.version>
-    <metrics.version>4.1.5</metrics.version>
-    <mockito-all.version>2.0.2-beta</mockito-all.version>
-    <mongodb-driver-sync.version>4.0.0</mongodb-driver-sync.version>
-    <mybatis-guice.version>3.12</mybatis-guice.version>
-    <mybatis.version>3.5.4</mybatis.version>
-    <resteasy.version>4.5.3.Final</resteasy.version>
-    <slf4j.version>1.7.30</slf4j.version>
-    <xmemcached.version>2.4.6</xmemcached.version>
-    <HikariCP.version>3.4.2</HikariCP.version>
-    <cache-annotations-ri-guice.version>1.1.1</cache-annotations-ri-guice.version>
-    <cache2k.version>1.2.4.Final</cache2k.version>
-    <caffeine.version>2.8.1</caffeine.version>
-    <commons-cli.version>1.4</commons-cli.version>
-    <commons-collections4.version>4.4</commons-collections4.version>
-    <commons-io.version>2.6</commons-io.version>
-    <commons-jcs.version>2.2.1</commons-jcs.version>
-    <commons-lang3.version>3.10</commons-lang3.version>
-    <ehcache.version>3.8.1</ehcache.version>
-    <hazelcast.version>4.0.1</hazelcast.version>
-    <hk2-api.version>2.6.1</hk2-api.version>
-    <ignite.version>2.8.0</ignite.version>
-    <infinispan.version>10.1.5.Final</infinispan.version>
-    <ini4j.version>0.5.4</ini4j.version>
-    <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
-    <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
-    <javax.websocket-api.version>1.1</javax.websocket-api.version>
-    <jdbi3-bom.version>3.12.2</jdbi3-bom.version>
-    <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
-    <okhttp.version>4.4.1</okhttp.version>
-    <swagger-jaxrs2.version>2.1.1</swagger-jaxrs2.version>
-    <swagger-ui.version>3.25.0</swagger-ui.version>
-    <system-rules.version>1.19.0</system-rules.version>
-    <tomlj.version>1.0.0</tomlj.version>
-    <undertow.version>2.0.30.Final</undertow.version>
-    <webjars-locator-core.version>0.44</webjars-locator-core.version>
-    <flyway.version>6.3.3</flyway.version>
-    <jooq.version>3.13.1</jooq.version>
-    <liquibase.version>3.8.8</liquibase.version>
-    <querydsl.version>4.3.1</querydsl.version>
-    <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
-    <sql2o.version>1.6.0</sql2o.version>
-    <javax.transaction-api.version>1.3</javax.transaction-api.version>
-    <javax.persistence-api.version>2.2</javax.persistence-api.version>
-    <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
-    <commons-dbutils.version>1.7</commons-dbutils.version>
-    <shiro.version>1.5.2</shiro.version>
-    <commons-logging.version>1.2</commons-logging.version>
-    <logback.version>1.2.3</logback.version>
-    <bval-jsr.version>2.0.3</bval-jsr.version>
-    <hibernate-validator.version>6.1.4.Final</hibernate-validator.version>
-    <jakarta.el.version>3.0.3</jakarta.el.version>
-    <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
-    <paranamer.version>2.8</paranamer.version>
-    <ebean.version>12.2.3</ebean.version>
-    <jboss-logging-annotations.version>2.2.1.Final</jboss-logging-annotations.version>
-    <type-parser.version>0.6.0</type-parser.version>
-    <c3p0.version>0.9.5.5</c3p0.version>
-    <commons-dbcp2.version>2.7.0</commons-dbcp2.version>
-    <druid.version>1.1.22</druid.version>
-  </properties>
-
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
 </project>

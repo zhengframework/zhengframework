@@ -18,8 +18,7 @@ import org.junit.runner.RunWith;
 @WithZhengApplication(moduleClass = {MyModule.class})
 public class EventModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   public void testProvidedComponentsPresent() {
@@ -49,21 +48,27 @@ public class EventModuleTest {
     final AtomicInteger notTestEventCounter = new AtomicInteger();
     final AtomicInteger allEventCounter = new AtomicInteger();
 
-    dispatcher.registerListener(TestEvent.class, new EventListener<TestEvent>() {
-      public void onEvent(TestEvent event) {
-        testEventCounter.incrementAndGet();
-      }
-    });
-    dispatcher.registerListener(NotTestEvent.class, new EventListener<NotTestEvent>() {
-      public void onEvent(NotTestEvent event) {
-        notTestEventCounter.incrementAndGet();
-      }
-    });
-    dispatcher.registerListener(Event.class, new EventListener<Event>() {
-      public void onEvent(Event event) {
-        allEventCounter.incrementAndGet();
-      }
-    });
+    dispatcher.registerListener(
+        TestEvent.class,
+        new EventListener<TestEvent>() {
+          public void onEvent(TestEvent event) {
+            testEventCounter.incrementAndGet();
+          }
+        });
+    dispatcher.registerListener(
+        NotTestEvent.class,
+        new EventListener<NotTestEvent>() {
+          public void onEvent(NotTestEvent event) {
+            notTestEventCounter.incrementAndGet();
+          }
+        });
+    dispatcher.registerListener(
+        Event.class,
+        new EventListener<Event>() {
+          public void onEvent(Event event) {
+            allEventCounter.incrementAndGet();
+          }
+        });
 
     dispatcher.publishEvent(new TestEvent());
     assertEquals(1, testEventCounter.get());
@@ -78,21 +83,24 @@ public class EventModuleTest {
     final AtomicInteger notTestEventCounter = new AtomicInteger();
     final AtomicInteger allEventCounter = new AtomicInteger();
 
-    dispatcher.registerListener(new EventListener<TestEvent>() {
-      public void onEvent(TestEvent event) {
-        testEventCounter.incrementAndGet();
-      }
-    });
-    dispatcher.registerListener(new EventListener<NotTestEvent>() {
-      public void onEvent(NotTestEvent event) {
-        notTestEventCounter.incrementAndGet();
-      }
-    });
-    dispatcher.registerListener(new EventListener<Event>() {
-      public void onEvent(Event event) {
-        allEventCounter.incrementAndGet();
-      }
-    });
+    dispatcher.registerListener(
+        new EventListener<TestEvent>() {
+          public void onEvent(TestEvent event) {
+            testEventCounter.incrementAndGet();
+          }
+        });
+    dispatcher.registerListener(
+        new EventListener<NotTestEvent>() {
+          public void onEvent(NotTestEvent event) {
+            notTestEventCounter.incrementAndGet();
+          }
+        });
+    dispatcher.registerListener(
+        new EventListener<Event>() {
+          public void onEvent(Event event) {
+            allEventCounter.incrementAndGet();
+          }
+        });
 
     dispatcher.publishEvent(new TestEvent());
     assertEquals(1, testEventCounter.get());
@@ -116,13 +124,13 @@ public class EventModuleTest {
     EventDispatcher dispatcher = injector.getInstance(EventDispatcher.class);
     final AtomicInteger testEventCounter = new AtomicInteger();
 
-    EventRegistration registration = dispatcher.registerListener(
-        new EventListener<TestEvent>() {
-          public void onEvent(TestEvent event) {
-            testEventCounter.incrementAndGet();
-          }
-        }
-    );
+    EventRegistration registration =
+        dispatcher.registerListener(
+            new EventListener<TestEvent>() {
+              public void onEvent(TestEvent event) {
+                testEventCounter.incrementAndGet();
+              }
+            });
 
     dispatcher.publishEvent(new TestEvent());
     assertEquals(1, testEventCounter.get());
@@ -167,12 +175,7 @@ public class EventModuleTest {
     }
   }
 
-  private class TestEvent implements Event {
+  private class TestEvent implements Event {}
 
-  }
-
-  private class NotTestEvent implements Event {
-
-  }
-
+  private class NotTestEvent implements Event {}
 }

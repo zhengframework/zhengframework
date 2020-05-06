@@ -1,5 +1,25 @@
 package com.github.zhengframework.jpa;
 
+/*-
+ * #%L
+ * zheng-jpa
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.google.inject.persist.Transactional;
 import com.google.inject.persist.UnitOfWork;
 import java.lang.reflect.Method;
@@ -14,11 +34,9 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
   // Tracks if the unit of work was begun implicitly by this transaction.
   private final ThreadLocal<Boolean> didWeStartWork = new ThreadLocal<>();
 
-  @Inject
-  private JpaService emProvider = null;
+  @Inject private JpaService emProvider = null;
 
-  @Inject
-  private UnitOfWork unitOfWork = null;
+  @Inject private UnitOfWork unitOfWork = null;
 
   @Override
   public Object invoke(final MethodInvocation methodInvocation) throws Throwable {
@@ -106,8 +124,8 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
    * @param txn A JPA Transaction to issue rollbacks on
    * @return rollbackIfNecessary
    */
-  private boolean rollbackIfNecessary(final Transactional transactional, final Exception e,
-      final EntityTransaction txn) {
+  private boolean rollbackIfNecessary(
+      final Transactional transactional, final Exception e, final EntityTransaction txn) {
     boolean commit = true;
 
     // check rollback clauses
@@ -142,7 +160,5 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
   }
 
   @Transactional
-  private static class Internal {
-
-  }
+  private static class Internal {}
 }

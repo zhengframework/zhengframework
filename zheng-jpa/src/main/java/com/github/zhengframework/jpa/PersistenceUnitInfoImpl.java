@@ -1,5 +1,25 @@
 package com.github.zhengframework.jpa;
 
+/*-
+ * #%L
+ * zheng-jpa
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,7 +35,8 @@ import javax.persistence.spi.PersistenceUnitTransactionType;
 import javax.sql.DataSource;
 
 /**
- * copy from eclipse link project org.eclipse.persistence.internal.jpa.deployment.SEPersistenceUnitInfo
+ * copy from eclipse link project
+ * org.eclipse.persistence.internal.jpa.deployment.SEPersistenceUnitInfo
  */
 public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
@@ -49,7 +70,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The name of the persistence unit. Corresponds to the &lt;name&gt; element in the
-   * persistence.xml file.
+   *     persistence.xml file.
    */
   @Override
   public String getPersistenceUnitName() {
@@ -62,7 +83,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The fully qualified name of the persistence provider implementation class. Corresponds
-   * to the &lt;provider&gt; element in the persistence.xml file.
+   *     to the &lt;provider&gt; element in the persistence.xml file.
    */
   @Override
   public String getPersistenceProviderClassName() {
@@ -75,7 +96,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The transaction type of the entity managers created by the EntityManagerFactory. The
-   * transaction type corresponds to the transaction-type attribute in the persistence.xml file.
+   *     transaction type corresponds to the transaction-type attribute in the persistence.xml file.
    */
   @Override
   public PersistenceUnitTransactionType getTransactionType() {
@@ -88,8 +109,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return the JTA-enabled data source to be used by the persistence provider. The data source
-   * corresponds to the &lt;jta-data-source&gt; element in the persistence.xml file or is provided
-   * at deployment or by the container.
+   *     corresponds to the &lt;jta-data-source&gt; element in the persistence.xml file or is
+   *     provided at deployment or by the container.
    */
   @Override
   public DataSource getJtaDataSource() {
@@ -102,9 +123,9 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The non-JTA-enabled data source to be used by the persistence provider for accessing
-   * data outside a JTA transaction. The data source corresponds to
-   * the named &lt;non-jta-data-source&gt; element in the persistence.xml file or provided at
-   * deployment or by the container.
+   *     data outside a JTA transaction. The data source corresponds to the named
+   *     &lt;non-jta-data-source&gt; element in the persistence.xml file or provided at deployment
+   *     or by the container.
    */
   @Override
   public DataSource getNonJtaDataSource() {
@@ -117,10 +138,10 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The list of mapping file names that the persistence provider must load to determine the
-   * mappings for the entity classes. The mapping files must be in the standard XML mapping format,
-   * be uniquely named and be resource-loadable from the application classpath. This list will not
-   * include the orm.xml file if one was specified. Each mapping file name corresponds to
-   * a &lt;mapping-file&gt; element in the persistence.xml file.
+   *     mappings for the entity classes. The mapping files must be in the standard XML mapping
+   *     format, be uniquely named and be resource-loadable from the application classpath. This
+   *     list will not include the orm.xml file if one was specified. Each mapping file name
+   *     corresponds to a &lt;mapping-file&gt; element in the persistence.xml file.
    */
   @Override
   public List<String> getMappingFileNames() {
@@ -133,8 +154,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The list of JAR file URLs that the persistence provider must examine for managed
-   * classes of the persistence unit. Each jar file URL corresponds to
-   * a named &lt;jar-file&gt; element in the persistence.xml file.
+   *     classes of the persistence unit. Each jar file URL corresponds to a named &lt;jar-file&gt;
+   *     element in the persistence.xml file.
    */
   @Override
   public List<URL> getJarFileUrls() {
@@ -162,7 +183,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The URL for the jar file that is the root of the persistence unit. If the persistence
-   * unit is rooted in the WEB-INF/classes directory, this will be the URL of that directory.
+   *     unit is rooted in the WEB-INF/classes directory, this will be the URL of that directory.
    */
   @Override
   public URL getPersistenceUnitRootUrl() {
@@ -175,8 +196,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return The list of the names of the classes that the persistence provider must add it to its
-   * set of managed classes. Each name corresponds to a named
-   * &lt;class&gt; element in the persistence.xml file.
+   *     set of managed classes. Each name corresponds to a named &lt;class&gt; element in the
+   *     persistence.xml file.
    */
   @Override
   public List<String> getManagedClassNames() {
@@ -189,8 +210,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return Whether classes in the root of the persistence unit that have not been explicitly
-   * listed are to be included in the set of managed classes. This value corresponds to the
-   * &lt;exclude-unlisted-classes&gt; element in the persistence.xml file.
+   *     listed are to be included in the set of managed classes. This value corresponds to the
+   *     &lt;exclude-unlisted-classes&gt; element in the persistence.xml file.
    */
   @Override
   public boolean excludeUnlistedClasses() {
@@ -203,7 +224,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
   /**
    * @return Properties object. Each property corresponds to a &lt;property&gt; element in the
-   * persistence.xml file
+   *     persistence.xml file
    */
   @Override
   public Properties getProperties() {
@@ -214,9 +235,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
     this.properties = properties;
   }
 
-  /**
-   * @return ClassLoader that the provider may use to load any classes, resources, or open URLs.
-   */
+  /** @return ClassLoader that the provider may use to load any classes, resources, or open URLs. */
   @Override
   public ClassLoader getClassLoader() {
     return realClassLoader;
@@ -235,7 +254,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
    * of.
    *
    * @param transformer A provider-supplied transformer that the Container invokes at
-   * class-(re)definition time
+   *     class-(re)definition time
    */
   @Override
   public void addTransformer(ClassTransformer transformer) {
@@ -270,7 +289,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   @Override
   public String getPersistenceXMLSchemaVersion() {
     // TODO
-//    throw new PersistenceException("Not Yet Implemented");
+    //    throw new PersistenceException("Not Yet Implemented");
     return "2.1";
   }
 
@@ -290,7 +309,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   public void setSharedCacheMode(String sharedCacheMode) {
     // If user enters an invalid caching type valueOf will throw an illegal
     // argument exception, e.g.
-    // java.lang.IllegalArgumentException: No enum const class javax.persistence.SharedCacheMode.ALLBOGUS
+    // java.lang.IllegalArgumentException: No enum const class
+    // javax.persistence.SharedCacheMode.ALLBOGUS
     this.cacheMode = SharedCacheMode.valueOf(sharedCacheMode);
   }
 
@@ -310,7 +330,8 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
   public void setValidationMode(String validationMode) {
     // If user enters an invalid validation mode valueOf will throw an illegal
     // argument exception, e.g.
-    // java.lang.IllegalArgumentException: No enum const class javax.persistence.ValidationMode.ALLBOGUS
+    // java.lang.IllegalArgumentException: No enum const class
+    // javax.persistence.ValidationMode.ALLBOGUS
     this.validationMode = ValidationMode.valueOf(validationMode);
   }
 }

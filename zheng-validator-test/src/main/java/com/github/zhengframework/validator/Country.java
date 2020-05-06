@@ -1,9 +1,27 @@
-
 package com.github.zhengframework.validator;
+
+/*-
+ * #%L
+ * zheng-validator-test
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 public class Country {
 
@@ -14,11 +32,15 @@ public class Country {
   private String name;
 
   @NotNull(groups = {Insert.class})
-  @Size(max = 2, groups = {Insert.class, Update.class})
+  @Size(
+      max = 2,
+      groups = {Insert.class, Update.class})
   private String iso2Code;
 
   @NotNull(groups = {Insert.class})
-  @Size(max = 3, groups = {Insert.class, Update.class})
+  @Size(
+      max = 3,
+      groups = {Insert.class, Update.class})
   private String iso3Code;
 
   public Long getId() {
@@ -52,5 +74,4 @@ public class Country {
   public void setIso3Code(String iso3Code) {
     this.iso3Code = iso3Code;
   }
-
 }

@@ -21,7 +21,6 @@ public class PlaceholderResolverTest {
         System.out.println(matcher.start(1) + ":" + matcher.end(1));
         System.out.println(matcher.start(2) + ":" + matcher.end(2));
       }
-
     }
   }
 }

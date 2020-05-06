@@ -1,5 +1,25 @@
 package com.github.zhengframework.web.undertow;
 
+/*-
+ * #%L
+ * zheng-web-undertow
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.web.EventListenerClassScanner;
 import com.github.zhengframework.web.GuiceServerEndpointConfigurator;
 import com.github.zhengframework.web.PathUtils;
@@ -47,7 +67,8 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
   private final ResourceManager resourceManager;
 
   @Inject
-  public DefaultUndertowServerConfigurer(WebConfig webConfig,
+  public DefaultUndertowServerConfigurer(
+      WebConfig webConfig,
       EventListenerClassScanner eventListenerScanner,
       ClassIntrospecter classIntrospecter,
       Set<ServerEndpointConfig> serverEndpointConfigSet,
@@ -67,18 +88,20 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
   public void configure(Undertow.Builder server) {
     try {
       ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-      DeploymentInfo deploymentInfo = Servlets.deployment()
-          .setClassIntrospecter(classIntrospecter)
-          .setClassLoader(contextClassLoader)
-          .setContextPath(webConfig.getContextPath())
-          .setDeploymentName("zheng-web-undertow-" + webConfig.getPort());
+      DeploymentInfo deploymentInfo =
+          Servlets.deployment()
+              .setClassIntrospecter(classIntrospecter)
+              .setClassLoader(contextClassLoader)
+              .setContextPath(webConfig.getContextPath())
+              .setDeploymentName("zheng-web-undertow-" + webConfig.getPort());
 
-      eventListenerScanner
-          .accept(thing -> deploymentInfo.addListener(new ListenerInfo(thing.getClass(),
-              new ImmediateInstanceFactory<>(thing))));
+      eventListenerScanner.accept(
+          thing ->
+              deploymentInfo.addListener(
+                  new ListenerInfo(thing.getClass(), new ImmediateInstanceFactory<>(thing))));
 
-      deploymentInfo.addFilter(new FilterInfo("GuiceFilter", GuiceFilter.class)
-          .setAsyncSupported(true));
+      deploymentInfo.addFilter(
+          new FilterInfo("GuiceFilter", GuiceFilter.class).setAsyncSupported(true));
       deploymentInfo.addFilterUrlMapping("GuiceFilter", "/*", DispatcherType.REQUEST);
 
       deploymentInfo.setResourceManager(resourceManager);
@@ -88,8 +111,10 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
 
       WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
       for (ServerEndpointConfig serverEndpointConfig : serverEndpointConfigSet) {
-        log.info("ServerEndpointConfig={} path={}",
-            serverEndpointConfig.getEndpointClass().getName(), serverEndpointConfig.getPath());
+        log.info(
+            "ServerEndpointConfig={} path={}",
+            serverEndpointConfig.getEndpointClass().getName(),
+            serverEndpointConfig.getPath());
       }
       webSocketDeploymentInfo.addProgramaticEndpoints(serverEndpointConfigSet);
       for (Class<? extends WebSocketEndpoint> clazz : annotatedEndpoints) {
@@ -100,42 +125,45 @@ public class DefaultUndertowServerConfigurer implements UndertowServerConfigurer
           webSocketDeploymentInfo.addEndpoint(serverEndpointConfig);
         }
       }
-      DeploymentInfo webSocketDeployment = Servlets.deployment()
-          .setClassIntrospecter(classIntrospecter)
-          .setContextPath(
-              PathUtils.fixPath(webConfig.getContextPath(), webConfig.getWebSocketPath()))
-          .addServletContextAttribute(WebSocketDeploymentInfo.ATTRIBUTE_NAME,
-              webSocketDeploymentInfo)
-          .setDeploymentName("zheng-web-undertow-websocket")
-          .setClassLoader(contextClassLoader);
-      DeploymentManager websocketManager = Servlets.defaultContainer()
-          .addDeployment(webSocketDeployment);
+      DeploymentInfo webSocketDeployment =
+          Servlets.deployment()
+              .setClassIntrospecter(classIntrospecter)
+              .setContextPath(
+                  PathUtils.fixPath(webConfig.getContextPath(), webConfig.getWebSocketPath()))
+              .addServletContextAttribute(
+                  WebSocketDeploymentInfo.ATTRIBUTE_NAME, webSocketDeploymentInfo)
+              .setDeploymentName("zheng-web-undertow-websocket")
+              .setClassLoader(contextClassLoader);
+      DeploymentManager websocketManager =
+          Servlets.defaultContainer().addDeployment(webSocketDeployment);
       websocketManager.deploy();
 
       PathHandler rootHandler = Handlers.path();
 
-      HttpHandler encodingHandler = new EncodingHandler.Builder().build(null)
-          .wrap(manager.start());
+      HttpHandler encodingHandler = new EncodingHandler.Builder().build(null).wrap(manager.start());
 
       rootHandler.addPrefixPath(webConfig.getContextPath(), encodingHandler);
       rootHandler.addPrefixPath(
           PathUtils.fixPath(webConfig.getContextPath(), webConfig.getWebSocketPath()),
           websocketManager.start());
-      server.setHandler(new SessionAttachmentHandler(
-          new LearningPushHandler(100, -1,
-              Handlers
-                  .header(Handlers.gracefulShutdown(Handlers.urlDecodingHandler("", rootHandler)),
-                      "x-undertow-transport", ExchangeAttributes.transportProtocol())),
-          new InMemorySessionManager("sessionManager"), new SessionCookieConfig().setSecure(true)
-          .setHttpOnly(true)
-      ));
+      server.setHandler(
+          new SessionAttachmentHandler(
+              new LearningPushHandler(
+                  100,
+                  -1,
+                  Handlers.header(
+                      Handlers.gracefulShutdown(Handlers.urlDecodingHandler("", rootHandler)),
+                      "x-undertow-transport",
+                      ExchangeAttributes.transportProtocol())),
+              new InMemorySessionManager("sessionManager"),
+              new SessionCookieConfig().setSecure(true).setHttpOnly(true)));
     } catch (ServletException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private ServerEndpointConfig createServerEndpointConfig(Class<? extends WebSocketEndpoint> clazz,
-      ServerEndpoint annotation) {
+  private ServerEndpointConfig createServerEndpointConfig(
+      Class<? extends WebSocketEndpoint> clazz, ServerEndpoint annotation) {
     return Builder.create(clazz, annotation.value())
         .configurator(guiceServerEndpointConfigurator)
         .decoders(Lists.newArrayList(annotation.decoders()))

@@ -18,24 +18,27 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class UndertowWebModuleTest {
 
-  @Inject()
-  private WebConfig webConfig;
+  @Inject() private WebConfig webConfig;
 
   @Test
   @WithZhengApplication(moduleClass = MyModule.class)
   public void configure() throws Exception {
     System.out.println(webConfig);
-    OkHttpClient okHttpClient = new Builder()
-        .build();
+    OkHttpClient okHttpClient = new Builder().build();
     Request request;
     if (webConfig.getContextPath().endsWith("/")) {
-      request = new Request.Builder()
-          .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "hello")
-          .get().build();
+      request =
+          new Request.Builder()
+              .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "hello")
+              .get()
+              .build();
     } else {
-      request = new Request.Builder()
-          .url("http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "/hello")
-          .get().build();
+      request =
+          new Request.Builder()
+              .url(
+                  "http://localhost:" + webConfig.getPort() + webConfig.getContextPath() + "/hello")
+              .get()
+              .build();
     }
 
     Response response1 = okHttpClient.newCall(request).execute();
@@ -43,5 +46,4 @@ public class UndertowWebModuleTest {
     System.out.println(resp);
     assertEquals("Hello, World", resp);
   }
-
 }

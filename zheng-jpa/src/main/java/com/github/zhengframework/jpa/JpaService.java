@@ -1,5 +1,25 @@
 package com.github.zhengframework.jpa;
 
+/*-
+ * #%L
+ * zheng-jpa
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.google.common.base.Preconditions;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -73,8 +93,8 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
   @Override
   public synchronized void start() {
     Preconditions.checkState(null == emFactory, "Persistence service was already initialized.");
-    ServiceLoader<EntityManagerFactoryProvider> load = ServiceLoader
-        .load(EntityManagerFactoryProvider.class);
+    ServiceLoader<EntityManagerFactoryProvider> load =
+        ServiceLoader.load(EntityManagerFactoryProvider.class);
     Iterator<EntityManagerFactoryProvider> iterator = load.iterator();
     if (iterator.hasNext()) {
       EntityManagerFactoryProvider entityManagerFactoryProvider = iterator.next();
@@ -92,8 +112,8 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
   }
 
   @Singleton
-  public static class EntityManagerFactoryInternalProvider implements
-      Provider<EntityManagerFactory> {
+  public static class EntityManagerFactoryInternalProvider
+      implements Provider<EntityManagerFactory> {
 
     private final JpaService emProvider;
 
@@ -108,5 +128,4 @@ public class JpaService implements Provider<EntityManager>, UnitOfWork, PersistS
       return emProvider.emFactory;
     }
   }
-
 }

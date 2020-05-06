@@ -1,5 +1,25 @@
 package com.github.zhengframework.test;
 
+/*-
+ * #%L
+ * zheng-test
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.bootstrap.ZhengApplication;
 import com.github.zhengframework.bootstrap.ZhengApplicationBuilder;
 import com.github.zhengframework.configuration.Configuration;
@@ -33,7 +53,6 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
     } else {
       classHolder = new WithZhengApplicationHolder();
     }
-
   }
 
   private Optional<WithZhengApplicationHolder> getWithZhengApplicationFor(
@@ -55,9 +74,10 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
     if (holder.getConfigurationClass() == null) {
       if (StringUtils.isNotEmpty(holder.getConfigFile())) {
         log.info("use ConfigFile={}", holder.getConfigFile());
-        Configuration configuration = new ConfigurationBuilder()
-            .withConfigurationSource(new FileConfigurationSource(holder.getConfigFile()))
-            .build();
+        Configuration configuration =
+            new ConfigurationBuilder()
+                .withConfigurationSource(new FileConfigurationSource(holder.getConfigFile()))
+                .build();
         builder.withConfiguration(configuration);
       }
     } else {
@@ -65,7 +85,10 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
         log.info("user Configuration={}", holder.getConfigurationClass().getName());
         Configuration configuration = holder.getConfigurationClass().getConstructor().newInstance();
         builder.withConfiguration(configuration);
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         throw new InitializationError(e);
       }
     }
@@ -75,7 +98,10 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
     for (Class<? extends Module> moduleClass : holder.getModuleClass()) {
       try {
         moduleList.add(moduleClass.getConstructor().newInstance());
-      } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
         log.error("create ZhengApplication fail, holder={}", holder, e);
         throw new InitializationError(e);
       }
@@ -89,8 +115,9 @@ public class ZhengApplicationRunner extends BlockJUnit4ClassRunner {
   @SneakyThrows
   @Override
   protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
-    WithZhengApplicationHolder current = classHolder
-        .merge(getWithZhengApplicationFor(method).orElse(new WithZhengApplicationHolder()));
+    WithZhengApplicationHolder current =
+        classHolder.merge(
+            getWithZhengApplicationFor(method).orElse(new WithZhengApplicationHolder()));
     ZhengApplication application = createZhengApplication(current);
     application.start();
     injector = application.getInjector();

@@ -1,46 +1,66 @@
-//package com.github.zhengframework.configuration.parser;
+// package com.github.zhengframework.configuration.parser;
+
+/*-
+ * #%L
+ * zheng-core
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 //
-//import static java.lang.reflect.Modifier.isStatic;
+// import static java.lang.reflect.Modifier.isStatic;
 //
-//import com.github.zhengframework.configuration.Configuration;
-//import java.beans.BeanInfo;
-//import java.beans.Introspector;
-//import java.beans.MethodDescriptor;
-//import java.beans.PropertyDescriptor;
-//import java.lang.reflect.Array;
-//import java.lang.reflect.Constructor;
-//import java.lang.reflect.Method;
-//import java.lang.reflect.ParameterizedType;
-//import java.lang.reflect.Type;
-//import java.util.ArrayDeque;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.Collection;
-//import java.util.Deque;
-//import java.util.EnumSet;
-//import java.util.HashSet;
-//import java.util.LinkedHashMap;
-//import java.util.LinkedHashSet;
-//import java.util.LinkedList;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Map.Entry;
-//import java.util.NavigableMap;
-//import java.util.Optional;
-//import java.util.Queue;
-//import java.util.Set;
-//import java.util.SortedMap;
-//import java.util.SortedSet;
-//import java.util.TreeMap;
-//import java.util.TreeSet;
-//import java.util.concurrent.BlockingDeque;
-//import java.util.concurrent.BlockingQueue;
-//import java.util.concurrent.ConcurrentHashMap;
-//import java.util.concurrent.ConcurrentMap;
-//import java.util.concurrent.ConcurrentSkipListMap;
-//import java.util.concurrent.LinkedBlockingDeque;
+// import com.github.zhengframework.configuration.Configuration;
+// import java.beans.BeanInfo;
+// import java.beans.Introspector;
+// import java.beans.MethodDescriptor;
+// import java.beans.PropertyDescriptor;
+// import java.lang.reflect.Array;
+// import java.lang.reflect.Constructor;
+// import java.lang.reflect.Method;
+// import java.lang.reflect.ParameterizedType;
+// import java.lang.reflect.Type;
+// import java.util.ArrayDeque;
+// import java.util.ArrayList;
+// import java.util.Arrays;
+// import java.util.Collection;
+// import java.util.Deque;
+// import java.util.EnumSet;
+// import java.util.HashSet;
+// import java.util.LinkedHashMap;
+// import java.util.LinkedHashSet;
+// import java.util.LinkedList;
+// import java.util.List;
+// import java.util.Map;
+// import java.util.Map.Entry;
+// import java.util.NavigableMap;
+// import java.util.Optional;
+// import java.util.Queue;
+// import java.util.Set;
+// import java.util.SortedMap;
+// import java.util.SortedSet;
+// import java.util.TreeMap;
+// import java.util.TreeSet;
+// import java.util.concurrent.BlockingDeque;
+// import java.util.concurrent.BlockingQueue;
+// import java.util.concurrent.ConcurrentHashMap;
+// import java.util.concurrent.ConcurrentMap;
+// import java.util.concurrent.ConcurrentSkipListMap;
+// import java.util.concurrent.LinkedBlockingDeque;
 //
-//public class BeanMapper {
+// public class BeanMapper {
 //
 //
 //  public final TypeParser typeParser;
@@ -374,4 +394,4 @@
 //      throw new UnsupportedOperationException(message, e);
 //    }
 //  }
-//}
+// }

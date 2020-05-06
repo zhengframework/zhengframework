@@ -1,2 +1,0 @@
-com.github.zhengframework.cache.noop.NoOpCachingProvider
-com.github.zhengframework.cache.simple.SimpleCachingProvider

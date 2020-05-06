@@ -19,11 +19,11 @@ import java.util.Map;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
+
 public class ConfigurationModuleTest {
 
   Food food;
   Injector injector;
-
 
   @Before
   public void setup() throws IOException {
@@ -43,14 +43,14 @@ public class ConfigurationModuleTest {
     }
     food.setBananas(list);
 
-    Configuration configuration = new ConfigurationBuilder()
-        .withConfigurationSource(new FileConfigurationSource("food.properties"))
-        .build();
+    Configuration configuration =
+        new ConfigurationBuilder()
+            .withConfigurationSource(new FileConfigurationSource("food.properties"))
+            .build();
 
     ConfigurationModule configurationModule = new ConfigurationModule();
     configurationModule.initConfiguration(configuration);
-    injector = Guice
-        .createInjector(configurationModule, new FoodModule());
+    injector = Guice.createInjector(configurationModule, new FoodModule());
   }
 
   @Test
@@ -62,8 +62,8 @@ public class ConfigurationModuleTest {
   @Test
   public void testGetMapKeyNamed() {
     Configuration configuration = injector.getInstance(Configuration.class);
-    Map<String, Apple> apples = ConfigurationBeanMapper
-        .resolveMap(configuration, "apples", Apple.class);
+    Map<String, Apple> apples =
+        ConfigurationBeanMapper.resolveMap(configuration, "apples", Apple.class);
     Apple abc = apples.get("abc");
     System.out.println(abc.getWeight());
     System.out.println(abc.getName());
@@ -77,17 +77,16 @@ public class ConfigurationModuleTest {
     assertEquals(food.getApple(), food2.getApple());
     System.out.println(food2.getApple());
 
-    Set<Banana> bananas = ConfigurationBeanMapper
-        .resolveSet(configuration, "bananas", Banana.class);
+    Set<Banana> bananas =
+        ConfigurationBeanMapper.resolveSet(configuration, "bananas", Banana.class);
 
     assertEquals(food.getBananas().size(), bananas.size());
 
-    Map<String, Apple> apples = ConfigurationBeanMapper
-        .resolveMap(configuration, "apples", Apple.class);
+    Map<String, Apple> apples =
+        ConfigurationBeanMapper.resolveMap(configuration, "apples", Apple.class);
 
     assertEquals(food.getApples().size(), apples.size());
   }
-
 
   @Test
   public void testStatic() throws IOException {
@@ -96,14 +95,12 @@ public class ConfigurationModuleTest {
 
     Apple apple = injector.getInstance(Apple.class);
     assertEquals(food.getApple(), apple);
-
   }
 
   public static class FoodModule extends AbstractModule {
 
     @Override
-    protected void configure() {
-    }
+    protected void configure() {}
 
     @Provides
     Food food(Configuration configuration) {
@@ -115,6 +112,5 @@ public class ConfigurationModuleTest {
       Configuration configuration1 = configuration.prefix("apple");
       return ConfigurationBeanMapper.resolve(configuration1, null, Apple.class);
     }
-
   }
 }

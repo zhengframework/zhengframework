@@ -19,14 +19,12 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class MyBatisXmlMultiModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
-  @WithZhengApplication(configFile = "application_xml_group.properties"
-      , moduleClass = {MyBatisXmlMultiModule.class}
-      , excludeModuleProviderClass = {
-      MyBatisModuleProvider.class, DataSourceModuleProvider.class
-  })
+  @WithZhengApplication(
+      configFile = "application_xml_group.properties",
+      moduleClass = {MyBatisXmlMultiModule.class},
+      excludeModuleProviderClass = {MyBatisModuleProvider.class, DataSourceModuleProvider.class})
   @Test
   public void configure() throws Exception {
     runGroup(injector, "a");
@@ -48,6 +46,5 @@ public class MyBatisXmlMultiModuleTest {
     UserDAO userDAO = injector.getInstance(Key.get(UserDAO.class, named(group)));
     User user1 = userDAO.getUser("u1");
     assertEquals("Pocoyo", user1.getName());
-
   }
 }

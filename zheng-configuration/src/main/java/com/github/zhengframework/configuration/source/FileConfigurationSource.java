@@ -1,5 +1,25 @@
 package com.github.zhengframework.configuration.source;
 
+/*-
+ * #%L
+ * zheng-configuration
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.configuration.environment.Environment;
 import com.github.zhengframework.configuration.ex.MissingEnvironmentException;
 import com.github.zhengframework.configuration.io.AbsoluteNameLocationStrategy;
@@ -32,21 +52,21 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class FileConfigurationSource extends AbstractConfigurationSource {
 
-  public static final CombinedLocationStrategy FILE_LOCATION_STRATEGY = new CombinedLocationStrategy(
-      Arrays.asList(
-          new ProvidedURLLocationStrategy(),
-          new AbsoluteNameLocationStrategy(),
-          new BasePathLocationStrategy(),
-          new HomeDirectoryLocationStrategy(),
-          new FileSystemLocationStrategy(),
-          new ClasspathLocationStrategy()
-      ));
-  public static final FileConfigurationParserSelector FILE_CONFIGURATION_PARSER = new FileConfigurationParserSelector(
-      Arrays.asList(
-          new PropertiesConfigurationParser()
-          , new YamlConfigurationParser()
-          , new JsonConfigurationParser()
-      ));
+  public static final CombinedLocationStrategy FILE_LOCATION_STRATEGY =
+      new CombinedLocationStrategy(
+          Arrays.asList(
+              new ProvidedURLLocationStrategy(),
+              new AbsoluteNameLocationStrategy(),
+              new BasePathLocationStrategy(),
+              new HomeDirectoryLocationStrategy(),
+              new FileSystemLocationStrategy(),
+              new ClasspathLocationStrategy()));
+  public static final FileConfigurationParserSelector FILE_CONFIGURATION_PARSER =
+      new FileConfigurationParserSelector(
+          Arrays.asList(
+              new PropertiesConfigurationParser(),
+              new YamlConfigurationParser(),
+              new JsonConfigurationParser()));
   private static final String ENV_PATTERN = "${env}";
   private final FileSystem fileSystem;
   private final FileLocationStrategy fileLocationStrategy;
@@ -57,8 +77,7 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
     this("application.properties");
   }
 
-  public FileConfigurationSource(
-      String fileName) {
+  public FileConfigurationSource(String fileName) {
     this(FileLocator.builder().fileName(fileName).build());
   }
 
@@ -67,18 +86,17 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
   }
 
   public FileConfigurationSource(
-      FileLocationStrategy fileLocationStrategy,
-      FileLocator fileLocator) {
+      FileLocationStrategy fileLocationStrategy, FileLocator fileLocator) {
     this(new DefaultFileSystem(), fileLocationStrategy, fileLocator);
   }
 
-  public FileConfigurationSource(FileSystem fileSystem,
-      FileLocationStrategy fileLocationStrategy,
-      FileLocator fileLocator) {
+  public FileConfigurationSource(
+      FileSystem fileSystem, FileLocationStrategy fileLocationStrategy, FileLocator fileLocator) {
     this(fileSystem, fileLocationStrategy, fileLocator, FILE_CONFIGURATION_PARSER);
   }
 
-  public FileConfigurationSource(FileSystem fileSystem,
+  public FileConfigurationSource(
+      FileSystem fileSystem,
       FileLocationStrategy fileLocationStrategy,
       FileLocator fileLocator,
       FileConfigurationParser fileConfigurationParser) {
@@ -93,9 +111,7 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
   }
 
   @Override
-  public void init() {
-
-  }
+  public void init() {}
 
   @Override
   protected Map<String, String> getConfigurationInternal(Environment environment) {
@@ -127,8 +143,8 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
       URL url = urlOptional.get();
       log.info("find configuration file, url={}", url);
       try (InputStream inputStream = url.openStream()) {
-        return Collections
-            .unmodifiableMap(fileConfigurationParser.parse(url.toString(), inputStream));
+        return Collections.unmodifiableMap(
+            fileConfigurationParser.parse(url.toString(), inputStream));
       } catch (IOException e) {
         throw new IllegalStateException("Unable to load configuration from file: " + url, e);
       }

@@ -1,5 +1,25 @@
 package com.palominolabs.metrics.guice;
 
+/*-
+ * #%L
+ * zheng-metrics
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.annotation.Counted;
 import com.codahale.metrics.annotation.ExceptionMetered;
@@ -39,12 +59,14 @@ public class MetricsInstrumentationModule extends AbstractModule {
    * @param metricRegistry The registry to use when creating meters, etc. for annotated methods.
    * @param matcher The matcher to determine which types to look for metrics in
    * @param metricNamer The metric namer to use when creating names for metrics for annotated
-   * methods
+   *     methods
    * @param annotationResolver The annotation provider
    */
-  private MetricsInstrumentationModule(MetricRegistry metricRegistry,
+  private MetricsInstrumentationModule(
+      MetricRegistry metricRegistry,
       Matcher<? super TypeLiteral<?>> matcher,
-      MetricNamer metricNamer, AnnotationResolver annotationResolver) {
+      MetricNamer metricNamer,
+      AnnotationResolver annotationResolver) {
     this.metricRegistry = metricRegistry;
     this.matcher = matcher;
     this.metricNamer = metricNamer;
@@ -60,8 +82,8 @@ public class MetricsInstrumentationModule extends AbstractModule {
     bindListener(matcher, new MeteredListener(metricRegistry, metricNamer, annotationResolver));
     bindListener(matcher, new TimedListener(metricRegistry, metricNamer, annotationResolver));
     bindListener(matcher, new GaugeListener(metricRegistry, metricNamer, annotationResolver));
-    bindListener(matcher,
-        new ExceptionMeteredListener(metricRegistry, metricNamer, annotationResolver));
+    bindListener(
+        matcher, new ExceptionMeteredListener(metricRegistry, metricNamer, annotationResolver));
     bindListener(matcher, new CountedListener(metricRegistry, metricNamer, annotationResolver));
   }
 
@@ -96,7 +118,7 @@ public class MetricsInstrumentationModule extends AbstractModule {
 
     /**
      * @param metricNamer The metric namer to use when creating names for metrics for annotated
-     * methods
+     *     methods
      * @return this
      */
     @Nonnull
@@ -123,8 +145,7 @@ public class MetricsInstrumentationModule extends AbstractModule {
           Preconditions.checkNotNull(metricRegistry),
           Preconditions.checkNotNull(matcher),
           Preconditions.checkNotNull(metricNamer),
-          Preconditions.checkNotNull(annotationResolver)
-      );
+          Preconditions.checkNotNull(annotationResolver));
     }
   }
 }

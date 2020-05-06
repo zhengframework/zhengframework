@@ -1,56 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
+
   <artifactId>zheng-rabbitmq</artifactId>
-  <dependencies>
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>logback-classic</artifactId>
-      <groupId>ch.qos.logback</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>amqp-client</artifactId>
-      <groupId>com.rabbitmq</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>embedded-rabbitmq</artifactId>
-      <groupId>io.arivera.oss</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-test</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+
+  <description>zheng framework module: rabbitmq support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>zheng-bom</artifactId>
         <groupId>com.github.zhengframework</groupId>
-        <scope>import</scope>
-        <type>pom</type>
+        <artifactId>zheng-bom</artifactId>
         <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.arivera.oss</groupId>
+      <artifactId>embedded-rabbitmq</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
+
   <profiles>
     <profile>
       <activation>
@@ -61,13 +74,11 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
+          <plugin><configuration>
               <skipTests>true</skipTests>
             </configuration>
             <groupId>org.apache.maven.plugins</groupId>
-            <version>3.0.0-M4</version>
+            <artifactId>maven-surefire-plugin</artifactId>
           </plugin>
         </plugins>
       </build>

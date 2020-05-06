@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
+
   <artifactId>zheng-cache</artifactId>
+
+  <description>zheng framework module: cache support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.github.zhengframework</groupId>
+        <artifactId>zheng-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
-      <artifactId>guice</artifactId>
       <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
     </dependency>
     <dependency>
-      <artifactId>cache-annotations-ri-guice</artifactId>
       <groupId>org.jsr107.ri</groupId>
+      <artifactId>cache-annotations-ri-guice</artifactId>
     </dependency>
     <dependency>
-      <artifactId>junit</artifactId>
       <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.cache2k</groupId>
       <artifactId>cache2k-jcache</artifactId>
-      <groupId>org.cache2k</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>cache2k-api</artifactId>
       <groupId>org.cache2k</groupId>
+      <artifactId>cache2k-api</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -32,8 +53,8 @@
       <artifactId>zheng-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -46,23 +67,13 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
   </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>zheng-bom</artifactId>
-        <groupId>com.github.zhengframework</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${project.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
-
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
 </project>

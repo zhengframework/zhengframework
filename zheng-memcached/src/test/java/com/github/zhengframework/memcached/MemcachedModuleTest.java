@@ -27,16 +27,17 @@ public class MemcachedModuleTest {
   String host = "127.0.0.1";
   int port;
   private MemCacheDaemon<LocalCacheElement> memcacheDaemon;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Before
   public void setup() {
-//    port = FreePortFinder.findFreeLocalPort();
+    //    port = FreePortFinder.findFreeLocalPort();
     port = 11211;
-    CacheStorage<Key, LocalCacheElement> storage = ConcurrentLinkedHashMap
-        .create(ConcurrentLinkedHashMap
-            .EvictionPolicy.FIFO, DEFAULT_STORAGE_CAPACITY, DEFAULT_STORAGE_MEMORY_CAPACITY);
+    CacheStorage<Key, LocalCacheElement> storage =
+        ConcurrentLinkedHashMap.create(
+            ConcurrentLinkedHashMap.EvictionPolicy.FIFO,
+            DEFAULT_STORAGE_CAPACITY,
+            DEFAULT_STORAGE_MEMORY_CAPACITY);
     memcacheDaemon = new MemCacheDaemon<>();
     memcacheDaemon.setCache(new CacheImpl(storage));
     memcacheDaemon.setVerbose(true);

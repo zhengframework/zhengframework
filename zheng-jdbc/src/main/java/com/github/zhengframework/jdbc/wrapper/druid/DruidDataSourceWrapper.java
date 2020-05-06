@@ -1,5 +1,25 @@
 package com.github.zhengframework.jdbc.wrapper.druid;
 
+/*-
+ * #%L
+ * zheng-jdbc
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceStatLogger;
@@ -41,8 +61,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setStatLogger(
-      @Named("druid.statLogger") DruidDataSourceStatLogger statLogger) {
+  public void setStatLogger(@Named("druid.statLogger") DruidDataSourceStatLogger statLogger) {
     origDataSource.setStatLogger(statLogger);
   }
 
@@ -106,8 +125,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   public void setMaxPoolPreparedStatementPerConnectionSize(
       @Named("druid.maxPoolPreparedStatementPerConnectionSize")
           int maxPoolPreparedStatementPerConnectionSize) {
-    origDataSource
-        .setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
+    origDataSource.setMaxPoolPreparedStatementPerConnectionSize(
+        maxPoolPreparedStatementPerConnectionSize);
   }
 
   @Inject(optional = true)
@@ -117,8 +136,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setValidConnectionChecker(@Named("druid.validConnectionChecker")
-      ValidConnectionChecker validConnectionChecker) {
+  public void setValidConnectionChecker(
+      @Named("druid.validConnectionChecker") ValidConnectionChecker validConnectionChecker) {
     origDataSource.setValidConnectionChecker(validConnectionChecker);
   }
 
@@ -213,8 +232,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setInitGlobalVariants(
-      @Named("druid.initGlobalVariants") boolean initGlobalVariants) {
+  public void setInitGlobalVariants(@Named("druid.initGlobalVariants") boolean initGlobalVariants) {
     origDataSource.setInitGlobalVariants(initGlobalVariants);
   }
 
@@ -235,8 +253,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setExceptionSorter(
-      @Named("druid.exceptionSorter") ExceptionSorter exceptionSorter) {
+  public void setExceptionSorter(@Named("druid.exceptionSorter") ExceptionSorter exceptionSorter) {
     origDataSource.setExceptionSorter(exceptionSorter);
   }
 
@@ -246,8 +263,7 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setClearFiltersEnable(
-      @Named("druid.clearFiltersEnable") boolean clearFiltersEnable) {
+  public void setClearFiltersEnable(@Named("druid.clearFiltersEnable") boolean clearFiltersEnable) {
     origDataSource.setClearFiltersEnable(clearFiltersEnable);
   }
 
@@ -372,7 +388,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
 
   @Inject(optional = true)
   public void setAccessToUnderlyingConnectionAllowed(
-      @Named("druid.accessToUnderlyingConnectionAllowed") final boolean accessToUnderlyingConnectionAllowed) {
+      @Named("druid.accessToUnderlyingConnectionAllowed")
+          final boolean accessToUnderlyingConnectionAllowed) {
     origDataSource.setAccessToUnderlyingConnectionAllowed(accessToUnderlyingConnectionAllowed);
   }
 
@@ -438,8 +455,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
   public void setDataSourceConfig(DataSourceConfig dataSourceConfig) {
     super.setDataSourceConfig(dataSourceConfig);
     origDataSource.setDriverClassLoader(Thread.currentThread().getContextClassLoader());
-    origDataSource
-        .setDriverClassName(Objects.requireNonNull(dataSourceConfig.getDriverClassName()));
+    origDataSource.setDriverClassName(
+        Objects.requireNonNull(dataSourceConfig.getDriverClassName()));
     origDataSource.setUrl(dataSourceConfig.getUrl());
     origDataSource.setUsername(dataSourceConfig.getUsername());
     origDataSource.setPassword(dataSourceConfig.getPassword());

@@ -10,8 +10,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class EclipseLinkTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @WithZhengApplication
   @Test
@@ -19,8 +18,9 @@ public class EclipseLinkTest {
     JpaModuleTest.test(injector);
   }
 
-  @WithZhengApplication(configFile = "application_group.properties"
-      , moduleClass = JpaMultiModule.class,
+  @WithZhengApplication(
+      configFile = "application_group.properties",
+      moduleClass = JpaMultiModule.class,
       excludeModuleProviderClass = JpaModuleProvider.class)
   @Test
   public void testGroup() throws Exception {

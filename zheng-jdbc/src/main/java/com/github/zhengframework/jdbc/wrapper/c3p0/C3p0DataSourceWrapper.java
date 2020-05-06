@@ -1,5 +1,25 @@
 package com.github.zhengframework.jdbc.wrapper.c3p0;
 
+/*-
+ * #%L
+ * zheng-jdbc
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.jdbc.DataSourceConfig;
 import com.github.zhengframework.jdbc.wrapper.DataSourceWrapper;
 import com.github.zhengframework.jdbc.wrapper.PropertyHelper;
@@ -156,8 +176,11 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
     try {
       origDataSource.setConnectionTesterClassName(connectionTesterClassName);
     } catch (PropertyVetoException e) {
-      throw new RuntimeException("Impossible to set C3P0 Data Source connection tester class name '"
-          + connectionTesterClassName + "', see nested exceptions", e);
+      throw new RuntimeException(
+          "Impossible to set C3P0 Data Source connection tester class name '"
+              + connectionTesterClassName
+              + "', see nested exceptions",
+          e);
     }
   }
 
@@ -345,14 +368,15 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setForceSynchronousCheckins(@Named("c3p0.forceSynchronousCheckins")
-      boolean forceSynchronousCheckins) {
+  public void setForceSynchronousCheckins(
+      @Named("c3p0.forceSynchronousCheckins") boolean forceSynchronousCheckins) {
     origDataSource.setForceSynchronousCheckins(forceSynchronousCheckins);
   }
 
   @Inject(optional = true)
   public void setStatementCacheNumDeferredCloseThreads(
-      @Named("c3p0.statementCacheNumDeferredCloseThreads") int statementCacheNumDeferredCloseThreads) {
+      @Named("c3p0.statementCacheNumDeferredCloseThreads")
+          int statementCacheNumDeferredCloseThreads) {
     origDataSource.setStatementCacheNumDeferredCloseThreads(statementCacheNumDeferredCloseThreads);
   }
 
@@ -370,27 +394,23 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
   }
 
   @Inject(optional = true)
-  public void setDataSourceName(
-      @Named("c3p0.dataSourceName") String dataSourceName) {
+  public void setDataSourceName(@Named("c3p0.dataSourceName") String dataSourceName) {
     origDataSource.setDataSourceName(dataSourceName);
   }
 
   @SuppressWarnings("rawtypes")
   @Inject(optional = true)
-  public void setExtensions(
-      @Named("c3p0.extensions") Map extensions) {
+  public void setExtensions(@Named("c3p0.extensions") Map extensions) {
     origDataSource.setExtensions(extensions);
   }
 
   @Inject(optional = true)
-  public void setIdentityToken(
-      @Named("c3p0.identityToken") String identityToken) {
+  public void setIdentityToken(@Named("c3p0.identityToken") String identityToken) {
     origDataSource.setIdentityToken(identityToken);
   }
 
   @Inject(optional = true)
-  public void setNumHelperThreads(
-      @Named("c3p0.numHelperThreads") int numHelperThreads) {
+  public void setNumHelperThreads(@Named("c3p0.numHelperThreads") int numHelperThreads) {
     origDataSource.setNumHelperThreads(numHelperThreads);
   }
 
@@ -401,7 +421,8 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
    */
   @Inject(optional = true)
   public void setUsesTraditionalReflectiveProxies(
-      @Named("c3p0.usesTraditionalReflectiveProxies") final boolean usesTraditionalReflectiveProxies) {
+      @Named("c3p0.usesTraditionalReflectiveProxies")
+          final boolean usesTraditionalReflectiveProxies) {
     origDataSource.setUsesTraditionalReflectiveProxies(usesTraditionalReflectiveProxies);
   }
 

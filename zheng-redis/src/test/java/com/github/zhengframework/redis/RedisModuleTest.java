@@ -22,8 +22,7 @@ import org.junit.runner.RunWith;
 public class RedisModuleTest {
 
   private RedisServer server = null;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Before
   public void before() throws IOException {
@@ -34,8 +33,7 @@ public class RedisModuleTest {
   @Test
   @WithZhengApplication()
   public void test() {
-    RedisClient redisClient = injector
-        .getInstance(RedisClient.class);
+    RedisClient redisClient = injector.getInstance(RedisClient.class);
     StatefulRedisConnection<String, String> connection = redisClient.connect();
     RedisCommands<String, String> commands = connection.sync();
     commands.set("test", "zheng");
@@ -46,8 +44,7 @@ public class RedisModuleTest {
   @Test
   @WithZhengApplication(configFile = "application_group.properties")
   public void testGroup() {
-    RedisClient redisClient = injector
-        .getInstance(Key.get(RedisClient.class, named("a1")));
+    RedisClient redisClient = injector.getInstance(Key.get(RedisClient.class, named("a1")));
     StatefulRedisConnection<String, String> connection = redisClient.connect();
     RedisCommands<String, String> commands = connection.sync();
     commands.set("test", "zheng");

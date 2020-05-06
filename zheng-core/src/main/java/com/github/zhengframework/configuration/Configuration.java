@@ -1,5 +1,25 @@
 package com.github.zhengframework.configuration;
 
+/*-
+ * #%L
+ * zheng-core
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import static java.util.Arrays.stream;
 
 import com.github.zhengframework.configuration.parser.Parser;
@@ -178,20 +198,15 @@ public interface Configuration {
   }
 
   default Optional<URI> getURI(String key) {
-    return getValue(key,
-
-        s -> ValueFunctions.toURI().parse(s));
+    return getValue(key, s -> ValueFunctions.toURI().parse(s));
   }
 
   default URI getURI(String key, URI defaultValue) {
     return getURI(key).orElse(defaultValue);
   }
 
-
   default Optional<URL> getURL(String key) {
-    return getValue(key,
-        s -> ValueFunctions.toURL().parse(s)
-    );
+    return getValue(key, s -> ValueFunctions.toURL().parse(s));
   }
 
   default URL getURL(String key, URL defaultValue) {
@@ -223,8 +238,7 @@ public interface Configuration {
   }
 
   default Optional<String[]> getArray(String key, String separator) {
-    return get(key).map(
-        s -> ValueFunctions.toArray(separator).parse(s));
+    return get(key).map(s -> ValueFunctions.toArray(separator).parse(s));
   }
 
   default String[] getArray(String key, String separator, String[] defaultValue) {
@@ -236,13 +250,11 @@ public interface Configuration {
   }
 
   default Optional<List<String>> getList(String key, String separator) {
-    return get(key).map(
-        s -> ValueFunctions.toList(separator).parse(s));
+    return get(key).map(s -> ValueFunctions.toList(separator).parse(s));
   }
 
   default Optional<List<String>> getList(String key) {
-    return get(key).map(
-        s -> ValueFunctions.toList(",").parse(s));
+    return get(key).map(s -> ValueFunctions.toList(",").parse(s));
   }
 
   default List<String> getList(String key, List<String> defaultValue) {
@@ -250,24 +262,24 @@ public interface Configuration {
   }
 
   default <T> List<T> getList(String key, String separator, Parser<T> map) {
-    return getList(key, separator).orElse(Collections.emptyList()).stream().map(map::parse)
+    return getList(key, separator).orElse(Collections.emptyList()).stream()
+        .map(map::parse)
         .collect(Collectors.toList());
   }
 
   @SuppressWarnings("unchecked")
   default <T> T[] getArray(String key, String separator, Parser<T> map) {
-    return (T[]) stream(getArray(key, separator).orElse(new String[0]))
-        .map(map::parse).toArray();
+    return (T[]) stream(getArray(key, separator).orElse(new String[0])).map(map::parse).toArray();
   }
 
   default <T> List<T> getList(String key, Parser<T> map) {
-    return getList(key, ",").orElse(Collections.emptyList()).stream().map(map::parse)
+    return getList(key, ",").orElse(Collections.emptyList()).stream()
+        .map(map::parse)
         .collect(Collectors.toList());
   }
 
   @SuppressWarnings("unchecked")
   default <T> T[] getArray(String key, Parser<T> map) {
-    return (T[]) stream(getArray(key, ",").orElse(new String[0]))
-        .map(map::parse).toArray();
+    return (T[]) stream(getArray(key, ",").orElse(new String[0])).map(map::parse).toArray();
   }
 }

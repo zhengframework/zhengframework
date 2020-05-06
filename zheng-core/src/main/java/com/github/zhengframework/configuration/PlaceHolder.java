@@ -1,13 +1,31 @@
 package com.github.zhengframework.configuration;
 
+/*-
+ * #%L
+ * zheng-core
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.configuration.ex.UnresolvablePlaceholdersException;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * class copy from project 'owner'
- */
+/** class copy from project 'owner' */
 public class PlaceHolder {
 
   private static final Pattern PATTERN = Pattern.compile("\\$\\{(.+?)}");
@@ -52,10 +70,10 @@ public class PlaceHolder {
   /**
    * Returns a string modified in according to supplied source and arguments.
    *
-   * If the source string has pattern-replacement content like {@code "a.${var}.b"}, the pattern is
-   * replaced property value of "var".
+   * <p>If the source string has pattern-replacement content like {@code "a.${var}.b"}, the pattern
+   * is replaced property value of "var".
    *
-   * Otherwise the return string is formatted by source and arguments as with {@link
+   * <p>Otherwise the return string is formatted by source and arguments as with {@link
    * String#format(String, Object...)}
    *
    * @param source A source formatting format string. {@code null} returns {@code null}
@@ -69,5 +87,4 @@ public class PlaceHolder {
     Matcher m = PATTERN.matcher(source);
     return m.find() ? replace(source) : String.format(source, args);
   }
-
 }

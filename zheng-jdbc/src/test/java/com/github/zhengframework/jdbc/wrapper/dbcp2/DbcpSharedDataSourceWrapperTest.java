@@ -36,35 +36,52 @@ public class DbcpSharedDataSourceWrapperTest {
     final int defaultMaxTotal = 60;
     final int defaultMaxIdle = 70;
     final int defaultMaxWaitMillis = 80;
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(Names.named("dbcp.defaultAutoCommit")).to(autoCommit);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultReadOnly")).to(defaultReadOnly);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultTransactionIsolation"))
-            .to(defaultTransactionIsolation);
-        bindConstant().annotatedWith(Names.named("dbcp.description")).to(description);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultMinEvictableIdleTimeMillis"))
-            .to(defaultMinEvictableIdleTimeMillis);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultNumTestsPerEvictionRun"))
-            .to(defaultNumTestsPerEvictionRun);
-        bindConstant().annotatedWith(Names.named("dbcp.rollbackAfterValidation"))
-            .to(rollbackAfterValidation);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultTestOnBorrow"))
-            .to(defaultTestOnBorrow);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultTestOnReturn"))
-            .to(defaultTestOnReturn);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultTestWhileIdle"))
-            .to(defaultTestWhileIdle);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultTimeBetweenEvictionRunsMillis"))
-            .to(defaultTimeBetweenEvictionRunsMillis);
-        bindConstant().annotatedWith(Names.named("dbcp.validationQuery")).to(validationQuery);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultMaxTotal")).to(defaultMaxTotal);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultMaxIdle")).to(defaultMaxIdle);
-        bindConstant().annotatedWith(Names.named("dbcp.defaultMaxWaitMillis"))
-            .to(defaultMaxWaitMillis);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(Names.named("dbcp.defaultAutoCommit")).to(autoCommit);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultReadOnly"))
+                    .to(defaultReadOnly);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultTransactionIsolation"))
+                    .to(defaultTransactionIsolation);
+                bindConstant().annotatedWith(Names.named("dbcp.description")).to(description);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultMinEvictableIdleTimeMillis"))
+                    .to(defaultMinEvictableIdleTimeMillis);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultNumTestsPerEvictionRun"))
+                    .to(defaultNumTestsPerEvictionRun);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.rollbackAfterValidation"))
+                    .to(rollbackAfterValidation);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultTestOnBorrow"))
+                    .to(defaultTestOnBorrow);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultTestOnReturn"))
+                    .to(defaultTestOnReturn);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultTestWhileIdle"))
+                    .to(defaultTestWhileIdle);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultTimeBetweenEvictionRunsMillis"))
+                    .to(defaultTimeBetweenEvictionRunsMillis);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.validationQuery"))
+                    .to(validationQuery);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultMaxTotal"))
+                    .to(defaultMaxTotal);
+                bindConstant().annotatedWith(Names.named("dbcp.defaultMaxIdle")).to(defaultMaxIdle);
+                bindConstant()
+                    .annotatedWith(Names.named("dbcp.defaultMaxWaitMillis"))
+                    .to(defaultMaxWaitMillis);
+              }
+            });
     DataSourceConfig dataSourceConfig = new DataSourceConfig();
     dataSourceConfig.setDriverClassName(driverClassName);
     dataSourceConfig.setUrl(url);
@@ -82,15 +99,15 @@ public class DbcpSharedDataSourceWrapperTest {
     assertEquals(defaultTransactionIsolation, dataSource.getDefaultTransactionIsolation());
     assertEquals(description, dataSource.getDescription());
     assertEquals(loginTimeout, dataSource.getLoginTimeout());
-    assertEquals(defaultMinEvictableIdleTimeMillis,
-        dataSource.getDefaultMinEvictableIdleTimeMillis());
+    assertEquals(
+        defaultMinEvictableIdleTimeMillis, dataSource.getDefaultMinEvictableIdleTimeMillis());
     assertEquals(defaultNumTestsPerEvictionRun, dataSource.getDefaultNumTestsPerEvictionRun());
     assertEquals(rollbackAfterValidation, dataSource.isRollbackAfterValidation());
     assertEquals(defaultTestOnBorrow, dataSource.getDefaultTestOnBorrow());
     assertEquals(defaultTestOnReturn, dataSource.getDefaultTestOnReturn());
     assertEquals(defaultTestWhileIdle, dataSource.getDefaultTestWhileIdle());
-    assertEquals(defaultTimeBetweenEvictionRunsMillis,
-        dataSource.getDefaultTimeBetweenEvictionRunsMillis());
+    assertEquals(
+        defaultTimeBetweenEvictionRunsMillis, dataSource.getDefaultTimeBetweenEvictionRunsMillis());
     assertEquals(validationQuery, dataSource.getValidationQuery());
     assertEquals(defaultMaxTotal, dataSource.getDefaultMaxTotal());
     assertEquals(defaultMaxIdle, dataSource.getDefaultMaxIdle());

@@ -9,8 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(ZhengApplicationRunner.class)
-@WithZhengApplication(moduleClass = {User.Module.class}
-    , excludeModuleClass = {User.Module.class})
+@WithZhengApplication(
+    moduleClass = {User.Module.class},
+    excludeModuleClass = {User.Module.class})
 public class ZhengApplicationRunnerExcludeTest {
 
   @Inject(optional = true)
@@ -19,8 +20,7 @@ public class ZhengApplicationRunnerExcludeTest {
   @Inject(optional = true)
   private Server server;
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication(moduleClass = {User.Module.class})
@@ -31,7 +31,10 @@ public class ZhengApplicationRunnerExcludeTest {
   }
 
   @Test
-  @WithZhengApplication(moduleClass = {Server.Module.class,})
+  @WithZhengApplication(
+      moduleClass = {
+        Server.Module.class,
+      })
   public void testB() {
     assertNotNull(injector);
     assertNull(user);

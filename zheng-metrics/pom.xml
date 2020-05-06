@@ -1,68 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
+
   <artifactId>zheng-metrics</artifactId>
-  <dependencies>
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>logback-classic</artifactId>
-      <groupId>ch.qos.logback</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-jmx</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-jvm</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-core</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-annotation</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-test</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>jakarta.ws.rs-api</artifactId>
-      <groupId>jakarta.ws.rs</groupId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+
+  <description>zheng framework module: metrics support</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>zheng-bom</artifactId>
         <groupId>com.github.zhengframework</groupId>
-        <scope>import</scope>
-        <type>pom</type>
+        <artifactId>zheng-bom</artifactId>
         <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jmx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jvm</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-annotation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
   <repositories>
     <repository>
       <id>bintray-marshallpierce-maven</id>
@@ -73,4 +77,13 @@
       <url>https://dl.bintray.com/marshallpierce/maven</url>
     </repository>
   </repositories>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
 </project>

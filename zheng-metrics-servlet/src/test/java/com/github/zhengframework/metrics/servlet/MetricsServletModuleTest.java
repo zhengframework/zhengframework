@@ -24,8 +24,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class MetricsServletModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @WithZhengApplication(moduleClass = {MyModule.class})
   @Test
@@ -36,32 +35,31 @@ public class MetricsServletModuleTest {
     }
     MetricRegistry metricRegistry = injector.getInstance(MetricRegistry.class);
 
-    assertEquals(10, metricRegistry
-        .counter(TestService.class.getName() + ".count.current").getCount());
-    assertEquals(10,
-        metricRegistry.timer(TestService.class.getName() + ".count.timer")
-            .getCount());
-    assertEquals(10,
-        metricRegistry.meter(TestService.class.getName() + ".count.meter")
-            .getCount());
-    metricRegistry.getGauges().forEach((key, value) -> {
-      System.out.println(key);
-      System.out.println(value.getValue());
-      if ((TestService.class.getName() + ".count.gauge").equals(key)) {
-        assertEquals("1111", value.getValue());
-      }
-    });
+    assertEquals(
+        10, metricRegistry.counter(TestService.class.getName() + ".count.current").getCount());
+    assertEquals(10, metricRegistry.timer(TestService.class.getName() + ".count.timer").getCount());
+    assertEquals(10, metricRegistry.meter(TestService.class.getName() + ".count.meter").getCount());
+    metricRegistry
+        .getGauges()
+        .forEach(
+            (key, value) -> {
+              System.out.println(key);
+              System.out.println(value.getValue());
+              if ((TestService.class.getName() + ".count.gauge").equals(key)) {
+                assertEquals("1111", value.getValue());
+              }
+            });
     WebConfig webConfig = injector.getInstance(WebConfig.class);
     MetricsServletConfig metricsServletConfig = injector.getInstance(MetricsServletConfig.class);
-    String url = "http://localhost:" + webConfig.getPort() + PathUtils
-        .fixPath(webConfig.getContextPath(), metricsServletConfig.getPath()) + "/";
+    String url =
+        "http://localhost:"
+            + webConfig.getPort()
+            + PathUtils.fixPath(webConfig.getContextPath(), metricsServletConfig.getPath())
+            + "/";
     log.info("Metrics Admin Page: {}", url);
 
-    OkHttpClient okHttpClient = new Builder()
-        .build();
-    Request request = new Request.Builder()
-        .url(url)
-        .get().build();
+    OkHttpClient okHttpClient = new Builder().build();
+    Request request = new Request.Builder().url(url).get().build();
 
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();

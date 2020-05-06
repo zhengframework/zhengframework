@@ -30,8 +30,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class ShiroRestTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})
@@ -42,48 +41,50 @@ public class ShiroRestTest {
     WebConfig webConfig = injector.getInstance(WebConfig.class);
     System.out.println(webConfig);
 
-    OkHttpClient okHttpClient = new Builder()
-        .cookieJar(new CookieJar() {
-          final ArrayList<Cookie> oneCookie = new ArrayList<>(1);
+    OkHttpClient okHttpClient =
+        new Builder()
+            .cookieJar(
+                new CookieJar() {
+                  final ArrayList<Cookie> oneCookie = new ArrayList<>(1);
 
-          @Override
-          public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-            oneCookie.addAll(cookies);
-          }
+                  @Override
+                  public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+                    oneCookie.addAll(cookies);
+                  }
 
-          @Override
-          public List<Cookie> loadForRequest(HttpUrl url) {
-            return oneCookie;
-          }
-        })
-        .build();
+                  @Override
+                  public List<Cookie> loadForRequest(HttpUrl url) {
+                    return oneCookie;
+                  }
+                })
+            .build();
 
-    FormBody formBody = new FormBody.Builder()
-        .add("username", "lonestarr")
-        .add("password", "vespa")
-        .build();
-    Request request = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + "/test/login")
-        .post(formBody).build();
+    FormBody formBody =
+        new FormBody.Builder().add("username", "lonestarr").add("password", "vespa").build();
+    Request request =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + "/test/login")
+            .post(formBody)
+            .build();
     System.out.println(request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
     System.out.println(resp);
     assertEquals("currentUser=lonestarr\n", resp);
-    for (Entry<String, List<String>> entry : response1.headers().toMultimap()
-        .entrySet()) {
+    for (Entry<String, List<String>> entry : response1.headers().toMultimap().entrySet()) {
       System.out.println(entry.getKey());
       System.out.println(entry.getValue());
     }
 
-    Request request1 = new Request.Builder()
-        .url("http://localhost:" + webConfig.getPort() + "/test/requiresRoles")
-        .get().build();
+    Request request1 =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + "/test/requiresRoles")
+            .get()
+            .build();
     ResponseBody body = okHttpClient.newCall(request1).execute().body();
 
     String respBody = body.string();
     log.info("requiresRoles={}", respBody);
     assertEquals("OK", respBody);
-
   }
 }

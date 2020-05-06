@@ -1,103 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
+    <version>${revision}</version>
+  </parent>
+
   <artifactId>zheng-rest</artifactId>
-  <dependencies>
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>jakarta.ws.rs-api</artifactId>
-      <groupId>jakarta.ws.rs</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>javax.servlet-api</artifactId>
-      <groupId>javax.servlet</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>resteasy-guice</artifactId>
-      <groupId>org.jboss.resteasy</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>resteasy-core</artifactId>
-      <groupId>org.jboss.resteasy</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>resteasy-jackson2-provider</artifactId>
-      <groupId>org.jboss.resteasy</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>jackson-databind</artifactId>
-      <groupId>com.fasterxml.jackson.core</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>jackson-core</artifactId>
-      <groupId>com.fasterxml.jackson.core</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-web</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-web-jetty</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>logback-classic</artifactId>
-      <groupId>ch.qos.logback</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-core</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>metrics-annotation</artifactId>
-      <groupId>io.dropwizard.metrics</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-core</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>zheng-test</artifactId>
-      <groupId>com.github.zhengframework</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>jboss-logging-annotations</artifactId>
-      <groupId>org.jboss.logging</groupId>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+
+  <description>zheng framework module: rest support by resteasy</description>
+  <url>https://github.com/zhengframework/zhengframework</url>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>zheng-bom</artifactId>
         <groupId>com.github.zhengframework</groupId>
-        <scope>import</scope>
-        <type>pom</type>
+        <artifactId>zheng-bom</artifactId>
         <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>zhengframework</artifactId>
-    <groupId>com.github.zhengframework</groupId>
-    <version>${revision}</version>
-  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-guice</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson2-provider</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-web-jetty</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-annotation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/site/</directory>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+      </resource>
+    </resources>
+  </build>
 </project>

@@ -23,7 +23,6 @@ public class DestroyableTest {
     Bean bean = injector.getInstance(Bean.class);
     manager.destroy();
     assertEquals(1, bean.counter);
-
   }
 
   public static class Bean implements Destroyable {

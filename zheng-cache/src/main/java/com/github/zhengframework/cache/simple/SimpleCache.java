@@ -1,5 +1,25 @@
 package com.github.zhengframework.cache.simple;
 
+/*-
+ * #%L
+ * zheng-cache
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -50,9 +70,7 @@ public class SimpleCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {
-
-  }
+  public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {}
 
   @Override
   public void put(K k, V v) {
@@ -146,8 +164,8 @@ public class SimpleCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public <T> Map<K, EntryProcessorResult<T>> invokeAll(Set<? extends K> set,
-      EntryProcessor<K, V, T> entryProcessor, Object... objects) {
+  public <T> Map<K, EntryProcessorResult<T>> invokeAll(
+      Set<? extends K> set, EntryProcessor<K, V, T> entryProcessor, Object... objects) {
     return null;
   }
 
@@ -163,10 +181,8 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public void close() {
-    synchronized (caches) {
-      isClosed = true;
-      caches.clear();
-    }
+    isClosed = true;
+    caches.clear();
   }
 
   @Override
@@ -181,21 +197,18 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public void registerCacheEntryListener(
-      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-
-  }
+      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {}
 
   @Override
   public void deregisterCacheEntryListener(
-      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-
-  }
+      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {}
 
   @Override
   public Iterator<Entry<K, V>> iterator() {
-    List<Entry<K, V>> list = caches.entrySet()
-        .stream().map(entry -> new SimpleCacheEntry<>(entry.getKey(), entry.getValue()))
-        .collect(Collectors.toList());
+    List<Entry<K, V>> list =
+        caches.entrySet().stream()
+            .map(entry -> new SimpleCacheEntry<>(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
     return list.iterator();
   }
 }

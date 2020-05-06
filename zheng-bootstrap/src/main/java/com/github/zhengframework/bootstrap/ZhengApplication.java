@@ -1,5 +1,25 @@
 package com.github.zhengframework.bootstrap;
 
+/*-
+ * #%L
+ * zheng-bootstrap
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
@@ -52,8 +72,11 @@ public class ZhengApplication {
 
   private Injector injector;
 
-  public ZhengApplication(Configuration configuration,
-      Arguments arguments, Set<Module> moduleList, boolean autoLoadModule,
+  public ZhengApplication(
+      Configuration configuration,
+      Arguments arguments,
+      Set<Module> moduleList,
+      boolean autoLoadModule,
       Set<Class<? extends Module>> excludeModuleList,
       Set<Class<? extends ModuleProvider>> excludeModuleProviderList) {
     this.configuration = configuration;
@@ -78,9 +101,10 @@ public class ZhengApplication {
         }
       }
     }
-    Set<Module> modules = moduleListCopy.stream()
-        .filter(module -> !excludeModuleList.contains(module.getClass()))
-        .collect(Collectors.toSet());
+    Set<Module> modules =
+        moduleListCopy.stream()
+            .filter(module -> !excludeModuleList.contains(module.getClass()))
+            .collect(Collectors.toSet());
     for (Module module : modules) {
       if (module instanceof ConfigurationAware) {
         ConfigurationAware configurationAware = (ConfigurationAware) module;
@@ -94,7 +118,6 @@ public class ZhengApplication {
     return injector;
   }
 
-
   public void start() throws Exception {
     injector.getInstance(ServiceManager.class).start();
   }
@@ -104,8 +127,8 @@ public class ZhengApplication {
   }
 
   private Configuration buildConfiguration(Arguments arguments) {
-    ArgumentAcceptingOptionSpec<String> configOpt = arguments.getOptionParser().accepts("config")
-        .withRequiredArg().ofType(String.class);
+    ArgumentAcceptingOptionSpec<String> configOpt =
+        arguments.getOptionParser().accepts("config").withRequiredArg().ofType(String.class);
     OptionSet optionSet = arguments.parse();
 
     Optional<String> config = optionSet.valueOfOptional(configOpt);
@@ -117,20 +140,21 @@ public class ZhengApplication {
     Path path = null;
     if (argsConfigFile != null) {
       path = Paths.get(argsConfigFile);
-      Preconditions.checkState(Files.exists(path) && Files.isReadable(path),
+      Preconditions.checkState(
+          Files.exists(path) && Files.isReadable(path),
           argsConfigFile + " not exists or not readable");
     }
     String env = System.getenv(APPLICATION_FILE);
     if (path == null && !Strings.isNullOrEmpty(env)) {
       path = Paths.get(env);
-      Preconditions.checkState(Files.exists(path) && Files.isReadable(path),
-          env + " not exists or not readable");
+      Preconditions.checkState(
+          Files.exists(path) && Files.isReadable(path), env + " not exists or not readable");
     }
     String property = System.getProperty(APPLICATION_FILE);
     if (path == null && !Strings.isNullOrEmpty(property)) {
       path = Paths.get(property);
-      Preconditions.checkState(Files.exists(path) && Files.isReadable(path),
-          property + " not exists or not readable");
+      Preconditions.checkState(
+          Files.exists(path) && Files.isReadable(path), property + " not exists or not readable");
     }
 
     List<ConfigurationSource> sources = new ArrayList<>();
@@ -138,16 +162,14 @@ public class ZhengApplication {
     sources.add(new EnvironmentVariablesConfigurationSource());
 
     if (path != null) {
-      sources.add(0, new FileConfigurationSource(
-          FileLocator.builder().sourceURL(path.toAbsolutePath().toString()).build()));
+      sources.add(
+          0,
+          new FileConfigurationSource(
+              FileLocator.builder().sourceURL(path.toAbsolutePath().toString()).build()));
     } else {
       sources.add(new FileConfigurationSource("application.properties"));
     }
-    MergeConfigurationSource configurationSource = new MergeConfigurationSource(
-        sources);
-    return new ConfigurationBuilder()
-        .withConfigurationSource(configurationSource)
-        .build();
+    MergeConfigurationSource configurationSource = new MergeConfigurationSource(sources);
+    return new ConfigurationBuilder().withConfigurationSource(configurationSource).build();
   }
-
 }
