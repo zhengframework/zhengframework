@@ -46,7 +46,7 @@ public class SwaggerUIServlet extends HttpServlet {
 
   private static final int EOF = -1;
   private static final long serialVersionUID = 6245564254901248946L;
-  private transient final SwaggerConfig swaggerConfig;
+  private transient SwaggerConfig swaggerConfig;
   private final String indexContent;
   private boolean disableCache = false;
   private transient WebJarAssetLocator locator = new WebJarAssetLocator();
@@ -55,7 +55,7 @@ public class SwaggerUIServlet extends HttpServlet {
   public SwaggerUIServlet(SwaggerConfig swaggerConfig) {
     this.swaggerConfig = swaggerConfig;
 
-    URL resource = SwaggerUIServlet.class.getResource("/swagger-ui/index.html");
+    URL resource = getClass().getResource("/swagger-ui/index.html");
     try (InputStream inputStream = resource.openStream()) {
       String string = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
       indexContent =
@@ -77,23 +77,16 @@ public class SwaggerUIServlet extends HttpServlet {
    *
    * @param input the <code>InputStream</code> to read from
    * @param output the <code>OutputStream</code> to write to
-   * @return the number of bytes copied, or -1 if &gt; Integer.MAX_VALUE
    * @throws NullPointerException if the input or output is null
    * @throws IOException if an I/O error occurs
    * @since 1.1
    */
-  private static int copy(InputStream input, OutputStream output) throws IOException {
-    long count = 0;
+  private static void copy(InputStream input, OutputStream output) throws IOException {
     int n;
     byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
     while (EOF != (n = input.read(buffer))) {
       output.write(buffer, 0, n);
-      count += n;
     }
-    if (count > Integer.MAX_VALUE) {
-      return -1;
-    }
-    return (int) count;
   }
 
   @Override
