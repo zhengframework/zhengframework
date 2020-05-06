@@ -86,8 +86,7 @@
       </resource>
     </resources>
     <plugins>
-      <plugin>
-        <configuration>
+      <plugin><configuration>
           <tiles>
             <tile>io.ebean.tile:enhancement:12.2.3</tile>
           </tiles>

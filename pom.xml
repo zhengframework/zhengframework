@@ -331,8 +331,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <executions>
+          <plugin><executions>
               <execution>
                 <goals>
                   <goal>format</goal>
@@ -344,8 +343,7 @@
             <artifactId>fmt-maven-plugin</artifactId>
             <version>${fmt-maven-plugin.version}</version>
           </plugin>
-          <plugin>
-            <executions>
+          <plugin><executions>
               <execution>
                 <goals>
                   <goal>pom</goal>
@@ -358,8 +356,7 @@
             <artifactId>tidy-maven-plugin</artifactId>
             <version>${tidy-maven-plugin.version}</version>
           </plugin>
-          <plugin>
-            <dependencies>
+          <plugin><dependencies>
               <dependency>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs</artifactId>
@@ -379,8 +376,7 @@
             <artifactId>spotbugs-maven-plugin</artifactId>
             <version>${spotbugs-maven-plugin.version}</version>
           </plugin>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <canUpdateCopyright>true</canUpdateCopyright>
               <canUpdateDescription>true</canUpdateDescription>
               <canUpdateLicense>true</canUpdateLicense>
@@ -446,8 +442,7 @@
       </build>
       <reporting>
         <plugins>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
@@ -511,8 +506,7 @@
     <profile>
       <build>
         <plugins>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <autoVersionSubmodules>true</autoVersionSubmodules>
               <goals>deploy</goals>
               <releaseProfiles>ossrh</releaseProfiles>
@@ -522,8 +516,7 @@
             <artifactId>maven-release-plugin</artifactId>
             <version>${maven-release-plugin.version}</version>
           </plugin>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
               <serverId>ossrh</serverId>
