@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>zheng-cache-ehcache</artifactId>
+  <packaging>pom</packaging>
 
   <description>zheng framework module: cache support by ehcache</description>
   <url>https://github.com/zhengframework/zhengframework</url>

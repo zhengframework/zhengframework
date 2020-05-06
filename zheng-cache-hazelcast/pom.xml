@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>zheng-cache-hazelcast</artifactId>
+  <packaging>pom</packaging>
 
   <description>zheng framework module: cache support by hazelcast</description>
   <url>https://github.com/zhengframework/zhengframework</url>

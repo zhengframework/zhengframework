@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>zheng-cache-infinispan</artifactId>
+  <packaging>pom</packaging>
 
   <description>zheng framework module: cache support by infinispan</description>
   <url>https://github.com/zhengframework/zhengframework</url>

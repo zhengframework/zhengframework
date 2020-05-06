@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>zheng-cache-cache2k</artifactId>
+  <packaging>pom</packaging>
 
   <description>zheng framework module: cache support by cache2k</description>
   <url>https://github.com/zhengframework/zhengframework</url>
