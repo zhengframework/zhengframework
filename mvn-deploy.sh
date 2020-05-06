@@ -1,1 +1,1 @@
-mvn -P javadoc8,ossrh,pre-package -Dskip-rabbitmq-test=true clean compile package deploy
+mvn -P javadoc8,ossrh -Dskip-rabbitmq-test=true clean deploy

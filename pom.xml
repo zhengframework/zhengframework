@@ -311,7 +311,7 @@
       <id>extra-report</id>
       <reporting>
         <plugins>
-          <plugin>
+          <!--<plugin>
             <groupId>org.owasp</groupId>
             <artifactId>dependency-check-maven</artifactId>
             <reportSets>
@@ -321,7 +321,7 @@
                 </reports>
               </reportSet>
             </reportSets>
-          </plugin>
+          </plugin>-->
         </plugins>
       </reporting>
     </profile>

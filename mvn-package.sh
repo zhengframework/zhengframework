@@ -1,1 +1,1 @@
-mvn -P pre-package clean compile package
+mvn -P pre-package clean package
