@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.zhengframework</groupId>
@@ -178,50 +176,16 @@
     </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>${maven-pmd-plugin.version}</version>
-        <configuration>
-          <linkXRef>false</linkXRef>
-          <failOnViolation>true</failOnViolation>
-          <printFailingErrors>true</printFailingErrors>
-          <analysisCache>true</analysisCache>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <version>${versions-maven-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <configuration>
-          <failBuildOnCVSS>8</failBuildOnCVSS>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <groupId>org.owasp</groupId>
-        <artifactId>dependency-check-maven</artifactId>
-        <version>${dependency-check-maven.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven-resources-plugin.version}</version>
       </plugin>
-      <plugin>
-        <executions>
+      <plugin><executions>
           <execution>
             <goals>
               <goal>attach-descriptor</goal>
@@ -354,8 +318,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <executions>
+          <plugin><executions>
               <execution>
                 <goals>
                   <goal>format</goal>
@@ -367,8 +330,7 @@
             <artifactId>fmt-maven-plugin</artifactId>
             <version>${fmt-maven-plugin.version}</version>
           </plugin>
-          <plugin>
-            <executions>
+          <plugin><executions>
               <execution>
                 <goals>
                   <goal>pom</goal>
@@ -381,8 +343,7 @@
             <artifactId>tidy-maven-plugin</artifactId>
             <version>${tidy-maven-plugin.version}</version>
           </plugin>
-          <plugin>
-            <dependencies>
+          <plugin><dependencies>
               <dependency>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs</artifactId>
@@ -402,8 +363,7 @@
             <artifactId>spotbugs-maven-plugin</artifactId>
             <version>${spotbugs-maven-plugin.version}</version>
           </plugin>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <canUpdateCopyright>true</canUpdateCopyright>
               <canUpdateDescription>true</canUpdateDescription>
               <canUpdateLicense>true</canUpdateLicense>
@@ -416,6 +376,7 @@
               </includes>
               <licenseName>apache_v2</licenseName>
               <organizationName>Zheng MingHai</organizationName>
+            <trimHeaderLine>true</trimHeaderLine>
             </configuration>
             <executions>
               <execution>
@@ -430,6 +391,39 @@
             <artifactId>license-maven-plugin</artifactId>
             <version>1.16</version>
           </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>${maven-pmd-plugin.version}</version>
+            <configuration>
+              <linkXRef>false</linkXRef>
+              <failOnViolation>true</failOnViolation>
+              <printFailingErrors>true</printFailingErrors>
+              <analysisCache>true</analysisCache>
+              <aggregate>false</aggregate>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin><configuration>
+              <failBuildOnCVSS>8</failBuildOnCVSS>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>${dependency-check-maven.version}</version>
+          </plugin>
         </plugins>
       </build>
       <id>pre-package</id>
@@ -441,8 +435,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
@@ -470,8 +463,7 @@
       </build>
       <reporting>
         <plugins>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
@@ -535,8 +527,7 @@
     <profile>
       <build>
         <plugins>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <autoVersionSubmodules>true</autoVersionSubmodules>
               <goals>deploy</goals>
               <releaseProfiles>ossrh</releaseProfiles>
@@ -546,8 +537,7 @@
             <artifactId>maven-release-plugin</artifactId>
             <version>${maven-release-plugin.version}</version>
           </plugin>
-          <plugin>
-            <configuration>
+          <plugin><configuration>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
               <serverId>ossrh</serverId>
