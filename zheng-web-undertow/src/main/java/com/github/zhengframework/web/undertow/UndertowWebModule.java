@@ -47,8 +47,7 @@ public class UndertowWebModule extends ConfigurationAwareModule {
     install(webModule);
     // WebSocket
     Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
-    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
-    });
+    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {});
 
     bind(ClassIntrospecter.class).to(GuiceClassIntrospecter.class);
     bind(GuiceServerEndpointConfigurator.class);

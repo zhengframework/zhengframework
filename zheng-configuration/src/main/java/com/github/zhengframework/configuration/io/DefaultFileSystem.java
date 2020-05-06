@@ -54,8 +54,7 @@ public class DefaultFileSystem extends FileSystem {
       final URL baseURL = new URL(basePath);
       url = new URL(baseURL, fileName);
 
-      try (InputStream in = url.openStream()) {
-      }
+      try (InputStream in = url.openStream()) {}
       return url;
     } catch (IOException e) {
       log.debug("Could not locate file {} at {}: {}", fileName, basePath, e.getMessage());

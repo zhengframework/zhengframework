@@ -34,8 +34,7 @@ public class MongodbModuleTest {
   private int port;
   private String bindIp;
   private MongodProcess mongod;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @SuppressWarnings("SpellCheckingInspection")
   @Before

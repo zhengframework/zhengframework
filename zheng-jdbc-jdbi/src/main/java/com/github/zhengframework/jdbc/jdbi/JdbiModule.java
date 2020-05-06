@@ -52,31 +52,27 @@ public class JdbiModule extends ConfigurationAwareModule {
 
         if (jdbiConfig.isEnable()) {
           OptionalBinder.newOptionalBinder(
-              binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-              }))
+                  binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {}))
               .setDefault()
               .toInstance(Collections.singletonList(new SqlObjectPlugin()));
           bind(Jdbi.class)
               .toProvider(
                   new JdbiProvider(
                       getProvider(Key.get(DataSource.class)),
-                      getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-                      }))));
+                      getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {}))));
         }
       } else {
         bind(Key.get(JdbiConfig.class, named(name))).toInstance(jdbiConfig);
         if (jdbiConfig.isEnable()) {
           OptionalBinder.newOptionalBinder(
-              binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-              }, named(name)))
+                  binder(), Key.get(new TypeLiteral<List<JdbiPlugin>>() {}, named(name)))
               .setDefault()
               .toInstance(Collections.singletonList(new SqlObjectPlugin()));
           bind(Key.get(Jdbi.class, named(name)))
               .toProvider(
                   new JdbiProvider(
                       getProvider(Key.get(DataSource.class, named(name))),
-                      getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {
-                      }, named(name)))));
+                      getProvider(Key.get(new TypeLiteral<List<JdbiPlugin>>() {}, named(name)))));
         }
       }
     }

@@ -48,7 +48,7 @@ public class INIConfigurationParser implements ConfigurationParser, FileConfigur
 
   @Override
   public String[] supportFileTypes() {
-    return new String[]{".properties"};
+    return new String[] {".properties"};
   }
 
   @Override

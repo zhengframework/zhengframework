@@ -33,8 +33,7 @@ import javax.net.ssl.TrustManagerFactory;
 
 public class WebUtils {
 
-  private WebUtils() {
-  }
+  private WebUtils() {}
 
   public static SSLContext createSSLContext(
       final KeyStore keyStore, final KeyStore trustStore, String password) throws Exception {

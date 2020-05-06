@@ -52,9 +52,7 @@ public class ValidationContext {
   private static final Class<?>[] EMPTY = new Class<?>[0];
   private final ThreadLocal<List<Class<?>[]>> threadContext = new ThreadLocal<List<Class<?>[]>>();
 
-  /**
-   * @return current context validation groups or empty array when no groups defined
-   */
+  /** @return current context validation groups or empty array when no groups defined */
   public Class<?>[] getContextGroups() {
     Class<?>[] res = EMPTY;
     final List<Class<?>[]> context = threadContext.get();

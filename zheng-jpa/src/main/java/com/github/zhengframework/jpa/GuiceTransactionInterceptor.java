@@ -34,11 +34,9 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
   // Tracks if the unit of work was begun implicitly by this transaction.
   private final ThreadLocal<Boolean> didWeStartWork = new ThreadLocal<>();
 
-  @Inject
-  private JpaService emProvider = null;
+  @Inject private JpaService emProvider = null;
 
-  @Inject
-  private UnitOfWork unitOfWork = null;
+  @Inject private UnitOfWork unitOfWork = null;
 
   @Override
   public Object invoke(final MethodInvocation methodInvocation) throws Throwable {
@@ -162,7 +160,5 @@ public class GuiceTransactionInterceptor implements MethodInterceptor {
   }
 
   @Transactional
-  private static class Internal {
-
-  }
+  private static class Internal {}
 }

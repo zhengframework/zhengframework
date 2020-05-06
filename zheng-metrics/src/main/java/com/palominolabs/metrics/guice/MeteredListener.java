@@ -28,9 +28,7 @@ import java.lang.reflect.Method;
 import javax.annotation.Nullable;
 import org.aopalliance.intercept.MethodInterceptor;
 
-/**
- * A listener which adds method interceptors to metered methods.
- */
+/** A listener which adds method interceptors to metered methods. */
 public class MeteredListener extends DeclaredMethodsTypeListener {
 
   private final MetricRegistry metricRegistry;

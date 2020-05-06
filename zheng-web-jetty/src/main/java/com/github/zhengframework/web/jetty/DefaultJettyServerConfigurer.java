@@ -113,7 +113,7 @@ public class DefaultJettyServerConfigurer implements JettyServerConfigurer {
     context.addFilter(filterHolder, "/*", EnumSet.allOf(DispatcherType.class));
 
     context.addServlet(DefaultServlet.class, "/");
-    context.setWelcomeFiles(new String[]{"index.html"});
+    context.setWelcomeFiles(new String[] {"index.html"});
 
     eventListenerScanner.accept(context::addEventListener);
 

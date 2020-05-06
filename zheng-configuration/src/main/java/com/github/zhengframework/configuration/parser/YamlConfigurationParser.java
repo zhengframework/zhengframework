@@ -45,7 +45,7 @@ public class YamlConfigurationParser implements ConfigurationParser, FileConfigu
 
   @Override
   public String[] supportFileTypes() {
-    return new String[]{".yml", ".yaml"};
+    return new String[] {".yml", ".yaml"};
   }
 
   @Override

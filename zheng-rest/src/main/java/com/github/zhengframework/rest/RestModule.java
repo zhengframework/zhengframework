@@ -50,9 +50,7 @@ public class RestModule extends ConfigurationAwareServletModule {
         ConfigurationBeanMapper.resolve(configuration, RestConfig.class);
     RestConfig restConfig = restConfigMap.getOrDefault("", new RestConfig());
     bind(RestConfig.class).toInstance(restConfig);
-    String path =
-        PathUtils.fixPath(
-            restConfig.getPath());
+    String path = PathUtils.fixPath(restConfig.getPath());
     HashMap<String, String> hashMap = new HashMap<>();
     for (Entry<String, String> entry : restConfig.getProperties().entrySet()) {
       if (entry.getKey().startsWith("resteasy.")) {
@@ -60,10 +58,7 @@ public class RestModule extends ConfigurationAwareServletModule {
       }
     }
     if (!hashMap.containsKey("resteasy.servlet.mapping.prefix")) {
-      hashMap.put(
-          "resteasy.servlet.mapping.prefix",
-          PathUtils.fixPath(
-              restConfig.getPath()));
+      hashMap.put("resteasy.servlet.mapping.prefix", PathUtils.fixPath(restConfig.getPath()));
       log.info("rest prefix path={}", hashMap.get("resteasy.servlet.mapping.prefix"));
     }
     log.info("rest path={}", path);

@@ -388,7 +388,8 @@ public class DruidDataSourceWrapper extends DataSourceWrapper {
 
   @Inject(optional = true)
   public void setAccessToUnderlyingConnectionAllowed(
-      @Named("druid.accessToUnderlyingConnectionAllowed") final boolean accessToUnderlyingConnectionAllowed) {
+      @Named("druid.accessToUnderlyingConnectionAllowed")
+          final boolean accessToUnderlyingConnectionAllowed) {
     origDataSource.setAccessToUnderlyingConnectionAllowed(accessToUnderlyingConnectionAllowed);
   }
 

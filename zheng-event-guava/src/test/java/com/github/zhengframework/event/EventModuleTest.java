@@ -18,8 +18,7 @@ import org.junit.runner.RunWith;
 @WithZhengApplication(moduleClass = {MyModule.class})
 public class EventModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   public void testProvidedComponentsPresent() {
@@ -176,11 +175,7 @@ public class EventModuleTest {
     }
   }
 
-  private class TestEvent implements Event {
+  private class TestEvent implements Event {}
 
-  }
-
-  private class NotTestEvent implements Event {
-
-  }
+  private class NotTestEvent implements Event {}
 }

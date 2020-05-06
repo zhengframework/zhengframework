@@ -40,8 +40,7 @@ public class ValidationMethodInterceptor implements MethodInterceptor {
 
   private final Provider<Validator> validatorProvider;
 
-  @Inject
-  private final Provider<ValidationContext> validationContext;
+  @Inject private final Provider<ValidationContext> validationContext;
 
   @Inject
   public ValidationMethodInterceptor(

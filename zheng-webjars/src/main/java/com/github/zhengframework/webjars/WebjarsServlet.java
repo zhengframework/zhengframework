@@ -43,7 +43,7 @@ public class WebjarsServlet extends HttpServlet {
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
   private static final int EOF = -1;
   private static final long serialVersionUID = -2107109556895489409L;
-  private transient final WebjarsConfig webjarsConfig;
+  private final transient WebjarsConfig webjarsConfig;
   private boolean disableCache = false;
   private transient WebJarAssetLocator locator = new WebJarAssetLocator();
 

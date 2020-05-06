@@ -46,7 +46,7 @@ public class PropertiesConfigurationParser implements ConfigurationParser, FileC
 
   @Override
   public String[] supportFileTypes() {
-    return new String[]{".properties"};
+    return new String[] {".properties"};
   }
 
   @Override

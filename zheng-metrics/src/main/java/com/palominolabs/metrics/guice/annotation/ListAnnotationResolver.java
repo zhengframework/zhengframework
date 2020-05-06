@@ -26,9 +26,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * Delegates to the provided list of resolvers, applying each resolver in turn.
- */
+/** Delegates to the provided list of resolvers, applying each resolver in turn. */
 public class ListAnnotationResolver implements AnnotationResolver {
 
   private final List<AnnotationResolver> resolvers;

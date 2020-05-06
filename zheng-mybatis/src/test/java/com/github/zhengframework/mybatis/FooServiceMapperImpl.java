@@ -26,8 +26,7 @@ import org.mybatis.guice.transactional.Transactional;
 
 public class FooServiceMapperImpl implements FooService {
 
-  @Inject
-  private UserMapper userMapper;
+  @Inject private UserMapper userMapper;
 
   @Override
   @Transactional

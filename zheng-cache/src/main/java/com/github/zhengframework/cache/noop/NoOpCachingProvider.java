@@ -67,16 +67,13 @@ public class NoOpCachingProvider implements CachingProvider {
   }
 
   @Override
-  public void close() {
-  }
+  public void close() {}
 
   @Override
-  public void close(ClassLoader classLoader) {
-  }
+  public void close(ClassLoader classLoader) {}
 
   @Override
-  public void close(URI uri, ClassLoader classLoader) {
-  }
+  public void close(URI uri, ClassLoader classLoader) {}
 
   @Override
   public boolean isSupported(OptionalFeature optionalFeature) {

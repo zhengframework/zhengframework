@@ -20,6 +20,4 @@ package com.github.zhengframework.test;
  * #L%
  */
 
-public class ServerImpl implements Server {
-
-}
+public class ServerImpl implements Server {}

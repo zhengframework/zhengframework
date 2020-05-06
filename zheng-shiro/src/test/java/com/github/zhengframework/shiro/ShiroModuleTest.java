@@ -17,15 +17,12 @@ import org.apache.shiro.subject.Subject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/**
- * https://shiro.apache.org/tutorial.html
- */
+/** https://shiro.apache.org/tutorial.html */
 @RunWith(ZhengApplicationRunner.class)
 @Slf4j
 public class ShiroModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication

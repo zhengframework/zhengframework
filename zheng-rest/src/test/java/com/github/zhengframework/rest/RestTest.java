@@ -14,8 +14,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class RestTest {
 
-  @Inject
-  private WebConfig webConfig;
+  @Inject private WebConfig webConfig;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})

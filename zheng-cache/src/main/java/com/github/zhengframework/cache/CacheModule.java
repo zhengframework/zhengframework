@@ -50,8 +50,7 @@ public class CacheModule extends AbstractModule {
         .setDefault()
         .toProvider(CachingProviderProvider.class);
 
-    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<Configurer<CacheManager>>() {
-    });
+    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<Configurer<CacheManager>>() {});
     OptionalBinder.newOptionalBinder(binder(), CacheManager.class)
         .setDefault()
         .toProvider(CacheManagerProvider.class);
@@ -64,8 +63,7 @@ public class CacheModule extends AbstractModule {
         .setDefault()
         .to(DefaultCacheKeyGenerator.class);
 
-    this.bind(new TypeLiteral<CacheContextSource<MethodInvocation>>() {
-    }).to(CacheLookupUtil.class);
+    this.bind(new TypeLiteral<CacheContextSource<MethodInvocation>>() {}).to(CacheLookupUtil.class);
     CachePutInterceptor cachePutInterceptor = new CachePutInterceptor();
     this.requestInjection(cachePutInterceptor);
     this.bindInterceptor(

@@ -32,8 +32,7 @@ import javax.websocket.server.ServerEndpointConfig;
 
 public class BasicServerEndpointConfig implements ServerEndpointConfig {
 
-  @Inject
-  private GuiceServerEndpointConfigurator configurator;
+  @Inject private GuiceServerEndpointConfigurator configurator;
   private String path;
   private Class<?> endpointClass;
 

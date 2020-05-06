@@ -53,7 +53,7 @@ public class TomlConfigurationParser implements ConfigurationParser, FileConfigu
 
   @Override
   public String[] supportFileTypes() {
-    return new String[]{".properties"};
+    return new String[] {".properties"};
   }
 
   @Override

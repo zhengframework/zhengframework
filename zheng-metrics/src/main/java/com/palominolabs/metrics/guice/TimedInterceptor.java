@@ -25,9 +25,7 @@ import java.util.concurrent.TimeUnit;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-/**
- * A method interceptor which times the execution of the annotated method.
- */
+/** A method interceptor which times the execution of the annotated method. */
 public class TimedInterceptor implements MethodInterceptor {
 
   private final Timer timer;

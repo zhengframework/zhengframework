@@ -100,8 +100,7 @@ public class ConfigurationModuleTest {
   public static class FoodModule extends AbstractModule {
 
     @Override
-    protected void configure() {
-    }
+    protected void configure() {}
 
     @Provides
     Food food(Configuration configuration) {

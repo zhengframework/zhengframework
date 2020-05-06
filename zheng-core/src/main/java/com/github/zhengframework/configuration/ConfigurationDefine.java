@@ -20,6 +20,4 @@ package com.github.zhengframework.configuration;
  * #L%
  */
 
-public interface ConfigurationDefine {
-
-}
+public interface ConfigurationDefine {}

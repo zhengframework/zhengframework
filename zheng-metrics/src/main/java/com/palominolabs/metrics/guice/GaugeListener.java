@@ -28,9 +28,7 @@ import com.google.inject.spi.TypeListener;
 import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import java.lang.reflect.Method;
 
-/**
- * A listener which adds gauge injection listeners to classes with gauges.
- */
+/** A listener which adds gauge injection listeners to classes with gauges. */
 public class GaugeListener implements TypeListener {
 
   private final MetricRegistry metricRegistry;

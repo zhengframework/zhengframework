@@ -33,14 +33,14 @@ public class DummyCountryDao {
   public Country insertCountry(
       @NotNull(groups = {Insert.class}) String name,
       @NotNull(groups = {Insert.class})
-      @Size(
-          max = 2,
-          groups = {Insert.class, Update.class})
+          @Size(
+              max = 2,
+              groups = {Insert.class, Update.class})
           String iso2Code,
       @NotNull(groups = {Insert.class})
-      @Size(
-          max = 3,
-          groups = {Insert.class, Update.class})
+          @Size(
+              max = 3,
+              groups = {Insert.class, Update.class})
           String iso3Code) {
     Country country = new Country();
     country.setName(name);

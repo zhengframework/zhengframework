@@ -7,6 +7,4 @@ import org.junit.runner.RunWith;
 
 @RunWith(ZhengApplicationRunner.class)
 @WithZhengApplication
-public class BvalValidatorModuleTest extends ValidatorModuleTest {
-
-}
+public class BvalValidatorModuleTest extends ValidatorModuleTest {}

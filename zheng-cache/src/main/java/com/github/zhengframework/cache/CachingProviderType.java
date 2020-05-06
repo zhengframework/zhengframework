@@ -38,7 +38,7 @@ public enum CachingProviderType {
   HAZELCAST("hazelcast", "com.hazelcast.cache.HazelcastCachingProvider") //
   ,
   IGNITE("ignite", "org.apache.ignite.cache.CachingProvider") //
-  ;
+;
 
   private String type;
   private String className;

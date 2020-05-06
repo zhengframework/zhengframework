@@ -35,7 +35,8 @@ import javax.persistence.spi.PersistenceUnitTransactionType;
 import javax.sql.DataSource;
 
 /**
- * copy from eclipse link project org.eclipse.persistence.internal.jpa.deployment.SEPersistenceUnitInfo
+ * copy from eclipse link project
+ * org.eclipse.persistence.internal.jpa.deployment.SEPersistenceUnitInfo
  */
 public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
 
@@ -234,9 +235,7 @@ public class PersistenceUnitInfoImpl implements PersistenceUnitInfo {
     this.properties = properties;
   }
 
-  /**
-   * @return ClassLoader that the provider may use to load any classes, resources, or open URLs.
-   */
+  /** @return ClassLoader that the provider may use to load any classes, resources, or open URLs. */
   @Override
   public ClassLoader getClassLoader() {
     return realClassLoader;

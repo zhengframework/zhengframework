@@ -18,8 +18,7 @@ public class ZhengApplicationRunnerClassTest {
   @Inject(optional = true)
   private Server server;
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication(moduleClass = {User.Module.class})
@@ -32,7 +31,7 @@ public class ZhengApplicationRunnerClassTest {
   @Test
   @WithZhengApplication(
       moduleClass = {
-          Server.Module.class,
+        Server.Module.class,
       })
   public void testB() {
     assertNotNull(injector);

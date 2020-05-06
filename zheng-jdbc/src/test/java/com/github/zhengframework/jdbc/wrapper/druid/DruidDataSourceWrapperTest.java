@@ -163,7 +163,6 @@ public class DruidDataSourceWrapperTest {
     }
 
     @Override
-    public void configFromProperties(Properties properties) {
-    }
+    public void configFromProperties(Properties properties) {}
   }
 }

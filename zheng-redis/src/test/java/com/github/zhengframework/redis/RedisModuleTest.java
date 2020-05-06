@@ -22,8 +22,7 @@ import org.junit.runner.RunWith;
 public class RedisModuleTest {
 
   private RedisServer server = null;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Before
   public void before() throws IOException {

@@ -41,8 +41,7 @@ public class EbeanModule extends ConfigurationAwareModule {
           if (name.isEmpty()) {
             OptionalBinder.newOptionalBinder(binder(), Key.get(DatabaseConfigConfigurer.class))
                 .setDefault()
-                .toInstance(databaseConfig -> {
-                });
+                .toInstance(databaseConfig -> {});
             bind(Key.get(Database.class))
                 .toProvider(
                     new DataBaseProvider(
@@ -52,10 +51,9 @@ public class EbeanModule extends ConfigurationAwareModule {
           } else {
             ebeanConfig.setName(name);
             OptionalBinder.newOptionalBinder(
-                binder(), Key.get(DatabaseConfigConfigurer.class, named(name)))
+                    binder(), Key.get(DatabaseConfigConfigurer.class, named(name)))
                 .setDefault()
-                .toInstance(databaseConfig -> {
-                });
+                .toInstance(databaseConfig -> {});
             bind(Key.get(Database.class, named(name)))
                 .toProvider(
                     new DataBaseProvider(

@@ -50,10 +50,8 @@ public class JobModuleTest {
   public static EveryTestJobWithDelay everyTestJobWithDelay = new EveryTestJobWithDelay();
   public static EveryTestJobWithJobName everyTestJobWithJobName = new EveryTestJobWithJobName();
   public static ApplicationStopTestJob applicationStopTestJob = new ApplicationStopTestJob();
-  @Inject
-  private Scheduler scheduler;
-  @Inject
-  private Injector injector;
+  @Inject private Scheduler scheduler;
+  @Inject private Injector injector;
 
   @WithZhengApplication(moduleClass = Module1.class)
   @Test

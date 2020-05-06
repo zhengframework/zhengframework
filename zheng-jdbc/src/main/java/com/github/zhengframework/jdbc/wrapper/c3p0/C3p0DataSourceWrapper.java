@@ -421,7 +421,8 @@ public class C3p0DataSourceWrapper extends DataSourceWrapper {
    */
   @Inject(optional = true)
   public void setUsesTraditionalReflectiveProxies(
-      @Named("c3p0.usesTraditionalReflectiveProxies") final boolean usesTraditionalReflectiveProxies) {
+      @Named("c3p0.usesTraditionalReflectiveProxies")
+          final boolean usesTraditionalReflectiveProxies) {
     origDataSource.setUsesTraditionalReflectiveProxies(usesTraditionalReflectiveProxies);
   }
 

@@ -62,6 +62,5 @@ public class MyBatisConfig implements ConfigurationDefine {
   private Boolean mapUnderscoreToCamelCase;
   private Class<? extends ExposedPrivateModule> extraModuleClass;
   private String configFile;
-  @JsonIgnore
-  private Map<String, String> properties = new HashMap<>();
+  @JsonIgnore private Map<String, String> properties = new HashMap<>();
 }

@@ -38,8 +38,7 @@ public final class ZhengApplicationBuilder {
   private Set<Class<? extends Module>> excludeModuleList = new LinkedHashSet<>();
   private Set<Class<? extends ModuleProvider>> excludeModuleProviderList = new LinkedHashSet<>();
 
-  private ZhengApplicationBuilder() {
-  }
+  private ZhengApplicationBuilder() {}
 
   public static ZhengApplicationBuilder create() {
     return new ZhengApplicationBuilder();

@@ -25,9 +25,7 @@ import java.lang.reflect.Method;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * Looks for annotations on the enclosing class of the method.
- */
+/** Looks for annotations on the enclosing class of the method. */
 public class ClassAnnotationResolver implements AnnotationResolver {
 
   @Override

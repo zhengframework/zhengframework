@@ -42,8 +42,7 @@ public class JettyWebModule extends ConfigurationAwareModule {
     // web socket
     bind(GuiceServerEndpointConfigurator.class);
     Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
-    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
-    });
+    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {});
 
     OptionalBinder.newOptionalBinder(binder(), Server.class)
         .setDefault()

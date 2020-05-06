@@ -22,8 +22,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class JettyWebModuleAnnotationWSTest {
 
-  @Inject
-  private WebConfig webConfig;
+  @Inject private WebConfig webConfig;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class, AnnotationWSModule.class})
@@ -51,7 +50,7 @@ public class JettyWebModuleAnnotationWSTest {
                       "ws://localhost:"
                           + webConfig.getPort()
                           + PathUtils.fixPath(
-                          webConfig.getContextPath(), webConfig.getWebSocketPath(), "/echo"))
+                              webConfig.getContextPath(), webConfig.getWebSocketPath(), "/echo"))
                   .build(),
               new WebSocketListener() {
                 @Override

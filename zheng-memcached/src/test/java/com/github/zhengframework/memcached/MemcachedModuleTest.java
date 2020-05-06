@@ -27,8 +27,7 @@ public class MemcachedModuleTest {
   String host = "127.0.0.1";
   int port;
   private MemCacheDaemon<LocalCacheElement> memcacheDaemon;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Before
   public void setup() {

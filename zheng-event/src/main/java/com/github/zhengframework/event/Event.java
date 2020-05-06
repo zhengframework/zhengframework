@@ -20,6 +20,4 @@ package com.github.zhengframework.event;
  * #L%
  */
 
-public interface Event {
-
-}
+public interface Event {}

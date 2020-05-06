@@ -20,8 +20,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class CommonsDBUtilsModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication(configFile = "application.properties")

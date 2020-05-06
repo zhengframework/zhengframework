@@ -14,8 +14,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class HealthCheckModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication

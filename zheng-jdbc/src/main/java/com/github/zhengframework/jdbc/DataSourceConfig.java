@@ -43,6 +43,5 @@ public class DataSourceConfig implements ConfigurationDefine {
   private String url;
   private Integer loginTimeout;
   private Class<? extends DataSourceWrapper> dataSourceWrapperClass = HikariDataSourceWrapper.class;
-  @JsonIgnore
-  private Map<String, String> properties = new HashMap<>();
+  @JsonIgnore private Map<String, String> properties = new HashMap<>();
 }

@@ -34,9 +34,7 @@ import javax.inject.Singleton;
 import javax.sql.DataSource;
 import lombok.EqualsAndHashCode;
 
-/**
- * http://www.querydsl.com/static/querydsl/latest/reference/html/ch02s03.html
- */
+/** http://www.querydsl.com/static/querydsl/latest/reference/html/ch02s03.html */
 @EqualsAndHashCode(callSuper = false)
 public class QuerydslModule extends ConfigurationAwareModule {
 
@@ -64,7 +62,7 @@ public class QuerydslModule extends ConfigurationAwareModule {
         bind(Key.get(QuerydslConfig.class, named(name))).toInstance(querydslConfig);
         if (querydslConfig.isEnable()) {
           OptionalBinder.newOptionalBinder(
-              binder(), Key.get(com.querydsl.sql.Configuration.class, named(name)))
+                  binder(), Key.get(com.querydsl.sql.Configuration.class, named(name)))
               .setDefault()
               .toProvider(() -> new com.querydsl.sql.Configuration(SQLTemplates.DEFAULT));
           bind(Key.get(SQLQueryFactory.class, named(name)))

@@ -28,22 +28,19 @@ import javax.persistence.Version;
 @Entity
 public class Customer extends Model {
 
-  @Id
-  Long id;
+  @Id Long id;
 
   String name;
 
   String notes;
 
-  @Version
-  Long version;
+  @Version Long version;
 
   public Customer(String name) {
     this.name = name;
   }
 
-  public Customer() {
-  }
+  public Customer() {}
 
   public Long getId() {
     return id;

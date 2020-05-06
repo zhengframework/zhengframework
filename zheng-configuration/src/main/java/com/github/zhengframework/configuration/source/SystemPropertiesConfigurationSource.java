@@ -29,8 +29,7 @@ import java.util.stream.Collectors;
 public class SystemPropertiesConfigurationSource extends AbstractConfigurationSource {
 
   @Override
-  public void init() {
-  }
+  public void init() {}
 
   @Override
   public Map<String, String> getConfigurationInternal(Environment environment) {

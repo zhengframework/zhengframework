@@ -30,8 +30,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class ShiroRestTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})

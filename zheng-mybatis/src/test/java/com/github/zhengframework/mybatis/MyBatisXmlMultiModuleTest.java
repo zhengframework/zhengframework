@@ -19,8 +19,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class MyBatisXmlMultiModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @WithZhengApplication(
       configFile = "application_xml_group.properties",

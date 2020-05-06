@@ -74,8 +74,7 @@ public class GuiceServerEndpointConfigurator extends ServerEndpointConfig.Config
   public void modifyHandshake(
       final ServerEndpointConfig sec,
       final HandshakeRequest request,
-      final HandshakeResponse response) {
-  }
+      final HandshakeResponse response) {}
 
   @Override
   public <T> T getEndpointInstance(Class<T> endpointClass) throws InstantiationException {

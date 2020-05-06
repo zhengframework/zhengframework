@@ -66,8 +66,6 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface ValidationGroups {
 
-  /**
-   * @return validation groups to be used.
-   */
+  /** @return validation groups to be used. */
   Class<?>[] value();
 }

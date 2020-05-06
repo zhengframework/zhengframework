@@ -23,38 +23,34 @@ import org.junit.Test;
 
 public class CacheModuleTest {
 
-  @Inject
-  CacheManager cacheManager;
-  @Inject
-  Service service;
+  @Inject CacheManager cacheManager;
+  @Inject Service service;
 
   @Before
   public void beforeMethod() {
 
     Guice.createInjector(
-        new CacheModule(),
-        new AbstractModule() {
-          @Override
-          protected void configure() {
-            OptionalBinder.newOptionalBinder(
-                binder(), new TypeLiteral<Configurer<CacheManager>>() {
-                })
-                .setBinding()
-                .toInstance(
-                    cacheManager -> {
-                      String cacheName = "guice";
-                      Cache<?, ?> cache = cacheManager.getCache(cacheName);
-                      if (cache == null) {
-                        cacheManager.createCache(
-                            "guice",
-                            ExtendedMutableConfiguration.of(
-                                new Cache2kBuilder<Integer, Integer>() {
-                                }.entryCapacity(1000)
-                                    .expireAfterWrite(10, TimeUnit.SECONDS)));
-                      }
-                    });
-          }
-        })
+            new CacheModule(),
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                OptionalBinder.newOptionalBinder(
+                        binder(), new TypeLiteral<Configurer<CacheManager>>() {})
+                    .setBinding()
+                    .toInstance(
+                        cacheManager -> {
+                          String cacheName = "guice";
+                          Cache<?, ?> cache = cacheManager.getCache(cacheName);
+                          if (cache == null) {
+                            cacheManager.createCache(
+                                "guice",
+                                ExtendedMutableConfiguration.of(
+                                    new Cache2kBuilder<Integer, Integer>() {}.entryCapacity(1000)
+                                        .expireAfterWrite(10, TimeUnit.SECONDS)));
+                          }
+                        });
+              }
+            })
         .injectMembers(this);
   }
 

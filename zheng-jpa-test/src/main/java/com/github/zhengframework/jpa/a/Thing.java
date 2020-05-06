@@ -38,8 +38,7 @@ public class Thing {
     setName(name);
   }
 
-  public Thing() {
-  }
+  public Thing() {}
 
   public Integer getId() {
     return id;

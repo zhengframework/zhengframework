@@ -25,9 +25,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * class copy from project 'owner'
- */
+/** class copy from project 'owner' */
 public class PlaceHolder {
 
   private static final Pattern PATTERN = Pattern.compile("\\$\\{(.+?)}");

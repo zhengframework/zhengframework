@@ -18,8 +18,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class UndertowWebModuleTest {
 
-  @Inject()
-  private WebConfig webConfig;
+  @Inject() private WebConfig webConfig;
 
   @Test
   @WithZhengApplication(moduleClass = MyModule.class)

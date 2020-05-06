@@ -47,7 +47,6 @@ public class JpaConfig implements ConfigurationDefine {
   private String password;
   private String managedClassPackages;
   private Set<String> managedClasses = new HashSet<>();
-  @JsonIgnore
-  private Map<String, String> properties = new HashMap<>();
+  @JsonIgnore private Map<String, String> properties = new HashMap<>();
   private Class<? extends ExposedPrivateModule> extraModuleClass;
 }

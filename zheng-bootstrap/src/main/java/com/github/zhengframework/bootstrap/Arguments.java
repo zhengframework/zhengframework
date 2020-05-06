@@ -27,8 +27,7 @@ import lombok.Getter;
 
 public class Arguments {
 
-  @Getter
-  private final OptionParser optionParser = new OptionParser();
+  @Getter private final OptionParser optionParser = new OptionParser();
 
   private final String[] arguments;
 

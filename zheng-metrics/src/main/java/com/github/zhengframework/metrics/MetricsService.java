@@ -31,9 +31,7 @@ import com.google.inject.Inject;
 import java.lang.management.ManagementFactory;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * a Service that starts Metrics JmxReporter
- */
+/** a Service that starts Metrics JmxReporter */
 @Slf4j
 public class MetricsService implements Service {
 

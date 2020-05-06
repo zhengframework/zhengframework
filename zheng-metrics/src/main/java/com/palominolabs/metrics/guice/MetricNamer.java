@@ -28,9 +28,7 @@ import com.codahale.metrics.annotation.Timed;
 import java.lang.reflect.Method;
 import javax.annotation.Nonnull;
 
-/**
- * Generates for the metrics corresponding to the various metric annotations.
- */
+/** Generates for the metrics corresponding to the various metric annotations. */
 public interface MetricNamer {
 
   @Nonnull

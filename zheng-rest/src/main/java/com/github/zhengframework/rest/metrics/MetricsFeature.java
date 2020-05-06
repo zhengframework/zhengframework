@@ -117,7 +117,7 @@ public class MetricsFeature implements DynamicFeature {
                     registry.meter(MetricRegistry.name(name, "3xx-responses")), // 3xx
                     registry.meter(MetricRegistry.name(name, "4xx-responses")), // 4xx
                     registry.meter(MetricRegistry.name(name, "5xx-responses")) // 5xx
-                ));
+                    ));
         responseMeters.putIfAbsent(resourceMethod, new ResponseMeteredInterceptor(meters));
         context.register(responseMeters.get(resourceMethod));
       }

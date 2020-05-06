@@ -37,14 +37,10 @@ public class EbeanConfig implements ConfigurationDefine {
 
   private boolean enable = true;
 
-  /**
-   * The Database name. if use group, will auto override by group name.
-   */
+  /** The Database name. if use group, will auto override by group name. */
   private String name = "db";
 
-  /**
-   * Set to true to register this Database with the DB singleton.
-   */
+  /** Set to true to register this Database with the DB singleton. */
   private boolean register = true;
 
   /** Set to true if this is the default/primary database. */

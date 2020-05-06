@@ -20,6 +20,4 @@ package com.github.zhengframework.test;
  * #L%
  */
 
-public class UserImpl implements User {
-
-}
+public class UserImpl implements User {}

@@ -32,9 +32,7 @@ import javax.sql.DataSource;
 import lombok.EqualsAndHashCode;
 import org.sql2o.Sql2o;
 
-/**
- * https://github.com/aaberg/sql2o
- */
+/** https://github.com/aaberg/sql2o */
 @EqualsAndHashCode(callSuper = false)
 public class Sql2oModule extends ConfigurationAwareModule {
 

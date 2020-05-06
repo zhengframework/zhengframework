@@ -27,8 +27,7 @@ import com.google.inject.multibindings.Multibinder;
 public class AnnotationWSModule extends AbstractModule {
 
   protected void configure() {
-    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
-    })
+    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {})
         .addBinding()
         .toInstance(EchoEndpoint.class);
   }

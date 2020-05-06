@@ -43,17 +43,18 @@ public class GeneralTypeListener<T> implements TypeListener {
     }
     if (typeClass.isAssignableFrom(actualType)) {
       encounter.register(
-          (InjectionListener<I>) injectee -> {
-            try {
-              postProcessor.process((T) injectee);
-            } catch (Exception ex) {
-              throw new IllegalStateException(
-                  String.format(
-                      "Failed to process type %s of class %s",
-                      typeClass.getSimpleName(), injectee.getClass().getSimpleName()),
-                  ex);
-            }
-          });
+          (InjectionListener<I>)
+              injectee -> {
+                try {
+                  postProcessor.process((T) injectee);
+                } catch (Exception ex) {
+                  throw new IllegalStateException(
+                      String.format(
+                          "Failed to process type %s of class %s",
+                          typeClass.getSimpleName(), injectee.getClass().getSimpleName()),
+                      ex);
+                }
+              });
     }
   }
 }

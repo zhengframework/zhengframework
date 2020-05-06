@@ -29,16 +29,13 @@ public class EmptyConfigurationSource implements ConfigurationSource {
   private final Map<String, String> map = Collections.emptyMap();
 
   @Override
-  public void init() {
-  }
+  public void init() {}
 
   @Override
-  public void addListener(ConfigurationSourceListener listener) {
-  }
+  public void addListener(ConfigurationSourceListener listener) {}
 
   @Override
-  public void removeListener(ConfigurationSourceListener listener) {
-  }
+  public void removeListener(ConfigurationSourceListener listener) {}
 
   @Override
   public Map<String, String> getConfiguration(Environment environment) {

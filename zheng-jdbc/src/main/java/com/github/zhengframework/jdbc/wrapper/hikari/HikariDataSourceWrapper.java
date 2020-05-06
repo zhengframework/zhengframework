@@ -38,8 +38,7 @@ public class HikariDataSourceWrapper extends DataSourceWrapper {
   private HikariDataSource origDataSource;
   private HikariConfig configuration = new HikariConfig();
 
-  public HikariDataSourceWrapper() {
-  }
+  public HikariDataSourceWrapper() {}
 
   public HikariDataSource getOrigDataSource() {
     return origDataSource;

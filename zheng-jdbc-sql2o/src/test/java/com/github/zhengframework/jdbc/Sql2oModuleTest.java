@@ -20,8 +20,7 @@ import org.sql2o.Sql2o;
 @RunWith(ZhengApplicationRunner.class)
 public class Sql2oModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @Test
   @WithZhengApplication(configFile = "application.properties")

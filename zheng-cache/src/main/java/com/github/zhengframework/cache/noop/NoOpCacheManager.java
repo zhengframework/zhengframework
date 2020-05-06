@@ -103,12 +103,10 @@ public class NoOpCacheManager implements CacheManager {
   }
 
   @Override
-  public void enableManagement(String s, boolean b) {
-  }
+  public void enableManagement(String s, boolean b) {}
 
   @Override
-  public void enableStatistics(String s, boolean b) {
-  }
+  public void enableStatistics(String s, boolean b) {}
 
   @Override
   public void close() {

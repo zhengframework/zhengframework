@@ -43,8 +43,7 @@ public class ShiroService implements Service {
   }
 
   @Override
-  public void start() throws Exception {
-  }
+  public void start() throws Exception {}
 
   @Override
   public void stop() throws Exception {

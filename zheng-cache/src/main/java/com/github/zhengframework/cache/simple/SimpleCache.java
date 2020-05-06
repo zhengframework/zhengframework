@@ -70,8 +70,7 @@ public class SimpleCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {
-  }
+  public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {}
 
   @Override
   public void put(K k, V v) {
@@ -198,13 +197,11 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
   @Override
   public void registerCacheEntryListener(
-      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-  }
+      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {}
 
   @Override
   public void deregisterCacheEntryListener(
-      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-  }
+      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {}
 
   @Override
   public Iterator<Entry<K, V>> iterator() {

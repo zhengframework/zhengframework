@@ -39,9 +39,7 @@ public class SwaggerUIServlet extends HttpServlet {
 
   private static final long DEFAULT_EXPIRE_TIME_MS = 86400000L; // 1 day
   private static final long DEFAULT_EXPIRE_TIME_S = 86400L; // 1 day
-  /**
-   * The default buffer size ({@value}) to use
-   */
+  /** The default buffer size ({@value}) to use */
   private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
   private static final int EOF = -1;

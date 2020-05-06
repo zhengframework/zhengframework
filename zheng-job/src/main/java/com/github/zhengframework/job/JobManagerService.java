@@ -79,10 +79,10 @@ public class JobManagerService implements Service {
     }
 
     List<AbstractJob> jobs = new ArrayList<>();
-    ClassScanner<AbstractJob> jobClassScanner = new ClassScanner<>(injectorProvider.get(),
-        AbstractJob.class);
+    ClassScanner<AbstractJob> jobClassScanner =
+        new ClassScanner<>(injectorProvider.get(), AbstractJob.class);
     jobClassScanner.accept(jobs::add);
-    this.jobs = jobs.toArray(new AbstractJob[]{});
+    this.jobs = jobs.toArray(new AbstractJob[] {});
   }
 
   @Override

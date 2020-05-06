@@ -59,12 +59,10 @@ public class NoOpCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {
-  }
+  public void loadAll(Set<? extends K> set, boolean b, CompletionListener completionListener) {}
 
   @Override
-  public void put(K k, V v) {
-  }
+  public void put(K k, V v) {}
 
   @Override
   public V getAndPut(K k, V v) {
@@ -72,8 +70,7 @@ public class NoOpCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public void putAll(Map<? extends K, ? extends V> map) {
-  }
+  public void putAll(Map<? extends K, ? extends V> map) {}
 
   @Override
   public boolean putIfAbsent(K k, V v) {
@@ -111,16 +108,13 @@ public class NoOpCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public void removeAll(Set<? extends K> set) {
-  }
+  public void removeAll(Set<? extends K> set) {}
 
   @Override
-  public void removeAll() {
-  }
+  public void removeAll() {}
 
   @Override
-  public void clear() {
-  }
+  public void clear() {}
 
   @Override
   public <C extends Configuration<K, V>> C getConfiguration(Class<C> aClass) {
@@ -150,8 +144,7 @@ public class NoOpCache<K, V> implements Cache<K, V> {
   }
 
   @Override
-  public void close() {
-  }
+  public void close() {}
 
   @Override
   public boolean isClosed() {
@@ -165,13 +158,11 @@ public class NoOpCache<K, V> implements Cache<K, V> {
 
   @Override
   public void registerCacheEntryListener(
-      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-  }
+      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {}
 
   @Override
   public void deregisterCacheEntryListener(
-      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {
-  }
+      CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration) {}
 
   public Iterator<Entry<K, V>> iterator() {
     return Collections.emptyIterator();

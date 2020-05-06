@@ -75,5 +75,4 @@ public class MyBatisPrivateModule extends PrivateModule {
       expose(key.getTypeLiteral());
     }
   }
-
 }

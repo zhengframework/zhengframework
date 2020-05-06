@@ -38,9 +38,9 @@ import lombok.NoArgsConstructor;
     prefix = "zheng.example",
     supportGroup = true,
     examples = {
-        @ConfigurationExample(example = DefaultConfigurationDefineExample.class),
-        @ConfigurationExample(groupName = "first", example = FirstConfigurationDefineExample.class),
-        @ConfigurationExample(groupName = "second", example = SecondConfigurationDefineExample.class)
+      @ConfigurationExample(example = DefaultConfigurationDefineExample.class),
+      @ConfigurationExample(groupName = "first", example = FirstConfigurationDefineExample.class),
+      @ConfigurationExample(groupName = "second", example = SecondConfigurationDefineExample.class)
     })
 @Data
 @NoArgsConstructor
@@ -50,8 +50,7 @@ public class ConfigurationDefineExample implements ConfigurationDefine {
 
   private boolean enableWeb = true;
 
-  @JsonIgnore
-  private Map<String, Integer> properties = new HashMap<>();
+  @JsonIgnore private Map<String, Integer> properties = new HashMap<>();
 
   private JettyConfig jettyConfig = new JettyConfig();
 

@@ -34,7 +34,7 @@ public class PackageScanManagedClassProvider implements ManagedClassProvider {
   private final String[] annotationClasses;
 
   public PackageScanManagedClassProvider(String... packages) {
-    this(new String[]{"javax.persistence.Entity"}, packages);
+    this(new String[] {"javax.persistence.Entity"}, packages);
   }
 
   public PackageScanManagedClassProvider(String[] annotationClasses, String... packages) {

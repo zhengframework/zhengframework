@@ -62,8 +62,7 @@ public class PreDestroyTest {
 
   public static class KoBean {
     @PreDestroy
-    public void init(Object smth) {
-    }
+    public void init(Object smth) {}
   }
 
   public static class KoExceptionBean {

@@ -23,8 +23,7 @@ public class RabbitMQModuleTest {
 
   EmbeddedRabbitMq rabbitMq;
   EmbeddedRabbitMqConfig config;
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @SuppressWarnings("ResultOfMethodCallIgnored")
   @Before

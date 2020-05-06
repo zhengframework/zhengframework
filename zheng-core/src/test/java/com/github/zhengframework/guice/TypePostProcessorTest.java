@@ -50,15 +50,15 @@ public class TypePostProcessorTest {
   @Test(expected = ProvisionException.class)
   public void testPostProcessingFailure2() throws Exception {
     Guice.createInjector(
-        new AbstractModule() {
-          @Override
-          protected void configure() {
-            bind(ExceptionalBean.class).in(Singleton.class);
-            bindListener(
-                Matchers.any(),
-                new GeneralTypeListener<AbstractBean>(AbstractBean.class, new PostProcessor()));
-          }
-        })
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(ExceptionalBean.class).in(Singleton.class);
+                bindListener(
+                    Matchers.any(),
+                    new GeneralTypeListener<AbstractBean>(AbstractBean.class, new PostProcessor()));
+              }
+            })
         .getInstance(ExceptionalBean.class);
   }
 
@@ -71,17 +71,11 @@ public class TypePostProcessorTest {
     }
   }
 
-  public static class Bean1 extends AbstractBean {
+  public static class Bean1 extends AbstractBean {}
 
-  }
+  public static class Bean2 extends AbstractBean {}
 
-  public static class Bean2 extends AbstractBean {
-
-  }
-
-  public static class Bean3 {
-
-  }
+  public static class Bean3 {}
 
   public static class ExceptionalBean extends AbstractBean {
 

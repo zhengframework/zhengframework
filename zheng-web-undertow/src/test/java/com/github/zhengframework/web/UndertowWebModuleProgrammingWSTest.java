@@ -21,8 +21,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class UndertowWebModuleProgrammingWSTest {
 
-  @Inject()
-  private WebConfig webConfig;
+  @Inject() private WebConfig webConfig;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class, ProgrammingWSModule.class})
@@ -50,7 +49,7 @@ public class UndertowWebModuleProgrammingWSTest {
                     "ws://localhost:"
                         + webConfig.getPort()
                         + PathUtils.fixPath(
-                        webConfig.getContextPath(), webConfig.getWebSocketPath(), echoPath))
+                            webConfig.getContextPath(), webConfig.getWebSocketPath(), echoPath))
                 .build(),
             new WebSocketListener() {
               @Override

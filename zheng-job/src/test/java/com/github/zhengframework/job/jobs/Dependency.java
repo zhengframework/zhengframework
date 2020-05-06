@@ -20,6 +20,4 @@ package com.github.zhengframework.job.jobs;
  * #L%
  */
 
-public class Dependency {
-
-}
+public class Dependency {}

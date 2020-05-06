@@ -5,6 +5,4 @@ import com.github.zhengframework.validator.ValidatorModuleTest;
 import org.junit.runner.RunWith;
 
 @RunWith(ZhengApplicationRunner.class)
-public class HibernateValidatorModuleTest extends ValidatorModuleTest {
-
-}
+public class HibernateValidatorModuleTest extends ValidatorModuleTest {}

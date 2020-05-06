@@ -61,6 +61,5 @@ public class EnvironmentVariablesConfigurationSource extends AbstractConfigurati
   }
 
   @Override
-  public void init() {
-  }
+  public void init() {}
 }

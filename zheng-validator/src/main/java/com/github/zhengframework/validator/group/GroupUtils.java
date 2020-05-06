@@ -34,8 +34,7 @@ import java.util.List;
  */
 public final class GroupUtils {
 
-  private GroupUtils() {
-  }
+  private GroupUtils() {}
 
   /**
    * Search for {@link ValidationGroups} annotations on class and method. Checks direct annotations

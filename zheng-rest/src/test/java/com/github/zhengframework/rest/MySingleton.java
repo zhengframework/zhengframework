@@ -25,8 +25,7 @@ import javax.inject.Inject;
 public class MySingleton {
 
   @Inject
-  private MySingleton() {
-  }
+  private MySingleton() {}
 
   public String call() {
     return "MyService(" + hashCode() + ")";

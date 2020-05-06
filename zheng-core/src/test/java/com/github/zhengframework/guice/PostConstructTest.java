@@ -50,8 +50,7 @@ public class PostConstructTest {
 
   public static class KoBean {
     @PostConstruct
-    public void init(Object smth) {
-    }
+    public void init(Object smth) {}
   }
 
   public static class KoExceptionBean {

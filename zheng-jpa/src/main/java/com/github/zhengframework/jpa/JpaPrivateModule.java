@@ -60,7 +60,7 @@ public class JpaPrivateModule extends PrivateModule {
     } catch (ClassNotFoundException ignored) {
 
     }
-    Class<?>[] classes = new Class<?>[]{JpaManagedService.class, PersistenceUnitInfo.class};
+    Class<?>[] classes = new Class<?>[] {JpaManagedService.class, PersistenceUnitInfo.class};
     for (Class<?> aClass : classes) {
       exposeClass(aClass);
     }

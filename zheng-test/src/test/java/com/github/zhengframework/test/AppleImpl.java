@@ -20,6 +20,4 @@ package com.github.zhengframework.test;
  * #L%
  */
 
-public class AppleImpl implements Apple {
-
-}
+public class AppleImpl implements Apple {}

@@ -78,8 +78,7 @@ public class GuavaEventDispatcher implements EventDispatcher {
       }
     }
     // no-op. Could not find anything to register.
-    return () -> {
-    };
+    return () -> {};
   }
 
   @Override

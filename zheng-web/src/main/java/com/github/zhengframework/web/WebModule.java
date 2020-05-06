@@ -41,10 +41,8 @@ public class WebModule extends ConfigurationAwareServletModule {
         ConfigurationBeanMapper.resolve(getConfiguration(), WebConfig.class);
     WebConfig webConfig = configMap.getOrDefault("", new WebConfig());
     bind(WebConfig.class).toInstance(webConfig);
-    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<WebSocketEndpoint>() {
-    });
-    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<ServerEndpointConfig>() {
-    });
+    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<WebSocketEndpoint>() {});
+    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<ServerEndpointConfig>() {});
     requireBinding(WebServer.class);
     bind(WebServerService.class).asEagerSingleton();
   }

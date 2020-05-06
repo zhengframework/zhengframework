@@ -61,6 +61,5 @@ public class WebConfig implements ConfigurationDefine {
 
   private String trustStorePassword;
 
-  @JsonIgnore
-  private Map<String, String> properties = new HashMap<>();
+  @JsonIgnore private Map<String, String> properties = new HashMap<>();
 }

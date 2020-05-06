@@ -21,12 +21,9 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class SwaggerModuleTest {
 
-  @Inject
-  private Injector injector;
-  @Inject
-  private WebConfig webConfig;
-  @Inject
-  private RestConfig restConfig;
+  @Inject private Injector injector;
+  @Inject private WebConfig webConfig;
+  @Inject private RestConfig restConfig;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})

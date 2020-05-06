@@ -15,8 +15,7 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class MyBatisModuleTest {
 
-  @Inject
-  private Injector injector;
+  @Inject private Injector injector;
 
   @WithZhengApplication
   @Test

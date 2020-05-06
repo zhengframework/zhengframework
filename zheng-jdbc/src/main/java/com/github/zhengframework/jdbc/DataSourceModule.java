@@ -61,8 +61,7 @@ public class DataSourceModule extends ConfigurationAwareModule {
             .toProvider(
                 new DataSourceProvider(
                     getProvider(Key.get(DataSourceWrapper.class)),
-                    getProvider(Key.get(new TypeLiteral<Set<DataSourceProxy>>() {
-                    })),
+                    getProvider(Key.get(new TypeLiteral<Set<DataSourceProxy>>() {})),
                     getProvider(Key.get(ManagedSchema.class))));
 
         bind(DataSourceService.class).asEagerSingleton();
@@ -72,8 +71,7 @@ public class DataSourceModule extends ConfigurationAwareModule {
             .toInstance(dataSource -> dataSource);
         OptionalBinder.newOptionalBinder(binder(), ManagedSchema.class)
             .setDefault()
-            .toInstance(dataSource -> {
-            });
+            .toInstance(dataSource -> {});
       } else {
         Named annotation = named(name);
         bind(Key.get(DataSourceConfig.class, annotation)).toInstance(dataSourceConfig);
@@ -88,8 +86,7 @@ public class DataSourceModule extends ConfigurationAwareModule {
             .toProvider(
                 new DataSourceProvider(
                     getProvider(Key.get(DataSourceWrapper.class, annotation)),
-                    getProvider(Key.get(new TypeLiteral<Set<DataSourceProxy>>() {
-                    }, annotation)),
+                    getProvider(Key.get(new TypeLiteral<Set<DataSourceProxy>>() {}, annotation)),
                     getProvider(Key.get(ManagedSchema.class, annotation))));
 
         bind(Key.get(DataSourceService.class, annotation))
@@ -101,8 +98,7 @@ public class DataSourceModule extends ConfigurationAwareModule {
             .toInstance(dataSource -> dataSource);
         OptionalBinder.newOptionalBinder(binder(), Key.get(ManagedSchema.class, annotation))
             .setDefault()
-            .toInstance(dataSource -> {
-            });
+            .toInstance(dataSource -> {});
       }
     }
   }

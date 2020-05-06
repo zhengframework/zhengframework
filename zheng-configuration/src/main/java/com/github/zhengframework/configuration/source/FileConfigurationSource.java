@@ -111,8 +111,7 @@ public class FileConfigurationSource extends AbstractConfigurationSource {
   }
 
   @Override
-  public void init() {
-  }
+  public void init() {}
 
   @Override
   protected Map<String, String> getConfigurationInternal(Environment environment) {

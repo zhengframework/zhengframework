@@ -45,7 +45,7 @@ public class JsonConfigurationParser implements ConfigurationParser, FileConfigu
 
   @Override
   public String[] supportFileTypes() {
-    return new String[]{".json"};
+    return new String[] {".json"};
   }
 
   @Override

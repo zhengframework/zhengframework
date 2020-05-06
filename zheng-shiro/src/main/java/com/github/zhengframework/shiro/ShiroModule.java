@@ -44,9 +44,7 @@ import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionManager;
 
-/**
- * https://shiro.apache.org/configuration.html
- */
+/** https://shiro.apache.org/configuration.html */
 public class ShiroModule extends ConfigurationAwareModule {
 
   @Override

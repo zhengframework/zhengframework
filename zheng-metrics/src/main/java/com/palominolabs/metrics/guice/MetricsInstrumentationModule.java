@@ -59,7 +59,7 @@ public class MetricsInstrumentationModule extends AbstractModule {
    * @param metricRegistry The registry to use when creating meters, etc. for annotated methods.
    * @param matcher The matcher to determine which types to look for metrics in
    * @param metricNamer The metric namer to use when creating names for metrics for annotated
-   * methods
+   *     methods
    * @param annotationResolver The annotation provider
    */
   private MetricsInstrumentationModule(

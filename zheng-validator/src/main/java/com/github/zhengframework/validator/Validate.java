@@ -27,9 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.ConstraintViolationException;
 
-/**
- * Marker for methods which arguments have to be validated.
- */
+/** Marker for methods which arguments have to be validated. */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

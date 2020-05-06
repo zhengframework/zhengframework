@@ -12,11 +12,9 @@ import org.junit.Test;
 
 public class ValidatorModuleTest {
 
-  @Inject
-  private Validator validator;
+  @Inject private Validator validator;
 
-  @Inject
-  private DummyCountryDao dummyCountryDao;
+  @Inject private DummyCountryDao dummyCountryDao;
 
   @Test
   public void testInjectedValidation() {

@@ -34,8 +34,7 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 public class ResteasyBootstrapServletContextListener extends ResteasyBootstrap
     implements ServletContextListener {
 
-  @Inject
-  private Injector parentInjector = null;
+  @Inject private Injector parentInjector = null;
 
   @Inject
   public ResteasyBootstrapServletContextListener(Injector parentInjector) {

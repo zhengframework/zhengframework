@@ -20,6 +20,4 @@ package com.github.zhengframework.validator;
  * #L%
  */
 
-public interface Insert {
-
-}
+public interface Insert {}

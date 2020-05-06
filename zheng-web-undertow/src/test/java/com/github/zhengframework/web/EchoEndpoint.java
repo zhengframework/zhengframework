@@ -32,8 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EchoEndpoint extends WebSocketEndpoint {
 
   @Override
-  public void connect(Session session) throws IOException {
-  }
+  public void connect(Session session) throws IOException {}
 
   @SneakyThrows
   @Override
@@ -44,14 +43,11 @@ public class EchoEndpoint extends WebSocketEndpoint {
   }
 
   @Override
-  public void message(byte[] data, boolean done, Session session) {
-  }
+  public void message(byte[] data, boolean done, Session session) {}
 
   @Override
-  public void error(Throwable exception, Session session) {
-  }
+  public void error(Throwable exception, Session session) {}
 
   @Override
-  public void close(CloseReason closeReason, Session session) {
-  }
+  public void close(CloseReason closeReason, Session session) {}
 }
