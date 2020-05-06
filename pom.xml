@@ -409,7 +409,7 @@
     </profile>
     <profile>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
         <jdk>8</jdk>
       </activation>
       <build>
