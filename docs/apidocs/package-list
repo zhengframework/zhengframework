@@ -2,6 +2,7 @@ com.github.zhengframework.bootstrap
 com.github.zhengframework.cache
 com.github.zhengframework.cache.noop
 com.github.zhengframework.cache.simple
+com.github.zhengframework.common
 com.github.zhengframework.configuration
 com.github.zhengframework.configuration.annotation
 com.github.zhengframework.configuration.environment
