@@ -37,7 +37,6 @@ public class EchoEndpoint extends WebSocketEndpoint {
   @SneakyThrows
   @Override
   public void message(String message, Session session) {
-    System.out.println();
     log.info("onMessage={}", message);
     session.getBasicRemote().sendText(message);
   }

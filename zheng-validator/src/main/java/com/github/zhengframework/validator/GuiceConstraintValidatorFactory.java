@@ -21,8 +21,8 @@ package com.github.zhengframework.validator;
  */
 
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorFactory;
 

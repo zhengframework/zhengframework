@@ -26,7 +26,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Singleton
 public class HelloServlet extends HttpServlet {
 
@@ -35,8 +37,8 @@ public class HelloServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    System.out.println("getContextPath=" + req.getContextPath());
-    System.out.println("getRequestURI=" + req.getRequestURI());
+    log.info("{}", "getContextPath=" + req.getContextPath());
+    log.info("{}", "getRequestURI=" + req.getRequestURI());
     resp.getWriter().print("Hello, World");
   }
 }

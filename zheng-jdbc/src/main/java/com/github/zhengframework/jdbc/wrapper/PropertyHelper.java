@@ -80,7 +80,11 @@ public final class PropertyHelper {
     if (writeMethod == null) {
       logger.error("Property {} does not exist on target {}", propName, target.getClass());
       throw new RuntimeException(
-          String.format(Locale.ENGLISH,"Property %s does not exist on target %s", propName, target.getClass()));
+          String.format(
+              Locale.ENGLISH,
+              "Property %s does not exist on target %s",
+              propName,
+              target.getClass()));
     }
 
     try {

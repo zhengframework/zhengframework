@@ -20,11 +20,11 @@ package com.github.zhengframework.jdbc.ebean;
  * #L%
  */
 
-import com.google.inject.Provider;
 import io.ebean.Database;
 import io.ebean.DatabaseFactory;
 import io.ebean.config.DatabaseConfig;
 import java.util.Optional;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 

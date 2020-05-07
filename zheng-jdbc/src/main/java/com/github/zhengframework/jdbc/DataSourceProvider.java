@@ -21,13 +21,13 @@ package com.github.zhengframework.jdbc;
  */
 
 import com.github.zhengframework.jdbc.wrapper.DataSourceWrapper;
-import com.google.inject.Provider;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;

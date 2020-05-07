@@ -21,9 +21,9 @@ package com.github.zhengframework.validator.group;
  */
 
 import com.github.zhengframework.validator.ValidationGroups;
-import com.google.common.collect.Lists;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,7 +51,7 @@ public final class GroupUtils {
   }
 
   private static List<ValidationGroups> filterAnnotations(final Annotation... annotations) {
-    final List<ValidationGroups> res = Lists.newArrayList();
+    final List<ValidationGroups> res = new ArrayList<>();
     for (Annotation ann : annotations) {
       if (ValidationGroups.class.equals(ann.annotationType())) {
         res.add((ValidationGroups) ann);

@@ -55,7 +55,7 @@ public class TcpHealthCheck extends NamedHealthCheck {
 
   @Override
   public String getName() {
-    return String.format(Locale.ENGLISH,"TcpHealthCheck-%s:%d", host, port);
+    return String.format(Locale.ENGLISH, "TcpHealthCheck-%s:%d", host, port);
   }
 
   @Override

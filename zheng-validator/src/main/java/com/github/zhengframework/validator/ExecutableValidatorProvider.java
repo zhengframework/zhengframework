@@ -20,8 +20,8 @@ package com.github.zhengframework.validator;
  * #L%
  */
 
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 import javax.validation.Validator;
 import javax.validation.executable.ExecutableValidator;
 

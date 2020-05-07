@@ -20,8 +20,8 @@ package com.github.zhengframework.event;
  * #L%
  */
 
-import com.google.inject.Provider;
 import com.google.inject.spi.ProvisionListener;
+import javax.inject.Provider;
 
 class EventSubscribingProvisionListener implements ProvisionListener {
 

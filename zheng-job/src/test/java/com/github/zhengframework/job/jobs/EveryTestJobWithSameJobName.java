@@ -22,7 +22,7 @@ package com.github.zhengframework.job.jobs;
 
 import com.github.zhengframework.job.AbstractJob;
 import com.github.zhengframework.job.annotations.Every;
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.quartz.JobExecutionContext;
@@ -32,7 +32,7 @@ import org.quartz.JobExecutionException;
 @Every(value = "1s", jobName = "FooJob")
 public class EveryTestJobWithSameJobName extends AbstractJob {
 
-  public static List<String> results = Lists.newArrayList();
+  public static List<String> results = new ArrayList<>();
 
   @Override
   public void doJob(JobExecutionContext context) throws JobExecutionException {

@@ -7,8 +7,10 @@ import com.github.zhengframework.configuration.source.FileConfigurationSource;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class ConfigurationMapperTest {
 
   @Test
@@ -20,7 +22,7 @@ public class ConfigurationMapperTest {
             .build();
 
     Food food = ConfigurationBeanMapper.resolve(configuration, null, Food.class);
-    System.out.println(food);
+    log.info("{}", food);
     assertEquals(1, food.getApples().size());
     assertEquals(3, food.getBananas().size());
   }
@@ -34,7 +36,7 @@ public class ConfigurationMapperTest {
     Map<String, ConfigurationDefineExample> map =
         ConfigurationBeanMapper.resolve(configuration, ConfigurationDefineExample.class);
     ConfigurationDefineExample example = map.get("");
-    System.out.println(example);
+    log.info("{}", example);
   }
 
   @Test
@@ -47,8 +49,8 @@ public class ConfigurationMapperTest {
         ConfigurationBeanMapper.resolve(configuration, ConfigurationDefineExample.class);
 
     for (Entry<String, ConfigurationDefineExample> entry : map.entrySet()) {
-      System.out.println(entry.getKey());
-      System.out.println(entry.getValue());
+      log.info("{}", entry.getKey());
+      log.info("{}", entry.getValue());
     }
   }
 }

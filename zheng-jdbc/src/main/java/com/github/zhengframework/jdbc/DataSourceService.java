@@ -22,8 +22,8 @@ package com.github.zhengframework.jdbc;
 
 import com.github.zhengframework.jdbc.wrapper.DataSourceWrapper;
 import com.github.zhengframework.service.Service;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class DataSourceService implements Service {
 

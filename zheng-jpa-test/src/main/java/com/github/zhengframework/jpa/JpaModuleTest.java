@@ -12,7 +12,7 @@ public class JpaModuleTest {
     work.makeAThing();
     work.makeAThing();
     work.makeAThing();
-    log.info("There are now {} things",work.countThings());
+    log.info("There are now {} things", work.countThings());
     assert 3 == work.countThings();
   }
 }

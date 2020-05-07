@@ -23,8 +23,8 @@ package com.github.zhengframework.jdbc.wrapper;
 import com.github.zhengframework.jdbc.DataSourceConfig;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import java.util.concurrent.locks.ReentrantLock;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 @Singleton

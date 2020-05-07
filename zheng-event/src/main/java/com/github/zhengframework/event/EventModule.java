@@ -21,8 +21,8 @@ package com.github.zhengframework.event;
  */
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
 import com.google.inject.matcher.Matchers;
+import javax.inject.Provider;
 
 public class EventModule extends AbstractModule {
 

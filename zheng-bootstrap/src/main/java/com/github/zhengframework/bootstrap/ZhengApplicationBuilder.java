@@ -22,11 +22,11 @@ package com.github.zhengframework.bootstrap;
 
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.core.ModuleProvider;
-import com.google.common.base.Preconditions;
 import com.google.inject.Module;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public final class ZhengApplicationBuilder {
@@ -45,25 +45,25 @@ public final class ZhengApplicationBuilder {
   }
 
   public ZhengApplicationBuilder withConfiguration(Configuration configuration) {
-    Preconditions.checkNotNull(configuration);
+    Objects.requireNonNull(configuration);
     this.configuration = configuration;
     return this;
   }
 
   public ZhengApplicationBuilder withArguments(String[] arguments) {
-    Preconditions.checkNotNull(arguments);
+    Objects.requireNonNull(arguments);
     this.arguments = new Arguments(arguments);
     return this;
   }
 
   public ZhengApplicationBuilder addModule(Module... moduleList) {
-    Preconditions.checkNotNull(moduleList);
+    Objects.requireNonNull(moduleList);
     this.moduleList.addAll(Arrays.asList(moduleList));
     return this;
   }
 
   public ZhengApplicationBuilder addModule(Collection<Module> moduleList) {
-    Preconditions.checkNotNull(moduleList);
+    Objects.requireNonNull(moduleList);
     this.moduleList.addAll(moduleList);
     return this;
   }
@@ -85,13 +85,13 @@ public final class ZhengApplicationBuilder {
 
   @SafeVarargs
   public final ZhengApplicationBuilder excludeModule(Class<? extends Module>... moduleList) {
-    Preconditions.checkNotNull(moduleList);
+    Objects.requireNonNull(moduleList);
     this.excludeModuleList.addAll(Arrays.asList(moduleList));
     return this;
   }
 
   public ZhengApplicationBuilder excludeModule(Set<Class<? extends Module>> moduleList) {
-    Preconditions.checkNotNull(moduleList);
+    Objects.requireNonNull(moduleList);
     this.excludeModuleList.addAll(moduleList);
     return this;
   }
@@ -99,14 +99,14 @@ public final class ZhengApplicationBuilder {
   @SafeVarargs
   public final ZhengApplicationBuilder excludeModuleProvider(
       Class<? extends ModuleProvider>... moduleProviderList) {
-    Preconditions.checkNotNull(moduleProviderList);
+    Objects.requireNonNull(moduleProviderList);
     this.excludeModuleProviderList.addAll(Arrays.asList(moduleProviderList));
     return this;
   }
 
   public ZhengApplicationBuilder excludeModuleProvider(
       Set<Class<? extends ModuleProvider>> moduleProviderList) {
-    Preconditions.checkNotNull(moduleProviderList);
+    Objects.requireNonNull(moduleProviderList);
     this.excludeModuleProviderList.addAll(moduleProviderList);
     return this;
   }

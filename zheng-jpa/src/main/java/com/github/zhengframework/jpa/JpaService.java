@@ -21,13 +21,13 @@ package com.github.zhengframework.jpa;
  */
 
 import com.google.common.base.Preconditions;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.UnitOfWork;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.spi.PersistenceUnitInfo;

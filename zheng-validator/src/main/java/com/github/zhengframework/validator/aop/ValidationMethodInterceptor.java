@@ -20,12 +20,12 @@ package com.github.zhengframework.validator.aop;
  * #L%
  */
 
-import com.google.inject.Provider;
 import java.lang.reflect.Member;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ElementKind;

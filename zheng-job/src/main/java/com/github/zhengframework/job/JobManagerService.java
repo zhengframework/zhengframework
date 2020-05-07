@@ -29,7 +29,6 @@ import com.github.zhengframework.job.annotations.OnApplicationStop;
 import com.github.zhengframework.service.Service;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -41,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronScheduleBuilder;
@@ -187,7 +187,7 @@ public class JobManagerService implements Service {
       JobKey jobKey = createJobKey(onAnnotation.jobName(), job);
 
       createOrUpdateJob(jobKey, clazz, trigger, requestRecovery, storeDurably);
-      log.info(String.format(Locale.ENGLISH,"    %-21s %s", cron, jobKey.toString()));
+      log.info(String.format(Locale.ENGLISH, "    %-21s %s", cron, jobKey.toString()));
     }
   }
 
@@ -266,7 +266,8 @@ public class JobManagerService implements Service {
       JobKey jobKey = createJobKey(everyAnnotation.jobName(), job);
       createOrUpdateJob(jobKey, clazz, trigger, requestRecovery, storeDurably);
 
-      String logMessage = String.format(Locale.ENGLISH,"    %-7s %s", everyAnnotation.value(), jobKey.toString());
+      String logMessage =
+          String.format(Locale.ENGLISH, "    %-7s %s", everyAnnotation.value(), jobKey.toString());
       if (delayAnnotation != null) {
         logMessage += " (" + delayAnnotation.value() + " delay)";
       }

@@ -26,13 +26,13 @@ import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.Gauge;
 import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
-import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matcher;
 import com.google.inject.matcher.Matchers;
 import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import com.palominolabs.metrics.guice.annotation.MethodAnnotationResolver;
+import java.util.Objects;
 import javax.annotation.Nonnull;
 
 /**
@@ -142,10 +142,10 @@ public class MetricsInstrumentationModule extends AbstractModule {
     @Nonnull
     public MetricsInstrumentationModule build() {
       return new MetricsInstrumentationModule(
-          Preconditions.checkNotNull(metricRegistry),
-          Preconditions.checkNotNull(matcher),
-          Preconditions.checkNotNull(metricNamer),
-          Preconditions.checkNotNull(annotationResolver));
+          Objects.requireNonNull(metricRegistry),
+          Objects.requireNonNull(matcher),
+          Objects.requireNonNull(metricNamer),
+          Objects.requireNonNull(annotationResolver));
     }
   }
 }

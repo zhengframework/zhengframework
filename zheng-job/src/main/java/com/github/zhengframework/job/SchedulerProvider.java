@@ -21,8 +21,8 @@ package com.github.zhengframework.job;
  */
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;

@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.util.Locale;
 import org.junit.Test;
 
 public class TimeParserUtilTest {
@@ -33,6 +34,10 @@ public class TimeParserUtilTest {
     } catch (IllegalArgumentException e) {
       return;
     }
-    fail(String.format("Duration %s should have thrown an IllegalArgumentException", duration));
+    fail(
+        String.format(
+            Locale.ENGLISH,
+            "Duration %s should have thrown an IllegalArgumentException",
+            duration));
   }
 }

@@ -138,6 +138,7 @@
     <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
     <maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
+    <modernizer-maven-annotations.version>2.1.0</modernizer-maven-annotations.version>
   </properties>
 
   <dependencies>
@@ -145,6 +146,12 @@
       <groupId>org.kohsuke.metainf-services</groupId>
       <artifactId>metainf-services</artifactId>
       <version>${metainf-services.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.gaul</groupId>
+      <artifactId>modernizer-maven-annotations</artifactId>
+      <version>${modernizer-maven-annotations.version}</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
@@ -175,30 +182,6 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <plugin>
-        <groupId>de.thetaphi</groupId>
-        <artifactId>forbiddenapis</artifactId>
-        <version>3.0</version>
-        <configuration>
-          <bundledSignatures>
-            <bundledSignature>jdk-unsafe</bundledSignature>
-            <bundledSignature>jdk-deprecated</bundledSignature>
-            <bundledSignature>jdk-non-portable</bundledSignature>
-<!--            <bundledSignature>jdk-reflection</bundledSignature>-->
-            <bundledSignature>jdk-system-out</bundledSignature>
-          </bundledSignatures>
-          <failOnViolation>false</failOnViolation>
-<!--          <failOnMissingClasses>false</failOnMissingClasses>-->
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-              <goal>testCheck</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
@@ -594,6 +577,58 @@
         </plugins>
       </build>
       <id>ossrh</id>
+    </profile>
+    <profile>
+      <id>extra-verify</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.gaul</groupId>
+            <artifactId>modernizer-maven-plugin</artifactId>
+            <version>${modernizer-maven-annotations.version}</version>
+            <configuration>
+              <javaVersion>1.8</javaVersion>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>modernizer</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>de.thetaphi</groupId>
+            <artifactId>forbiddenapis</artifactId>
+            <version>3.0</version>
+            <configuration>
+              <bundledSignatures>
+                <bundledSignature>jdk-unsafe</bundledSignature>
+                <bundledSignature>jdk-deprecated</bundledSignature>
+                <bundledSignature>jdk-non-portable</bundledSignature>
+                <bundledSignature>jdk-reflection</bundledSignature>
+                <bundledSignature>jdk-system-out</bundledSignature>
+              </bundledSignatures>
+              <suppressAnnotations>
+                <suppressAnnotation>
+                  **.SuppressForbidden
+                </suppressAnnotation>
+              </suppressAnnotations>
+              <failOnUnsupportedJava>false</failOnUnsupportedJava>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>check</goal>
+                  <goal>testCheck</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

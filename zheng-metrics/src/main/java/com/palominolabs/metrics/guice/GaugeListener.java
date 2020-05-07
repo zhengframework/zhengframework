@@ -22,6 +22,7 @@ package com.palominolabs.metrics.guice;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.annotation.Gauge;
+import com.github.zhengframework.common.SuppressForbidden;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
@@ -29,6 +30,7 @@ import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import java.lang.reflect.Method;
 
 /** A listener which adds gauge injection listeners to classes with gauges. */
+@SuppressForbidden
 public class GaugeListener implements TypeListener {
 
   private final MetricRegistry metricRegistry;

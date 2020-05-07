@@ -12,11 +12,13 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sql2o.Sql2o;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class Sql2oModuleTest {
 
@@ -28,7 +30,7 @@ public class Sql2oModuleTest {
     DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
-    System.out.println(metaData.getDatabaseProductName());
+    log.info("{}", metaData.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
     Sql2o instance = injector.getInstance(Sql2o.class);
     assertNotNull(instance);
@@ -39,7 +41,7 @@ public class Sql2oModuleTest {
   public void configureGroup() throws SQLException {
     DataSource dataSourceA = injector.getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
-    System.out.println(metaDataA.getDatabaseProductName());
+    log.info("{}", metaDataA.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaDataA.getDatabaseProductName());
 
     DataSource dataSourceB = injector.getInstance(Key.get(DataSource.class, named("b")));

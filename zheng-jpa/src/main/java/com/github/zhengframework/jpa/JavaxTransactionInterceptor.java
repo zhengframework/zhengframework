@@ -97,7 +97,7 @@ public class JavaxTransactionInterceptor implements MethodInterceptor {
     return result;
   }
 
-  //(dhanji): Cache this method's results.
+  // (dhanji): Cache this method's results.
   private Transactional readTransactionMetadata(final MethodInvocation methodInvocation) {
     Transactional transactional;
     final Method method = methodInvocation.getMethod();

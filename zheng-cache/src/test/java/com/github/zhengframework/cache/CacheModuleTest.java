@@ -15,12 +15,14 @@ import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.annotation.CacheResult;
 import javax.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 import org.cache2k.Cache2kBuilder;
 import org.cache2k.jcache.ExtendedMutableConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+@Slf4j
 public class CacheModuleTest {
 
   @Inject CacheManager cacheManager;
@@ -57,7 +59,7 @@ public class CacheModuleTest {
   @Test
   public void factory() {
     for (String cacheName : cacheManager.getCacheNames()) {
-      System.out.println(cacheName);
+      log.info("{}", cacheName);
     }
     Cache<Integer, Integer> cache = cacheManager.getCache("guice");
     cache.put(1, 1);

@@ -21,8 +21,8 @@ package com.github.zhengframework.validator.bval;
  */
 
 import com.github.zhengframework.validator.ValidatorConfigurationConfigurer;
-import com.google.inject.Provider;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;

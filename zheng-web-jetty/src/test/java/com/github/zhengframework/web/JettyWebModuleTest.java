@@ -23,7 +23,7 @@ public class JettyWebModuleTest {
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})
   public void configure() throws Exception {
-    System.out.println(webConfig);
+    log.info("{}", webConfig);
     OkHttpClient okHttpClient = new Builder().build();
 
     String path = PathUtils.fixPath(webConfig.getContextPath());
@@ -32,10 +32,10 @@ public class JettyWebModuleTest {
             .url("http://localhost:" + webConfig.getPort() + path + "/hello")
             .get()
             .build();
-    System.out.println(request);
+    log.info("{}", request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     assertEquals("Hello, World", resp);
   }
 }

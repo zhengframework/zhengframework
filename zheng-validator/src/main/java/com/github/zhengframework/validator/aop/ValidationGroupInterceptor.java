@@ -22,8 +22,8 @@ package com.github.zhengframework.validator.aop;
 
 import com.github.zhengframework.validator.ValidationGroups;
 import com.github.zhengframework.validator.group.MethodGroupsFactory;
-import com.google.inject.Provider;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 

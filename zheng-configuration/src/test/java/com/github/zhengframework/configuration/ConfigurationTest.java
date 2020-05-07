@@ -25,7 +25,7 @@ public class ConfigurationTest {
     Configuration apple = configuration.prefix("apple");
     assertTrue(Boolean.parseBoolean(apple.get("big").get()));
     assertEquals("110", apple.get("name").get());
-    assertTrue(Double.parseDouble(apple.get("weight").get()) == 1.9);
+    assertEquals(1.9, Double.parseDouble(apple.get("weight").get()), 0.0);
   }
 
   @Test

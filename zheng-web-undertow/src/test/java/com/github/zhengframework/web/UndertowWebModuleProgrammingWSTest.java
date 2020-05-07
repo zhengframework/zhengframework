@@ -27,7 +27,7 @@ public class UndertowWebModuleProgrammingWSTest {
   @WithZhengApplication(moduleClass = {MyModule.class, ProgrammingWSModule.class})
   public void configureProgrammingWS() throws Exception {
     String echoPath = "/echo222";
-    System.out.println(webConfig);
+    log.info("{}", webConfig);
     OkHttpClient okHttpClient = new Builder().build();
 
     String path = PathUtils.fixPath(webConfig.getContextPath());
@@ -36,10 +36,10 @@ public class UndertowWebModuleProgrammingWSTest {
             .url("http://localhost:" + webConfig.getPort() + path + "/hello")
             .get()
             .build();
-    System.out.println(request);
+    log.info("{}", request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     Assert.assertEquals("Hello, World", resp);
 
     WebSocket webSocket =

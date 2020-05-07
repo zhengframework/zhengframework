@@ -21,8 +21,8 @@ package com.github.zhengframework.rest;
  */
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
 import com.google.inject.servlet.RequestScoped;
+import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;

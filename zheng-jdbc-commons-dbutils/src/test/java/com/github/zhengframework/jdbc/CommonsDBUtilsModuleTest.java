@@ -11,12 +11,14 @@ import com.google.inject.Key;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbutils.AsyncQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class CommonsDBUtilsModuleTest {
 
@@ -28,7 +30,7 @@ public class CommonsDBUtilsModuleTest {
     DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
-    System.out.println(metaData.getDatabaseProductName());
+    log.info("{}", metaData.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaData.getDatabaseProductName());
     assertNotNull(injector.getInstance(QueryRunner.class));
     assertNotNull(injector.getInstance(AsyncQueryRunner.class));
@@ -39,7 +41,7 @@ public class CommonsDBUtilsModuleTest {
   public void configureGroup() throws Exception {
     DataSource dataSourceA = injector.getInstance(Key.get(DataSource.class, named("a")));
     DatabaseMetaData metaDataA = dataSourceA.getConnection().getMetaData();
-    System.out.println(metaDataA.getDatabaseProductName());
+    log.info("{}", metaDataA.getDatabaseProductName());
     Assert.assertEquals("HSQL Database Engine", metaDataA.getDatabaseProductName());
 
     DataSource dataSourceB = injector.getInstance(Key.get(DataSource.class, named("b")));

@@ -41,7 +41,6 @@
     <dependency>
       <groupId>javax.transaction</groupId>
       <artifactId>javax.transaction-api</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.persistence</groupId>
@@ -50,12 +49,10 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.interceptor</groupId>
       <artifactId>javax.interceptor-api</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.github.classgraph</groupId>

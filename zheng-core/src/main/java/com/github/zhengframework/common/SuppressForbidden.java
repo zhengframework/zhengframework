@@ -1,8 +1,8 @@
-package com.github.zhengframework.validator;
+package com.github.zhengframework.common;
 
 /*-
  * #%L
- * zheng-validator
+ * zheng-core
  * %%
  * Copyright (C) 2020 Zheng MingHai
  * %%
@@ -20,23 +20,13 @@ package com.github.zhengframework.validator;
  * #L%
  */
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-@Singleton
-public class ValidatorProvider implements Provider<Validator> {
-
-  private final ValidatorFactory validatorFactory;
-
-  @Inject
-  public ValidatorProvider(ValidatorFactory validatorFactory) {
-    this.validatorFactory = validatorFactory;
-  }
-
-  public Validator get() {
-    return validatorFactory.getValidator();
-  }
+@Retention(RetentionPolicy.CLASS)
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+public @interface SuppressForbidden {
+  String reason() default "";
 }

@@ -50,9 +50,11 @@ public class GeneralTypeListener<T> implements TypeListener {
                   postProcessor.process((T) injectee);
                 } catch (Exception ex) {
                   throw new IllegalStateException(
-                      String.format(Locale.ENGLISH,
+                      String.format(
+                          Locale.ENGLISH,
                           "Failed to process type %s of class %s",
-                          typeClass.getSimpleName(), injectee.getClass().getSimpleName()),
+                          typeClass.getSimpleName(),
+                          injectee.getClass().getSimpleName()),
                       ex);
                 }
               });

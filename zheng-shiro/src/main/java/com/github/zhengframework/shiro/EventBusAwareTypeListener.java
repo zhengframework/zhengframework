@@ -20,11 +20,11 @@ package com.github.zhengframework.shiro;
  * #L%
  */
 
-import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
+import javax.inject.Provider;
 import org.apache.shiro.event.EventBus;
 import org.apache.shiro.event.EventBusAware;
 

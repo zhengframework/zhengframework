@@ -7,12 +7,14 @@ import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.github.zhengframework.web.WebConfig;
 import com.google.inject.Inject;
 import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
 import okhttp3.Request;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class WebjarsModuleTest {
 
@@ -23,8 +25,8 @@ public class WebjarsModuleTest {
   @Test
   @WithZhengApplication(configFile = "app.properties")
   public void testDefaultPath() throws Exception {
-    System.out.println(webConfig);
-    System.out.println(webjarsConfig);
+    log.info("{}", webConfig);
+    log.info("{}", webjarsConfig);
 
     OkHttpClient okHttpClient = new Builder().build();
 
@@ -80,8 +82,8 @@ public class WebjarsModuleTest {
   @Test
   @WithZhengApplication(configFile = "app_cache.properties")
   public void testDisableCache() throws Exception {
-    System.out.println(webConfig);
-    System.out.println(webjarsConfig);
+    log.info("{}", webConfig);
+    log.info("{}", webjarsConfig);
     OkHttpClient okHttpClient = new Builder().build();
 
     String bootstrap1 =
@@ -136,8 +138,8 @@ public class WebjarsModuleTest {
   @Test
   @WithZhengApplication(configFile = "app_path.properties")
   public void testPath() throws Exception {
-    System.out.println(webConfig);
-    System.out.println(webjarsConfig);
+    log.info("{}", webConfig);
+    log.info("{}", webjarsConfig);
     OkHttpClient okHttpClient = new Builder().build();
 
     String bootstrap1 =

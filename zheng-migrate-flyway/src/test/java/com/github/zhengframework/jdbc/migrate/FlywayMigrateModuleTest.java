@@ -7,9 +7,11 @@ import com.google.inject.Injector;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class FlywayMigrateModuleTest {
 
@@ -21,7 +23,7 @@ public class FlywayMigrateModuleTest {
     DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
-    System.out.println(metaData.getDatabaseProductName());
+    log.info("{}", metaData.getDatabaseProductName());
     connection.close();
   }
 }

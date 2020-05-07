@@ -22,12 +22,14 @@ import de.flapdoodle.embed.mongo.config.Net;
 import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class MongodbModuleTest {
 
@@ -71,13 +73,13 @@ public class MongodbModuleTest {
     basicDBObject.append("name", "hello");
 
     InsertOneResult insertOneResult = testCollection.insertOne(basicDBObject);
-    System.out.println("getInsertedId=" + insertOneResult.getInsertedId());
+    log.info("{}", "getInsertedId=" + insertOneResult.getInsertedId());
 
     FindIterable<BasicDBObject> basicDBObjects = testCollection.find(basicDBObject);
     MongoCursor<BasicDBObject> iterator = basicDBObjects.iterator();
     while (iterator.hasNext()) {
       BasicDBObject next = iterator.next();
-      System.out.println("getObjectId=" + next.getObjectId("_id"));
+      log.info("{}", "getObjectId=" + next.getObjectId("_id"));
       assertEquals(
           insertOneResult.getInsertedId().asObjectId().getValue().toHexString(),
           next.getObjectId("_id").toString());

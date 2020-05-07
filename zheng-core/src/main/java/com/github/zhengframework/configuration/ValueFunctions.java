@@ -58,14 +58,14 @@ public class ValueFunctions {
 
   public static Parser<Calendar> toCalendar() {
     return s -> {
-      Calendar c = Calendar.getInstance(TimeZone.getDefault(),Locale.ENGLISH);
+      Calendar c = Calendar.getInstance(TimeZone.getDefault(), Locale.ENGLISH);
       try {
         c.setTime(new Date(Long.parseLong(s)));
         return c;
       } catch (NumberFormatException ignored) {
       }
       try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("",Locale.ENGLISH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("", Locale.ENGLISH);
         dateFormat.setTimeZone(TimeZone.getDefault());
         c.setTime(dateFormat.parse(s));
       } catch (ParseException e) {

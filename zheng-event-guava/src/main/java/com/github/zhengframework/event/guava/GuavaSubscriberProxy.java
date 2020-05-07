@@ -20,11 +20,13 @@ package com.github.zhengframework.event.guava;
  * #L%
  */
 
+import com.github.zhengframework.common.SuppressForbidden;
 import com.github.zhengframework.event.Event;
 import com.google.common.eventbus.Subscribe;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@SuppressForbidden
 class GuavaSubscriberProxy {
 
   private final Object handlerInstance;

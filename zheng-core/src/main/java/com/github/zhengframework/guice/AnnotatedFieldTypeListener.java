@@ -20,6 +20,7 @@ package com.github.zhengframework.guice;
  * #L%
  */
 
+import com.github.zhengframework.common.SuppressForbidden;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
@@ -28,6 +29,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
+@SuppressForbidden
 public class AnnotatedFieldTypeListener<T extends Annotation> implements TypeListener {
 
   private final Class<T> annotationClass;
@@ -56,7 +58,8 @@ public class AnnotatedFieldTypeListener<T extends Annotation> implements TypeLis
                       postProcessor.process(field.getAnnotation(annotationClass), field, injected);
                     } catch (Exception ex) {
                       throw new IllegalStateException(
-                          String.format(Locale.ENGLISH,
+                          String.format(
+                              Locale.ENGLISH,
                               "Failed to process annotation %s of field %s of class %s",
                               annotationClass.getSimpleName(),
                               field.getName(),

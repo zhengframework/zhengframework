@@ -20,7 +20,6 @@ package com.github.zhengframework.event;
  * #L%
  */
 
-import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
@@ -29,6 +28,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.inject.Provider;
 
 class EventSubscribingTypeListener implements TypeListener {
 

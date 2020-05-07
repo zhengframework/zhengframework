@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.github.drapostolos.typeparser.TypeParser;
+import com.github.zhengframework.common.SuppressForbidden;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -43,6 +44,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+@SuppressForbidden
 public class ConfigurationBeanMapper {
 
   private static final JavaPropsMapper mapper =
