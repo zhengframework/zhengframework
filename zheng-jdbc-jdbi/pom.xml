@@ -33,6 +33,12 @@
     <dependency>
       <groupId>org.jdbi</groupId>
       <artifactId>jdbi3-core</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.checkerframework</groupId>
+          <artifactId>checker-qual</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.jdbi</groupId>

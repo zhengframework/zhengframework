@@ -246,20 +246,24 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>${maven-enforcer-plugin.version}</version>
+        <configuration>
+          <rules>
+            <requireMavenVersion>
+              <version>3.0.0</version>
+            </requireMavenVersion>
+            <requireJavaVersion>
+              <version>1.8</version>
+            </requireJavaVersion>
+            <dependencyConvergence/>
+            <banDuplicatePomDependencyVersions/>
+            <reactorModuleConvergence/>
+          </rules>
+        </configuration>
         <executions>
           <execution>
-            <configuration>
-              <rules>
-                <dependencyConvergence/>
-                <requireMavenVersion>
-                  <version>3.0.0</version>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
             <goals>
               <goal>enforce</goal>
             </goals>
-            <id>enforce-maven</id>
           </execution>
         </executions>
       </plugin>

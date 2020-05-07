@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -52,6 +54,12 @@
     <dependency>
       <groupId>io.ebean</groupId>
       <artifactId>ebean</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.yaml</groupId>
+          <artifactId>snakeyaml</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Query bean support -->
@@ -66,11 +74,6 @@
       <artifactId>querybean-generator</artifactId>
       <scope>provided</scope>
     </dependency>
-   <!-- <dependency>
-      <artifactId>h2</artifactId>
-      <groupId>com.h2database</groupId>
-      <scope>test</scope>
-    </dependency>-->
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
@@ -86,7 +89,8 @@
       </resource>
     </resources>
     <plugins>
-      <plugin><configuration>
+      <plugin>
+        <configuration>
           <tiles>
             <tile>io.ebean.tile:enhancement:12.2.3</tile>
           </tiles>

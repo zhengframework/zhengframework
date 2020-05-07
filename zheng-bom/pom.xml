@@ -100,6 +100,11 @@
     <webjars-locator-core.version>0.44</webjars-locator-core.version>
     <xmemcached.version>2.4.6</xmemcached.version>
     <zhengframework.version>${revision}</zhengframework.version>
+    <commons-codec.version>1.14</commons-codec.version>
+    <jboss-logging.version>3.4.1.Final</jboss-logging.version>
+    <snakeyaml.version>1.25</snakeyaml.version>
+    <checker-qual.version>3.1.0</checker-qual.version>
+    <mchange-commons-java.version>0.2.19</mchange-commons-java.version>
   </properties>
 
   <dependencyManagement>
@@ -401,6 +406,11 @@
         <version>${ini4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.tomlj</groupId>
         <artifactId>tomlj</artifactId>
         <version>${tomlj.version}</version>
@@ -476,6 +486,11 @@
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-collections4</artifactId>
         <version>${commons-collections4.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
       </dependency>
       <dependency>
         <groupId>org.webjars</groupId>
@@ -623,6 +638,11 @@
         <version>${jboss-logging-annotations.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.jboss.logging</groupId>
+        <artifactId>jboss-logging</artifactId>
+        <version>${jboss-logging.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.github.drapostolos</groupId>
         <artifactId>type-parser</artifactId>
         <version>${type-parser.version}</version>
@@ -661,6 +681,11 @@
         <version>${c3p0.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.mchange</groupId>
+        <artifactId>mchange-commons-java</artifactId>
+        <version>${mchange-commons-java.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.kohsuke.metainf-services</groupId>
         <artifactId>metainf-services</artifactId>
         <version>${metainf-services.version}</version>
@@ -669,6 +694,11 @@
         <groupId>org.quartz-scheduler</groupId>
         <artifactId>quartz</artifactId>
         <version>${quartz.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker-qual</artifactId>
+        <version>${checker-qual.version}</version>
       </dependency>
       <!-- zheng framework module -->
       <dependency>
