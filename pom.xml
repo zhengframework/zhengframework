@@ -131,6 +131,7 @@
     <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
     <forbiddenapis.version>3.0</forbiddenapis.version>
     <depgraph-maven-plugin.version>3.3.0</depgraph-maven-plugin.version>
+    <sortpom-maven-plugin.version>2.11.0</sortpom-maven-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -364,7 +365,7 @@
           <plugin>
             <groupId>com.github.ekryd.sortpom</groupId>
             <artifactId>sortpom-maven-plugin</artifactId>
-            <version>2.11.0</version>
+            <version>${sortpom-maven-plugin.version}</version>
             <executions>
               <execution>
                 <goals>
