@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>com.github.zhengframework</groupId>
     <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
-
   <artifactId>zheng-cache-ehcache</artifactId>
   <packaging>pom</packaging>
-
   <description>zheng framework module: cache support by ehcache</description>
   <url>https://github.com/zhengframework/zhengframework</url>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -31,12 +27,11 @@
       <artifactId>ehcache</artifactId>
     </dependency>
   </dependencies>
-
   <build>
     <resources>
       <resource>
-        <directory>${project.build.directory}/site/</directory>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+        <directory>${project.build.directory}/site/</directory>
       </resource>
     </resources>
   </build>

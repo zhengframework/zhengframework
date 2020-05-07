@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>com.github.zhengframework</groupId>
     <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
-
   <artifactId>zheng-job</artifactId>
-
   <description>zheng framework module: job support by quartz</description>
   <url>https://github.com/zhengframework/zhengframework</url>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -39,12 +35,12 @@
       <artifactId>quartz</artifactId>
       <exclusions>
         <exclusion>
-          <groupId>com.mchange</groupId>
           <artifactId>c3p0</artifactId>
+          <groupId>com.mchange</groupId>
         </exclusion>
         <exclusion>
-          <groupId>com.mchange</groupId>
           <artifactId>mchange-commons-java</artifactId>
+          <groupId>com.mchange</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -71,12 +67,11 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <resources>
       <resource>
-        <directory>${project.build.directory}/site/</directory>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+        <directory>${project.build.directory}/site/</directory>
       </resource>
     </resources>
   </build>

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>com.github.zhengframework</groupId>
     <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
-
   <artifactId>zheng-core</artifactId>
-
   <description>zheng framework module: core</description>
   <url>https://github.com/zhengframework/zhengframework</url>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -30,8 +26,8 @@
       <artifactId>guice</artifactId>
       <exclusions>
         <exclusion>
-          <groupId>org.checkerframework</groupId>
           <artifactId>checker-qual</artifactId>
+          <groupId>org.checkerframework</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -80,12 +76,11 @@
       <artifactId>type-parser</artifactId>
     </dependency>
   </dependencies>
-
   <build>
     <resources>
       <resource>
-        <directory>${project.build.directory}/site/</directory>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+        <directory>${project.build.directory}/site/</directory>
       </resource>
     </resources>
   </build>

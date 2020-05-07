@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>com.github.zhengframework</groupId>
     <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
-
   <artifactId>zheng-configuration</artifactId>
-
   <description>zheng framework module: configuration support</description>
   <url>https://github.com/zhengframework/zhengframework</url>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -42,12 +38,12 @@
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-yaml</artifactId>
-    <exclusions>
-      <exclusion>
-        <groupId>org.yaml</groupId>
-        <artifactId>snakeyaml</artifactId>
-      </exclusion>
-    </exclusions>
+      <exclusions>
+        <exclusion>
+          <artifactId>snakeyaml</artifactId>
+          <groupId>org.yaml</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.yaml</groupId>
@@ -88,12 +84,11 @@
       <artifactId>commons-io</artifactId>
     </dependency>
   </dependencies>
-
   <build>
     <resources>
       <resource>
-        <directory>${project.build.directory}/site/</directory>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+        <directory>${project.build.directory}/site/</directory>
       </resource>
     </resources>
   </build>
