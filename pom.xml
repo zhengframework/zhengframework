@@ -120,7 +120,7 @@
     <metainf-services.version>1.8</metainf-services.version>
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.7.0</revision>
+    <revision>1.7.1</revision>
     <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
     <spotbugs.version>4.0.2</spotbugs.version>
     <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
@@ -216,6 +216,7 @@
           <allowMinorUpdates>true</allowMinorUpdates>
           <allowMajorUpdates>false</allowMajorUpdates>
           <allowAnyUpdates>false</allowAnyUpdates>
+          <!--suppress UnresolvedMavenProperty -->
           <rulesUri>file:///${maven.multiModuleProjectDirectory}/files/versions-rule.xml</rulesUri>
         </configuration>
       </plugin>
