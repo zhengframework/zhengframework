@@ -203,6 +203,20 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <version>${versions-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <configuration>
+              <allowIncrementalUpdates>true</allowIncrementalUpdates>
+              <allowMinorUpdates>true</allowMinorUpdates>
+              <allowMajorUpdates>false</allowMajorUpdates>
+            </configuration>
+            <goals>
+              <goal>update-child-modules</goal>
+              <goal>update-property</goal>
+              <goal>update-properties</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
