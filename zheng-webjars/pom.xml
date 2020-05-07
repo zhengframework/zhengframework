@@ -10,7 +10,7 @@
   <description>zheng framework module: webjars support</description>
   <url>https://github.com/zhengframework/zhengframework</url>
   <properties>
-    <bootstrap.version>3.1.0</bootstrap.version>
+    <bootstrap.version>3.4.1</bootstrap.version>
   </properties>
   <dependencyManagement>
     <dependencies>

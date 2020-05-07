@@ -132,6 +132,9 @@
     <forbiddenapis.version>3.0</forbiddenapis.version>
     <depgraph-maven-plugin.version>3.3.0</depgraph-maven-plugin.version>
     <sortpom-maven-plugin.version>2.11.0</sortpom-maven-plugin.version>
+    <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -170,9 +173,25 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven-surefire-plugin.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven-clean-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+
       <plugin>
         <groupId>com.github.ferstl</groupId>
         <artifactId>depgraph-maven-plugin</artifactId>
@@ -192,20 +211,13 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <version>${versions-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>update-child-modules</goal>
-              <goal>update-property</goal>
-              <goal>update-properties</goal>
-            </goals>
-            <configuration>
-              <allowIncrementalUpdates>true</allowIncrementalUpdates>
-              <allowMinorUpdates>true</allowMinorUpdates>
-              <allowMajorUpdates>false</allowMajorUpdates>
-            </configuration>
-          </execution>
-        </executions>
+        <configuration>
+          <allowIncrementalUpdates>true</allowIncrementalUpdates>
+          <allowMinorUpdates>true</allowMinorUpdates>
+          <allowMajorUpdates>false</allowMajorUpdates>
+          <allowAnyUpdates>false</allowAnyUpdates>
+          <rulesUri>file:///${maven.multiModuleProjectDirectory}/files/versions-rule.xml</rulesUri>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -251,23 +263,26 @@
         <version>${maven-enforcer-plugin.version}</version>
         <executions>
           <execution>
-            <phase>verify</phase>
-            <goals>
+<!--            <phase>verify</phase>-->
+            <!--<goals>
               <goal>enforce</goal>
-            </goals>
+            </goals>-->
           </execution>
         </executions>
         <configuration>
           <rules>
-            <requireMavenVersion>
-              <version>3.0.0</version>
-            </requireMavenVersion>
+            <!--<requireMavenVersion>
+              <version>2.0.0</version>
+            </requireMavenVersion>-->
+            <!--<requireMavenVersion>
+              <version>3.0</version>
+            </requireMavenVersion>-->
             <requireJavaVersion>
               <version>1.8</version>
             </requireJavaVersion>
-            <dependencyConvergence></dependencyConvergence>
-            <banDuplicatePomDependencyVersions></banDuplicatePomDependencyVersions>
-            <reactorModuleConvergence></reactorModuleConvergence>
+            <dependencyConvergence/>
+            <banDuplicatePomDependencyVersions/>
+            <reactorModuleConvergence/>
           </rules>
         </configuration>
       </plugin>

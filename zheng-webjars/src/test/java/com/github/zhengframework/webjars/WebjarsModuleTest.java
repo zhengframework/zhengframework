@@ -39,7 +39,7 @@ public class WebjarsModuleTest {
                                 "http://localhost:"
                                     + webConfig.getPort()
                                     + webjarsConfig.getBasePath()
-                                    + "/bootstrap/3.1.0/js/bootstrap.js")
+                                    + "/bootstrap/js/bootstrap.js")
                             .get()
                             .build())
                     .execute()
@@ -95,7 +95,7 @@ public class WebjarsModuleTest {
                                 "http://localhost:"
                                     + webConfig.getPort()
                                     + webjarsConfig.getBasePath()
-                                    + "/bootstrap/3.1.0/js/bootstrap.js")
+                                    + "/bootstrap/js/bootstrap.js")
                             .get()
                             .build())
                     .execute()
@@ -151,7 +151,7 @@ public class WebjarsModuleTest {
                                 "http://localhost:"
                                     + webConfig.getPort()
                                     + webjarsConfig.getBasePath()
-                                    + "/bootstrap/3.1.0/js/bootstrap.js")
+                                    + "/bootstrap/js/bootstrap.js")
                             .get()
                             .build())
                     .execute()

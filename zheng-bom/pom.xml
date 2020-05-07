@@ -12,7 +12,7 @@
   <url>https://github.com/zhengframework/zhengframework</url>
   <properties>
     <HikariCP.version>3.4.2</HikariCP.version>
-    <amqp-client.version>5.8.0</amqp-client.version>
+    <amqp-client.version>5.9.0</amqp-client.version>
     <artemis.version>2.11.0</artemis.version>
     <bval-jsr.version>2.0.3</bval-jsr.version>
     <c3p0.version>0.9.5.5</c3p0.version>
@@ -30,12 +30,12 @@
     <commons-logging.version>1.2</commons-logging.version>
     <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
     <druid.version>1.1.22</druid.version>
-    <ebean.version>12.2.3</ebean.version>
+    <ebean.version>12.3.1</ebean.version>
     <eclipse.persistence.version>2.7.6</eclipse.persistence.version>
     <ehcache.version>3.8.1</ehcache.version>
     <embedded-rabbitmq.version>1.4.0</embedded-rabbitmq.version>
     <fastjson.version>1.2.67</fastjson.version>
-    <flyway.version>6.3.3</flyway.version>
+    <flyway.version>6.4.1</flyway.version>
     <free-port-finder.version>1.1.1</free-port-finder.version>
     <guava.version>28.2-jre</guava.version>
     <guice-bridge.version>2.6.1</guice-bridge.version>
@@ -51,7 +51,7 @@
     <ignite.version>2.8.0</ignite.version>
     <infinispan.version>10.1.5.Final</infinispan.version>
     <ini4j.version>0.5.4</ini4j.version>
-    <jackson.version>2.10.3</jackson.version>
+    <jackson.version>2.11.0</jackson.version>
     <jakarta.el.version>3.0.3</jakarta.el.version>
     <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
     <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
@@ -62,13 +62,13 @@
     <javax.transaction-api.version>1.3</javax.transaction-api.version>
     <javax.websocket-api.version>1.1</javax.websocket-api.version>
     <jboss-logging-annotations.version>2.2.1.Final</jboss-logging-annotations.version>
-    <jdbi3-bom.version>3.12.2</jdbi3-bom.version>
+    <jdbi3-bom.version>3.13.0</jdbi3-bom.version>
     <jedis-mock.version>0.1.16</jedis-mock.version>
     <jetty.version>9.4.27.v20200227</jetty.version>
     <jmemcached-core.version>1.0.0</jmemcached-core.version>
     <jooq.version>3.13.1</jooq.version>
     <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
-    <junit.version>4.12</junit.version>
+    <junit.version>4.13</junit.version>
     <lettuce-core.version>5.2.2.RELEASE</lettuce-core.version>
     <liquibase.version>3.8.8</liquibase.version>
     <logback.version>1.2.3</logback.version>
@@ -79,7 +79,7 @@
     <mongodb-driver-sync.version>4.0.0</mongodb-driver-sync.version>
     <mybatis-guice.version>3.12</mybatis-guice.version>
     <mybatis.version>3.5.4</mybatis.version>
-    <okhttp.version>4.4.1</okhttp.version>
+    <okhttp.version>4.6.0</okhttp.version>
     <paranamer.version>2.8</paranamer.version>
     <quartz.version>2.3.2</quartz.version>
     <querydsl.version>4.3.1</querydsl.version>
@@ -92,14 +92,14 @@
     <system-rules.version>1.19.0</system-rules.version>
     <tomlj.version>1.0.0</tomlj.version>
     <type-parser.version>0.6.0</type-parser.version>
-    <undertow.version>2.0.30.Final</undertow.version>
-    <webjars-locator-core.version>0.44</webjars-locator-core.version>
+    <undertow.version>2.1.0.Final</undertow.version>
+    <webjars-locator-core.version>0.45</webjars-locator-core.version>
     <xmemcached.version>2.4.6</xmemcached.version>
     <zhengframework.version>${revision}</zhengframework.version>
     <commons-codec.version>1.14</commons-codec.version>
     <jboss-logging.version>3.4.1.Final</jboss-logging.version>
-    <snakeyaml.version>1.25</snakeyaml.version>
-    <checker-qual.version>3.1.0</checker-qual.version>
+    <snakeyaml.version>1.26</snakeyaml.version>
+    <checker-qual.version>3.4.0</checker-qual.version>
     <mchange-commons-java.version>0.2.19</mchange-commons-java.version>
   </properties>
   <dependencyManagement>
@@ -167,7 +167,6 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
-        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
