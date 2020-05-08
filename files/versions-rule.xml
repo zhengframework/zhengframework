@@ -1,0 +1,36 @@
+<ruleset comparisonMethod="maven"
+  xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0 https://www.mojohaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+  <ignoreVersions>
+    <ignoreVersion type="regex">.*[.-][Bb]eta.*</ignoreVersion>
+    <ignoreVersion type="regex">.*[.-][Aa]lpha.*</ignoreVersion>
+  </ignoreVersions>
+  <rules>
+    <rule groupId="javax.servlet" artifactId="javax.servlet-api" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">4\.0.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.glassfish" artifactId="jakarta.el" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">4\.0.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.eclipse.persistence" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">3\.0.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="jakarta.ws.rs" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">3\.0.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.webjars" artifactId="bootstrap" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">3\.0.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+  </rules>
+</ruleset>

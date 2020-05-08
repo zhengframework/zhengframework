@@ -39,7 +39,7 @@ public class ShiroRestTest {
     SecurityManager securityManager = injector.getInstance(SecurityManager.class);
     SecurityUtils.setSecurityManager(securityManager);
     WebConfig webConfig = injector.getInstance(WebConfig.class);
-    System.out.println(webConfig);
+    log.info("{}", webConfig);
 
     OkHttpClient okHttpClient =
         new Builder()
@@ -66,14 +66,14 @@ public class ShiroRestTest {
             .url("http://localhost:" + webConfig.getPort() + "/test/login")
             .post(formBody)
             .build();
-    System.out.println(request);
+    log.info("{}", request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     assertEquals("currentUser=lonestarr\n", resp);
     for (Entry<String, List<String>> entry : response1.headers().toMultimap().entrySet()) {
-      System.out.println(entry.getKey());
-      System.out.println(entry.getValue());
+      log.info("{}", entry.getKey());
+      log.info("{}", entry.getValue());
     }
 
     Request request1 =

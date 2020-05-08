@@ -9,9 +9,9 @@ package com.github.zhengframework.job;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,6 @@ import com.github.zhengframework.job.annotations.OnApplicationStop;
 import com.github.zhengframework.service.Service;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -38,8 +37,10 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronScheduleBuilder;
@@ -186,7 +187,7 @@ public class JobManagerService implements Service {
       JobKey jobKey = createJobKey(onAnnotation.jobName(), job);
 
       createOrUpdateJob(jobKey, clazz, trigger, requestRecovery, storeDurably);
-      log.info(String.format("    %-21s %s", cron, jobKey.toString()));
+      log.info(String.format(Locale.ENGLISH, "    %-21s %s", cron, jobKey.toString()));
     }
   }
 
@@ -247,7 +248,7 @@ public class JobManagerService implements Service {
         scheduleBuilder.withMisfireHandlingInstructionNextWithRemainingCount();
       }
 
-      LocalDateTime start = LocalDateTime.now();
+      LocalDateTime start = LocalDateTime.now(ZoneOffset.systemDefault());
       DelayStart delayAnnotation = clazz.getAnnotation(DelayStart.class);
       if (delayAnnotation != null) {
         long milliSecondDelay = TimeParserUtil.parseDuration(delayAnnotation.value());
@@ -265,7 +266,8 @@ public class JobManagerService implements Service {
       JobKey jobKey = createJobKey(everyAnnotation.jobName(), job);
       createOrUpdateJob(jobKey, clazz, trigger, requestRecovery, storeDurably);
 
-      String logMessage = String.format("    %-7s %s", everyAnnotation.value(), jobKey.toString());
+      String logMessage =
+          String.format(Locale.ENGLISH, "    %-7s %s", everyAnnotation.value(), jobKey.toString());
       if (delayAnnotation != null) {
         logMessage += " (" + delayAnnotation.value() + " delay)";
       }

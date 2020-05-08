@@ -17,9 +17,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 
+@Slf4j
 public class ConfigurationModuleTest {
 
   Food food;
@@ -55,8 +57,8 @@ public class ConfigurationModuleTest {
 
   @Test
   public void testNamedAnnotation() {
-    System.out.println(injector.getInstance(NamedAnnotation.class).getName());
-    System.out.println(injector.getInstance(NamedAnnotation.class).getName());
+    log.info(injector.getInstance(NamedAnnotation.class).getName());
+    log.info(injector.getInstance(NamedAnnotation.class).getName());
   }
 
   @Test
@@ -65,8 +67,8 @@ public class ConfigurationModuleTest {
     Map<String, Apple> apples =
         ConfigurationBeanMapper.resolveMap(configuration, "apples", Apple.class);
     Apple abc = apples.get("abc");
-    System.out.println(abc.getWeight());
-    System.out.println(abc.getName());
+    log.info("{}", abc.getWeight());
+    log.info("{}", abc.getName());
   }
 
   @Test
@@ -75,7 +77,7 @@ public class ConfigurationModuleTest {
     Configuration configuration = injector.getInstance(Configuration.class);
     Food food2 = ConfigurationBeanMapper.resolve(configuration, null, Food.class);
     assertEquals(food.getApple(), food2.getApple());
-    System.out.println(food2.getApple());
+    log.info("{}", food2.getApple());
 
     Set<Banana> bananas =
         ConfigurationBeanMapper.resolveSet(configuration, "bananas", Banana.class);

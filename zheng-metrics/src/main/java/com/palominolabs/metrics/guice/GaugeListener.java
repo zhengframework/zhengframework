@@ -9,9 +9,9 @@ package com.palominolabs.metrics.guice;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ package com.palominolabs.metrics.guice;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.annotation.Gauge;
+import com.github.zhengframework.common.SuppressForbidden;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
@@ -29,6 +30,7 @@ import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import java.lang.reflect.Method;
 
 /** A listener which adds gauge injection listeners to classes with gauges. */
+@SuppressForbidden
 public class GaugeListener implements TypeListener {
 
   private final MetricRegistry metricRegistry;

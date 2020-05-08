@@ -5,18 +5,20 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Set;
 import java.util.TimeZone;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class ZoneTest {
 
   @Test
   public void zone() {
     TimeZone timeZone = TimeZone.getDefault();
     ZoneId zoneId = ZoneOffset.systemDefault();
-    System.out.println(timeZone.getID());
-    System.out.println(zoneId);
+    log.info("{}", timeZone.getID());
+    log.info("{}", zoneId);
     Set<String> availableZoneIds = ZoneOffset.getAvailableZoneIds();
     Set<String> availableIDs = Sets.newHashSet(TimeZone.getAvailableIDs());
-    System.out.println(Sets.difference(availableIDs, availableZoneIds));
+    log.info("{}", Sets.difference(availableIDs, availableZoneIds));
   }
 }

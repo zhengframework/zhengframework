@@ -9,9 +9,9 @@ package com.github.zhengframework.configuration;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 
 public class ValueFunctions {
 
@@ -41,7 +43,7 @@ public class ValueFunctions {
   private static final Set<String> FALSE = ImmutableSet.of("false", "no", "off", "0");
   private static final Parser<Boolean> STRING_TO_BOOLEAN =
       value -> {
-        String lower = Strings.nullToEmpty(value).toLowerCase();
+        String lower = Strings.nullToEmpty(value).toLowerCase(Locale.ENGLISH);
         if (TRUE.contains(lower)) {
           return true;
         } else if (FALSE.contains(lower)) {
@@ -56,14 +58,16 @@ public class ValueFunctions {
 
   public static Parser<Calendar> toCalendar() {
     return s -> {
-      Calendar c = Calendar.getInstance();
+      Calendar c = Calendar.getInstance(TimeZone.getDefault(), Locale.ENGLISH);
       try {
         c.setTime(new Date(Long.parseLong(s)));
         return c;
       } catch (NumberFormatException ignored) {
       }
       try {
-        c.setTime(new SimpleDateFormat().parse(s));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getDefault());
+        c.setTime(dateFormat.parse(s));
       } catch (ParseException e) {
         throw new RuntimeException("illegal value", e);
       }

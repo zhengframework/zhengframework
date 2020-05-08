@@ -11,6 +11,7 @@ import com.github.zhengframework.web.WebConfig;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
 import okhttp3.Request;
@@ -18,6 +19,7 @@ import okhttp3.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class SwaggerModuleTest {
 
@@ -29,8 +31,8 @@ public class SwaggerModuleTest {
   @WithZhengApplication(moduleClass = {MyModule.class})
   public void test() throws Exception {
 
-    System.out.println("webConfig=" + webConfig);
-    System.out.println("restConfig=" + restConfig);
+    log.info("{}", "webConfig=" + webConfig);
+    log.info("{}", "restConfig=" + restConfig);
     String path = PathUtils.fixPath(webConfig.getContextPath(), restConfig.getPath());
 
     OkHttpClient okHttpClient = new Builder().build();
@@ -42,7 +44,7 @@ public class SwaggerModuleTest {
 
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     assertEquals("aa/bb", resp);
 
     String openapiJSON =

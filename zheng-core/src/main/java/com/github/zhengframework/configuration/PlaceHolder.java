@@ -9,9 +9,9 @@ package com.github.zhengframework.configuration;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,9 +21,11 @@ package com.github.zhengframework.configuration;
  */
 
 import com.github.zhengframework.configuration.ex.UnresolvablePlaceholdersException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 
 /** class copy from project 'owner' */
 public class PlaceHolder {
@@ -48,6 +50,7 @@ public class PlaceHolder {
    * @param source the string to replace in, null returns null
    * @return the result of the replace operation
    */
+  @SuppressModernizer
   public String replace(String source) {
     if (source == null) {
       return null;
@@ -85,6 +88,6 @@ public class PlaceHolder {
       return null;
     }
     Matcher m = PATTERN.matcher(source);
-    return m.find() ? replace(source) : String.format(source, args);
+    return m.find() ? replace(source) : String.format(Locale.ENGLISH, source, args);
   }
 }

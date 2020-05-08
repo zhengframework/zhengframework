@@ -7,9 +7,11 @@ import com.github.zhengframework.test.WithZhengApplication;
 import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class MetricsModuleTest {
 
@@ -43,8 +45,8 @@ public class MetricsModuleTest {
         .getGauges()
         .forEach(
             (key, value) -> {
-              System.out.println(key);
-              System.out.println(value.getValue());
+              log.info("{}", key);
+              log.info("{}", value.getValue());
               if ("com.github.zhengframework.metrics.TestService.count.gauge".equals(key)) {
                 assertEquals("1111", value.getValue());
               }

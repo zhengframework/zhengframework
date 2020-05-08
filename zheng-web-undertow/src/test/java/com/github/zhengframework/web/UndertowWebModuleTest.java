@@ -23,7 +23,7 @@ public class UndertowWebModuleTest {
   @Test
   @WithZhengApplication(moduleClass = MyModule.class)
   public void configure() throws Exception {
-    System.out.println(webConfig);
+    log.info("{}", webConfig);
     OkHttpClient okHttpClient = new Builder().build();
     Request request;
     if (webConfig.getContextPath().endsWith("/")) {
@@ -43,7 +43,7 @@ public class UndertowWebModuleTest {
 
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     assertEquals("Hello, World", resp);
   }
 }

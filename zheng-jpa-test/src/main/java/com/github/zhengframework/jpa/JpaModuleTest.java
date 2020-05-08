@@ -2,7 +2,9 @@ package com.github.zhengframework.jpa;
 
 import com.github.zhengframework.jpa.a.Work;
 import com.google.inject.Injector;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class JpaModuleTest {
 
   public static void test(Injector injector) throws Exception {
@@ -10,7 +12,7 @@ public class JpaModuleTest {
     work.makeAThing();
     work.makeAThing();
     work.makeAThing();
-    System.out.println("There are now " + work.countThings() + " things");
+    log.info("There are now {} things", work.countThings());
     assert 3 == work.countThings();
   }
 }

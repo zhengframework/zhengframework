@@ -8,9 +8,11 @@ import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Map.Entry;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class HealthCheckModuleTest {
 
@@ -23,16 +25,16 @@ public class HealthCheckModuleTest {
 
     for (Entry<String, Result> entry : healthCheckRegistry.runHealthChecks().entrySet()) {
       Result result = entry.getValue();
-      System.out.println(entry.getKey());
+      log.info("{}", entry.getKey());
       boolean healthy = result.isHealthy();
-      System.out.println(healthy);
+      log.info("{}", healthy);
       if (result.getMessage() != null) {
-        System.out.println(result.getMessage());
+        log.info("{}", result.getMessage());
       }
       if (!healthy) {
         Throwable throwable = result.getError();
         if (throwable != null) {
-          throwable.printStackTrace();
+          log.info("healthy=FAIL", throwable);
         }
       }
     }

@@ -1,6 +1,7 @@
 package com.github.zhengframework.configuration;
 
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+import com.github.zhengframework.common.SuppressForbidden;
 import com.github.zhengframework.configuration.annotation.ConfigurationExample;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ public class ConfigurationDefineUtilsTest {
 
   private static JavaPropsMapper javaPropsMapper = new JavaPropsMapper();
 
+  @SuppressForbidden
   @Test
   public void print() throws Exception {
     PrintWriter writer = new PrintWriter(System.out);

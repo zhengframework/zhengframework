@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>com.github.zhengframework</groupId>
     <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
-
   <artifactId>zheng-jdbc-ebean</artifactId>
-
   <description>zheng framework module: jdbc ebean support</description>
   <url>https://github.com/zhengframework/zhengframework</url>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -52,49 +48,48 @@
     <dependency>
       <groupId>io.ebean</groupId>
       <artifactId>ebean</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>snakeyaml</artifactId>
+          <groupId>org.yaml</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
-
     <!-- Query bean support -->
     <dependency>
       <groupId>io.ebean</groupId>
       <artifactId>ebean-querybean</artifactId>
     </dependency>
-
     <!-- APT Query bean generation for Java -->
     <dependency>
       <groupId>io.ebean</groupId>
       <artifactId>querybean-generator</artifactId>
       <scope>provided</scope>
     </dependency>
-   <!-- <dependency>
-      <artifactId>h2</artifactId>
-      <groupId>com.h2database</groupId>
-      <scope>test</scope>
-    </dependency>-->
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <resources>
       <resource>
-        <directory>${project.build.directory}/site/</directory>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+        <directory>${project.build.directory}/site/</directory>
       </resource>
     </resources>
     <plugins>
-      <plugin><configuration>
+      <plugin>
+        <groupId>io.repaint.maven</groupId>
+        <artifactId>tiles-maven-plugin</artifactId>
+        <version>2.16</version>
+        <extensions>true</extensions>
+        <configuration>
           <tiles>
             <tile>io.ebean.tile:enhancement:12.2.3</tile>
           </tiles>
         </configuration>
-        <extensions>true</extensions>
-        <groupId>io.repaint.maven</groupId>
-        <artifactId>tiles-maven-plugin</artifactId>
-        <version>2.16</version>
       </plugin>
     </plugins>
   </build>

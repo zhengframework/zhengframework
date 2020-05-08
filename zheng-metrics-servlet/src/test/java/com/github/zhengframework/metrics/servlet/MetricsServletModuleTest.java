@@ -43,8 +43,8 @@ public class MetricsServletModuleTest {
         .getGauges()
         .forEach(
             (key, value) -> {
-              System.out.println(key);
-              System.out.println(value.getValue());
+              log.info("{}", key);
+              log.info("{}", value.getValue());
               if ((TestService.class.getName() + ".count.gauge").equals(key)) {
                 assertEquals("1111", value.getValue());
               }
@@ -63,7 +63,7 @@ public class MetricsServletModuleTest {
 
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     assertTrue(StringUtils.contains(resp, "<h1>Operational Menu</h1>"));
   }
 }

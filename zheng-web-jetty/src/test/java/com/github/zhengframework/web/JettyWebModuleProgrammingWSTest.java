@@ -2,6 +2,7 @@ package com.github.zhengframework.web;
 
 import static org.junit.Assert.assertEquals;
 
+import com.github.zhengframework.common.SuppressForbidden;
 import com.github.zhengframework.test.WithZhengApplication;
 import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.google.inject.Inject;
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@SuppressForbidden
 @RunWith(ZhengApplicationRunner.class)
 @Slf4j
 public class JettyWebModuleProgrammingWSTest {
@@ -28,7 +30,7 @@ public class JettyWebModuleProgrammingWSTest {
   @WithZhengApplication(moduleClass = {MyModule.class, ProgrammingWSModule.class})
   public void configureProgrammingWS() throws Exception {
     String echoPath = "/echo222";
-    System.out.println(webConfig);
+    log.info("{}", webConfig);
     OkHttpClient okHttpClient = new Builder().build();
 
     String path = PathUtils.fixPath(webConfig.getContextPath());
@@ -37,10 +39,10 @@ public class JettyWebModuleProgrammingWSTest {
             .url("http://localhost:" + webConfig.getPort() + path + "/hello")
             .get()
             .build();
-    System.out.println(request);
+    log.info("{}", request);
     Response response1 = okHttpClient.newCall(request).execute();
     String resp = Objects.requireNonNull(response1.body()).string();
-    System.out.println(resp);
+    log.info("{}", resp);
     assertEquals("Hello, World", resp);
 
     WebSocket webSocket =

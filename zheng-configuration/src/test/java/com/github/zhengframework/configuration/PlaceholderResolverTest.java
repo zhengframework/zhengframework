@@ -2,8 +2,10 @@ package com.github.zhengframework.configuration;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class PlaceholderResolverTest {
 
   private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("(\\$\\{(.*?)})");
@@ -16,10 +18,10 @@ public class PlaceholderResolverTest {
       if (matcher.groupCount() == 2) {
         String placeholder = matcher.group(1);
         String property = matcher.group(2);
-        System.out.println(placeholder);
-        System.out.println(property);
-        System.out.println(matcher.start(1) + ":" + matcher.end(1));
-        System.out.println(matcher.start(2) + ":" + matcher.end(2));
+        log.info("{}", placeholder);
+        log.info("{}", property);
+        log.info("{}", matcher.start(1) + ":" + matcher.end(1));
+        log.info("{}", matcher.start(2) + ":" + matcher.end(2));
       }
     }
   }

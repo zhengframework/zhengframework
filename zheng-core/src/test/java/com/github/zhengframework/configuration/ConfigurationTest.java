@@ -2,8 +2,10 @@ package com.github.zhengframework.configuration;
 
 import java.util.HashMap;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class ConfigurationTest {
 
   @Test
@@ -24,7 +26,7 @@ public class ConfigurationTest {
 
     List<Configuration> prefixSet = configuration.prefixList("zheng.hibernate.userIds");
     for (Configuration configuration1 : prefixSet) {
-      System.out.println(configuration1.asMap().toString());
+      log.info("{}", configuration1.asMap().toString());
     }
   }
 }

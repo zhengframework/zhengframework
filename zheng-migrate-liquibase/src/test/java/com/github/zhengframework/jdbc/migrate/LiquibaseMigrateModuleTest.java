@@ -11,9 +11,11 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class LiquibaseMigrateModuleTest {
 
@@ -25,7 +27,7 @@ public class LiquibaseMigrateModuleTest {
     DataSource dataSource = injector.getInstance(DataSource.class);
     Connection connection = dataSource.getConnection();
     DatabaseMetaData metaData = connection.getMetaData();
-    System.out.println(metaData.getDatabaseProductName());
+    log.info("{}", metaData.getDatabaseProductName());
     Statement statement = connection.createStatement();
     ResultSet resultSet = statement.executeQuery("SELECT * FROM public.department;");
     assertTrue(resultSet.next());

@@ -13,11 +13,13 @@ import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 import java.io.IOException;
 import javax.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class RedisModuleTest {
 
@@ -37,7 +39,7 @@ public class RedisModuleTest {
     StatefulRedisConnection<String, String> connection = redisClient.connect();
     RedisCommands<String, String> commands = connection.sync();
     commands.set("test", "zheng");
-    System.out.println(commands.info());
+    log.info("{}", commands.info());
     assertEquals("zheng", commands.get("test"));
   }
 
@@ -48,7 +50,7 @@ public class RedisModuleTest {
     StatefulRedisConnection<String, String> connection = redisClient.connect();
     RedisCommands<String, String> commands = connection.sync();
     commands.set("test", "zheng");
-    System.out.println(commands.info());
+    log.info("{}", commands.info());
     assertEquals("zheng", commands.get("test"));
   }
 

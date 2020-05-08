@@ -2,6 +2,7 @@ package com.github.zhengframework.web;
 
 import static org.junit.Assert.assertEquals;
 
+import com.github.zhengframework.common.SuppressForbidden;
 import com.github.zhengframework.test.WithZhengApplication;
 import com.github.zhengframework.test.ZhengApplicationRunner;
 import com.google.inject.Inject;
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@SuppressForbidden
 @Slf4j
 @RunWith(ZhengApplicationRunner.class)
 public class JettyWebModuleAnnotationWSTest {
@@ -27,46 +29,43 @@ public class JettyWebModuleAnnotationWSTest {
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class, AnnotationWSModule.class})
   public void configureAnnotationWS() throws Exception {
-    System.out.println(webConfig);
-    try {
-      OkHttpClient okHttpClient = new Builder().build();
+    log.info("{}", webConfig);
+    OkHttpClient okHttpClient = new Builder().build();
 
-      String path = PathUtils.fixPath(webConfig.getContextPath());
-      Request request =
-          new Request.Builder()
-              .url("http://localhost:" + webConfig.getPort() + path + "/hello")
-              .get()
-              .build();
-      System.out.println(request);
-      Response response1 = okHttpClient.newCall(request).execute();
-      String resp = Objects.requireNonNull(response1.body()).string();
-      System.out.println(resp);
-      assertEquals("Hello, World", resp);
+    String path = PathUtils.fixPath(webConfig.getContextPath());
+    Request request =
+        new Request.Builder()
+            .url("http://localhost:" + webConfig.getPort() + path + "/hello")
+            .get()
+            .build();
+    log.info("{}", request);
+    Response response1 = okHttpClient.newCall(request).execute();
+    String resp = Objects.requireNonNull(response1.body()).string();
+    log.info("{}", resp);
+    assertEquals("Hello, World", resp);
 
-      WebSocket webSocket =
-          okHttpClient.newWebSocket(
-              new Request.Builder()
-                  .url(
-                      "ws://localhost:"
-                          + webConfig.getPort()
-                          + PathUtils.fixPath(
-                              webConfig.getContextPath(), webConfig.getWebSocketPath(), "/echo"))
-                  .build(),
-              new WebSocketListener() {
-                @Override
-                public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
-                  log.info("onMessage={}", text);
-                  assertEquals("hello", text);
-                }
+    WebSocket webSocket =
+        okHttpClient.newWebSocket(
+            new Request.Builder()
+                .url(
+                    "ws://localhost:"
+                        + webConfig.getPort()
+                        + PathUtils.fixPath(
+                            webConfig.getContextPath(), webConfig.getWebSocketPath(), "/echo"))
+                .build(),
+            new WebSocketListener() {
+              @Override
+              public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
+                log.info("onMessage={}", text);
+                assertEquals("hello", text);
+              }
 
-                @Override
-                public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
-                  webSocket.send("hello");
-                }
-              });
+              @Override
+              public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
+                webSocket.send("hello");
+              }
+            });
 
-      okHttpClient.dispatcher().executorService().awaitTermination(1, TimeUnit.SECONDS);
-    } finally {
-    }
+    okHttpClient.dispatcher().executorService().awaitTermination(1, TimeUnit.SECONDS);
   }
 }
