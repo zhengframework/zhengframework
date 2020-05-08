@@ -196,6 +196,18 @@
         <groupId>com.amashchenko.maven.plugin</groupId>
         <artifactId>gitflow-maven-plugin</artifactId>
         <version>${gitflow-maven-plugin.version}</version>
+        <configuration>
+          <installProject>false</installProject>
+          <gitFlowConfig>
+            <productionBranch>master</productionBranch>
+            <developmentBranch>dev</developmentBranch>
+            <featureBranchPrefix>feature/</featureBranchPrefix>
+            <releaseBranchPrefix>release/</releaseBranchPrefix>
+            <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+            <supportBranchPrefix>support/</supportBranchPrefix>
+            <origin>origin</origin>
+          </gitFlowConfig>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>com.github.ferstl</groupId>
