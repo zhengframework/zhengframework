@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhengframework</groupId>
   <artifactId>zhengframework</artifactId>
@@ -7,7 +9,8 @@
   <packaging>pom</packaging>
   <name>zheng framework</name>
   <description>zheng framework is a modular framework with many
-    ready-to-use modules</description>
+    ready-to-use modules
+  </description>
   <url>https://github.com/zhengframework/zhengframework</url>
   <inceptionYear>2020</inceptionYear>
   <licenses>
@@ -82,12 +85,15 @@
   </modules>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
     <url>https://github.com/zhengframework/zhengframework</url>
   </scm>
   <ciManagement>
     <system>github</system>
-    <url>https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22</url>
+    <url>
+      https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
+    </url>
   </ciManagement>
   <distributionManagement>
     <repository>
@@ -193,6 +199,28 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>remove-old-installers</id>
+            <goals>
+              <goal>remove-project-artifact</goal>
+            </goals>
+            <configuration>
+              <removeAll>true</removeAll>
+            </configuration>
+          </execution>
+          <execution>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>com.amashchenko.maven.plugin</groupId>
         <artifactId>gitflow-maven-plugin</artifactId>
         <version>${gitflow-maven-plugin.version}</version>
@@ -284,7 +312,7 @@
         <version>${maven-enforcer-plugin.version}</version>
         <executions>
           <execution>
-<!--            <phase>verify</phase>-->
+            <!--            <phase>verify</phase>-->
             <!--<goals>
               <goal>enforce</goal>
             </goals>-->
