@@ -197,6 +197,7 @@
         <artifactId>gitflow-maven-plugin</artifactId>
         <version>${gitflow-maven-plugin.version}</version>
         <configuration>
+          <versionProperty>revision</versionProperty>
           <installProject>false</installProject>
           <gitFlowConfig>
             <productionBranch>master</productionBranch>
@@ -206,6 +207,7 @@
             <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
             <supportBranchPrefix>support/</supportBranchPrefix>
             <origin>origin</origin>
+
           </gitFlowConfig>
         </configuration>
       </plugin>
