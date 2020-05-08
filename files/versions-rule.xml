@@ -32,5 +32,10 @@
         <ignoreVersion type="regex">3\.0.*</ignoreVersion>
       </ignoreVersions>
     </rule>
+    <rule groupId="io.lettuce" artifactId="lettuce-core" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">6\.0.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
   </rules>
 </ruleset>
