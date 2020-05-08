@@ -198,6 +198,7 @@
         <version>${gitflow-maven-plugin.version}</version>
         <configuration>
           <versionProperty>revision</versionProperty>
+          <skipUpdateVersion>true</skipUpdateVersion>
           <installProject>false</installProject>
           <gitFlowConfig>
             <productionBranch>master</productionBranch>
