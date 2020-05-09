@@ -1,4 +1,4 @@
-mvn -P extra-report,javadoc8 clean site:site
+mvn -P extra-report,javadoc8 site:site
 rm -rf docs/*
 mvn resources:resources
 git add docs

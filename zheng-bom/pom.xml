@@ -951,6 +951,11 @@
         <artifactId>zheng-job</artifactId>
         <version>${zhengframework.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.github.zhengframework</groupId>
+        <artifactId>zheng-remote-config</artifactId>
+        <version>${zhengframework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>

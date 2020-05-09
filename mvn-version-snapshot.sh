@@ -1,0 +1,1 @@
+mvn build-helper:parse-version versions:set-property -Dproperty=revision -DnewVersion="\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}-SNAPSHOT"
