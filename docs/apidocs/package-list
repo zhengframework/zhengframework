@@ -49,6 +49,8 @@ com.github.zhengframework.mongodb
 com.github.zhengframework.mybatis
 com.github.zhengframework.rabbitmq
 com.github.zhengframework.redis
+com.github.zhengframework.remoteconfig
+com.github.zhengframework.remoteconfig.servlet
 com.github.zhengframework.rest
 com.github.zhengframework.rest.metrics
 com.github.zhengframework.service
