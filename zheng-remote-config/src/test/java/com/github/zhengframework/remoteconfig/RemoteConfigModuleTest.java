@@ -18,11 +18,9 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class RemoteConfigModuleTest {
 
-  @Inject
-  private RemoteConfigServer remoteConfigServer;
+  @Inject private RemoteConfigServer remoteConfigServer;
 
-  @Inject
-  private ObjectMapper objectMapper;
+  @Inject private ObjectMapper objectMapper;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})
@@ -37,27 +35,28 @@ public class RemoteConfigModuleTest {
 
   private void testCustomExceptionMapper() {
     List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer
-        .getConfig(new String[]{"CustomThrowableRemoteConfig"}, list);
+    Map<String, RemoteConfigResponse<?>> config =
+        remoteConfigServer.getConfig(new String[] {"CustomThrowableRemoteConfig"}, list);
 
     RemoteConfigResponse<?> customThrowableRemoteConfig = config.get("CustomThrowableRemoteConfig");
-    Assert.assertEquals("CustomRemoteConfigExceptionMapper",customThrowableRemoteConfig.getMessage());
+    Assert.assertEquals(
+        "CustomRemoteConfigExceptionMapper", customThrowableRemoteConfig.getMessage());
   }
 
   private void testNotFound() {
     List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer
-        .getConfig(new String[]{"testNotFound"}, list);
+    Map<String, RemoteConfigResponse<?>> config =
+        remoteConfigServer.getConfig(new String[] {"testNotFound"}, list);
     RemoteConfigResponse<?> testNotFound = config.get("testNotFound");
     Assert.assertFalse(testNotFound.isSuccess());
-    Assert.assertEquals(String.format(Locale.ENGLISH, "'%s' not found", "testNotFound"),
-        testNotFound.getMessage());
+    Assert.assertEquals(
+        String.format(Locale.ENGLISH, "'%s' not found", "testNotFound"), testNotFound.getMessage());
   }
 
   private void testMultiKeys() {
     List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer
-        .getConfig(new String[]{"key1", "key2"}, list);
+    Map<String, RemoteConfigResponse<?>> config =
+        remoteConfigServer.getConfig(new String[] {"key1", "key2"}, list);
     RemoteConfigResponse<?> key1 = config.get("key1");
     RemoteConfigResponse<?> key2 = config.get("key2");
     Assert.assertTrue(key1.isSuccess());
@@ -67,8 +66,8 @@ public class RemoteConfigModuleTest {
 
   private void testThrowable() {
     List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer
-        .getConfig(new String[]{"throwable"}, list);
+    Map<String, RemoteConfigResponse<?>> config =
+        remoteConfigServer.getConfig(new String[] {"throwable"}, list);
     RemoteConfigResponse<?> throwable = config.get("throwable");
     Assert.assertFalse(throwable.isSuccess());
     Assert.assertEquals(ThrowableRemoteConfig.MSG, throwable.getMessage());
@@ -79,13 +78,12 @@ public class RemoteConfigModuleTest {
     List<ConfigParam> list = new ArrayList<>();
     list.add(ConfigParam.builder().key("k").value("k").build());
     list.add(ConfigParam.builder().key("k2").value("k2").build());
-    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(new String[]{
-        "echo"
-    }, list);
+    Map<String, RemoteConfigResponse<?>> config =
+        remoteConfigServer.getConfig(new String[] {"echo"}, list);
 
-    RemoteConfigResponse<List<ConfigParam>> echo = (RemoteConfigResponse<List<ConfigParam>>) config
-        .get("echo");
-    log.info("echo={}",objectMapper.writeValueAsString(echo));
+    RemoteConfigResponse<List<ConfigParam>> echo =
+        (RemoteConfigResponse<List<ConfigParam>>) config.get("echo");
+    log.info("echo={}", objectMapper.writeValueAsString(echo));
     Assert.assertTrue(echo.isSuccess());
     Assert.assertEquals(list, echo.getData());
   }
