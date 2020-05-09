@@ -5,10 +5,14 @@ please go to website [zhengframework](https://zhengframework.github.io/zhengfram
 ![Java CI with Maven](https://github.com/zhengframework/zhengframework/workflows/Java%20CI%20with%20Maven/badge.svg)
 [![][maven img]][maven]
 [![][release img]][release]
+[![][snapshot img]][snapshot]
 [![][license img]][license]
 
 [maven]:http://search.maven.org/#search|gav|1|g:"com.github.zhengframework"%20AND%20a:"zheng-core"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/com.github.zhengframework/zheng-bootstrap/badge.svg
+
+[snapshot]:https://github.com/zhengframework/zhengframework
+[snapshot img]:https://img.shields.io/nexus/s/com.github.zhengframework/zheng-core?server=https%3A%2F%2Foss.sonatype.org
 
 [release]:https://github.com/zhengframework/zhengframework/releases
 [release img]:https://img.shields.io/github/v/release/zhengframework/zhengframework.svg
