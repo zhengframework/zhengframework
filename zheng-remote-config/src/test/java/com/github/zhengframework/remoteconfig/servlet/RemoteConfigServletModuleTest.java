@@ -22,33 +22,34 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class RemoteConfigServletModuleTest {
 
-  @Inject
-  private RemoteConfigServer remoteConfigServer;
+  @Inject private RemoteConfigServer remoteConfigServer;
 
-  @Inject
-  private WebConfig webConfig;
+  @Inject private WebConfig webConfig;
 
-  @Inject
-  private RemoteConfigServerServletConfig remoteConfigServerServletConfig;
+  @Inject private RemoteConfigServerServletConfig remoteConfigServerServletConfig;
 
-  @Inject
-  private ObjectMapper objectMapper;
+  @Inject private ObjectMapper objectMapper;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})
   public void configureServlets() throws IOException {
     OkHttpClient okHttpClient = new Builder().build();
-    Response response = okHttpClient.newCall(new Request.Builder()
-        .url("http://localhost:"
-            + webConfig.getPort()
-            + remoteConfigServerServletConfig.getBasePath()
-            + "/?configNames=echo&configNames=testNotFound")
-        .get()
-        .addHeader("k1","v1")
-        .build()).execute();
+    Response response =
+        okHttpClient
+            .newCall(
+                new Request.Builder()
+                    .url(
+                        "http://localhost:"
+                            + webConfig.getPort()
+                            + remoteConfigServerServletConfig.getBasePath()
+                            + "/?configNames=echo&configNames=testNotFound")
+                    .get()
+                    .addHeader("k1", "v1")
+                    .build())
+            .execute();
 
     String string = Objects.requireNonNull(response.body()).string();
-    log.info("string={}",string);
+    log.info("string={}", string);
     Assert.assertEquals(
         "{\"testNotFound\":{\"data\":null,\"success\":false,\"message\":\"'testNotFound' not found\"},\"echo\":{\"data\":[{\"key\":\"k1\",\"value\":\"v1\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"},{\"key\":\"User-Agent\",\"value\":\"okhttp/4.6.0\"},{\"key\":\"Host\",\"value\":\"localhost:8080\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"success\":true,\"message\":null}}",
         string);

@@ -1,5 +1,25 @@
 package com.github.zhengframework.remoteconfig.servlet;
 
+/*-
+ * #%L
+ * zheng-remote-config
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.zhengframework.remoteconfig.ConfigParam;
 import com.github.zhengframework.remoteconfig.RemoteConfigResponse;
@@ -24,14 +44,13 @@ public class RemoteConfigServerServlet extends HttpServlet {
 
   private static final long serialVersionUID = 3063575731127695929L;
 
-  private RemoteConfigServer remoteConfigServer;
+  private transient RemoteConfigServer remoteConfigServer;
 
   private ObjectMapper objectMapper;
 
   @Inject
   public RemoteConfigServerServlet(
-      RemoteConfigServer remoteConfigServer,
-      ObjectMapper objectMapper) {
+      RemoteConfigServer remoteConfigServer, ObjectMapper objectMapper) {
     this.remoteConfigServer = remoteConfigServer;
     this.objectMapper = objectMapper;
   }
@@ -56,10 +75,10 @@ public class RemoteConfigServerServlet extends HttpServlet {
       configParamList.add(ConfigParam.builder().key(key).value(value).build());
     }
 
-    log.debug("keys={} configParamList={}", Arrays.toString(names),configParamList);
+    log.debug("keys={} configParamList={}", Arrays.toString(names), configParamList);
 
-    Map<String, RemoteConfigResponse<?>> responseMap = remoteConfigServer
-        .getConfig(names, configParamList);
+    Map<String, RemoteConfigResponse<?>> responseMap =
+        remoteConfigServer.getConfig(names, configParamList);
     objectMapper.writeValue(resp.getOutputStream(), responseMap);
   }
 }

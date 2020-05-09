@@ -1,5 +1,25 @@
 package com.github.zhengframework.remoteconfig;
 
+/*-
+ * #%L
+ * zheng-remote-config
+ * %%
+ * Copyright (C) 2020 Zheng MingHai
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,8 +41,7 @@ public class DefaultRemoteConfigServer implements RemoteConfigServer {
 
   @Inject
   public DefaultRemoteConfigServer(
-      RemoteConfigExceptionMapper remoteConfigExceptionMapper,
-      RemoteConfigRegistry registry) {
+      RemoteConfigExceptionMapper remoteConfigExceptionMapper, RemoteConfigRegistry registry) {
     this.remoteConfigExceptionMapper = remoteConfigExceptionMapper;
     this.registry = registry;
     init();
@@ -38,8 +57,8 @@ public class DefaultRemoteConfigServer implements RemoteConfigServer {
   }
 
   @Override
-  public Map<String, RemoteConfigResponse<?>> getConfig(String[] configKeys,
-      List<ConfigParam> configParams) {
+  public Map<String, RemoteConfigResponse<?>> getConfig(
+      String[] configKeys, List<ConfigParam> configParams) {
     String[] keys = Optional.ofNullable(configKeys).orElse(new String[0]);
     List<ConfigParam> configParamList = Optional.ofNullable(configParams).orElse(new ArrayList<>());
     Map<String, RemoteConfigResponse<?>> map = new HashMap<>();
@@ -59,19 +78,18 @@ public class DefaultRemoteConfigServer implements RemoteConfigServer {
 
     return map;
 
-//    return Arrays.stream(keys)
-//        .map(key -> Pair.of(key, configMap.getOrDefault(key, new NotFound(key))))
-//        .map(remoteConfigPair -> {
-//          try {
-//            return Pair.of(remoteConfigPair.getKey(),
-//                remoteConfigPair.getValue().get(ImmutableList.copyOf(configParamList)));
-//          } catch (Exception e) {
-//            return Pair.of(remoteConfigPair.getKey(), remoteConfigExceptionMapper.resolve(e));
-//          }
-//        }).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
+    //    return Arrays.stream(keys)
+    //        .map(key -> Pair.of(key, configMap.getOrDefault(key, new NotFound(key))))
+    //        .map(remoteConfigPair -> {
+    //          try {
+    //            return Pair.of(remoteConfigPair.getKey(),
+    //                remoteConfigPair.getValue().get(ImmutableList.copyOf(configParamList)));
+    //          } catch (Exception e) {
+    //            return Pair.of(remoteConfigPair.getKey(), remoteConfigExceptionMapper.resolve(e));
+    //          }
+    //        }).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
 
   }
-
 
   public static final class NotFound implements RemoteConfig {
 
