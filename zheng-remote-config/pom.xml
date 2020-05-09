@@ -71,5 +71,12 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
+  <build>
+    <resources>
+      <resource>
+        <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
+        <directory>${project.build.directory}/site/</directory>
+      </resource>
+    </resources>
+  </build>
 </project>
