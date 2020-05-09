@@ -40,10 +40,6 @@ public class WebjarsModule extends ConfigurationAwareServletModule {
     path = PathUtils.fixPath(path);
     Map<String, String> initParams =
         Collections.singletonMap("disableCache", "" + webjarsConfig.isDisableCache());
-    if (path == null) {
-      serve("/webjars/*").with(WebjarsServlet.class, initParams);
-    } else {
-      serve(path + "/*").with(WebjarsServlet.class, initParams);
-    }
+    serve(path + "/*").with(WebjarsServlet.class, initParams);
   }
 }
