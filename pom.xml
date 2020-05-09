@@ -82,6 +82,7 @@
     <module>zheng-module-template</module>
     <module>zheng-jdbc-ebean</module>
     <module>zheng-job</module>
+    <module>zheng-remote-config</module>
   </modules>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
