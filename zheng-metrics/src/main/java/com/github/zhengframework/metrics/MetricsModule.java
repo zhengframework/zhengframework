@@ -21,6 +21,12 @@ package com.github.zhengframework.metrics;
  */
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.jvm.ClassLoadingGaugeSet;
+import com.codahale.metrics.jvm.FileDescriptorRatioGauge;
+import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
+import com.codahale.metrics.jvm.JvmAttributeGaugeSet;
+import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
+import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.palominolabs.metrics.guice.GaugeInstanceClassMetricNamer;
@@ -44,6 +50,9 @@ public class MetricsModule extends ConfigurationAwareModule {
 
     if (metricsConfig.isEnable()) {
       MetricRegistry metricRegistry = new MetricRegistry();
+
+      defaultMetric(metricRegistry);
+
       MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
       AnnotationResolver annotationResolver = new MethodAnnotationResolver();
       bind(MetricRegistry.class).toInstance(metricRegistry);
@@ -59,5 +68,16 @@ public class MetricsModule extends ConfigurationAwareModule {
     } else {
       log.warn("MetricsModule is disable");
     }
+  }
+
+  protected void defaultMetric(MetricRegistry metricRegistry) {
+    metricRegistry.register(MetricRegistry.name("jvm", "gc"), new GarbageCollectorMetricSet());
+    metricRegistry.register(MetricRegistry.name("jvm", "memory"), new MemoryUsageGaugeSet());
+    metricRegistry
+        .register(MetricRegistry.name("jvm", "thread-states"), new ThreadStatesGaugeSet());
+    metricRegistry
+        .register(MetricRegistry.name("jvm", "fd", "usage"), new FileDescriptorRatioGauge());
+    metricRegistry.register(MetricRegistry.name("jvm", "attribute"), new JvmAttributeGaugeSet());
+    metricRegistry.register(MetricRegistry.name("jvm", "class"), new ClassLoadingGaugeSet());
   }
 }
