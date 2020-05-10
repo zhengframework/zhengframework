@@ -22,22 +22,34 @@ package com.github.zhengframework.healthcheck;
 
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.health.jvm.ThreadDeadlockHealthCheck;
+import com.github.zhengframework.configuration.Configuration;
+import com.github.zhengframework.configuration.ConfigurationAwareModule;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.healthcheck.datasource.DataSourceHealthCheck;
 import com.github.zhengframework.healthcheck.sys.MemoryStatusHealthCheck;
 import com.github.zhengframework.healthcheck.sys.SystemLoadHealthCheck;
-import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.OptionalBinder;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
-public class HealthCheckModule extends AbstractModule {
+public class HealthCheckModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    OptionalBinder.newOptionalBinder(binder(), HealthCheckRegistry.class)
-        .setDefault()
-        .toInstance(new HealthCheckRegistry());
-    bind(HealthCheckManagedService.class).asEagerSingleton();
+    Configuration configuration = getConfiguration();
+    HealthCheckConfig healthCheckConfig = ConfigurationBeanMapper
+        .resolve(configuration, "", HealthCheckConfig.class);
+    bind(HealthCheckConfig.class).toInstance(healthCheckConfig);
+    if (healthCheckConfig.isEnable()) {
+      OptionalBinder.newOptionalBinder(binder(), HealthCheckRegistry.class)
+          .setDefault()
+          .toInstance(new HealthCheckRegistry());
+      bind(HealthCheckManagedService.class).asEagerSingleton();
+      bindDefaultHealthCheck();
+    }
+  }
+
+  protected void bindDefaultHealthCheck() {
     bind(SystemLoadHealthCheck.class);
     bind(ThreadDeadlockHealthCheck.class);
     bind(MemoryStatusHealthCheck.class);

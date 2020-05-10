@@ -40,19 +40,16 @@ public class HealthCheckManagedService implements Service {
   private final HealthCheckConfig config;
   private final HealthCheckRegistry healthCheckRegistry;
   private final HealthCheckScanner healthCheckScanner;
-  private final Injector injector;
   private ScheduledExecutorService scheduledExecutorService;
 
   @Inject
   public HealthCheckManagedService(
       HealthCheckConfig config,
       HealthCheckRegistry healthCheckRegistry,
-      HealthCheckScanner healthCheckScanner,
-      Injector injector) {
+      HealthCheckScanner healthCheckScanner) {
     this.config = config;
     this.healthCheckRegistry = healthCheckRegistry;
     this.healthCheckScanner = healthCheckScanner;
-    this.injector = injector;
     scheduledExecutorService =
         Executors.newScheduledThreadPool(
             Runtime.getRuntime().availableProcessors(),
