@@ -27,7 +27,6 @@ import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.metrics.MetricsConfig;
 import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebConfig;
-import java.util.Map;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,19 +36,16 @@ public class MetricsServletModule extends ConfigurationAwareServletModule {
   @Override
   protected void configureServlets() {
     Configuration configuration = getConfiguration();
-    Map<String, MetricsConfig> metricsConfigMap =
-        ConfigurationBeanMapper.resolve(configuration, MetricsConfig.class);
-    MetricsConfig metricsConfig = metricsConfigMap.getOrDefault("", new MetricsConfig());
+    MetricsConfig metricsConfig =
+        ConfigurationBeanMapper.resolve(configuration, "", MetricsConfig.class);
 
-    Map<String, MetricsServletConfig> metricsServletConfigMap =
-        ConfigurationBeanMapper.resolve(configuration, MetricsServletConfig.class);
     MetricsServletConfig metricsServletConfig =
-        metricsServletConfigMap.getOrDefault("", new MetricsServletConfig());
+        ConfigurationBeanMapper.resolve(configuration, "", MetricsServletConfig.class);
+    bind(MetricsServletConfig.class).toInstance(metricsServletConfig);
+
     if (metricsConfig.isEnable()) {
       if (metricsServletConfig.isEnable()) {
-        Map<String, WebConfig> webConfigMap =
-            ConfigurationBeanMapper.resolve(configuration, WebConfig.class);
-        WebConfig webConfig = webConfigMap.getOrDefault("", new WebConfig());
+        WebConfig webConfig = ConfigurationBeanMapper.resolve(configuration, "", WebConfig.class);
 
         String path = PathUtils.fixPath(metricsServletConfig.getPath());
         serve(path + "/*").with(AdminServlet.class);
