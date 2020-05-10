@@ -13,6 +13,7 @@
       <w>hikari</w>
       <w>hikaricp</w>
       <w>injectee</w>
+      <w>jaxrs</w>
       <w>jcache</w>
       <w>jdbc</w>
       <w>jdbi</w>

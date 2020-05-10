@@ -26,7 +26,6 @@ import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
 import com.google.inject.Scopes;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -46,10 +45,10 @@ public class RestModule extends ConfigurationAwareServletModule {
     install(new RequestScopeModule());
     Configuration configuration = getConfiguration();
 
-    Map<String, RestConfig> restConfigMap =
-        ConfigurationBeanMapper.resolve(configuration, RestConfig.class);
-    RestConfig restConfig = restConfigMap.getOrDefault("", new RestConfig());
+    RestConfig restConfig =
+        ConfigurationBeanMapper.resolve(configuration, "", RestConfig.class);
     bind(RestConfig.class).toInstance(restConfig);
+
     String path = PathUtils.fixPath(restConfig.getPath());
     HashMap<String, String> hashMap = new HashMap<>();
     for (Entry<String, String> entry : restConfig.getProperties().entrySet()) {
