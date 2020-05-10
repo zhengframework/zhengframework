@@ -23,7 +23,6 @@ package com.github.zhengframework.job;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.inject.multibindings.OptionalBinder;
-import java.util.Map;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerFactory;
 
@@ -31,9 +30,8 @@ public class JobModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, JobConfig> configMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), JobConfig.class);
-    JobConfig jobConfig = configMap.get("");
+    JobConfig jobConfig =
+        ConfigurationBeanMapper.resolve(getConfiguration(), "", JobConfig.class);
     bind(JobConfig.class).toInstance(jobConfig);
     bind(GuiceJobFactory.class);
     OptionalBinder.newOptionalBinder(binder(), SchedulerFactory.class)
