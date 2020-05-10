@@ -20,6 +20,8 @@ package com.github.zhengframework.webjars;
  * #L%
  */
 
+import static com.github.zhengframework.webjars.WebjarsServlet.DISABLE_CACHE;
+
 import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
@@ -31,15 +33,12 @@ public class WebjarsModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Map<String, WebjarsConfig> configMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), WebjarsConfig.class);
-    WebjarsConfig webjarsConfig = configMap.getOrDefault("", new WebjarsConfig());
+    WebjarsConfig webjarsConfig = ConfigurationBeanMapper
+        .resolve(getConfiguration(), "", WebjarsConfig.class);
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
     bind(WebjarsServlet.class).in(Singleton.class);
-    String path = webjarsConfig.getBasePath();
-    path = PathUtils.fixPath(path);
     Map<String, String> initParams =
-        Collections.singletonMap("disableCache", "" + webjarsConfig.isDisableCache());
-    serve(path + "/*").with(WebjarsServlet.class, initParams);
+        Collections.singletonMap(DISABLE_CACHE, "" + webjarsConfig.isDisableCache());
+    serve(PathUtils.fixPath(webjarsConfig.getBasePath()) + "/*").with(WebjarsServlet.class, initParams);
   }
 }
