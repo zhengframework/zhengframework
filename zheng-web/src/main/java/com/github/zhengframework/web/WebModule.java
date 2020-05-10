@@ -23,27 +23,29 @@ package com.github.zhengframework.web;
 import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.inject.TypeLiteral;
+import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
-import java.util.Map;
 import javax.websocket.server.ServerEndpointConfig;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@EqualsAndHashCode(
-    callSuper = false,
-    of = {})
+@EqualsAndHashCode(callSuper = false)
 public class WebModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Map<String, WebConfig> configMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), WebConfig.class);
-    WebConfig webConfig = configMap.getOrDefault("", new WebConfig());
+    WebConfig webConfig = ConfigurationBeanMapper.resolve(getConfiguration(), "", WebConfig.class);
     bind(WebConfig.class).toInstance(webConfig);
-    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<WebSocketEndpoint>() {});
-    OptionalBinder.newOptionalBinder(binder(), new TypeLiteral<ServerEndpointConfig>() {});
+
+    // WebSocket
+    bind(GuiceServerEndpointConfigurator.class);
+    Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
+    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
+    });
+
     requireBinding(WebServer.class);
     bind(WebServerService.class).asEagerSingleton();
+
   }
 }
