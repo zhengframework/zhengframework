@@ -43,13 +43,14 @@ import lombok.extern.slf4j.Slf4j;
 public class RemoteConfigServerServlet extends HttpServlet {
 
   private static final long serialVersionUID = 3063575731127695929L;
-  private transient final RemoteConfigServerServletConfig remoteConfigServerServletConfig;
+  private final transient RemoteConfigServerServletConfig remoteConfigServerServletConfig;
   private transient RemoteConfigServer remoteConfigServer;
   private ObjectMapper objectMapper;
 
   @Inject
   public RemoteConfigServerServlet(
-      RemoteConfigServer remoteConfigServer, ObjectMapper objectMapper,
+      RemoteConfigServer remoteConfigServer,
+      ObjectMapper objectMapper,
       RemoteConfigServerServletConfig remoteConfigServerServletConfig) {
     this.remoteConfigServer = remoteConfigServer;
     this.objectMapper = objectMapper;
@@ -77,11 +78,10 @@ public class RemoteConfigServerServlet extends HttpServlet {
 
     log.debug("keys={} configParamList={}", Arrays.toString(keys), configParamList);
 
-    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys(keys)
-        .configParams(configParamList).build();
+    RemoteConfigRequest request =
+        RemoteConfigRequest.builder().configKeys(keys).configParams(configParamList).build();
 
-    Map<String, RemoteConfigResponse<?>> responseMap =
-        remoteConfigServer.getConfig(request);
+    Map<String, RemoteConfigResponse<?>> responseMap = remoteConfigServer.getConfig(request);
     objectMapper.writeValue(resp.getOutputStream(), responseMap);
   }
 }

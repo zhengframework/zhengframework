@@ -33,11 +33,16 @@ public class RemoteConfigServletModule extends ConfigurationAwareServletModule {
   protected void configureServlets() {
     Configuration configuration = getConfiguration();
     RemoteConfigServerConfig remoteConfigServerConfig =
-        ConfigurationBeanMapper.resolve(configuration, "", RemoteConfigServerConfig.class);
+        ConfigurationBeanMapper.resolve(
+            configuration,
+            RemoteConfigServerConfig.ZHENG_REMOTE_CONFIG,
+            RemoteConfigServerConfig.class);
     if (remoteConfigServerConfig.isEnable()) {
       RemoteConfigServerServletConfig remoteConfigServerServletConfig =
           ConfigurationBeanMapper.resolve(
-              configuration, "", RemoteConfigServerServletConfig.class);
+              configuration,
+              RemoteConfigServerServletConfig.ZHENG_REMOTE_CONFIG_SERVLET,
+              RemoteConfigServerServletConfig.class);
       bind(RemoteConfigServerServletConfig.class).toInstance(remoteConfigServerServletConfig);
       if (remoteConfigServerServletConfig.isEnable()) {
         bind(RemoteConfigServerServlet.class).in(Singleton.class);

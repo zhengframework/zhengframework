@@ -30,7 +30,10 @@ public class RemoteConfigModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     RemoteConfigServerConfig remoteConfigServerConfig =
-        ConfigurationBeanMapper.resolve(getConfiguration(), "", RemoteConfigServerConfig.class);
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(),
+            RemoteConfigServerConfig.ZHENG_REMOTE_CONFIG,
+            RemoteConfigServerConfig.class);
 
     bind(RemoteConfigServerConfig.class).toInstance(remoteConfigServerConfig);
 

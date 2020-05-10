@@ -34,10 +34,10 @@ import org.kohsuke.MetaInfServices;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode
-@SuppressWarnings("SpellCheckingInspection")
-@ConfigurationInfo(prefix = "zheng.remoteconfig")
+@ConfigurationInfo(prefix = RemoteConfigServerConfig.ZHENG_REMOTE_CONFIG)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RemoteConfigServerConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_REMOTE_CONFIG = "zheng.remoteConfig";
   private boolean enable = true;
 }

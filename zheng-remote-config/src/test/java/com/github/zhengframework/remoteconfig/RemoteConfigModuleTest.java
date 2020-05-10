@@ -18,11 +18,9 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class RemoteConfigModuleTest {
 
-  @Inject
-  private RemoteConfigServer remoteConfigServer;
+  @Inject private RemoteConfigServer remoteConfigServer;
 
-  @Inject
-  private ObjectMapper objectMapper;
+  @Inject private ObjectMapper objectMapper;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})
@@ -36,10 +34,9 @@ public class RemoteConfigModuleTest {
   }
 
   private void testCustomExceptionMapper() {
-    RemoteConfigRequest request = RemoteConfigRequest.builder()
-        .configKeys("CustomThrowableRemoteConfig").build();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(request);
+    RemoteConfigRequest request =
+        RemoteConfigRequest.builder().configKeys("CustomThrowableRemoteConfig").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
 
     RemoteConfigResponse<?> customThrowableRemoteConfig = config.get("CustomThrowableRemoteConfig");
     Assert.assertEquals(
@@ -47,10 +44,8 @@ public class RemoteConfigModuleTest {
   }
 
   private void testNotFound() {
-    RemoteConfigRequest request = RemoteConfigRequest.builder()
-        .configKeys("testNotFound").build();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(request);
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys("testNotFound").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
     RemoteConfigResponse<?> testNotFound = config.get("testNotFound");
     Assert.assertFalse(testNotFound.isSuccess());
     Assert.assertEquals(
@@ -58,10 +53,8 @@ public class RemoteConfigModuleTest {
   }
 
   private void testMultiKeys() {
-    RemoteConfigRequest request = RemoteConfigRequest.builder()
-        .configKeys("key1", "key2").build();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(request);
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys("key1", "key2").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
     RemoteConfigResponse<?> key1 = config.get("key1");
     RemoteConfigResponse<?> key2 = config.get("key2");
     Assert.assertTrue(key1.isSuccess());
@@ -70,10 +63,8 @@ public class RemoteConfigModuleTest {
   }
 
   private void testThrowable() {
-    RemoteConfigRequest request = RemoteConfigRequest.builder()
-        .configKeys("throwable").build();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(request);
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys("throwable").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
     RemoteConfigResponse<?> throwable = config.get("throwable");
     Assert.assertFalse(throwable.isSuccess());
     Assert.assertEquals(ThrowableRemoteConfig.MSG, throwable.getMessage());
@@ -82,12 +73,11 @@ public class RemoteConfigModuleTest {
   @SuppressWarnings("unchecked")
   private void testEcho() throws JsonProcessingException {
     List<ConfigParam> list = new ArrayList<>();
-    list.add(ConfigParam.create("k","k"));
-    list.add(ConfigParam.create("k2","k2"));
-    RemoteConfigRequest request = RemoteConfigRequest.builder()
-        .configKeys("echo").configParams(list).build();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(request);
+    list.add(ConfigParam.create("k", "k"));
+    list.add(ConfigParam.create("k2", "k2"));
+    RemoteConfigRequest request =
+        RemoteConfigRequest.builder().configKeys("echo").configParams(list).build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
 
     RemoteConfigResponse<List<ConfigParam>> echo =
         (RemoteConfigResponse<List<ConfigParam>>) config.get("echo");

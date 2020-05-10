@@ -20,13 +20,11 @@ package com.github.zhengframework.remoteconfig;
  * #L%
  */
 
-import java.util.List;
 import java.util.Map;
 
 public interface RemoteConfigServer {
 
   void init();
 
-  Map<String, RemoteConfigResponse<?>> getConfig(
-      RemoteConfigRequest request);
+  Map<String, RemoteConfigResponse<?>> getConfig(RemoteConfigRequest request);
 }

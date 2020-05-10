@@ -35,10 +35,8 @@ import lombok.ToString;
 @Builder
 public class ConfigParam {
 
-  @Getter
-  private String key;
-  @Getter
-  private String value;
+  @Getter private String key;
+  @Getter private String value;
 
   public static ConfigParam create(String key, String value) {
     return ConfigParam.builder()
@@ -46,5 +44,4 @@ public class ConfigParam {
         .value(Objects.requireNonNull(value, "value is null"))
         .build();
   }
-
 }
