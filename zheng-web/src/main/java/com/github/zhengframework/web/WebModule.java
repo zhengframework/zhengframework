@@ -24,7 +24,6 @@ import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
-import com.google.inject.multibindings.OptionalBinder;
 import javax.websocket.server.ServerEndpointConfig;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -35,17 +34,16 @@ public class WebModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    WebConfig webConfig = ConfigurationBeanMapper.resolve(getConfiguration(), "", WebConfig.class);
+    WebConfig webConfig =
+        ConfigurationBeanMapper.resolve(getConfiguration(), WebConfig.ZHENG_WEB, WebConfig.class);
     bind(WebConfig.class).toInstance(webConfig);
 
     // WebSocket
     bind(GuiceServerEndpointConfigurator.class);
     Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
-    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {
-    });
+    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {});
 
     requireBinding(WebServer.class);
     bind(WebServerService.class).asEagerSingleton();
-
   }
 }

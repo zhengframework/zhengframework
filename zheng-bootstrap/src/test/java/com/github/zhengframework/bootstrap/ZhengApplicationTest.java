@@ -11,8 +11,7 @@ public class ZhengApplicationTest {
     ZhengApplication zhengApplication = ZhengApplicationBuilder.create().build();
     zhengApplication.start();
     GuiceConfig guiceConfig = zhengApplication.getInjector().getInstance(GuiceConfig.class);
-    log.info("stage={}",guiceConfig.getStage());
+    log.info("stage={}", guiceConfig.getStage());
     zhengApplication.stop();
-
   }
 }

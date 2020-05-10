@@ -21,10 +21,8 @@ import org.junit.runner.RunWith;
 @WithZhengApplication(moduleClass = MyModule.class)
 public class CacheModuleTest {
 
-  @Inject
-  CacheManager cacheManager;
-  @Inject
-  Service service;
+  @Inject CacheManager cacheManager;
+  @Inject Service service;
 
   @Test
   public void factory() {

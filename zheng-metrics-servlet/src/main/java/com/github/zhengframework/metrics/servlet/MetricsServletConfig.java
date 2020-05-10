@@ -33,9 +33,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.metrics.servlet")
+@ConfigurationInfo(prefix = MetricsServletConfig.ZHENG_METRICS_SERVLET)
 public class MetricsServletConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_METRICS_SERVLET = "zheng.metrics.servlet";
   private boolean enable = true;
   private String path = "/metrics";
 }

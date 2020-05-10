@@ -31,7 +31,7 @@ public class JobModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     JobConfig jobConfig =
-        ConfigurationBeanMapper.resolve(getConfiguration(), "", JobConfig.class);
+        ConfigurationBeanMapper.resolve(getConfiguration(), JobConfig.ZHENG_JOB, JobConfig.class);
     bind(JobConfig.class).toInstance(jobConfig);
     bind(GuiceJobFactory.class);
     OptionalBinder.newOptionalBinder(binder(), SchedulerFactory.class)

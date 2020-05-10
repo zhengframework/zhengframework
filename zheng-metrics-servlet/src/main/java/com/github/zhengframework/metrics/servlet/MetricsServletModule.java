@@ -37,15 +37,18 @@ public class MetricsServletModule extends ConfigurationAwareServletModule {
   protected void configureServlets() {
     Configuration configuration = getConfiguration();
     MetricsConfig metricsConfig =
-        ConfigurationBeanMapper.resolve(configuration, "", MetricsConfig.class);
+        ConfigurationBeanMapper.resolve(
+            configuration, MetricsConfig.ZHENG_METRICS, MetricsConfig.class);
 
     MetricsServletConfig metricsServletConfig =
-        ConfigurationBeanMapper.resolve(configuration, "", MetricsServletConfig.class);
+        ConfigurationBeanMapper.resolve(
+            configuration, MetricsServletConfig.ZHENG_METRICS_SERVLET, MetricsServletConfig.class);
     bind(MetricsServletConfig.class).toInstance(metricsServletConfig);
 
     if (metricsConfig.isEnable()) {
       if (metricsServletConfig.isEnable()) {
-        WebConfig webConfig = ConfigurationBeanMapper.resolve(configuration, "", WebConfig.class);
+        WebConfig webConfig =
+            ConfigurationBeanMapper.resolve(configuration, WebConfig.ZHENG_WEB, WebConfig.class);
 
         String path = PathUtils.fixPath(metricsServletConfig.getPath());
         serve(path + "/*").with(AdminServlet.class);

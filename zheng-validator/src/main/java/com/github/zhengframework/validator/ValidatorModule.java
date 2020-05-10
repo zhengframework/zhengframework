@@ -32,7 +32,6 @@ import com.github.zhengframework.validator.group.MethodGroupsFactory;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.OptionalBinder;
 import java.lang.annotation.Annotation;
-import java.util.Map;
 import java.util.Objects;
 import javax.validation.ConstraintValidatorFactory;
 import javax.validation.MessageInterpolator;
@@ -47,7 +46,9 @@ public class ValidatorModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    ValidatorConfig validatorConfig = ConfigurationBeanMapper.resolve(getConfiguration(),"", ValidatorConfig.class);
+    ValidatorConfig validatorConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), ValidatorConfig.ZHENG_VALIDATOR, ValidatorConfig.class);
     if (validatorConfig.isEnable()) {
       OptionalBinder.newOptionalBinder(binder(), ConstraintValidatorFactory.class)
           .setDefault()

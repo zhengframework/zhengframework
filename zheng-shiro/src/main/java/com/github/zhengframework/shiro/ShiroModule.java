@@ -43,15 +43,14 @@ import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionManager;
 
-/**
- * https://shiro.apache.org/configuration.html
- */
+/** https://shiro.apache.org/configuration.html */
 public class ShiroModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    ShiroConfig shiroConfig = ConfigurationBeanMapper
-        .resolve(getConfiguration(), "", ShiroConfig.class);
+    ShiroConfig shiroConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), ShiroConfig.ZHENG_SHIRO, ShiroConfig.class);
     bind(ShiroConfig.class).toInstance(shiroConfig);
 
     Ini ini = new Ini();

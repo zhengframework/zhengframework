@@ -38,7 +38,8 @@ public class MetricsModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     MetricsConfig metricsConfig =
-        ConfigurationBeanMapper.resolve(getConfiguration(), "", MetricsConfig.class);
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), MetricsConfig.ZHENG_METRICS, MetricsConfig.class);
     bind(MetricsConfig.class).toInstance(metricsConfig);
 
     if (metricsConfig.isEnable()) {

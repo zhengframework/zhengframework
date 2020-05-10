@@ -35,9 +35,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.job")
+@ConfigurationInfo(prefix = JobConfig.ZHENG_JOB)
 public class JobConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_JOB = "zheng.job";
   private boolean enable = true;
 
   private String defaultTimezone;

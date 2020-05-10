@@ -44,9 +44,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.mybatis", supportGroup = true)
+@ConfigurationInfo(prefix = MyBatisConfig.ZHENG_MYBATIS, supportGroup = true)
 public class MyBatisConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_MYBATIS = "zheng.mybatis";
   private String environmentId;
   private boolean lazyLoadingEnabled = false;
   private boolean aggressiveLazyLoading = true;

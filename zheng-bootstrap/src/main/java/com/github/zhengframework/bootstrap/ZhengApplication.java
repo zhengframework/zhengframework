@@ -37,7 +37,6 @@ import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Stage;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -113,7 +112,8 @@ public class ZhengApplication {
       }
     }
 
-    GuiceConfig guiceConfig = ConfigurationBeanMapper.resolve(configuration, "", GuiceConfig.class);
+    GuiceConfig guiceConfig =
+        ConfigurationBeanMapper.resolve(configuration, GuiceConfig.ZHENG_GUICE, GuiceConfig.class);
     injector = Guice.createInjector(guiceConfig.getStage(), modules);
   }
 

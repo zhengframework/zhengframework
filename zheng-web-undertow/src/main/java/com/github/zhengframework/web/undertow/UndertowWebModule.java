@@ -23,9 +23,6 @@ package com.github.zhengframework.web.undertow;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.web.WebModule;
 import com.github.zhengframework.web.WebServer;
-import com.github.zhengframework.web.WebSocketEndpoint;
-import com.google.inject.TypeLiteral;
-import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import io.undertow.Undertow;
 import io.undertow.server.handlers.resource.ClassPathResourceManager;
@@ -33,7 +30,6 @@ import io.undertow.server.handlers.resource.ResourceManager;
 import io.undertow.servlet.api.ClassIntrospecter;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-import javax.websocket.server.ServerEndpointConfig;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

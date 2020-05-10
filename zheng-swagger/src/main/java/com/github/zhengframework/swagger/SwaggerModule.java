@@ -40,14 +40,16 @@ public class SwaggerModule extends ConfigurationAwareServletModule {
   protected void configureServlets() {
     Configuration configuration = getConfiguration();
 
-    SwaggerConfig swaggerConfig = ConfigurationBeanMapper
-        .resolve(configuration, "", SwaggerConfig.class);
+    SwaggerConfig swaggerConfig =
+        ConfigurationBeanMapper.resolve(
+            configuration, SwaggerConfig.ZHENG_SWAGGER, SwaggerConfig.class);
     bind(SwaggerConfig.class).toInstance(swaggerConfig);
 
-    WebConfig webConfig = ConfigurationBeanMapper.resolve(configuration, "", WebConfig.class);
+    WebConfig webConfig =
+        ConfigurationBeanMapper.resolve(configuration, WebConfig.ZHENG_WEB, WebConfig.class);
 
     RestConfig restConfig =
-        ConfigurationBeanMapper.resolve(configuration, "", RestConfig.class);
+        ConfigurationBeanMapper.resolve(configuration, RestConfig.ZHENG_REST, RestConfig.class);
 
     bind(OpenApiResource.class);
     bind(AcceptHeaderOpenApiResource.class);

@@ -33,8 +33,9 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.metrics")
+@ConfigurationInfo(prefix = MetricsConfig.ZHENG_METRICS)
 public class MetricsConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_METRICS = "zheng.metrics";
   private boolean enable = true;
 }

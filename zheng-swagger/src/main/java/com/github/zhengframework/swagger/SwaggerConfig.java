@@ -33,9 +33,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.swagger")
+@ConfigurationInfo(prefix = SwaggerConfig.ZHENG_SWAGGER)
 public final class SwaggerConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_SWAGGER = "zheng.swagger";
   private String uiPath = "/api-docs";
 
   private String apiUrl = "http://127.0.0.1:8080/openapi.json";

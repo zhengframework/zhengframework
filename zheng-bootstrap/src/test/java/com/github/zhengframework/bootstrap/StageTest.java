@@ -15,8 +15,8 @@ public class StageTest {
 
   @Test
   public void test() {
-    Configuration configuration = new MapConfiguration(
-        Collections.singletonMap("zheng.guice.stage", "DEVELOPMENT"));
+    Configuration configuration =
+        new MapConfiguration(Collections.singletonMap("zheng.guice.stage", "DEVELOPMENT"));
     Optional<Stage> stage = configuration.getEnum("zheng.guice.stage", Stage.class);
     if (stage.isPresent()) {
       log.info("stage={}", stage.get());
@@ -27,9 +27,9 @@ public class StageTest {
 
   @Test
   public void testFail() {
-    Configuration configuration = new MapConfiguration(
-        Collections.singletonMap("zheng.guice.stage", "DEV"));
-    try{
+    Configuration configuration =
+        new MapConfiguration(Collections.singletonMap("zheng.guice.stage", "DEV"));
+    try {
       Optional<Stage> stage = configuration.getEnum("zheng.guice.stage", Stage.class);
       if (stage.isPresent()) {
         log.info("stage={}", stage.get());
@@ -37,17 +37,14 @@ public class StageTest {
         log.error("not set stage");
       }
       fail("stage value is error");
-    }catch (IllegalArgumentException ignored){
+    } catch (IllegalArgumentException ignored) {
 
     }
-
   }
 
   @Test
   public void testNotSet() {
-    Configuration configuration = new MapConfiguration(
-        Collections.emptyMap()
-    );
+    Configuration configuration = new MapConfiguration(Collections.emptyMap());
     Optional<Stage> stage = configuration.getEnum("zheng.guice.stage", Stage.class);
     if (stage.isPresent()) {
       log.info("stage={}", stage.get());

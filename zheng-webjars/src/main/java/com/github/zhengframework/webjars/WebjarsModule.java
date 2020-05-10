@@ -33,12 +33,14 @@ public class WebjarsModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    WebjarsConfig webjarsConfig = ConfigurationBeanMapper
-        .resolve(getConfiguration(), "", WebjarsConfig.class);
+    WebjarsConfig webjarsConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), WebjarsConfig.ZHENG_WEBJARS, WebjarsConfig.class);
     bind(WebjarsConfig.class).toInstance(webjarsConfig);
     bind(WebjarsServlet.class).in(Singleton.class);
     Map<String, String> initParams =
         Collections.singletonMap(DISABLE_CACHE, "" + webjarsConfig.isDisableCache());
-    serve(PathUtils.fixPath(webjarsConfig.getBasePath()) + "/*").with(WebjarsServlet.class, initParams);
+    serve(PathUtils.fixPath(webjarsConfig.getBasePath()) + "/*")
+        .with(WebjarsServlet.class, initParams);
   }
 }

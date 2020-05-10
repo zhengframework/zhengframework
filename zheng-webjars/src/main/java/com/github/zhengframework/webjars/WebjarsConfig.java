@@ -33,9 +33,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.webjars")
+@ConfigurationInfo(prefix = WebjarsConfig.ZHENG_WEBJARS)
 public class WebjarsConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_WEBJARS = "zheng.webjars";
   private String basePath = "/webjars";
   private boolean disableCache = false;
 }

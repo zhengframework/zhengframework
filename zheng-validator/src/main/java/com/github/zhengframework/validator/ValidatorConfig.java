@@ -35,9 +35,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.validator")
+@ConfigurationInfo(prefix = ValidatorConfig.ZHENG_VALIDATOR)
 public class ValidatorConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_VALIDATOR = "zheng.validator";
   private boolean enable = true;
 
   private boolean annotationOnly = false;

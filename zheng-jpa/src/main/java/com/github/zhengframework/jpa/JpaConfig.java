@@ -39,9 +39,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.jpa", supportGroup = true)
+@ConfigurationInfo(prefix = JpaConfig.ZHENG_JPA, supportGroup = true)
 public class JpaConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_JPA = "zheng.jpa";
   private String persistenceUnitName;
   private String driverClassName;
   private String url;

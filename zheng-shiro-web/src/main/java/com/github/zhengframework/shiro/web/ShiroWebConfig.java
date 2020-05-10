@@ -33,9 +33,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.shiro")
+@ConfigurationInfo(prefix = ShiroWebConfig.ZHENG_SHIRO_WEB)
 public class ShiroWebConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_SHIRO_WEB = "zheng.shiro.web";
   private String iniConfig = "classpath:shiro.ini";
 
   private String path;

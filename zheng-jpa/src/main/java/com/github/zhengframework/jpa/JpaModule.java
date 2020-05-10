@@ -32,7 +32,7 @@ public class JpaModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     JpaConfig jpaConfig =
-        ConfigurationBeanMapper.resolve(getConfiguration(), "", JpaConfig.class);
+        ConfigurationBeanMapper.resolve(getConfiguration(), JpaConfig.ZHENG_JPA, JpaConfig.class);
     if (jpaConfig.getPersistenceUnitName() == null) {
       jpaConfig.setPersistenceUnitName("zheng-jpa");
     }

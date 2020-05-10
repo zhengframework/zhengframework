@@ -46,7 +46,7 @@ public class RestModule extends ConfigurationAwareServletModule {
     Configuration configuration = getConfiguration();
 
     RestConfig restConfig =
-        ConfigurationBeanMapper.resolve(configuration, "", RestConfig.class);
+        ConfigurationBeanMapper.resolve(configuration, RestConfig.ZHENG_REST, RestConfig.class);
     bind(RestConfig.class).toInstance(restConfig);
 
     String path = PathUtils.fixPath(restConfig.getPath());

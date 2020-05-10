@@ -24,7 +24,6 @@ import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.core.Configurer;
-import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.OptionalBinder;
@@ -50,7 +49,8 @@ public class CacheModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     Configuration configuration = getConfiguration();
-    CacheConfig cacheConfig = ConfigurationBeanMapper.resolve(configuration, "", CacheConfig.class);
+    CacheConfig cacheConfig =
+        ConfigurationBeanMapper.resolve(configuration, CacheConfig.ZHENG_CACHE, CacheConfig.class);
     bind(CacheConfig.class).toInstance(cacheConfig);
 
     OptionalBinder.newOptionalBinder(binder(), CachingProvider.class)

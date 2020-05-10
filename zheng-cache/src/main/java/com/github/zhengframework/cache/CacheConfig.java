@@ -33,9 +33,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.cache")
+@ConfigurationInfo(prefix = CacheConfig.ZHENG_CACHE)
 public class CacheConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_CACHE = "zheng.cache";
   private String cachingProviderName = null;
   private String cacheManagerResource = null;
   private String type = "simple";

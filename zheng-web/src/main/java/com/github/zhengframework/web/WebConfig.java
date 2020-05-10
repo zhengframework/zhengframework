@@ -36,9 +36,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.web")
+@ConfigurationInfo(prefix = WebConfig.ZHENG_WEB)
 public class WebConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_WEB = "zheng.web";
   private String contextPath = "/";
 
   private String webSocketPath = "/ws";

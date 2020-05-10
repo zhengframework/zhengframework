@@ -32,7 +32,8 @@ public class MyBatisXmlModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     MyBatisConfig myBatisConfig =
-        ConfigurationBeanMapper.resolve(getConfiguration(), "", MyBatisConfig.class);
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), MyBatisConfig.ZHENG_MYBATIS, MyBatisConfig.class);
 
     install(new MyBatisXmlInternalModule(myBatisConfig));
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();

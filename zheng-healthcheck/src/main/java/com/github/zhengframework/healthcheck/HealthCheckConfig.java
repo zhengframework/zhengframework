@@ -34,9 +34,10 @@ import org.kohsuke.MetaInfServices;
 @EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.healthCheck")
+@ConfigurationInfo(prefix = HealthCheckConfig.ZHENG_HEALTH_CHECK)
 public class HealthCheckConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_HEALTH_CHECK = "zheng.healthCheck";
   private boolean enable = true;
   private long duration = 60;
   private TimeUnit unit = TimeUnit.SECONDS;

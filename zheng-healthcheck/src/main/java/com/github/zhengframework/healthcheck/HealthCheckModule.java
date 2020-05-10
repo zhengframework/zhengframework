@@ -37,8 +37,9 @@ public class HealthCheckModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     Configuration configuration = getConfiguration();
-    HealthCheckConfig healthCheckConfig = ConfigurationBeanMapper
-        .resolve(configuration, "", HealthCheckConfig.class);
+    HealthCheckConfig healthCheckConfig =
+        ConfigurationBeanMapper.resolve(
+            configuration, HealthCheckConfig.ZHENG_HEALTH_CHECK, HealthCheckConfig.class);
     bind(HealthCheckConfig.class).toInstance(healthCheckConfig);
     if (healthCheckConfig.isEnable()) {
       OptionalBinder.newOptionalBinder(binder(), HealthCheckRegistry.class)

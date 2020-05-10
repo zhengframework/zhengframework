@@ -34,7 +34,8 @@ public class MyBatisModule extends ConfigurationAwareModule {
   @Override
   protected void configure() {
     MyBatisConfig myBatisConfig =
-        ConfigurationBeanMapper.resolve(getConfiguration(), "", MyBatisConfig.class);
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), MyBatisConfig.ZHENG_MYBATIS, MyBatisConfig.class);
 
     requireBinding(Key.get(DataSource.class));
     install(new MyBatisInternalModule(myBatisConfig));
