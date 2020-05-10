@@ -47,6 +47,11 @@
       <groupId>com.github.zhengframework</groupId>
       <artifactId>zheng-configuration</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <resources>

@@ -22,6 +22,7 @@ package com.github.zhengframework.bootstrap;
 
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.io.FileLocator;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
@@ -111,7 +112,9 @@ public class ZhengApplication {
         configurationAware.initConfiguration(configuration);
       }
     }
-    injector = Guice.createInjector(Stage.PRODUCTION, modules);
+
+    GuiceConfig guiceConfig = ConfigurationBeanMapper.resolve(configuration, "", GuiceConfig.class);
+    injector = Guice.createInjector(guiceConfig.getStage(), modules);
   }
 
   public Injector getInjector() {
