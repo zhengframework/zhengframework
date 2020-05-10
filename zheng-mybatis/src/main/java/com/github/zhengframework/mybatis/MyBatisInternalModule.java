@@ -34,6 +34,7 @@ public class MyBatisInternalModule extends org.mybatis.guice.MyBatisModule {
 
   @Override
   protected void initialize() {
+    bind(MyBatisConfig.class).toInstance(myBatisConfig);
     environmentId(myBatisConfig.getEnvironmentId());
     bindTransactionFactoryType(JdbcTransactionFactory.class);
     aggressiveLazyLoading(myBatisConfig.isAggressiveLazyLoading());

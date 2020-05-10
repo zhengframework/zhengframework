@@ -43,6 +43,7 @@ public class MyBatisXmlPrivateModule extends PrivateModule {
   @Override
   protected void configure() {
     install(new MyBatisXmlInternalModule(myBatisConfig));
+    exposeClass(Key.get(MyBatisConfig.class));
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();
     if (extraModuleClass != null) {
       try {
