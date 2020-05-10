@@ -28,5 +28,5 @@ public interface RemoteConfigServer {
   void init();
 
   Map<String, RemoteConfigResponse<?>> getConfig(
-      String[] configKeys, List<ConfigParam> configParams);
+      RemoteConfigRequest request);
 }

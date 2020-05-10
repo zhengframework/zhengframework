@@ -23,17 +23,15 @@ package com.github.zhengframework.remoteconfig;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.inject.multibindings.OptionalBinder;
-import java.util.Map;
 import javax.inject.Singleton;
 
 public class RemoteConfigModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, RemoteConfigServerConfig> configMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), RemoteConfigServerConfig.class);
     RemoteConfigServerConfig remoteConfigServerConfig =
-        configMap.getOrDefault("", new RemoteConfigServerConfig());
+        ConfigurationBeanMapper.resolve(getConfiguration(), "", RemoteConfigServerConfig.class);
+
     bind(RemoteConfigServerConfig.class).toInstance(remoteConfigServerConfig);
 
     if (remoteConfigServerConfig.isEnable()) {

@@ -42,4 +42,5 @@ public class RemoteConfigServerServletConfig implements ConfigurationDefine {
   private boolean enable = true;
 
   private String basePath = "/config";
+  private String parameterName = "key";
 }

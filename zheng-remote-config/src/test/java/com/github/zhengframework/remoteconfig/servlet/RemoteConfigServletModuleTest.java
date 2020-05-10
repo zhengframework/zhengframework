@@ -22,31 +22,34 @@ import org.junit.runner.RunWith;
 @RunWith(ZhengApplicationRunner.class)
 public class RemoteConfigServletModuleTest {
 
-  @Inject private RemoteConfigServer remoteConfigServer;
+  @Inject
+  private RemoteConfigServer remoteConfigServer;
 
-  @Inject private WebConfig webConfig;
+  @Inject
+  private WebConfig webConfig;
 
-  @Inject private RemoteConfigServerServletConfig remoteConfigServerServletConfig;
+  @Inject
+  private RemoteConfigServerServletConfig remoteConfigServerServletConfig;
 
-  @Inject private ObjectMapper objectMapper;
+  @Inject
+  private ObjectMapper objectMapper;
 
   @Test
   @WithZhengApplication(moduleClass = {MyModule.class})
   public void configureServlets() throws IOException {
     OkHttpClient okHttpClient = new Builder().build();
-    Response response =
-        okHttpClient
-            .newCall(
-                new Request.Builder()
-                    .url(
-                        "http://localhost:"
-                            + webConfig.getPort()
-                            + remoteConfigServerServletConfig.getBasePath()
-                            + "/?configNames=echo&configNames=testNotFound")
-                    .get()
-                    .addHeader("k1", "v1")
-                    .build())
-            .execute();
+    Request request = new Request.Builder()
+        .url(
+            "http://localhost:"
+                + webConfig.getPort()
+                + remoteConfigServerServletConfig.getBasePath()
+                + "/?" + remoteConfigServerServletConfig.getParameterName() + "=echo&"
+                + remoteConfigServerServletConfig.getParameterName() + "=testNotFound")
+        .get()
+        .addHeader("k1", "v1")
+        .build();
+    log.info("request={}", request);
+    Response response = okHttpClient.newCall(request).execute();
 
     String string = Objects.requireNonNull(response.body()).string();
     log.info("string={}", string);

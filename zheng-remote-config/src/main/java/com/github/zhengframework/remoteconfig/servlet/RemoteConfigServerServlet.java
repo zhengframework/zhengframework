@@ -22,6 +22,7 @@ package com.github.zhengframework.remoteconfig.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.zhengframework.remoteconfig.ConfigParam;
+import com.github.zhengframework.remoteconfig.RemoteConfigRequest;
 import com.github.zhengframework.remoteconfig.RemoteConfigResponse;
 import com.github.zhengframework.remoteconfig.RemoteConfigServer;
 import java.io.IOException;
@@ -30,7 +31,6 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -43,16 +43,17 @@ import lombok.extern.slf4j.Slf4j;
 public class RemoteConfigServerServlet extends HttpServlet {
 
   private static final long serialVersionUID = 3063575731127695929L;
-
+  private transient final RemoteConfigServerServletConfig remoteConfigServerServletConfig;
   private transient RemoteConfigServer remoteConfigServer;
-
   private ObjectMapper objectMapper;
 
   @Inject
   public RemoteConfigServerServlet(
-      RemoteConfigServer remoteConfigServer, ObjectMapper objectMapper) {
+      RemoteConfigServer remoteConfigServer, ObjectMapper objectMapper,
+      RemoteConfigServerServletConfig remoteConfigServerServletConfig) {
     this.remoteConfigServer = remoteConfigServer;
     this.objectMapper = objectMapper;
+    this.remoteConfigServerServletConfig = remoteConfigServerServletConfig;
   }
 
   @Override
@@ -64,8 +65,7 @@ public class RemoteConfigServerServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    String[] configNames = req.getParameterValues("configNames");
-    String[] names = Optional.ofNullable(configNames).orElse(new String[0]);
+    String[] keys = req.getParameterValues(remoteConfigServerServletConfig.getParameterName());
 
     List<ConfigParam> configParamList = new ArrayList<>();
     Enumeration<String> headerNames = req.getHeaderNames();
@@ -75,10 +75,13 @@ public class RemoteConfigServerServlet extends HttpServlet {
       configParamList.add(ConfigParam.builder().key(key).value(value).build());
     }
 
-    log.debug("keys={} configParamList={}", Arrays.toString(names), configParamList);
+    log.debug("keys={} configParamList={}", Arrays.toString(keys), configParamList);
+
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys(keys)
+        .configParams(configParamList).build();
 
     Map<String, RemoteConfigResponse<?>> responseMap =
-        remoteConfigServer.getConfig(names, configParamList);
+        remoteConfigServer.getConfig(request);
     objectMapper.writeValue(resp.getOutputStream(), responseMap);
   }
 }

@@ -20,6 +20,7 @@ package com.github.zhengframework.remoteconfig;
  * #L%
  */
 
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -34,6 +35,16 @@ import lombok.ToString;
 @Builder
 public class ConfigParam {
 
-  @Getter private String key;
-  @Getter private String value;
+  @Getter
+  private String key;
+  @Getter
+  private String value;
+
+  public static ConfigParam create(String key, String value) {
+    return ConfigParam.builder()
+        .key(Objects.requireNonNull(key, "key is null"))
+        .value(Objects.requireNonNull(value, "value is null"))
+        .build();
+  }
+
 }
