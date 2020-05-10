@@ -54,6 +54,7 @@ public class ShiroWebModule extends ConfigurationAwareServletModule {
   protected void configureServlets() {
     ShiroWebConfig shiroConfig = ConfigurationBeanMapper
         .resolve(getConfiguration(), "", ShiroWebConfig.class);
+    bind(ShiroWebConfig.class).toInstance(shiroConfig);
     Ini ini = new Ini();
     ini.loadFromPath(shiroConfig.getIniConfig());
     IniWebEnvironment environment = new IniWebEnvironment();
