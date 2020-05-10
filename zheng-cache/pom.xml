@@ -22,10 +22,6 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.jsr107.ri</groupId>
       <artifactId>cache-annotations-ri-guice</artifactId>
     </dependency>
@@ -65,8 +61,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
+      <groupId>com.github.zhengframework</groupId>
+      <artifactId>zheng-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
