@@ -25,12 +25,16 @@ import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.lang.annotation.Annotation;
 import javax.validation.executable.ValidateOnExecution;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
-@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Data
+@NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.validator")
 public class ValidatorConfig implements ConfigurationDefine {
 

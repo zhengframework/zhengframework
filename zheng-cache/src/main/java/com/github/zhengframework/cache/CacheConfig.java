@@ -23,8 +23,14 @@ package com.github.zhengframework.cache;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.cache")

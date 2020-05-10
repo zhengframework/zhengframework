@@ -29,12 +29,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
 @ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.jpa", supportGroup = true)

@@ -29,7 +29,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.AutoMappingBehavior;
 import org.apache.ibatis.session.ExecutorType;
@@ -38,6 +40,8 @@ import org.apache.ibatis.type.TypeHandler;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.mybatis", supportGroup = true)

@@ -6,6 +6,7 @@
       <w>checkin</w>
       <w>checkins</w>
       <w>configurer</w>
+      <w>dbutils</w>
       <w>ebean</w>
       <w>eclipselink</w>
       <w>evictable</w>
