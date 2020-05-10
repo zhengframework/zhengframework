@@ -26,7 +26,6 @@ public class ServiceModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    super.configure();
     bind(ServiceManager.class).asEagerSingleton();
   }
 }
