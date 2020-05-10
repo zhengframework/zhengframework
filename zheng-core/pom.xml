@@ -75,6 +75,10 @@
       <groupId>com.github.drapostolos</groupId>
       <artifactId>type-parser</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <resources>
