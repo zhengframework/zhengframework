@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhengframework</groupId>
   <artifactId>zhengframework</artifactId>
@@ -9,8 +7,7 @@
   <packaging>pom</packaging>
   <name>zheng framework</name>
   <description>zheng framework is a modular framework with many
-    ready-to-use modules
-  </description>
+    ready-to-use modules</description>
   <url>https://github.com/zhengframework/zhengframework</url>
   <inceptionYear>2020</inceptionYear>
   <licenses>
@@ -86,15 +83,12 @@
   </modules>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
-    </developerConnection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git</developerConnection>
     <url>https://github.com/zhengframework/zhengframework</url>
   </scm>
   <ciManagement>
     <system>github</system>
-    <url>
-      https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
-    </url>
+    <url>https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22</url>
   </ciManagement>
   <distributionManagement>
     <repository>
@@ -167,6 +161,15 @@
       <resource>
         <targetPath>${basedir}/docs/</targetPath>
         <directory>${project.build.directory}/site/</directory>
+      </resource>
+      <resource>
+        <targetPath>${basedir}/dep/${project.artifactId}/</targetPath>
+        <filtering>true</filtering>
+        <directory>${project.build.directory}/</directory>
+        <includes>
+          <include>*.dot</include>
+          <include>*.svg</include>
+        </includes>
       </resource>
     </resources>
     <testResources>
@@ -329,9 +332,9 @@
             <requireJavaVersion>
               <version>1.8</version>
             </requireJavaVersion>
-            <dependencyConvergence/>
-            <banDuplicatePomDependencyVersions/>
-            <reactorModuleConvergence/>
+            <dependencyConvergence></dependencyConvergence>
+            <banDuplicatePomDependencyVersions></banDuplicatePomDependencyVersions>
+            <reactorModuleConvergence></reactorModuleConvergence>
           </rules>
         </configuration>
       </plugin>
@@ -432,10 +435,10 @@
             <version>${sortpom-maven-plugin.version}</version>
             <executions>
               <execution>
+                <phase>prepare-package</phase>
                 <goals>
                   <goal>sort</goal>
                 </goals>
-                <phase>prepare-package</phase>
               </execution>
             </executions>
           </plugin>

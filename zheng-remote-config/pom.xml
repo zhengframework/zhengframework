@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>zhengframework</artifactId>
     <groupId>com.github.zhengframework</groupId>
+    <artifactId>zhengframework</artifactId>
     <version>${revision}</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
+  <artifactId>zheng-remote-config</artifactId>
   <description>zheng framework module: remote config</description>
   <url>https://github.com/zhengframework/zhengframework</url>
-  <artifactId>zheng-remote-config</artifactId>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -76,6 +74,15 @@
       <resource>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
         <directory>${project.build.directory}/site/</directory>
+      </resource>
+      <resource>
+        <targetPath>${maven.multiModuleProjectDirectory}/dep/${project.artifactId}/</targetPath>
+        <filtering>true</filtering>
+        <directory>${project.build.directory}/</directory>
+        <includes>
+          <include>*.dot</include>
+          <include>*.svg</include>
+        </includes>
       </resource>
     </resources>
   </build>
