@@ -33,6 +33,10 @@ public class HibernateValidatorModule extends ConfigurationAwareModule {
     validatorModule.initConfiguration(getConfiguration());
     install(validatorModule);
 
+    bindValidatorFactory();
+  }
+
+  protected void bindValidatorFactory() {
     bind(ValidatorFactory.class)
         .toProvider(HibernateValidatorFactoryProvider.class)
         .in(Scopes.SINGLETON);

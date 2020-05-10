@@ -47,10 +47,7 @@ public class ValidatorModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, ValidatorConfig> configMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), ValidatorConfig.class);
-    ValidatorConfig validatorConfig = configMap.get("");
-
+    ValidatorConfig validatorConfig = ConfigurationBeanMapper.resolve(getConfiguration(),"", ValidatorConfig.class);
     if (validatorConfig.isEnable()) {
       OptionalBinder.newOptionalBinder(binder(), ConstraintValidatorFactory.class)
           .setDefault()

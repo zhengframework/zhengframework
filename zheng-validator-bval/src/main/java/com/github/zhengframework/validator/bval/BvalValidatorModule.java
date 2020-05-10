@@ -22,8 +22,8 @@ package com.github.zhengframework.validator.bval;
 
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.validator.ValidatorModule;
-import com.google.inject.Scopes;
 import com.google.inject.multibindings.OptionalBinder;
+import javax.inject.Singleton;
 import javax.validation.MessageInterpolator;
 import javax.validation.ParameterNameProvider;
 import javax.validation.TraversableResolver;
@@ -39,18 +39,34 @@ public class BvalValidatorModule extends ConfigurationAwareModule {
     ValidatorModule validatorModule = new ValidatorModule();
     validatorModule.initConfiguration(getConfiguration());
     install(validatorModule);
-    OptionalBinder.newOptionalBinder(binder(), MessageInterpolator.class)
+    bindMessageInterpolator();
+    bindTraversableResolver();
+    bindParameterNameProvider();
+    bindValidatorFactory();
+  }
+
+  protected void bindValidatorFactory() {
+    bind(ValidatorFactory.class).toProvider(BvalValidatorFactoryProvider.class);
+  }
+
+  protected void bindParameterNameProvider() {
+    OptionalBinder.newOptionalBinder(binder(), ParameterNameProvider.class)
         .setBinding()
-        .to(DefaultMessageInterpolator.class)
-        .in(Scopes.SINGLETON);
+        .to(DefaultParameterNameProvider.class)
+        .in(Singleton.class);
+  }
+
+  protected void bindTraversableResolver() {
     OptionalBinder.newOptionalBinder(binder(), TraversableResolver.class)
         .setBinding()
         .to(DefaultTraversableResolver.class)
-        .in(Scopes.SINGLETON);
-    OptionalBinder.newOptionalBinder(binder(), ParameterNameProvider.class)
-        .setBinding()
-        .to(DefaultParameterNameProvider.class);
+        .in(Singleton.class);
+  }
 
-    bind(ValidatorFactory.class).toProvider(BvalValidatorFactoryProvider.class);
+  protected void bindMessageInterpolator() {
+    OptionalBinder.newOptionalBinder(binder(), MessageInterpolator.class)
+        .setBinding()
+        .to(DefaultMessageInterpolator.class)
+        .in(Singleton.class);
   }
 }
