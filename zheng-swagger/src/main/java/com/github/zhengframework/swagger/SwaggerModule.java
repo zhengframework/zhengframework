@@ -28,33 +28,26 @@ import com.github.zhengframework.web.PathUtils;
 import com.github.zhengframework.web.WebConfig;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
-import java.util.Map;
 import javax.inject.Singleton;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@EqualsAndHashCode(
-    callSuper = false,
-    of = {})
+@EqualsAndHashCode(callSuper = false)
 public class SwaggerModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
     Configuration configuration = getConfiguration();
-    Map<String, SwaggerConfig> configMap =
-        ConfigurationBeanMapper.resolve(configuration, SwaggerConfig.class);
-    SwaggerConfig swaggerConfig = configMap.getOrDefault("", new SwaggerConfig());
 
+    SwaggerConfig swaggerConfig = ConfigurationBeanMapper
+        .resolve(configuration, "", SwaggerConfig.class);
     bind(SwaggerConfig.class).toInstance(swaggerConfig);
 
-    Map<String, WebConfig> webConfigMap =
-        ConfigurationBeanMapper.resolve(configuration, WebConfig.class);
-    WebConfig webConfig = webConfigMap.getOrDefault("", new WebConfig());
+    WebConfig webConfig = ConfigurationBeanMapper.resolve(configuration, "", WebConfig.class);
 
-    Map<String, RestConfig> restConfigMap =
-        ConfigurationBeanMapper.resolve(configuration, RestConfig.class);
-    RestConfig restConfig = restConfigMap.getOrDefault("", new RestConfig());
+    RestConfig restConfig =
+        ConfigurationBeanMapper.resolve(configuration, "", RestConfig.class);
 
     bind(OpenApiResource.class);
     bind(AcceptHeaderOpenApiResource.class);
