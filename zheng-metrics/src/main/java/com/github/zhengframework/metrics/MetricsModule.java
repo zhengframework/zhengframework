@@ -21,6 +21,7 @@ package com.github.zhengframework.metrics;
  */
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.jvm.BufferPoolMetricSet;
 import com.codahale.metrics.jvm.ClassLoadingGaugeSet;
 import com.codahale.metrics.jvm.FileDescriptorRatioGauge;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
@@ -34,6 +35,7 @@ import com.palominolabs.metrics.guice.MetricNamer;
 import com.palominolabs.metrics.guice.MetricsInstrumentationModule;
 import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import com.palominolabs.metrics.guice.annotation.MethodAnnotationResolver;
+import java.lang.management.ManagementFactory;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -73,11 +75,13 @@ public class MetricsModule extends ConfigurationAwareModule {
   protected void defaultMetric(MetricRegistry metricRegistry) {
     metricRegistry.register(MetricRegistry.name("jvm", "gc"), new GarbageCollectorMetricSet());
     metricRegistry.register(MetricRegistry.name("jvm", "memory"), new MemoryUsageGaugeSet());
-    metricRegistry
-        .register(MetricRegistry.name("jvm", "thread-states"), new ThreadStatesGaugeSet());
-    metricRegistry
-        .register(MetricRegistry.name("jvm", "fd", "usage"), new FileDescriptorRatioGauge());
+    metricRegistry.register(MetricRegistry.name("jvm", "threads"), new ThreadStatesGaugeSet());
+    metricRegistry.register(
+        MetricRegistry.name("jvm", "fd", "usage"), new FileDescriptorRatioGauge());
     metricRegistry.register(MetricRegistry.name("jvm", "attribute"), new JvmAttributeGaugeSet());
     metricRegistry.register(MetricRegistry.name("jvm", "class"), new ClassLoadingGaugeSet());
+    metricRegistry.register(
+        MetricRegistry.name("jvm", "buffers"),
+        new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
   }
 }
