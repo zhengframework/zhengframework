@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.zhengframework</groupId>
   <artifactId>zhengframework</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
   <name>zheng framework</name>
-  <description>zheng framework is a modular framework with many
-    ready-to-use modules</description>
+  <description>Zheng framework is a modular framework with many ready-made modules.
+    \n
+    Zheng framework uses Google guice for dependency management. For ease of use, most modules support automatic loading through ServiceLoader.</description>
   <url>https://github.com/zhengframework/zhengframework</url>
   <inceptionYear>2020</inceptionYear>
   <licenses>
@@ -82,12 +85,15 @@
   </modules>
   <scm>
     <connection>scm:git:git@github.com:zhengframework/zhengframework.git</connection>
-    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:zhengframework/zhengframework.git
+    </developerConnection>
     <url>https://github.com/zhengframework/zhengframework</url>
   </scm>
   <ciManagement>
     <system>github</system>
-    <url>https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22</url>
+    <url>
+      https://github.com/zhengframework/zhengframework/actions?query=workflow%3A%22Java+CI+with+Maven%22
+    </url>
   </ciManagement>
   <distributionManagement>
     <repository>
@@ -295,8 +301,10 @@
           </dependency>
         </dependencies>
         <configuration>
-          <locales>en</locales>
+          <locales>en,zh</locales>
           <skipDeploy>true</skipDeploy>
+          <inputEncoding>UTF-8</inputEncoding>
+          <outputEncoding>UTF-8</outputEncoding>
         </configuration>
       </plugin>
       <plugin>
