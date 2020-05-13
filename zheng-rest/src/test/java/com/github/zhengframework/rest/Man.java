@@ -1,5 +1,8 @@
 package com.github.zhengframework.rest;
 
-public class Man {
+class Man {
 
+  public String say() {
+    return "hello, thanks to use zheng framework";
+  }
 }
