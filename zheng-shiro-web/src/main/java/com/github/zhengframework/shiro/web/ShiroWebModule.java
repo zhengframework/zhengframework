@@ -24,7 +24,6 @@ import com.github.zhengframework.configuration.ConfigurationAwareServletModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.web.PathUtils;
 import com.google.inject.matcher.Matchers;
-import java.util.Map;
 import java.util.Objects;
 import org.apache.shiro.authc.Authenticator;
 import org.apache.shiro.authz.Authorizer;
@@ -53,13 +52,12 @@ public class ShiroWebModule extends ConfigurationAwareServletModule {
 
   @Override
   protected void configureServlets() {
-    Map<String, ShiroWebConfig> shiroConfigMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), ShiroWebConfig.class);
-    ShiroWebConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroWebConfig());
-
+    ShiroWebConfig shiroConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), ShiroWebConfig.ZHENG_SHIRO_WEB, ShiroWebConfig.class);
+    bind(ShiroWebConfig.class).toInstance(shiroConfig);
     Ini ini = new Ini();
     ini.loadFromPath(shiroConfig.getIniConfig());
-
     IniWebEnvironment environment = new IniWebEnvironment();
     environment.setIni(ini);
     environment.init();
@@ -123,8 +121,7 @@ public class ShiroWebModule extends ConfigurationAwareServletModule {
     }
 
     bind(GuiceShiroFilter.class).asEagerSingleton();
-    String path = PathUtils.fixPath(shiroConfig.getPath());
-    filter(path + "/*").through(GuiceShiroFilter.class);
+    filter(PathUtils.fixPath(shiroConfig.getPath()) + "/*").through(GuiceShiroFilter.class);
     install(new ShiroAopModule());
   }
 }

@@ -34,6 +34,7 @@ public class MyBatisXmlInternalModule extends XMLMyBatisModule {
 
   @Override
   protected void initialize() {
+    bind(MyBatisConfig.class).toInstance(myBatisConfig);
     setClassPathResource(Objects.requireNonNull(myBatisConfig.getConfigFile()));
     Properties properties = new Properties();
     properties.putAll(myBatisConfig.getProperties());

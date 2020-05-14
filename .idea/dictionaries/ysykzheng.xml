@@ -2,9 +2,11 @@
   <dictionary name="ysykzheng">
     <words>
       <w>benmanes</w>
+      <w>bval</w>
       <w>checkin</w>
       <w>checkins</w>
       <w>configurer</w>
+      <w>dbutils</w>
       <w>ebean</w>
       <w>eclipselink</w>
       <w>evictable</w>
@@ -12,6 +14,7 @@
       <w>hikari</w>
       <w>hikaricp</w>
       <w>injectee</w>
+      <w>jaxrs</w>
       <w>jcache</w>
       <w>jdbc</w>
       <w>jdbi</w>

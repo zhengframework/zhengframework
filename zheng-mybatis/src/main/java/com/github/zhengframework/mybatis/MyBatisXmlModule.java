@@ -24,7 +24,6 @@ import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.guice.ExposedPrivateModule;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,9 +31,10 @@ public class MyBatisXmlModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MyBatisConfig> myBatisConfigMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), MyBatisConfig.class);
-    MyBatisConfig myBatisConfig = myBatisConfigMap.get("");
+    MyBatisConfig myBatisConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), MyBatisConfig.ZHENG_MYBATIS, MyBatisConfig.class);
+
     install(new MyBatisXmlInternalModule(myBatisConfig));
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();
     if (extraModuleClass != null) {

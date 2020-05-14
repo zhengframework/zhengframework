@@ -21,12 +21,8 @@ package com.github.zhengframework.web.undertow;
  */
 
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
-import com.github.zhengframework.web.GuiceServerEndpointConfigurator;
 import com.github.zhengframework.web.WebModule;
 import com.github.zhengframework.web.WebServer;
-import com.github.zhengframework.web.WebSocketEndpoint;
-import com.google.inject.TypeLiteral;
-import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import io.undertow.Undertow;
 import io.undertow.server.handlers.resource.ClassPathResourceManager;
@@ -34,7 +30,6 @@ import io.undertow.server.handlers.resource.ResourceManager;
 import io.undertow.servlet.api.ClassIntrospecter;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-import javax.websocket.server.ServerEndpointConfig;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -45,21 +40,18 @@ public class UndertowWebModule extends ConfigurationAwareModule {
     WebModule webModule = new WebModule();
     webModule.initConfiguration(getConfiguration());
     install(webModule);
-    // WebSocket
-    Multibinder.newSetBinder(binder(), ServerEndpointConfig.class);
-    Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends WebSocketEndpoint>>() {});
+    bindClassIntrospecter();
+    bindUndertowBuilder();
+    bindUndertowServerConfigurer();
+    bindResourceManager();
+    bindWebServer();
+  }
 
-    bind(ClassIntrospecter.class).to(GuiceClassIntrospecter.class);
-    bind(GuiceServerEndpointConfigurator.class);
+  protected void bindWebServer() {
+    bind(WebServer.class).to(UndertowWebServer.class);
+  }
 
-    OptionalBinder.newOptionalBinder(binder(), Undertow.Builder.class)
-        .setDefault()
-        .toProvider(UndertowServerProvider.class);
-
-    OptionalBinder.newOptionalBinder(binder(), UndertowServerConfigurer.class)
-        .setDefault()
-        .to(DefaultUndertowServerConfigurer.class);
-
+  protected void bindResourceManager() {
     OptionalBinder.newOptionalBinder(binder(), ResourceManager.class)
         .setDefault()
         .toProvider(
@@ -72,7 +64,23 @@ public class UndertowWebModule extends ConfigurationAwareModule {
                   return new ResourceManagerCollection(classPathResourceManager);
                 })
         .in(Singleton.class);
+  }
 
-    bind(WebServer.class).to(UndertowWebServer.class);
+  protected void bindClassIntrospecter() {
+    OptionalBinder.newOptionalBinder(binder(), ClassIntrospecter.class)
+        .setDefault()
+        .to(GuiceClassIntrospecter.class);
+  }
+
+  protected void bindUndertowServerConfigurer() {
+    OptionalBinder.newOptionalBinder(binder(), UndertowServerConfigurer.class)
+        .setDefault()
+        .to(DefaultUndertowServerConfigurer.class);
+  }
+
+  protected void bindUndertowBuilder() {
+    OptionalBinder.newOptionalBinder(binder(), Undertow.Builder.class)
+        .setDefault()
+        .toProvider(UndertowServerProvider.class);
   }
 }

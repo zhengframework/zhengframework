@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+  name="Zheng Framework">
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.9</version>
+  </skin>
+  <body>
+<!--    <breadcrumbs>-->
+<!--      <item name="ZhengFramework@Github" href=""/>-->
+<!--    </breadcrumbs>-->
+
+    <menu name="Overview">
+      <item name="Intro" href="index.html"/>
+      <item name="Quick Start" href="quick-start.html"/>
+      <item name="中文文档" href="zh/index.html"/>
+      <item name="Java Docs" href="apidocs/index.html"/>
+    </menu>
+
+    <menu ref="modules"/>
+
+    <menu ref="reports"/>
+  </body>
+
+</project>

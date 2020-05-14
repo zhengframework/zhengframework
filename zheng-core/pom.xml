@@ -75,12 +75,25 @@
       <groupId>com.github.drapostolos</groupId>
       <artifactId>type-parser</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <resources>
       <resource>
         <targetPath>${maven.multiModuleProjectDirectory}/docs/${project.artifactId}/</targetPath>
         <directory>${project.build.directory}/site/</directory>
+      </resource>
+      <resource>
+        <targetPath>${maven.multiModuleProjectDirectory}/dep/${project.artifactId}/</targetPath>
+        <filtering>true</filtering>
+        <directory>${project.build.directory}/</directory>
+        <includes>
+          <include>*.dot</include>
+          <include>*.svg</include>
+        </includes>
       </resource>
     </resources>
   </build>

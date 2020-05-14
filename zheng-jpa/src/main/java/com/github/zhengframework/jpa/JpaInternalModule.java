@@ -35,15 +35,15 @@ import org.aopalliance.intercept.MethodInterceptor;
 
 public class JpaInternalModule extends AbstractModule {
 
-  private final JpaConfig persistenceConfig;
+  private final JpaConfig jpaConfig;
 
-  public JpaInternalModule(JpaConfig persistenceConfig) {
-    this.persistenceConfig = persistenceConfig;
+  public JpaInternalModule(JpaConfig jpaConfig) {
+    this.jpaConfig = jpaConfig;
   }
 
   @Override
   protected void configure() {
-    bind(JpaConfig.class).toInstance(persistenceConfig);
+    bind(JpaConfig.class).toInstance(jpaConfig);
     OptionalBinder.newOptionalBinder(binder(), PersistenceUnitInfo.class)
         .setDefault()
         .toProvider(PersistenceUnitInfoProvider.class);

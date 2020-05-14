@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+  name="Zheng Framework">
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.9</version>
+  </skin>
+  <body>
+<!--    <breadcrumbs>-->
+<!--      <item name="Doxia" href="https://maven.apache.org/doxia/index.html"/>-->
+<!--      <item name="Doxia Sitetools"-->
+<!--        href="https://maven.apache.org/doxia/doxia-sitetools/index.html"/>-->
+<!--    </breadcrumbs>-->
+
+    <menu name="Overview">
+      <item name="返回首页" href="../index.html"/>
+      <item name="快速入门" href="quick-start.html"/>
+      <item name="Java文档" href="apidocs/index.html"/>
+    </menu>
+  </body>
+
+</project>

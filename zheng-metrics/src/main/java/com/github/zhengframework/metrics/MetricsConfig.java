@@ -23,14 +23,19 @@ package com.github.zhengframework.metrics;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.metrics")
+@ConfigurationInfo(prefix = MetricsConfig.ZHENG_METRICS)
 public class MetricsConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_METRICS = "zheng.metrics";
   private boolean enable = true;
 }

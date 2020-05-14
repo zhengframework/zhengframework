@@ -23,14 +23,19 @@ package com.github.zhengframework.shiro;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.shiro")
+@ConfigurationInfo(prefix = ShiroConfig.ZHENG_SHIRO)
 public class ShiroConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_SHIRO = "zheng.shiro";
   private String iniConfig = "classpath:shiro.ini";
 }

@@ -37,6 +37,8 @@ import org.webjars.WebJarAssetLocator;
 @Slf4j
 public class WebjarsServlet extends HttpServlet {
 
+  public static final String DISABLE_CACHE = "disableCache";
+
   private static final long DEFAULT_EXPIRE_TIME_MS = 86400000L; // 1 day
   private static final long DEFAULT_EXPIRE_TIME_S = 86400L; // 1 day
 
@@ -89,7 +91,7 @@ public class WebjarsServlet extends HttpServlet {
           "Expected servlet container to provide a non-null ServletConfig.");
     }
     try {
-      String disableCache = config.getInitParameter("disableCache");
+      String disableCache = config.getInitParameter(DISABLE_CACHE);
       if (disableCache != null) {
         this.disableCache = Boolean.parseBoolean(disableCache);
         log.info("WebjarsServlet cache enabled: {}", !this.disableCache);

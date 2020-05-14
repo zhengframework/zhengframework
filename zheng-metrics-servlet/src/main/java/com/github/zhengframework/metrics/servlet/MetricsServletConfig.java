@@ -23,15 +23,20 @@ package com.github.zhengframework.metrics.servlet;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.metrics.servlet")
+@ConfigurationInfo(prefix = MetricsServletConfig.ZHENG_METRICS_SERVLET)
 public class MetricsServletConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_METRICS_SERVLET = "zheng.metrics.servlet";
   private boolean enable = true;
   private String path = "/metrics";
 }

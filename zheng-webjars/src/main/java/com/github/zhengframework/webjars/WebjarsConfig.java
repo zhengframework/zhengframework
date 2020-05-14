@@ -23,15 +23,20 @@ package com.github.zhengframework.webjars;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.webjars")
+@ConfigurationInfo(prefix = WebjarsConfig.ZHENG_WEBJARS)
 public class WebjarsConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_WEBJARS = "zheng.webjars";
   private String basePath = "/webjars";
   private boolean disableCache = false;
 }

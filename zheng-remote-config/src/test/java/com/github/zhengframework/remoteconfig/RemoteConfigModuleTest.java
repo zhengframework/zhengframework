@@ -34,9 +34,9 @@ public class RemoteConfigModuleTest {
   }
 
   private void testCustomExceptionMapper() {
-    List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(new String[] {"CustomThrowableRemoteConfig"}, list);
+    RemoteConfigRequest request =
+        RemoteConfigRequest.builder().configKeys("CustomThrowableRemoteConfig").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
 
     RemoteConfigResponse<?> customThrowableRemoteConfig = config.get("CustomThrowableRemoteConfig");
     Assert.assertEquals(
@@ -44,9 +44,8 @@ public class RemoteConfigModuleTest {
   }
 
   private void testNotFound() {
-    List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(new String[] {"testNotFound"}, list);
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys("testNotFound").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
     RemoteConfigResponse<?> testNotFound = config.get("testNotFound");
     Assert.assertFalse(testNotFound.isSuccess());
     Assert.assertEquals(
@@ -54,9 +53,8 @@ public class RemoteConfigModuleTest {
   }
 
   private void testMultiKeys() {
-    List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(new String[] {"key1", "key2"}, list);
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys("key1", "key2").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
     RemoteConfigResponse<?> key1 = config.get("key1");
     RemoteConfigResponse<?> key2 = config.get("key2");
     Assert.assertTrue(key1.isSuccess());
@@ -65,9 +63,8 @@ public class RemoteConfigModuleTest {
   }
 
   private void testThrowable() {
-    List<ConfigParam> list = new ArrayList<>();
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(new String[] {"throwable"}, list);
+    RemoteConfigRequest request = RemoteConfigRequest.builder().configKeys("throwable").build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
     RemoteConfigResponse<?> throwable = config.get("throwable");
     Assert.assertFalse(throwable.isSuccess());
     Assert.assertEquals(ThrowableRemoteConfig.MSG, throwable.getMessage());
@@ -76,10 +73,11 @@ public class RemoteConfigModuleTest {
   @SuppressWarnings("unchecked")
   private void testEcho() throws JsonProcessingException {
     List<ConfigParam> list = new ArrayList<>();
-    list.add(ConfigParam.builder().key("k").value("k").build());
-    list.add(ConfigParam.builder().key("k2").value("k2").build());
-    Map<String, RemoteConfigResponse<?>> config =
-        remoteConfigServer.getConfig(new String[] {"echo"}, list);
+    list.add(ConfigParam.create("k", "k"));
+    list.add(ConfigParam.create("k2", "k2"));
+    RemoteConfigRequest request =
+        RemoteConfigRequest.builder().configKeys("echo").configParams(list).build();
+    Map<String, RemoteConfigResponse<?>> config = remoteConfigServer.getConfig(request);
 
     RemoteConfigResponse<List<ConfigParam>> echo =
         (RemoteConfigResponse<List<ConfigParam>>) config.get("echo");

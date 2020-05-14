@@ -28,7 +28,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-// @Builder
 public class RemoteConfigResponse<T> {
 
   @Getter private T data;

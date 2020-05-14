@@ -25,15 +25,20 @@ import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.lang.annotation.Annotation;
 import javax.validation.executable.ValidateOnExecution;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
-@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Data
-@ConfigurationInfo(prefix = "zheng.validator")
+@NoArgsConstructor
+@ConfigurationInfo(prefix = ValidatorConfig.ZHENG_VALIDATOR)
 public class ValidatorConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_VALIDATOR = "zheng.validator";
   private boolean enable = true;
 
   private boolean annotationOnly = false;

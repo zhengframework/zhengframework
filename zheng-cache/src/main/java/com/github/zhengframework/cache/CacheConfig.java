@@ -23,13 +23,20 @@ package com.github.zhengframework.cache;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.kohsuke.MetaInfServices;
 
+@MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.cache")
+@ConfigurationInfo(prefix = CacheConfig.ZHENG_CACHE)
 public class CacheConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_CACHE = "zheng.cache";
   private String cachingProviderName = null;
   private String cacheManagerResource = null;
   private String type = "simple";

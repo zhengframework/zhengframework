@@ -29,17 +29,20 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
 @ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.jpa", supportGroup = true)
+@ConfigurationInfo(prefix = JpaConfig.ZHENG_JPA, supportGroup = true)
 public class JpaConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_JPA = "zheng.jpa";
   private String persistenceUnitName;
   private String driverClassName;
   private String url;

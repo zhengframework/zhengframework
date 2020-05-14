@@ -34,12 +34,13 @@ import org.kohsuke.MetaInfServices;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode
-@SuppressWarnings("SpellCheckingInspection")
-@ConfigurationInfo(prefix = "zheng.remoteconfig.servlet")
+@ConfigurationInfo(prefix = RemoteConfigServerServletConfig.ZHENG_REMOTE_CONFIG_SERVLET)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RemoteConfigServerServletConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_REMOTE_CONFIG_SERVLET = "zheng.remoteConfig.servlet";
   private boolean enable = true;
 
   private String basePath = "/config";
+  private String parameterName = "key";
 }

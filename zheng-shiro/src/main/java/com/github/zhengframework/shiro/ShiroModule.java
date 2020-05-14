@@ -23,7 +23,6 @@ package com.github.zhengframework.shiro;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.google.inject.matcher.Matchers;
-import java.util.Map;
 import java.util.Objects;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.Authenticator;
@@ -49,9 +48,10 @@ public class ShiroModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, ShiroConfig> shiroConfigMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), ShiroConfig.class);
-    ShiroConfig shiroConfig = shiroConfigMap.getOrDefault("", new ShiroConfig());
+    ShiroConfig shiroConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), ShiroConfig.ZHENG_SHIRO, ShiroConfig.class);
+    bind(ShiroConfig.class).toInstance(shiroConfig);
 
     Ini ini = new Ini();
     ini.loadFromPath(shiroConfig.getIniConfig());

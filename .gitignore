@@ -185,3 +185,4 @@ hs_err_pid*
 */pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.releaseBackup
+/dep/

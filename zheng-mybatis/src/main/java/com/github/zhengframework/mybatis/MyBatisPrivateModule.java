@@ -48,6 +48,8 @@ public class MyBatisPrivateModule extends PrivateModule {
     }
     install(new MyBatisInternalModule(myBatisConfig));
 
+    exposeClass(Key.get(MyBatisConfig.class));
+
     Class<? extends ExposedPrivateModule> extraModuleClass = myBatisConfig.getExtraModuleClass();
     if (extraModuleClass != null) {
       try {

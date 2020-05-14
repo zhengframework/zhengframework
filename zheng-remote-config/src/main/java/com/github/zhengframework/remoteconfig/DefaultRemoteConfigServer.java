@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,8 +34,7 @@ public class DefaultRemoteConfigServer implements RemoteConfigServer {
 
   public static final NotFound NOT_FOUND = new NotFound();
   private final RemoteConfigExceptionMapper remoteConfigExceptionMapper;
-  List<RemoteConfig> remoteConfigs = new ArrayList<>();
-  //  private Map<String, RemoteConfig> configMap = new HashMap<>();
+  private List<RemoteConfig> remoteConfigs = new ArrayList<>();
   private RemoteConfigRegistry registry;
 
   @Inject
@@ -51,44 +49,33 @@ public class DefaultRemoteConfigServer implements RemoteConfigServer {
   public void init() {
     remoteConfigs.clear();
     remoteConfigs.addAll(ImmutableList.copyOf(registry.getRemoteConfigs()));
-    if (!remoteConfigs.contains(NOT_FOUND)) {
-      remoteConfigs.add(NOT_FOUND);
-    }
   }
 
   @Override
-  public Map<String, RemoteConfigResponse<?>> getConfig(
-      String[] configKeys, List<ConfigParam> configParams) {
-    String[] keys = Optional.ofNullable(configKeys).orElse(new String[0]);
-    List<ConfigParam> configParamList = Optional.ofNullable(configParams).orElse(new ArrayList<>());
+  public Map<String, RemoteConfigResponse<?>> getConfig(RemoteConfigRequest request) {
+    String[] keys = request.getConfigKeys();
+    List<ConfigParam> configParamList = request.getConfigParams();
     Map<String, RemoteConfigResponse<?>> map = new HashMap<>();
 
     for (String key : keys) {
+      boolean found = false;
+      ImmutableList<ConfigParam> configParams = ImmutableList.copyOf(configParamList);
       for (RemoteConfig remoteConfig : remoteConfigs) {
         if (remoteConfig.supportKey(key)) {
           try {
-            map.put(key, remoteConfig.get(key, ImmutableList.copyOf(configParamList)));
+            map.put(key, remoteConfig.get(key, configParams));
           } catch (Exception e) {
             map.put(key, remoteConfigExceptionMapper.resolve(e));
           }
+          found = true;
           break;
         }
       }
+      if (!found) {
+        map.put(key, NOT_FOUND.get(key, configParams));
+      }
     }
-
     return map;
-
-    //    return Arrays.stream(keys)
-    //        .map(key -> Pair.of(key, configMap.getOrDefault(key, new NotFound(key))))
-    //        .map(remoteConfigPair -> {
-    //          try {
-    //            return Pair.of(remoteConfigPair.getKey(),
-    //                remoteConfigPair.getValue().get(ImmutableList.copyOf(configParamList)));
-    //          } catch (Exception e) {
-    //            return Pair.of(remoteConfigPair.getKey(), remoteConfigExceptionMapper.resolve(e));
-    //          }
-    //        }).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
-
   }
 
   public static final class NotFound implements RemoteConfig {

@@ -21,6 +21,13 @@ package com.github.zhengframework.metrics;
  */
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.jvm.BufferPoolMetricSet;
+import com.codahale.metrics.jvm.ClassLoadingGaugeSet;
+import com.codahale.metrics.jvm.FileDescriptorRatioGauge;
+import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
+import com.codahale.metrics.jvm.JvmAttributeGaugeSet;
+import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
+import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 import com.github.zhengframework.configuration.ConfigurationAwareModule;
 import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.palominolabs.metrics.guice.GaugeInstanceClassMetricNamer;
@@ -28,8 +35,7 @@ import com.palominolabs.metrics.guice.MetricNamer;
 import com.palominolabs.metrics.guice.MetricsInstrumentationModule;
 import com.palominolabs.metrics.guice.annotation.AnnotationResolver;
 import com.palominolabs.metrics.guice.annotation.MethodAnnotationResolver;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.lang.management.ManagementFactory;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,29 +45,43 @@ public class MetricsModule extends ConfigurationAwareModule {
 
   @Override
   protected void configure() {
-    Map<String, MetricsConfig> metricsConfigMap =
-        ConfigurationBeanMapper.resolve(getConfiguration(), MetricsConfig.class);
-    for (Entry<String, MetricsConfig> entry : metricsConfigMap.entrySet()) {
-      MetricsConfig metricsConfig = entry.getValue();
-      if (metricsConfig.isEnable()) {
-        MetricRegistry metricRegistry = new MetricRegistry();
-        MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
-        AnnotationResolver annotationResolver = new MethodAnnotationResolver();
-        //        OptionalBinder.newOptionalBinder(binder(),MetricRegistry.class)
-        //            .setDefault().to(MetricRegistry.class);
-        bind(MetricRegistry.class).toInstance(metricRegistry);
-        MetricsInstrumentationModule metricsInstrumentationModule =
-            MetricsInstrumentationModule.builder()
-                .withMetricRegistry(metricRegistry)
-                .withMetricNamer(metricNamer)
-                .withAnnotationMatcher(annotationResolver)
-                .build();
-        install(metricsInstrumentationModule);
+    MetricsConfig metricsConfig =
+        ConfigurationBeanMapper.resolve(
+            getConfiguration(), MetricsConfig.ZHENG_METRICS, MetricsConfig.class);
+    bind(MetricsConfig.class).toInstance(metricsConfig);
 
-        bind(MetricsService.class).asEagerSingleton();
-      } else {
-        log.warn("MetricsModule is disable");
-      }
+    if (metricsConfig.isEnable()) {
+      MetricRegistry metricRegistry = new MetricRegistry();
+
+      defaultMetric(metricRegistry);
+
+      MetricNamer metricNamer = new GaugeInstanceClassMetricNamer();
+      AnnotationResolver annotationResolver = new MethodAnnotationResolver();
+      bind(MetricRegistry.class).toInstance(metricRegistry);
+      MetricsInstrumentationModule metricsInstrumentationModule =
+          MetricsInstrumentationModule.builder()
+              .withMetricRegistry(metricRegistry)
+              .withMetricNamer(metricNamer)
+              .withAnnotationMatcher(annotationResolver)
+              .build();
+      install(metricsInstrumentationModule);
+
+      bind(MetricsService.class).asEagerSingleton();
+    } else {
+      log.warn("MetricsModule is disable");
     }
+  }
+
+  protected void defaultMetric(MetricRegistry metricRegistry) {
+    metricRegistry.register(MetricRegistry.name("jvm", "gc"), new GarbageCollectorMetricSet());
+    metricRegistry.register(MetricRegistry.name("jvm", "memory"), new MemoryUsageGaugeSet());
+    metricRegistry.register(MetricRegistry.name("jvm", "threads"), new ThreadStatesGaugeSet());
+    metricRegistry.register(
+        MetricRegistry.name("jvm", "fd", "usage"), new FileDescriptorRatioGauge());
+    metricRegistry.register(MetricRegistry.name("jvm", "attribute"), new JvmAttributeGaugeSet());
+    metricRegistry.register(MetricRegistry.name("jvm", "class"), new ClassLoadingGaugeSet());
+    metricRegistry.register(
+        MetricRegistry.name("jvm", "buffers"),
+        new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
   }
 }

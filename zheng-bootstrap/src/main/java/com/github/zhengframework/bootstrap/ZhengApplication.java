@@ -22,6 +22,7 @@ package com.github.zhengframework.bootstrap;
 
 import com.github.zhengframework.configuration.Configuration;
 import com.github.zhengframework.configuration.ConfigurationAware;
+import com.github.zhengframework.configuration.ConfigurationBeanMapper;
 import com.github.zhengframework.configuration.ConfigurationBuilder;
 import com.github.zhengframework.configuration.io.FileLocator;
 import com.github.zhengframework.configuration.source.ConfigurationSource;
@@ -36,7 +37,6 @@ import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Stage;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -111,7 +111,10 @@ public class ZhengApplication {
         configurationAware.initConfiguration(configuration);
       }
     }
-    injector = Guice.createInjector(Stage.PRODUCTION, modules);
+
+    GuiceConfig guiceConfig =
+        ConfigurationBeanMapper.resolve(configuration, GuiceConfig.ZHENG_GUICE, GuiceConfig.class);
+    injector = Guice.createInjector(guiceConfig.getStage(), modules);
   }
 
   public Injector getInjector() {

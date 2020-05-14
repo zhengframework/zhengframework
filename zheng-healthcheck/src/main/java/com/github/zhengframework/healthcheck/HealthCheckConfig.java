@@ -24,15 +24,20 @@ import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.concurrent.TimeUnit;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
-@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Data
-@ConfigurationInfo(prefix = "zheng.healthCheck")
+@NoArgsConstructor
+@ConfigurationInfo(prefix = HealthCheckConfig.ZHENG_HEALTH_CHECK)
 public class HealthCheckConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_HEALTH_CHECK = "zheng.healthCheck";
   private boolean enable = true;
   private long duration = 60;
   private TimeUnit unit = TimeUnit.SECONDS;

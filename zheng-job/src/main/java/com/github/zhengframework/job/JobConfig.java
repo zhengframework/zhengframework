@@ -25,15 +25,20 @@ import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.job")
+@ConfigurationInfo(prefix = JobConfig.ZHENG_JOB)
 public class JobConfig implements ConfigurationDefine {
 
+  public static final String ZHENG_JOB = "zheng.job";
   private boolean enable = true;
 
   private String defaultTimezone;

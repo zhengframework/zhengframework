@@ -20,26 +20,28 @@ package com.github.zhengframework.rest;
  * #L%
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.zhengframework.configuration.ConfigurationDefine;
 import com.github.zhengframework.configuration.annotation.ConfigurationInfo;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
-@ConfigurationInfo(prefix = "zheng.rest")
+@ConfigurationInfo(prefix = RestConfig.ZHENG_REST)
+// @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestConfig implements ConfigurationDefine {
 
-  public static final String PREFIX = "zheng.rest";
+  public static final String ZHENG_REST = "zheng.rest";
   private String path = null;
 
-  private Map<String, String> properties = new HashMap<>();
-
-  public void addProperty(String key, String value) {
-    properties.put(key, value);
-  }
+  @JsonIgnore private Map<String, String> properties = new HashMap<>();
 }

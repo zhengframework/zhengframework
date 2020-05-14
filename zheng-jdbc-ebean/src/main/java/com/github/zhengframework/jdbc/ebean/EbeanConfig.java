@@ -26,10 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EnumType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.kohsuke.MetaInfServices;
 
 @MetaInfServices
+@ToString
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
 @ConfigurationInfo(prefix = "zheng.ebean", supportGroup = true)
