@@ -68,7 +68,7 @@
     <jmemcached-core.version>1.0.0</jmemcached-core.version>
     <jooq.version>3.13.1</jooq.version>
     <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
-    <junit.version>4.13</junit.version>
+    <junit.version>4.13.1</junit.version>
     <lettuce-core.version>5.2.2.RELEASE</lettuce-core.version>
     <liquibase.version>3.8.8</liquibase.version>
     <logback.version>1.2.3</logback.version>
