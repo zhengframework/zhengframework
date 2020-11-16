@@ -64,7 +64,7 @@
     <jboss-logging-annotations.version>2.2.1.Final</jboss-logging-annotations.version>
     <jdbi3-bom.version>3.13.0</jdbi3-bom.version>
     <jedis-mock.version>0.1.16</jedis-mock.version>
-    <jetty.version>9.4.27.v20200227</jetty.version>
+    <jetty.version>9.4.34.v20201102</jetty.version>
     <jmemcached-core.version>1.0.0</jmemcached-core.version>
     <jooq.version>3.13.1</jooq.version>
     <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
