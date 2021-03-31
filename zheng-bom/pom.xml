@@ -37,7 +37,7 @@
     <fastjson.version>1.2.67</fastjson.version>
     <flyway.version>6.4.1</flyway.version>
     <free-port-finder.version>1.1.1</free-port-finder.version>
-    <guava.version>28.2-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <guice-bridge.version>2.6.1</guice-bridge.version>
     <guice-servlet.version>4.2.2</guice-servlet.version>
     <guice.version>4.2.2</guice.version>
