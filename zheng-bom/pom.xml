@@ -42,7 +42,7 @@
     <guice-servlet.version>4.2.2</guice-servlet.version>
     <guice.version>4.2.2</guice.version>
     <h2.version>1.4.200</h2.version>
-    <hazelcast.version>4.0.1</hazelcast.version>
+    <hazelcast.version>4.0.5</hazelcast.version>
     <hibernate-core.version>5.4.12.Final</hibernate-core.version>
     <hibernate-jpa-2.1-api.version>1.0.2.Final</hibernate-jpa-2.1-api.version>
     <hibernate-validator.version>6.1.4.Final</hibernate-validator.version>
