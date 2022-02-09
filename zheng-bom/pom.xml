@@ -84,7 +84,7 @@
     <quartz.version>2.3.2</quartz.version>
     <querydsl.version>4.3.1</querydsl.version>
     <resteasy.version>4.5.3.Final</resteasy.version>
-    <shiro.version>1.5.2</shiro.version>
+    <shiro.version>1.7.1</shiro.version>
     <slf4j.version>1.7.30</slf4j.version>
     <sql2o.version>1.6.0</sql2o.version>
     <swagger-jaxrs2.version>2.1.1</swagger-jaxrs2.version>
