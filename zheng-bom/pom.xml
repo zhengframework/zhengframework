@@ -70,7 +70,7 @@
     <jopt-simple.version>6.0-alpha-3</jopt-simple.version>
     <junit.version>4.13</junit.version>
     <lettuce-core.version>5.2.2.RELEASE</lettuce-core.version>
-    <liquibase.version>3.8.8</liquibase.version>
+    <liquibase.version>4.8.0</liquibase.version>
     <logback.version>1.2.3</logback.version>
     <lombok.version>1.18.12</lombok.version>
     <metainf-services.version>1.8</metainf-services.version>
