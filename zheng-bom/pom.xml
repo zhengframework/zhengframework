@@ -51,7 +51,7 @@
     <ignite.version>2.8.1</ignite.version>
     <infinispan.version>10.1.5.Final</infinispan.version>
     <ini4j.version>0.5.4</ini4j.version>
-    <jackson.version>2.11.0</jackson.version>
+    <jackson.version>2.12.6.1</jackson.version>
     <jakarta.el.version>3.0.3</jakarta.el.version>
     <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
     <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
