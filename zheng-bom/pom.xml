@@ -76,7 +76,7 @@
     <metainf-services.version>1.8</metainf-services.version>
     <metrics.version>4.1.5</metrics.version>
     <mockito-all.version>2.0.2-beta</mockito-all.version>
-    <mongodb-driver-sync.version>4.0.0</mongodb-driver-sync.version>
+    <mongodb-driver-sync.version>4.0.6</mongodb-driver-sync.version>
     <mybatis-guice.version>3.12</mybatis-guice.version>
     <mybatis.version>3.5.4</mybatis.version>
     <okhttp.version>4.6.0</okhttp.version>
