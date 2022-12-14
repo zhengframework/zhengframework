@@ -98,7 +98,7 @@
     <zhengframework.version>${revision}</zhengframework.version>
     <commons-codec.version>1.14</commons-codec.version>
     <jboss-logging.version>3.4.1.Final</jboss-logging.version>
-    <snakeyaml.version>1.26</snakeyaml.version>
+    <snakeyaml.version>1.32</snakeyaml.version>
     <checker-qual.version>3.4.0</checker-qual.version>
     <mchange-commons-java.version>0.2.19</mchange-commons-java.version>
   </properties>
